@@ -1,6 +1,7 @@
-= Introduction =
+= Introduction to Version Control =
 
-I'll use an analogy to introduce version control, which can also be called revision control, source control, or source code management. See the Wikipedia article for a normal explanation.
+I'll use an analogy to introduce version control, also termed revision control, source control, or source code management.
+See [[http://en.wikipedia.org/wiki/Revision_control][the Wikipedia entry on revision control]] for a normal explanation.
 
 == Work is Play ==
 

@@ -49,6 +49,14 @@ BEGIN {
     next
 }
 
+/\[\[/ {
+    gsub("\\[\\[", "<ulink url=\"")
+    gsub("]\\[", "\">")
+    gsub("]]", "</ulink>")
+    print $0
+    next
+}
+
 {
     if (!in_para) {
 	print "<para>"
