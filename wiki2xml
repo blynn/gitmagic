@@ -1,0 +1,64 @@
+#!/usr/bin/gawk -f
+# Converts small subset of MediaWiki to DocBook
+# Ben Lynn
+
+func close_para() {
+    in_para = 0
+    print "</para>"
+}
+
+func open_section(tag) {
+    stack[stack_i] = tag
+    stack_i = stack_i + 1
+    print "<"tag">"
+}
+
+func close_section() {
+    if (in_para) close_para();
+    stack_i = stack_i - 1
+    print "</"stack[stack_i]">"
+}
+
+func close_until(i) {
+    while (stack_i > i) {
+	close_section()
+    }
+}
+
+BEGIN {
+    stack_i = 0
+    open_section("chapter")
+}
+
+/^ *$/ {
+    if (in_para) close_para();
+    next
+}
+
+/^ *==.*==$/ {
+    gsub(" *== *","")
+    close_until(1)
+    open_section("section")
+    print "<title>"$0"</title>"
+    next
+}
+
+/^ *=.*=$/ {
+    gsub(" *= *","")
+    print "<title>"$0"</title>"
+    next
+}
+
+{
+    if (!in_para) {
+	print "<para>"
+	in_para = 1
+    }
+    print $0
+}
+
+END {
+    while (stack_i > 0) {
+	close_section()
+    }
+}

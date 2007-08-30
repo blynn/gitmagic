@@ -1,0 +1,16 @@
+#!/bin/bash
+
+echo '<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+               "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<book>
+<bookinfo>
+    <title>Git Magic</title>
+    <author><firstname>Ben</firstname><surname>Lynn</surname></author>
+    <copyright><year>2007</year><holder>Ben Lynn</holder></copyright>
+</bookinfo>'
+
+for FILE in $*; do
+    ./wiki2xml $FILE
+done
+echo '</book>'
