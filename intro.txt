@@ -21,7 +21,7 @@ In some computer games, saving the game actually writes a directory full of file
 
 This turns out to be a basic capability of all version control systems. They all have nice interfaces to manage a directory of stuff. You can save its state every so often, and be able to load any one of the saved states later on. They're also smart about using space, by exploiting the fact that only a few of the files usually change between version to version.
 
-== Sharing Saved Games ==
+== Centralized Versus Distributed ==
 
 Now imagine a very difficult computer game. So difficult to finish that many experienced gamers all over the world decide to team up and share their saved games to try to beat it. Real-life examples of this include doing speedruns of certain games. Players specializing in different levels of the same game collaborate to produce amazing results.
 
@@ -33,7 +33,7 @@ What if a player wanted to get an older saved game for any reason? Maybe the cur
 
 There could be many reasons to want to see an older revision, but the outcome is the same. They have to ask the central server for that old save. The more saves they want, the more communication that is required.
 
-The new generation of version control systems are known as distributed systems, and can be thought of as a generalization of the centralized systems. When players download from the main server they get every saved game, not just the latest one. It's as if they're mirroring the central server.
+The new generation of version control systems, to which Git belong, are known as distributed systems, and can be thought of as a generalization of the centralized systems. When players download from the main server they get every saved game, not just the latest one. It's as if they're mirroring the central server.
 
 One immediately obvious benefit is that when an old save is desired for any reason, communication with the central server is unnecessary.
 

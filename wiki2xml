@@ -2,11 +2,6 @@
 # Converts small subset of MediaWiki to DocBook
 # Ben Lynn
 
-func close_para() {
-    in_para = 0
-    print "</para>"
-}
-
 func open_section(tag) {
     stack[stack_i] = tag
     stack_i = stack_i + 1
@@ -14,7 +9,7 @@ func open_section(tag) {
 }
 
 func close_section() {
-    if (in_para) close_para();
+    close_block();
     stack_i = stack_i - 1
     print "</"stack[stack_i]">"
 }
@@ -25,13 +20,28 @@ func close_until(i) {
     }
 }
 
+func close_block() {
+  if (block_state != "") {
+      print "</"block_state">"
+      block_state = ""
+  }
+}
+
+func in_block(s) {
+  if (block_state != s) {
+    close_block()
+    print "<"s">"
+    block_state = s
+  }
+}
+
 BEGIN {
     stack_i = 0
     open_section("chapter")
 }
 
 /^ *$/ {
-    if (in_para) close_para();
+    close_block()
     next
 }
 
@@ -57,11 +67,14 @@ BEGIN {
     next
 }
 
+/^ / {
+    in_block("screen")
+    print $0
+    next
+}
+
 {
-    if (!in_para) {
-	print "<para>"
-	in_para = 1
-    }
+    in_block("para")
     print $0
 }
 
