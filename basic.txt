@@ -1,4 +1,6 @@
-= Basic Git Tricks =
+= Basic Tricks =
+
+Rather than diving into a sea of Git commands, use these elementary examples to get your feet wet. Despite their simplicity, each of them are useful in real life.
 
 == Instant Backup ==
 
@@ -6,47 +8,64 @@ When I'm about to attempt something drastic I like to save the current state, so
 
  $ git-init
  $ git-add .
- $ git-commit -m "Initial commit"
+ $ git-commit -m "my first backup"
 
 to take a snapshot of all files in the current directory.
 Then if something goes wrong type
 
- $ git-reset --hard
+ $ git-checkout HEAD .
 
-to go back to where you were. To save the state again, type <command>git-commit -a</command> and provide a description.
+to go back to where you were. To save the state again, you can type
 
-One benefit to doing this instead of simply copying files is that with Git's hash chaining, you can tell if a backup gets corrupted.
+ $ git-commit -a -m "another backup"
 
-== Undo/Redo History ==
+=== Adding, Deleting, Renaming Files ===
 
-More generally, you can do the above, and every so often "save the game" by typing
+The above will only keep track of the files that were present when you first ran <tt>git-add</tt>. If you add new files to the directory, you'll have to tell Git:
 
- $ git-commit -a -m "description of current state"
+ $ git-add NEWFILES...
 
-Note if you want to keep track of newly added files or forget about deleted files you'll need to first run <command>git-add</command> or <command>git-delete</command> accordingly.
+Similarly, if you want Git to forget about certain files, maybe because you've deleted them
 
-Typing git-log shows you a list of recent commits, and their SHA1 hashes. Then typing
+ $ git-rm OLDFILES...
+
+Renaming a file is the same as removing the old name and adding the new name. There's also the shortcut <tt>git-mv</tt> which has the same syntax as the <tt>mv</tt> command. For example:
+
+ $ git-mv OLDFILE NEWFILE
+
+== Advanced Undo/Redo ==
+
+Typing <tt>git-log</tt> shows you a list of recent commits, and their SHA1 hashes. Then typing:
+
+ $ git-checkout SHA1_HASH .
+
+will load the previous state with the given hash.
+Don't like working with hashes? Then use:
+
+ $ git-checkout "@{10 minutes ago}" .
+
+Other time specifications work too. Or you can ask for the 5th-last saved state:
+
+ $ git-checkout "@{5}" .
+
+In some circumstances, it is preferable to type:
 
  $ git-commit -a
  $ git-revert SHA1_HASH
 
-will restore the state to the commit with the given hash. You might like to use something like the following instead:
+This appears to have the same affect, but <tt>git-log</tt> reveals that the fact that you loaded an old saved state has been recorded as new commit. In other words, you can have Git track you when you undo and redo.
 
- $ git-revert "@{10 minutes ago}"
+Lastly, other times you might want:
 
-You can undo the undo: type git-log and you'll see that the other commits you made are still there.
+ $ git-reset --hard SHA1_HASH
 
-Typing
+which restores the state to a given commit but also erases all newer commits from the record permanently.
 
- $ git-checkout SHA1_HASH .
+To take the computer game analogy again, <tt>git-checkout</tt> is like loading a game, <tt>git-revert</tt> is like loading a game and recording this fact as another saved game, and <tt>git-reset --hard</tt> is like loading an old save and deleting all saved games newer than the one just loaded.
 
-loads a saved state without recording the fact that you've gone back to an old state. This is sometimes what you want.
+== Sync Computers ==
 
-To take the computer game analogy again, git-checkout is like loading a game, git-revert is like loading a game and recording this fact as another saved game, and git-reset --hard is like loading an old save and deleting all saved games newer than the one just loaded.
-
-== Synchronize Files Between Computers ==
-
-This is the reason I first used Git. I can make tarballs or use rsync to do backups. The problem was sometimes I'd edit on my laptop, other times on my desktop, and they may not have talked to each other in between.
+This is the reason I first used Git. I can tolerate making tarballs or using <tt>rsync</tt> for backups. The problem was sometimes I'd edit on my laptop, other times on my desktop, and they may not have talked to each other in between.
 
 Initialize a Git repository and commit your files as above on one machine. Then on the other:
 

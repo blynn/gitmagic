@@ -1,0 +1,52 @@
+= Cloning Around =
+
+== Classic Source Control ==
+
+Copy your project to a directory in your main server. Initialize a Git
+repository: <tt>git init ; git add . ; git commit -m "Initial commit"</tt>.
+
+To check out source, a developer types
+
+ $ git clone git+ssh://main.server/directory
+
+After making changes, the code is checked in to the main server by:
+
+ $ git commit -a
+ $ git push
+
+If the main server has been updated, the latest version needs to be checked out before the push. To sync to the latest version:
+
+ $ git commit -a
+ $ git pull
+
+== Forking a Project ==
+
+Sick of the way a project is being run? Think you could do a better job?
+
+First, on your server:
+
+ $ git clone git+ssh://main.server/directory
+
+Then tell everyone to check out your fork of the project at your server.
+
+At any later time, you can merge in the changes from the original project with:
+
+ $ git pull
+
+== Ultimate Backups ==
+
+How would you like multiple tamper-proof geographically diverse redundant archives?
+
+TODO
+
+== Guerilla Version Control ==
+
+TODO
+
+== Working On Features In Parallel ==
+
+TODO
+
+== Source Control Engine Tools and Utilities ==
+
+TODO

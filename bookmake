@@ -10,7 +10,12 @@ echo '<?xml version="1.0" encoding="utf-8"?>
     <copyright><year>2007</year><holder>Ben Lynn</holder></copyright>
 </bookinfo>'
 
-for FILE in $*; do
-    ./wiki2xml $FILE
-done
+if [ $# -gt 0 ]; then
+    for FILE in $*; do
+	./wiki2xml $FILE
+    done
+else
+    ./wiki2xml
+fi
+
 echo '</book>'

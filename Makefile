@@ -1,13 +1,16 @@
-target: book.html
+.PHONY: target clean
 
-TXTFILES=intro.txt basic.txt
+target: book book.html
+
+TXTFILES=intro.txt basic.txt clone.txt branch.txt
 
 book.xml: $(TXTFILES)
-	./bookmake $^ > book.xml
+	cat $^ | sed 's/<tt>/<command>/g' | sed 's/<\/tt>/<\/command>/g' | ./bookmake > book.xml
 
 book: book.xml
 	xmlto -m custom-html.xsl -o book html book.xml
 	-ls book/*.html | xargs -n 1 tidy -utf8 -m -i -q
+	./makeover
 
 book.html: book.xml
 	xmlto -m custom-nochunks.xsl html-nochunks $^

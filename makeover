@@ -1,0 +1,59 @@
+#!/bin/bash
+
+# extract table of contents from index.html
+BOOKDIR=book
+gawk '
+/<div class="toc">/ {
+    print $0
+    getline #TODO: check this is the <ul> line
+    print $0
+    print "<li><a href=\".\">Git Magic</a></li>"
+    getline
+    while (!match($0, "</div>")) {
+	print $0
+	getline
+    }
+    print "</div>"
+    exit
+}
+' < $BOOKDIR/index.html > toc.tmp
+
+# for every chapter...
+for FILE in $BOOKDIR/*.html
+do
+    if [ $FILE != "$BOOKDIR/index.html" ]
+    then
+    # add " - Git Magic" to titles of all pages
+    sed '/<\/title>/ s/<\/title>/ - Git Magic&/' -i $FILE
+    # paste ToC into beginning
+    # and add div section with class content for CSS
+    sed '/<body/{n; r toc.tmp
+a <div class="content">
+} ' -i $FILE
+    sed '/^<\/body/i </div>' -i $FILE
+    fi
+done
+
+# extract shell of index.html
+# then insert ToC and preface
+gawk '
+/<div class="book"/ {
+    i = 0
+    for(;;) {
+	getline
+	if (match($0, "<div")) i++;
+	else if (match($0, "</div")) {
+	    i--;
+	    if (i < 0) break;
+	}
+    }
+    sub("</div>","")
+}
+{ print }
+' < $BOOKDIR/index.html | sed '/<body/{n; r toc.tmp
+a <div class="content">
+r preface.html
+a </div>
+} ' > tmp.tmp
+mv tmp.tmp $BOOKDIR/index.html
+rm toc.tmp

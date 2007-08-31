@@ -15,6 +15,7 @@ func close_section() {
 }
 
 func close_until(i) {
+    close_block()
     while (stack_i > i) {
 	close_section()
     }
@@ -37,11 +38,18 @@ func in_block(s) {
 
 BEGIN {
     stack_i = 0
-    open_section("chapter")
 }
 
 /^ *$/ {
     close_block()
+    next
+}
+
+/^ *===.*===$/ {
+    gsub(" *=== *","")
+    close_until(2)
+    open_section("section")
+    print "<title>"$0"</title>"
     next
 }
 
@@ -55,6 +63,8 @@ BEGIN {
 
 /^ *=.*=$/ {
     gsub(" *= *","")
+    close_until(0)
+    open_section("chapter")
     print "<title>"$0"</title>"
     next
 }
@@ -79,7 +89,5 @@ BEGIN {
 }
 
 END {
-    while (stack_i > 0) {
-	close_section()
-    }
+    close_until(0)
 }

@@ -1,0 +1,56 @@
+= Branch Magic =
+Cheap Context Switching
+
+== The Boss Key ==
+
+Ever play one of those games where you could hit a special key combination at
+any time, and the screen would instantly display a spreadsheet or something? So if the boss walked in the office while you were playing the game you could quickly hide this fact?
+
+In some directory, edit a text file and write "I'm smarter than my boss".
+Create a Git repository, that is, <tt>git-init ; git-add . ; git-commit -m "Initial commit"</tt>. Then type
+
+ $ git checkout -b boss
+
+Edit the text file to say "My boss is smarter than me", and type <tt>git-commit -a</tt>. Now you can switch between the two versions of the file with
+
+ $ git branch master  # see original version of the file
+
+and
+
+ $ git branch boss  # see version of the file suitable for boss' eyes
+
+One can imagine reasons to use this that have nothing to do with source code management. Perhaps you have a program that reads data from a certain directory, and every now and then you'd like to switch the data back and forth without reconfiguring the program.
+
+== Dirty Work ==
+
+TODO
+
+== Quick Fixes ==
+
+TODO
+
+== Working While Being Reviewed ==
+
+Some projects require your code to be reviewed before you can submit it. To make life easier for those reviewing your code, if you have a big change to make you might break it into two or more parts, and get each parts separately reviewed.
+
+What if the second part cannot be written until the first part is approved and checked in? In many version control systems, you'd have to send the first part to the reviewers, and then wait until it has been approved before starting on the second part.
+
+Actually that's not quite true, but in many systems editing part 2 before part 1 had been submitted involves a lot of suffering and hardship. In Git, branching and merging are painless. So after you've committed the first part and sent it for review:
+
+ $ git checkout -b part2
+
+Next, code the second part of the big change while you're waiting for the first part to be accepted. When the first part is approved and submitted,
+
+ $ git branch master
+ $ git merge part2
+ $ git branch -d part2
+
+and the second part of the change is ready to review.
+
+But wait! What if it wasn't that simple? Say you made a mistake in the first part, which you have to correct before submitting. No problem! First, switch back to the master branch with <tt>git branch master</tt>. Fix the issue with the first part of the change and hope it gets approved. If not we simply repeat this step.
+
+Eventually, once the first part has been approved and submitted:
+
+ $ git merge part2
+
+and again, the second part is ready to be reviewed.

@@ -1,21 +1,21 @@
-= Introduction to Version Control =
+= Introduction =
 
 I'll use an analogy to introduce version control, also termed revision control, source control, or source code management.
 See [[http://en.wikipedia.org/wiki/Revision_control][the Wikipedia entry on revision control]] for a normal explanation.
 
 == Work is Play ==
 
-I've played computer games almost all my life. In contrast only started using version control systems as an adult. Not surprisingly, I'm a lot more familiar with video game concepts than version control ones. I'm certain I'm not alone.
+I've played computer games almost all my life. In contrast I only started using version control systems as an adult. I suspect I'm not alone, and comparing the two may make version control easier to explain and understand.
 
 Think of editing your document, or your code, or whatever, as playing a game. Once you've made a lot of progress, you'd like to save. To do so, you click on the "Save" button in your trusty editor.
 
-But this will overwrite the old version. It's like those old school games which only had one save slot: sure you could save, but you could never go back to an older state. Which was a shame, because your previous save might have been right at a really fun part of the game that you'd like to revisit one day. 
+But this will overwrite the old version. It's like those old school games which only had one save slot: sure you could save, but you could never go back to an older state. Which was a shame, because your previous save might have been right at a really fun part of the game that you'd like to revisit one day. Or worse still, your current save is in an unwinnable state, which means you have to start again.
 
 == Version Control ==
 
-You can "Save As..." a different file, or copy the old one somewhere first before saving if you want to savour old versions. Maybe compress them too to save space. We have just described a primitive labour-intensive form of version control.
+When editing, you can "Save As..." a different file, or copy the file somewhere first before saving if you want to savour old versions. Maybe compress them too to save space. This is version control, but very primitive and labour-intensive.
 
-Let's make the problem slightly tougher now. Say you have a bunch of files that go together, such as collection of source code for the same project, or files for a website. Now if you want to keep an old version you have to copy a whole directory of stuff. Keeping many versions around is inconvenient to do by hand.
+Let's make the problem slightly tougher now. Say you have a bunch of files that go together, such as collection of source code for the same project, or files for a website. Now if you want to keep an old version you have to archive a whole directory of stuff. Keeping many versions around is inconvenient to do by hand, and gets expensive fast.
 
 In some computer games, saving the game actually writes a directory full of files. They hide these details from the player and present a convenient interface for you to manage saves.
 
@@ -29,13 +29,13 @@ How would you set up a system so they can get at each other's saves easily? And 
 
 In the old days, every project used centralized version control. A server somewhere held all the saved games. Nobody else did. Every player kept at most a few saved games on their machine. When a player wanted to make progress, they'd download the latest save from the main server, play a while, save and upload back to the server for everyone else to use.
 
-What if a player wanted to get an older saved game for any reason? Maybe the current saved game is in an unfinishable state because somebody forgot to pick up an object back in level three, and they want to find the latest saved game where the game still can completed. Or maybe they want to compare two older saved games to see how much work a particular player did.
+What if a player wanted to get an older saved game for some reason? Maybe the current saved game is in an unwinnable state because somebody forgot to pick up an object back in level three, and they want to find the latest saved game where the game can still be completed. Or maybe they want to compare two older saved games to see how much work a particular player did.
 
-There could be many reasons to want to see an older revision, but the outcome is the same. They have to ask the central server for that old save. The more saves they want, the more communication that is required.
+There could be many reasons to want to see an older revision, but the outcome is the same. They have to ask the central server for that old saved game. The more saved games they want, the more communication that is required.
 
-The new generation of version control systems, to which Git belong, are known as distributed systems, and can be thought of as a generalization of the centralized systems. When players download from the main server they get every saved game, not just the latest one. It's as if they're mirroring the central server.
+The new generation of version control systems, of which Git is a member, are known as distributed systems, and can be thought of as a generalization of centralized systems. When players download from the main server they get every saved game, not just the latest one. It's as if they're mirroring the central server.
 
-One immediately obvious benefit is that when an old save is desired for any reason, communication with the central server is unnecessary.
+Thus the initial cloning can be expensive, especially if there's a long history, but it pays off in the long run. One immediately obvious benefit is that when an old save is desired for any reason, communication with the central server is unnecessary.
 
 == Merge Conflicts ==
 
