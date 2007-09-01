@@ -35,7 +35,7 @@ Some projects require your code to be reviewed before you can submit it. To make
 
 What if the second part cannot be written until the first part is approved and checked in? In many version control systems, you'd have to send the first part to the reviewers, and then wait until it has been approved before starting on the second part.
 
-Actually that's not quite true, but in many systems editing part 2 before part 1 had been submitted involves a lot of suffering and hardship. In Git, branching and merging are painless. So after you've committed the first part and sent it for review:
+Actually that's not quite true, but in many systems editing part 2 before part 1 has been submitted involves a lot of suffering and hardship. In Git, branching and merging are painless. So after you've committed the first part and sent it for review:
 
  $ git checkout -b part2
 
