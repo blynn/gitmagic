@@ -16,7 +16,7 @@ The above sequence of commands should be memorized, or placed in a script, as th
 
 Then if something goes wrong, run:
 
- $ git-checkout HEAD .
+ $ git-reset --hard
 
 to go back to where you were. To save the state again:
 
@@ -44,31 +44,31 @@ Running:
 
 shows you a list of recent commits, and their SHA1 hashes. Then:
 
- $ git-checkout SHA1_HASH .
+ $ git-commit -a
+ $ git-revert SHA1_HASH
 
 will load the previous state with the given hash.
 Don't like cutting and pasting hashes? Then use:
 
- $ git-checkout "@{10 minutes ago}" .
+ $ git-revert "@{10 minutes ago}" .
 
 Other time specifications work too. Or you can ask for the 5th-last saved state:
 
- $ git-checkout "@{5}" .
+ $ git-revert "@{5}" .
 
-In some circumstances, it is preferable to type:
+Running <tt>git-log</tt> reveals that the fact that you loaded an old saved state has been recorded as new commit. In other words, Git tracks your undo and redo operations.
 
- $ git-commit -a
- $ git-revert SHA1_HASH
-
-This appears to have the same affect, but <tt>git-log</tt> reveals that the fact that you loaded an old saved state has been recorded as new commit. In other words, you can have Git track you when you undo and redo.
-
-Lastly, other times you might want:
+Sometimes you just want to go back and forget about every change past a certain point because they're all wrong. Then type:
 
  $ git-reset --hard SHA1_HASH
 
-which restores the state to a given commit but also erases all newer commits from the record permanently.
+which restores the state to a given commit and also erases all newer commits from the record permanently.
 
-To take the computer game analogy again, <tt>git-checkout</tt> is like loading a game, <tt>git-revert</tt> is like loading a game and recording this fact as a new saved game, and <tt>git-reset --hard</tt> is like loading an old save and deleting all saved games newer than the one just loaded.
+Using <tt>git-checkout</tt> is a third way to load an old state, but it's slightly more complicated because it involves branches, and will be discussed in detail later.
+
+To take the computer game analogy again, <tt>git-revert</tt> is like loading a game and recording this fact as a new saved game, and <tt>git-reset --hard</tt> is like loading an old save and deleting all saved games newer than the one just loaded.
+
+Lastly, <tt>git-checkout</tt> is like loading an old game, but if you play on, the game state will deviate from the newer saves you made the first time around. Any saved games you make now will end up in a separate branch representing the alternate reality you have entered. We describe how to deal with this later.
 
 == Dowloading Files ==
 

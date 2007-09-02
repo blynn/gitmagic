@@ -45,17 +45,21 @@ One can imagine reasons to use this that have nothing to do with source code man
 Say you're working on some feature, and for some reason, you need to go back to an old version and temporarily need to put in a few prints statements to see how something works. Then:
 
  $ git commit -a
- $ git checkout -b dirty SHA1_HASH
+ $ git checkout SHA1_HASH
 
 Now you can add ugly temporary code all over the place. When you're done,
 
  $ git checkout master
 
-to return to your original work, and:
+to return to your original work and remove all traces of the temporary code.
 
- $ git branch -d dirty
+What if you wanted to save the temporary changes after all? Easy:
 
-to remove the "dirty" branch, and all traces of the temporary code.
+ $ git checkout -b dirty
+
+before switching back to the master branch. Whenever you want to return to the dirty changes, simply type
+
+ $ git checkout dirty
 
 == Quick Fixes ==
 
@@ -72,32 +76,36 @@ Then once you've fixed the bug:
 
 ...and resume work on your original task.
 
-== Working While Being Reviewed ==
+== Uninterrupted Workflow ==
 
 Some projects require your code to be reviewed before you may submit it. To make life easier for those reviewing your code, if you have a big change to make you might break it into two or more parts, and get each parts separately reviewed.
 
 What if the second part cannot be written until the first part is approved and checked in? In many version control systems, you'd have to send the first part to the reviewers, and then wait until it has been approved before starting on the second part.
 
-Actually that's not quite true, but in these systems editing part two before part one has been submitted involves a lot of suffering and hardship. In Git, branching and merging are painless. So after you've committed the first part and sent it for review:
+Actually that's not quite true, but in these systems editing Part II before Part I has been submitted involves a lot of suffering and hardship. In Git, branching and merging are painless (a technical term for fast and local). So after you've committed the first part and sent it for review:
 
  $ git checkout -b part2
 
-Next, code the second part of the big change while you're waiting for the first part to be accepted. When the first part is approved and submitted,
+Next, code the second part of the big change without waiting for the first part to be accepted. When the first part is approved and submitted,
 
  $ git checkout master
  $ git merge part2
- $ git branch -d part2
+ $ git branch -d part2  # don't need this branch anymore
 
 and the second part of the change is ready to review.
 
 But wait! What if it wasn't that simple? Say you made a mistake in the first part, which you have to correct before submitting. No problem! First, switch back to the master branch with
  $ git checkout master
 
-Fix the issue with the first part of the change and hope it gets approved. If not we simply repeat this step.
+Fix the issue with the first part of the change and hope it gets approved. If not we simply repeat this step. You'll probably want to merge the fixed version of Part I into Part II as well:
 
-Eventually, once the first part has been approved and submitted:
+ $ git checkout part2
+ $ git merge master
+
+Now it's the same as before. Once the first part has been approved and submitted:
 
  $ git merge part2
+ $ git branch -d part2
 
 and again, the second part is ready to be reviewed.
 
@@ -115,4 +123,4 @@ Several Linux window managers allow you to have multiple desktops, which means y
 
 Git branching is like multiple desktops for your working directory. With this analogy Git cloning is like attaching another monitor on which you can open more windows.
 
-Perhaps a better example is the famous [[http://TODO][<tt>screen</tt>]] utitlity. This gem allows you to create multiple terminal sessions in the same terminal. Instead of opening new terminals, you can use the same one if you run <tt>screen</tt>. In fact, you can do a lot more with <tt>screen</tt> but that's a topic for another day.
+Perhaps a better example is the famous [[http://TODO][<tt>screen</tt>]] utitlity. This gem allows you to create, destroy and switch between multiple terminal sessions in the same terminal. Instead of opening new terminals (clone), you can use the same one if you run <tt>screen</tt> (branch). In fact, you can do a lot more with <tt>screen</tt> but that's a topic for another day.
