@@ -1,12 +1,12 @@
 = Cloning Around =
 
-In older version control systems, checkout was the standard way to get a saved state. On checkout, you'd get a bunch of files in the requested saved state.
+In older version control systems, checkout was the standard way to get a saved state. You'd checkout a bunch of files in the requested saved state.
 
-In Git, the standard way to get files is to create a clone of the entire repository. In other words, you practically create a mirror of the central repository, so you can do anything the central repostiory can do.
+In Git, the standard way to get files is to create a clone of the entire repository. In other words, you practically create a mirror of the central repository, so you can do anything the central repository can do.
 
 == Sync Computers ==
 
-This is the reason I first used Git. I can tolerate making tarballs or using <tt>rsync</tt> for backups. The problem was sometimes I'd edit on my laptop, other times on my desktop, and they may not have talked to each other in between.
+This is the reason I first used Git. I can tolerate making tarballs or using <tt>rsync</tt> for backups and basic syncing. The problem was sometimes I'd edit on my laptop, other times on my desktop, and they may not have talked to each other in between.
 
 Initialize a Git repository and commit your files as above on one machine. Then on the other:
 
@@ -27,16 +27,29 @@ to push the current state to the other computer. Next time you're logged in to t
 
  $ git-checkout HEAD .
 
-to update the files before working on them. Be aware that you'll lose any uncommitted changes after.
+to update the files before working on them. Be aware that you'll lose any uncommitted changes when you do this.
 
 == Classic Source Control ==
 
-Copy your project to a directory in your main server. Initialize a Git
-repository: <tt>git init ; git add . ; git commit -m "Initial commit"</tt>.
+Initialize a Git repository for your files: 
 
-To check out source, a developer types
+ $ git-init-db
+ $ git add .
+ $ git commit -m "Initial commit"
 
- $ git clone main.server:/path/to/files
+On the central server, initialize an empty Git repository with some name:
+
+ $ GIT_DIR=proj.git git-init-db
+
+Some public hosts, such as [[http://repo.or.cz][repo.or.cz]], will have alternative method for setting up the initially empty Git repository, such as filling in a form.
+
+Push your project to the central server with:
+
+ $ git-push git://central.server/path/to/proj.git HEAD
+
+Now, to check out source, a developer types
+
+ $ git clone central.server:/path/to/proj.git
 
 After making changes, the code is checked in to the main server by:
 
@@ -50,13 +63,11 @@ If the main server has been updated, the latest version needs to be checked out 
 
 == Forking a Project ==
 
-Sick of the way a project is being run? Think you could do a better job?
-
-First, on your server:
+Sick of the way a project is being run? Think you could do a better job? Then on your server:
 
  $ git clone main.server:/path/to/files
 
-Then tell everyone to check out your fork of the project at your server.
+Next tell everyone to check out your fork of the project at your server.
 
 At any later time, you can merge in the changes from the original project with:
 
@@ -64,18 +75,39 @@ At any later time, you can merge in the changes from the original project with:
 
 == Ultimate Backups ==
 
-How would you like multiple tamper-proof geographically diverse redundant archives?
+Want numerous tamper-proof geographically diverse redundant archives? If your project has many developers, don't do anything! Everyone who clones your code is effectively a backup, not just of the current state of the project, but of your project's entire history. Thanks to cryptographic hashing, if someone's clone become corrupted, it will be spotted as soon as they try to communicate with others.
 
-TODO
+If your project is not so popular, find as many hosts as you can and clone your project there.
+
+For the truly paranoid, always write down the latest 20-byte SHA1 hash of the HEAD somewhere safe. It has to be safe, not private. For example, publishing it in a newspaper would work well, because it's hard for an attacker to alter every copy of a newspaper.
 
 == Guerilla Version Control ==
 
-TODO
+Are you working on a project that uses some other version control system, and you sorely miss some Git features? Then initialize a Git repository in your working directory:
 
-== Working On Features In Parallel ==
+ $ git-init-db
+ $ git add .  # you may want to exclude certain files, such as those
+              # belonging to the other version control system
+ $ git commit -m "Initial commit"
 
-TODO
+then clone it:
 
-== Source Control Engine Tools and Utilities ==
+ $ git-clone . /some/new/directory
+
+Now go to the new directory and work here instead, and use Git to your heart's content. Once in a while, you'll want to sync with everyone else, in which case first sync the original directory using the commands appropriate to the other version control system, and type:
+
+ $ git add .
+ $ git commit -m "sync with everyone else"
+
+Then go to the new directory and run:
+
+ $ git commit -a -m "description of my changes"
+ $ git pull
+
+On the other hand, the procedure for giving your changes to everyone else varies depending on the other version control system. You have the files you want to push in the new directory, and running a few commands of the other version control system will upload them to the central repository.
+
+== Multitasking ==
+
+Say you want to work on several features in parallel.
 
 TODO

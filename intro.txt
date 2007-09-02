@@ -1,11 +1,11 @@
 = Introduction =
 
-I'll use an analogy to introduce version control, also termed revision control, source control, or source code management.
-See [[http://en.wikipedia.org/wiki/Revision_control][the Wikipedia entry on revision control]] for a normal explanation.
+I'll use an analogy to introduce version control.
+See [[http://en.wikipedia.org/wiki/Revision_control][the Wikipedia entry on revision control]] for a saner explanation.
 
 == Work is Play ==
 
-I've played computer games almost all my life. In contrast I only started using version control systems as an adult. I suspect I'm not alone, and comparing the two may make version control easier to explain and understand.
+I've played computer games almost all my life. In contrast, I only started using version control systems as an adult. I suspect I'm not alone, and comparing the two may make these concepts easier to explain and understand.
 
 Think of editing your document, or your code, or whatever, as playing a game. Once you've made a lot of progress, you'd like to save. To do so, you click on the "Save" button in your trusty editor.
 
@@ -13,13 +13,13 @@ But this will overwrite the old version. It's like those old school games which 
 
 == Version Control ==
 
-When editing, you can "Save As..." a different file, or copy the file somewhere first before saving if you want to savour old versions. Maybe compress them too to save space. This is version control, but very primitive and labour-intensive.
+When editing, you can "Save As..." a different file, or copy the file somewhere first before saving if you want to savour old versions. Maybe compress them too to save space. This is version control, but very primitive and labour-intensive.Computer games improved on this out long ago, many of them allowing multiple automatically timestamped save slots.
 
 Let's make the problem slightly tougher now. Say you have a bunch of files that go together, such as collection of source code for the same project, or files for a website. Now if you want to keep an old version you have to archive a whole directory of stuff. Keeping many versions around is inconvenient to do by hand, and gets expensive fast.
 
 In some computer games, saving the game actually writes a directory full of files. They hide these details from the player and present a convenient interface for you to manage saves.
 
-This turns out to be a basic capability of all version control systems. They all have nice interfaces to manage a directory of stuff. You can save its state every so often, and be able to load any one of the saved states later on. They're also smart about using space, by exploiting the fact that only a few of the files usually change between version to version.
+This is also a basic capability of all version control systems. They all have nice interfaces to manage a directory of stuff. You can save its state every so often, and you can load any one of the saved states later on. Unlike most computer games, they're usually smart about using space, by exploiting the fact that only a few of the files usually change between version to version, and not by much.
 
 == Distributed Control ==
 

@@ -24,7 +24,7 @@ to go back to where you were. To save the state again, you can type
 
 === Add, Delete, Rename ===
 
-The above will only keep track of the files that were present when you first ran <tt>git-add</tt>. If you add new files to the directory, you'll have to tell Git:
+The above will only keep track of the files that were present when you first ran <tt>git-add</tt>. If you add new files or subdirectories, you'll have to tell Git:
 
  $ git-add NEWFILES...
 

@@ -73,8 +73,6 @@ BEGIN {
     gsub("\\[\\[", "<ulink url=\"")
     gsub("]\\[", "\">")
     gsub("]]", "</ulink>")
-    print $0
-    next
 }
 
 /^ / {
