@@ -14,11 +14,11 @@ to take a snapshot of all files in the current directory.
 
 The above sequence of commands should be memorized, or placed in a script, as they will be reused frequently.
 
-Then if something goes wrong type
+Then if something goes wrong, run:
 
  $ git-checkout HEAD .
 
-to go back to where you were. To save the state again, you can type
+to go back to where you were. To save the state again:
 
  $ git-commit -a -m "another backup"
 

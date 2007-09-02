@@ -2,7 +2,7 @@
 
 In older version control systems, checkout was the standard way to get a saved state. You'd checkout a bunch of files in the requested saved state.
 
-In Git, the standard way to get files is to create a clone of the entire repository. In other words, you practically create a mirror of the central repository, so you can do anything the central repository can do.
+In Git and other distributed version control systems, the standard way to get files is to create a clone of the entire repository. In other words, you practically create a mirror of the central repository. So anything the central repository can do, you can do.
 
 == Sync Computers ==
 
@@ -41,13 +41,13 @@ On the central server, initialize an empty Git repository with some name:
 
  $ GIT_DIR=proj.git git-init-db
 
-Some public hosts, such as [[http://repo.or.cz][repo.or.cz]], will have alternative method for setting up the initially empty Git repository, such as filling in a form.
+Some public hosts, such as [[http://repo.or.cz][repo.or.cz]], will have a different method for setting up the initially empty Git repository, such as filling in a form on a webpage.
 
 Push your project to the central server with:
 
  $ git-push git://central.server/path/to/proj.git HEAD
 
-Now, to check out source, a developer types
+We're ready. To check out source, a developer types
 
  $ git clone central.server:/path/to/proj.git
 
@@ -81,6 +81,18 @@ If your project is not so popular, find as many hosts as you can and clone your 
 
 For the truly paranoid, always write down the latest 20-byte SHA1 hash of the HEAD somewhere safe. It has to be safe, not private. For example, publishing it in a newspaper would work well, because it's hard for an attacker to alter every copy of a newspaper.
 
+== Light-Speed Multitasking ==
+
+Say you want to work on several features in parallel. Then after committing your project, clone it:
+
+ $ git-clone --local --shared . /some/new/directory
+
+Git exploits hard links and file sharing as much as possible to create this clone. Subsequently, this clone is unsuitable as a backup. However, it's ready in a flash, and you can now you can work on two independent features simultaneously.
+
+For example, you can edit one while the other is compiling. At any time, you can commit and pull changes from one to the other.
+
+ $ git-pull one /to/the/other
+
 == Guerilla Version Control ==
 
 Are you working on a project that uses some other version control system, and you sorely miss some Git features? Then initialize a Git repository in your working directory:
@@ -105,9 +117,3 @@ Then go to the new directory and run:
  $ git pull
 
 On the other hand, the procedure for giving your changes to everyone else varies depending on the other version control system. You have the files you want to push in the new directory, and running a few commands of the other version control system will upload them to the central repository.
-
-== Multitasking ==
-
-Say you want to work on several features in parallel.
-
-TODO

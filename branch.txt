@@ -1,56 +1,118 @@
 = Branch Magic =
-Cheap Context Switching
+
+Now that you've mastered some simple Git sleights, it's time to learn some showstoppers.
+
+External factors inevitably necessitate context switching. A severe bug manifests in the released version suddenly without warning, and must be fixed as soon as possible at all costs. The guy who wrote a certain function is about to leave, so you should drop what you are doing and get him to help you with your changes that affect his code.
+
+Interrupting your train of thought can be detrimental to your productivity, and the slower and less convenient it is to switch contexts, the greater the loss. With centralized version control we must download a fresh working copy from the central server. Distributed systems fare much better, as we can clone the repository up to the desired version locally.
+
+But cloning still entails copying the whole working directory as well as the entire history up to the given point. Even though Git reduces the cost of this with file sharing and hard links, there are some files we cannot link nor share. The project files must be recreated in their entirety in the new working directory, so we may edit them.
+
+Happily, Git has a better tool for these situations that is much faster and more space-efficient than cloning: <tt>git-branch</tt>.
 
 == The Boss Key ==
 
 Ever play one of those games where you could hit a special key combination at
 any time, and the screen would instantly display a spreadsheet or something? So if the boss walked in the office while you were playing the game you could quickly hide this fact?
 
-In some directory, edit a text file and write "I'm smarter than my boss".
-Create a Git repository, that is, <tt>git-init ; git-add . ; git-commit -m "Initial commit"</tt>. Then type
+In some directory:
 
- $ git checkout -b boss
+ $ echo "I'm smarter than my boss" > myfile.txt
+ $ git-init-db
+ $ git-add .
+ $ git-commit -m "Initial commit"
 
-Edit the text file to say "My boss is smarter than me", and type <tt>git-commit -a</tt>. Now you can switch between the two versions of the file with
+So we have created a Git repository that tracks one text file containing a certain message. Now type:
 
- $ git branch master  # see original version of the file
+ $ git checkout -b boss  # nothing seems to change after this
+ $ echo "My boss is smarter than me" > myfile.txt
+ $ git-commit -a -m "Another commit"
 
-and
+It looks like we've just overwritten our file and committed it. But it's an illusion. Type:
 
- $ git branch boss  # see version of the file suitable for boss' eyes
+ $ git checkout master  # switch to original version of the file
+
+and hey presto! The text file is restored. And if the boss decides to snoop around this directory, type:
+
+ $ git checkout boss  # switch to version suitable for boss' eyes
+
+You can switch between the two versions of the file as much as you like, and commit to each independently.
 
 One can imagine reasons to use this that have nothing to do with source code management. Perhaps you have a program that reads data from a certain directory, and every now and then you'd like to switch the data back and forth without reconfiguring the program.
 
 == Dirty Work ==
 
-TODO
+Say you're working on some feature, and for some reason, you need to go back to an old version and temporarily need to put in a few prints statements to see how something works. Then:
+
+ $ git commit -a
+ $ git checkout -b dirty SHA1_HASH
+
+Now you can add ugly temporary code all over the place. When you're done,
+
+ $ git checkout master
+
+to return to your original work, and:
+
+ $ git branch -d dirty
+
+to remove the "dirty" branch, and all traces of the temporary code.
 
 == Quick Fixes ==
 
-TODO
+This time, say you're in the middle of something and you are required to drop everything and work on fixing a bug that's just been reported:
+
+ $ git commit -a
+ $ git checkout -b fixes SHA1_HASH
+
+Then once you've fixed the bug:
+
+ $ git commit -a -m "bug fixed"
+ $ git push  # to the central repository
+ $ git checkout master
+
+...and resume work on your original task.
 
 == Working While Being Reviewed ==
 
-Some projects require your code to be reviewed before you can submit it. To make life easier for those reviewing your code, if you have a big change to make you might break it into two or more parts, and get each parts separately reviewed.
+Some projects require your code to be reviewed before you may submit it. To make life easier for those reviewing your code, if you have a big change to make you might break it into two or more parts, and get each parts separately reviewed.
 
 What if the second part cannot be written until the first part is approved and checked in? In many version control systems, you'd have to send the first part to the reviewers, and then wait until it has been approved before starting on the second part.
 
-Actually that's not quite true, but in many systems editing part 2 before part 1 has been submitted involves a lot of suffering and hardship. In Git, branching and merging are painless. So after you've committed the first part and sent it for review:
+Actually that's not quite true, but in these systems editing part two before part one has been submitted involves a lot of suffering and hardship. In Git, branching and merging are painless. So after you've committed the first part and sent it for review:
 
  $ git checkout -b part2
 
 Next, code the second part of the big change while you're waiting for the first part to be accepted. When the first part is approved and submitted,
 
- $ git branch master
+ $ git checkout master
  $ git merge part2
  $ git branch -d part2
 
 and the second part of the change is ready to review.
 
-But wait! What if it wasn't that simple? Say you made a mistake in the first part, which you have to correct before submitting. No problem! First, switch back to the master branch with <tt>git branch master</tt>. Fix the issue with the first part of the change and hope it gets approved. If not we simply repeat this step.
+But wait! What if it wasn't that simple? Say you made a mistake in the first part, which you have to correct before submitting. No problem! First, switch back to the master branch with
+ $ git checkout master
+
+Fix the issue with the first part of the change and hope it gets approved. If not we simply repeat this step.
 
 Eventually, once the first part has been approved and submitted:
 
  $ git merge part2
 
 and again, the second part is ready to be reviewed.
+
+== Managing Branches ==
+
+Type:
+
+ $ git branch
+
+to list all the branches. There is always a branch named "master" which is where you start by default. This command can also do other operations with branches. See <tt>git help branch</tt> for details.
+
+== An Analogy ==
+
+Several Linux window managers allow you to have multiple desktops, which means you can instantly view a different state of the desktop.
+
+Git branching is like multiple desktops for your working directory. With this analogy Git cloning is like attaching another monitor on which you can open more windows.
+
+Perhaps a better example is the famous [[http://TODO][<tt>screen</tt>]] utitlity. This gem allows you to create multiple terminal sessions in the same terminal. Instead of opening new terminals, you can use the same one if you run <tt>screen</tt>. In fact, you can do a lot more with <tt>screen</tt> but that's a topic for another day.

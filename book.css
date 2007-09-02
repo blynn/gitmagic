@@ -1,0 +1,89 @@
+body {
+    font-size: 90%;
+    font-family: verdana, arial, sans-serif;
+}
+
+tt, code, pre, .type {
+    font-family: andale mono, courier new, courier, monospace;
+    font-size: 90%;
+}
+
+/* Based on http://phrogz.net/CSS/columns3.html */
+div.toc {
+    float: left;
+    margin: 0;
+    padding: 0;
+    padding-top: 0.5em;
+    border: 0;
+    width: 13em;
+
+    background-color: #f9f9f9;
+    margin-right:1em;
+}
+
+div.content {
+    margin: 0;
+    padding: 0;
+
+    /* won't match if font is smaller in toc */
+    border-left: 13em solid #f9f9f9;
+    padding-left: 1em;
+}
+
+div.content:after {
+    content:' ';
+    clear:both;
+    display:block;
+    height:0;
+    overflow:hidden
+}
+
+div.footer {
+    clear:left;
+}
+
+div.toc ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+div.toc li ul a, li ul span.currentlink
+{
+    font-weight: normal;
+    font-size: 90%;
+    padding-left: 2em;
+}
+
+div.toc a, span.currentlink{
+    display:block;
+    text-decoration: none;
+    padding-left: 0.5em;
+    color: #0000aa;
+}
+
+span.currentlink {
+    text-decoration: none;
+    background-color: #aaaaf9;
+}
+
+div.toc a:visited {
+    color: #0000aa;
+}
+
+div.toc a:hover {
+    background-color: #f9f9aa;
+}
+
+.programlisting, .screen {
+    margin: 0;
+    border: 1px solid #aaaaaa;
+    background-color: #f9f9f9;
+    padding: 0.17em;
+    margin: 1em;
+    margin-right: 3em;
+}
+
+.parameter {
+    font-style: italic;
+}
