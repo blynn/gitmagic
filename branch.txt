@@ -2,11 +2,11 @@
 
 Now that you've mastered some simple Git sleights, it's time to learn some showstoppers.
 
-External factors inevitably necessitate context switching. A severe bug manifests in the released version suddenly without warning, and must be fixed as soon as possible at all costs. The guy who wrote a certain function is about to leave, so you should drop what you are doing and get him to help you with your changes that affect his code.
+External factors inevitably necessitate context switching. A severe bug manifests in the released version suddenly without warning, and must be fixed as soon as possible at all costs. The deadline for a certain feature is imminent. The guy who wrote a certain function is about to leave, so you should drop what you are doing and get him to help you understand it.
 
 Interrupting your train of thought can be detrimental to your productivity, and the slower and less convenient it is to switch contexts, the greater the loss. With centralized version control we must download a fresh working copy from the central server. Distributed systems fare much better, as we can clone the repository up to the desired version locally.
 
-But cloning still entails copying the whole working directory as well as the entire history up to the given point. Even though Git reduces the cost of this with file sharing and hard links, there are some files we cannot link nor share. The project files must be recreated in their entirety in the new working directory, so we may edit them.
+But cloning still entails copying the whole working directory as well as the entire history up to the given point. Even though Git reduces the cost of this with file sharing and hard links, the project files themselves must be recreated in their entirety in the new working directory, so we may edit them.
 
 Happily, Git has a better tool for these situations that is much faster and more space-efficient than cloning: <tt>git-branch</tt>.
 
@@ -38,7 +38,7 @@ and hey presto! The text file is restored. And if the boss decides to snoop arou
 
 You can switch between the two versions of the file as much as you like, and commit to each independently.
 
-One can imagine reasons to use this that have nothing to do with source code management. Perhaps you have a program that reads data from a certain directory, and every now and then you'd like to switch the data back and forth without reconfiguring the program.
+You may have real applications for this trick. Perhaps you have a program that reads data from a certain directory, and every now and then you'd like to switch the data back and forth without reconfiguring the program.
 
 == Dirty Work ==
 
@@ -109,18 +109,24 @@ Now it's the same as before. Once the first part has been approved and submitted
 
 and again, the second part is ready to be reviewed.
 
+It's easy to extend this trick for any number of parts.
+
 == Managing Branches ==
 
 Type:
 
  $ git branch
 
-to list all the branches. There is always a branch named "master" which is where you start by default. This command can also do other operations with branches. See <tt>git help branch</tt> for details.
+to list all the branches. There is always a branch named "master", and you start here by default. Some advocate leaving the "master" branch untouched and creating new branches for your own edits.
 
-== An Analogy ==
+The branch command can also do other operations with branches. See <tt>git help branch</tt> for details.
 
-Several Linux window managers allow you to have multiple desktops, which means you can instantly view a different state of the desktop.
+== Work How You Want ==
 
-Git branching is like multiple desktops for your working directory. With this analogy Git cloning is like attaching another monitor on which you can open more windows.
+Several Linux window managers allow you to have multiple desktops, which means you can instantly view a different state of the desktop. Git branching is like multiple desktops for your working directory. Continuing this analogy, Git cloning is like attaching another monitor on which you can open more windows.
 
-Perhaps a better example is the famous [[http://TODO][<tt>screen</tt>]] utitlity. This gem allows you to create, destroy and switch between multiple terminal sessions in the same terminal. Instead of opening new terminals (clone), you can use the same one if you run <tt>screen</tt> (branch). In fact, you can do a lot more with <tt>screen</tt> but that's a topic for another day.
+Perhaps a better example is the famous [[http://www.gnu.org/software/screen/][<tt>screen</tt>]] utility. This gem allows you to create, destroy and switch between multiple terminal sessions in the same terminal. Instead of opening new terminals (clone), you can use the same one if you run <tt>screen</tt> (branch). In fact, you can do a lot more with <tt>screen</tt> but that's a topic for another day.
+
+Web browsers like [[http://www.mozilla.com/][Mozilla Firefox]] allow you to open multitple tabs and multiple windows which are analogous to branching and cloning in Git. Being able to do both easily makes for a better user experience.
+
+Cloning, branching and merging are fast and local in Git, so you can easily use the combination that suits you best. Git allows you to work exactly how you want.

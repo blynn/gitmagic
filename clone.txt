@@ -61,6 +61,12 @@ If the main server has been updated, the latest version needs to be checked out 
  $ git commit -a
  $ git pull
 
+A popular misconception is that Git is ill-suited for projects requiring an official central repository (see for example [[http://www.subversionary.org/martintomes/git][this blog post]]). Nothing could be further from the truth. Photographing someone does not cause their soul to be stolen. Similarly, cloning the master repository does not make its importance diminish.
+
+A good first approximation is that anything a centralized version control system can do, Git can do better. While not strictly true, one is less likely to make erroneous comparisons with this rule of thumb.
+
+You might not use most of Git's features in a small project, but there is nothing wrong with this as there is negligible overhead. And who knows, perhaps your project will grow beyond your original expectations. It's like using a Swiss army knife to mostly open bottles. On the day you desperately need a screwdriver you'll be glad you have it with you.
+
 == Forking a Project ==
 
 Sick of the way a project is being run? Think you could do a better job? Then on your server:
@@ -79,34 +85,35 @@ Want numerous tamper-proof geographically diverse redundant archives? If your pr
 
 If your project is not so popular, find as many hosts as you can and clone your project there.
 
-For the truly paranoid, always write down the latest 20-byte SHA1 hash of the HEAD somewhere safe. It has to be safe, not private. For example, publishing it in a newspaper would work well, because it's hard for an attacker to alter every copy of a newspaper.
+The truly paranoid should always write down the latest 20-byte SHA1 hash of the HEAD somewhere safe. It has to be safe, not private. For example, publishing it in a newspaper would work well, because it's hard for an attacker to alter every copy of a newspaper.
 
-== Light-Speed Multitasking ==
+== Light-Speed Multitask ==
 
-Say you want to work on several features in parallel. Then after committing your project, clone it:
+Say you want to work on several features in parallel. Then after committing your project:
 
  $ git-clone --local --shared . /some/new/directory
 
-Git exploits hard links and file sharing as much as possible to create this clone. Subsequently, this clone is unsuitable as a backup. However, it's ready in a flash, and you can now you can work on two independent features simultaneously.
+The options can be written as <tt>-l -s</tt> instead, which I like to think of as an acronym for "Light Speed"!
 
-For example, you can edit one while the other is compiling. At any time, you can commit and pull changes from one to the other.
+Git exploits hard links and file sharing as much as possible to create this clone. Subsequently, this clone is unsuitable as a backup. However, it's ready in a flash, and you can now work on two independent features simultaneously. For example, you can edit one clone while the other is compiling.
+
+At any time, you can commit and pull changes from one to the other.
 
  $ git-pull one /to/the/other
 
 == Guerilla Version Control ==
 
-Are you working on a project that uses some other version control system, and you sorely miss some Git features? Then initialize a Git repository in your working directory:
+Are you working on a project that uses some other version control system, and you sorely miss Git? Then initialize a Git repository in your working directory:
 
  $ git-init-db
- $ git add .  # you may want to exclude certain files, such as those
-              # belonging to the other version control system
+ $ git add .
  $ git commit -m "Initial commit"
 
 then clone it:
 
- $ git-clone . /some/new/directory
+ $ git-clone -l -s  . /some/new/directory
 
-Now go to the new directory and work here instead, and use Git to your heart's content. Once in a while, you'll want to sync with everyone else, in which case first sync the original directory using the commands appropriate to the other version control system, and type:
+Now go to the new directory and work here instead, using Git to your heart's content. Once in a while, you'll want to sync with everyone else, in which case go to the original directory, sync using the other version control system, and type:
 
  $ git add .
  $ git commit -m "sync with everyone else"

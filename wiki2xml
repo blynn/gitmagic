@@ -1,5 +1,5 @@
 #!/usr/bin/gawk -f
-# Converts small subset of MediaWiki to DocBook
+# Converts variant of MediaWiki to DocBook
 # Ben Lynn
 
 func open_section(tag) {
