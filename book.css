@@ -92,3 +92,24 @@ div.toc a:hover {
 .parameter {
     font-style: italic;
 }
+
+h1, h2 {
+    padding-top: 0.5em;
+    padding-bottom: 0.17em;
+    margin: 0;
+    font-weight: normal;
+    color: black;
+    border-bottom: 1px solid #aaaaaa;
+}
+
+h1 {
+    font-size: 188%;
+}
+
+div.chapter h2 {
+    font-size: 188%;
+}
+
+div.section h2 {
+    font-size: 150%;
+}

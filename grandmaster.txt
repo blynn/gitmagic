@@ -29,7 +29,7 @@ and in the "proj.git" directory, run
 
 From your computer, you can push via ssh:
 
- $ git push git+ssh://web.server/proj.git HEAD
+ $ git push web.server:/path/to/proj.git HEAD
 
 and people can get your project via
 
