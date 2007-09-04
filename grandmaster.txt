@@ -1,0 +1,27 @@
+= Git Grandmastery =
+
+This pretentiously named page is my dumping ground for uncategorized Git tricks.
+
+== Building On Git ==
+
+TODO
+
+== Git Over HTTP ==
+
+TODO
+
+== Commit What Changed ==
+
+Telling Git when you've added, deleted and renamed files gets tedious. Instead, try:
+
+ $ git-ls-files -d -m -o | xargs git-update-index --add --remove
+
+and Git will look at the files in the current directory and work everything out for itself.
+
+You might want it to ignore particular files:
+
+ $ git-ls-files -d -m -o -x *.tmp | xargs git-update-index --add --remove
+
+If you have a big list of directories and files that should never be version controlled, type them into a separate file named "ignore" and run:
+
+ $ git-ls-files -d -m -o -X ignore | xargs git-update-index --add --remove
