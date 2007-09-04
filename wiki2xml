@@ -48,8 +48,8 @@ func ul_item() {
 }
 
 func close_lists() {
-    close_block()
     if (in_list) {
+	close_block()
 	print "</listitem>"
 	print "</itemizedlist>"
 	in_list = 0

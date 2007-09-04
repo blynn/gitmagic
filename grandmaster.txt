@@ -51,6 +51,14 @@ If you have a big list of directories and files that should never be version con
 
  $ git-ls-files -d -m -o -X ignore | xargs git-update-index --add --remove
 
+== I Stand Corrected ==
+
+Did you just commit, but wish you had typed a different message? Realized you forgot to add a file? Then:
+
+ $ git commit --amend
+
+can help you out.
+
 == Building On Git ==
 
 In true UNIX fashion, Git's design allows it to be easily used as a low-level component of other programs. There are GUI interfaces, web interfaces, alternative command-line interfaces, and perhaps soon you will have a script or two of your own that calls Git.
