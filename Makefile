@@ -5,7 +5,7 @@ target: book
 TXTFILES=intro.txt basic.txt clone.txt branch.txt grandmaster.txt secrets.txt
 
 book.xml: $(TXTFILES)
-	cat $^ | sed 's/<tt>/<command>/g' | sed 's/<\/tt>/<\/command>/g' | ./bookmake > book.xml
+	cat $^ | sed 's/\*\([^ *][^*]*[^ *]\)\*/<command>\1<\/command>/g' | ./bookmake > book.xml
 
 book: book.xml book.css preface.html book/default.css
 	xmlto -m custom-html.xsl -o book html book.xml

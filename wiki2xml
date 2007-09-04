@@ -15,7 +15,7 @@ func close_section() {
 }
 
 func close_until(i) {
-    close_block()
+    close_lists()
     while (stack_i > i) {
 	close_section()
     }
@@ -36,21 +36,73 @@ func in_block(s) {
   }
 }
 
+func ul_item() {
+    if (in_list) {
+	close_block()
+	print "</listitem>"
+    } else {
+	in_list = 1
+	print "<itemizedlist>"
+    }
+    print "<listitem>"
+}
+
+func close_lists() {
+    close_block()
+    if (in_list) {
+	print "</listitem>"
+	print "</itemizedlist>"
+	in_list = 0
+	list_indent = 0
+    }
+}
+
 BEGIN {
     stack_i = 0
 }
 
+# empty lines = close block
 /^ *$/ {
     close_block()
     next
 }
 
+# lists/stuff that goes in <screen> tags
+# if matches a previous indentation level it's a list
+# otherwise it should have higher indentation level
+# and belongs in <screen> tag
+
 /^ / {
-    in_block("screen")
-    print $0
-    next
+    n = length()
+    # must use gensub because length() doesn't seem to change after sub()
+    tmp = gensub("^ *", "", 1)
+    n -= length(tmp)
+    $0 = tmp
+    if (list_indent == n) {
+	was_list_item = 1
+    } else if (list_indent < n) {
+	in_block("screen")
+	print $0
+	next
+    } else {
+	print "funny indent level"
+	print $0
+	next
+    }
 }
 
+/^-/ {
+    was_list_item = 1
+    n = length()
+    # must use gensub because length() doesn't seem to change after sub()
+    tmp = gensub("^- *", "", 1)
+    $0 = tmp
+    n -= length(tmp)
+    list_indent = n
+    ul_item()
+}
+
+# replace " with prettier Unicode open/close double quotes
 /"/ {
     while (match($0, "\"")) {
 	sub("\"", "\\&#8220;")
@@ -64,6 +116,8 @@ BEGIN {
 	sub("''", "</emphasis>")
     }
 }
+
+# headings
 
 /^ *===.*===$/ {
     gsub(" *=== *","")
@@ -89,13 +143,19 @@ BEGIN {
     next
 }
 
+# links
 /\[\[/ {
     gsub("\\[\\[", "<ulink url=\"")
     gsub("]\\[", "\">")
     gsub("]]", "</ulink>")
 }
 
+# default = paragraph
 {
+    if (!was_list_item) {
+	close_lists()
+    }
+    was_list_item = 0
     in_block("para")
     print $0
 }

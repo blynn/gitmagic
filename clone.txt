@@ -6,7 +6,7 @@ In Git and other distributed version control systems, cloning is the standard op
 
 == Sync Computers ==
 
-This is the reason I first used Git. I can tolerate making tarballs or using <tt>rsync</tt> for backups and basic syncing. The problem was sometimes I'd edit on my laptop, other times on my desktop, and they may not have talked to each other in between.
+This is the reason I first used Git. I can tolerate making tarballs or using *rsync* for backups and basic syncing. The problem was sometimes I'd edit on my laptop, other times on my desktop, and they may not have talked to each other in between.
 
 Initialize a Git repository and commit your files as above on one machine. Then on the other:
 
@@ -41,6 +41,10 @@ On the central server, initialize an empty Git repository with some name:
 
  $ GIT_DIR=proj.git git-init-db
 
+and start the Git daemon if necessary:
+
+ $ git-daemon --detach
+
 Some public hosts, such as [[http://repo.or.cz][repo.or.cz]], will have a different method for setting up the initially empty Git repository, such as filling in a form on a webpage.
 
 Push your project to the central server with:
@@ -49,7 +53,7 @@ Push your project to the central server with:
 
 We're ready. To check out source, a developer types
 
- $ git clone central.server:/path/to/proj.git
+ $ git clone git://central.server/path/to/proj.git
 
 After making changes, the code is checked in to the main server by:
 
@@ -71,7 +75,7 @@ You might not use most of Git's features in a small project, but there is nothin
 
 Sick of the way a project is being run? Think you could do a better job? Then on your server:
 
- $ git clone main.server:/path/to/files
+ $ git clone git://main.server/path/to/files
 
 Next tell everyone to check out your fork of the project at your server.
 
@@ -93,7 +97,7 @@ Say you want to work on several features in parallel. Then after committing your
 
  $ git-clone --local --shared . /some/new/directory
 
-The options can be written as <tt>-l -s</tt> instead, which I like to think of as an acronym for "Light Speed"!
+The options can be written as *-l -s* instead, which I like to think of as an acronym for "Light Speed"!
 
 Git exploits hard links and file sharing as much as possible to create this clone. Subsequently, this clone is unsuitable as a backup. However, it's ready in a flash, and you can now work on two independent features simultaneously. For example, you can edit one clone while the other is compiling.
 

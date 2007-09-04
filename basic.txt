@@ -26,7 +26,7 @@ Tip: the hyphen after "git" may be replaced by a space if you prefer.
 
 === Add, Delete, Rename ===
 
-The above will only keep track of the files that were present when you first ran <tt>git-add</tt>. If you add new files or subdirectories, you'll have to tell Git:
+The above will only keep track of the files that were present when you first ran *git-add*. If you add new files or subdirectories, you'll have to tell Git:
 
  $ git-add NEWFILES...
 
@@ -34,7 +34,7 @@ Similarly, if you want Git to forget about certain files, maybe because you've d
 
  $ git-rm OLDFILES...
 
-Renaming a file is the same as removing the old name and adding the new name. There's also the shortcut <tt>git-mv</tt> which has the same syntax as the <tt>mv</tt> command. For example:
+Renaming a file is the same as removing the old name and adding the new name. There's also the shortcut *git-mv* which has the same syntax as the *mv* command. For example:
 
  $ git-mv OLDFILE NEWFILE
 
@@ -58,7 +58,7 @@ Other time specifications work too. Or you can ask for the 5th-last saved state:
 
  $ git-revert "@{5}" .
 
-Running <tt>git-log</tt> reveals that the fact that you loaded an old saved state has been recorded as new commit. In other words, Git tracks your undo and redo operations.
+Running *git-log* reveals that the fact that you loaded an old saved state has been recorded as new commit. In other words, Git tracks your undo and redo operations.
 
 Sometimes you just want to go back and forget about every change past a certain point because they're all wrong. Then type:
 
@@ -66,23 +66,27 @@ Sometimes you just want to go back and forget about every change past a certain 
 
 which restores the state to a given commit and also erases all newer commits from the record permanently.
 
-Using <tt>git-checkout</tt> is a third way to load an old state, but it's slightly more complicated because it involves branches, and will be discussed in detail later.
+Using *git-checkout* is a third way to load an old state, but it's slightly more complicated because it involves branches, and will be discussed in detail later.
 
-To take the computer game analogy again, <tt>git-revert</tt> is like loading a game and recording this fact as a new saved game, and <tt>git-reset --hard</tt> is like loading an old save and deleting all saved games newer than the one just loaded.
+To take the computer game analogy again:
 
-Lastly, <tt>git-checkout</tt> is like loading an old game, but if you play on, the game state will deviate from the newer saves you made the first time around. Any saved games you make now will end up in a separate branch representing the alternate reality you have entered. We describe how to deal with this later.
+- *git-revert* is like loading a game and recording this fact as a new saved game,
+
+- *git-reset --hard* is like loading an old save and deleting all saved games newer than the one just loaded, and
+
+- *git-checkout* is like loading an old game, but if you play on, the game state will deviate from the newer saves you made the first time around. Any saved games you make now will end up in a separate branch representing the alternate reality you have entered. We describe how to deal with this later.
 
 == Dowloading Files ==
 
 If a project uses Git to manage its files, you can get a copy with:
 
- $ git-clone server:/path/to/files
+ $ git-clone git://server/path/to/files
 
-We'll have a lot more to say about the <tt>clone</tt> command later.
+We'll have a lot more to say about the *clone* command later.
 
 == Keeping Up-to-date  ==
 
-If a project uses Git to manage its files, and you've already downloaded a copy using <tt>git-clone</tt>, you can upgrade to the latest released version with:
+If a project uses Git to manage its files, and you've already downloaded a copy using *git-clone*, you can upgrade to the latest released version with:
 
  $ git-pull
 
@@ -100,7 +104,11 @@ Then tell your users to type
 
  $ git-clone your.computer:/path/to/script
 
-to download your script. From now on, every time your script is ready for release, type:
+to download your script. This assumes they have ssh access. If not, run *git-daemon* and tell your users to type
+
+ $ git-clone git://your.computer/path/to/script
+
+From now on, every time your script is ready for release, type:
 
  $ git-commit -a -m "next release"
 
