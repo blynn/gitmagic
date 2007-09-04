@@ -85,9 +85,9 @@ At any later time, you can merge in the changes from the original project with:
 
 == Ultimate Backups ==
 
-Want numerous tamper-proof geographically diverse redundant archives? If your project has many developers, don't do anything! Everyone who clones your code is effectively a backup, not just of the current state of the project, but of your project's entire history. Thanks to cryptographic hashing, if someone's clone become corrupted, it will be spotted as soon as they try to communicate with others.
+Want numerous tamper-proof geographically diverse redundant archives? If your project has many developers, don't do anything! Every clone of your code is effectively a backup. Not just of the current state of the project, but of your project's entire history. Thanks to cryptographic hashing, if anyone's clone becomes corrupted, it will be spotted as soon as they try to communicate with others.
 
-If your project is not so popular, find as many hosts as you can and clone your project there.
+If your project is not so popular, find as many servers as you can to host clones.
 
 The truly paranoid should always write down the latest 20-byte SHA1 hash of the HEAD somewhere safe. It has to be safe, not private. For example, publishing it in a newspaper would work well, because it's hard for an attacker to alter every copy of a newspaper.
 
@@ -101,9 +101,9 @@ The options can be written as *-l -s* instead, which I like to think of as an ac
 
 Git exploits hard links and file sharing as much as possible to create this clone. Subsequently, this clone is unsuitable as a backup. However, it's ready in a flash, and you can now work on two independent features simultaneously. For example, you can edit one clone while the other is compiling.
 
-At any time, you can commit and pull changes from one to the other.
+At any time, you can commit and pull changes the other clone.
 
- $ git-pull one /to/the/other
+ $ git-pull /the/other/clone
 
 == Guerilla Version Control ==
 
