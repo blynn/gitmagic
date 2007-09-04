@@ -40,6 +40,11 @@ div.content:after {
 
 div.footer {
     clear:left;
+    padding: 0.5em;
+    /* background-color: #f9f9f9;
+    border: 1px solid #aaaaaa; */
+    font-size: 80%;
+    margin: 0;
 }
 
 div.toc ul {

@@ -2,13 +2,38 @@
 
 This pretentiously named page is my dumping ground for uncategorized Git tricks.
 
-== Building On Git ==
+== Source Releases ==
 
-TODO
+For my projects, Git tracks exactly the files I'd like to archive and release to users. So to create a tarball of the source code, I run:
 
-== Git Over HTTP ==
+ $ git-archive --format=tar --prefix=proj-1.2.3/ HEAD
 
-TODO
+== Changelog Generation ==
+
+It's good practice to keep a [[http://en.wikipedia.org/wiki/Changelog][changelog]], and some projects even require it. If you've been committing frequently, which you should, generate a Changelog by typing
+
+ $ git-log > ChangeLog
+
+== Git Over SSH, HTTP ==
+
+Suppose you have ssh access to your web server, and it does not have Git installed, which is not an uncommon situation. Then download, compile and install Git in your account.
+
+Create a repository in your web directory:
+
+ $ GIT_DIR=proj.git git-init
+
+and in the "proj.git" directory, run
+
+ $ git --bare update-server-info
+ $ chmod a+x hooks/post-update
+
+From your computer, you can push via ssh:
+
+ $ git push git+ssh://web.server/proj.git HEAD
+
+and people can get your project via
+
+ $ git clone http://web.server/proj.git
 
 == Commit What Changed ==
 
@@ -25,3 +50,9 @@ You might want it to ignore particular files:
 If you have a big list of directories and files that should never be version controlled, type them into a separate file named "ignore" and run:
 
  $ git-ls-files -d -m -o -X ignore | xargs git-update-index --add --remove
+
+== Building On Git ==
+
+In true UNIX fashion, Git's design allows it to be easily used as a low-level component of other programs. There are GUI interfaces, web interfaces, alternative command-line interfaces, and perhaps soon you will have a script or two of your own that calls Git.
+
+See [[http://git.or.cz/][the Git homepage]] for some examples.

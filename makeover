@@ -34,6 +34,8 @@ a <div class="content">
     fi
 done
 
+sed '/^<\/body/i </div><div class="footer"><a href="/~blynn/">My Homepage</a></div>' -i $BOOKDIR/*.html
+
 # extract shell of index.html
 # then insert ToC and preface
 gawk '

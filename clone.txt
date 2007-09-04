@@ -1,8 +1,8 @@
 = Cloning Around =
 
-In older version control systems, checkout was the standard way to get a saved state. You'd checkout a bunch of files in the requested saved state.
+In older version control systems, the standard way to get a saved state was checkout. You'd checkout a bunch of files in the requested saved state.
 
-In Git and other distributed version control systems, the standard way to get files is to create a clone of the entire repository. In other words, you practically create a mirror of the central repository. So anything the central repository can do, you can do.
+In Git and other distributed version control systems, cloning is the standard operation. To get files you create a clone of the entire repository. In other words, you practically create a mirror of the central server. So anything the main repository can do, you can do.
 
 == Sync Computers ==
 
@@ -123,4 +123,4 @@ Then go to the new directory and run:
  $ git commit -a -m "description of my changes"
  $ git pull
 
-On the other hand, the procedure for giving your changes to everyone else varies depending on the other version control system. You have the files you want to push in the new directory, and running a few commands of the other version control system will upload them to the central repository.
+On the other hand, the procedure for giving your changes to everyone else varies depending on the other version control system. The new directory contains the files with your changes. Run whatever commands of the other version control system are neeeded to upload them to the central repository.

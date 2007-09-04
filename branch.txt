@@ -1,6 +1,6 @@
 = Branch Magic =
 
-Now that you've mastered some simple Git sleights, it's time to learn some showstoppers.
+Now that you've mastered some simple Git sleights, it's time to learn some real crowd-pleasers.
 
 External factors inevitably necessitate context switching. A severe bug manifests in the released version suddenly without warning, and must be fixed as soon as possible at all costs. The deadline for a certain feature is imminent. The guy who wrote a certain function is about to leave, so you should drop what you are doing and get him to help you understand it.
 
@@ -129,4 +129,18 @@ Perhaps a better example is the famous [[http://www.gnu.org/software/screen/][<t
 
 Web browsers like [[http://www.mozilla.com/][Mozilla Firefox]] allow you to open multitple tabs and multiple windows which are analogous to branching and cloning in Git. Being able to do both easily makes for a better user experience.
 
-Cloning, branching and merging are fast and local in Git, so you can easily use the combination that suits you best. Git allows you to work exactly how you want.
+Cloning, branching and merging are fast and local in Git, encouraging you to use the combination that best suits you. Git allows you to work exactly how you want.
+
+=== Personal Experience ===
+
+The equivalent of branching and cloning in centralized version control systems, when it exists, requires network communication. This automatically precludes working offline. Secondly, these systems need more expensive network infrastructure, especially as the number of users grows.
+
+Lastly, and most importantly, these operations will be slower to some degree, usually to the point where users won't bother using them unless absolutely necessary. And when they absolutely have to run slow commands, productivity suffers because of an interrupted work flow.
+
+I experienced these phenomena first-hand. Git was the first version control system I used, and I grew accustomed to it, taking many features for granted. I did not know what centralized systems were like, and assumed they were similar. Later, I was forced to use one because of a project I worked on.
+
+Often I have a flaky internet connection. I didn't mind too much with Git but found development unbearable with a centralized system.
+
+I found myself conditioned to avoid certain commands because of the latencies involved, which ultimately prevented me from following the work flow I wanted.
+
+And when I had to run a slow command, the interruption to my train of thought dealt a disproportionate amount of damage. While waiting for server communcation to complete, I'd do something else to pass the time, such as check email or write documentation. By the time I returned to the original task, the command had already finished long ago, but I'd have to spend a long time trying to remember what I was doing.

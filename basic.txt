@@ -22,6 +22,8 @@ to go back to where you were. To save the state again:
 
  $ git-commit -a -m "another backup"
 
+Tip: the hyphen after "git" may be replaced by a space if you prefer.
+
 === Add, Delete, Rename ===
 
 The above will only keep track of the files that were present when you first ran <tt>git-add</tt>. If you add new files or subdirectories, you'll have to tell Git:
@@ -86,9 +88,7 @@ If a project uses Git to manage its files, and you've already downloaded a copy 
 
 == Instant Publishing ==
 
-Let's say you've written a script you'd like to share with others. You could just tell them to download from your computer, but if they do so while you're improving the script or making experimental changes, they'll get a bad version.
-
-Of course, this is why release cycles exist. Code is written, and at certain points in time, when it's suitable for others, it gets released.
+Let's say you've written a script you'd like to share with others. You could just tell them to download from your computer, but if they do so while you're improving the script or making experimental changes, they could wind up in trouble.  Of course, this is why release cycles exist. Code is written, and at certain points in time, when it's suitable for others, it gets released.
 
 To do this with Git, in the directory where your script resides:
 
@@ -108,7 +108,7 @@ and your users can upgrade their version by changing to the directory containing
 
  $ git-pull
 
-Your users will never wind up with a version of your script you don't want them to see. Obviously this trick works for anything, not just scripts.
+Your users will never end up with a version of your script you don't want them to see. Obviously this trick works for anything, not just scripts.
 
 == What Have I Done? ==
 

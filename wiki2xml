@@ -45,6 +45,26 @@ BEGIN {
     next
 }
 
+/^ / {
+    in_block("screen")
+    print $0
+    next
+}
+
+/"/ {
+    while (match($0, "\"")) {
+	sub("\"", "\\&#8220;")
+	sub("\"", "\\&#8221;")
+    }
+}
+
+/''/ {
+    while (match($0, "''")) {
+	sub("''", "<emphasis>")
+	sub("''", "</emphasis>")
+    }
+}
+
 /^ *===.*===$/ {
     gsub(" *=== *","")
     close_until(2)
@@ -73,12 +93,6 @@ BEGIN {
     gsub("\\[\\[", "<ulink url=\"")
     gsub("]\\[", "\">")
     gsub("]]", "</ulink>")
-}
-
-/^ / {
-    in_block("screen")
-    print $0
-    next
 }
 
 {
