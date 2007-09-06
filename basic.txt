@@ -76,6 +76,8 @@ To take the computer game analogy again:
 
 - *git-checkout* is like loading an old game, but if you play on, the game state will deviate from the newer saves you made the first time around. Any saved games you make now will end up in a separate branch representing the alternate reality you have entered. We describe how to deal with this later.
 
+For reset and checkout, you can choose only to restore particular files and subdirectories by appending them after the command.
+
 == Dowloading Files ==
 
 If a project uses Git to manage its files, you can get a copy with:
@@ -84,9 +86,9 @@ If a project uses Git to manage its files, you can get a copy with:
 
 We'll have a lot more to say about the *clone* command later.
 
-== Keeping Up-to-date  ==
+== The Bleeding Edge ==
 
-If a project uses Git to manage its files, and you've already downloaded a copy using *git-clone*, you can upgrade to the latest released version with:
+If a project uses Git to manage its files, and you've already downloaded a copy using *git-clone*, you can upgrade to the latest version with:
 
  $ git-pull
 

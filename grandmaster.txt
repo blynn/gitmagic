@@ -39,17 +39,17 @@ and people can get your project via
 
 Telling Git when you've added, deleted and renamed files gets tedious. Instead, try:
 
- $ git-ls-files -d -m -o | xargs git-update-index --add --remove
+ $ git-ls-files -d -m -o -z | xargs -0 git-update-index --add --remove
 
-and Git will look at the files in the current directory and work everything out for itself.
+and Git will look at the files in the current directory and work everything out for itself. The *-z* and *-0* options prevent ill side-effects from filenames containing strange characters.
 
 You might want it to ignore particular files:
 
- $ git-ls-files -d -m -o -x *.tmp | xargs git-update-index --add --remove
+ $ git-ls-files -d -m -o -z -x *.tmp | xargs -0 git-update-index --add --remove
 
 If you have a big list of directories and files that should never be version controlled, type them into a separate file named "ignore" and run:
 
- $ git-ls-files -d -m -o -X ignore | xargs git-update-index --add --remove
+ $ git-ls-files -d -m -o -z -X ignore | xargs -0 git-update-index --add --remove
 
 == I Stand Corrected ==
 

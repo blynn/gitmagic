@@ -37,13 +37,11 @@ Initialize a Git repository for your files:
  $ git add .
  $ git commit -m "Initial commit"
 
-On the central server, initialize an empty Git repository with some name:
-
- $ GIT_DIR=proj.git git-init-db
-
+On the central server, initialize an empty Git repository with some name,
 and start the Git daemon if necessary:
 
- $ git-daemon --detach
+ $ GIT_DIR=proj.git git-init-db
+ $ git-daemon --detach  # it might already be running
 
 Some public hosts, such as [[http://repo.or.cz][repo.or.cz]], will have a different method for setting up the initially empty Git repository, such as filling in a form on a webpage.
 
@@ -64,12 +62,6 @@ If the main server has been updated, the latest version needs to be checked out 
 
  $ git commit -a
  $ git pull
-
-A popular misconception is that Git is ill-suited for projects requiring an official central repository (see for example [[http://www.subversionary.org/martintomes/git][this blog post]]). Nothing could be further from the truth. Photographing someone does not cause their soul to be stolen. Similarly, cloning the master repository does not make its importance diminish.
-
-A good first approximation is that anything a centralized version control system can do, Git can do better. While not strictly true, one is less likely to make erroneous comparisons with this rule of thumb.
-
-You might not use most of Git's features in a small project, but there is nothing wrong with this as there is negligible overhead. Moreover, your project may grow beyond your original expectations. It's like using a Swiss army knife to mostly open bottles. On the day you desperately need a screwdriver you'll be glad you have it with you.
 
 == Forking a Project ==
 
@@ -101,7 +93,7 @@ The options can be written as *-l -s* instead, which I like to think of as an ac
 
 Git exploits hard links and file sharing as much as possible to create this clone. Subsequently, this clone is unsuitable as a backup. However, it's ready in a flash, and you can now work on two independent features simultaneously. For example, you can edit one clone while the other is compiling.
 
-At any time, you can commit and pull changes the other clone.
+At any time, you can commit and pull changes from the other clone.
 
  $ git-pull /the/other/clone
 
@@ -113,7 +105,7 @@ Are you working on a project that uses some other version control system, and yo
  $ git add .
  $ git commit -m "Initial commit"
 
-then clone it:
+then clone it, at light speed:
 
  $ git-clone -l -s  . /some/new/directory
 
@@ -127,4 +119,4 @@ Then go to the new directory and run:
  $ git commit -a -m "description of my changes"
  $ git pull
 
-On the other hand, the procedure for giving your changes to everyone else varies depending on the other version control system. The new directory contains the files with your changes. Run whatever commands of the other version control system are neeeded to upload them to the central repository.
+The procedure for giving your changes to everyone else depends on the other version control system. The new directory contains the files with your changes. Run whatever commands of the other version control system are needed to upload them to the central repository.
