@@ -1,6 +1,6 @@
-= Branch Magic =
+= Branch Wizardry =
 
-Now that you've mastered some simple Git sleights, it's time to learn some real crowd-pleasers.
+Instant branching and merging are the most lethal of Git's killer features.
 
 *Problem*: External factors inevitably necessitate context switching. A severe bug manifests in the released version suddenly without warning, and must be fixed as soon as possible at all costs. The deadline for a certain feature is imminent. The guy who wrote a certain function is about to leave, so you should drop what you are doing and get him to help you understand it.
 
@@ -8,12 +8,11 @@ Interrupting your train of thought can be detrimental to your productivity, and 
 
 But cloning still entails copying the whole working directory as well as the entire history up to the given point. Even though Git reduces the cost of this with file sharing and hard links, the project files themselves must be recreated in their entirety in the new working directory.
 
-*Solution*: Git has a better tool for these situations that is much faster and more space-efficient than cloning: *git-branch*. With this magic word, the files in your directory instantly shapeshift from one version to another. This transformation can do more than merely go back or forward in history. Your files can morph from the last release to the experimental version to the current development version to your friend's version and so on.
+*Solution*: Git has a better tool for these situations that is much faster and more space-efficient than cloning: *git-branch*. With this magic word, the files in your directory suddenly shapeshift from one version to another. This transformation can do more than merely go back or forward in history. Your files can morph from the last release to the experimental version to the current development version to your friend's version and so on.
 
 == The Boss Key ==
 
-Ever play one of those games where you could hit a special key combination at
-any time, and the screen would instantly display a spreadsheet or something? So if the boss walked in the office while you were playing the game you could quickly hide this fact?
+Ever play one of those games where at the push of a button ("the boss key"), the screen would instantly display a spreadsheet or something? So if the boss walked in the office while you were playing the game you could quickly hide this fact?
 
 In some directory:
 
@@ -38,8 +37,6 @@ and hey presto! The text file is restored. And if the boss decides to snoop arou
 
 You can switch between the two versions of the file as much as you like, and commit to each independently.
 
-You may have real applications for this trick. Perhaps you have a program that reads data from a certain directory, and every now and then you'd like to switch the data back and forth without reconfiguring the program.
-
 == Dirty Work ==
 
 Say you're working on some feature, and for some reason, you need to go back to an old version and temporarily need to put in a few prints statements to see how something works. Then:
@@ -61,9 +58,13 @@ before switching back to the master branch. Whenever you want to return to the d
 
  $ git checkout dirty
 
+We touched upon this command in an earlier chapter, when discussing loading old states. Now we can describe what happens when you load an old state using the checkout command: the files change to the requested state, but we must leave the master branch. Any commits made from now on take your files down a different road.
+
+Hence after checking out an old state, Git automatically puts you in a new, unnamed branch, which can be named and saved with *git-checkout -b*.
+
 == Quick Fixes ==
 
-This time, say you're in the middle of something and you are required to drop everything and work on fixing a bug that's just been reported:
+You're in the middle of something when you are told to drop everything and fix a newly discovered bug:
 
  $ git commit -a
  $ git checkout -b fixes SHA1_HASH
@@ -125,7 +126,7 @@ The branch command can also do other operations with branches. See *git help bra
 
 Several Linux window managers allow you to have multiple desktops, which means you can instantly view a different state of the desktop. Git branching is like multiple desktops for your working directory. Continuing this analogy, Git cloning is like attaching another monitor on which you can open more windows.
 
-Perhaps a better example is the famous [[http://www.gnu.org/software/screen/][*screen*]] utility. This gem allows you to create, destroy and switch between multiple terminal sessions in the same terminal. Instead of opening new terminals (clone), you can use the same one if you run *screen* (branch). In fact, you can do a lot more with *screen* but that's a topic for another day.
+Perhaps a better example is the [[http://www.gnu.org/software/screen/][*screen*]] utility. This gem allows you to create, destroy and switch between multiple terminal sessions in the same terminal. Instead of opening new terminals (clone), you can use the same one if you run *screen* (branch). In fact, you can do a lot more with *screen* but that's a topic for another day.
 
 Web browsers like [[http://www.mozilla.com/][Mozilla Firefox]] allow you to open multitple tabs and multiple windows which are analogous to branching and cloning in Git. Being able to do both easily makes for a better user experience.
 

@@ -47,9 +47,11 @@ You might want it to ignore particular files:
 
  $ git-ls-files -d -m -o -z -x *.tmp | xargs -0 git-update-index --add --remove
 
-If you have a big list of directories and files that should never be version controlled, type them into a separate file named "ignore" and run:
+If you have a big list of directories and files that should never be version controlled, type them into a separate file named ".gitignore" and run:
 
- $ git-ls-files -d -m -o -z -X ignore | xargs -0 git-update-index --add --remove
+ $ git-ls-files -d -m -o -z -X .gitignore | xargs -0 git-update-index --add --remove
+
+You can also exclude files on a per-directory basis. See the help page.
 
 == I Stand Corrected ==
 
@@ -58,6 +60,24 @@ Did you just commit, but wish you had typed a different message? Realized you fo
  $ git commit --amend
 
 can help you out.
+
+== Don't Lose Your HEAD ==
+
+The HEAD tag is like a cursor that normally points at the latest commit, advancing with each new commit. Some Git commands let you move it. For example:
+
+ $ git reset HEAD~3
+
+will move the HEAD three commits backwards in time. Thus all Git commands now act as if you hadn't made those last three commits, while your files remain in the present. See the git-reset man page for some applications.
+
+But how can you go back to the future? The past commits do not know anything of the future.
+
+If you have the SHA1 of the original HEAD then:
+
+ $ git reset SHA1
+
+But suppose you never took it down? Don't worry, for commands like these, Git saves the original HEAD as a tag called ORIG_HEAD, and you can return safe and sound with:
+
+ $ git reset ORIG_HEAD
 
 == Building On Git ==
 
