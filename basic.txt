@@ -84,6 +84,10 @@ If a project uses Git to manage its files, you can get a copy with:
 
  $ git-clone git://server/path/to/files
 
+For example, to get all the files I used to create this site:
+
+ $ git-clone git://git.or.cz/gitmagic.git
+
 We'll have a lot more to say about the *clone* command later.
 
 == The Bleeding Edge ==
