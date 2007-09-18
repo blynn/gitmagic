@@ -29,7 +29,7 @@ and in the "proj.git" directory, run
 
 From your computer, you can push via ssh:
 
- $ git push web.server:/path/to/proj.git HEAD
+ $ git push web.server:/path/to/proj.git master
 
 and people can get your project via
 
@@ -60,6 +60,44 @@ Did you just commit, but wish you had typed a different message? Realized you fo
  $ git commit --amend
 
 can help you out.
+
+Since this changes the history, only do this if you have yet to push your changes, otherwise your tree will diverge from other trees. Of course, if you control all the other trees too, then there is no problem since you can always overwrite them.
+
+== ... And Then Some ==
+
+Let's suppose the previous problem is ten times worse. After a lengthy session you've made a bunch of commits. But you're not quite happy with the way they're organized, and some of those commit messages could use some rewording. This is quite likely if you've been saving early and saving often. Then type
+
+ $ git rebase -i HEAD~10
+
+and the last 10 commits will appear in your favourite $EDITOR. A sample excerpt:
+
+    pick 5c6eb73 Added repo.or.cz link
+    pick a311a64 Reordered analogies in "Work How You Want"
+    pick 100834f Added push target to Makefile
+
+Then:
+
+- Remove commits by deleting lines.
+- Reorder commits by reordering lines.
+- Replace "pick" with "edit" to mark a commit for amending.
+- Replace "pick" with "squash" to merge a commit with the previous one.
+
+Next run *git-commit --amend* if you marked a commit for editing. Otherwise, run:
+
+ $ git-rebase --continue
+
+Again, you can only do this if no one else has your tree.
+
+== Local Changes Last ==
+
+You're working on an active project. You make some local commits over time, and
+then you sync with the official tree with a merge. This cycle repeats itself a few times before you're ready to push to the cetnral tree.
+
+But now the history in your local Git clone is a messy jumble of your changes and the official changes. You'd prefer to see all your changes in one contiguous section, and after all the official changes.
+
+This is a job for *git-rebase* as described above.
+
+Also see the manpage for other amazing uses of this command, which really deserves a chapter of its own. You can split commits. You can even rearrange branches of a tree!
 
 == Don't Lose Your HEAD ==
 

@@ -10,7 +10,7 @@ book.xml: $(TXTFILES)
 book: book.xml book.css preface.html book/default.css
 	xmlto -m custom-html.xsl -o book html book.xml
 	sed -i 's/xmlns:fo[^ ]*//' book/*.html
-	-ls book/*.html | xargs -n 1 tidy -utf8 -m -i -q
+	ls book/*.html | xargs -n 1 tidy -utf8 -m -i -q
 	./makeover
 
 book/default.css: book.css
@@ -19,7 +19,7 @@ book/default.css: book.css
 
 book.html: book.xml
 	xmlto -m custom-nochunks.xsl html-nochunks $^
-	-tidy -utf8 -imq $@
+	tidy -utf8 -imq $@
 
 book.pdf: book.xml
 	docbook2pdf book.xml
