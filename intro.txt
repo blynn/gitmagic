@@ -1,8 +1,8 @@
-= Introduction =
+== Introduction ==
 
-I'll use an analogy to introduce version control. See [[http://en.wikipedia.org/wiki/Revision_control][the Wikipedia entry on revision control]] for a saner explanation.
+I'll use an analogy to introduce version control. See http://en.wikipedia.org/wiki/Revision_control[the Wikipedia entry on revision control] for a saner explanation.
 
-== Work is Play ==
+=== Work is Play ===
 
 I've played computer games almost all my life. In contrast, I only started using version control systems as an adult. I suspect I'm not alone, and comparing the two may make these concepts easier to explain and understand.
 
@@ -10,7 +10,7 @@ Think of editing your code or document, or whatever, as playing a game. Once you
 
 But this will overwrite the old version. It's like those old school games which only had one save slot: sure you could save, but you could never go back to an older state. Which was a shame, because your previous save might have been right at a really fun part of the game that you'd like to revisit one day. Or worse still, your current save is in an unwinnable state, and you have to start again.
 
-== Version Control ==
+=== Version Control ===
 
 When editing, you can "Save As..." a different file, or copy the file somewhere first before saving if you want to savour old versions. Maybe compress them too to save space. This is version control, but very primitive and labour-intensive. Computer games improved on this long ago, many of them providing multiple automatically timestamped save slots.
 
@@ -20,7 +20,7 @@ In some computer games, saving the game actually writes a directory full of file
 
 This is also a basic capability of all version control systems. They all have nice interfaces to manage a directory of stuff. You can save its state every so often, and you can load any one of the saved states later on. Unlike most computer games, they're usually smart about using space, by exploiting the fact that only a few of the files usually change between version to version, and not by much.
 
-== Distributed Control ==
+=== Distributed Control ===
 
 Now imagine a very difficult computer game. So difficult to finish that many experienced gamers all over the world decide to team up and share their saved games to try to beat it. Real-life examples of this include doing speedruns of certain games. Players specializing in different levels of the same game collaborate to produce amazing results.
 
@@ -36,15 +36,15 @@ The new generation of version control systems, of which Git is a member, are kno
 
 This initial cloning operation can be expensive, especially if there's a long history, but it pays off in the long run. One immediate benefit is that when an old save is desired for any reason, communication with the central server is unnecessary.
 
-=== A Silly Superstition ===
+==== A Silly Superstition ====
 
-A popular misconception is that distributed systems are ill-suited for projects requiring an official central repository (see for example [[http://www.subversionary.org/martintomes/git][this blog post]]). Nothing could be further from the truth. Photographing someone does not cause their soul to be stolen. Similarly, cloning the master repository does not make its importance diminish.
+A popular misconception is that distributed systems are ill-suited for projects requiring an official central repository (see for example http://www.subversionary.org/martintomes/git[this blog post]). Nothing could be further from the truth. Photographing someone does not cause their soul to be stolen. Similarly, cloning the master repository does not make its importance diminish.
 
 A good first approximation is that anything a centralized version control system can do, a well-designed distributed system can do better. While not strictly true, one is less likely to make erroneous comparisons with this rule of thumb.
 
 You might not use most features of such a system in a small project, but there is nothing wrong with this as there is negligible overhead. Moreover, your project may grow beyond your original expectations. It's like using a Swiss army knife to mostly open bottles. On the day you desperately need a screwdriver you'll be glad you have it with you.
 
-== Merge Conflicts ==
+=== Merge Conflicts ===
 
 An interesting problem arises in any type of revision control system. Suppose Alice and Bob have both independently downloaded the latest saved game. They both play the game a bit more and save. What if they both want to submit their new saves? Let's say Alice uploads first. Nothing spectacular happens, but when Bob tries to upload his save, the system realizes that his state does not chronologically follow Alice's state.
 

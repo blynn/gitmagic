@@ -1,0 +1,50 @@
+= Git Magic =
+Ben Lynn
+August 2007
+
+== Preface ==
+
+http://git.or.cz/[Git] is a version control Swiss army knife. A reliable versatile multipurpose revision control tool whose extraordinary flexibility makes it tricky to learn, let alone master. I'm recording what I've figured out so far in these pages.
+
+As Arthur C. Clarke observed, any sufficiently advanced technology is indistinguishable from magic, and this is a great way to approach Git. Newbies can ignore its inner workings and view Git as a gizmo that can amaze friends and infuriate enemies with its wondrous abilities.
+
+So rather than go into details, I'll provide rough instructions for particular effects. After repeated use, gradually you will understand how each trick works, and how to tailor the recipes for your needs.
+
+.About Git
+
+- http://git.or.cz[Git homepage], which hosts
+ * http://www.kernel.org/pub/software/scm/git/docs/user-manual.html[The official Git user manual]
+ * http://www.kernel.org/pub/software/scm/git/docs/git.html[Git manual pages]
+ * http://www.kernel.org/pub/software/scm/git/docs/tutorial.html[Tutorial]
+ * http://git.or.cz/gitwiki/GitHistory[Historical background]
+- http://en.wikipedia.org/wiki/Git_%28software%29[Wikipedia entry on Git].
+- http://eagain.net/articles/git-for-computer-scientists/[Git For Computer Scientists] by Tommi Virtanen.
+- http://www.selenic.com/mercurial/wiki/index.cgi/UnderstandingMercurial[Understanding Mercurial], a highly accessible introduction to distributed version control.
+- http://lkml.org/lkml/2005/4/6/121[Linux Kernel Mailing List post] describing the chain of events that led to Git. The entire thread is a fascinating archaeological site for Git historians.
+
+.Comparisons
+
+- Git versus Subversion: articles by
+ * http://git.or.cz/gitwiki/GitSvnComparsion[Shawn Pearce]
+ * http://mjtsai.com/blog/2007/07/15/subversion-to-git/[Michael Tsai]
+ * http://utsl.gen.nz/talks/git-svn/intro.html[Sam Vilain]
+- Git versus Mercurial: articles by
+ * http://tytso.livejournal.com/29467.html[Ted Tso]
+ * http://www.jukie.net/~bart/blog/git-vs-hg[Bart Trojanowski]
+
+- http://subversion.tigris.org/subversion-linus.html[Subversion vs itself]: in response to its defence of Subversion's limitations, I claim Git is right for _every_ project. I also claim where there is more than one programmer, there is decentralized development.
++
+Saying you should use systems that don't scale well when your project is tiny is like saying you should use Roman numerals for calculations involving small numbers.
+
+.Other guides
+
+ - http://wiki.sourcemage.org/Git_Guide[Git Guide] at SourceMage.
+ - http://git.or.cz/course/svn.html[Git crash course for Subversion users]
+ - http://linux.yyz.us/git-howto.html[Kernel Hacker's Guide to Git] by Jeff Garzik.
+ - http://wiki.samba.org/index.php/Using_Git_for_Samba_Development[Using Git for Samba Development]
+ - http://polywww.in2p3.fr/~gaycken/Calice/Software/my_git_workflow.html[Advanced Git work flow] described by Götz Gaycken.
+
+.Free Git hosting
+
+ - http://repo.or.cz/ provides free Git hosting for free projects,
+http://repo.or.cz/w/gitmagic.git[including this guide].

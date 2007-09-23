@@ -1,4 +1,4 @@
-= Branch Wizardry =
+== Branch Wizardry ==
 
 Instant branching and merging are the most lethal of Git's killer features.
 
@@ -12,7 +12,7 @@ But cloning still entails copying the whole working directory as well as the ent
 
 With this magic word, the files in your directory suddenly shapeshift from one version to another. This transformation can do more than merely go back or forward in history. Your files can morph from the last release to the experimental version to the current development version to your friend's version and so on.
 
-== The Boss Key ==
+=== The Boss Key ===
 
 Ever play one of those games where at the push of a button ("the boss key"), the screen would instantly display a spreadsheet or something? So if the boss walked in the office while you were playing the game you could quickly hide this fact?
 
@@ -39,7 +39,7 @@ and hey presto! The text file is restored. And if the boss decides to snoop arou
 
 You can switch between the two versions of the file as much as you like, and commit to each independently.
 
-== Dirty Work ==
+=== Dirty Work ===
 
 Say you're working on some feature, and for some reason, you need to go back to an old version and temporarily need to put in a few prints statements to see how something works. Then:
 
@@ -64,7 +64,7 @@ We touched upon this command in an earlier chapter, when discussing loading old 
 
 Hence after checking out an old state, Git automatically puts you in a new, unnamed branch, which can be named and saved with *git-checkout -b*.
 
-== Quick Fixes ==
+=== Quick Fixes ===
 
 You're in the middle of something when you are told to drop everything and fix a newly discovered bug:
 
@@ -79,7 +79,7 @@ Then once you've fixed the bug:
 
 ...and resume work on your original task.
 
-== Uninterrupted Workflow ==
+=== Uninterrupted Workflow ===
 
 Some projects require your code to be reviewed before you may submit it. To make life easier for those reviewing your code, if you have a big change to make you might break it into two or more parts, and get each part separately reviewed.
 
@@ -114,7 +114,7 @@ and again, the second part is ready to be reviewed.
 
 It's easy to extend this trick for any number of parts.
 
-== Managing Branches ==
+=== Managing Branches ===
 
 Type:
 
@@ -124,17 +124,17 @@ to list all the branches. There is always a branch named "master", and you start
 
 The branch command can also do other operations with branches. See *git help branch* for details.
 
-== Work How You Want ==
+=== Work How You Want ===
 
-Applications like [[http://www.mozilla.com/][Mozilla Firefox]] allow you to open multitple tabs and multiple windows. Swtiching tabs gives you different content in the same window. Git branching is like tabs for your working directory. Continuing this analogy, Git cloning is like opening a new window. Being able to do both easily makes for a better user experience.
+Applications like http://www.mozilla.com/[Mozilla Firefox] allow you to open multitple tabs and multiple windows. Swtiching tabs gives you different content in the same window. Git branching is like tabs for your working directory. Continuing this analogy, Git cloning is like opening a new window. Being able to do both easily makes for a better user experience.
 
 On a higher level, several Linux window managers allow you to have multiple desktops, which means you can instantly view a different state of the desktop. This is similar to branching in Git, whereas Git cloning would be like attaching another monitor where you can open more windows.
 
-Yet another example is the [[http://www.gnu.org/software/screen/][*screen*]] utility. This gem allows you to create, destroy and switch between multiple terminal sessions in the same terminal. Instead of opening new terminals (clone), you can use the same one if you run *screen* (branch). In fact, you can do a lot more with *screen* but that's a topic for another day.
+Yet another example is the http://www.gnu.org/software/screen/[*screen*] utility. This gem allows you to create, destroy and switch between multiple terminal sessions in the same terminal. Instead of opening new terminals (clone), you can use the same one if you run *screen* (branch). In fact, you can do a lot more with *screen* but that's a topic for another day.
 
 Cloning, branching and merging are fast and local in Git, encouraging you to use the combination that best suits you. Git allows you to work exactly how you want.
 
-=== Personal Experience ===
+==== Personal Experience ====
 
 The equivalent of branching and cloning in centralized version control systems, when it exists, requires network communication. This automatically precludes working offline. Secondly, these systems need more expensive network infrastructure, especially as the number of users grows.
 
