@@ -46,5 +46,5 @@ Saying you should use systems that don't scale well when your project is tiny is
 
 .Free Git hosting
 
- - http://repo.or.cz/ provides free Git hosting for free projects,
+ - http://repo.or.cz/[http://repo.or.cz/] provides free Git hosting for free projects,
 http://repo.or.cz/w/gitmagic.git[including this guide].
