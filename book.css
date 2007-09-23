@@ -8,6 +8,10 @@ tt, code, pre, .type {
     font-size: 90%;
 }
 
+ul li p {
+    margin-bottom:0;
+}
+
 /* Based on http://phrogz.net/CSS/columns3.html */
 div.toc {
     float: left;

@@ -1,13 +1,13 @@
 .PHONY: target clean sync push
 
-target: book
+target: book book/default.css
 
-TXTFILES=intro.txt basic.txt clone.txt branch.txt grandmaster.txt secrets.txt
+TXTFILES=preface.txt intro.txt basic.txt clone.txt branch.txt grandmaster.txt secrets.txt
 
 book.xml: $(TXTFILES)
-	cat $^ | sed 's/\*\([^ *][^*]*[^ *]\)\*/<command>\1<\/command>/g' | ./bookmake > book.xml
+	( for FILE in $^ ; do cat $$FILE ; echo ; done ) | asciidoc -d book -b docbook - > $@
 
-book: book.xml book.css preface.html book/default.css
+book: book.xml
 	xmlto -m custom-html.xsl -o book html book.xml
 	sed -i 's/xmlns:fo[^ ]*//' book/*.html
 	ls book/*.html | xargs -n 1 tidy -utf8 -m -i -q

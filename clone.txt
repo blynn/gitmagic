@@ -1,10 +1,10 @@
-= Cloning Around =
+== Cloning Around ==
 
 In older version control systems, the standard way to get a saved state was checkout. You'd checkout a bunch of files in the requested saved state.
 
 In Git and other distributed version control systems, cloning is the standard operation. To get files you create a clone of the entire repository. In other words, you practically create a mirror of the central server. So anything the main repository can do, you can do.
 
-== Sync Computers ==
+=== Sync Computers ===
 
 This is the reason I first used Git. I can tolerate making tarballs or using *rsync* for backups and basic syncing. The problem was sometimes I'd edit on my laptop, other times on my desktop, and they may not have talked to each other in between.
 
@@ -29,7 +29,7 @@ to push the current state to the other computer. Next time you're logged in to t
 
 to update the files before working on them. Be aware that you'll lose any uncommitted changes when you do this.
 
-== Classic Source Control ==
+=== Classic Source Control ===
 
 Initialize a Git repository for your files: 
 
@@ -40,10 +40,10 @@ Initialize a Git repository for your files:
 On the central server, initialize an empty Git repository with some name,
 and start the Git daemon if necessary:
 
- $ GIT_DIR=proj.git git-init-db
+ $ GIT_DIR==proj.git git-init-db
  $ git-daemon --detach  # it might already be running
 
-Some public hosts, such as [[http://repo.or.cz][repo.or.cz]], will have a different method for setting up the initially empty Git repository, such as filling in a form on a webpage.
+Some public hosts, such as http://repo.or.cz[repo.or.cz], will have a different method for setting up the initially empty Git repository, such as filling in a form on a webpage.
 
 Push your project to the central server with:
 
@@ -63,7 +63,7 @@ If the main server has been updated, the latest version needs to be checked out 
  $ git commit -a
  $ git pull
 
-== Forking a Project ==
+=== Forking a Project ===
 
 Sick of the way a project is being run? Think you could do a better job? Then on your server:
 
@@ -75,7 +75,7 @@ At any later time, you can merge in the changes from the original project with:
 
  $ git pull
 
-== Ultimate Backups ==
+=== Ultimate Backups ===
 
 Want numerous tamper-proof geographically diverse redundant archives? If your project has many developers, don't do anything! Every clone of your code is effectively a backup. Not just of the current state of the project, but of your project's entire history. Thanks to cryptographic hashing, if anyone's clone becomes corrupted, it will be spotted as soon as they try to communicate with others.
 
@@ -83,7 +83,7 @@ If your project is not so popular, find as many servers as you can to host clone
 
 The truly paranoid should always write down the latest 20-byte SHA1 hash of the HEAD somewhere safe. It has to be safe, not private. For example, publishing it in a newspaper would work well, because it's hard for an attacker to alter every copy of a newspaper.
 
-== Light-Speed Multitask ==
+=== Light-Speed Multitask ===
 
 Say you want to work on several features in parallel. Then after committing your project:
 
@@ -97,7 +97,7 @@ At any time, you can commit and pull changes from the other clone.
 
  $ git-pull /the/other/clone
 
-== Guerilla Version Control ==
+=== Guerilla Version Control ===
 
 Are you working on a project that uses some other version control system, and you sorely miss Git? Then initialize a Git repository in your working directory:
 
