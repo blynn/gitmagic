@@ -9,7 +9,7 @@ book.xml: $(TXTFILES)
 
 book: book.xml
 	xmlto -m custom-html.xsl -o book html book.xml
-	sed -i 's/xmlns:fo[^ ]*//' book/*.html
+	sed -i 's/xmlns:fo[^ ]*//g' book/*.html
 	ls book/*.html | xargs -n 1 tidy -utf8 -m -i -q
 	./makeover
 
