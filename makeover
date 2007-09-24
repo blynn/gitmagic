@@ -44,5 +44,13 @@ done
 
 sed '/^<\/body/i </div><div class="footer"><a href="/~blynn/">My Homepage</a></div>' -i $BOOKDIR/*.html
 
+sed '/<\/body>/ i \
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"> \
+</script> \
+<script type="text/javascript"> \
+_uacct = "UA-1901330-2"; \
+urchinTracker(); \
+</script>' -i $BOOKDIR/*.html
+
 mv $BOOKDIR/pr01.html $BOOKDIR/index.html
 rm toc.tmp
