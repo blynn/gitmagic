@@ -77,7 +77,7 @@ Then once you've fixed the bug:
  $ git push  # to the central repository
  $ git checkout master
 
-...and resume work on your original task.
+and resume work on your original task.
 
 === Uninterrupted Workflow ===
 
