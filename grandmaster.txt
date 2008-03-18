@@ -16,7 +16,7 @@ It's good practice to keep a http://en.wikipedia.org/wiki/Changelog[changelog], 
 
 === Git Over SSH, HTTP ===
 
-Suppose you have ssh access to your web server, and it does not have Git installed, which is not an uncommon situation. Then download, compile and install Git in your account.
+Suppose you have ssh access to your web server, but it does not have Git installed. Then download, compile and install Git in your account.
 
 Create a repository in your web directory:
 

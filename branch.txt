@@ -41,7 +41,7 @@ You can switch between the two versions of the file as much as you like, and com
 
 === Dirty Work ===
 
-Say you're working on some feature, and for some reason, you need to go back to an old version and temporarily need to put in a few prints statements to see how something works. Then:
+Say you're working on some feature, and for some reason, you need to go back to an old version and temporarily put in a few prints statements to see how something works. Then:
 
  $ git commit -a
  $ git checkout SHA1_HASH
@@ -98,6 +98,7 @@ Next, code the second part of the big change without waiting for the first part 
 and the second part of the change is ready to review.
 
 But wait! What if it wasn't that simple? Say you made a mistake in the first part, which you have to correct before submitting. No problem! First, switch back to the master branch with
+
  $ git checkout master
 
 Fix the issue with the first part of the change and hope it gets approved. If not we simply repeat this step. You'll probably want to merge the fixed version of Part I into Part II as well:
@@ -107,6 +108,7 @@ Fix the issue with the first part of the change and hope it gets approved. If no
 
 Now it's the same as before. Once the first part has been approved and submitted:
 
+ $ git checkout master
  $ git merge part2
  $ git branch -d part2
 

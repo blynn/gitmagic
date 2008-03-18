@@ -38,11 +38,11 @@ This initial cloning operation can be expensive, especially if there's a long hi
 
 ==== A Silly Superstition ====
 
-A popular misconception is that distributed systems are ill-suited for projects requiring an official central repository (see for example http://www.subversionary.org/martintomes/git[this blog post]). Nothing could be further from the truth. Photographing someone does not cause their soul to be stolen. Similarly, cloning the master repository does not make its importance diminish.
+A popular misconception is that distributed systems are ill-suited for projects requiring an official central repository (see for example http://www.subversionary.org/martintomes/git[this blog post]). Nothing could be further from the truth. Photographing someone does not cause their soul to be stolen. Similarly, cloning the master repository does not diminish its importance.
 
 A good first approximation is that anything a centralized version control system can do, a well-designed distributed system can do better. While not strictly true, one is less likely to make erroneous comparisons with this rule of thumb.
 
-You might not use most features of such a system in a small project, but there is nothing wrong with this as there is negligible overhead. Moreover, your project may grow beyond your original expectations. It's like using a Swiss army knife to mostly open bottles. On the day you desperately need a screwdriver you'll be glad you have it with you.
+You might not use most features of such a system in a small project, but there is nothing wrong with this as there is negligible overhead. Moreover, your project may grow beyond your original expectations. It's like carrying a Swiss army knife even though you mostly use it to open bottles. On the day you desperately need a screwdriver you'll be glad you haven't been carrying a plain bottle-opener all this time.
 
 === Merge Conflicts ===
 
