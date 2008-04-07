@@ -16,9 +16,9 @@ When editing, you can "Save As..." a different file, or copy the file somewhere 
 
 Let's make the problem slightly tougher now. Say you have a bunch of files that go together, such as collection of source code for the same project, or files for a website. Now if you want to keep an old version you have to archive a whole directory of stuff. Keeping many versions around is inconvenient to do by hand, and gets expensive fast.
 
-In some computer games, saving the game actually writes a directory full of files. They hide these details from the player and present a convenient interface for you to manage saves.
+With some computer games, a saved game really does consist of a directory full of files. These games hide this detail from the player and present a convenient interface to manage different versions of directories.
 
-This is also a basic capability of all version control systems. They all have nice interfaces to manage a directory of stuff. You can save its state every so often, and you can load any one of the saved states later on. Unlike most computer games, they're usually smart about using space, by exploiting the fact that only a few of the files usually change between version to version, and not by much.
+It's the same with all version control systems. They all have nice interfaces to manage a directory of stuff. You can save the state of the directory every so often, and you can load any one of the saved states later on. Unlike most computer games, they're usually smart about conserving space. Typically, only a few files change between version to version, and not by much. Storing the differences instead of entire new copies saves room.
 
 === Distributed Control ===
 
@@ -30,7 +30,7 @@ In the old days, every project used centralized version control. A server somewh
 
 What if a player wanted to get an older saved game for some reason? Maybe the current saved game is in an unwinnable state because somebody forgot to pick up an object back in level three, and they want to find the latest saved game where the game can still be completed. Or maybe they want to compare two older saved games to see how much work a particular player did.
 
-There could be many reasons to want to see an older revision, but the outcome is the same. They have to ask the central server for that old saved game. The more saved games they want, the more communication that is required.
+There could be many reasons to want to see an older revision, but the outcome is the same. They have to ask the central server for that old saved game. The more saved games they want, the more they need to communicate.
 
 The new generation of version control systems, of which Git is a member, are known as distributed systems, and can be thought of as a generalization of centralized systems. When players download from the main server they get every saved game, not just the latest one. It's as if they're mirroring the central server.
 
@@ -46,7 +46,7 @@ You might not use most features of such a system in a small project, but there i
 
 === Merge Conflicts ===
 
-An interesting problem arises in any type of revision control system. Suppose Alice and Bob have both independently downloaded the latest saved game. They both play the game a bit more and save. What if they both want to submit their new saves? Let's say Alice uploads first. Nothing spectacular happens, but when Bob tries to upload his save, the system realizes that his state does not chronologically follow Alice's state.
+An interesting problem arises in any type of revision control system. Suppose Alice and Bob have both independently downloaded the latest saved game. They both play the game a bit more and save. What if they both want to submit their new saves? Let's say Alice uploads first. Then when Bob tries to upload his save, the system realizes that his state does not chronologically follow Alice's state.
 
 Ideally, the team possesses some sort of tool that can merge together progress from two different saved games into a new saved game. With such a tool, the problem is solved because Bob can merge Alice's state into his, and then upload the result. But in general, there is no such tool that can handle all cases and sometimes the only solution is human intervention.
 
