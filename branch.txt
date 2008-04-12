@@ -8,7 +8,7 @@ Interrupting your train of thought can be detrimental to your productivity, and 
 
 But cloning still entails copying the whole working directory as well as the entire history up to the given point. Even though Git reduces the cost of this with file sharing and hard links, the project files themselves must be recreated in their entirety in the new working directory.
 
-*Solution*: Git has a better tool for these situations that is much faster and more space-efficient than cloning: *git-branch*.
+*Solution*: Git has a better tool for these situations that is much faster and more space-efficient than cloning: *git branch*.
 
 With this magic word, the files in your directory suddenly shapeshift from one version to another. This transformation can do more than merely go back or forward in history. Your files can morph from the last release to the experimental version to the current development version to your friend's version and so on.
 
@@ -19,15 +19,15 @@ Ever play one of those games where at the push of a button ("the boss key"), the
 In some directory:
 
  $ echo "I'm smarter than my boss" > myfile.txt
- $ git-init-db
- $ git-add .
- $ git-commit -m "Initial commit"
+ $ git init
+ $ git add .
+ $ git commit -m "Initial commit"
 
 We have created a Git repository that tracks one text file containing a certain message. Now type:
 
  $ git checkout -b boss  # nothing seems to change after this
  $ echo "My boss is smarter than me" > myfile.txt
- $ git-commit -a -m "Another commit"
+ $ git commit -a -m "Another commit"
 
 It looks like we've just overwritten our file and committed it. But it's an illusion. Type:
 
@@ -62,7 +62,7 @@ before switching back to the master branch. Whenever you want to return to the d
 
 We touched upon this command in an earlier chapter, when discussing loading old states. Now we can describe what happens when you load an old state using the checkout command: the files change to the requested state, but we must leave the master branch. Any commits made from now on take your files down a different road.
 
-Hence after checking out an old state, Git automatically puts you in a new, unnamed branch, which can be named and saved with *git-checkout -b*.
+Hence after checking out an old state, Git automatically puts you in a new, unnamed branch, which can be named and saved with *git checkout -b*.
 
 === Quick Fixes ===
 
