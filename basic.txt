@@ -6,9 +6,9 @@ Rather than diving into a sea of Git commands, use these elementary examples to 
 
 When I'm about to attempt something drastic I like to save the current state, so I can go back and try again should things go awry.
 
- $ git-init-db  # for git-1.5 and up you can type "git-init" instead
- $ git-add .
- $ git-commit -m "my first backup"
+ $ git init
+ $ git add .
+ $ git commit -m "my first backup"
 
 to take a snapshot of all files in the current directory.
 
@@ -16,65 +16,65 @@ The above sequence of commands should be memorized, or placed in a script, as th
 
 Then if something goes wrong, run:
 
- $ git-reset --hard
+ $ git reset --hard
 
 to go back to where you were. To save the state again:
 
- $ git-commit -a -m "another backup"
+ $ git commit -a -m "another backup"
 
 Tip: the hyphen after "git" may be replaced by a space if you prefer.
 
 ==== Add, Delete, Rename ====
 
-The above will only keep track of the files that were present when you first ran *git-add*. If you add new files or subdirectories, you'll have to tell Git:
+The above will only keep track of the files that were present when you first ran *git add*. If you add new files or subdirectories, you'll have to tell Git:
 
- $ git-add NEWFILES...
+ $ git add NEWFILES...
 
 Similarly, if you want Git to forget about certain files, maybe because you've deleted them
 
- $ git-rm OLDFILES...
+ $ git rm OLDFILES...
 
-Renaming a file is the same as removing the old name and adding the new name. There's also the shortcut *git-mv* which has the same syntax as the *mv* command. For example:
+Renaming a file is the same as removing the old name and adding the new name. There's also the shortcut *git mv* which has the same syntax as the *mv* command. For example:
 
- $ git-mv OLDFILE NEWFILE
+ $ git mv OLDFILE NEWFILE
 
 === Advanced Undo/Redo ===
 
 Running:
 
- $ git-log
+ $ git log
 
 shows you a list of recent commits, and their SHA1 hashes. Then:
 
- $ git-commit -a
- $ git-revert SHA1_HASH
+ $ git commit -a
+ $ git revert SHA1_HASH
 
 will load the previous state with the given hash.
 Don't like cutting and pasting hashes? Then use:
 
- $ git-revert "@{10 minutes ago}" .
+ $ git revert "@{10 minutes ago}" .
 
 Other time specifications work too. Or you can ask for the 5th-last saved state:
 
- $ git-revert "@{5}" .
+ $ git revert "@{5}" .
 
-Running *git-log* reveals that the fact that you loaded an old saved state has been recorded as new commit. In other words, Git tracks your undo and redo operations.
+Running *git log* reveals that the fact that you loaded an old saved state has been recorded as new commit. In other words, Git tracks your undo and redo operations.
 
 Sometimes you just want to go back and forget about every change past a certain point because they're all wrong. Then type:
 
- $ git-reset --hard SHA1_HASH
+ $ git reset --hard SHA1_HASH
 
 which restores the state to a given commit and also erases all newer commits from the record permanently.
 
-Using *git-checkout* is a third way to load an old state, but it's slightly more complicated because it involves branches, and will be discussed in detail later.
+Using *git checkout* is a third way to load an old state, but it's slightly more complicated because it involves branches, and will be discussed in detail later.
 
 To take the computer game analogy again:
 
-- *git-revert* is like loading a game and recording this fact as a new saved game,
+- *git revert* is like loading a game and recording this fact as a new saved game,
 
-- *git-reset --hard* is like loading an old save and deleting all saved games newer than the one just loaded, and
+- *git reset --hard* is like loading an old save and deleting all saved games newer than the one just loaded, and
 
-- *git-checkout* is like loading an old game, but if you play on, the game state will deviate from the newer saves you made the first time around. Any saved games you make now will end up in a separate branch representing the alternate reality you have entered. We describe how to deal with this later.
+- *git checkout* is like loading an old game, but if you play on, the game state will deviate from the newer saves you made the first time around. Any saved games you make now will end up in a separate branch representing the alternate reality you have entered. We describe how to deal with this later.
 
 For reset and checkout, you can choose only to restore particular files and subdirectories by appending them after the command.
 
@@ -82,19 +82,19 @@ For reset and checkout, you can choose only to restore particular files and subd
 
 If a project uses Git to manage its files, you can get a copy with:
 
- $ git-clone git://server/path/to/files
+ $ git clone git://server/path/to/files
 
 For example, to get all the files I used to create this site:
 
- $ git-clone git://git.or.cz/gitmagic.git
+ $ git clone git://git.or.cz/gitmagic.git
 
 We'll have a lot more to say about the *clone* command later.
 
 === The Bleeding Edge ===
 
-If a project uses Git to manage its files, and you've already downloaded a copy using *git-clone*, you can upgrade to the latest version with:
+If a project uses Git to manage its files, and you've already downloaded a copy using *git clone*, you can upgrade to the latest version with:
 
- $ git-pull
+ $ git pull
 
 === Instant Publishing ===
 
@@ -102,25 +102,25 @@ Let's say you've written a script you'd like to share with others. You could jus
 
 To do this with Git, in the directory where your script resides:
 
- $ git-init-db  # in git-1.5 just type git-init 
- $ git-add .
- $ git-commit -m "first release"
+ $ git init
+ $ git add .
+ $ git commit -m "first release"
 
 Then tell your users to type
 
- $ git-clone your.computer:/path/to/script
+ $ git clone your.computer:/path/to/script
 
-to download your script. This assumes they have ssh access. If not, run *git-daemon* and tell your users to type
+to download your script. This assumes they have ssh access. If not, run *git daemon* and tell your users to type
 
- $ git-clone git://your.computer/path/to/script
+ $ git clone git://your.computer/path/to/script
 
 From now on, every time your script is ready for release, type:
 
- $ git-commit -a -m "next release"
+ $ git commit -a -m "next release"
 
 and your users can upgrade their version by changing to the directory containing your script and typing.
 
- $ git-pull
+ $ git pull
 
 Your users will never end up with a version of your script you don't want them to see. Obviously this trick works for anything, not just scripts.
 
@@ -128,12 +128,12 @@ Your users will never end up with a version of your script you don't want them t
 
 Find out what changes you've made since the last commit with:
 
- $ git-diff
+ $ git diff
 
 Or since yesterday:
 
- $ git-diff "@{yesterday}"
+ $ git diff "@{yesterday}"
 
 Or between a particular version and 2 versions ago:
 
- $ git-diff SHA1_HASH "@{2}"
+ $ git diff SHA1_HASH "@{2}"
