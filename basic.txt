@@ -8,7 +8,7 @@ When I'm about to attempt something drastic I like to save the current state, so
 
  $ git init
  $ git add .
- $ git commit -m "my first backup"
+ $ git commit -m "My first backup"
 
 to take a snapshot of all files in the current directory.
 
@@ -20,7 +20,7 @@ Then if something goes wrong, run:
 
 to go back to where you were. To save the state again:
 
- $ git commit -a -m "another backup"
+ $ git commit -a -m "Another backup"
 
 ==== Add, Delete, Rename ====
 
@@ -102,7 +102,7 @@ To do this with Git, in the directory where your script resides:
 
  $ git init
  $ git add .
- $ git commit -m "first release"
+ $ git commit -m "First release"
 
 Then tell your users to type
 
@@ -114,7 +114,7 @@ to download your script. This assumes they have ssh access. If not, run *git dae
 
 From now on, every time your script is ready for release, type:
 
- $ git commit -a -m "next release"
+ $ git commit -a -m "Next release"
 
 and your users can upgrade their version by changing to the directory containing your script and typing.
 

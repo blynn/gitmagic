@@ -112,11 +112,11 @@ then clone it, at light speed:
 Now go to the new directory and work here instead, using Git to your heart's content. Once in a while, you'll want to sync with everyone else, in which case go to the original directory, sync using the other version control system, and type:
 
  $ git add .
- $ git commit -m "sync with everyone else"
+ $ git commit -m "Sync with everyone else"
 
 Then go to the new directory and run:
 
- $ git commit -a -m "description of my changes"
+ $ git commit -a -m "Description of my changes"
  $ git pull
 
 The procedure for giving your changes to everyone else depends on the other version control system. The new directory contains the files with your changes. Run whatever commands of the other version control system are needed to upload them to the central repository.

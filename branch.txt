@@ -73,7 +73,7 @@ You're in the middle of something when you are told to drop everything and fix a
 
 Then once you've fixed the bug:
 
- $ git commit -a -m "bug fixed"
+ $ git commit -a -m "Bug fixed"
  $ git push  # to the central repository
  $ git checkout master
 
