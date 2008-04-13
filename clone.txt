@@ -118,3 +118,5 @@ Then go to the new directory and run:
  $ git pull
 
 The procedure for giving your changes to everyone else depends on the other version control system. The new directory contains the files with your changes. Run whatever commands of the other version control system are needed to upload them to the central repository.
+
+Tip: If you want to interact with a Subversion repository, check out the *git svn* command, which can automate all this (and more) for you.
