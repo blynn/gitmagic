@@ -87,11 +87,9 @@ The truly paranoid should always write down the latest 20-byte SHA1 hash of the 
 
 Say you want to work on several features in parallel. Then after committing your project:
 
- $ git clone --local --shared . /some/new/directory
+ $ git clone . /some/new/directory
 
-The options can be written as *-l -s* instead, which I like to think of as an acronym for "Light Speed"!
-
-Git exploits hard links and file sharing as much as possible to create this clone. Subsequently, this clone is unsuitable as a backup. However, it's ready in a flash, and you can now work on two independent features simultaneously. For example, you can edit one clone while the other is compiling.
+Git exploits hard links and file sharing as much as safely possible to create this clone, so it will be ready in a flash, and you can now work on two independent features simultaneously. For example, you can edit one clone while the other is compiling.
 
 At any time, you can commit and pull changes from the other clone.
 
@@ -107,7 +105,7 @@ Are you working on a project that uses some other version control system, and yo
 
 then clone it, at light speed:
 
- $ git clone -l -s  . /some/new/directory
+ $ git clone . /some/new/directory
 
 Now go to the new directory and work here instead, using Git to your heart's content. Once in a while, you'll want to sync with everyone else, in which case go to the original directory, sync using the other version control system, and type:
 
