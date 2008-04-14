@@ -38,43 +38,56 @@ Renaming a file is the same as removing the old name and adding the new name. Th
 
 === Advanced Undo/Redo ===
 
-Running:
+Sometimes you just want to go back and forget about every change past a certain point because they're all wrong.
+
+Then
 
  $ git log
 
-shows you a list of recent commits, and their SHA1 hashes. Then:
-
- $ git commit -a
- $ git revert SHA1_HASH
-
-will load the previous state with the given hash.
-Don't like cutting and pasting hashes? Then use:
-
- $ git revert "@{10 minutes ago}" .
-
-Other time specifications work too. Or you can ask for the 5th-last saved state:
-
- $ git revert "@{5}" .
-
-Running *git log* reveals that the fact that you loaded an old saved state has been recorded as new commit. In other words, Git tracks your undo and redo operations.
-
-Sometimes you just want to go back and forget about every change past a certain point because they're all wrong. Then type:
+shows you a list of recent commits, and their SHA1 hashes. Next, type
 
  $ git reset --hard SHA1_HASH
 
-which restores the state to a given commit and also erases all newer commits from the record permanently.
+to restore the state to a given commit and erase all newer commits from the record permanently.
 
-Using *git checkout* is a third way to load an old state, but it's slightly more complicated because it involves branches, and will be discussed in detail later.
+Other times you want to hop to an old state briefly. In this case, type:
+
+ $ git checkout SHA1_HASH
+
+This takes you back in time, while preserving newer commits. However, like time travel in a science-fiction movie, if you now edit and commit, you will be in an alternate reality, because your actions are different to what they were the first time around.
+
+This alternate reality is called a branch, and we'll have more to say about that later. For now, just remember that
+
+ $ git checkout master
+
+will take you back to the present.
+
+Note uncommitted changes will travel in time with you when you use the checkout command.
 
 To take the computer game analogy again:
-
-- *`git revert`*: load a game and record this fact as a new saved game.
 
 - *`git reset \--hard`*: load an old save and delete all saved games newer than the one just loaded.
 
 - *`git checkout`*: load an old game, but if you play on, the game state will deviate from the newer saves you made the first time around. Any saved games you make now will end up in a separate branch representing the alternate reality you have entered. We describe how to deal with this later.
 
-For reset and checkout, you can choose only to restore particular files and subdirectories by appending them after the command.
+You can choose only to restore particular files and subdirectories by appending them after the command.
+
+Don't like cutting and pasting hashes? Then use:
+
+ $ git checkout "@{10 minutes ago}" .
+
+Other time specifications work too. For example, you can ask for the 5th-last saved state:
+
+ $ git checkout "@{5}" .
+
+==== Reverting ====
+
+In a court of law, events can be stricken from the record. Likewise, you can pick specific commits to undo.
+
+ $ git commit -a
+ $ git revert SHA1_HASH
+
+will undo just the commit with the given hash. Running *git log* reveals the revert is recorded as new commit.
 
 === Dowloading Files ===
 
