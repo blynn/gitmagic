@@ -41,22 +41,23 @@ You can switch between the two versions of the file as much as you like, and com
 
 === Dirty Work ===
 
+[[branch]]
 Say you're working on some feature, and for some reason, you need to go back to an old version and temporarily put in a few prints statements to see how something works. Then:
 
  $ git commit -a
  $ git checkout SHA1_HASH
 
-Now you can add ugly temporary code all over the place. When you're done,
+Now you can add ugly temporary code all over the place. You can even commit these changes. When you're done,
 
  $ git checkout master
 
-to return to your original work and remove all traces of the temporary code.
+to return to your original work. Observe that any uncommitted changes are carried over.
 
 What if you wanted to save the temporary changes after all? Easy:
 
  $ git checkout -b dirty
 
-before switching back to the master branch. Whenever you want to return to the dirty changes, simply type
+and commit before switching back to the master branch. Whenever you want to return to the dirty changes, simply type
 
  $ git checkout dirty
 

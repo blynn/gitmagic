@@ -56,7 +56,7 @@ Other times you want to hop to an old state briefly. In this case, type:
 
 This takes you back in time, while preserving newer commits. However, like time travel in a science-fiction movie, if you now edit and commit, you will be in an alternate reality, because your actions are different to what they were the first time around.
 
-This alternate reality is called a branch, and we'll have more to say about that later. For now, just remember that
+This alternate reality is called a ''branch'', and <<branch,we'll have more to say about this later>>. For now, just remember that
 
  $ git checkout master
 
@@ -68,7 +68,7 @@ To take the computer game analogy again:
 
 - *`git reset \--hard`*: load an old save and delete all saved games newer than the one just loaded.
 
-- *`git checkout`*: load an old game, but if you play on, the game state will deviate from the newer saves you made the first time around. Any saved games you make now will end up in a separate branch representing the alternate reality you have entered. We describe how to deal with this later.
+- *`git checkout`*: load an old game, but if you play on, the game state will deviate from the newer saves you made the first time around. Any saved games you make now will end up in a separate branch representing the alternate reality you have entered. <<branch,We deal with this later>>.
 
 You can choose only to restore particular files and subdirectories by appending them after the command.
 
