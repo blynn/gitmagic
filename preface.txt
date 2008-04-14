@@ -10,6 +10,10 @@ As Arthur C. Clarke observed, any sufficiently advanced technology is indistingu
 
 Rather than go into details, I'll provide rough instructions for particular effects. After repeated use, gradually you will understand how each trick works, and how to tailor the recipes for your needs.
 
+.Thanks!
+
+Thanks to Dustin Sallings, Alberto Bertogli, and Douglas Livingstone for suggestions and improvements. [If you're name should be here, and it isn't, please tell me because I often forget to update this section.]
+
 .About Git
 
 - http://git.or.cz[Git homepage], which hosts
