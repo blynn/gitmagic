@@ -148,4 +148,4 @@ Often I have a flaky internet connection. I didn't mind too much with Git but fo
 
 I found myself conditioned to avoid certain commands because of the latencies involved, which ultimately prevented me from following the work flow I wanted.
 
-When I had to run a slow command, the interruption to my train of thought dealt a disproportionate amount of damage. While waiting for server communcation to complete, I'd do something else to pass the time, such as check email or write documentation. By the time I returned to the original task, the command had already finished long ago. I'd have to spend a long time trying to remember what I was doing.
+When I had to run a slow command, the interruption to my train of thought dealt a disproportionate amount of damage. While waiting for server communcation to complete, I'd do something else to pass the time, such as check email or write documentation. By the time I returned to the original task, the command had already finished long ago. I would then spend a long time trying to remember what I was doing.

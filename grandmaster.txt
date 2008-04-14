@@ -82,7 +82,7 @@ Then:
 - Replace "pick" with "edit" to mark a commit for amending.
 - Replace "pick" with "squash" to merge a commit with the previous one.
 
-Next run *git commit --amend* if you marked a commit for editing. Otherwise, run:
+Next run *git commit \--amend* if you marked a commit for editing. Otherwise, run:
 
  $ git rebase --continue
 
@@ -96,7 +96,7 @@ then you sync with the official tree with a merge. This cycle repeats itself a f
 But now the history in your local Git clone is a messy jumble of your changes and the official changes. You'd prefer to see all your changes in one contiguous section, and after all the official changes.
 
 This is a job for *git rebase* as described above. In many cases you can use
-the *--onto* flag and avoid interaction.
+the *\--onto* flag and avoid interaction.
 
 Also see the manpage for other amazing uses of this command, which really deserves a chapter of its own. You can split commits. You can even rearrange branches of a tree!
 

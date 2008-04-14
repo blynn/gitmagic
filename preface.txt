@@ -12,7 +12,7 @@ Rather than go into details, I'll provide rough instructions for particular effe
 
 .Thanks!
 
-Thanks to Dustin Sallings, Alberto Bertogli, and Douglas Livingstone for suggestions and improvements. [If you're name should be here, and it isn't, please tell me because I often forget to update this section.]
+Kudos to Dustin Sallings, Alberto Bertogli, and Douglas Livingstone for suggestions and improvements. [If I've left you out, please tell me because I often forget to update this section.]
 
 .About Git
 

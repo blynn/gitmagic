@@ -68,11 +68,11 @@ Using *git checkout* is a third way to load an old state, but it's slightly more
 
 To take the computer game analogy again:
 
-- *git revert* is like loading a game and recording this fact as a new saved game,
+- *`git revert`*: load a game and record this fact as a new saved game.
 
-- *git reset --hard* is like loading an old save and deleting all saved games newer than the one just loaded, and
+- *`git reset \--hard`*: load an old save and delete all saved games newer than the one just loaded.
 
-- *git checkout* is like loading an old game, but if you play on, the game state will deviate from the newer saves you made the first time around. Any saved games you make now will end up in a separate branch representing the alternate reality you have entered. We describe how to deal with this later.
+- *`git checkout`*: load an old game, but if you play on, the game state will deviate from the newer saves you made the first time around. Any saved games you make now will end up in a separate branch representing the alternate reality you have entered. We describe how to deal with this later.
 
 For reset and checkout, you can choose only to restore particular files and subdirectories by appending them after the command.
 
