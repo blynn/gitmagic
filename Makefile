@@ -2,7 +2,7 @@
 
 target: book book/default.css
 
-TXTFILES=preface.txt intro.txt basic.txt clone.txt branch.txt grandmaster.txt secrets.txt
+TXTFILES=preface.txt intro.txt basic.txt clone.txt branch.txt grandmaster.txt secrets.txt drawbacks.txt
 
 book.xml: $(TXTFILES)
 	( for FILE in $^ ; do cat $$FILE ; echo ; done ) | asciidoc -d book -b docbook - > $@
