@@ -6,7 +6,7 @@ This pretentiously named page is my dumping ground for uncategorized Git tricks.
 
 For my projects, Git tracks exactly the files I'd like to archive and release to users. So to create a tarball of the source code, I run:
 
- $ git archive --format==tar --prefix==proj-1.2.3/ HEAD
+ $ git archive --format=tar --prefix=proj-1.2.3/ HEAD
 
 === Changelog Generation ===
 
@@ -20,7 +20,7 @@ Suppose you have ssh access to your web server, but it does not have Git install
 
 Create a repository in your web directory:
 
- $ GIT_DIR==proj.git git init
+ $ GIT_DIR=proj.git git init
 
 and in the "proj.git" directory, run
 

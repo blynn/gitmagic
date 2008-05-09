@@ -6,21 +6,16 @@ BOOKDIR=book
 gawk '
 /<div class="toc">/ {
     print $0
-    getline #TODO: check this is the <ul> line
+    getline
     print $0
-    print "<li><a href=\".\">Git Magic</a></li>"
+    print "<li><b>Git Magic</b></li>"
     getline
     while (!match($0, "</div>")) {
-	if (match($0, "<li><span class=\"preface\"")) {
-	    while (!match($0, "</span>")) {
-		getline
-	    }
-	    getline
-	}
+	gsub("pr01.html", "index.html")
 	print $0
 	getline
     }
-    print "</div>"
+    print $0
     exit
 }
 ' < $BOOKDIR/index.html > toc.tmp
@@ -44,5 +39,5 @@ done
 
 sed '/^<\/body/i </div><div class="footer"><a href="/~blynn/">My Homepage</a></div>' -i $BOOKDIR/*.html
 
-mv $BOOKDIR/pr01.html $BOOKDIR/index.html
+cp $BOOKDIR/pr01.html $BOOKDIR/index.html
 rm toc.tmp

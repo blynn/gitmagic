@@ -1,6 +1,6 @@
 == Git Shortcomings ==
 
-There are some Git issues I've swept under the carpet until now. Some can be handled easily with scripts, others require reorganizing or redefining the project, and as for Windows annoyances, one will just have to wait. Or better yet, pitch in and help!
+There are some Git issues I've swept under the carpet. Some can be handled easily with scripts and hooks, some require reorganizing or redefining the project, and for the few remaining annoyances, one will just have to wait. Or better yet, pitch in and help!
 
 === Microsoft Windows ===
 
@@ -20,21 +20,23 @@ Some version control systems force you to explicitly tag a file before editing. 
 
   2. When a central server stores the tags, one can discover who else is working on the file.
 
-However, with appropriate scripting, you can achieve the same with Git, though it does require cooperation from the programmer, who should execute particular scripts when editing a file.
+With appropriate scripting, you can achieve the same with Git. This requires cooperation from the programmer, who should execute particular scripts when editing a file.
 
 === File History ===
 
-Since Git records project-wide changes, reconstructing the history of a single file requires more work than in version control systems that track individual files. However, the penalty is slight.
+Since Git records project-wide changes, reconstructing the history of a single file requires more work than in version control systems that track individual files.
+
+The penalty is typically slight, and well worth having as other operations are incredibly efficient. For example, `git checkout` is faster than `cp -a`, and project-wide deltas compress better than collections of file-based deltas.
 
 === Initial Clone ===
 
-Creating a clone is more expensive than checking out code in other version control systems when there is a lot of history.
+Creating a clone is more expensive than checking out code in other version control systems when there is a lenghty history.
 
-The initial payment is worth it in the long run, as most operations will then be fast and offline. However, if the down payment is prohibitive, create a shallow clone with the \--depth option. This is much faster, but the resulting clone has fewer capabilities.
+The initial cost is worth paying in the long run, as most future operations will then be fast and offline. However, in some situations, it may be preferable to create a shallow clone with the `\--depth` option. This is much faster, but the resulting clone has reduced functionality.
 
 === Volatile Projects ===
 
-Git was written to be fast with respect to the size of the changes. Humans make small edits from version to version. A one-liner bugfix here, a new feature there, emended comments, that sort of thing. But if you're mostly keeping files that are radically different in successive revisions, on each commit, your history necessarily grows by the size of your whole project.
+Git was written to be fast with respect to the size of the changes. Humans make small edits from version to version. A one-liner bugfix here, a new feature there, emended comments, and so forth. But if your files are radically different in successive revisions, then on each commit, your history necessarily grows by the size of your whole project.
 
 There is nothing any version control system can do about this, but standard Git users will suffer more since normally histories are cloned.
 
@@ -46,7 +48,7 @@ If the files really must be constantly morphing and they really must be versione
 
 Another example is a project depending on firmware, which takes the form of a huge binary file. The history of the firmware is uninteresting to users, and updates compress poorly, so firmware revisions would unnecessarily blow up the size of the repository.
 
-In this case, the source code should be stored in a Git repository, and the binary file should be kept separately. To make life easier, one could distribute a script that uses Git to checkout the code, and rsync for the firmware.
+In this case, the source code should be stored in a Git repository, and the binary file should be kept separately. To make life easier, one could distribute a script that uses Git to clone the code, and rsync or a Git shallow clone for the firmware.
 
 === Global Counter ===
 
@@ -64,10 +66,10 @@ The current implementation of Git, rather than its design, is to blame for this 
 
 === Initial Commit ===
 
-A stereotypical computer scientist counts from 0, rather than 1. Unfortunately, git does not, and many commands are unfriendly before the initial commit. Aside from decreased usability, some corner cases must be handled specially, such as rebasing a branch with a different initial commit.
+A stereotypical computer scientist counts from 0, rather than 1. Unfortunately, with respect to commits, git does not adhere to this convention. Many commands are unfriendly before the initial commit. Aside from decreased user-friendliness, some corner cases must be handled specially, such as rebasing a branch with a different initial commit.
 
-Git would benefit from defining the zero commit: as soon as a repository is constructed, HEAD would be set to the string consisting of 20 zero bytes. This special commit represents an empty tree, with no parent, at a time that predates all other Git repositories.
+Git would benefit from defining the zero commit: as soon as a repository is constructed, HEAD would be set to the string consisting of 20 zero bytes. This special commit represents an empty tree, with no parent, at some time predating all Git repositories.
 
 Then running git log, for example, would inform the user that no commits have been made yet, instead of exiting with a fatal error. Similarly for other tools.
 
-Every initial commit is implicitly a descendant of this zero commit, so for example, rebasing an unrelated branch would cause the whole branch to be grafted on to the target. Currently, all but the initial commit is applied, resulting in a merge conflict.
+Every initial commit is implicitly a descendant of this zero commit. For example, rebasing an unrelated branch would cause the whole branch to be grafted on to the target. Currently, all but the initial commit is applied, resulting in a merge conflict. One workaround is to use `git checkout` followed by `git commit -C` on the initial commit, then rebase the rest.
