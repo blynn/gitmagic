@@ -17,7 +17,7 @@ Kudos to Dustin Sallings, Alberto Bertogli, Douglas Livingstone, and Michael Bud
 === Links ===
 
 I once listed some references, but it's too time-consuming to maintain.
-Why bother, when anyone can use http://www.google.com/[a search engine]
+Besides, anyone can simply use http://www.google.com/[a search engine]
 to find Git
 http://www.google.com/search?q=git+tutorial[tutorials],
 http://www.google.com/search?q=git+guide[guides], and
@@ -27,7 +27,7 @@ http://www.google.com/search?q=git+mercurial[Mercurial], and other version contr
 
 .Free Git hosting
 
- - http://repo.or.cz/[http://repo.or.cz/] provides hosts free projects,
+ - http://repo.or.cz/[http://repo.or.cz/] hosts free projects,
 http://repo.or.cz/w/gitmagic.git[including this guide].
  - http://gitorious.org/[http://gitorious.org/] is another Git hosting site aimed at open-source projects.
  - http://github.com/[http://github.com/] hosts open-source projects for free, and private projects for a fee.
