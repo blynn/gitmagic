@@ -30,4 +30,4 @@ http://www.google.com/search?q=git+mercurial[Mercurial], and other version contr
  - http://repo.or.cz/[http://repo.or.cz/] hosts free projects,
 http://repo.or.cz/w/gitmagic.git[including this guide].
  - http://gitorious.org/[http://gitorious.org/] is another Git hosting site aimed at open-source projects.
- - http://github.com/[http://github.com/] hosts open-source projects for free, and private projects for a fee.
+ - http://github.com/[http://github.com/] hosts open-source projects for free, http://github.com/blynn/gitmagic/tree/master[including this guide], and private projects for a fee.

@@ -27,8 +27,9 @@ book.pdf: book.xml
 clean:
 	-rm -rf book.xml book.html book
 
-push:
-	git-push blynn@git.or.cz:srv/git/gitmagic.git
-
 sync: target
 	rsync -r book/* blynn@tl1.stanford.edu:www/gitmagic/
+
+public:
+	git push blynn@git.or.cz:srv/git/gitmagic.git
+	git push git@github.com:blynn/gitmagic.git
