@@ -8,17 +8,17 @@ I've played computer games almost all my life. In contrast, I only started using
 
 Think of editing your code or document, or whatever, as playing a game. Once you've made a lot of progress, you'd like to save. To do so, you click on the "Save" button in your trusty editor.
 
-But this will overwrite the old version. It's like those old school games which only had one save slot: sure you could save, but you could never go back to an older state. Which was a shame, because your previous save might have been right at a really fun part of the game that you'd like to revisit one day. Or worse still, your current save is in an unwinnable state, and you have to start again.
+But this will overwrite the old version. It's like those old school games which only had one save slot: sure you could save, but you could never go back to an older state. Which was a shame, because your previous save might have been right at a exceptionally fun part of the game that you'd like to revisit one day. Or worse still, your current save is in an unwinnable state, and you have to start again.
 
 === Version Control ===
 
-When editing, you can "Save As..." a different file, or copy the file somewhere first before saving if you want to savour old versions. Maybe compress them too to save space. This is version control, but very primitive and labour-intensive. Computer games improved on this long ago, many of them providing multiple automatically timestamped save slots.
+When editing, you can "Save As..." a different file, or copy the file somewhere first before saving if you want to savour old versions. Maybe compress them too to save space. This is a primitive and labour-intensive form of version control. Computer games improved on this long ago, many of them providing multiple automatically timestamped save slots.
 
 Let's make the problem slightly tougher now. Say you have a bunch of files that go together, such as collection of source code for the same project, or files for a website. Now if you want to keep an old version you have to archive a whole directory of stuff. Keeping many versions around by hand is inconvenient, and quickly becomes expensive.
 
 With some computer games, a saved game really does consist of a directory full of files. These games hide this detail from the player and present a convenient interface to manage different versions of directories.
 
-It's the same with all version control systems. They all have nice interfaces to manage a directory of stuff. You can save the state of the directory every so often, and you can load any one of the saved states later on. Unlike most computer games, they're usually smart about conserving space. Typically, only a few files change between version to version, and not by much. Storing the differences instead of entire new copies saves room.
+Version control systems are no different. They all have nice interfaces to manage a directory of stuff. You can save the state of the directory every so often, and you can load any one of the saved states later on. Unlike most computer games, they're usually smart about conserving space. Typically, only a few files change between version to version, and not by much. Storing the differences instead of entire new copies saves room.
 
 === Distributed Control ===
 
@@ -52,6 +52,6 @@ Let us revert to editing a text file. Our computer game analogy becomes too thin
 
 So suppose Alice has inserted a line at the beginning of a file, and Bob appends one at the end. They both upload their changes. Most systems will automatically deduce a reasonable course of action: accept and merge their changes, so both Alice's and Bob's edits are applied.
 
-Now suppose both Alice and Bob have both made distinct edits to the same line. Then it is impossible to resolve the conflict without human intervention. The second person to upload is informed of a merge conflict, and they must either choose one edit over another, or revise the line entirely.
+Now suppose both Alice and Bob have made distinct edits to the same line. Then it is impossible to resolve the conflict without human intervention. The second person to upload is informed of a merge conflict, and they must either choose one edit over another, or revise the line entirely.
 
 More complex situations can arise. Version control systems handle the simpler cases themselves, and leave the difficult cases for humans. Usually their behaviour is configurable.
