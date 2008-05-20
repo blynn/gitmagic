@@ -61,7 +61,7 @@ Did you just commit, but wish you had typed a different message? Realized you fo
 
 can help you out.
 
-Since this changes the history, only do this if you have yet to push your changes, otherwise your tree will diverge from other trees. Of course, if you control all the other trees too, then there is no problem since you can always overwrite them.
+Since this changes the history, only do this if you have yet to push your changes, otherwise your tree will diverge from other trees. Of course, if you control all the other trees too, then there is no problem since you can overwrite them.
 
 === ... And Then Some ===
 
@@ -131,13 +131,13 @@ But suppose you never took it down? Don't worry, for commands like these, Git sa
 
 Perhaps ORIG_HEAD isn't enough. Perhaps you've just realized you made a monumental mistake last month and you need to go back to an ancient commit in a long-forgotten branch.
 
-It's hard to lose Git commits permanently, even after deleting branches. As long as you never run git gc, your commits are preserved forever and can be restored at any time.
+It's hard to lose Git commits permanently, even after deleting branches. As long as you never run *git gc \--prune*, your commits are preserved forever and can be restored at any time.
 
 The trouble is finding the appropriate hash. You could look at all the hash values in `.git/objects` and use trial and error to find the one you want. But there's a much easier way.
 
 Git records every hash of a commit it computes in `.git/logs`. The subdirectory `refs` contains the history of all activity on all branches, while the file `HEAD` shows every hash value it has ever taken. The latter can be used to find hashes of commits on branches that have been accidentally lopped off.
 
-Eventually, you may want to run git gc to recover space. Be aware that doing so prevents you from recovering lost HEADs.
+Eventually, you may want to run *git gc \--prune* to recover space. Be aware that doing so prevents you from recovering lost HEADs.
 
 === Building On Git ===
 

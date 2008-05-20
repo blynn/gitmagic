@@ -6,11 +6,11 @@ Rather than diving into a sea of Git commands, use these elementary examples to 
 
 When I'm about to attempt something drastic I like to save the current state, so I can go back and try again should things go awry.
 
+Take a snapshot of all files in the current directory with:
+
  $ git init
  $ git add .
  $ git commit -m "My first backup"
-
-to take a snapshot of all files in the current directory.
 
 The above sequence of commands should be memorized, or placed in a script, as they will be reused frequently.
 
@@ -62,7 +62,7 @@ This alternate reality is called a ''branch'', and <<branch,we'll have more to s
 
 will take you back to the present.
 
-Note uncommitted changes will travel in time with you when you use the checkout command.
+Uncommitted changes travel in time with you when you run checkout.
 
 To take the computer game analogy again:
 

@@ -40,7 +40,7 @@ Initialize a Git repository for your files:
 On the central server, initialize an empty Git repository with some name,
 and start the Git daemon if necessary:
 
- $ GIT_DIR==proj.git git init
+ $ GIT_DIR=proj.git git init
  $ git daemon --detach  # it might already be running
 
 Some public hosts, such as http://repo.or.cz[repo.or.cz], will have a different method for setting up the initially empty Git repository, such as filling in a form on a webpage.
@@ -69,7 +69,7 @@ Sick of the way a project is being run? Think you could do a better job? Then on
 
  $ git clone git://main.server/path/to/files
 
-Next tell everyone to check out your fork of the project at your server.
+Next tell everyone about your fork of the project at your server.
 
 At any later time, you can merge in the changes from the original project with:
 
