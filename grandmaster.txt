@@ -139,6 +139,58 @@ Git records every hash of a commit it computes in `.git/logs`. The subdirectory 
 
 Eventually, you may want to run *git gc \--prune* to recover space. Be aware that doing so prevents you from recovering lost HEADs.
 
+=== Making History ===
+
+Want to migrate a project to Git? If it's managed with one of the more well-known systems, then chances are someone has already written a script to export the whole history to Git.
+
+Otherwise, take a look at *git fast-import*. This command takes text input in a specific format and creates Git history from scratch. Typically a script is cobbled together and run once to feed this command, migrating the project in a single shot.
+
+As an example, paste the following listing into temporary file, such as `/tmp/history`:
+----------------------------------
+commit refs/heads/master
+committer "Alice" <alice@example.com> Thu, 01 Jan 1970 00:00:00 +0000
+data <<EOT
+Initial commit.
+EOT
+
+M 100644 inline hello.c
+data <<EOT
+#include <stdio.h>
+
+int main() {
+  printf("Hello, world!\n");
+  return 0;
+}
+EOT
+
+
+commit refs/heads/master
+committer "Bob" <bob@example.com> Tue, 14 Mar 2000 01:59:26 -0800
+data <<EOT
+Replace printf() with write().
+EOT
+
+M 100644 inline hello.c
+data <<EOT
+#include <unistd.h>
+
+int main() {
+  write(1, "Hello, world!\n", 14);
+  return 0;
+}
+EOT
+
+----------------------------------
+
+Then create a Git repository from this temporary file by typing:
+
+ $ mkdir project; cd project; git init
+ $ git fast-import < /tmp/history
+
+You can checkout the latest version of the project with:
+
+ $ git checkout master .
+
 === Building On Git ===
 
 In true UNIX fashion, Git's design allows it to be easily used as a low-level component of other programs. There are GUI interfaces, web interfaces, alternative command-line interfaces, and perhaps soon you will have a script or two of your own that calls Git.

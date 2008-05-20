@@ -117,7 +117,7 @@ and again, the second part is ready to be reviewed.
 
 It's easy to extend this trick for any number of parts.
 
-=== Reorganizing a Medley Branch ===
+=== Reorganizing a Medley ===
 
 Perhaps you like to work on all aspects of a project in the same branch, but want others to avoid seeing works-in-progress, and want your commits neatly organized. Then after cloning:
 

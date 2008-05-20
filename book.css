@@ -8,6 +8,10 @@ tt, code, pre, .type {
     font-size: 90%;
 }
 
+pre {
+    color: #0000aa;
+}
+
 ul li p {
     margin-bottom:0;
 }
