@@ -117,6 +117,20 @@ and again, the second part is ready to be reviewed.
 
 It's easy to extend this trick for any number of parts.
 
+=== Reorganizing a Medley Branch ===
+
+Perhaps you like to work on all aspects of a project in the same branch, but want others to avoid seeing works-in-progress, and want your commits neatly organized. Then after cloning:
+
+  $ git checkout -b sanitized
+  $ git checkout -b medley
+
+Next, work on anything: fix bugs, add features, add temporary code, and so forth. and commit often along the way. Then:
+
+  $ git checkout sanitized
+  $ git cherry-pick SHA1_HASH
+
+applies a given commit to the "sanitized" branch. With appropriate cherry-picks you can construct a branch that contains only permanent code, and has related commits grouped together.
+
 === Managing Branches ===
 
 Type:
@@ -143,10 +157,10 @@ The equivalent of branching and cloning in centralized version control systems, 
 
 Most importantly, these operations will be slower to some degree, usually to the point where users won't bother using them unless absolutely necessary. And when they absolutely have to run slow commands, productivity suffers because of an interrupted work flow.
 
-I experienced these phenomena first-hand. Git was the first version control system I used, and I grew accustomed to it, taking many features for granted. I did not know what centralized systems were like, and assumed they were similar. Later, I was forced to use one because of a project I worked on.
+I experienced these phenomena first-hand. Git was the first version control system I used, and I grew accustomed to it, taking many features for granted. I did not know what centralized systems were like, and assumed they were similar. Later, I was forced to use one.
 
-Often I have a flaky internet connection. I didn't mind too much with Git but found development unbearable with a centralized system.
+Often I have a flaky internet connection. This matters little with Git, but makes development unbearable with a centralized system.
 
-I found myself conditioned to avoid certain commands because of the latencies involved, which ultimately prevented me from following the work flow I wanted.
+Additionally, I found myself conditioned to avoid certain commands because of the latencies involved, which ultimately prevented me from following the work flow I wanted.
 
 When I had to run a slow command, the interruption to my train of thought dealt a disproportionate amount of damage. While waiting for server communcation to complete, I'd do something else to pass the time, such as check email or write documentation. By the time I returned to the original task, the command had already finished long ago. I would then spend a long time trying to remember what I was doing.

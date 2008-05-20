@@ -1,6 +1,6 @@
 == Basic Tricks ==
 
-Rather than diving into a sea of Git commands, use these elementary examples to get your feet wet. Despite their simplicity, each of them are useful in real life.
+Rather than diving into a sea of Git commands, use these elementary examples to get your feet wet. Despite their simplicity, each of them are useful.
 
 === Saving State ===
 
@@ -87,11 +87,11 @@ In a court of law, events can be stricken from the record. Likewise, you can pic
  $ git commit -a
  $ git revert SHA1_HASH
 
-will undo just the commit with the given hash. Running *git log* reveals the revert is recorded as new commit.
+will undo just the commit with the given hash. Running *git log* reveals the revert is recorded as a new commit.
 
 === Dowloading Files ===
 
-If a project uses Git to manage its files, you can get a copy with:
+Get a copy of a project managed with Git by typing:
 
  $ git clone git://server/path/to/files
 
@@ -99,17 +99,17 @@ For example, to get all the files I used to create this site:
 
  $ git clone git://git.or.cz/gitmagic.git
 
-We'll have a lot more to say about the *clone* command later.
+We'll have much to say about the *clone* command soon.
 
 === The Bleeding Edge ===
 
-If a project uses Git to manage its files, and you've already downloaded a copy using *git clone*, you can upgrade to the latest version with:
+If you've already downloaded a copy of a project using *git clone*, you can upgrade to the latest version with:
 
  $ git pull
 
 === Instant Publishing ===
 
-Let's say you've written a script you'd like to share with others. You could just tell them to download from your computer, but if they do so while you're improving the script or making experimental changes, they could wind up in trouble.  Of course, this is why release cycles exist. Code is written, and at certain points in time, when it's suitable for others, it gets released.
+Let's say you've written a script you'd like to share with others. You could just tell them to download from your computer, but if they do so while you're improving the script or making experimental changes, they could wind up in trouble.  Of course, this is why release cycles exist. Developers work on code, and when they feel it's suitable for others, they release the code.
 
 To do this with Git, in the directory where your script resides:
 
@@ -117,19 +117,19 @@ To do this with Git, in the directory where your script resides:
  $ git add .
  $ git commit -m "First release"
 
-Then tell your users to type
+Then tell your users to run:
 
  $ git clone your.computer:/path/to/script
 
-to download your script. This assumes they have ssh access. If not, run *git daemon* and tell your users to type
+to download your script. This assumes they have ssh access. If not, run *git daemon* and tell your users to instead run:
 
  $ git clone git://your.computer/path/to/script
 
-From now on, every time your script is ready for release, type:
+From now on, every time your script is ready for release, execute:
 
  $ git commit -a -m "Next release"
 
-and your users can upgrade their version by changing to the directory containing your script and typing.
+and your users can upgrade their version by changing to the directory containing your script and typing:
 
  $ git pull
 

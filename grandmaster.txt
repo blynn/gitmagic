@@ -4,13 +4,13 @@ This pretentiously named page is my dumping ground for uncategorized Git tricks.
 
 === Source Releases ===
 
-For my projects, Git tracks exactly the files I'd like to archive and release to users. So to create a tarball of the source code, I run:
+For my projects, Git tracks exactly the files I'd like to archive and release to users. To create a tarball of the source code, I run:
 
  $ git archive --format=tar --prefix=proj-1.2.3/ HEAD
 
 === Changelog Generation ===
 
-It's good practice to keep a http://en.wikipedia.org/wiki/Changelog[changelog], and some projects even require it. If you've been committing frequently, which you should, generate a Changelog by typing
+It's good practice to keep a http://en.wikipedia.org/wiki/Changelog[changelog], and some projects even require it. If you've been committing frequently, which you should, generate a Changelog by typing:
 
  $ git log > ChangeLog
 
@@ -27,11 +27,11 @@ and in the "proj.git" directory, run
  $ git --bare update-server-info
  $ chmod a+x hooks/post-update
 
-From your computer, you can push via ssh:
+From your computer, push via ssh:
 
  $ git push web.server:/path/to/proj.git master
 
-and people can get your project via
+and others get your project via:
 
  $ git clone http://web.server/proj.git
 
