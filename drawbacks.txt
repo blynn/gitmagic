@@ -4,7 +4,11 @@ There are some Git issues I've swept under the carpet. Some can be handled easil
 
 === Microsoft Windows ===
 
-Git on Microsoft Windows can be cumbersome. It works with Cygwin installed, though is slower. There is also the less invasive http://repo.or.cz/w/git/mingw.git[mingw port] which can be run from the Windows command-line.
+Git on Microsoft Windows can be cumbersome:
+
+- http://cygwin.com/[Cygwin], a Linux-like environment for Windows, contains http://cygwin.com/packages/git/[a Windows port of Git].
+
+- http://code.google.com/p/msysgit/[Git on MSys] is an alternative requiring minimal runtime support, though a few of the commands need some work.
 
 === Unrelated Files ===
 
@@ -42,7 +46,7 @@ There is nothing any version control system can do about this, but standard Git 
 
 The reasons why the changes are so great should be examined. Perhaps file formats should be changed. Minor edits should only cause minor changes to at most a few files.
 
-Or perhaps a database or backup/archival solution is what is actually being sought, not a version control system. For example, version control may not be suitable for managing photos periodically taken from a webcam. Again, version control is meant for keeping track of alterations made by humans.
+Or perhaps a database or backup/archival solution is what is actually being sought, not a version control system. For example, version control may be ill-suited for managing photos periodically taken from a webcam.
 
 If the files really must be constantly morphing and they really must be versioned, a possibility is to use Git in a centralized fashion. One can create shallow clones, which checks out little or no history of the project. Of course, many Git tools will be unavailable, and fixes must be submitted as patches. This is probably fine as it's unclear why anyone would want the history of wildly unstable files.
 
@@ -66,10 +70,12 @@ The current implementation of Git, rather than its design, is to blame for this 
 
 === Initial Commit ===
 
-A stereotypical computer scientist counts from 0, rather than 1. Unfortunately, with respect to commits, git does not adhere to this convention. Many commands are unfriendly before the initial commit. Aside from decreased user-friendliness, some corner cases must be handled specially, such as rebasing a branch with a different initial commit.
+A stereotypical computer scientist counts from 0, rather than 1. Unfortunately, with respect to commits, git does not adhere to this convention. Many commands are unfriendly before the initial commit. Additionally, some corner cases must be handled specially, such as rebasing a branch with a different initial commit.
 
 Git would benefit from defining the zero commit: as soon as a repository is constructed, HEAD would be set to the string consisting of 20 zero bytes. This special commit represents an empty tree, with no parent, at some time predating all Git repositories.
 
 Then running git log, for example, would inform the user that no commits have been made yet, instead of exiting with a fatal error. Similarly for other tools.
 
 Every initial commit is implicitly a descendant of this zero commit. For example, rebasing an unrelated branch would cause the whole branch to be grafted on to the target. Currently, all but the initial commit is applied, resulting in a merge conflict. One workaround is to use `git checkout` followed by `git commit -C` on the initial commit, then rebase the rest.
+
+There are worse cases unfortunately. If several branches with different initial commits are merged together, then rebasing the result requires substantial manual intervention.
