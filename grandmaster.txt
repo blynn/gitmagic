@@ -37,21 +37,18 @@ and others get your project via:
 
 === Commit What Changed ===
 
-Telling Git when you've added, deleted and renamed files gets tedious. Instead, try:
+Telling Git when you've added, deleted and renamed files gets tedious. Instead, you can type:
+
+ $ git add .
+ $ git add -u
+
+Git will look at the files in the current directory and work out the details by itself. Instead of the second add command, run `git commit -a` if you also intend to commit at this time.
+
+You can perform the above in a single pass with:
 
  $ git ls-files -d -m -o -z | xargs -0 git update-index --add --remove
 
-and Git will look at the files in the current directory and work everything out for itself. The *-z* and *-0* options prevent ill side-effects from filenames containing strange characters.
-
-You might want it to ignore particular files:
-
- $ git ls-files -d -m -o -z -x *.tmp | xargs -0 git update-index --add --remove
-
-If you have a big list of directories and files that should never be version controlled, type them into a separate file named ".gitignore" and run:
-
- $ git ls-files -d -m -o -z -X .gitignore | xargs -0 git update-index --add --remove
-
-You can also exclude files on a per-directory basis. See the help page.
+The *-z* and *-0* options prevent ill side-effects from filenames containing strange characters. Note this command adds ignored files. You may want to use the `-x` or `-X` option.
 
 === I Stand Corrected ===
 
