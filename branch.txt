@@ -119,12 +119,12 @@ It's easy to extend this trick for any number of parts.
 
 === Reorganizing a Medley ===
 
-Perhaps you like to work on all aspects of a project in the same branch, but want others to avoid seeing works-in-progress, and want your commits neatly organized. Then after cloning:
+Perhaps you like to work on all aspects of a project in the same branch. You want to keep works-in-progress to yourself and want others to see your commits only when they have been neatly organized. Then after cloning:
 
   $ git checkout -b sanitized
   $ git checkout -b medley
 
-Next, work on anything: fix bugs, add features, add temporary code, and so forth, and commit often along the way. Then:
+Next, work on anything: fix bugs, add features, add temporary code, and so forth, committing often along the way. Then:
 
   $ git checkout sanitized
   $ git cherry-pick SHA1_HASH
