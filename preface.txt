@@ -12,7 +12,7 @@ Rather than go into details, we provide rough instructions for particular effect
 
 === Thanks! ===
 
-Kudos to Dustin Sallings, Alberto Bertogli, Douglas Livingstone, Michael Budde and Tarmigan for suggestions and improvements. [If I've left you out, please tell me because I often forget to update this section.]
+Kudos to Dustin Sallings, Alberto Bertogli, Douglas Livingstone, Michael Budde, Tarmigan and Derek Mahar for suggestions and improvements. [If I've left you out, please tell me because I often forget to update this section.]
 
 === Links ===
 
