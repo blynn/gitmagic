@@ -145,7 +145,7 @@ Otherwise, take a look at *git fast-import*. This command takes text input in a 
 As an example, paste the following listing into temporary file, such as `/tmp/history`:
 ----------------------------------
 commit refs/heads/master
-committer "Alice" <alice@example.com> Thu, 01 Jan 1970 00:00:00 +0000
+committer Alice <alice@example.com> Thu, 01 Jan 1970 00:00:00 +0000
 data <<EOT
 Initial commit.
 EOT
@@ -162,7 +162,7 @@ EOT
 
 
 commit refs/heads/master
-committer "Bob" <bob@example.com> Tue, 14 Mar 2000 01:59:26 -0800
+committer Bob <bob@example.com> Tue, 14 Mar 2000 01:59:26 -0800
 data <<EOT
 Replace printf() with write().
 EOT

@@ -2,6 +2,8 @@
 
 There are some Git issues I've swept under the carpet. Some can be handled easily with scripts and hooks, some require reorganizing or redefining the project, and for the few remaining annoyances, one will just have to wait. Or better yet, pitch in and help!
 
+I've been playing around with some version control system ideas, and wrote link:/~blynn/gg/[an experimental system based on Git], which addresses some of these problems.
+
 === Microsoft Windows ===
 
 Git on Microsoft Windows can be cumbersome:
@@ -16,9 +18,9 @@ If your project is very large and contains many unrelated files that are constan
 
 A solution is to break up your project into pieces, each consisting of related files. Use *git submodule* if you still want to keep everything in a single repository.
 
-=== Diffs ===
+=== Who's Editing What? ===
 
-Some version control systems force you to explicitly tag a file before editing. While this is especially annoying when this tagging involves talking to a central server, it does have two benefits:
+Some version control systems force you to explicitly tag a file before editing. While this is especially annoying when this involves talking to a central server, it does have two benefits:
 
   1. Diffs are quick because only the tagged files need be examined.
 
