@@ -134,6 +134,12 @@ The trouble is finding the appropriate hash. You could look at all the hash valu
 
 Git records every hash of a commit it computes in `.git/logs`. The subdirectory `refs` contains the history of all activity on all branches, while the file `HEAD` shows every hash value it has ever taken. The latter can be used to find hashes of commits on branches that have been accidentally lopped off.
 
+The reflog command provides a friendly interface to these log files. Try
+
+  $ git reflog
+
+and see its manpage for more information.
+
 Eventually, you may want to run *git gc \--prune* to recover space. Be aware that doing so prevents you from recovering lost HEADs.
 
 === Making History ===
@@ -232,7 +238,7 @@ On the other hand, if you specify particular paths for checkout, then there are 
 
   $ git branch -D BRANCH  # instead of -d
 
-Similarly, attempting to overwrite a branch via a move fails if this causes data loss. To force a branch move through, type:
+Similarly, attempting to overwrite a branch via a move fails if data loss would ensue. To force a branch move, type:
 
   $ git branch -M [SOURCE] TARGET  # instead of -m
 
