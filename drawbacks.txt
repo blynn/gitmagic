@@ -36,7 +36,7 @@ The penalty is typically slight, and well worth having as other operations are i
 
 === Initial Clone ===
 
-Creating a clone is more expensive than checking out code in other version control systems when there is a lenghty history.
+Creating a clone is more expensive than checking out code in other version control systems when there is a lengthy history.
 
 The initial cost is worth paying in the long run, as most future operations will then be fast and offline. However, in some situations, it may be preferable to create a shallow clone with the `\--depth` option. This is much faster, but the resulting clone has reduced functionality.
 

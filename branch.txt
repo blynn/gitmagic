@@ -143,7 +143,7 @@ See *git help branch* for other branch operations.
 
 === Work How You Want ===
 
-Applications such as http://www.mozilla.com/[Mozilla Firefox] allow you to open multitple tabs and multiple windows. Switching tabs gives you different content in the same window. Git branching is like tabs for your working directory. Continuing this analogy, Git cloning is like opening a new window. Being able to do both easily makes for a better user experience.
+Applications such as http://www.mozilla.com/[Mozilla Firefox] allow you to open multiple tabs and multiple windows. Switching tabs gives you different content in the same window. Git branching is like tabs for your working directory. Continuing this analogy, Git cloning is like opening a new window. Being able to do both easily makes for a better user experience.
 
 On a higher level, several Linux window managers allow you to have multiple desktops, which means you can instantly view a different state of the desktop. This is similar to branching in Git, whereas Git cloning would be like attaching another monitor where you can open more windows.
 

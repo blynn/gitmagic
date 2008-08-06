@@ -12,7 +12,7 @@ Initialize a Git repository and commit your files as above on one machine. Then 
 
  $ git clone other.computer:/path/to/files
 
-to create a second copy of the files and Git respository. From now on,
+to create a second copy of the files and Git repository. From now on,
 
  $ git commit -a
  $ git pull other.computer:/path/to/files
