@@ -216,7 +216,7 @@ See http://git.or.cz/[the Git homepage] for more examples.
 
 Recent versions of Git make it difficult for the user to accidentally destroy data. This is perhaps the most compelling reason to upgrade.
 
-Nonetheless, what if you truly want to destroy data? We'll show how to override the safeguards for common commands. Only use them if you know what you are doing.
+Nonetheless, there are times you truly want to destroy data. We show how to override the safeguards for common commands. Only use them if you know what you are doing.
 
 *Checkout*: If you have uncommitted changes, a plain checkout fails. To destroy your changes, and checkout a given commit anyway, use the force flag:
 
