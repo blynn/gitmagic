@@ -27,7 +27,7 @@ to push the current state to the other computer. Next time you're logged in to t
 
  $ git checkout HEAD .
 
-to update the files before working on them. Be aware that you'll lose any uncommitted changes when you do this. Because more care is required, I prefer sticking to pulls for this use case.
+to update the files before working on them, though this won't work if you have uncommitted changes. Because more work is required, I prefer sticking to pulls for this use case.
 
 === Classic Source Control ===
 

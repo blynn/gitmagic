@@ -211,3 +211,27 @@ the "refs/heads/" and ignore errors:
   $ git symbolic-ref HEAD 2> /dev/null | cut -b 12-
 
 See http://git.or.cz/[the Git homepage] for more examples.
+
+=== Daring Stunts ===
+
+Recent versions of Git make it difficult for the user to accidentally destroy data. This is perhaps the most compelling reason to upgrade.
+
+Nonetheless, what if you truly want to destroy data? We'll show how to override the safeguards for common commands. Only use them if you know what you are doing.
+
+*Checkout*: If you have uncommitted changes, checkout will fail. To destroy your changes, and checkout a given commit anyway, use the force flag:
+
+  $ git checkout -f COMMIT
+
+*Reset*: Reset also fails in the presence of uncommitted changes. To force it through, run:
+
+  $ git reset --hard [COMMIT]
+
+*Branch*: Deleting branches fails if this causes changes to be lost. To force a deletion, type:
+
+  $ git branch -D BRANCH  # instead of -d
+
+Similarly, attempting to overwrite a branch via a move fails if this causes data loss. To force a branch move through, type:
+
+  $ git branch -M [SOURCE] TARGET  # instead of -m
+
+Unlike checkout and reset, no data is lost yet. The changes are still stored in the .git subdirectory, and can be retrieved by recovering the appropriate hash from `.git/logs` (see "HEAD-hunting" above). The data is deleted the next time garbage is collected.
