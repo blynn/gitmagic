@@ -19,16 +19,6 @@ to create a second copy of the files and Git repository. From now on,
 
 will pull in the state of the files on the other computer into the one you're working on. If you've recently made conflicting edits in the same file, Git will let you know and you should commit again after resolving them.
 
-Pushing is also possible. If you have not committed any changes on the other computer, you may type
-
- $ git push other.computer:/path/to/files
-
-to push the current state to the other computer. Next time you're logged in to the other computer, run
-
- $ git checkout HEAD .
-
-to update the files before working on them, though this won't work if you have uncommitted changes. Because more work is required, I prefer sticking to pulls for this use case.
-
 === Classic Source Control ===
 
 Initialize a Git repository for your files: 
