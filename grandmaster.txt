@@ -218,9 +218,11 @@ Recent versions of Git make it difficult for the user to accidentally destroy da
 
 Nonetheless, what if you truly want to destroy data? We'll show how to override the safeguards for common commands. Only use them if you know what you are doing.
 
-*Checkout*: If you have uncommitted changes, checkout will fail. To destroy your changes, and checkout a given commit anyway, use the force flag:
+*Checkout*: If you have uncommitted changes, a plain checkout fails. To destroy your changes, and checkout a given commit anyway, use the force flag:
 
   $ git checkout -f COMMIT
+
+On the other hand, if you specify particular paths for checkout, then there are no safety checks. The supplied paths are quietly overwritten. Take care if you use checkout in this manner.
 
 *Reset*: Reset also fails in the presence of uncommitted changes. To force it through, run:
 
