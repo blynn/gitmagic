@@ -236,4 +236,4 @@ Similarly, attempting to overwrite a branch via a move fails if this causes data
 
   $ git branch -M [SOURCE] TARGET  # instead of -m
 
-Unlike checkout and reset, no data is lost yet. The changes are still stored in the .git subdirectory, and can be retrieved by recovering the appropriate hash from `.git/logs` (see "HEAD-hunting" above). The data is deleted the next time garbage is collected.
+Unlike checkout and reset, the destruction is deferred. The changes are still stored in the .git subdirectory, and can be retrieved by recovering the appropriate hash from `.git/logs` (see "HEAD-hunting" above). The data is only deleted the next time garbage is collected.
