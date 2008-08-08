@@ -1,6 +1,6 @@
 .PHONY: target clean sync push
 
-target: book book/default.css
+target: book book/default.css book.html book.pdf
 
 TXTFILES=preface.txt intro.txt basic.txt clone.txt branch.txt grandmaster.txt secrets.txt drawbacks.txt
 
@@ -28,7 +28,7 @@ clean:
 	-rm -rf book.xml book.html book
 
 sync: target
-	rsync -r book/* blynn@tl1.stanford.edu:www/gitmagic/
+	rsync -r book.html book.pdf book/* blynn@tl1.stanford.edu:www/gitmagic/
 
 public:
 	git push blynn@git.or.cz:srv/git/gitmagic.git

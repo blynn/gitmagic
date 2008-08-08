@@ -10,9 +10,14 @@ As Arthur C. Clarke observed, any sufficiently advanced technology is indistingu
 
 Rather than go into details, we provide rough instructions for particular effects. After repeated use, gradually you will understand how each trick works, and how to tailor the recipes for your needs.
 
+.Other Editions
+
+ - link:book.html[Single webpage]: barebones HTML, with no CSS.
+ - link:book.pdf[PDF file]: printer-friendly.
+
 === Thanks! ===
 
-Kudos to Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael Budde, Tarmigan and Derek Mahar for suggestions and improvements. [If I've left you out, please tell me because I often forget to update this section.]
+Kudos to Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael Budde, Richard Albury, Tarmigan and Derek Mahar for suggestions and improvements. [If I've left you out, please tell me because I often forget to update this section.]
 
 === Links ===
 

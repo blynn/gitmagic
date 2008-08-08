@@ -89,7 +89,7 @@ In a court of law, events can be stricken from the record. Likewise, you can pic
 
 will undo just the commit with the given hash. Running *git log* reveals the revert is recorded as a new commit.
 
-=== Dowloading Files ===
+=== Downloading Files ===
 
 Get a copy of a project managed with Git by typing:
 
