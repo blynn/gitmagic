@@ -4,9 +4,8 @@ Rather than diving into a sea of Git commands, use these elementary examples to 
 
 === Saving State ===
 
-When I'm about to attempt something drastic I like to save the current state, so I can go back and try again should things go awry.
-
-Take a snapshot of all files in the current directory with:
+About to attempt something drastic? Before you do, take a snapshot of all files
+in the current directory with:
 
  $ git init
  $ git add .
@@ -14,7 +13,7 @@ Take a snapshot of all files in the current directory with:
 
 The above sequence of commands should be memorized, or placed in a script, as they will be reused frequently.
 
-Then if something goes wrong, run:
+Now if your new edits go awry, run:
 
  $ git reset --hard
 
@@ -28,7 +27,7 @@ The above will only keep track of the files that were present when you first ran
 
  $ git add NEWFILES...
 
-Similarly, if you want Git to forget about certain files, maybe because you've deleted them
+Similarly, if you want Git to forget about certain files, maybe because you've deleted them:
 
  $ git rm OLDFILES...
 
@@ -38,13 +37,11 @@ Renaming a file is the same as removing the old name and adding the new name. Th
 
 === Advanced Undo/Redo ===
 
-Sometimes you just want to go back and forget about every change past a certain point because they're all wrong.
-
-Then
+Sometimes you just want to go back and forget about every change past a certain point because they're all wrong. Then:
 
  $ git log
 
-shows you a list of recent commits, and their SHA1 hashes. Next, type
+shows you a list of recent commits, and their SHA1 hashes. Next, type:
 
  $ git reset --hard SHA1_HASH
 
@@ -109,7 +106,7 @@ If you've already downloaded a copy of a project using *git clone*, you can upgr
 
 === Instant Publishing ===
 
-Let's say you've written a script you'd like to share with others. You could just tell them to download from your computer, but if they do so while you're improving the script or making experimental changes, they could wind up in trouble.  Of course, this is why release cycles exist. Developers work on code, and when they feel it's suitable for others, they release the code.
+Suppose you've written a script you'd like to share with others. You could just tell them to download from your computer, but if they do so while you're improving the script or making experimental changes, they could wind up in trouble.  Of course, this is why release cycles exist. Developers may work on a project frequently, but they only make the code available when they feel it is presentable.
 
 To do this with Git, in the directory where your script resides:
 

@@ -67,7 +67,7 @@ At any later time, you can merge in the changes from the original project with:
 
 === Ultimate Backups ===
 
-Want numerous tamper-proof geographically diverse redundant archives? If your project has many developers, don't do anything! Every clone of your code is effectively a backup. Not just of the current state of the project, but of your project's entire history. Thanks to cryptographic hashing, if anyone's clone becomes corrupted, it will be spotted as soon as they try to communicate with others.
+Want numerous tamper-proof geographically diverse redundant archives? If your project has many developers, don't do anything! Every clone of your code is effectively a backup. Not just of the current state, but of your project's entire history. Thanks to cryptographic hashing, if anyone's clone becomes corrupted, it will be spotted as soon as they try to communicate with others.
 
 If your project is not so popular, find as many servers as you can to host clones.
 
@@ -109,4 +109,6 @@ Then go to the new directory and run:
 
 The procedure for giving your changes to everyone else depends on the other version control system. The new directory contains the files with your changes. Run whatever commands of the other version control system are needed to upload them to the central repository.
 
-Tip: If you want to interact with a Subversion repository, check out the *git svn* command, which can automate all this (and more) for you.
+Tip: The *git svn* command automates the above for Subversion repositories.
+You can also run it to
+http://google-opensource.blogspot.com/2008/05/export-git-project-to-google-code.html[export a Git project to a Subversion repository].
