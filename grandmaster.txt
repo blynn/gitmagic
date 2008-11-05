@@ -83,7 +83,17 @@ Next run *git commit \--amend* if you marked a commit for editing. Otherwise, ru
 
  $ git rebase --continue
 
-Again, only do this if no one else has a clone of your tree.
+Thus tampering with the past is easily accomplished with the rebase command.
+But take care: only rewrite that part of history which you alone possess. Just
+as nations forever argue on who committed what atrocity, if someone else has a
+clone whose version of history differs to yours, you will have trouble
+reconciling when your trees interact.
+
+Some developers strongly feel history should be immutable, warts and all.
+What's done is done. Others feel trees should be made presentable before
+they are unleashed in public. Git accommodates both viewpoints. Like cloning,
+branching and merging, rewriting history is fast and local, and how you want to
+use this power is up to you.
 
 === Local Changes Last ===
 
@@ -103,16 +113,27 @@ Have you neglected to commit for too long? Been coding furiously and forgotten
 about source control until now? Made a series of unrelated changes, because
 that's your style?
 
-No worries, run *git add -p*. For each edit you made, Git will show you the hunk of code that was changed, and ask if it should be part of the next commit. Answer with "y" or "n". You have other options, such as postponing the decision; type "?" to learn them.
+No worries. Run:
 
-Once you're done, type *git commit* to commit precisely the changes you selected (the 'staged' changes). Make sure you omit the *-a* option, otherwise Git will commit all the edits.
+ $ git add -p
+
+For each edit you made, Git will show you the hunk of code that was changed,
+and ask if it should be part of the next commit. Answer with "y" or "n". You
+have other options, such as postponing the decision; type "?" to learn more.
+
+Once you're satisfied, type
+
+ $ git commit
+ 
+to commit precisely the changes you selected (the 'staged' changes). Make sure
+you omit the *-a* option, otherwise Git will commit all the edits.
 
 What if you've edited many files in many places? Reviewing each change one by
-one could get tedious. In this case, use *git add -i* instead. The interface is
-less straightforward, but more flexible. With a few keystrokes, you can stage
-or unstage several files at a time, or review and select changes in particular
-files only. The command *git commit --interactive* is similar, but runs *git
-commit* after you're done.
+one becomes frustratingly mind-numbing. In this case, use *git add -i*, whose
+interface is less straightforward, but more flexible. With a few keystrokes,
+you can stage or unstage several files at a time, or review and select changes
+in particular files only. Alternatively, run *git commit --interactive* which
+automatically runs commits after you're done.
  
 === Don't Lose Your HEAD ===
 
@@ -228,9 +249,10 @@ See http://git.or.cz/[the Git homepage] for more examples.
 
 === Daring Stunts ===
 
-Recent versions of Git make it difficult for the user to accidentally destroy data. This is perhaps the most compelling reason to upgrade.
-
-Nonetheless, there are times you truly want to destroy data. We show how to override the safeguards for common commands. Only use them if you know what you are doing.
+Recent versions of Git make it difficult for the user to accidentally destroy
+data. This is perhaps the most compelling reason to upgrade. Nonetheless, there
+are times you truly want to destroy data. We show how to override the
+safeguards for common commands. Only use them if you know what you are doing.
 
 *Checkout*: If you have uncommitted changes, a plain checkout fails. To destroy your changes, and checkout a given commit anyway, use the force flag:
 
@@ -250,4 +272,7 @@ Similarly, attempting to overwrite a branch via a move fails if data loss would 
 
   $ git branch -M [SOURCE] TARGET  # instead of -m
 
-Unlike checkout and reset, these two commands defer data destruction. The changes are still stored in the .git subdirectory, and can be retrieved by recovering the appropriate hash from `.git/logs` (see "HEAD-hunting" above). They are lost only the next time garbage is collected.
+Unlike checkout and reset, these two commands defer data destruction. The
+changes are still stored in the .git subdirectory, and can be retrieved by
+recovering the appropriate hash from `.git/logs` (see "HEAD-hunting" above).
+By default, they will be kept for at least two weeks.

@@ -142,6 +142,29 @@ to list all the branches. There is always a branch named "master", and you start
 The *-d* and *-m* options allow you to delete and move (rename) branches.
 See *git help branch*.
 
+=== Temporary Branches ===
+
+After a while you may realize that you are creating short-lived branches
+frequently for the same reasons. Perhaps you feel almost every second branch
+you create is only so you can save the current state somewhere while you
+briefly perform some operation on the previous state, such as fix a
+high-priority bug.
+
+Scripting can relieve the tedium of creating, deleting and checking out
+temporary branches and commits, but there's an even simpler way:
+
+ $ git stash
+
+This command saves the current state in a temporary location (a 'stash') and
+restores the previous state, so your working directory appears exactly as it
+was before you started editing. You can fix bugs, pull in upstream changes, and
+so on. When you want to go back to the stashed state, type
+
+ $ git stash apply  # You may need to resolve some conflicts.
+
+You can have multiple stashes, and manipulate them in various ways. See
+*git help stash*.
+
 === Work How You Want ===
 
 Applications such as http://www.mozilla.com/[Mozilla Firefox] allow you to open multiple tabs and multiple windows. Switching tabs gives you different content in the same window. Git branching is like tabs for your working directory. Continuing this analogy, Git cloning is like opening a new window. Being able to do both easily makes for a better user experience.
@@ -150,7 +173,7 @@ On a higher level, several Linux window managers allow you to have multiple desk
 
 Yet another example is the http://www.gnu.org/software/screen/[*screen*] utility. This gem allows you to create, destroy and switch between multiple terminal sessions in the same terminal. Instead of opening new terminals (clone), you can use the same one if you run *screen* (branch). In fact, you can do a lot more with *screen* but that's a topic for another text.
 
-Cloning, branching and merging are fast and local in Git, encouraging you to use the combination that best suits you. Git allows you to work exactly how you want.
+Cloning, branching, and merging are fast and local in Git, encouraging you to use the combination that best suits you. Git allows you to work exactly how you want.
 
 ==== Personal Experience ====
 
