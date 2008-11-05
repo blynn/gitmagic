@@ -103,9 +103,17 @@ Have you neglected to commit for too long? Been coding furiously and forgotten
 about source control until now? Made a series of unrelated changes, because
 that's your style?
 
-No worries, use *git add -i* or *git commit -i* to interactively choose which
-edits should belong to the next commit.
+No worries, run *git add -p*. For each edit you made, Git will show you the hunk of code that was changed, and ask if it should be part of the next commit. Answer with "y" or "n". You have other options, such as postponing the decision; type "?" to learn them.
 
+Once you're done, type *git commit* to commit precisely the changes you selected (the 'staged' changes). Make sure you omit the *-a* option, otherwise Git will commit all the edits.
+
+What if you've edited many files in many places? Reviewing each change one by
+one could get tedious. In this case, use *git add -i* instead. The interface is
+less straightforward, but more flexible. With a few keystrokes, you can stage
+or unstage several files at a time, or review and select changes in particular
+files only. The command *git commit --interactive* is similar, but runs *git
+commit* after you're done.
+ 
 === Don't Lose Your HEAD ===
 
 The HEAD tag is like a cursor that normally points at the latest commit, advancing with each new commit. Some Git commands let you move it. For example:
@@ -242,4 +250,4 @@ Similarly, attempting to overwrite a branch via a move fails if data loss would 
 
   $ git branch -M [SOURCE] TARGET  # instead of -m
 
-Unlike checkout and reset, the destruction is deferred. The changes are still stored in the .git subdirectory, and can be retrieved by recovering the appropriate hash from `.git/logs` (see "HEAD-hunting" above). The data is only deleted the next time garbage is collected.
+Unlike checkout and reset, these two commands defer data destruction. The changes are still stored in the .git subdirectory, and can be retrieved by recovering the appropriate hash from `.git/logs` (see "HEAD-hunting" above). They are lost only the next time garbage is collected.

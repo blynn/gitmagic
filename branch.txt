@@ -139,7 +139,8 @@ Type:
 
 to list all the branches. There is always a branch named "master", and you start here by default. Some advocate leaving the "master" branch untouched and creating new branches for your own edits.
 
-See *git help branch* for other branch operations.
+The *-d* and *-m* options allow you to delete and move (rename) branches.
+See *git help branch*.
 
 === Work How You Want ===
 
