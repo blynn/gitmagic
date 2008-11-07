@@ -50,63 +50,6 @@ You can perform the above in a single pass with:
 
 The *-z* and *-0* options prevent ill side-effects from filenames containing strange characters. Note this command adds ignored files. You may want to use the `-x` or `-X` option.
 
-=== I Stand Corrected ===
-
-Did you just commit, but wish you had typed a different message? Realized you forgot to add a file? Then:
-
- $ git commit --amend
-
-can help you out.
-
-Since this changes the history, only do this if you have yet to push your changes, otherwise your tree will diverge from other trees. Of course, if you control all the other trees too, then there is no problem since you can overwrite them.
-
-=== ... And Then Some ===
-
-Let's suppose the previous problem is ten times worse. After a lengthy session you've made a bunch of commits. But you're not quite happy with the way they're organized, and some of those commit messages could use rewording. This is quite likely if you've been saving early and saving often. Then type
-
- $ git rebase -i HEAD~10
-
-and the last 10 commits will appear in your favourite $EDITOR. A sample excerpt:
-
-    pick 5c6eb73 Added repo.or.cz link
-    pick a311a64 Reordered analogies in "Work How You Want"
-    pick 100834f Added push target to Makefile
-
-Then:
-
-- Remove commits by deleting lines.
-- Reorder commits by reordering lines.
-- Replace "pick" with "edit" to mark a commit for amending.
-- Replace "pick" with "squash" to merge a commit with the previous one.
-
-Next run *git commit \--amend* if you marked a commit for editing. Otherwise, run:
-
- $ git rebase --continue
-
-Thus tampering with the past is easily accomplished with the rebase command.
-But take care: only rewrite that part of history which you alone possess. Just
-as nations forever argue on who committed what atrocity, if someone else has a
-clone whose version of history differs to yours, you will have trouble
-reconciling when your trees interact.
-
-Some developers strongly feel history should be immutable, warts and all.
-What's done is done. Others feel trees should be made presentable before
-they are unleashed in public. Git accommodates both viewpoints. Like cloning,
-branching and merging, rewriting history is fast and local, and how you want to
-use this power is up to you.
-
-=== Local Changes Last ===
-
-You're working on an active project. You make some local commits over time, and
-then you sync with the official tree with a merge. This cycle repeats itself a few times before you're ready to push to the central tree.
-
-But now the history in your local Git clone is a messy jumble of your changes and the official changes. You'd prefer to see all your changes in one contiguous section, and after all the official changes.
-
-This is a job for *git rebase* as described above. In many cases you can use
-the *\--onto* flag and avoid interaction.
-
-Also see the manpage for other amazing uses of this command, which really deserves a chapter of its own. You can split commits. You can even rearrange branches of a tree!
-
 === My Commit Is Too Big! ===
 
 Have you neglected to commit for too long? Been coding furiously and forgotten
@@ -132,7 +75,7 @@ What if you've edited many files in many places? Reviewing each change one by
 one becomes frustratingly mind-numbing. In this case, use *git add -i*, whose
 interface is less straightforward, but more flexible. With a few keystrokes,
 you can stage or unstage several files at a time, or review and select changes
-in particular files only. Alternatively, run *git commit --interactive* which
+in particular files only. Alternatively, run *git commit \--interactive* which
 automatically runs commits after you're done.
  
 === Don't Lose Your HEAD ===
@@ -171,61 +114,11 @@ and see its manpage for more information.
 
 Eventually, you may want to run *git gc \--prune* to recover space. Be aware that doing so prevents you from recovering lost HEADs.
 
-=== Making History ===
-
-Want to migrate a project to Git? If it's managed with one of the more well-known systems, then chances are someone has already written a script to export the whole history to Git.
-
-Otherwise, take a look at *git fast-import*. This command takes text input in a specific format and creates Git history from scratch. Typically a script is cobbled together and run once to feed this command, migrating the project in a single shot.
-
-As an example, paste the following listing into temporary file, such as `/tmp/history`:
-----------------------------------
-commit refs/heads/master
-committer Alice <alice@example.com> Thu, 01 Jan 1970 00:00:00 +0000
-data <<EOT
-Initial commit.
-EOT
-
-M 100644 inline hello.c
-data <<EOT
-#include <stdio.h>
-
-int main() {
-  printf("Hello, world!\n");
-  return 0;
-}
-EOT
-
-
-commit refs/heads/master
-committer Bob <bob@example.com> Tue, 14 Mar 2000 01:59:26 -0800
-data <<EOT
-Replace printf() with write().
-EOT
-
-M 100644 inline hello.c
-data <<EOT
-#include <unistd.h>
-
-int main() {
-  write(1, "Hello, world!\n", 14);
-  return 0;
-}
-EOT
-
-----------------------------------
-
-Then create a Git repository from this temporary file by typing:
-
- $ mkdir project; cd project; git init
- $ git fast-import < /tmp/history
-
-You can checkout the latest version of the project with:
-
- $ git checkout master .
-
 === Building On Git ===
 
 In true UNIX fashion, Git's design allows it to be easily used as a low-level component of other programs. There are GUI interfaces, web interfaces, alternative command-line interfaces, and perhaps soon you will have a script or two of your own that calls Git.
+
+I like browsing history with http://sourceforge.net/projects/qgit[qgit], due to its slick photogenic interface, and http://jonas.nitro.dk/tig/[tig], a text-mode interface that works well over slow connections.
 
 One easy trick is to use built-in git aliases shorten your most frequently used
 commands:
