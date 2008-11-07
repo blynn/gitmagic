@@ -145,20 +145,21 @@ See *git help branch*.
 === Temporary Branches ===
 
 After a while you may realize that you are creating short-lived branches
-frequently for the same reasons. Perhaps you feel almost every second branch
-you create is only so you can save the current state somewhere while you
-briefly perform some operation on the previous state, such as fix a
-high-priority bug.
+frequently for the same reasons. Perhaps it seems every other time you create a
+branch is just so you can save the current state while you briefly perform some
+operation on the last saved state, such as fixing a high-priority bug.
 
-Scripting can relieve the tedium of creating, deleting and checking out
-temporary branches and commits, but there's an even simpler way:
+It's analogous to changing the TV channel temporarily to see what else is on,
+but instead of pushing a couple of buttons, you have to create, check out and
+delete temporary branches and commits. Luckily, Git has a feature that
+is as convenient as a TV remote control:
 
  $ git stash
 
 This command saves the current state in a temporary location (a 'stash') and
-restores the previous state, so your working directory appears exactly as it
-was before you started editing. You can fix bugs, pull in upstream changes, and
-so on. When you want to go back to the stashed state, type
+restores the previous state. Your working directory appears exactly as it was
+before you started editing, and you can fix bugs, pull in upstream changes, and
+so on. When you want to go back to the stashed state, type:
 
  $ git stash apply  # You may need to resolve some conflicts.
 
@@ -183,8 +184,9 @@ Most importantly, these operations will be slower to some degree, usually to the
 
 I experienced these phenomena first-hand. Git was the first version control system I used, and I grew accustomed to it, taking many features for granted. I did not know what centralized systems were like, and assumed they were similar. Later, I was forced to use one.
 
-Often I have a flaky internet connection. This matters little with Git, but makes development unbearable with a centralized system.
-
-Additionally, I found myself conditioned to avoid certain commands because of the latencies involved, which ultimately prevented me from following the work flow I wanted.
+Often I have a flaky internet connection. This matters little with Git, but
+makes development unbearable with a centralized system. Additionally, I found
+myself conditioned to avoid certain commands because of the latencies involved,
+which ultimately prevented me from following the work flow I wanted.
 
 When I had to run a slow command, the interruption to my train of thought dealt a disproportionate amount of damage. While waiting for server communcation to complete, I'd do something else to pass the time, such as check email or write documentation. By the time I returned to the original task, the command had already finished long ago. I would then spend a long time trying to remember what I was doing.

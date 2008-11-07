@@ -46,11 +46,9 @@ A small project may only need a fraction of the features offered by such a syste
 
 === Merge Conflicts ===
 
-An interesting problem arises in any type of revision control system. Suppose Alice and Bob have both independently downloaded the latest saved game. They both play the game a bit more and save. What if they both want to submit their new saves? Let's say Alice uploads first. Then when Bob tries to upload his save, the system realizes that his state does not chronologically follow Alice's state.
+For this topic, our computer game analogy becomes too thinly stretched since most games never worry about this, so let us consider the case of editing a document.
 
-Let us revert to editing a text file. Our computer game analogy becomes too thinly stretched since most games never worry about this.
-
-So suppose Alice has inserted a line at the beginning of a file, and Bob appends one at the end. They both upload their changes. Most systems will automatically deduce a reasonable course of action: accept and merge their changes, so both Alice's and Bob's edits are applied.
+Suppose Alice has inserted a line at the beginning of a file, and Bob appends one at the end. They both upload their changes. Most systems will automatically deduce a reasonable course of action: accept and merge their changes, so both Alice's and Bob's edits are applied.
 
 Now suppose both Alice and Bob have made distinct edits to the same line. Then it is impossible to resolve the conflict without human intervention. The second person to upload is informed of a merge conflict, and they must either choose one edit over another, or revise the line entirely.
 

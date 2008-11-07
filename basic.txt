@@ -1,6 +1,8 @@
 == Basic Tricks ==
 
-Rather than diving into a sea of Git commands, use these elementary examples to get your feet wet. Despite their simplicity, each of them are useful.
+Rather than diving into a sea of Git commands, use these elementary examples to
+get your feet wet. Despite their simplicity, each of them are useful. In fact,
+for many purposes you can get by with a handful of basic commands.
 
 === Saving State ===
 
@@ -53,7 +55,7 @@ Other times you want to hop to an old state briefly. In this case, type:
 
 This takes you back in time, while preserving newer commits. However, like time travel in a science-fiction movie, if you now edit and commit, you will be in an alternate reality, because your actions are different to what they were the first time around.
 
-This alternate reality is called a ''branch'', and <<branch,we'll have more to say about this later>>. For now, just remember that
+This alternate reality is called a 'branch', and <<branch,we'll have more to say about this later>>. For now, just remember that
 
  $ git checkout master
 

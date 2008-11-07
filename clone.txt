@@ -1,8 +1,8 @@
 == Cloning Around ==
 
-In older version control systems, checkout is the standard operation to get files. You checkout a bunch of files in the requested saved state.
+In older version control systems, checkout is the standard operation to get files. You retrieve a bunch of files in the requested saved state.
 
-In Git and other distributed version control systems, cloning is the standard operation. To get files you create a clone of the entire repository. In other words, you practically create a mirror of the central server. Anything the main repository can do, you can do.
+In Git and other distributed version control systems, cloning is the standard operation. To get files you create a clone of the entire repository. In other words, you practically mirror the central server. Anything the main repository can do, you can do.
 
 === Sync Computers ===
 
@@ -75,7 +75,7 @@ The truly paranoid should always write down the latest 20-byte SHA1 hash of the 
 
 === Light-Speed Multitask ===
 
-Say you want to work on several features in parallel. Then after committing your project:
+Say you want to work on several features in parallel. Then commit your project and run:
 
  $ git clone . /some/new/directory
 
