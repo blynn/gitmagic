@@ -31,7 +31,7 @@ Want to include a few more edits in that last commit? Then make those edits and 
 
 === ... And Then Some ===
 
-Let's suppose the previous problem is ten times worse. After a lengthy session you've made a bunch of commits. But you're not quite happy with the way they're organized, and some of those commit messages could use rewording. This is quite likely if you've been saving early and saving often. Then type
+Let's suppose the previous problem is ten times worse. After a lengthy session you've made a bunch of commits. But you're not quite happy with the way they're organized, and some of those commit messages could use rewording. Then type:
 
  $ git rebase -i HEAD~10
 
@@ -48,9 +48,15 @@ Then:
 - Replace "pick" with "edit" to mark a commit for amending.
 - Replace "pick" with "squash" to merge a commit with the previous one.
 
-Next run *git commit \--amend* if you marked a commit for editing. Otherwise, run:
+If you marked a commit for editing, then run:
+
+ $ git commit --amend
+
+Otherwise, run:
 
  $ git rebase --continue
+
+So commit early and commit often: you can easily tidy up later with rebase.
 
 === Local Changes Last ===
 
@@ -85,7 +91,7 @@ Afterwards, you must replace all clones of your project with your revised versio
 
 Want to migrate a project to Git? If it's managed with one of the more well-known systems, then chances are someone has already written a script to export the whole history to Git.
 
-Otherwise, take a look at *git fast-import*. This command takes text input in a specific format and creates Git history from scratch. Typically a script is cobbled together and run once to feed this command, migrating the project in a single shot.
+Otherwise, take a look at *git fast-import*. This command takes text input in a specific format and creates Git history from scratch. Typically a script is cobbled together and run once, migrating the project in a single shot.
 
 As an example, paste the following listing into temporary file, such as `/tmp/history`:
 ----------------------------------

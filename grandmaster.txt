@@ -37,7 +37,7 @@ and others get your project via:
 
 === Commit What Changed ===
 
-Telling Git when you've added, deleted and renamed files gets tedious. Instead, you can type:
+Telling Git when you've added, deleted and renamed files is troublesome for certain projects. Instead, you can type:
 
  $ git add .
  $ git add -u
@@ -117,8 +117,6 @@ Eventually, you may want to run *git gc \--prune* to recover space. Be aware tha
 === Building On Git ===
 
 In true UNIX fashion, Git's design allows it to be easily used as a low-level component of other programs. There are GUI interfaces, web interfaces, alternative command-line interfaces, and perhaps soon you will have a script or two of your own that calls Git.
-
-I like browsing history with http://sourceforge.net/projects/qgit[qgit], due to its slick photogenic interface, and http://jonas.nitro.dk/tig/[tig], a text-mode interface that works well over slow connections.
 
 One easy trick is to use built-in git aliases shorten your most frequently used
 commands:

@@ -1,8 +1,10 @@
 == Basic Tricks ==
 
 Rather than diving into a sea of Git commands, use these elementary examples to
-get your feet wet. Despite their simplicity, each of them are useful. In fact,
-for many purposes you can get by with a handful of basic commands.
+get your feet wet. Despite their simplicity, each of them are useful.
+
+In fact, when I first started using Git, for months I never went beyond the
+commands in this chapter.
 
 === Saving State ===
 
@@ -147,3 +149,9 @@ Or since yesterday:
 Or between a particular version and 2 versions ago:
 
  $ git diff SHA1_HASH "@{2}"
+
+Instead of running log and diff directly, sometimes I'll browse history with
+http://sourceforge.net/projects/qgit[qgit], due to its slick photogenic
+interface, or http://jonas.nitro.dk/tig/[tig], a text-mode interface that works
+well over slow connections. Alternatively, install a web server, run
+*git instaweb* and fire up any web browser.
