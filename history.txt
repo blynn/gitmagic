@@ -1,11 +1,10 @@
 == Lessons of History ==
 
 A consequence of the distributed nature of Git is that history can be edited
-easily. But if you tamper with the past, take care:
-only rewrite that part of history which you alone possess. Just as nations
-forever argue on who committed what atrocity, if someone else has a clone whose
-version of history differs to yours, you will have trouble reconciling when
-your trees interact.
+easily. But if you tamper with the past, take care: only rewrite that part of
+history which you alone possess. Just as nations forever argue over who
+committed what atrocity, if someone else has a clone whose version of history
+differs to yours, you will have trouble reconciling when your trees interact.
 
 Of course, if you control all the other trees too, then there is no problem
 since you can overwrite them.
@@ -72,26 +71,30 @@ Also see *git help rebase* for detailed examples of this amazing command. You ca
 
 === Rewriting History ===
 
-Occasionally, there are situations that call for the equivalent of the
-Stalinesque practice of airbrushing people out of official photos, erasing them
-from history. For example, suppose we intend to release a project, but it
-involves a file that should be kept private for some reason. Perhaps I left my
-credit card number in a text file and accidentally added it to the project.
-Deleting the file is insufficient, for the file can be accessed from older
-commits. We must remove the file from all commits:
+Occasionally, you need the source control equivalent of airbrushing people out
+of official photos, erasing them from history in a Stalinesque fashion. For
+example, suppose we intend to release a project, but it involves a file that
+should be kept private for some reason. Perhaps I left my credit card number in
+a text file and accidentally added it to the project. Deleting the file is
+insufficient, for the file can be accessed from older commits. We must remove
+the file from all commits:
 
  $ git filter-branch --tree-filter 'rm top/secret/file' HEAD
 
 See *git help filter-branch*, which discusses this example and gives a faster
-method. In general, *filter-branch* lets you alter large sections of history with a single command.
+method. In general, *filter-branch* lets you alter large sections of history
+with a single command.
 
-Afterwards, you must replace all clones of your project with your revised version if you wish to interact with them later.
+Afterwards, you must replace clones of your project with your revised version if you wish to interact with them later.
 
 === Making History ===
 
 Want to migrate a project to Git? If it's managed with one of the more well-known systems, then chances are someone has already written a script to export the whole history to Git.
 
-Otherwise, take a look at *git fast-import*. This command takes text input in a specific format and creates Git history from scratch. Typically a script is cobbled together and run once, migrating the project in a single shot.
+Otherwise, look up *git fast-import*, which reads text input in a specific
+format to create Git history from scratch. Typically a script using this
+command is hastily cobbled together and run once, migrating the project in a
+single shot.
 
 As an example, paste the following listing into temporary file, such as `/tmp/history`:
 ----------------------------------
@@ -138,3 +141,44 @@ Then create a Git repository from this temporary file by typing:
 You can checkout the latest version of the project with:
 
  $ git checkout master .
+
+=== Personal Experience ===
+
+In a centralized version control system, history modification is a difficult
+operation, and only available to administrators. Cloning, branching, and
+merging are impossible without network communication. So are basic operations
+such as browsing history, or committing a change. In some systems, users
+require network connectivity just to view their own changes or open a file for
+editing.
+
+Centralized systems preclude working offline, and need more expensive network
+infrastructure, especially as the number of developers grows. Most
+importantly, all operations are slower to some degree, usually to the point
+where users shun advanced commands unless absolutely necessary. In extreme
+cases this is true of even the most basic commands. When users must run slow
+commands, productivity suffers because of an interrupted work flow.
+
+I experienced these phenomena first-hand. Git was the first version control
+system I used. I quickly grew accustomed to it, taking many features for
+granted. I simply assumed other systems were similar: choosing a version
+control system ought to be no different from choosing a text editor or web
+browser.
+
+I was shocked when later forced to use a centralized system. My often flaky
+internet connection matters little with Git, but makes development unbearable
+when it needs to be as reliable as local disk. Additionally, I found myself
+conditioned to avoid certain commands because of the latencies involved, which
+ultimately prevented me from following my desired work flow.
+
+When I had to run a slow command, the interruption to my train of thought
+dealt a disproportionate amount of damage. While waiting for server
+communcation to complete, I'd do something else to pass the time, such as
+check email or write documentation. By the time I returned to the original
+task, the command had finished long ago, and I would waste more time trying to
+remember what I was doing. Humans are bad at context switching.
+
+There was also an interesting tragedy-of-the-commmons effect: anticipating
+network congestion, individuals would consume more bandwidth than necessary on
+various operations in an attempt to reduce future delays. The combined efforts
+intensified congestion, encouraging individuals to consume even more bandwidth
+next time to avoid even longer delays.

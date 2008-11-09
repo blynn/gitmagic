@@ -168,25 +168,10 @@ You can have multiple stashes, and manipulate them in various ways. See
 
 === Work How You Want ===
 
-Applications such as http://www.mozilla.com/[Mozilla Firefox] allow you to open multiple tabs and multiple windows. Switching tabs gives you different content in the same window. Git branching is like tabs for your working directory. Continuing this analogy, Git cloning is like opening a new window. Being able to do both easily makes for a better user experience.
+Applications such as http://www.mozilla.com/[Mozilla Firefox] allow you to open multiple tabs and multiple windows. Switching tabs gives you different content in the same window. Git branching is like tabs for your working directory. Continuing this analogy, Git cloning is like opening a new window. Being able to do both easily improves the user experience.
 
 On a higher level, several Linux window managers allow you to have multiple desktops: you can instantly switch to a different desktop. This is similar to branching in Git, whereas Git cloning would be like attaching another monitor to gain another desktop.
 
 Yet another example is the http://www.gnu.org/software/screen/[*screen*] utility. This gem allows you to create, destroy and switch between multiple terminal sessions in the same terminal. Instead of opening new terminals (clone), you can use the same one if you run *screen* (branch). In fact, you can do a lot more with *screen* but that's a topic for another text.
 
-Cloning, branching, and merging are fast and local in Git, encouraging you to use the combination that best suits you. Git allows you to work exactly how you want.
-
-==== Personal Experience ====
-
-The equivalent of branching and cloning in centralized version control systems, when it exists, requires network communication. This precludes working offline, and means these systems need more expensive network infrastructure, especially as the number of users grows.
-
-Most importantly, these operations will be slower to some degree, usually to the point where users won't bother using them unless absolutely necessary. And when they absolutely have to run slow commands, productivity suffers because of an interrupted work flow.
-
-I experienced these phenomena first-hand. Git was the first version control system I used, and I grew accustomed to it, taking many features for granted. I did not know what centralized systems were like, and assumed they were similar. Later, I was forced to use one.
-
-Often I have a flaky internet connection. This matters little with Git, but
-makes development unbearable with a centralized system. Additionally, I found
-myself conditioned to avoid certain commands because of the latencies involved,
-which ultimately prevented me from following the work flow I wanted.
-
-When I had to run a slow command, the interruption to my train of thought dealt a disproportionate amount of damage. While waiting for server communcation to complete, I'd do something else to pass the time, such as check email or write documentation. By the time I returned to the original task, the command had already finished long ago. I would then spend a long time trying to remember what I was doing.
+Cloning, branching, and merging are fast and local in Git, encouraging you to use the combination that best suits you. Git lets you work exactly how you want.

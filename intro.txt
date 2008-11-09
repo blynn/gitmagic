@@ -46,7 +46,7 @@ A small project may only need a fraction of the features offered by such a syste
 
 === Merge Conflicts ===
 
-For this topic, our computer game analogy becomes too thinly stretched since most games never worry about this. Instead, let us again consider the case of editing a document.
+For this topic, our computer game analogy becomes too thinly stretched. Instead, let us again consider editing a document.
 
 Suppose Alice has inserted a line at the beginning of a file, and Bob appends one at the end. They both upload their changes. Most systems will automatically deduce a reasonable course of action: accept and merge their changes, so both Alice's and Bob's edits are applied.
 

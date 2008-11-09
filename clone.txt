@@ -109,6 +109,6 @@ Then go to the new directory and run:
 
 The procedure for giving your changes to everyone else depends on the other version control system. The new directory contains the files with your changes. Run whatever commands of the other version control system are needed to upload them to the central repository.
 
-Tip: The *git svn* command automates the above for Subversion repositories.
-You can also run it to
+The *git svn* command automates the above for Subversion repositories, and can
+also be used to
 http://google-opensource.blogspot.com/2008/05/export-git-project-to-google-code.html[export a Git project to a Subversion repository].
