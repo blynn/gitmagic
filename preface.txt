@@ -19,6 +19,10 @@ Rather than go into details, we provide rough instructions for particular effect
 
 Kudos to Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael Budde, Richard Albury, Tarmigan and Derek Mahar for suggestions and improvements. [If I've left you out, please tell me because I often forget to update this section.]
 
+=== License ===
+
+This guide is released under http://www.gnu.org/licenses/gpl-3.0.html[the GNU General Public License version 3]. See below for the source.
+
 === Links ===
 
 I once listed some references, but it's too time-consuming to maintain.
