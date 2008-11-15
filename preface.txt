@@ -21,7 +21,12 @@ Kudos to Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, 
 
 === License ===
 
-This guide is released under http://www.gnu.org/licenses/gpl-3.0.html[the GNU General Public License version 3]. See below for the source.
+This guide is released under http://www.gnu.org/licenses/gpl-3.0.html[the GNU General Public License version 3]. Naturally, the source is kept in a Git
+repository, and can be obtained by typing:
+
+ $ git clone http://repo.or.cz/r/gitmagic.git  # Creates "gitmagic" directory.
+
+See below for other mirrors.
 
 === Links ===
 
