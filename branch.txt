@@ -2,7 +2,9 @@
 
 Instant branching and merging are the most lethal of Git's killer features.
 
-*Problem*: External factors inevitably necessitate context switching. A severe bug manifests in the released version suddenly without warning, and must be fixed as soon as possible at all costs. The deadline for a certain feature is imminent. The guy who wrote a certain function is about to leave, so you should drop what you are doing and get him to help you understand it.
+*Problem*: External factors inevitably necessitate context switching. A severe
+bug manifests in the released version without warning. The deadline for a
+certain feature is moved closer. A developer whose help you need for a key section of the project is about to leave. In all cases, you must abruptly drop what you are doing and focus on a completely different task.
 
 Interrupting your train of thought can be detrimental to your productivity, and the slower and less convenient it is to switch contexts, the greater the loss. With centralized version control we must download a fresh working copy from the central server. Distributed systems fare better, as we can clone the desired version locally.
 
@@ -14,7 +16,7 @@ With this magic word, the files in your directory suddenly shapeshift from one v
 
 === The Boss Key ===
 
-Ever play one of those games where at the push of a button ("the boss key"), the screen would instantly display a spreadsheet or something? So if the boss walked in the office while you were playing the game you could quickly hide this fact?
+Ever play one of those games where at the push of a button ("the boss key"), the screen would instantly display a spreadsheet or something? So if the boss walked in the office while you were playing the game you could quickly hide it away?
 
 In some directory:
 
@@ -144,19 +146,19 @@ See *git help branch*.
 
 === Temporary Branches ===
 
-After a while you may realize that you are creating short-lived branches
-frequently for the same reasons. Perhaps it seems every other time you create a
-branch is just so you can save the current state while you briefly perform some
-operation on the last saved state, such as fixing a high-priority bug.
+After a while you may realize you are creating short-lived branches
+frequently for similar reasons: every other branch merely serves to
+save the current state so you can briefly hop back to an older state to
+fix a high-priority bug or something.
 
-It's analogous to changing the TV channel temporarily to see what else is on,
-but instead of pushing a couple of buttons, you have to create, check out and
-delete temporary branches and commits. Luckily, Git has a feature that
+It's analogous to changing the TV channel temporarily to see what else is on.
+But instead of pushing a couple of buttons, you have to create, check out and
+delete temporary branches and commits. Luckily, Git has a shorcut that
 is as convenient as a TV remote control:
 
  $ git stash
 
-This command saves the current state in a temporary location (a 'stash') and
+This saves the current state in a temporary location (a 'stash') and
 restores the previous state. Your working directory appears exactly as it was
 before you started editing, and you can fix bugs, pull in upstream changes, and
 so on. When you want to go back to the stashed state, type:
@@ -164,7 +166,7 @@ so on. When you want to go back to the stashed state, type:
  $ git stash apply  # You may need to resolve some conflicts.
 
 You can have multiple stashes, and manipulate them in various ways. See
-*git help stash*.
+*git help stash*. As you may have guessed, Git maintains branches behind the scenes to perform this magic trick.
 
 === Work How You Want ===
 

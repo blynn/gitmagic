@@ -8,7 +8,7 @@ In Git and other distributed version control systems, cloning is the standard op
 
 This is the reason I first used Git. I can tolerate making tarballs or using *rsync* for backups and basic syncing. But sometimes I edit on my laptop, other times on my desktop, and the two may not have talked to each other in between.
 
-Initialize a Git repository and commit your files as above on one machine. Then on the other:
+Initialize a Git repository and commit your files on one machine. Then on the other:
 
  $ git clone other.computer:/path/to/files
 

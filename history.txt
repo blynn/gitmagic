@@ -1,6 +1,6 @@
 == Lessons of History ==
 
-A consequence of the distributed nature of Git is that history can be edited
+A consequence of Git's distributed nature is that history can be edited
 easily. But if you tamper with the past, take care: only rewrite that part of
 history which you alone possess. Just as nations forever argue over who
 committed what atrocity, if someone else has a clone whose version of history
@@ -141,6 +141,50 @@ Then create a Git repository from this temporary file by typing:
 You can checkout the latest version of the project with:
 
  $ git checkout master .
+
+=== Where Did It All Go Wrong? ===
+
+You've just discovered a broken feature in your program which you know for sure was working a few months ago. Argh! Where did this bug come from? If only you had been testing the feature as you developed.
+
+It's too late for that now. However, provided you've been committing often, Git
+can pinpoint the problem:
+
+ $ git bisect start
+ $ git bisect bad SHA1_OF_BAD_VERSION
+ $ git bisect good SHA1_OF_GOOD_VERSION
+
+Git checks out a state halfway in between. Test the feature, and if it's still broken:
+
+ $ git bisect bad
+
+If not, replace "bad" with "good". Git again transports you to a state halfway
+between the known good and bad versions, narrowing down the possibilities.
+After a few iterations, this binary search will lead you to the commit that
+caused the trouble. Once you've finished your investigation, return to your
+original state by typing:
+
+ $ git bisect reset
+
+Instead of testing every change by hand, automate the search by running:
+
+ $ git bisect run COMMAND
+
+Git uses the return value of the given command, typically a one-off script, to
+decide whether a change is good or bad: the command should exit with code 0
+when good, 125 when the change should be skipped, and anything else between 1
+and 127 if it is bad. A negative return value aborts the bisect.
+
+You can do much more: the help page explains how to visualize bisects, examine
+or replay the bisect log, and eliminate known innoncent changes for a speedier
+search.
+
+=== Who Made It All Go Wrong? ===
+
+Like many other version control systems, Git has a blame command:
+
+ $ git blame FILE
+
+which annotates every line in the given file showing who last changed it, and when. Unlike many other version control systems, this operation works offline, reading only from local disk. 
 
 === Personal Experience ===
 

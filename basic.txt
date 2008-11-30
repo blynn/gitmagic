@@ -2,9 +2,7 @@
 
 Rather than diving into a sea of Git commands, use these elementary examples to
 get your feet wet. Despite their simplicity, each of them are useful.
-
-In fact, when I first started using Git, for months I never went beyond the
-commands in this chapter.
+Indeed, in my first months with Git I never ventured beyond the material in this chapter.
 
 === Saving State ===
 
