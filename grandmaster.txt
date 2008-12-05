@@ -16,13 +16,13 @@ It's good practice to keep a http://en.wikipedia.org/wiki/Changelog[changelog], 
 
 === Git Over SSH, HTTP ===
 
-Suppose you have ssh access to your web server, but it does not have Git installed. Then download, compile and install Git in your account.
+Suppose you have ssh access to a web server, but Git is not installed. Though less efficient than its native protocol, Git can communicate over HTTP.
 
-Create a repository in your web directory:
+Download, compile and install Git in your account, and create a repository in your web directory:
 
  $ GIT_DIR=proj.git git init
 
-and in the "proj.git" directory, run
+In the "proj.git" directory, run:
 
  $ git --bare update-server-info
  $ chmod a+x hooks/post-update

@@ -12,6 +12,7 @@ Rather than go into details, we provide rough instructions for particular effect
 
 .Other Editions
 
+ - http://docs.google.com/View?id=dfwthj68_675gz3bw8kj[Chinese translation]: by JunJie, Meng and JiangWei.
  - link:book.html[Single webpage]: barebones HTML, with no CSS.
  - link:book.pdf[PDF file]: printer-friendly.
 
@@ -24,7 +25,7 @@ Kudos to Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, 
 This guide is released under http://www.gnu.org/licenses/gpl-3.0.html[the GNU General Public License version 3]. Naturally, the source is kept in a Git
 repository, and can be obtained by typing:
 
- $ git clone http://repo.or.cz/r/gitmagic.git  # Creates "gitmagic" directory.
+ $ git clone git://repo.or.cz/gitmagic.git  # Creates "gitmagic" directory.
 
 See below for other mirrors.
 
