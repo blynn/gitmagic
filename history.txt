@@ -89,6 +89,7 @@ Afterwards, you must replace clones of your project with your revised version if
 
 === Making History ===
 
+[[makinghistory]]
 Want to migrate a project to Git? If it's managed with one of the more well-known systems, then chances are someone has already written a script to export the whole history to Git.
 
 Otherwise, look up *git fast-import*, which reads text input in a specific
@@ -141,6 +142,11 @@ Then create a Git repository from this temporary file by typing:
 You can checkout the latest version of the project with:
 
  $ git checkout master .
+
+The *git fast-export* command converts any git repository to the
+*git fast-import* format, whose output you can study for writing exporters,
+and also to transport git repositories in a human-readable format. Indeed,
+these commands can send repositories of text files over text-only channels.
 
 === Where Did It All Go Wrong? ===
 

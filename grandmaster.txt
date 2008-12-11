@@ -35,6 +35,45 @@ and others get your project via:
 
  $ git clone http://web.server/proj.git
 
+=== Git Over Anything ===
+
+Want to synchronize repositories without servers, or even a network connection?
+Need to improvise during an emergency?
+
+We've seen <<makinghistory, *git fast-export* and *git fast-import* can convert
+repositories to a single file and back>>. We could shuttle such files back and
+forth to transport git repositories over any medium, but a more efficient tool
+is *git bundle*.
+
+The sender creates a 'bundle':
+
+ $ git bundle create somefile HEAD
+
+then transports the bundle, +somefile+, to the other party somehow: email,
+thumb drive, floppy disk, an *xxd* printout and an OCR machine,
+reading bits over the phone, smoke signals, etc. The receiver retrieves
+commits from the bundle by typing:
+
+ $ git pull somefile
+
+The receiver can even do this from an empty repository. Despite its
+size, +somefile+ contains the entire original git repository.
+
+In larger projects, eliminate waste by bundling only changes the other
+repository lacks:
+
+ $ git bundle create somefile HEAD ^COMMON_SHA1
+
+If done frequently, one could easily forget which commit was the last to be
+sent. The help page suggests using tags to solve this. Namely, after you
+send a bundle, type:
+
+ $ git tag -f lastbundle HEAD
+
+and create new refresher bundles with:
+
+ $ git bundle create newbundle HEAD ^lastbundle
+
 === Commit What Changed ===
 
 Telling Git when you've added, deleted and renamed files is troublesome for certain projects. Instead, you can type:
