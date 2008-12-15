@@ -39,7 +39,6 @@ and others get your project via:
 
 Want to synchronize repositories without servers, or even a network connection?
 Need to improvise during an emergency?
-
 We've seen <<makinghistory, *git fast-export* and *git fast-import* can convert
 repositories to a single file and back>>. We could shuttle such files back and
 forth to transport git repositories over any medium, but a more efficient tool
@@ -106,7 +105,7 @@ have other options, such as postponing the decision; type "?" to learn more.
 Once you're satisfied, type
 
  $ git commit
- 
+
 to commit precisely the changes you selected (the 'staged' changes). Make sure
 you omit the *-a* option, otherwise Git will commit all the edits.
 
@@ -116,7 +115,7 @@ interface is less straightforward, but more flexible. With a few keystrokes,
 you can stage or unstage several files at a time, or review and select changes
 in particular files only. Alternatively, run *git commit \--interactive* which
 automatically runs commits after you're done.
- 
+
 === Don't Lose Your HEAD ===
 
 The HEAD tag is like a cursor that normally points at the latest commit, advancing with each new commit. Some Git commands let you move it. For example:
@@ -219,3 +218,11 @@ Unlike checkout and reset, these two commands defer data destruction. The
 changes are still stored in the .git subdirectory, and can be retrieved by
 recovering the appropriate hash from `.git/logs` (see "HEAD-hunting" above).
 By default, they will be kept for at least two weeks.
+
+*Clean*: Some git commands refuse to proceed because they're worried about
+clobbering untracked files. If you're certain that all untracked files and
+directories are expendable, then delete them mercilessly with:
+
+  $ git clean -f -d
+
+Next time, that pesky command will work!

@@ -12,8 +12,8 @@ since you can overwrite them.
 Some developers strongly feel history should be immutable, warts and all.
 Others feel trees should be made presentable before they are unleashed in
 public. Git accommodates both viewpoints. Like cloning, branching and merging,
-rewriting history is simply another power Git gives you, and it is up to you
-to decide how to use it.
+rewriting history is simply another power Git gives you. It is up to you
+to use it wisely.
 
 === I Stand Corrected ===
 
@@ -190,7 +190,7 @@ Like many other version control systems, Git has a blame command:
 
  $ git blame FILE
 
-which annotates every line in the given file showing who last changed it, and when. Unlike many other version control systems, this operation works offline, reading only from local disk. 
+which annotates every line in the given file showing who last changed it, and when. Unlike many other version control systems, this operation works offline, reading only from local disk.
 
 === Personal Experience ===
 

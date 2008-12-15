@@ -21,7 +21,7 @@ will pull in the state of the files on the other computer into the one you're wo
 
 === Classic Source Control ===
 
-Initialize a Git repository for your files: 
+Initialize a Git repository for your files:
 
  $ git init
  $ git add .
