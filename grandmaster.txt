@@ -157,6 +157,8 @@ Or checkout the 5th-last visited commit via:
 
  $ git checkout "@{5}"
 
+See the ``Specifying Revisions'' section of *git help rev-parse* for more.
+
 You may wish to configure a longer grace period for doomed commits. For
 example:
 

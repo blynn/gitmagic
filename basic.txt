@@ -79,8 +79,6 @@ You can also ask for the 5th-last saved state:
 
  $ git checkout master~5
 
-See the ``Specifying Revisions'' section of *git help rev-parse* for more.
-
 ==== Reverting ====
 
 In a court of law, events can be stricken from the record. Likewise, you can pick specific commits to undo.
