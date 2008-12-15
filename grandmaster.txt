@@ -149,7 +149,13 @@ The reflog command provides a friendly interface to these log files. Try
 
   $ git reflog
 
-and see its manpage for more information.
+Instead of cutting and pasting hashes from the reflog, try:
+
+ $ git checkout "@{10 minutes ago}"
+
+Or checkout the 5th-last visited commit via:
+
+ $ git checkout "@{5}"
 
 You may wish to configure a longer grace period for doomed commits. For
 example:

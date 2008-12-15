@@ -59,9 +59,8 @@ This alternate reality is called a 'branch', and <<branch,we'll have more to say
 
  $ git checkout master
 
-will take you back to the present.
-
-Uncommitted changes travel in time with you when you run checkout.
+will take you back to the present. Also, to stop Git complaining, always
+commit or reset your changes before running checkout.
 
 To take the computer game analogy again:
 
@@ -73,11 +72,14 @@ You can choose only to restore particular files and subdirectories by appending 
 
 Don't like cutting and pasting hashes? Then use:
 
- $ git checkout "@{10 minutes ago}" .
+ $ git checkout :/"My first b"
 
-Other time specifications work too. For example, you can ask for the 5th-last saved state:
+to jump to the commit that starts with a given message.
+You can also ask for the 5th-last saved state:
 
- $ git checkout "@{5}" .
+ $ git checkout master~5
+
+See the ``Specifying Revisions'' section of *git help rev-parse* for more.
 
 ==== Reverting ====
 
