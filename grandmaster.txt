@@ -177,7 +177,7 @@ in which case commits will only be deleted when you run *git gc* manually.
 
 In true UNIX fashion, Git's design allows it to be easily used as a low-level component of other programs. There are GUI interfaces, web interfaces, alternative command-line interfaces, and perhaps soon you will have a script or two of your own that calls Git.
 
-One easy trick is to use built-in git aliases shorten your most frequently used
+One easy trick is to use built-in git aliases to shorten your most frequently used
 commands:
 
   $ git config --global alias.co checkout
