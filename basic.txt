@@ -146,7 +146,7 @@ Or since yesterday:
 
 Or between a particular version and 2 versions ago:
 
- $ git diff SHA1_HASH "@{2}"
+ $ git diff SHA1_HASH "master~2"
 
 Try also:
 
