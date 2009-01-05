@@ -222,12 +222,12 @@ ultimately prevented me from following my desired work flow.
 
 When I had to run a slow command, the interruption to my train of thought
 dealt a disproportionate amount of damage. While waiting for server
-communcation to complete, I'd do something else to pass the time, such as
+communication to complete, I'd do something else to pass the time, such as
 check email or write documentation. By the time I returned to the original
 task, the command had finished long ago, and I would waste more time trying to
 remember what I was doing. Humans are bad at context switching.
 
-There was also an interesting tragedy-of-the-commmons effect: anticipating
+There was also an interesting tragedy-of-the-commons effect: anticipating
 network congestion, individuals would consume more bandwidth than necessary on
 various operations in an attempt to reduce future delays. The combined efforts
 intensified congestion, encouraging individuals to consume even more bandwidth
