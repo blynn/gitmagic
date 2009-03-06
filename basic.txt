@@ -66,7 +66,13 @@ To take the computer game analogy again:
 
 - *`git checkout`*: load an old game, but if you play on, the game state will deviate from the newer saves you made the first time around. Any saved games you make now will end up in a separate branch representing the alternate reality you have entered. <<branch,We deal with this later>>.
 
-You can choose only to restore particular files and subdirectories by appending them after the command.
+You can choose only to restore particular files and subdirectories by appending them after the command:
+
+ $ git checkout SHA1_HASH some.file another.file
+
+Take care, as this form of *checkout* can silently overwrite files. To
+prevent accidents, commit before running any checkout command, especially when
+first learning Git. In general, whenever you feel unsure of the outcome of an operation, Git command or not, first run *git commit -a*.
 
 Don't like cutting and pasting hashes? Then use:
 
@@ -146,6 +152,7 @@ Or between a particular version and 2 versions ago:
 
  $ git diff SHA1_HASH "master~2"
 
+In each case the output is a patch that can be applied with *git apply*.
 Try also:
 
  $ git whatchanged --since="2 weeks ago"
@@ -155,3 +162,23 @@ instead, due to its slick photogenic interface, or
 http://jonas.nitro.dk/tig/[tig], a text-mode interface that works well over
 slow connections. Alternatively, install a web server, run *git instaweb* and
 fire up any web browser.
+
+=== Exercise ===
+
+Let A, B, C, D be four successive commits where B is the same as A except some files have been removed. We want to add the files back at D and not at B. How can we do this?
+
+There are at least three solutions. Assuming we are at D:
+
+  1. The difference between A and B are the removed files, so create a patch representing this difference and apply it:
+  
+   $ git diff B A | git apply
+
+  2. Since we saved the files back at A, we can get them back:
+
+   $ git checkout A FILES...
+
+  3. We can view going from A to B as a change we want to undo:
+
+   $ git revert B
+
+Which choice is best? Whichever one you prefer most. It is easy to get what you want with Git, and often there are many ways to get it.
