@@ -2,8 +2,6 @@
 
 There are some Git issues I've swept under the carpet. Some can be handled easily with scripts and hooks, some require reorganizing or redefining the project, and for the few remaining annoyances, one will just have to wait. Or better yet, pitch in and help!
 
-I've been playing around with some version control system ideas, and wrote link:/~blynn/gg/[an experimental system based on Git], which addresses some of these problems.
-
 === Microsoft Windows ===
 
 Git on Microsoft Windows can be cumbersome:

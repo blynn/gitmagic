@@ -15,10 +15,13 @@ Rather than go into details, we provide rough instructions for particular effect
  - http://docs.google.com/View?id=dfwthj68_675gz3bw8kj[Chinese translation]: by JunJie, Meng and JiangWei.
  - link:book.html[Single webpage]: barebones HTML, with no CSS.
  - link:book.pdf[PDF file]: printer-friendly.
+ - http://packages.debian.org/search?searchon=names&keywords=gitmagic[Debian gitmagic package]: get a fast and local copy of this site. http://packages.ubuntu.com/jaunty/gitmagic[Ubuntu package (Jaunty Jackalope)] also available. Handy http://csdcf.stanford.edu/status/[when this server is offline for maintenance].
 
 === Thanks! ===
 
-Kudos to Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael Budde, Richard Albury, Tarmigan, Derek Mahar and Frode Aannevik for suggestions and improvements. [If I've left you out, please tell me because I often forget to update this section.]
+Kudos to Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael Budde, Richard Albury, Tarmigan, Derek Mahar and Frode Aannevik for suggestions and improvements. Thanks to Daniel Baumann for creating and maintaining the Debian package. Thanks also to JunJie, Meng and JiangWei for the Chinese translation. [If I've left you out, please tell me because I often forget to update this section.]
+
+My gratitute goes to many others for your support and praise. I wish this were a real physical book, so I could quote your generous words on the cover to promote it! In seriousness, I greatly appreciate each message. Reading one always brightens my mood.
 
 === License ===
 

@@ -13,8 +13,6 @@ in the current directory with:
  $ git add .
  $ git commit -m "My first backup"
 
-The above sequence of commands should be memorized, or placed in a script, as they will be reused frequently.
-
 Now if your new edits go awry, run:
 
  $ git reset --hard

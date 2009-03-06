@@ -63,9 +63,9 @@ repository lacks:
 
  $ git bundle create somefile HEAD ^COMMON_SHA1
 
-If done frequently, one could easily forget which commit was the last to be
-sent. The help page suggests using tags to solve this. Namely, after you
-send a bundle, type:
+If done frequently, one could easily forget which commit was last sent. The
+help page suggests using tags to solve this. Namely, after you send a bundle,
+type:
 
  $ git tag -f lastbundle HEAD
 
@@ -175,10 +175,10 @@ in which case commits will only be deleted when you run *git gc* manually.
 
 === Building On Git ===
 
-In true UNIX fashion, Git's design allows it to be easily used as a low-level component of other programs. There are GUI interfaces, web interfaces, alternative command-line interfaces, and perhaps soon you will have a script or two of your own that calls Git.
+In true UNIX fashion, Git's design allows it to be easily used as a low-level component of other programs, such as GUI and web interfaces, alternative command-line interfaces, patch managements tools, importing and conversion tools and so on. In fact, some Git commands are themselves scripts standing on the shoulders of giants. With a little tinkering, you can customize Git to suit your preferences.
 
-One easy trick is to use built-in git aliases to shorten your most frequently used
-commands:
+One easy trick is to use built-in Git aliases to shorten your most frequently
+used commands:
 
   $ git config --global alias.co checkout
   $ git config --global --get-regexp alias  # display current aliases
@@ -195,7 +195,15 @@ the "refs/heads/" and ignore errors:
 
   $ git symbolic-ref HEAD 2> /dev/null | cut -b 12-
 
-See http://git.or.cz/[the Git homepage] for more examples.
+The +contrib+ subdirectory is a treasure trove of tools built on basic commands
+(which in time may be promoted to official commands). On Debian and Ubuntu,
+this directory lives at +/usr/share/doc/git-core/contrib+.
+
+One popular resident is +workdir/git-new-workdir+. Via clever symlinking, this script creates a new working directory whose history is shared with the original respository:
+
+  $ git-new-workdir an/existing/repo new/directory
+
+The new directory and files within can be thought of as a clone, except since the history is shared, the two trees automatically stay in sync. There's no need to merge, push or pull.
 
 === Daring Stunts ===
 

@@ -7,10 +7,18 @@ TXTFILES=preface.txt intro.txt basic.txt clone.txt branch.txt history.txt grandm
 book.xml: $(TXTFILES)
 	( for FILE in $^ ; do cat $$FILE ; echo ; done ) | asciidoc -d book -b docbook - > $@
 
+# Ignore tidy's exit code because Asciidoc generates section IDs beginning with
+# "_", which xmlto converts to "id" attributes of <a> tags. The standard
+# insists that "id" attributes begin with a letter, which causes tidy to
+# print a warning and return a nonzero code.
+#
+# When Asciidoc 8.3.0+ is widespread, I'll use its idprefix attribute instead
+# of ignoring return codes.
+
 book: book.xml
 	xmlto -m custom-html.xsl -o book html book.xml
 	sed -i 's/xmlns:fo[^ ]*//g' book/*.html
-	ls book/*.html | xargs -n 1 tidy -utf8 -m -i -q
+	-ls book/*.html | xargs -n 1 tidy -utf8 -m -i -q
 	./makeover
 
 book/default.css: book.css
@@ -19,7 +27,7 @@ book/default.css: book.css
 
 book.html: book.xml
 	xmlto -m custom-nochunks.xsl html-nochunks $^
-	tidy -utf8 -imq $@
+	-tidy -utf8 -imq $@
 
 book.pdf: book.xml
 	docbook2pdf book.xml
