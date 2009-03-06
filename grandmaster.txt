@@ -116,6 +116,14 @@ you can stage or unstage several files at a time, or review and select changes
 in particular files only. Alternatively, run *git commit \--interactive* which
 automatically runs commits after you're done.
 
+==== Staged Changes ====
+
+So far I have deliberately avoided 'the index' but I must now describe it to explain the above. The index is a temporary staging area: behind the scenes, *commit -a* is really a two-step process. The first step places a snapshot of the current state of your project into the index. The second step permanently records the snapshot now in the index.
+
+Committing without the *-a* option only performs the second step, and only makes sense after running commands that somehow change the index, such as *git add*.
+
+Usually we can ignore the index and pretend we are reading directly from and writing directly to the history of our project. On this occasion, we want finer control on what gets written to history, and are forced to manipulate the index. We place a snapshot of some, but not all, of our changes into the index, and then permanently record this carefully rigged snapshot.
+
 === Don't Lose Your HEAD ===
 
 The HEAD tag is like a cursor that normally points at the latest commit, advancing with each new commit. Some Git commands let you move it. For example:
