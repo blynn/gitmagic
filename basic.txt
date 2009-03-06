@@ -169,11 +169,11 @@ Let A, B, C, D be four successive commits where B is the same as A except some f
 
 There are at least three solutions. Assuming we are at D:
 
-  1. The difference between A and B are the removed files, so create a patch representing this difference and apply it:
+  1. The difference between A and B are the removed files. We can create a patch representing this difference and apply it:
   
    $ git diff B A | git apply
 
-  2. Since we saved the files back at A, we can get them back:
+  2. Since we saved the files back at A, we can retrieve them:
 
    $ git checkout A FILES...
 
@@ -181,4 +181,4 @@ There are at least three solutions. Assuming we are at D:
 
    $ git revert B
 
-Which choice is best? Whichever one you prefer most. It is easy to get what you want with Git, and often there are many ways to get it.
+Which choice is best? Whichever you prefer most. It is easy to get what you want with Git, and often there are many ways to get it.

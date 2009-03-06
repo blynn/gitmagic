@@ -114,15 +114,23 @@ one becomes frustratingly mind-numbing. In this case, use *git add -i*, whose
 interface is less straightforward, but more flexible. With a few keystrokes,
 you can stage or unstage several files at a time, or review and select changes
 in particular files only. Alternatively, run *git commit \--interactive* which
-automatically runs commits after you're done.
+automatically commits after you're done.
 
 ==== Staged Changes ====
 
-So far I have deliberately avoided 'the index' but I must now describe it to explain the above. The index is a temporary staging area: behind the scenes, *commit -a* is really a two-step process. The first step places a snapshot of the current state of your project into the index. The second step permanently records the snapshot now in the index.
+So far I have deliberately avoided mentioning Git's famous 'index', but we must
+now confront it to explain the above. The index is a temporary staging area.
+Git seldom shuttles data directly between your project and its history. Rather,
+Git first writes data to the index, and then copies the data in the index to
+its final destination.
 
-Committing without the *-a* option only performs the second step, and only makes sense after running commands that somehow change the index, such as *git add*.
+For example, *commit -a* is really a two-step process. The first step places a
+snapshot of the current state of every tracked file into the index. The second
+step permanently records the snapshot now in the index. Committing without the
+*-a* option only performs the second step, and only makes sense after running
+commands that somehow change the index, such as *git add*.
 
-Usually we can ignore the index and pretend we are reading directly from and writing directly to the history of our project. On this occasion, we want finer control on what gets written to history, and are forced to manipulate the index. We place a snapshot of some, but not all, of our changes into the index, and then permanently record this carefully rigged snapshot.
+Usually we can ignore the index and pretend we are reading straight from and writing straight to the history. On this occasion, we want finer control on what gets written to history, and are forced to manipulate the index. We place a snapshot of some, but not all, of our changes into the index, and then permanently record this carefully rigged snapshot.
 
 === Don't Lose Your HEAD ===
 
@@ -220,7 +228,7 @@ data. This is perhaps the most compelling reason to upgrade. Nonetheless, there
 are times you truly want to destroy data. We show how to override the
 safeguards for common commands. Only use them if you know what you are doing.
 
-*Checkout*: If you have uncommitted changes, a plain checkout fails. To destroy your changes, and checkout a given commit anyway, use the force flag:
+*Checkout*: Uncommitted changes cause checkout to fail. To destroy your changes, and checkout a given commit anyway, use the force flag:
 
   $ git checkout -f COMMIT
 
