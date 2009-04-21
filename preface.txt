@@ -32,18 +32,7 @@ repository, and can be obtained by typing:
 
 See below for other mirrors.
 
-=== Links ===
-
-I once listed some references, but it's too time-consuming to maintain.
-Besides, anyone can simply use http://www.google.com/[a search engine]
-to find Git
-http://www.google.com/search?q=git+tutorial[tutorials],
-http://www.google.com/search?q=git+guide[guides], and
-http://www.google.com/search?q=git+comparison[comparisons] with
-http://www.google.com/search?q=git+subversion[Subversion],
-http://www.google.com/search?q=git+mercurial[Mercurial], and other version control systems.
-
-.Free Git hosting
+=== Free Git hosting ===
 
  - http://repo.or.cz/[http://repo.or.cz/] hosts free projects,
 http://repo.or.cz/w/gitmagic.git[including this guide].

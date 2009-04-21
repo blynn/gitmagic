@@ -73,6 +73,47 @@ and create new refresher bundles with:
 
  $ git bundle create newbundle HEAD ^lastbundle
 
+=== Patches: The Global Currency ===
+
+Patches are text representations of your changes that can be easily understood
+by computers and humans alike. This gives them universal appeal. You can email a
+patch to developers no matter what version control system they prefer. As long
+as your audience can read their email, they can see your edits. Similarly, on
+your side, all you require is an email account: there's no need to setup a Git
+repository online somewhere.
+
+Recall from the first chapter:
+
+ $ git diff COMMIT
+
+outputs a patch which can be pasted into an email for discussion. In a Git
+repository, type:
+
+ $ git apply < FILE
+
+to apply the patch.
+
+In more formal settings, when author names and perhaps signatures should be
+recorded, generate the corresponding patches past a certain point by typing:
+
+ $ git format-patch START_COMMIT
+
+The resulting files can be given to *git-send-email*, or sent by hand. You can also specify a range of commits:
+
+ $ git format-patch START_COMMIT..END_COMMIT
+
+On the receving end, save an email to a file, then type:
+
+ $ git am < FILE
+
+This applies the incoming patch and also creates a commit, including information such as the author.
+
+With a browser email client, you may need to click a button to see the email in its raw original form before saving the patch to a file.
+
+There are slight differences for mbox-based email clients, but if you use one
+of these, you're probably the sort of person who can figure them out easily
+without reading tutorials!
+
 === Commit What Changed ===
 
 Telling Git when you've added, deleted and renamed files is troublesome for certain projects. Instead, you can type:
