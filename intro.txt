@@ -1,55 +1,55 @@
-== Introduction ==
+== Introducción ==
 
-I'll use an analogy to introduce version control. See http://en.wikipedia.org/wiki/Revision_control[the Wikipedia entry on revision control] for a saner explanation.
+Voy a usar una analogía para explicar el control de versiones. Mira http://es.wikipedia.org/wiki/Control_de_versiones[el artículo de wikipedia sobre control de versiones] para una explicación más cuerda.
 
-=== Work is Play ===
+=== Trabajar Es Jugar ===
 
-I've played computer games almost all my life. In contrast, I only started using version control systems as an adult. I suspect I'm not alone, and comparing the two may make these concepts easier to explain and understand.
+He jugado juegos de PC casi toda mi vida. En cambio, empecé a usar sistemas de control de versiones siendo adulto. Sospecho que no soy el único, y comparar ambas cosas puede hacer que estos conceptos sean más fáciles de explicar y entender.
 
-Think of editing your code or document, or whatever, as playing a game. Once you've made a lot of progress, you'd like to save. To do so, you click on the "Save" button in your trusty editor.
+Piensa en editar tu código o documento, o lo que sea, como si fuera jugar un juego. Una vez que progresaste mucho, te gustaría guardar. Para lograrlo, haces click en el botón de "Guardar" en tu editor de confianza.
 
-But this will overwrite the old version. It's like those old school games which only had one save slot: sure you could save, but you could never go back to an older state. Which was a shame, because your previous save might have been right at an exceptionally fun part of the game that you'd like to revisit one day. Or worse still, your current save is in an unwinnable state, and you have to start again.
+Pero esto va a sobreescribir tu versión antigua. Es como esos viejos juegos que solo tenían un slot para guardar: se podía guardar, pero nunca podías volver a un estado anterior. Esto era una pena, porque tu versión anterior podía haber estado justo en una parte que era particularmente divertida, y podías querer volver a jugarla algún día. O peor aún, tu partida actual está en un estado donde es imposible ganar, y tienes que volver a empezar.
 
-=== Version Control ===
+=== Control De Versiones ===
 
-When editing, you can "Save As..." a different file, or copy the file somewhere first before saving if you want to savour old versions. You can compress them too to save space. This is a primitive and labour-intensive form of version control. Computer games improved on this long ago, many of them providing multiple automatically timestamped save slots.
+Cuando estás editando, puedes "Guardar Como..." un archivo diferente, o copiar el archivo a otro lugar antes de guardar si quieres probar versiones viejas. También puedes usar compresión para ahorrar espacio. Esta es una forma primitiva y muy trabajosa de control de versiones. Los videojuegos han mejorado esto hace ya tiempo, muchas veces permitiendo guardar en varios slots, fechados automáticamente.
 
-Let's make the problem slightly tougher. Say you have a bunch of files that go together, such as source code for a project, or files for a website. Now if you want to keep an old version you have to archive a whole directory. Keeping many versions around by hand is inconvenient, and quickly becomes expensive.
+Hagamos que el problema sea un poco más complejo. Imagina que tienes un montón de archivos que van juntos, como el código fuente de un proyecto, o archivos para un sitio web. Ahora, si quieres mantener una vieja versión, debes archivar un directorio completo. Tener muchar versiones a mano es inconveniente y rápidamente se vuelve costoso.
 
-With some computer games, a saved game really does consist of a directory full of files. These games hide this detail from the player and present a convenient interface to manage different versions of this directory.
+Con algunos juegos, una partida guardada en realidad consiste de un directorio lleno de archivos. Estos videojuegos ocultan este detalle del jugador y presentan una interfaz conveniente para administrar diferentes versiones de este directorio.
 
-Version control systems are no different. They all have nice interfaces to manage a directory of stuff. You can save the state of the directory every so often, and you can load any one of the saved states later on. Unlike most computer games, they're usually smart about conserving space. Typically, only a few files change between version to version, and not by much. Storing the differences instead of entire new copies saves room.
+Los sistemas de control de versiones no son diferentes. Todos tienen lindas interfaces para administrar un directorio de cosas. Puedes guardar el estado del directorio tantas veces como quieras, y tiempo después puedes cargar cualquiera de los estados guardados. A diferencia de la mayoría de los juegos, normalmente estos sistemas son inteligentes en cuanto la conservación del espacio. Por lo general, solo algunos pocos archivos cambian de versión a versión, y no es un gran cambio. Guardar las diferencias en lugar de nuevas copias ahorra espacio.
 
-=== Distributed Control ===
+=== Control Distribuído ===
 
-Now imagine a very difficult computer game. So difficult to finish that many experienced gamers all over the world decide to team up and share their saved games to try to beat it. Speedruns are real-life examples: players specializing in different levels of the same game collaborate to produce amazing results.
+Ahora imagina un juego muy difícil. Tan difícil para terminar, que muchos jugadores experientes alrededor del mundo deciden agruparse e intercambiar sus juegos guardados para intentar terminarlo. Los "Speedruns" son ejemplos de la vida real: los jugadores se especializan en diferents niveles del mismo juego y colaboran para lograr resultados sorprendentes.
+¿Cómo armarías un sistema para que puedan descargar las partidas de los otros de manera simple? ¿Y para que suban las nuevas? 
 
-How would you set up a system so they can get at each other's saves easily? And upload new ones?
+Antes, cada proyecto usaba un control de versiones centralizado. Un servidor en algún lado contenía todos los juegos salvados. Nadie más los tenía. Cada jugador tenía a lo sumo un un par de juegos guardados en su máquina. Cuando un jugador quería progresar, obtenía la última versión del servidor principal, jugaba un rato, guardaba y volvía a subir al servidor para que todos los demás pudieran usarlo.
 
-In the old days, every project used centralized version control. A server somewhere held all the saved games. Nobody else did. Every player kept at most a few saved games on their machine. When a player wanted to make progress, they'd download the latest save from the main server, play a while, save and upload back to the server for everyone else to use.
+¿Qué pasa si un jugador quería obtener un juego anterior por algún motivo? Tal vez el juego actual está en un estado donde es imposible ganar, porque alguien olvidó obtener un objeto antes de pasar el nivel tres, por que que se quiere obtener el último juego guardado donde todavía es posible completarlo. O tal vez quieren comparar dos estados antiguos, para ver cuánto trabajo hizo un jugador en particular.
 
-What if a player wanted to get an older saved game for some reason? Maybe the current saved game is in an unwinnable state because somebody forgot to pick up an object back in level three, and they want to find the latest saved game where the game can still be completed. Or maybe they want to compare two older saved games to see how much work a particular player did.
+Puede haber varias razones para querer ver una revisión antigua, pero el resultado es siempre el mismo. Tienen que pedirle esa vieja partida al servidor central. Mientras mas juegos guardados se quieran, más se necesita esa comunicación.
 
-There could be many reasons to want to see an older revision, but the outcome is the same. They have to ask the central server for that old saved game. The more saved games they want, the more they need to communicate.
-
-The new generation of version control systems, of which Git is a member, are known as distributed systems, and can be thought of as a generalization of centralized systems. When players download from the main server they get every saved game, not just the latest one. It's as if they're mirroring the central server.
+La nueva generación de sistemas de control de versiones, de la cual Git es miembro, se conoce como sistemas distribuídos, y se puede pensar en ella como una generalización de sistemas centralizados. Cuando los jugadores descargan del servidor central, obtienen todos los juegos guardados, no solo el último. Es como si tuvieran un mirror del servidor central.
 
 This initial cloning operation can be expensive, especially if there's a long history, but it pays off in the long run. One immediate benefit is that when an old save is desired for any reason, communication with the central server is unnecessary.
+Esta operación inicial de clonado, puede ser cara, especialmente si el historial es largo, pero a la larga termina siendo mejor. Un beneficio inmediato es que cuando se quiere una versión vieja por el motivo que sea, la comunicación con el servidor es innecesaria.
 
-==== A Silly Superstition ====
+==== Una Tonta Superstición ====
 
-A popular misconception is that distributed systems are ill-suited for projects requiring an official central repository. Nothing could be further from the truth. Photographing someone does not cause their soul to be stolen. Similarly, cloning the master repository does not diminish its importance.
+Una creencia popular errónea es que los sistemas distribuídos son poco apropiados para proyectos que requieren un repositorio central oficial. Nada podría estar más lejos de la verdad. Fotografiar a alguien no hace que su alma sea robada, clonar el repositorio central no disminuye su importancia.
 
-A good first approximation is that anything a centralized version control system can do, a well-designed distributed system can do better. Network resources are simply costlier than local resources. While we shall later see there are drawbacks to a distributed approach, one is less likely to make erroneous comparisons with this rule of thumb.
+Una buena aproximación inicial, es que cualquier cosa que se puede hacer con un sistema de control de versiones centralizado, se puede hacer mejor con un sistema de versiones distribuído que esté bien diseñado. Los recursos de red son simplemente más costosos que los recursos locales. Aunque luego veremos que hay algunas desventajas para un sistema distribuído, hay menos probabilidad de hacer comparaciones erroneas al tener esto en cuenta. 
 
-A small project may only need a fraction of the features offered by such a system. But would you use Roman numerals when calculating with small numbers? Moreover, your project may grow beyond your original expectations. Using Git from the outset is like carrying a Swiss army knife even though you mostly use it to open bottles. On the day you desperately need a screwdriver you'll be glad you have more than a plain bottle-opener.
+Un proyecto pequeño, puede necesitar solo una fracción de de las características que un sistema así ofrece. Pero, ¿usarías números romanos si solo necesitas usar números pequeños?. Además, tu proyecto puede crecer más allá de tus expectativas originales. Usar Git desde el comienzo, es como llevar una navaja suiza, aunque solo pretendas usarla para abrir botellas. El día que necesites desesperadamente un destornillador, vas a agradecer el tener más que un simple destapador.
 
-=== Merge Conflicts ===
+=== Conflictos al fusionar ===
 
-For this topic, our computer game analogy becomes too thinly stretched. Instead, let us again consider editing a document.
+Para este tema, habría que estirar demasiado nuestra analogía con un videojuego. En lugar de eso, esta vez consideremos editar un documento.
 
-Suppose Alice inserts a line at the beginning of a file, and Bob appends one at the end of his copy. They both upload their changes. Most systems will automatically deduce a reasonable course of action: accept and merge their changes, so both Alice's and Bob's edits are applied.
+Supongamos que Alice inserta una línea al comienzo de un archivo, y Bob agrega una línea al final de su copia. Ambos suben sus cambios. La mayoría de los sistemas automáticamente van a deducir un accionar razonable: aceptar y hacer merge (Nota del Traductor: fusionar en inglés) de los cambios, para que tanto la edición de Alice como la de Bob sean aplicadas.
 
-Now suppose both Alice and Bob have made distinct edits to the same line. Then it is impossible to resolve the conflict without human intervention. The second person to upload is informed of a merge conflict, and they must either choose one edit over another, or revise the line entirely.
+Ahora supongamos que Alice y Bob han hecho ediciones distintas sobre la misma línea. Entonces es imposible resolver el conflicto sin intervención humana.Se le informa a la segunda persona en hacer upload que hay un conflicto de merge, y ellos deben elegir entre ambas ediciones, o cambiar la línea por completo.
 
-More complex situations can arise. Version control systems handle the simpler cases themselves, and leave the difficult cases for humans. Usually their behaviour is configurable.
+Pueden surgir situaciones más complejas. Los sistemas de control de versiones manejan automáticamente los casos simples, y dejan los más complejos para los humanos. Usualmente este comportamiento es configurable.
