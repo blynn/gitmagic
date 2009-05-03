@@ -2,39 +2,38 @@
 Ben Lynn
 August 2007
 
-== Preface ==
+== Prólogo ==
 
-http://git.or.cz/[Git] is a version control Swiss army knife. A reliable versatile multipurpose revision control tool whose extraordinary flexibility makes it tricky to learn, let alone master. I'm recording what I've figured out so far in these pages, because I initially had difficulty understanding http://www.kernel.org/pub/software/scm/git/docs/user-manual.html[the Git user manual].
+http://git.or.cz/[Git] es la navaja suiza del control de versiones. Una herramienta de control de revisiones confiable, versátil y multipropósito, que por su extraordinaria flexibilidad es complicada de aprender, y más aún de dominar. Estoy documentando lo que he aprendido hasta ahora en estas páginas, porque inicialmente tuve dificultades para comprender http://www.kernel.org/pub/software/scm/git/docs/user-manual.html[el manual de usuario de Git].
 
-As Arthur C. Clarke observed, any sufficiently advanced technology is indistinguishable from magic. This is a great way to approach Git: newbies can ignore its inner workings and view Git as a gizmo that can amaze friends and infuriate enemies with its wondrous abilities.
+Tal como observó Arthur C. Clarke, cualquier tecnología suficientemente avanzada, es indistinguible de la magia. Este es un gran modo de acercarce a Git: los novatos pueden ignorar su funcionamiento interno, y ver a Git como un artefacto que puede asombrar a los amigos y enfurecer a los enemigos con sus maravillosas habilidades.
 
-Rather than go into details, we provide rough instructions for particular effects. After repeated use, gradually you will understand how each trick works, and how to tailor the recipes for your needs.
+En lugar de ser detallados, proveemos instrucciones generales para efectos particulares. Luego de un uso reiterado, gradualmente irás entendiendo como funciona cada truco, y como adaptar las recetas a tus necesidades.
 
-.Other Editions
+.Otras ediciones
 
- - http://docs.google.com/View?id=dfwthj68_675gz3bw8kj[Chinese translation]: by JunJie, Meng and JiangWei.
- - link:book.html[Single webpage]: barebones HTML, with no CSS.
- - link:book.pdf[PDF file]: printer-friendly.
- - http://packages.debian.org/search?searchon=names&keywords=gitmagic[Debian gitmagic package]: get a fast and local copy of this site. http://packages.ubuntu.com/jaunty/gitmagic[Ubuntu package (Jaunty Jackalope)] also available. Handy http://csdcf.stanford.edu/status/[when this server is offline for maintenance].
+ - http://docs.google.com/View?id=dfwthj68_675gz3bw8kj[Traducción al chino]: por JunJie, Meng y JiangWei.
+ - link:book.html[Una única página]: HTML simple, sin CSS.
+ - link:book.pdf[Archivo PDF]: Listo para imprimir.
+ - http://packages.debian.org/search?searchon=names&keywords=gitmagic[Paquete gitmagic para Debian]: Consigue una copia rápida y local de este sitio. http://packages.ubuntu.com/jaunty/gitmagic[Paquete para Ubuntu (Jaunty Jackalope)] también disponible. Útil http://csdcf.stanford.edu/status/[cuando este servidor está offline para mantenimiento].
 
-=== Thanks! ===
+=== Gracias! ===
 
-Kudos to Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael Budde, Richard Albury, Tarmigan, Derek Mahar and Frode Aannevik for suggestions and improvements. Thanks to Daniel Baumann for creating and maintaining the Debian package. Thanks also to JunJie, Meng and JiangWei for the Chinese translation. [If I've left you out, please tell me because I often forget to update this section.]
+Agradezco a Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael Budde, Richard Albury, Tarmigan, Derek Mahar y Frode Aannevik por sugerencias y mejoras. Gracias a Daniel Baumann por crear y mantener el paquete para Debian. También gracias a  JunJie, Meng y JiangWei por la traduccción al chino. [Si me olvidé de tí, por favor recuérdamelo, porque suelo olvidarme de actualizar esta sección]
 
-My gratitute goes to many others for your support and praise. I wish this were a real physical book, so I could quote your generous words on the cover to promote it! In seriousness, I greatly appreciate each message. Reading one always brightens my mood.
+Estoy muy agradecido por todos los que me han dado apoyo y elogios. Me gustaría que este fuera un libro real impreso, para poder citar sus generosas palabras en la tapa a modo de promoción. Hablando en serio, aprecio enormemente cada mensaje. El leerlos siempre ilumina mi ánimo.
 
-=== License ===
+=== Licencia ===
 
-This guide is released under http://www.gnu.org/licenses/gpl-3.0.html[the GNU General Public License version 3]. Naturally, the source is kept in a Git
-repository, and can be obtained by typing:
+Esta guía se publica bajo la http://www.gnu.org/licenses/gpl-3.0.html[GNU General Public License versión 3]. Naturalmente, los fuentes se guardan en un repositorio Git, y pueden ser obtenidos escribiendo:
 
- $ git clone git://repo.or.cz/gitmagic.git  # Creates "gitmagic" directory.
+ $ git clone git://repo.or.cz/gitmagic.git  # Crea el directorio "gitmagic". 
 
-See below for other mirrors.
+Ver debajo por otros mirrors.
 
-=== Free Git hosting ===
+=== Hosting Git gratuito ===
 
- - http://repo.or.cz/[http://repo.or.cz/] hosts free projects,
-http://repo.or.cz/w/gitmagic.git[including this guide].
- - http://gitorious.org/[http://gitorious.org/] is another Git hosting site aimed at open-source projects.
- - http://github.com/[http://github.com/] hosts open-source projects for free, http://github.com/blynn/gitmagic/tree/master[including this guide], and private projects for a fee.
+ - http://repo.or.cz/[http://repo.or.cz/] hospeda proyectos gratuitos,
+http://repo.or.cz/w/gitmagic.git[incluyendo esta guía].
+ - http://gitorious.org/[http://gitorious.org/] es un sitio que apunta al hosting de proyectos open-source.
+ - http://github.com/[http://github.com/] hospeda proyectos open-source gratis, http://github.com/blynn/gitmagic/tree/master[incluyendo esta guía], y proyectos privados por una cuota. 
