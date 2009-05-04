@@ -93,7 +93,7 @@ Are you working on a project that uses some other version control system, and yo
  $ git add .
  $ git commit -m "Initial commit"
 
-then clone it, at light speed:
+then clone it:
 
  $ git clone . /some/new/directory
 

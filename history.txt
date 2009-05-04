@@ -85,7 +85,9 @@ See *git help filter-branch*, which discusses this example and gives a faster
 method. In general, *filter-branch* lets you alter large sections of history
 with a single command.
 
-Afterwards, you must replace clones of your project with your revised version if you wish to interact with them later.
+Afterwards, the +.git/refs/original+ directory describes the state of affairs before the operation. Check the filter-branch command did what you wanted, then delete this directory if you wish to run more filter-branch commands.
+
+Lastly, replace clones of your project with your revised version if you want to interact with them later.
 
 === Making History ===
 

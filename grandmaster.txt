@@ -77,10 +77,9 @@ and create new refresher bundles with:
 
 Patches are text representations of your changes that can be easily understood
 by computers and humans alike. This gives them universal appeal. You can email a
-patch to developers no matter what version control system they prefer. As long
+patch to developers no matter what version control system they're using. As long
 as your audience can read their email, they can see your edits. Similarly, on
-your side, all you require is an email account: there's no need to setup a Git
-repository online somewhere.
+your side, all you require is an email account: there's no need to setup an online Git repository.
 
 Recall from the first chapter:
 
@@ -179,7 +178,7 @@ The HEAD tag is like a cursor that normally points at the latest commit, advanci
 
  $ git reset HEAD~3
 
-will move the HEAD three commits backwards in time. Thus all Git commands now act as if you hadn't made those last three commits, while your files remain in the present. See the git reset man page for some applications.
+will move the HEAD three commits back. Thus all Git commands now act as if you hadn't made those last three commits, while your files remain in the present. See the help page for some applications.
 
 But how can you go back to the future? The past commits know nothing of the future.
 
