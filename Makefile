@@ -17,6 +17,13 @@ book.xml: $(addprefix $(LANG)/,$(TXTFILES))
 	( for FILE in $^ ; do cat $$FILE ; echo ; done ) | \
     asciidoc -a lang=$(LANG) -d book -b docbook -f conf - > $@
 
+# Allow unfinished translations to build with this dummy rule.
+# Report an error if we reach this rule for the English version.
+$(addprefix $(LANG)/,$(TXTFILES)) :
+ifeq ($(LANG),en)
+	echo English file missing: $@; exit 123
+endif
+
 # Ignore tidy's exit code because Asciidoc generates section IDs beginning with
 # "_", which xmlto converts to "id" attributes of <a> tags. The standard
 # insists that "id" attributes begin with a letter, which causes tidy to
