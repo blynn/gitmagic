@@ -1,16 +1,21 @@
+LANG := en
+
 .PHONY: target clean sync push
 
 target: book book/default.css book.html book.pdf
 
 # The book consists of these text files in the following order:
 
-TXTFILES=preface.txt intro.txt basic.txt clone.txt branch.txt history.txt \
+TXTFILES := preface.txt intro.txt basic.txt clone.txt branch.txt history.txt \
     grandmaster.txt secrets.txt drawbacks.txt
 
-LANG=en
-
 book.xml: $(addprefix $(LANG)/,$(TXTFILES))
-	( for FILE in $^ ; do cat $$FILE ; echo ; done ) | asciidoc -d book -b docbook - > $@
+	# Kludge to make preface sections work for languages besides English.
+	echo '[specialsections]' > conf
+	sed -n '/^== .* ==$$/p' $(LANG)/preface.txt | sed 's/^== \(.*\) ==$$/^\1$$=sect-preface/' >> conf
+	# Concatenate the text files and feed to AsciiDoc.
+	( for FILE in $^ ; do cat $$FILE ; echo ; done ) | \
+    asciidoc -a lang=$(LANG) -d book -b docbook -f conf - > $@
 
 # Ignore tidy's exit code because Asciidoc generates section IDs beginning with
 # "_", which xmlto converts to "id" attributes of <a> tags. The standard
@@ -34,14 +39,16 @@ book.html: book.xml
 	xmlto -m custom-nochunks.xsl html-nochunks $^
 	-tidy -utf8 -imq $@
 
+# Set SP_ENCODING to avoid "non SGML character" errors.
+# Can also do SP_ENCODING="UTF-8".
 book.pdf: book.xml
-	docbook2pdf book.xml
+	SP_ENCODING="XML" docbook2pdf book.xml
 
 clean:
 	-rm -rf book.xml book.html book
 
 sync: target
-	rsync -r book.html book.pdf book/* blynn@tl1.stanford.edu:www/gitmagic/
+	rsync -r book.html book.pdf book/* blynn@tl1.stanford.edu:www/gitmagic/intl/$(LANG)/
 
 public:
 	git push blynn@git.or.cz:srv/git/gitmagic.git
