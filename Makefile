@@ -2,9 +2,14 @@
 
 target: book book/default.css book.html book.pdf
 
-TXTFILES=preface.txt intro.txt basic.txt clone.txt branch.txt history.txt grandmaster.txt secrets.txt drawbacks.txt
+# The book consists of these text files in the following order:
 
-book.xml: $(TXTFILES)
+TXTFILES=preface.txt intro.txt basic.txt clone.txt branch.txt history.txt \
+    grandmaster.txt secrets.txt drawbacks.txt
+
+LANG=en
+
+book.xml: $(addprefix $(LANG)/,$(TXTFILES))
 	( for FILE in $^ ; do cat $$FILE ; echo ; done ) | asciidoc -d book -b docbook - > $@
 
 # Ignore tidy's exit code because Asciidoc generates section IDs beginning with
