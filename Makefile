@@ -14,14 +14,17 @@ book.xml: $(addprefix $(LANG)/,$(TXTFILES))
 	echo '[specialsections]' > conf
 	sed -n '/^== .* ==$$/p' $(LANG)/preface.txt | sed 's/^== \(.*\) ==$$/^\1$$=sect-preface/' >> conf
 	# Concatenate the text files and feed to AsciiDoc.
-	( for FILE in $^ ; do cat $$FILE ; echo ; done ) | \
-    asciidoc -a lang=$(LANG) -d book -b docbook -f conf - > $@
+	# If a file has not yet been translated for the target langauge,
+	# then substitute the English version.
+	( for FILE in $^ ; do if [ -f $$FILE ]; then cat $$FILE; else \
+	cat en/$$(basename $$FILE); fi; echo ; done ) | \
+	asciidoc -a lang=$(LANG) -d book -b docbook -f conf - > $@
 
 # Allow unfinished translations to build with this dummy rule.
 # Report an error if we reach this rule for the English version.
 $(addprefix $(LANG)/,$(TXTFILES)) :
 ifeq ($(LANG),en)
-	echo English file missing: $@; exit 123
+	@if [ ! -f $@ ]; then echo English file missing: $@; exit 123; fi
 endif
 
 # Ignore tidy's exit code because Asciidoc generates section IDs beginning with
