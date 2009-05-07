@@ -36,7 +36,10 @@ do
   fi
 done
 
-sed '/^<\/body/i </div><div class="footer"><a href="/~blynn/">My Homepage</a></div>' -i $BOOKDIR/*.html
+# Originally this link was "My Homepage". Since it appears on translations of
+# the guide, I changed it to my name so it doesn't have to be translated.
+sed '/^<\/body/i </div><div class="footer"><a href="/~blynn/">Ben
+Lynn</a></div>' -i $BOOKDIR/*.html
 
 cp $BOOKDIR/pr01.html $BOOKDIR/index.html
 rm toc.tmp

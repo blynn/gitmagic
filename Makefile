@@ -1,3 +1,5 @@
+# The language we are building.
+# For example, Run "make LANG=es" to build the Spanish edition.
 LANG := en
 
 .PHONY: target clean sync push
@@ -65,3 +67,4 @@ sync: target
 public:
 	git push blynn@git.or.cz:srv/git/gitmagic.git
 	git push git@github.com:blynn/gitmagic.git
+	git push git@gitorious.org:gitmagic/mainline.git

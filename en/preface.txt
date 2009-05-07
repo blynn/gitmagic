@@ -10,18 +10,30 @@ As Arthur C. Clarke observed, any sufficiently advanced technology is indistingu
 
 Rather than go into details, we provide rough instructions for particular effects. After repeated use, gradually you will understand how each trick works, and how to tailor the recipes for your needs.
 
+.Translations
+
+ - http://docs.google.com/View?id=dfwthj68_675gz3bw8kj[Chinese (Simplified)]: by JunJie, Meng and JiangWei. Hosted by Google Docs.
+ - link:/~blynn/gitmagic/intl/es/[Spanish]: by Rodrigo Toledo.
+
 .Other Editions
 
- - http://docs.google.com/View?id=dfwthj68_675gz3bw8kj[Chinese translation]: by JunJie, Meng and JiangWei.
  - link:book.html[Single webpage]: barebones HTML, with no CSS.
  - link:book.pdf[PDF file]: printer-friendly.
- - http://packages.debian.org/search?searchon=names&keywords=gitmagic[Debian gitmagic package]: get a fast and local copy of this site. http://packages.ubuntu.com/jaunty/gitmagic[Ubuntu package (Jaunty Jackalope)] also available. Handy http://csdcf.stanford.edu/status/[when this server is offline for maintenance].
+ - http://packages.debian.org/search?searchon=names&keywords=gitmagic[Debian package]: get a fast and local copy of this site. http://packages.ubuntu.com/jaunty/gitmagic[Ubuntu package (Jaunty Jackalope)] also available. Handy http://csdcf.stanford.edu/status/[when this server is offline for maintenance].
 
 === Thanks! ===
 
-Kudos to Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael Budde, Richard Albury, Tarmigan, Derek Mahar and Frode Aannevik for suggestions and improvements. Thanks to Daniel Baumann for creating and maintaining the Debian package. Thanks also to JunJie, Meng and JiangWei for the Chinese translation. [If I've left you out, please tell me because I often forget to update this section.]
+Kudos to Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael Budde, Richard Albury, Tarmigan, Derek Mahar and Frode Aannevik for suggestions and improvements. Thanks to Daniel Baumann for creating and maintaining the Debian package. Thanks also to JunJie, Meng and JiangWei for the Chinese translation, and Rodrigo Toledo for the Spanish translation. [If I've left you out, please tell me because I often forget to update this section.]
 
 My gratitute goes to many others for your support and praise. I wish this were a real physical book, so I could quote your generous words on the cover to promote it! In seriousness, I greatly appreciate each message. Reading one always brightens my mood.
+
+.Free Git hosting
+
+ - http://repo.or.cz/[http://repo.or.cz/] hosts free projects. The first Git hosting site. Founded and maintained by one of the earliest Git developers.
+ - http://gitorious.org/[http://gitorious.org/] is another Git hosting site aimed at open-source projects.
+ - http://github.com/[http://github.com/] hosts open-source projects for free, and private projects for a fee.
+
+Many thanks to each of these sites for hosting this guide.
 
 === License ===
 
@@ -30,11 +42,36 @@ repository, and can be obtained by typing:
 
  $ git clone git://repo.or.cz/gitmagic.git  # Creates "gitmagic" directory.
 
-See below for other mirrors.
+or from one of the mirrors:
 
-=== Free Git hosting ===
+ $ git clone git://github.com/blynn/gitmagic.git
+ $ git clone git://gitorious.org/gitmagic/mainline.git
 
- - http://repo.or.cz/[http://repo.or.cz/] hosts free projects,
-http://repo.or.cz/w/gitmagic.git[including this guide].
- - http://gitorious.org/[http://gitorious.org/] is another Git hosting site aimed at open-source projects.
- - http://github.com/[http://github.com/] hosts open-source projects for free, http://github.com/blynn/gitmagic/tree/master[including this guide], and private projects for a fee.
+=== How to Translate This Guide ===
+
+Clone the source, then create a directory corresponding to the target http://www.iana.org/assignments/language-subtag-registry[language's IETF tag]: see
+http://www.w3.org/International/articles/language-tags/Overview.en.php[the W3C article on internationalization]. For example, English is "en", Japanese is "ja", and Traditional Chinese is "zh-Hant". In the new directory, and translate the +txt+ files from the "en" subdirectory. 
+
+For instance, to translate the guide into http://en.wikipedia.org/wiki/Klingon_language[Klingon], you might type:
+
+ $ git clone git://repo.or.cz/gitmagic.git
+ $ cd gitmagic
+ $ mkdir tlh  # "tlh" is the IETF language code for Klingon.
+ $ cd tlh
+ $ cp ../en/intro.txt .
+ $ edit intro.txt  # Translate the file.
+
+and so on for each text file. You can review your work incrementally:
+
+ $ make LANG=tlh
+ $ firefox book.html
+
+Commit your changes often, then let me know when they're ready.
+GitHub.com has an interface that facilitates this: fork the "gitmagic" project,
+push your changes, then ask me to merge.
+
+I like to have translations follow the above scheme so my scripts can produce
+HTML and PDF versions. Also, it conveniently keeps all the translations in the
+official repository. But please do whatever suits you best: for example, the
+Chinese translators used Google Docs. I'm happy as long as your work
+enables more people to access my work.

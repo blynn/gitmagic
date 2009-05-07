@@ -101,7 +101,7 @@ Por ejemplo, para bajar todos los archivos que usé para crear este sitio:
 
 Pronto tendremos más para decir acerca del comando *clone*.
 
-=== Lo Más Nuevo===
+=== Lo Más Nuevo ===
 
 Si ya descargaste una copia de un proyecto usando *git clone*, puedes actualizarte a la última versión con:
 
