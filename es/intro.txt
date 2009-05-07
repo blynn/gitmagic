@@ -33,7 +33,6 @@ Puede haber varias razones para querer ver una revisión antigua, pero el result
 
 La nueva generación de sistemas de control de versiones, de la cual Git es miembro, se conoce como sistemas distribuídos, y se puede pensar en ella como una generalización de sistemas centralizados. Cuando los jugadores descargan del servidor central, obtienen todos los juegos guardados, no solo el último. Es como si tuvieran un mirror del servidor central.
 
-This initial cloning operation can be expensive, especially if there's a long history, but it pays off in the long run. One immediate benefit is that when an old save is desired for any reason, communication with the central server is unnecessary.
 Esta operación inicial de clonado, puede ser cara, especialmente si el historial es largo, pero a la larga termina siendo mejor. Un beneficio inmediato es que cuando se quiere una versión vieja por el motivo que sea, la comunicación con el servidor es innecesaria.
 
 ==== Una Tonta Superstición ====
