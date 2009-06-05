@@ -113,6 +113,97 @@ There are slight differences for mbox-based email clients, but if you use one
 of these, you're probably the sort of person who can figure them out easily
 without reading tutorials!
 
+=== Sorry, We've Moved ===
+
+From earlier chapters, we've seen that after cloning a repository, running
+*git push* or *git pull* will automatically push to or pull from the original
+URL. How does Git do this? The secret lies in config options initialized
+created with the clone. Let's take a peek:
+
+ $ git config --list
+
+The +remote.origin.url+ option controls the source URL; "origin" is a nickname
+given to the source repository. As with the "master" branch convention, we may
+change or delete this nickname but there is usually no reason for doing so.
+
+If the the original repository moves, we can update the URL via:
+
+ $ git config remote.origin.url NEW_URL
+
+The +branch.master.merge+ option specifies the default remote branch in
+a *git pull*. During the initial clone, it is set to the current branch of the
+source repository, so even if the HEAD of the source repository subsequently
+moves to a different branch, a later pull will faithfully follow the
+original branch.
+
+This option only applies to the repository we first cloned from, which is
+recorded in the option +branch.master.remote+. If we pull in from other
+repositories we must explicitly state which branch we want:
+
+ $ git pull ANOTHER_URL master
+
+The above explains why some of our earlier push and pull examples occasionally
+required arguments.
+
+=== Remote Branches ===
+
+When you clone a repository, you also clone all its branches. You may not have
+noticed this because Git hides them away: you must ask for them specifically.
+This prevents branches in the remote repository from interfering with
+your branches, and also makes Git easier for beginners.
+
+List the remote branches with:
+
+ $ git branch -r
+
+You should see something like:
+
+ origin/HEAD
+ origin/master
+ origin/experimental
+
+These represent branches and the HEAD of the remote repository, and can be used
+in regular Git commands. For example, suppose you have made many commits, and
+wish to compare against the last fetched version. You could search through the
+logs for the appropriate SHA1 hash, but it's much easier to type:
+
+ $ git diff origin/HEAD
+
+Or quickly see what the "experimental" branch has been up to:
+
+ $ git log origin/experimental
+
+=== Multiple Remotes ===
+
+Suppose two other developers are working on our project, and we want to
+keep tabs on both. We can follow more than one repository at a time with:
+
+ $ git remote add other ANOTHER_URL
+ $ git pull other some_branch
+
+Now we have merged in a branch from the second repository, and we have
+easy access to all branches of all repositories:
+
+ $ git diff origin/experimental^ other/some_branch~5
+
+But what if we just want to compare their changes without affecting our own
+work? In other words, we want to examine their branches without having
+their changes invade our working directory. In this case, rather than pull,
+run:
+
+ $ git fetch        # Fetch from origin, the default.
+ $ git fetch other  # Fetch from the second programmer.
+
+This fetches their histories and nothing more, so although the working
+directory remains untouched, we can refer to any branch of any repository in
+a Git command. By the way, behind the scenes, a pull is simply a fetch followed
+by *git merge*; recall the latter merges a given commit into the working
+directory. Usually we pull because we want to merge after a fetch; this
+situation is a notable exception.
+
+See *git help remote* for how to remove remote repositories, ignore certain
+branches, and more.
+
 === Commit What Changed ===
 
 Telling Git when you've added, deleted and renamed files is troublesome for certain projects. Instead, you can type:

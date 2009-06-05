@@ -72,7 +72,7 @@ You can choose only to restore particular files and subdirectories by appending 
 
 Take care, as this form of *checkout* can silently overwrite files. To
 prevent accidents, commit before running any checkout command, especially when
-first learning Git. In general, whenever you feel unsure of the outcome of an operation, Git command or not, first run *git commit -a*.
+first learning Git. In general, whenever you feel unsure about any operation, Git command or not, first run *git commit -a*.
 
 Don't like cutting and pasting hashes? Then use:
 

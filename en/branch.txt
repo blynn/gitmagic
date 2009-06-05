@@ -144,6 +144,12 @@ to list all the branches. There is always a branch named "master", and you start
 The *-d* and *-m* options allow you to delete and move (rename) branches.
 See *git help branch*.
 
+Git automatically starts you off in a branch called "master". This is a useful
+convention. Others often assume that your repository has a branch with
+this name, and that it contains the official version of your project.
+You can rename or obliterate the "master" branch, but unless you have a good
+reason, you might as well respect this convention.
+
 === Temporary Branches ===
 
 After a while you may realize you are creating short-lived branches
