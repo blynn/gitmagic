@@ -30,16 +30,15 @@ do
     sed 's/pr01\.html/index.html/g' -i $FILE
     # Paste ToC into beginning and add div section with class content for CSS.
     sed '/<body/{n; r toc.tmp
-  a <div class="content">
-  } ' -i $FILE
+a <div class="content">
+}' -i $FILE
     sed '/^<\/body/i </div>' -i $FILE
   fi
 done
 
 # Originally this link was "My Homepage". Since it appears on translations of
 # the guide, I changed it to my name so it doesn't have to be translated.
-sed '/^<\/body/i </div><div class="footer"><a href="/~blynn/">Ben
-Lynn</a></div>' -i $BOOKDIR/*.html
+sed '/^<\/body/i </div><div class="footer"><a href="/~blynn/">Ben Lynn</a></div>' -i $BOOKDIR/*.html
 
 cp $BOOKDIR/pr01.html $BOOKDIR/index.html
 rm toc.tmp

@@ -9,7 +9,7 @@ target: book book/default.css book.html book.pdf
 # The book consists of these text files in the following order:
 
 TXTFILES := preface.txt intro.txt basic.txt clone.txt branch.txt history.txt \
-    grandmaster.txt secrets.txt drawbacks.txt
+    grandmaster.txt secrets.txt drawbacks.txt translate.txt
 
 book.xml: $(addprefix $(LANG)/,$(TXTFILES))
 	# Kludge to make preface sections work for languages besides English.
