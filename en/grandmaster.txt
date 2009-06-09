@@ -169,7 +169,7 @@ logs for the appropriate SHA1 hash, but it's much easier to type:
 
  $ git diff origin/HEAD
 
-Or quickly see what the "experimental" branch has been up to:
+Or you can see what the "experimental" branch has been up to:
 
  $ git log origin/experimental
 

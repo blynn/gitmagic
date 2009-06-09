@@ -65,7 +65,7 @@ then you sync with the official tree with a merge. This cycle repeats itself a f
 But now the history in your local Git clone is a messy jumble of your changes and the official changes. You'd prefer to see all your changes in one contiguous section, and after all the official changes.
 
 This is a job for *git rebase* as described above. In many cases you can use
-the *\--onto* flag and avoid interaction.
+the *--onto* flag and avoid interaction.
 
 Also see *git help rebase* for detailed examples of this amazing command. You can split commits. You can even rearrange branches of a tree.
 

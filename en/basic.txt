@@ -62,7 +62,7 @@ commit or reset your changes before running checkout.
 
 To take the computer game analogy again:
 
-- *`git reset \--hard`*: load an old save and delete all saved games newer than the one just loaded.
+- *`git reset --hard`*: load an old save and delete all saved games newer than the one just loaded.
 
 - *`git checkout`*: load an old game, but if you play on, the game state will deviate from the newer saves you made the first time around. Any saved games you make now will end up in a separate branch representing the alternate reality you have entered. <<branch,We deal with this later>>.
 
