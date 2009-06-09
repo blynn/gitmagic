@@ -42,7 +42,12 @@ A popular misconception is that distributed systems are ill-suited for projects 
 
 A good first approximation is that anything a centralized version control system can do, a well-designed distributed system can do better. Network resources are simply costlier than local resources. While we shall later see there are drawbacks to a distributed approach, one is less likely to make erroneous comparisons with this rule of thumb.
 
-A small project may only need a fraction of the features offered by such a system. But would you use Roman numerals when calculating with small numbers? Moreover, your project may grow beyond your original expectations. Using Git from the outset is like carrying a Swiss army knife even though you mostly use it to open bottles. On the day you desperately need a screwdriver you'll be glad you have more than a plain bottle-opener.
+A small project may only need a fraction of the features offered by such a
+system, but saying you should use systems that don't scale well when your
+project is tiny is like saying you should use Roman numerals for calculations
+involving small numbers.
+
+Moreover, your project may grow beyond your original expectations. Using Git from the outset is like carrying a Swiss army knife even though you mostly use it to open bottles. On the day you desperately need a screwdriver you'll be glad you have more than a plain bottle-opener.
 
 === Merge Conflicts ===
 
@@ -50,6 +55,6 @@ For this topic, our computer game analogy becomes too thinly stretched. Instead,
 
 Suppose Alice inserts a line at the beginning of a file, and Bob appends one at the end of his copy. They both upload their changes. Most systems will automatically deduce a reasonable course of action: accept and merge their changes, so both Alice's and Bob's edits are applied.
 
-Now suppose both Alice and Bob have made distinct edits to the same line. Then it is impossible to resolve the conflict without human intervention. The second person to upload is informed of a merge conflict, and they must either choose one edit over another, or revise the line entirely.
+Now suppose both Alice and Bob have made distinct edits to the same line. Then it is impossible to proceed without human intervention. The second person to upload is informed of a _merge conflict_, and must choose one edit over another, or revise the line entirely.
 
 More complex situations can arise. Version control systems handle the simpler cases themselves, and leave the difficult cases for humans. Usually their behaviour is configurable.

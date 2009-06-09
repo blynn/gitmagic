@@ -135,20 +135,21 @@ applies a given commit to the "sanitized" branch. With appropriate cherry-picks 
 
 === Managing Branches ===
 
-Type:
+List all branches by typing:
 
  $ git branch
 
-to list all the branches. There is always a branch named "master", and you start here by default. Some advocate leaving the "master" branch untouched and creating new branches for your own edits.
+There is always a branch named "master", and you start here by default. Some
+advocate leaving the "master" branch untouched and creating new branches for
+your own edits.
 
 The *-d* and *-m* options allow you to delete and move (rename) branches.
 See *git help branch*.
 
-Git automatically starts you off in a branch called "master". This is a useful
-convention. Others often assume that your repository has a branch with
-this name, and that it contains the official version of your project.
-You can rename or obliterate the "master" branch, but unless you have a good
-reason, you might as well respect this convention.
+The "master" branch is a useful convention. Others may assume that your
+repository has a branch with this name, and that it contains the official
+version of your project. You can rename or obliterate the "master" branch, but
+you might as well respect this custom.
 
 === Temporary Branches ===
 
@@ -178,7 +179,9 @@ You can have multiple stashes, and manipulate them in various ways. See
 
 Applications such as http://www.mozilla.com/[Mozilla Firefox] allow you to open multiple tabs and multiple windows. Switching tabs gives you different content in the same window. Git branching is like tabs for your working directory. Continuing this analogy, Git cloning is like opening a new window. Being able to do both improves the user experience.
 
-On a higher level, several Linux window managers allow you to have multiple desktops: you can instantly switch to a different desktop. This is similar to branching in Git, whereas Git cloning would be like attaching another monitor to gain another desktop.
+On a higher level, several Linux window managers support multiple desktops.
+Branching in Git is similar to switching to a different desktop, while cloning
+is similar to attaching another monitor to gain another desktop.
 
 Yet another example is the http://www.gnu.org/software/screen/[*screen*] utility. This gem lets you create, destroy and switch between multiple terminal sessions in the same terminal. Instead of opening new terminals (clone), you can use the same one if you run *screen* (branch). In fact, you can do a lot more with *screen* but that's a topic for another text.
 

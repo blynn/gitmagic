@@ -249,11 +249,11 @@ automatically commits after you're done.
 
 ==== Staged Changes ====
 
-So far I have deliberately avoided mentioning Git's famous 'index', but we must
-now confront it to explain the above. The index is a temporary staging area.
-Git seldom shuttles data directly between your project and its history. Rather,
-Git first writes data to the index, and then copies the data in the index to
-its final destination.
+So far we have avoided Git's famous 'index', but we must now confront it to
+explain the above. The index is a temporary staging area. Git seldom shuttles
+data directly between your project and its history. Rather, Git first writes
+data to the index, and then copies the data in the index to its final
+destination.
 
 For example, *commit -a* is really a two-step process. The first step places a
 snapshot of the current state of every tracked file into the index. The second
@@ -342,9 +342,9 @@ the "refs/heads/" and ignore errors:
 
   $ git symbolic-ref HEAD 2> /dev/null | cut -b 12-
 
-The +contrib+ subdirectory is a treasure trove of tools built on basic commands
-(which in time may be promoted to official commands). On Debian and Ubuntu,
-this directory lives at +/usr/share/doc/git-core/contrib+.
+The +contrib+ subdirectory is a treasure trove of tools built on Git.
+In time, some of them may be promoted to official commands. On Debian and
+Ubuntu, this directory lives at +/usr/share/doc/git-core/contrib+.
 
 One popular resident is +workdir/git-new-workdir+. Via clever symlinking, this script creates a new working directory whose history is shared with the original respository:
 
@@ -354,10 +354,9 @@ The new directory and files within can be thought of as a clone, except since th
 
 === Daring Stunts ===
 
-Recent versions of Git make it difficult for the user to accidentally destroy
-data. This is perhaps the most compelling reason to upgrade. Nonetheless, there
-are times you truly want to destroy data. We show how to override the
-safeguards for common commands. Only use them if you know what you are doing.
+These days, Git makes it difficult for the user to accidentally destroy data.
+But if you know what you are doing, you can override safeguards for common
+commands.
 
 *Checkout*: Uncommitted changes cause checkout to fail. To destroy your changes, and checkout a given commit anyway, use the force flag:
 
