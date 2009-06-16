@@ -22,39 +22,34 @@
 
 === Распределенный контроль  ===
 
-Now imagine a very difficult computer game. So difficult to finish that many experienced gamers all over the world decide to team up and share their saved games to try to beat it. Speedruns are real-life examples: players specializing in different levels of the same game collaborate to produce amazing results.
+А теперь представьте очень сложную компьютерную игру. Её настолько сложно пройти, что множество опытных игроков по всему миру решили объединиться и использовать общие сохранения, чтобы попытаться выиграть. Прохождения на скорость — живой пример. Игроки, специализирующиеся на разных уровнях игры, объединяются, чтобы в итоге получить потрясающий результат.
 
-How would you set up a system so they can get at each other's saves easily? And upload new ones?
+Как бы вы организовали такую систему, чтобы игроки смогли легко забирать сохранения других? А загружать свои?
 
-In the old days, every project used centralized version control. A server somewhere held all the saved games. Nobody else did. Every player kept at most a few saved games on their machine. When a player wanted to make progress, they'd download the latest save from the main server, play a while, save and upload back to the server for everyone else to use.
+Раньше каждый проект использовал централизованную систему контроля версий. Какой-нибудь сервер хранил все сохраненные игры. И никто больше. На машине каждого игрока хранилась только очень маленькая часть. Когда игрок хотел пройти немного дальше, он выкачивал самое последнее сохранение с сервера, играл немного, сохранялся и закачивал уже свое сохранение обратно на сервер, чтобы кто-нибудь другой смог его использовать.
 
-What if a player wanted to get an older saved game for some reason? Maybe the current saved game is in an unwinnable state because somebody forgot to pick up an object back in level three, and they want to find the latest saved game where the game can still be completed. Or maybe they want to compare two older saved games to see how much work a particular player did.
+А что, если игрок по какой-то причине захотел использовать более старую сохраненную игру? Возможно, текущая версия сохраненной игры безвыигрышна, потому что кто-то из игроков забыл взять какой-либо игровой предмет на каком-то предыдущем уровне, и они хотят найти последнюю сохраненную игру, которая все еще выигрышна. Или, может быть, они хотят сравнить две более старые сохраненные игры, чтобы установить вклад каждого игрока.
 
-There could be many reasons to want to see an older revision, but the outcome is the same. They have to ask the central server for that old saved game. The more saved games they want, the more they need to communicate.
+Может быть много причин вернуться к более старой версии, но выход один. Они должны запросить центральный сервер о той старой сохраненной игре. Чем больше сохраненных игр они захотят, тем больше им понадобится связываться с сервером.
 
-The new generation of version control systems, of which Git is a member, are known as distributed systems, and can be thought of as a generalization of centralized systems. When players download from the main server they get every saved game, not just the latest one. It's as if they're mirroring the central server.
+Новое поколение систем контроля версий, к которым относится Git, известны как распределенные системы, их можно понимать как обобщение централизованных систем. Когда игроки загружаются с главного сервера, они получают каждую сохраненную игру, а не только последнюю. Это как если они зеркалируют центральный сервер.
 
-This initial cloning operation can be expensive, especially if there's a long history, but it pays off in the long run. One immediate benefit is that when an old save is desired for any reason, communication with the central server is unnecessary.
+Эти первоначальные операции клонирования могут быть интенсивными, особенно если присутствует длинная история разработки, но это сполна окупается при длительной работе. Одна немедленная выгода состоит в том, что если по какой-то причине потребуется более старая версия, дополнительное обращение к серверу не понадобится.
 
-==== A Silly Superstition ====
+==== Глупые предрассудки  ====
 
-A popular misconception is that distributed systems are ill-suited for projects requiring an official central repository. Nothing could be further from the truth. Photographing someone does not cause their soul to be stolen. Similarly, cloning the master repository does not diminish its importance.
+Широко распространенное заблуждение состоит в том, что распределенные системы непригодны для проектов, требующих официального централизованного репозитория. Ничто не может быть более далеким от истины. Получение фотоснимка не приводит к тому, что мы крадем чью-то душу. Проще говоря, клонирование главного репозитория не уменьшает его важность.
 
-A good first approximation is that anything a centralized version control system can do, a well-designed distributed system can do better. Network resources are simply costlier than local resources. While we shall later see there are drawbacks to a distributed approach, one is less likely to make erroneous comparisons with this rule of thumb.
+В первом приближении можно сказать, что все, что делает централизованная система контроля версий, хорошо сконструированная распределенная система может сделать лучше. Сетевые ресурсы просто дороже локальных. Хотя дальше мы увидим, что в распределенном подходе есть свои недостатки, менее вероятно провести ложные аналогии руководствуясь этим приближенным правилом.
 
-A small project may only need a fraction of the features offered by such a
-system, but saying you should use systems that don't scale well when your
-project is tiny is like saying you should use Roman numerals for calculations
-involving small numbers.
+Небольшому проекту может понадобиться лишь часть функций, предлагаемых такой системой. Но будете ли вы использовать римские цифры в расчетах с небольшими числами? Более того, ваш проект может вырасти за пределы ваших первоначальных ожиданий. Использовать Git с самого начала — это как держать наготове швейцарский армейский нож, даже если вы только открываете им бутылки. Однажды вам безумно понадобится отвертка и вы будете рады, что под рукой у вас нечто большее, чем простая открывалка.
 
-Moreover, your project may grow beyond your original expectations. Using Git from the outset is like carrying a Swiss army knife even though you mostly use it to open bottles. On the day you desperately need a screwdriver you'll be glad you have more than a plain bottle-opener.
+=== Конфликты при слиянии  ===
 
-=== Merge Conflicts ===
+Для этой темы аналогия с компьютерной игрой становится слишком натянутой. Вместо этого, давайте вернемся к редактированию документа.
 
-For this topic, our computer game analogy becomes too thinly stretched. Instead, let us again consider editing a document.
+Итак, допустим, что Алиса вставила строчку в начале файла, а Боб — в конец. Оба они закачивают свои изменения. Большинство систем автоматически сделает разумный вывод: принять и объединить их изменения так, чтобы обе правки — и Алисы, и Боба — были применены.
 
-Suppose Alice inserts a line at the beginning of a file, and Bob appends one at the end of his copy. They both upload their changes. Most systems will automatically deduce a reasonable course of action: accept and merge their changes, so both Alice's and Bob's edits are applied.
+Теперь предположим, что и Алиса, и Боб независимо друг от друга сделали изменения в одной и той же строке. Тогда становится невозможным разрешить конфликт без человеческого вмешательства. Тот, кто вторым из них закачает на сервер изменения, будет информирован о конфликте слияния, и должен либо выбрать, чье изменение перекроет другое, либо заново отредактировать строку целиком.
 
-Now suppose both Alice and Bob have made distinct edits to the same line. Then it is impossible to proceed without human intervention. The second person to upload is informed of a _merge conflict_, and must choose one edit over another, or revise the line entirely.
-
-More complex situations can arise. Version control systems handle the simpler cases themselves, and leave the difficult cases for humans. Usually their behaviour is configurable.
+Могут случаться и более сложные ситуации. Системы контроля версий разрешают простые ситуации сами, и оставляют сложные для человека. Обычно такое их поведение поддается настройке.
