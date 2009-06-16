@@ -1,0 +1,48 @@
+= Git Magic =
+Ben Lynn
+August 2007
+
+== Preface ==
+
+http://git.or.cz/[Git] is a version control Swiss army knife. A reliable versatile multipurpose revision control tool whose extraordinary flexibility makes it tricky to learn, let alone master.
+
+As Arthur C. Clarke observed, any sufficiently advanced technology is indistinguishable from magic. This is a great way to approach Git: newbies can ignore its inner workings and view Git as a gizmo that can amaze friends and infuriate enemies with its wondrous abilities.
+
+Rather than go into details, we provide rough instructions for particular effects. After repeated use, gradually you will understand how each trick works, and how to tailor the recipes for your needs.
+
+.Translations
+
+ - http://docs.google.com/View?id=dfwthj68_675gz3bw8kj[Chinese (Simplified)]: by JunJie, Meng and JiangWei. Hosted by Google Docs.
+ - link:/~blynn/gitmagic/intl/es/[Spanish]: by Rodrigo Toledo.
+
+.Other Editions
+
+ - link:book.html[Single webpage]: barebones HTML, with no CSS.
+ - link:book.pdf[PDF file]: printer-friendly.
+ - http://packages.debian.org/search?searchon=names&keywords=gitmagic[Debian package]: get a fast and local copy of this site. http://packages.ubuntu.com/jaunty/gitmagic[Ubuntu package (Jaunty Jackalope)] also available. Handy http://csdcf.stanford.edu/status/[when this server is offline for maintenance].
+
+=== Thanks! ===
+
+Kudos to Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael Budde, Richard Albury, Tarmigan, Derek Mahar and Frode Aannevik for suggestions and improvements. Thanks to Daniel Baumann for creating and maintaining the Debian package. Thanks also to JunJie, Meng and JiangWei for the Chinese translation, and Rodrigo Toledo for the Spanish translation. [If I've left you out, please tell me because I often forget to update this section.]
+
+My gratitute goes to many others for your support and praise. I wish this were a real physical book, so I could quote your generous words on the cover to promote it! In seriousness, I greatly appreciate each message. Reading one always brightens my mood.
+
+.Free Git hosting
+
+ - http://repo.or.cz/[http://repo.or.cz/] hosts free projects. The first Git hosting site. Founded and maintained by one of the earliest Git developers.
+ - http://gitorious.org/[http://gitorious.org/] is another Git hosting site aimed at open-source projects.
+ - http://github.com/[http://github.com/] hosts open-source projects for free, and private projects for a fee.
+
+Many thanks to each of these sites for hosting this guide.
+
+=== License ===
+
+This guide is released under http://www.gnu.org/licenses/gpl-3.0.html[the GNU General Public License version 3]. Naturally, the source is kept in a Git
+repository, and can be obtained by typing:
+
+ $ git clone git://repo.or.cz/gitmagic.git  # Creates "gitmagic" directory.
+
+or from one of the mirrors:
+
+ $ git clone git://github.com/blynn/gitmagic.git
+ $ git clone git://gitorious.org/gitmagic/mainline.git

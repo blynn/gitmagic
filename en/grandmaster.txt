@@ -1,0 +1,390 @@
+== Git Grandmastery ==
+
+This pretentiously named page is my dumping ground for uncategorized Git tricks.
+
+=== Source Releases ===
+
+For my projects, Git tracks exactly the files I'd like to archive and release to users. To create a tarball of the source code, I run:
+
+ $ git archive --format=tar --prefix=proj-1.2.3/ HEAD
+
+=== Changelog Generation ===
+
+It's good practice to keep a http://en.wikipedia.org/wiki/Changelog[changelog], and some projects even require it. If you've been committing frequently, which you should, generate a Changelog by typing:
+
+ $ git log > ChangeLog
+
+=== Git Over SSH, HTTP ===
+
+Suppose you have ssh access to a web server, but Git is not installed. Though less efficient than its native protocol, Git can communicate over HTTP.
+
+Download, compile and install Git in your account, and create a repository in your web directory:
+
+ $ GIT_DIR=proj.git git init
+
+In the "proj.git" directory, run:
+
+ $ git --bare update-server-info
+ $ chmod a+x hooks/post-update
+
+From your computer, push via ssh:
+
+ $ git push web.server:/path/to/proj.git master
+
+and others get your project via:
+
+ $ git clone http://web.server/proj.git
+
+=== Git Over Anything ===
+
+Want to synchronize repositories without servers, or even a network connection?
+Need to improvise during an emergency?
+We've seen <<makinghistory, *git fast-export* and *git fast-import* can convert
+repositories to a single file and back>>. We could shuttle such files back and
+forth to transport git repositories over any medium, but a more efficient tool
+is *git bundle*.
+
+The sender creates a 'bundle':
+
+ $ git bundle create somefile HEAD
+
+then transports the bundle, +somefile+, to the other party somehow: email,
+thumb drive, floppy disk, an *xxd* printout and an OCR machine,
+reading bits over the phone, smoke signals, etc. The receiver retrieves
+commits from the bundle by typing:
+
+ $ git pull somefile
+
+The receiver can even do this from an empty repository. Despite its
+size, +somefile+ contains the entire original git repository.
+
+In larger projects, eliminate waste by bundling only changes the other
+repository lacks:
+
+ $ git bundle create somefile HEAD ^COMMON_SHA1
+
+If done frequently, one could easily forget which commit was last sent. The
+help page suggests using tags to solve this. Namely, after you send a bundle,
+type:
+
+ $ git tag -f lastbundle HEAD
+
+and create new refresher bundles with:
+
+ $ git bundle create newbundle HEAD ^lastbundle
+
+=== Patches: The Global Currency ===
+
+Patches are text representations of your changes that can be easily understood
+by computers and humans alike. This gives them universal appeal. You can email a
+patch to developers no matter what version control system they're using. As long
+as your audience can read their email, they can see your edits. Similarly, on
+your side, all you require is an email account: there's no need to setup an online Git repository.
+
+Recall from the first chapter:
+
+ $ git diff COMMIT
+
+outputs a patch which can be pasted into an email for discussion. In a Git
+repository, type:
+
+ $ git apply < FILE
+
+to apply the patch.
+
+In more formal settings, when author names and perhaps signatures should be
+recorded, generate the corresponding patches past a certain point by typing:
+
+ $ git format-patch START_COMMIT
+
+The resulting files can be given to *git-send-email*, or sent by hand. You can also specify a range of commits:
+
+ $ git format-patch START_COMMIT..END_COMMIT
+
+On the receving end, save an email to a file, then type:
+
+ $ git am < FILE
+
+This applies the incoming patch and also creates a commit, including information such as the author.
+
+With a browser email client, you may need to click a button to see the email in its raw original form before saving the patch to a file.
+
+There are slight differences for mbox-based email clients, but if you use one
+of these, you're probably the sort of person who can figure them out easily
+without reading tutorials!
+
+=== Sorry, We've Moved ===
+
+From earlier chapters, we've seen that after cloning a repository, running
+*git push* or *git pull* will automatically push to or pull from the original
+URL. How does Git do this? The secret lies in config options initialized
+created with the clone. Let's take a peek:
+
+ $ git config --list
+
+The +remote.origin.url+ option controls the source URL; "origin" is a nickname
+given to the source repository. As with the "master" branch convention, we may
+change or delete this nickname but there is usually no reason for doing so.
+
+If the the original repository moves, we can update the URL via:
+
+ $ git config remote.origin.url NEW_URL
+
+The +branch.master.merge+ option specifies the default remote branch in
+a *git pull*. During the initial clone, it is set to the current branch of the
+source repository, so even if the HEAD of the source repository subsequently
+moves to a different branch, a later pull will faithfully follow the
+original branch.
+
+This option only applies to the repository we first cloned from, which is
+recorded in the option +branch.master.remote+. If we pull in from other
+repositories we must explicitly state which branch we want:
+
+ $ git pull ANOTHER_URL master
+
+The above explains why some of our earlier push and pull examples occasionally
+required arguments.
+
+=== Remote Branches ===
+
+When you clone a repository, you also clone all its branches. You may not have
+noticed this because Git hides them away: you must ask for them specifically.
+This prevents branches in the remote repository from interfering with
+your branches, and also makes Git easier for beginners.
+
+List the remote branches with:
+
+ $ git branch -r
+
+You should see something like:
+
+ origin/HEAD
+ origin/master
+ origin/experimental
+
+These represent branches and the HEAD of the remote repository, and can be used
+in regular Git commands. For example, suppose you have made many commits, and
+wish to compare against the last fetched version. You could search through the
+logs for the appropriate SHA1 hash, but it's much easier to type:
+
+ $ git diff origin/HEAD
+
+Or you can see what the "experimental" branch has been up to:
+
+ $ git log origin/experimental
+
+=== Multiple Remotes ===
+
+Suppose two other developers are working on our project, and we want to
+keep tabs on both. We can follow more than one repository at a time with:
+
+ $ git remote add other ANOTHER_URL
+ $ git pull other some_branch
+
+Now we have merged in a branch from the second repository, and we have
+easy access to all branches of all repositories:
+
+ $ git diff origin/experimental^ other/some_branch~5
+
+But what if we just want to compare their changes without affecting our own
+work? In other words, we want to examine their branches without having
+their changes invade our working directory. In this case, rather than pull,
+run:
+
+ $ git fetch        # Fetch from origin, the default.
+ $ git fetch other  # Fetch from the second programmer.
+
+This fetches their histories and nothing more, so although the working
+directory remains untouched, we can refer to any branch of any repository in
+a Git command. By the way, behind the scenes, a pull is simply a fetch followed
+by *git merge*; recall the latter merges a given commit into the working
+directory. Usually we pull because we want to merge after a fetch; this
+situation is a notable exception.
+
+See *git help remote* for how to remove remote repositories, ignore certain
+branches, and more.
+
+=== Commit What Changed ===
+
+Telling Git when you've added, deleted and renamed files is troublesome for certain projects. Instead, you can type:
+
+ $ git add .
+ $ git add -u
+
+Git will look at the files in the current directory and work out the details by itself. Instead of the second add command, run `git commit -a` if you also intend to commit at this time.
+
+You can perform the above in a single pass with:
+
+ $ git ls-files -d -m -o -z | xargs -0 git update-index --add --remove
+
+The *-z* and *-0* options prevent ill side-effects from filenames containing strange characters. Note this command adds ignored files. You may want to use the `-x` or `-X` option.
+
+=== My Commit Is Too Big! ===
+
+Have you neglected to commit for too long? Been coding furiously and forgotten
+about source control until now? Made a series of unrelated changes, because
+that's your style?
+
+No worries. Run:
+
+ $ git add -p
+
+For each edit you made, Git will show you the hunk of code that was changed,
+and ask if it should be part of the next commit. Answer with "y" or "n". You
+have other options, such as postponing the decision; type "?" to learn more.
+
+Once you're satisfied, type
+
+ $ git commit
+
+to commit precisely the changes you selected (the 'staged' changes). Make sure
+you omit the *-a* option, otherwise Git will commit all the edits.
+
+What if you've edited many files in many places? Reviewing each change one by
+one becomes frustratingly mind-numbing. In this case, use *git add -i*, whose
+interface is less straightforward, but more flexible. With a few keystrokes,
+you can stage or unstage several files at a time, or review and select changes
+in particular files only. Alternatively, run *git commit \--interactive* which
+automatically commits after you're done.
+
+==== Staged Changes ====
+
+So far we have avoided Git's famous 'index', but we must now confront it to
+explain the above. The index is a temporary staging area. Git seldom shuttles
+data directly between your project and its history. Rather, Git first writes
+data to the index, and then copies the data in the index to its final
+destination.
+
+For example, *commit -a* is really a two-step process. The first step places a
+snapshot of the current state of every tracked file into the index. The second
+step permanently records the snapshot now in the index. Committing without the
+*-a* option only performs the second step, and only makes sense after running
+commands that somehow change the index, such as *git add*.
+
+Usually we can ignore the index and pretend we are reading straight from and writing straight to the history. On this occasion, we want finer control on what gets written to history, and are forced to manipulate the index. We place a snapshot of some, but not all, of our changes into the index, and then permanently record this carefully rigged snapshot.
+
+=== Don't Lose Your HEAD ===
+
+The HEAD tag is like a cursor that normally points at the latest commit, advancing with each new commit. Some Git commands let you move it. For example:
+
+ $ git reset HEAD~3
+
+will move the HEAD three commits back. Thus all Git commands now act as if you hadn't made those last three commits, while your files remain in the present. See the help page for some applications.
+
+But how can you go back to the future? The past commits know nothing of the future.
+
+If you have the SHA1 of the original HEAD then:
+
+ $ git reset SHA1
+
+But suppose you never took it down? Don't worry, for commands like these, Git saves the original HEAD as a tag called ORIG_HEAD, and you can return safe and sound with:
+
+ $ git reset ORIG_HEAD
+
+=== HEAD-hunting ===
+
+Perhaps ORIG_HEAD isn't enough. Perhaps you've just realized you made a monumental mistake and you need to go back to an ancient commit in a long-forgotten branch.
+
+By default, Git keeps a commit for at least two weeks, even if you ordered
+Git to destroy the branch containing it. The trouble is finding the appropriate
+hash. You could look at all the hash values in `.git/objects` and use trial
+and error to find the one you want. But there's a much easier way.
+
+Git records every hash of a commit it computes in `.git/logs`. The subdirectory `refs` contains the history of all activity on all branches, while the file `HEAD` shows every hash value it has ever taken. The latter can be used to find hashes of commits on branches that have been accidentally lopped off.
+
+The reflog command provides a friendly interface to these log files. Try
+
+  $ git reflog
+
+Instead of cutting and pasting hashes from the reflog, try:
+
+ $ git checkout "@{10 minutes ago}"
+
+Or checkout the 5th-last visited commit via:
+
+ $ git checkout "@{5}"
+
+See the ``Specifying Revisions'' section of *git help rev-parse* for more.
+
+You may wish to configure a longer grace period for doomed commits. For
+example:
+
+  $ git config gc.pruneexpire "30 days"
+
+means a deleted commit will only be permanently lost once 30 days have passed
+and *git gc* is run.
+
+You may also wish to disable automatic invocations of *git gc*:
+
+  $ git conifg gc.auto 0
+
+in which case commits will only be deleted when you run *git gc* manually.
+
+=== Building On Git ===
+
+In true UNIX fashion, Git's design allows it to be easily used as a low-level component of other programs, such as GUI and web interfaces, alternative command-line interfaces, patch managements tools, importing and conversion tools and so on. In fact, some Git commands are themselves scripts standing on the shoulders of giants. With a little tinkering, you can customize Git to suit your preferences.
+
+One easy trick is to use built-in Git aliases to shorten your most frequently
+used commands:
+
+  $ git config --global alias.co checkout
+  $ git config --global --get-regexp alias  # display current aliases
+  alias.co checkout
+  $ git co foo                              # same as 'git checkout foo'
+
+Another is to print the current branch in the prompt, or window title.
+Invoking
+
+  $ git symbolic-ref HEAD
+
+shows the current branch name. In practice, you most likely want to remove
+the "refs/heads/" and ignore errors:
+
+  $ git symbolic-ref HEAD 2> /dev/null | cut -b 12-
+
+The +contrib+ subdirectory is a treasure trove of tools built on Git.
+In time, some of them may be promoted to official commands. On Debian and
+Ubuntu, this directory lives at +/usr/share/doc/git-core/contrib+.
+
+One popular resident is +workdir/git-new-workdir+. Via clever symlinking, this script creates a new working directory whose history is shared with the original respository:
+
+  $ git-new-workdir an/existing/repo new/directory
+
+The new directory and files within can be thought of as a clone, except since the history is shared, the two trees automatically stay in sync. There's no need to merge, push or pull.
+
+=== Daring Stunts ===
+
+These days, Git makes it difficult for the user to accidentally destroy data.
+But if you know what you are doing, you can override safeguards for common
+commands.
+
+*Checkout*: Uncommitted changes cause checkout to fail. To destroy your changes, and checkout a given commit anyway, use the force flag:
+
+  $ git checkout -f COMMIT
+
+On the other hand, if you specify particular paths for checkout, then there are no safety checks. The supplied paths are quietly overwritten. Take care if you use checkout in this manner.
+
+*Reset*: Reset also fails in the presence of uncommitted changes. To force it through, run:
+
+  $ git reset --hard [COMMIT]
+
+*Branch*: Deleting branches fails if this causes changes to be lost. To force a deletion, type:
+
+  $ git branch -D BRANCH  # instead of -d
+
+Similarly, attempting to overwrite a branch via a move fails if data loss would ensue. To force a branch move, type:
+
+  $ git branch -M [SOURCE] TARGET  # instead of -m
+
+Unlike checkout and reset, these two commands defer data destruction. The
+changes are still stored in the .git subdirectory, and can be retrieved by
+recovering the appropriate hash from `.git/logs` (see "HEAD-hunting" above).
+By default, they will be kept for at least two weeks.
+
+*Clean*: Some git commands refuse to proceed because they're worried about
+clobbering untracked files. If you're certain that all untracked files and
+directories are expendable, then delete them mercilessly with:
+
+  $ git clean -f -d
+
+Next time, that pesky command will work!
