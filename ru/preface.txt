@@ -2,7 +2,7 @@
 Ben Lynn
 August 2007
 
-== Preface ==
+== Введение  ==
 
 http://git.or.cz/[Git] is a version control Swiss army knife. A reliable versatile multipurpose revision control tool whose extraordinary flexibility makes it tricky to learn, let alone master.
 
