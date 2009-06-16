@@ -21,7 +21,7 @@ Rather than go into details, we provide rough instructions for particular effect
  - link:book.pdf[PDF file]: printer-friendly.
  - http://packages.debian.org/search?searchon=names&keywords=gitmagic[Debian package]: get a fast and local copy of this site. http://packages.ubuntu.com/jaunty/gitmagic[Ubuntu package (Jaunty Jackalope)] also available. Handy http://csdcf.stanford.edu/status/[when this server is offline for maintenance].
 
-=== Thanks! ===
+=== Благодарности. ===
 
 Kudos to Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael Budde, Richard Albury, Tarmigan, Derek Mahar and Frode Aannevik for suggestions and improvements. Thanks to Daniel Baumann for creating and maintaining the Debian package. Thanks also to JunJie, Meng and JiangWei for the Chinese translation, and Rodrigo Toledo for the Spanish translation. [If I've left you out, please tell me because I often forget to update this section.]
 
