@@ -1,0 +1,10 @@
+=== Last revision in which the translation was synchronized ===
+preface.txt         09751f37469d32da649b1c64862023820e0d0499
+intro.txt           09751f37469d32da649b1c64862023820e0d0499
+basic.txt           09751f37469d32da649b1c64862023820e0d0499
+clone.txt
+branch.txt
+history.txt
+grandmaster.txt
+secrets.txt
+drawbacks.txt

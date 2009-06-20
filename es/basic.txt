@@ -1,0 +1,180 @@
+== Trucos Básicos ==
+
+En lugar de sumergirte en un mar de comandos de Git, usa estos ejemplos elementales para mojarte los pies. A pesar de sus simplicidad, todos son útiles.
+De hecho, en mis primeros meses con Git nunca fui más allá del material en este capítulo.
+
+=== Guardando Estados ===
+
+Estás a punto de intentar algo drástico? Antes de hacerlo, toma una instantánea de todos los archivos en el directorio actual con:
+
+ $ git init
+ $ git add .
+ $ git commit -m "My first backup"
+
+Ahora, si tu edición se vuelve irrecuperable, ejecuta:
+
+ $ git reset --hard
+
+para volver a donde estabas. Para volver a salvar el estado:
+
+ $ git commit -a -m "Otro respaldo"
+
+==== Agrega, Elimina, Renombra ====
+
+El comando anterior solo seguirá la pista de los archivos que estaban presentes la primera vez que ejecutaste *git add*. Si añades nuevos archivos o subdirectorios, deberás decirle a Git:
+
+ $ git add ARCHIVOSNUEVOS...
+
+De manera similar, si quieres que Git se olvide de determinados archivos, porque (por ejemplo) los borraste:
+
+ $ git rm ARCHIVOSVIEJOS...
+
+Renombrar un archivo es lo mismo que eliminar el nombre anterior y agregar el nuevo. También puedes usar *git mv* que tiene la misma sintaxis que el comando *mv*. Por ejemplo:
+
+ $ git mv ARCHIVOVIEJO ARCHIVONUEVO
+
+=== Deshacer/Rehacer Avanzado ===
+
+Algunas veces solo quieres ir hacia atrás y olvidarte de todos los cambios a partir de cierto punto, porque estaban todos mal. Entonces:
+
+ $ git log
+
+te muestra una lista de commits recientes, y sus hashes SHA1. A continuación, escribe:
+
+ $ git reset --hard SHA1_HASH
+
+para recuperar el estado de un commit dado, y borrar para siempre cualquier recuerdo de commits más nuevos.
+
+Otras veces, quieres saltar a un estado anterior temporalmente. En ese caso escribe:
+
+ $ git checkout SHA1_HASH
+
+Esto te lleva atrás en el tiempo, sin tocar los commits más nuevos. Sin embargo, como en los viajes en el tiempo de las películas de ciencia ficción, estarás en una realidad alternativa, porque tus acciones fueron diferentes a las de la primera vez.
+
+Esta realidad alternativa se llama 'branch' (rama), y <<branch,tendremos más cosas para decir al respecto luego>>. Por ahora solo recuerda que
+
+ $ git checkout master
+
+te llevará al presente. También, para que Git no se queje, siempre haz un commit o resetea tus cambios antes de ejecutar checkout.
+
+Para retomar la analogía de los videojuegos:
+
+- *`git reset \--hard`*: carga un juego viejo y borra todos los que son mas nuevos que el que acabas de cargar. 
+
+- *`git checkout`*: carga un juego viejo, pero si continúas jugando, el estado del juego se desviará de los juegos que salvaste la primera vez. Cualquierpartido nuevo que guardes, terminará en una branch separada, representando la realidad alternativa a la que entraste. <<branch,Luego nos encargaremos de esto>>
+
+Puedes elegir el restaurar solo archivos o directorios en particular, al agregarlos al final del comando:
+You can choose only to restore particular files and subdirectories by appending them after the command:
+
+ $ git checkout SHA1_HASH algun.archivo otro.archivo
+
+Ten cuidado, esta forma de *checkout* puede sobreescribir archivos sin avisar. Para prevenir accidentes, haz commit antes de ejecutar cualquier comando de checkout, especialmente cuando estás aprendiendo a usar Git. En general, cuando te sientas inseguro del resultado de una operación, sea o no de Git, ejecuta antes *git commit -a*.
+
+¿No te gusta cortar y pegar hashes? Entonces usa:
+
+ $ git checkout :/"Mi primer r"
+
+para saltar al commit que comienza con el mensaje dado.
+
+También puedes pedir el 5to estado hacia atrás:
+
+ $ git checkout master~5
+
+==== Revirtiendo  ====
+
+En una corte, los eventos pueden ser eliminados del registro. Igualmente, puedes elegir commits específicos para deshacer.
+
+ $ git commit -a
+ $ git revert SHA1_HASH
+
+va a deshacer solo el commit con el hash dado. Ejecutar *git log* revela que el revert es registrado como un nuevo commit.
+
+=== Descargando Archivos ===
+
+Obtén una copia de un proyecto administrado por git escribiendo:
+
+ $ git clone git://servidor/ruta/a/los/archivos
+
+Por ejemplo, para bajar todos los archivos que usé para crear este sitio:
+
+ $ git clone git://git.or.cz/gitmagic.git
+
+Pronto tendremos más para decir acerca del comando *clone*.
+
+=== Lo Más Nuevo ===
+
+Si ya descargaste una copia de un proyecto usando *git clone*, puedes actualizarte a la última versión con:
+
+ $ git pull
+
+=== Publicación Al Instante ===
+
+Imagina que has escrito un script que te gustaría compartir con otros. Puedes decirles que simplemente lo bajen de tu computadora, pero si lo hacen mientras estás haciendo una modificación, pueden terminar en problemas. Es por esto que existen los ciclos de desarrollo. Los programadores pueden trabajar en un proyecto de manera frecuente, pero solo hacen público el código cuando consideran que es presentable.
+
+Para hacer esto con Git, en el directorio donde guardas tu script:
+
+ $ git init
+ $ git add .
+ $ git commit -m "Primer lanzamiento"
+
+Entonces puedes decirle a tus usuarios que ejecuten:
+
+ $ git clone tu.maquina:/ruta/al/script
+
+para descargar tu script. Esto asume que tienen acceso por ssh. Si no es así, ejecuta *git daemon* y dile a tus usuarios que usen:
+
+ $ git clone git://tu.maquina/ruta/al/script
+
+De ahora en más, cada vez que tu script esté listo para el lanzamiento, escribe:
+
+ $ git commit -a -m "Siguiente lanzamiento"
+
+y tus usuarios puede actualizar su versión yendo al directorio que tiene tu script y ejecutando:
+
+ $ git pull
+
+Tus usuarios nunca terminarán usando una versión de tu script que no quieres que vean. Obviamente este truco funciona para lo que sea, no solo scripts.
+
+=== Que es lo que hice? ===
+
+Averigua que cambios hiciste desde el último commit con:
+
+ $ git diff
+
+O desde ayer:
+
+ $ git diff "@{yesterday}"
+
+O entre una versión en particular y 2 versiones hacia atrás:
+
+ $ git diff SHA1_HASH "master~2"
+
+En cado caso la salida es un patch (parche) que puede ser aplicado con *git apply*
+Para ver cambios desde hace 2 semanas, puedes intentar:
+
+ $ git whatchanged --since="2 weeks ago"
+
+Usualmente recorro la historia con http://sourceforge.net/projects/qgit[qgit]
+, dada su interfaz pulida y fotogénica, o http://jonas.nitro.dk/tig/[tig], una interfaz en modo texto
+que funciona bien a través conexiones lentas. Como alternativa, puedes instalar un servidor web,
+ejecutar *git instaweb* y utilizar cualquier navegador web.
+
+=== Ejercicio ===
+
+Siendo A, B, C, y D cuatro commits sucesivos, donde B es el mismo que A pero con algunos archivos eliminados. Queremos volver a agregar los archivos en D pero no en B. ¿Cómo podemos hacer esto?
+
+Hay por lo menos tres soluciones. Asumiendo que estamos en D:
+
+  1. La diferencia entre A y B son los archivos eliminados. Podemos crear un patch representando esta diferencia y aplicarlo:
+  
+   $ git diff B A | git apply
+
+  2. Como en A tenemos los archivos guardados, podemos recuperarlos :
+
+   $ git checkout A ARCHIVOS...
+
+  3. Podemos ver el pasaje de A a B como un cambio que queremos deshacer:
+
+   $ git revert B
+
+¿Cuál alternativa es la mejor? Cualquiera que prefieras. Es fácil obtener lo que quieres con Git, y normalmente hay varias formas de hacerlo.
