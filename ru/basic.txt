@@ -1,184 +1,203 @@
-== Basic Tricks ==
 
-Rather than diving into a sea of Git commands, use these elementary examples to
-get your feet wet. Despite their simplicity, each of them are useful.
-Indeed, in my first months with Git I never ventured beyond the material in this chapter.
+Git Magic. Глава 2. Базовые операции
 
-=== Saving State ===
+== Базовые операции ==
 
-About to attempt something drastic? Before you do, take a snapshot of all files
-in the current directory with:
+Прежде чем погружаться в дебри многочисленных Git команд, попробуйте воспользоваться этими простыми примерами, чтобы немного освоиться. Несмотря на свою простоту, каждая из них является полезной.
 
- $ git init
- $ git add .
- $ git commit -m "My first backup"
+Действительно, в первые месяцы использования Git я не выходил за рамки материала изложенного в этой главе.
 
-Now if your new edits go awry, run:
+=== Сохранение состояния ===
 
- $ git reset --hard
+Выполняете опасную операцию? Перед тем, как сделать это, создайте снимок всех файлов в текущей директории с помощью команд:
 
-to go back to where you were. To save the state again:
+$ git init
 
- $ git commit -a -m "Another backup"
+$ git add .
 
-==== Add, Delete, Rename ====
+$ git commit -m "Мой первый бекап"
 
-The above will only keep track of the files that were present when you first ran *git add*. If you add new files or subdirectories, you'll have to tell Git:
+Теперь, если ваши новые правки все испортили, запустите:
 
- $ git add NEWFILES...
+$ git reset --hard
 
-Similarly, if you want Git to forget about certain files, maybe because you've deleted them:
+чтобы вернуться к исходному состоянию. Чтобы вновь сохраниться выполните:
 
- $ git rm OLDFILES...
+$ git commit -a -m "Другой бекап"
 
-Renaming a file is the same as removing the old name and adding the new name. There's also the shortcut *git mv* which has the same syntax as the *mv* command. For example:
+==== Добавление, Удаление, Переименование ====
 
- $ git mv OLDFILE NEWFILE
+Приведенный  выше пример будет отслеживать файлы, которые вы добавили когда впервые запустили *git add*. Если вы хотите добавить новые файлы или поддиректории, вам придется сказать Git:
 
-=== Advanced Undo/Redo ===
+$ git add НОВЫЕ_ФАЙЛЫ...
 
-Sometimes you just want to go back and forget about every change past a certain point because they're all wrong. Then:
+Аналогично, если вы хотите чтобы Git забыл о некоторых файлах, может быть, потому, что вы удалите их:
 
- $ git log
+git rm СТАРЫЕ_ФАЙЛЫ...
 
-shows you a list of recent commits, and their SHA1 hashes. Next, type:
+Переименование файла это то же, что и удаление старого имени и добавления нового. Для этого есть *git mv*, который имеет тот же синтаксис, что и команда *mv*. Например:
 
- $ git reset --hard SHA1_HASH
+$ git mv OLDFILE NEWFILE
 
-to restore the state to a given commit and erase all newer commits from the record permanently.
+=== Расширенная отмена/Восстановление ===
 
-Other times you want to hop to an old state briefly. In this case, type:
+Иногда вы просто хотите вернуться к определенной точке и забыть все изменения, потому что все они были неправильными. В таком случае:
 
- $ git checkout SHA1_HASH
+$ git log
 
-This takes you back in time, while preserving newer commits. However, like time travel in a science-fiction movie, if you now edit and commit, you will be in an alternate reality, because your actions are different to what they were the first time around.
+покажет вам список последних изменений (коммитов, прим. пер.), и их SHA1 хеши. Далее введите:
 
-This alternate reality is called a 'branch', and <<branch,we'll have more to say about this later>>. For now, just remember that
+$ git reset --hard SHA1_HASH
 
- $ git checkout master
+для восстановления состояния до указанного коммита и удаления всех последующих коммитов безвозвратно.
 
-will take you back to the present. Also, to stop Git complaining, always
-commit or reset your changes before running checkout.
+Возможно, в другой раз вы захотите быстро вернуться к старому состоянию. В этом случае наберите:
 
-To take the computer game analogy again:
+$ git checkout SHA1_HASH
 
-- *`git reset --hard`*: load an old save and delete all saved games newer than the one just loaded.
+Это перенесет вас назад во времени, до тех пор пока вы не сделаете новые коммиты. Как и в фантастических фильмах о путешествиях во времени, если вы редактируете и коммитите код, вы будете находиться в альтернативной реальности, потому что ваши действия отличаются от тех, что вы делали до этого.
 
-- *`git checkout`*: load an old game, but if you play on, the game state will deviate from the newer saves you made the first time around. Any saved games you make now will end up in a separate branch representing the alternate reality you have entered. <<branch,We deal with this later>>.
+Эта альтернативная реальность называется 'бранч' и 
+<<мы поговорим об этом больше чуть позже>>. А сейчас просто запомните:
 
-You can choose only to restore particular files and subdirectories by appending them after the command:
+$ git checkout master
 
- $ git checkout SHA1_HASH some.file another.file
+вернёт вас обратно в настоящее. Кроме того, чтобы не получать предупреждений от Git, всегда делайте коммит или сброс ваших изменений до запуска checkout.
 
-Take care, as this form of *checkout* can silently overwrite files. To
-prevent accidents, commit before running any checkout command, especially when
-first learning Git. In general, whenever you feel unsure about any operation, Git command or not, first run *git commit -a*.
+Еще раз воспользуемся терминологией компьютерных игр:
 
-Don't like cutting and pasting hashes? Then use:
+- *`git reset --hard`*: загружает ранее сохраненную игру и удаляет все версии, сохраненные после только что загруженной.
 
- $ git checkout :/"My first b"
+- *`git checkout`*: загружает старую игру, но если вы продолжаете играть, состояние игры будет отличаться от более новых сохранок, которые вы сделали в первый раз. Любая игра, которую вы теперь сохраняете, попадает в отдельный бранч, прадставляющий альтенативную реальность, в которую вы вошли.
+<<как мы договорились, о бранчах поговорим позже>>
 
-to jump to the commit that starts with a given message.
-You can also ask for the 5th-last saved state:
+Вы можете выбрать для восстановления только определенные файлы и поддиректории путём добавления их после команды:
 
- $ git checkout master~5
+$ git checkout SHA1_HASH some.file another.file
 
-==== Reverting ====
+Будьте внимательны, такая форма *checkout* (чекаута) может незаметно перезаписать файлы. Чтобы избежать неприятных неожиданностей, выполняйте коммит до запуска "чекаут", особенно если вы впервые пробуете Git. Вообще, если вы не уверены в какой-либо операции, будь то команда Git или нет, сперва выполните *git commit -a*.
 
-In a court of law, events can be stricken from the record. Likewise, you can pick specific commits to undo.
+Не любите копировать и вставлять хеши? Используйте:
 
- $ git commit -a
- $ git revert SHA1_HASH
+$ git checkout :/"Мой первый б"
 
-will undo just the commit with the given hash. Running *git log* reveals the revert is recorded as a new commit.
+для перехода на коммит, который начинается с приведенной строки.
 
-=== Downloading Files ===
+Можно также запросить 5-е последнее  сохраненное состояние:
 
-Get a copy of a project managed with Git by typing:
+$ git checkout master~5
 
- $ git clone git://server/path/to/files
+==== Возвраты====
 
-For example, to get all the files I used to create this site:
+В зале суда в протокол могут вноситься изменения прямо во время слушания. Подобным образом и вы можете выбирать коммиты для возврата.
 
- $ git clone git://git.or.cz/gitmagic.git
+$ git commit -a
 
-We'll have much to say about the *clone* command soon.
+$ git revert SHA1_HASH
 
-=== The Bleeding Edge ===
+отменит  текущий коммит с учетом выбранного хеша. Запущенный *git log* показывает, что изменение записано в качестве нового коммита.
 
-If you've already downloaded a copy of a project using *git clone*, you can upgrade to the latest version with:
+=== Скачивание файлов ===
 
- $ git pull
+Получить копию проекта под управлением Git можно набрав:
 
-=== Instant Publishing ===
+$ git clone git://server/path/to/files
 
-Suppose you've written a script you'd like to share with others. You could just tell them to download from your computer, but if they do so while you're improving the script or making experimental changes, they could wind up in trouble.  Of course, this is why release cycles exist. Developers may work on a project frequently, but they only make the code available when they feel it is presentable.
+Например, чтобы получить все файлы, я создавал такой сайт:
 
-To do this with Git, in the directory where your script resides:
+$ git clone git://git.or.cz/gitmagic.git
 
- $ git init
- $ git add .
- $ git commit -m "First release"
+Мы поговорим больше о команде *clone* позже.
 
-Then tell your users to run:
+=== Сглаживание углов ===
 
- $ git clone your.computer:/path/to/script
+Если вы уже загрузили копию проекта с помощью *git clone*, вы можете обновить его до последней версии используя:
 
-to download your script. This assumes they have ssh access. If not, run *git daemon* and tell your users to instead run:
+$ git pull
 
- $ git clone git://your.computer/path/to/script
+=== Публичный доступ ===
 
-From now on, every time your script is ready for release, execute:
+Предположим, вы написали скрипт которым хотите поделиться с другими. Можно просто позволить всем загружать его с вашего компьютера, но, если они будут делать это в то время, как вы дорабатываете его или добавляете экспериментальную функциональность, у них могут возникнуть проблемы. Конечно, это одна из причин существования цикла разработки. Разработчики могут долго работать над проектом, но открывать доступ к коду следует только после того, как код приведен в приличный вид.
 
- $ git commit -a -m "Next release"
+Чтобы сделать это с помощью Git, выполните в директории, где лежит ваш скрипт:
 
-and your users can upgrade their version by changing to the directory containing your script and typing:
+$ git init
 
- $ git pull
+$ git add .
 
-Your users will never end up with a version of your script you don't want them to see. Obviously this trick works for anything, not just scripts.
+$ git commit -m "Первый релиз"
 
-=== What Have I Done? ===
+Затем скажите вашим пользователям запустить:
 
-Find out what changes you've made since the last commit with:
+$ git clone ваш.компьютер:/path/to/script
 
- $ git diff
+для того чтобы загрузить ваш скрипт. Это подразумевает что у вас есть доступ по ssh. Если нет, запустите *git daemon* и скажите пользователям использовать для запуска:
 
-Or since yesterday:
+$ git clone git://ваш.компьютер/path/to/script
 
- $ git diff "@{yesterday}"
+Теперь, всякий раз когда ваш скрипт готов к релизу, выполняйте:
 
-Or between a particular version and 2 versions ago:
+$ git commit -a -m "Следующий релиз"
 
- $ git diff SHA1_HASH "master~2"
+и ваши пользователи смогут обновить свои версии, перейдя в директорию, содержащую ваш скрипт, и, набрав:
 
-In each case the output is a patch that can be applied with *git apply*.
-Try also:
+$ git pull
 
- $ git whatchanged --since="2 weeks ago"
+Ваши пользователи никогда не попадут на версии скрипта, доступ к которым вы скрываете. Безусловно, что этот трюк работает для всего, не только в случаях со скриптами.
 
-Often I'll browse history with http://sourceforge.net/projects/qgit[qgit]
-instead, due to its slick photogenic interface, or
-http://jonas.nitro.dk/tig/[tig], a text-mode interface that works well over
-slow connections. Alternatively, install a web server, run *git instaweb* and
-fire up any web browser.
+=== Что я наделал? ===
 
-=== Exercise ===
+Выяснить, какие изменения вы сделали со времени последнего коммита:
 
-Let A, B, C, D be four successive commits where B is the same as A except some files have been removed. We want to add the files back at D and not at B. How can we do this?
+$ git diff
 
-There are at least three solutions. Assuming we are at D:
+Или со вчерашнего дня:
 
-  1. The difference between A and B are the removed files. We can create a patch representing this difference and apply it:
+$ git diff "@{yesterday}"
 
-   $ git diff B A | git apply
+Или между определенной версией и 2-мя предыдущими версиями.
 
-  2. Since we saved the files back at A, we can retrieve them:
+$ git diff SHA1_HASH "master~2"
 
-   $ git checkout A FILES...
+В каждом случае на выходе будет патч, который может быть применён с помощью *git apply*.
 
-  3. We can view going from A to B as a change we want to undo:
+Попробуйте также:
 
-   $ git revert B
+$ git whatchanged --since="2 weeks ago"
 
-Which choice is best? Whichever you prefer most. It is easy to get what you want with Git, and often there are many ways to get it.
+Часто я смотрю историю при помощи: http://sourceforge.net/projects/qgit[qgit]
+
+вместо стандартного способа, из-за приятного фотогеничного интерфейса, или с помощью
+http://jonas.nitro.dk/tig[tig] с текстовым интерфейсом, который хорошо работает при медленном соединении.
+В качестве альтернативы, можно проинсталировать веб-сервер, введя *git instaweb*, и запустить любой веб-браузер.
+
+=== Упражнение ===
+
+Пусть A, B, C, D четыре успешных коммита, где В - то же, что и A, но с несколькими удаленными файлами. Мы хотим вернуть файлы в D, но не в B. Как это можно сделать?
+
+Существует как минимум три решения. Предположим, что мы находимся на D.
+
+1. Разница между A и B - удаление файлов.
+Мы можем создать патч, отражающий эти изменения, и применить его:
+
+$ git diff B A | git apply
+
+2. Поскольку мы сохранили файлы  обратно в A, мы можем получить их обратно:
+
+$ git checkout A FILES...
+
+3. Мы можем рассматривать переход от A до B в качестве изменений, которые мы хотим отменить:
+
+$ git revert B
+
+Какой способ лучший?
+Тот, который вам больше нравится. С Git легко сделать все, что вы хотите, причем часто существует ни один способ сделать это.
+
+
+-------------------------------------------------------------------------------
+http://translated.by/you/git-magic-chapter-2-basic-tricks/into-ru/trans/
+Оригинал (английский): Git Magic. Chapter 2. Basic Tricks (http://www-cs-students.stanford.edu/~blynn/gitmagic/ch02.html)
+Перевод: © iBog, mifistor, Natamile.
+Лицензия: GNU General Public License version 3
+
+translated.by переведено толпой
