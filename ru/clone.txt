@@ -1,114 +1,115 @@
-== Cloning Around ==
+== Все о клонировании ==
 
-In older version control systems, checkout is the standard operation to get files. You retrieve a bunch of files in the requested saved state.
+В старых системах контроля версий, checkout - это стандартная операция для получения файлов. Вы получаете файлы в нужном сохраненном состоянии.
 
-In Git and other distributed version control systems, cloning is the standard operation. To get files you create a clone of the entire repository. In other words, you practically mirror the central server. Anything the main repository can do, you can do.
+В Git и других распределенных системах контроля версий, клонирование - это обычно дело. Для получение файлов вы создаете клон всего репозитария. Другими словами, вы создаете зеркало центрального сервера. При это все что можно делать в основном репозитарии, можно делать и в локальном.
 
-=== Sync Computers ===
+=== Синхронизация компьютеров ===
 
-This is the reason I first used Git. I can tolerate making tarballs or using *rsync* for backups and basic syncing. But sometimes I edit on my laptop, other times on my desktop, and the two may not have talked to each other in between.
+По этой причине я начал использовать Git. Я вполне приемлю синхронизацию архивами или использование *rsync* для бэкапа или процедуры стандартной синхронизации. Но я работаю то на ноутбуке, то на стационарном компьютере, которые никак между собой не взаимодействуют.
 
-Initialize a Git repository and commit your files on one machine. Then on the other:
+Инициализируйте Git репозиторий и делайте коммит файлов на одном компьютере. А потом выполните следующие операции на другом:
 
  $ git clone other.computer:/path/to/files
 
-to create a second copy of the files and Git repository. From now on,
+для создания второй копии файлов и Git репозитария. С этого момента выполняйте,
 
  $ git commit -a
  $ git pull other.computer:/path/to/files HEAD
 
-will pull in the state of the files on the other computer into the one you're working on. If you've recently made conflicting edits in the same file, Git will let you know and you should commit again after resolving them.
+это синхронизирует состояние ваших файлов с состоянием файлов другого компьютера. Если вы внесли изменения, которые будут конфликтовать с таким же файлом, Git даст Вам знать об этом, и вам придется сделать коммит еще раз, уже после устранения конфликтующих изменений.
 
-=== Classic Source Control ===
+=== Классический контроль исходного кода ===
 
-Initialize a Git repository for your files:
+Инициализируйте Git-репозитарий для ваших файлов:
 
  $ git init
  $ git add .
  $ git commit -m "Initial commit"
 
-On the central server, initialize an empty Git repository with some name,
-and start the Git daemon if necessary:
+На центральном сервере инициализируйте пустой Git-репозитарий с присвоением какого-нибудь имени,
+
+и запустите Git-демон, если необходимо:
 
  $ GIT_DIR=proj.git git init
- $ git daemon --detach  # it might already be running
+ $ git daemon --detach # возможно уже запущен
 
-Some public hosts, such as http://repo.or.cz[repo.or.cz], will have a different method for setting up the initially empty Git repository, such as filling in a form on a webpage.
+Публичные репозитарии, такие как http://repo.or.cz[repo.or.cz], имеют собственные схемы по организации изначально пустых Git-репозитариев, которые обычно предполагают регистрацию и заполнение формы.
 
-Push your project to the central server with:
+Чтобы сохранить ваши изменения в центральный репозиторий, запустите:
 
  $ git push git://central.server/path/to/proj.git HEAD
 
-We're ready. To check out source, a developer types
+Для клонирования, как уже было описано выше, необходимо:
 
  $ git clone git://central.server/path/to/proj.git
 
-After making changes, the code is checked in to the main server by:
+После внесения изменений, код записывается на главный сервер с помощью:
 
  $ git commit -a
  $ git push
 
-If the main server has been updated, the latest version needs to be checked out before the push. To sync to the latest version:
+Если в ходе работы на сервере уже происходили изменения, необходимо обновить локальную копию репозитария перед сохранением собственных изменений. Для синхронизации:
 
  $ git commit -a
  $ git pull
 
-=== Forking a Project ===
+=== Создание форка проекта ===
 
-Sick of the way a project is being run? Think you could do a better job? Then on your server:
+Не нравится путь развития проекта? Думаете можете сделать лучше? Тогда на Вашем сервере:
 
  $ git clone git://main.server/path/to/files
 
-Next tell everyone about your fork of the project at your server.
+Теперь расскажите всем, что новый проект находится на вашем сервере.
 
-At any later time, you can merge in the changes from the original project with:
+В любое время вы можете объединить изменения с изначальным проектом, используя:
 
  $ git pull
 
-=== Ultimate Backups ===
+=== Окончательные бэкапы ===
 
-Want numerous tamper-proof geographically diverse redundant archives? If your project has many developers, don't do anything! Every clone of your code is effectively a backup. Not just of the current state, but of your project's entire history. Thanks to cryptographic hashing, if anyone's clone becomes corrupted, it will be spotted as soon as they try to communicate with others.
+Хотите создать множество георграфически разнесенных, разных, защищенных, резервных архивов? Если в вашем проекте много разработчиков - делать ничего не надо! Каждый клон - это и есть бэкап, причем отражающий не только текущее состояние, но и всю историю изменений проекта. Благодаря криптографическому хэшированию, при нарушении какого-либо из клонов, этот клон будет помечен, и это будет видно при любой попытке взаимодействия с ним.
 
-If your project is not so popular, find as many servers as you can to host clones.
+Если ваш проект не такой популярный, размещайте клоны на как можно большем количестве серверов.
 
-The truly paranoid should always write down the latest 20-byte SHA1 hash of the HEAD somewhere safe. It has to be safe, not private. For example, publishing it in a newspaper would work well, because it's hard for an attacker to alter every copy of a newspaper.
+Особо беспокоящимся рекомендуется всегда записывать самый последний 20-байтный SHA1 хэш HEAD в безопасном месте. В безопасном, но не тайном. Например, в газете должно быть очень эффективно, потому как сложно изменить каждую копию газеты.
 
-=== Light-Speed Multitask ===
+=== Многозадачность со скоростью света ===
 
-Say you want to work on several features in parallel. Then commit your project and run:
+Скажем, вы хотите выполнять несколько задач параллельно. Тогда сохраните свой проект и запустите:
 
- $ git clone . /some/new/directory
+  $ git clone . /some/new/directory
 
-Git exploits hard links and file sharing as much as safely possible to create this clone, so it will be ready in a flash, and you can now work on two independent features simultaneously. For example, you can edit one clone while the other is compiling.
+Git использует жесткие ссылки и обмен файлами настолько безопасно, насколько это возможно для создания такого клона, он будет готов мгновенно, после чего можно будет работать с разными функциями одновременно. Например, можно редактировать один клон, компилируя в это время другой.
 
-At any time, you can commit and pull changes from the other clone.
+В любое время можно сделать коммит и вытянуть изменения из другого клона.
 
  $ git pull /the/other/clone HEAD
 
-=== Guerilla Version Control ===
+=== Другие системы контроля версий ===
 
-Are you working on a project that uses some other version control system, and you sorely miss Git? Then initialize a Git repository in your working directory:
+Вы работаете над проектом, который использует другую систему контроля версий, и вам не хватает Git? Тогда инициализируйте Git-репозиторий в свою рабочую папку:
 
  $ git init
  $ git add .
  $ git commit -m "Initial commit"
 
-then clone it:
+затем клонируйте его:
 
  $ git clone . /some/new/directory
 
-Now go to the new directory and work here instead, using Git to your heart's content. Once in a while, you'll want to sync with everyone else, in which case go to the original directory, sync using the other version control system, and type:
+Теперь перейдите в новую директорию и работайте в ней, используя для контроля версий Git. Когда вам понадобиться синхронизировать изменения с другими, перейдите в изначальную директорию и произведите синхронизацию с помощью другой системы контроля версий, затем наберите:
 
  $ git add .
- $ git commit -m "Sync with everyone else"
+ $ git commit -m "Синхронизироваться с другими"
 
-Then go to the new directory and run:
+Теперь перейдите в новую директорию и запустите:
 
- $ git commit -a -m "Description of my changes"
+ $ git commit -a -m "Описание моих изменений"
  $ git pull
 
-The procedure for giving your changes to everyone else depends on the other version control system. The new directory contains the files with your changes. Run whatever commands of the other version control system are needed to upload them to the central repository.
+Процедура обмена изменениями с другими зависит от используемой системы контроля версий. Новая директория содержит файлы с вашими изменениями. Для загрузки файлов в центральный репозиторий требуется запуск любых необходимых команд другой системы контроля версий.
 
-The *git svn* command automates the above for Subversion repositories, and can
-also be used to
-http://google-opensource.blogspot.com/2008/05/export-git-project-to-google-code.html[export a Git project to a Subversion repository].
+Команда *git svn* автоматизирует этот процесс для репозиториев Subversion и
+
+может быть использована для http://google-opensource.blogspot.com/2008/05/export-git-project-to-google-code.html[экспорта Git проекта в Subversion репозиторий].
