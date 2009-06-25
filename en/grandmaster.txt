@@ -8,12 +8,6 @@ For my projects, Git tracks exactly the files I'd like to archive and release to
 
  $ git archive --format=tar --prefix=proj-1.2.3/ HEAD
 
-=== Changelog Generation ===
-
-It's good practice to keep a http://en.wikipedia.org/wiki/Changelog[changelog], and some projects even require it. If you've been committing frequently, which you should, generate a Changelog by typing:
-
- $ git log > ChangeLog
-
 === Git Over SSH, HTTP ===
 
 Suppose you have ssh access to a web server, but Git is not installed. Though less efficient than its native protocol, Git can communicate over HTTP.
