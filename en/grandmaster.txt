@@ -388,3 +388,45 @@ directories are expendable, then delete them mercilessly with:
   $ git clean -f -d
 
 Next time, that pesky command will work!
+
+=== Improve Your Public Image ===
+
+Stupid mistakes abound in the histories of many of my projects. The most
+frightening are missing files due to forgetting to run *git add*. Luckily I
+have yet to lose crucial data though accidental omission because I rarely
+delete original working directories. I typically notice the error a few commits
+later, so the only damage is a bit of missing history and a sheepish admission
+of guilt.
+
+I also regularly commit (literally and git-erally) the lesser transgression of
+trailing whitespace. Though harmless, I wish these also never appeared on the
+public record.
+
+In addition, though unscathed so far, I worry about leaving merge conflicts
+unresolved. Usually I catch them when I build a project, but there are some
+cases this can overlook.
+
+If only I had bought idiot insurance by using a _hook_ to alert me about these
+problems:
+
+ $ chmod +x .git/hooks/pre-commit
+
+Now Git aborts a commit if useless whitespace or unresolved merge conflicts are
+detected.
+
+For a C project, add the following to the beginning of the *pre-commit* hook to
+warn about forgotten files:
+
+ if git ls-files -o | grep '\.[ch]$'; then
+   echo FAIL! Looks like you forgot to add some source files.
+   exit 1
+ fi
+
+Several git operations support hooks; see *git help hooks*. One can write hooks
+to complain about spelling mistakes in commit messages, add new files, indent
+paragraphs, complain about lines over 80 characters long, add an entry to a
+webpage, play a sound, and so on.
+
+In fact, we encountered the *post-update* hook while discussing Git over
+HTTP: in this case, after the repository is updated, a hook script
+maintains a few files Git needs for non-native communication.

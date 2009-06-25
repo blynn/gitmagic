@@ -59,7 +59,7 @@ te llevará al presente. También, para que Git no se queje, siempre haz un comm
 
 Para retomar la analogía de los videojuegos:
 
-- *`git reset \--hard`*: carga un juego viejo y borra todos los que son mas nuevos que el que acabas de cargar. 
+- *`git reset \--hard`*: carga un juego viejo y borra todos los que son mas nuevos que el que acabas de cargar.
 
 - *`git checkout`*: carga un juego viejo, pero si continúas jugando, el estado del juego se desviará de los juegos que salvaste la primera vez. Cualquierpartido nuevo que guardes, terminará en una branch separada, representando la realidad alternativa a la que entraste. <<branch,Luego nos encargaremos de esto>>
 
@@ -166,7 +166,7 @@ Siendo A, B, C, y D cuatro commits sucesivos, donde B es el mismo que A pero con
 Hay por lo menos tres soluciones. Asumiendo que estamos en D:
 
   1. La diferencia entre A y B son los archivos eliminados. Podemos crear un patch representando esta diferencia y aplicarlo:
-  
+
    $ git diff B A | git apply
 
   2. Como en A tenemos los archivos guardados, podemos recuperarlos :

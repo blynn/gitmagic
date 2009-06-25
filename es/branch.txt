@@ -3,7 +3,7 @@
 El hacer branches (ramificar) y merges (unir) de manera instantánea, son dos de las prestaciones más letales de Git.
 
 *Problema*: Factores externos necesitan inevitablemente de cambios de contexto.
-Un bug severo se manifiesta en la última versión sin previo aviso. El plazo para 
+Un bug severo se manifiesta en la última versión sin previo aviso. El plazo para
 alguna prestación se acorta. Un desarrollador que tiene que ayudar en una sección indispensable
 del proyecto está por tomar licencia. En cualquier caso, debes soltar abruptamente lo que estás haciendo
 y enfocarte en una tarea completamente diferente.
@@ -51,7 +51,7 @@ Supongamos que estás trabajando en alguna prestación, y que por alguna razón,
  $ git commit -a
  $ git checkout SHA1_HASH
 
-Ahora puedes agregar cualquier código temporal horrible por todos lados. 
+Ahora puedes agregar cualquier código temporal horrible por todos lados.
 Incluso puedes hacer commit de estos cambios. Cuando termines,
 
  $ git checkout master
@@ -91,7 +91,7 @@ Algunos proyectos requieren que tu código sea evaluado antes de que puedas subi
 
 ¿Que pasa si la segunda parte no puede ser escrita hasta que la primera sea aprobada y subida? En muchos sistemas de control de versiones, deberías enviar primero el código a los evaluadores, y luego esperar hasta que esté aprobado antes de empezar con la segunda parte.
 
-En realidad, eso no es del todo cierto, pero en estos sistemas, editar la Parte II antes de subir la Parte I involucra sufrimiento e infortunio. En Git, los branches y merges son indoloros (un termino técnico que significa rápidos y locales). Entonces, luego de que hayas hecho commit de la primera parte y la hayas enviado a ser revisada: 
+En realidad, eso no es del todo cierto, pero en estos sistemas, editar la Parte II antes de subir la Parte I involucra sufrimiento e infortunio. En Git, los branches y merges son indoloros (un termino técnico que significa rápidos y locales). Entonces, luego de que hayas hecho commit de la primera parte y la hayas enviado a ser revisada:
 
  $ git checkout -b parte2
 
@@ -162,7 +162,7 @@ para salvar el estado actual y permitirte saltar a un estado anterior
 para solucionar un bug de alta prioridad o algo.
 
 Es análogo a cambiar el canal de la TV temporalmente, para ver que otra
-cosa están dando. Pero en lugar de apretar un par de botones, tienes que 
+cosa están dando. Pero en lugar de apretar un par de botones, tienes que
 crear, hacer checkout y eliminar branches y commits temporales. Por suerte,
 Git tiene un aatajo que es tan conveniente como un control remoto de TV:
 
