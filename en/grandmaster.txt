@@ -408,11 +408,11 @@ problems:
 Now Git aborts a commit if useless whitespace or unresolved merge conflicts are
 detected.
 
-For a C project, add the following to the beginning of the *pre-commit* hook to
-warn about forgotten files:
+For this guide, I eventually added the following to the beginning of the
+*pre-commit* hook to warn about absent-mindedness:
 
- if git ls-files -o | grep '\.[ch]$'; then
-   echo FAIL! Looks like you forgot to add some source files.
+ if git ls-files -o | grep '\.txt$'; then
+   echo FAIL! Untracked .txt files.
    exit 1
  fi
 
