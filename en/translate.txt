@@ -1,4 +1,4 @@
-== Appendix A: Translating This Guide ==
+== Appendix B: Translating This Guide ==
 
 Clone the source, then create a directory corresponding to the target http://www.iana.org/assignments/language-subtag-registry[language's IETF tag]: see
 http://www.w3.org/International/articles/language-tags/Overview.en.php[the W3C article on internationalization]. For example, English is "en", Japanese is "ja", and Traditional Chinese is "zh-Hant". In the new directory, and translate the +txt+ files from the "en" subdirectory. 

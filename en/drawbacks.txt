@@ -1,4 +1,4 @@
-== Git Shortcomings ==
+== Appendix A: Git Shortcomings ==
 
 There are some Git issues I've swept under the carpet. Some can be handled easily with scripts and hooks, some require reorganizing or redefining the project, and for the few remaining annoyances, one will just have to wait. Or better yet, pitch in and help!
 
