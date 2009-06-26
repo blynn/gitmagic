@@ -47,17 +47,6 @@ and anybody can get your project with:
 
  $ git clone http://web.server/proj.git
 
-==== Push versus pull ====
-
-Pushing into a repository with a working directory that contains changes can
-be confusing so we have so far avoided this command. However, pushing into a
-bare repository is a straightforward operation, and more convenient than a pull
-in this case.
-
-Pulling from the server requires shelling into the server, and also
-knowing the network address of the machine you happen to be working on.
-Furthermore, firewalls may interfere.
-
 === Git Over Anything ===
 
 Want to synchronize repositories without servers, or even a network connection?
@@ -227,8 +216,8 @@ branches, and more.
 
 === My Preferences ===
 
-For my projects, I like contributors to prepare Git trees which I can pull.
-With some Git hosting services, you can host your own fork of a project at
+For my projects, I like contributors to prepare Git repositories which I can
+pull. Some Git hosting services let you host your own fork of a project with
 the click of a button.
 
 After I fetch a tree, I run Git commands to navigate and examine the changes,
@@ -242,5 +231,7 @@ http://torvalds-family.blogspot.com/2009/06/happiness-is-warm-scm.html[this
 blog post by Linus Torvalds].
 
 Staying in the Git world is slightly more convenient than patch files, as it
-saves me the step of converting them to Git commits, possibly adding author
-information and a description along the way.
+saves me the step of converting them to Git commits. Furthermore, Git
+automatically handles details such as recording the author's name and email
+address, as well as the time and date, and asks the author to describe
+their own change.
