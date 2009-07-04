@@ -1,0 +1,113 @@
+== Clonando  ==
+
+En sistemas de control de versiones antiguos, checkout es la operación standard para obtener archivos. Obtienes un conjunto de archivos en estado guardado que solicistaste.
+
+En Git, y otros sistemas de control de versiones distribuídos, clonar es la operación standard. Para obtener archivos se crea un clon de un repositorio entero. En otras palabras, practicamente se crea una copia idéntica del servidor central. Todo lo que se pueda hacer en el repositorio principal, también podrás hacerlo.
+
+=== Sincronizar Computadoras ===
+
+Este es el motivo por el que usé Git por primera vez. Puedo tolerar hacer tarballs o usar *rsync* para backups y sincronización básica. Pero algunas veces edito en mi laptop, otras veces en mi desktop, y ambas pueden no haberse comunicado en el medio.
+
+Inicializa un repositorio de Git y haz haz commit de tus archivos en una máquina, luego en la otra:
+
+ $ git clone otra.computadora:/ruta/a/archivos
+
+para crear una segunda copia de los archivos y el repositorio Git. De ahora en más,
+
+ $ git commit -a
+ $ git pull otra.computadora:/ruta/a/archivos HEAD
+
+va a traer (pull) el estado de los archivos desde la otra máquina hacia la que estás trabajando. Si haz hecho cambios que generen conflictos en un archivo, Git te va a avisar y deberías hacer commit luego de resolverlos.
+
+=== Control Clásico de Fuentes ===
+
+Inicializa un repositorio de Git para tus archivos:
+
+ $ git init
+ $ git add .
+ $ git commit -m "Commit Inicial"
+
+En el servidor central, inicializa un repositorio vacío de Git con algún nombre,
+y abre el Git daemon si es necesario:
+
+ $ GIT_DIR=proj.git git init
+ $ git daemon --detach  # podría ya estar corriendo
+
+Algunos servidores publicos, como http://repo.or.cz[repo.or.cz], tienen un método diferente para configurar el repositorio inicialmente vacío de Git, como llenar un formulario en una página.
+
+Empuja (push) tu proyecto hacia el servidor central con:
+
+ $ git push git://servidor.central/ruta/al/proyecto.git HEAD
+
+Ya estamos listos. Para copiarse los fuentes, un desarrollador escribe:
+
+ $ git clone git://servidor.central/ruta/al/proyecto.git
+
+Luego de hacer cambios, el código en envía al servidor central con:
+
+ $ git commit -a
+ $ git push
+
+Si hubo actualizaciones en el servidor principal, la última versión debe ser traída antes de enviar lo nuevo. Para sincronizar con la última versión:
+
+ $ git commit -a
+ $ git pull
+
+=== Bifurcando (fork) un proyecto ===
+
+¿Harto de la forma en la que se maneja un proyecto?¿Crees que podrías hacerlo mejor? Entonces en tu servidor:
+
+ $ git clone git://servidor.principal/ruta/a/archivos
+
+Luego avísale a todos de tu fork del proyecto en tu servidor.
+
+Luego, en cualquier momento, puedes unir (merge) los cambios del proyecto original con:
+
+ $ git pull
+
+=== Respaldos Definitivos ===
+
+¿Quieres varios respaldos redundantes a prueba de manipulación y geográficamente diversos? Si tu proyecto tiene varios desarrolladores, ¡no hagas nada! Cada clon de tu código es un backup efectivo. No sólo del estado actual, sino que también de la historia completa de tu proyecto. Gracias al hashing criptográfico, si hay corrupción en cualquiera de los clones, va a ser detectado tan pronto como intente comunicarse con otros.
+
+Si tu proyecto no es tan popular, busca tantos servidores como puedas para hospedar tus clones.
+
+El verdadero paranoico debería siempre escribir el último hash SHA1 de 20-bytes de su HEAD en algún lugar seguro. Tiene que ser seguro, no privado. Por ejemplo, publicarlo en un diario funcionaría bien, porque es difícil para un atacante el alterar cada copia de un diario.
+
+=== Multitask A La Velocidad De La Luz ===
+
+Digamos que quieres trabajar en varias prestaciones a la vez. Haz commit de tu proyecto y ejecuta:
+
+ $ git clone . /un/nuevo/directorio
+
+Git se aprovecha de los hard links y de compartir archivos de la manera mas segura posible para crear este clon, por lo que estará listo en un segundo, y podrás trabajar en dos prestaciones independientes de manera simultánea. Por ejemplo, puedes editar un clon mientras el otro está compilando.
+
+En cualquier momento, puedes hacer commit y pull de los cambios desde el otro clon.
+
+ $ git pull /el/otro/clon HEAD
+
+=== Control Guerrillero De Versiones ===
+
+¿Estás trabajando en un proyecto que usa algún otro sistema de control de versiones y extrañas mucho a Git? Entonces inicializa un repositorio de Git en tu directorio de trabajo.
+
+ $ git init
+ $ git add .
+ $ git commit -m "Commit Inicial"
+
+y luego clónalo:
+
+ $ git clone . /un/nuevo/directorio
+
+Ahora debes trabajar en el nuevo directorio, usando Git como te sea más cómodo. Cada tanto, querrás sincronizar con los demás, en ese caso, ve al directorio original, sincroniza usando el otro sistema de control de versiones y escribe:
+
+ $ git add .
+ $ git commit -m "Sincronizo con los demás"
+
+Luego ve al nuevo directorio y escribe:
+
+ $ git commit -a -m "Descripción de mis cambios"
+ $ git pull
+
+El procedimiento para pasarle tus cambios a los demás depende de cuál es tu otro sistema de control de versiones. El nuevo directorio contiene los archivos con tus cambios. Ejecuta los comandos que sean necesarios para subirlos al repositorio central del otro sistema de control de versiones.
+
+El comando *git svn* automatiza lo anterior para repositorios de Subversion,
+y también puede ser usado para http://google-opensource.blogspot.com/2008/05/export-git-project-to-google-code.html[exportar un proyecto de Git a un repositorio de Subversion].

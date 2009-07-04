@@ -2,8 +2,8 @@
 preface.txt         09751f37469d32da649b1c64862023820e0d0499
 intro.txt           09751f37469d32da649b1c64862023820e0d0499
 basic.txt           09751f37469d32da649b1c64862023820e0d0499
-clone.txt
-branch.txt
+clone.txt           46c05532226868b8b3b121d9320c0150491fd181
+branch.txt          46c05532226868b8b3b121d9320c0150491fd181
 history.txt
 grandmaster.txt
 secrets.txt

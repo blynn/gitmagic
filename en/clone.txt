@@ -33,7 +33,8 @@ and start the Git daemon if necessary:
  $ GIT_DIR=proj.git git init
  $ git daemon --detach  # it might already be running
 
-Some public hosts, such as http://repo.or.cz[repo.or.cz], will have a different method for setting up the initially empty Git repository, such as filling in a form on a webpage.
+For Git hosting services, follow the instructions to setup the initially
+empty Git repository. Typically one fills in a form on a webpage.
 
 Push your project to the central server with:
 
@@ -52,6 +53,17 @@ If the main server has been updated, the latest version needs to be checked out 
 
  $ git commit -a
  $ git pull
+
+==== Push versus pull ====
+
+We mostly avoid pushing into a repository, because confusion can ensue
+if the destination has a working directory with changes. However, pushing into
+a bare repository is a straightforward operation and more suitable than a pull
+in this case.
+
+Pulling from the server requires shelling into the server, and also
+knowing the network address of the machine you happen to be working on.
+Furthermore, firewalls may interfere.
 
 === Forking a Project ===
 

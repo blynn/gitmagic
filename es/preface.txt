@@ -27,7 +27,7 @@ Estoy muy agradecido por todos los que me han dado apoyo y elogios. Me gustaría
 
 Esta guía se publica bajo la http://www.gnu.org/licenses/gpl-3.0.html[GNU General Public License versión 3]. Naturalmente, los fuentes se guardan en un repositorio Git, y pueden ser obtenidos escribiendo:
 
- $ git clone git://repo.or.cz/gitmagic.git  # Crea el directorio "gitmagic". 
+ $ git clone git://repo.or.cz/gitmagic.git  # Crea el directorio "gitmagic".
 
 Ver debajo por otros mirrors.
 
@@ -36,4 +36,4 @@ Ver debajo por otros mirrors.
  - http://repo.or.cz/[http://repo.or.cz/] hospeda proyectos gratuitos,
 http://repo.or.cz/w/gitmagic.git[incluyendo esta guía].
  - http://gitorious.org/[http://gitorious.org/] es un sitio que apunta al hosting de proyectos open-source.
- - http://github.com/[http://github.com/] hospeda proyectos open-source gratis, http://github.com/blynn/gitmagic/tree/master[incluyendo esta guía], y proyectos privados por una cuota. 
+ - http://github.com/[http://github.com/] hospeda proyectos open-source gratis, http://github.com/blynn/gitmagic/tree/master[incluyendo esta guía], y proyectos privados por una cuota.

@@ -1,0 +1,192 @@
+== Magia Con Los Branches ==
+
+El hacer branches (ramificar) y merges (unir) de manera instantánea, son dos de las prestaciones más letales de Git.
+
+*Problema*: Factores externos necesitan inevitablemente de cambios de contexto.
+Un bug severo se manifiesta en la última versión sin previo aviso. El plazo para
+alguna prestación se acorta. Un desarrollador que tiene que ayudar en una sección indispensable
+del proyecto está por tomar licencia. En cualquier caso, debes soltar abruptamente lo que estás haciendo
+y enfocarte en una tarea completamente diferente.
+
+Interrumpir tu línea de pensamiento puede ser negativo para tu productividad, y cuanto más engorroso sea el cambiar contextos, mayor es la pérdida. Con los sistemas centralizados, debemos descargar una nueva copia. Los sistemas distribuídos se comportan mejor, dado que podemos clonar la versión deseada localmente.
+
+Pero el clonar igual implica copiar todo el directorio junto con toda la historia hasta el momento. Aunque Git reduce el costousando hard links y el compartir archivos, los archivos del proyecto deben ser recreados enteramente en el nuevo directorio.
+
+*Solución*: Git tiene una mejor herramienta para estas situaciones que es mucho más rápida y eficiente en tamaño que clonar *git branch*.
+
+Con esta palabra mágica, los archivos en tu directorio se transforman súbitamente de una versión en otra. Esta transformación puede hacer más que simplemente ir hacia atrás o adelante en la historia. Tus archivos pueden mutar desde la última versión lanzada, a la versión experimental, a la versión en desarrollo, a la versión de un amigo y así sucesivamente.
+
+=== La Tecla Del Jefe ===
+
+¿Alguna vez jugaste uno de esos juegos donde con solo presionar un botón ("la tecla del jefe"), la pantalla inmediatamente muestra una hoja de cálculo o algo así? La idea es que si el jefe entra a la oficina mientras estás en el juego, lo puedes esconder rápidamente.
+
+En algún directorio:
+
+ $ echo "Soy más inteligente que mi jefe" > miarchivo.txt
+ $ git init
+ $ git add .
+ $ git commit -m "Commit inicial"
+
+Creamos un repositorio de Git que guarda un archivo de texto conteniendo un mensaje dado. Ahora escribe:
+
+ $ git checkout -b jefe  # nada parece cambiar luego de esto
+ $ echo "Mi jefe es más inteligente que yo" > miarchivo.txt
+ $ git commit -a -m "Otro commit"
+
+Parecería que sobreescribimos nuestro archivo y le hicimos commit. Pero es una ilusión. Escribe:
+
+ $ git checkout master  # cambia a la versión original del archivo
+
+y presto! El archivo de texto es restaurado. Y si el jefe decide investigar este directorio, escribimos:
+
+ $ git checkout jefe  # cambia a la versión adecuada para los ojos del jefe
+
+Puedes cambiar entre ambas versiones del archivo cuantas veces quieras, y hacer commit en ambas de manera independiente.
+
+=== Trabajo Sucio ===
+
+[[branch]]
+Supongamos que estás trabajando en alguna prestación, y que por alguna razón, necesitas volver a una versión vieja y poner temporalmente algunos "print" para ver como funciona algo. Entonces:
+
+ $ git commit -a
+ $ git checkout SHA1_HASH
+
+Ahora puedes agregar cualquier código temporal horrible por todos lados.
+Incluso puedes hacer commit de estos cambios. Cuando termines,
+
+ $ git checkout master
+
+para volver a tu trabajo original. Observa que arrastrarás cualquier cambio del que no hayas hecho commit.
+
+¿Que pasa si quisieras cambiar los cambios temporales? Facil:
+
+ $ git checkout -b sucio
+
+y haz commit antes de volver a la branch master. Cuando quieras volver a los cambios sucios, simplemente escribe:
+
+ $ git checkout sucio
+
+Mencionamos este comando en un capítulo anterior, cuando discutíamos sobre cargar estados antiguos. Al fin podemos contar toda la historia:los archivos cambian al estado pedido, pero debemos dejar la branch master. Cualquier commit de aquí en adelante, llevan tus archivos por un nuevo camino, el podrá ser nombrado posteriormente.
+
+En otras palabras, luego de traer un estado viejo, Git automáticamente te pone en una nueva branch sin nombre, la cual puede ser nombrada y salvada con *git checkout -b*.
+
+=== Arreglos Rápidos ===
+
+Estás en medio de algo cuando te piden que dejes todo y soluciones un bug recién descubierto:
+
+ $ git commit -a
+ $ git checkout -b arreglos SHA1_HASH
+
+Luego, una vez que solucionaste el bug:
+
+ $ git commit -a -m "Bug arreglado"
+ $ git push  # al repositorio central
+ $ git checkout master
+
+y continúa con el trabajo en tu tarea original.
+
+=== Flujo De Trabajo Ininterrumpido ===
+
+Algunos proyectos requieren que tu código sea evaluado antes de que puedas subirlo. Para hacer la vida más fácil para aquellos que revisan tu código, si tienes algún cambio grande para hacer, puedes partirlo en dos o mas partes, y hacer que cada parte sea evaluada por separado.
+
+¿Que pasa si la segunda parte no puede ser escrita hasta que la primera sea aprobada y subida? En muchos sistemas de control de versiones, deberías enviar primero el código a los evaluadores, y luego esperar hasta que esté aprobado antes de empezar con la segunda parte.
+
+En realidad, eso no es del todo cierto, pero en estos sistemas, editar la Parte II antes de subir la Parte I involucra sufrimiento e infortunio. En Git, los branches y merges son indoloros (un termino técnico que significa rápidos y locales). Entonces, luego de que hayas hecho commit de la primera parte y la hayas enviado a ser revisada:
+
+ $ git checkout -b parte2
+
+Luego, escribe la segunda parte del gran cambio sin esperar a que la primera sea aceptada. Cuando la primera parte sea aprobada y subida,
+
+ $ git checkout master
+ $ git merge parte2
+ $ git branch -d parte2  # ya no se necesita esta branch
+
+y la segunda parte del cambio está lista para la evaluación.
+
+¡Pero esperen! ¿Qué pasa si no fuera tan simple? Digamos que tuviste un error en la primera parte, el cual hay que corregir antes de subir los cambios. ¡No hay problema! Primero, vuelve a la branch master usando
+
+ $ git checkout master
+
+Soluciona el error en la primera parte del cambio y espera que sea aprobado. Si no lo es, simplemente repite este paso. Probablemente quieras hacer un merge de la versión arreglada de la Parte I con la Parte II:
+
+ $ git checkout parte2
+ $ git merge master
+
+Ahora es igual que lo anterior. Una vez que la primera parte sea aprobada:
+
+ $ git checkout master
+ $ git merge parte2
+ $ git branch -d parte2
+
+y nuevamente, la segunda parte está lista para ser revisada.
+
+Es fácil extender este truco para cualquier cantidad de partes.
+
+=== Reorganizando Una Mezcla ===
+
+Quizás quieras trabajar en todos los aspectos de un proyecto sobre la misma branch. Quieres dejar los trabajos-en-progreso para ti y quieres que otros vean tus commits solo cuando han sido pulcramente organizados. Inicia un par de branches:
+
+  $ git checkout -b prolijo
+  $ git checkout -b mezcla
+
+A continuación, trabaja en lo que sea: soluciona bugs, agrega prestaciones, agrega código temporal o lo que quieras, haciendo commits seguidos a medida que avanzas. Entonces:
+
+  $ git checkout prolijo
+  $ git cherry-pick SHA1_HASH
+
+aplica un commit dado a la branch "prolijo". Con cherry-picks apropiados, puedes construir una rama que contenga solo el código permanente, y los commits relacionados juntos en un grupo.
+
+=== Administrando branches ===
+
+Lista todas las branches escribiendo:
+
+ $ git branch
+
+Siempre hay una branch llamada "master", y es en la que comienzas por defecto.
+Algunos aconsejan dejar la rama "master" sin tocar y el crear nuevas branches
+para tus propios cambios.
+
+Las opciones *-d* y *-m* te permiten borrar y mover (renombrar) branches.
+Mira en *git help branch*
+
+La branch "master" es una convención útil. Otros pueden asumir que tu
+repositorio tiene una branch con este nombre, y que contiene la versión
+oficial del proyecto. Puedes renombrar o destruir la branch "master", pero
+también podrías respetar esta costumbre.
+
+=== Branches Temporales ===
+
+Después de un rato puedes notar que estás creando branches de corta vida
+de manera frecuente por razones similares: cada branch sirve simplemente
+para salvar el estado actual y permitirte saltar a un estado anterior
+para solucionar un bug de alta prioridad o algo.
+
+Es análogo a cambiar el canal de la TV temporalmente, para ver que otra
+cosa están dando. Pero en lugar de apretar un par de botones, tienes que
+crear, hacer checkout y eliminar branches y commits temporales. Por suerte,
+Git tiene un aatajo que es tan conveniente como un control remoto de TV:
+
+ $ git stash
+
+Esto guarda el estado actual en un lugar temporal (un 'stash') y restaura
+el estado anterior. Tu directorio de trabajo se ve idéntico a como estaba
+antes de que comenzaras a editar, y puedes solucionar bugs, traer cambios
+desde otros repositorios, etc. Cuando quieras volver a los cambios
+del stash, escribe:
+
+ $ git stash apply  # Puedes necesitar corregir conflictos
+
+Puedes tener varios stashes, y manipularlos de varias maneras. Mira *git help stash*.
+Como es de imaginar, Git mantiene branches de manera interna para lograr este truco mágico.
+
+=== Trabaja como quieras ===
+
+Aplicaciones como http://www.mozilla.com/[Mozilla Firefox] permiten tener varias pestañas y ventanas abiertas. Cambiar de pestaña te da diferente contenido en la misma ventana. Los branches en git son como pestañas para tu directorio de trabajo. Siguiendo esta analogía, el clonar es como abrir una nueva ventana. La posibilidad de ambas cosas es lo que mejora la experiencia del usuario.
+
+En un nivel más alto, varios window managers en Linux soportan múltiples escritorios.
+Usar branches en Git es similar a cambiar a un escritorio diferente, mientras
+clonar es similar a conectar otro monitor para ganar un nuevo escritorio.
+
+Otro ejemplo es el programa http://www.gnu.org/software/screen/[*screen*]. Esta joya permite crear, destruir e intercambiar entre varias sesiones de terminal sobre la misma terminal. En lugar de abrir terminales nuevas (clone), puedes usar la misma si ejecutas *screen* (branch). De hecho, puedes hacer mucho más con *screen*, pero eso es un asunto para otro manual.
+
+Usar clone, branch y merge, es rápido y local en Git, animándote a usar la combinación que más te favorezca. Git te permite trabajar exactamente como prefieras.

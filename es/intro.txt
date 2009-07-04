@@ -23,7 +23,7 @@ Los sistemas de control de versiones no son diferentes. Todos tienen lindas inte
 === Control Distribuído ===
 
 Ahora imagina un juego muy difícil. Tan difícil para terminar, que muchos jugadores experientes alrededor del mundo deciden agruparse e intercambiar sus juegos guardados para intentar terminarlo. Los "Speedruns" son ejemplos de la vida real: los jugadores se especializan en diferents niveles del mismo juego y colaboran para lograr resultados sorprendentes.
-¿Cómo armarías un sistema para que puedan descargar las partidas de los otros de manera simple? ¿Y para que suban las nuevas? 
+¿Cómo armarías un sistema para que puedan descargar las partidas de los otros de manera simple? ¿Y para que suban las nuevas?
 
 Antes, cada proyecto usaba un control de versiones centralizado. Un servidor en algún lado contenía todos los juegos salvados. Nadie más los tenía. Cada jugador tenía a lo sumo un un par de juegos guardados en su máquina. Cuando un jugador quería progresar, obtenía la última versión del servidor principal, jugaba un rato, guardaba y volvía a subir al servidor para que todos los demás pudieran usarlo.
 
@@ -39,7 +39,7 @@ Esta operación inicial de clonado, puede ser cara, especialmente si el historia
 
 Una creencia popular errónea es que los sistemas distribuídos son poco apropiados para proyectos que requieren un repositorio central oficial. Nada podría estar más lejos de la verdad. Fotografiar a alguien no hace que su alma sea robada, clonar el repositorio central no disminuye su importancia.
 
-Una buena aproximación inicial, es que cualquier cosa que se puede hacer con un sistema de control de versiones centralizado, se puede hacer mejor con un sistema de versiones distribuído que esté bien diseñado. Los recursos de red son simplemente más costosos que los recursos locales. Aunque luego veremos que hay algunas desventajas para un sistema distribuído, hay menos probabilidad de hacer comparaciones erroneas al tener esto en cuenta. 
+Una buena aproximación inicial, es que cualquier cosa que se puede hacer con un sistema de control de versiones centralizado, se puede hacer mejor con un sistema de versiones distribuído que esté bien diseñado. Los recursos de red son simplemente más costosos que los recursos locales. Aunque luego veremos que hay algunas desventajas para un sistema distribuído, hay menos probabilidad de hacer comparaciones erroneas al tener esto en cuenta.
 
 Un proyecto pequeño, puede necesitar solo una fracción de de las características que un sistema así ofrece. Pero, ¿usarías números romanos si solo necesitas usar números pequeños?. Además, tu proyecto puede crecer más allá de tus expectativas originales. Usar Git desde el comienzo, es como llevar una navaja suiza, aunque solo pretendas usarla para abrir botellas. El día que necesites desesperadamente un destornillador, vas a agradecer el tener más que un simple destapador.
 
