@@ -92,7 +92,7 @@ There are worse cases unfortunately. If several branches with different initial 
 
 === Interface Quirks ===
 
-For commits A, B, the meaning of the expressions "A..B" and "A...B" depends
+For commits A and B, the meaning of the expressions "A..B" and "A...B" depends
 on whether the command expects two endpoints or a range. See *git help diff*
 and *git help rev-parse*.
 

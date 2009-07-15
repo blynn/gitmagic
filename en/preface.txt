@@ -12,8 +12,9 @@ Rather than go into details, we provide rough instructions for particular effect
 
 .Translations
 
- - http://docs.google.com/View?id=dfwthj68_675gz3bw8kj[Chinese (Simplified)]: by JunJie, Meng and JiangWei. Hosted by Google Docs.
+ - http://docs.google.com/View?id=dfwthj68_675gz3bw8kj[Chinese (Simplified)]: by JunJie, Meng and JiangWei.
  - link:/~blynn/gitmagic/intl/es/[Spanish]: by Rodrigo Toledo.
+ - http://www.slideshare.net/slide_user/magia-git[Portuguese]: by Leonardo Siqueira Rodrigues [http://www.slideshare.net/slide_user/magia-git-verso-odt[ODT version]].
 
 .Other Editions
 
