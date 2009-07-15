@@ -24,15 +24,19 @@ Rather than go into details, we provide rough instructions for particular effect
 
 === Thanks! ===
 
-Kudos to Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone,
-Michael Budde, Richard Albury, Tarmigan, Derek Mahar, Frode Aannevik, and
-Keith Rarick for suggestions and improvements. Thanks to Daniel Baumann for
-creating and maintaining the Debian package. Thanks also to JunJie, Meng and
-JiangWei for the Chinese translation, and Rodrigo Toledo for the Spanish
-translation. [If I've left you out, please tell me because I often forget to
-update this section.]
+Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone,
+Michael Budde, Richard Albury, Tarmigan, Derek Mahar, Frode Aannevik, and Keith
+Rarick contributed suggestions and improvements.
 
-My gratitute goes to many others for your support and praise. I wish this were a real physical book, so I could quote your generous words on the cover to promote it! In seriousness, I greatly appreciate each message. Reading one always brightens my mood.
+Daniel Baumann maintains the Debian package.
+
+JunJie, Meng, JiangWei, Rodrigo Toledo, and Leonardo Siqueira Rodrigues
+worked on translations of this guide.
+
+My gratitute goes to many others for your support and praise. If this were
+a real physical book, I'd quote your generous words on the cover to promote it.
+
+If I've left you out by mistake, please tell me or just send me a patch!
 
 .Free Git hosting
 
