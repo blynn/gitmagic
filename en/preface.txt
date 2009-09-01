@@ -25,8 +25,8 @@ Rather than go into details, we provide rough instructions for particular effect
 === Thanks! ===
 
 Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone,
-Michael Budde, Richard Albury, Tarmigan, Derek Mahar, Frode Aannevik, and Keith
-Rarick contributed suggestions and improvements.
+Michael Budde, Richard Albury, Tarmigan, Derek Mahar, Frode Aannevik, Keith
+Rarick, and Andy Somerville contributed suggestions and improvements.
 
 Daniel Baumann maintains the Debian package.
 

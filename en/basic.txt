@@ -13,11 +13,11 @@ in the current directory with:
  $ git add .
  $ git commit -m "My first backup"
 
-Now if your new edits go awry, run:
+Now if your new edits go awry, restore the pristine version:
 
  $ git reset --hard
 
-to go back to where you were. To save the state again:
+To save the state again:
 
  $ git commit -a -m "Another backup"
 
