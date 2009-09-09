@@ -28,7 +28,8 @@ Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone,
 Michael Budde, Richard Albury, Tarmigan, Derek Mahar, Frode Aannevik, Keith
 Rarick, and Andy Somerville contributed suggestions and improvements.
 
-Daniel Baumann maintains the Debian package.
+Francois Marier maintains the Debian package originally created by Daniel
+Baumann.
 
 JunJie, Meng, JiangWei, Rodrigo Toledo, and Leonardo Siqueira Rodrigues
 worked on translations of this guide.
