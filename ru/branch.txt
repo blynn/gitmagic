@@ -1,188 +1,177 @@
-== Branch Wizardry ==
+== Чудеса ветвления == 
+Возможности мгновенного разветвления и слияния - самые уникальные особенности Git.
 
-Instant branching and merging are the most lethal of Git's killer features.
+*Задача*: какие-то причины требуют  переключения процессов. В новой версии внезапно возникает серьезная ошибка. Срок завершения работы над определенным свойством близится к концу. Разработчик, помощь которого очень нужна Вам в работе над ключевым разделом, собирается в отпуск. Итак, Вам нужно срочно бросить все, над чем Вы трудитесь в настоящий момент, и переключиться на совершенно другие дела.
 
-*Problem*: External factors inevitably necessitate context switching. A severe
-bug manifests in the released version without warning. The deadline for a
-certain feature is moved closer. A developer whose help you need for a key section of the project is about to leave. In all cases, you must abruptly drop what you are doing and focus on a completely different task.
+Переключение внимания с одного на другое может серьезно снизить эффективность работы, и чем сложнее переход между процессами, тем больше будет потеря. При централизованном управлении версиями необходимо скачивать вновь разработанную рабочую копию с центрального сервера. Распределенная система предоставляет лучшие возможности, так как позволяет клонировать нужную версию в локальное рабочее место.
 
-Interrupting your train of thought can be detrimental to your productivity, and the more cumbersome it is to switch contexts, the greater the loss. With centralized version control we must download a fresh working copy from the central server. Distributed systems fare better, as we can clone the desired version locally.
+Однако клонирование все же предполагает копирование всей рабочей директории, а, значит, всей истории изменений до настоящего момента. Даже при том, что Git позволяет сэкономить средства за счет возможности совместного использования файлов и жестких ссылок, все файлы проекта придется полностью воссоздать в новой рабочей директории.
 
-But cloning still entails copying the whole working directory as well as the entire history up to the given point. Even though Git reduces the cost of this with file sharing and hard links, the project files themselves must be recreated in their entirety in the new working directory.
+*Решение*: у Git есть более удобный инструмент для этих целей, который, в отличие от клонирования, сэкономит и время, и дисковое пространство - это *git branch*.
 
-*Solution*: Git has a better tool for these situations that is much faster and more space-efficient than cloning: *git branch*.
+С этой волшебной командой файлы в вашей директории мгновенно изменяются с одной версии на другую. Это изменение позволяет сделать намного больше, чем просто вернуться назад или продвинуться вперед в истории. Ваши файлы могут изменится с последней версии на экспериментальную, с экспериментальной - на опытную, с  опытной - на версию вашего друга и так далее.
 
-With this magic word, the files in your directory suddenly shapeshift from one version to another. This transformation can do more than merely go back or forward in history. Your files can morph from the last release to the experimental version to the current development version to your friend's version and so on.
+=== Кнопка босса ===
 
-=== The Boss Key ===
+Наверняка, вы играли в одну из тех игр, где при нажатии определеной клавиши ("кнопка босса"), игра быстро сворачивается и на экране отображается рабочая таблица или что-нибудь другое? То есть, если в офис зашел начальник, а вы играете в игру, вы должны уметь быстро ее скрыть.
 
-Ever play one of those games where at the push of a button ("the boss key"), the screen would instantly display a spreadsheet or something? So if the boss walked in the office while you were playing the game you could quickly hide it away?
+В какой-нибудь директории:
 
-In some directory:
+ $ echo "Я хитрее моего босса" > myfile.txt 
+ $ git init 
+ $ git add .  
+ $ git commit -m "Начальный коммит"
+ 
+Мы создали Git-репозиторий который содержит один текстовый файл с определенным сообщением. Теперь выполните:
 
- $ echo "I'm smarter than my boss" > myfile.txt
- $ git init
- $ git add .
- $ git commit -m "Initial commit"
+ $ git checkout -b boss # вероятно, это последнее изменение
+ $ echo "Мой босс меня умнее" > myfile.txt
+ $ git commit -a -m "Другой коммит"
+ 
+Похоже на то, как будто мы перезаписали файл и сделали коммит. Но это иллюзия. Наберите:
 
-We have created a Git repository that tracks one text file containing a certain message. Now type:
+ $ git checkout master # переключиться на оригинальную версию файла
 
- $ git checkout -b boss  # nothing seems to change after this
- $ echo "My boss is smarter than me" > myfile.txt
- $ git commit -a -m "Another commit"
+Вуаля! Текстовый файл восстановлен. И если босс будет рядом, запустите
 
-It looks like we've just overwritten our file and committed it. But it's an illusion. Type:
+$ git checkout boss # перейти на специальную версию для босса
 
- $ git checkout master  # switch to original version of the file
+Вы можете переключаться между двумя версиями этого файла так часто, как вам хочется и делать коммиты в каждый из них независимо.
 
-and hey presto! The text file is restored. And if the boss decides to snoop around this directory, type:
-
- $ git checkout boss  # switch to version suitable for boss' eyes
-
-You can switch between the two versions of the file as much as you like, and commit to each independently.
-
-=== Dirty Work ===
+=== Грязная работа ===
 
 [[branch]]
-Say you're working on some feature, and for some reason, you need to go back to an old version and temporarily put in a few prints statements to see how something works. Then:
 
- $ git commit -a
+Допустим, вы работаете над созданием какой-либо функции, и по каким-то причинам необходимо вернуться назад к старой версии и временно загрузить старый код, чтобы посмотреть как что-либо работало, тогда введите:
+
+ $ git commit -a 
  $ git checkout SHA1_HASH
 
-Now you can add ugly temporary code all over the place. You can even commit these changes. When you're done,
+ Теперь вы можете добавить везде, где необходимо, временный  черновой код. Можно даже сделать коммит изменений. Когда закончите, выполните:
 
- $ git checkout master
+ $ git checkout master,
 
-to return to your original work. Observe that any uncommitted changes are carried over.
+чтобы вернуться к исходной работе. Заметьте, что любые изменения, не внесенные в коммит, будут перенесены.
 
-What if you wanted to save the temporary changes after all? Easy:
+
+А что, если вы все-таки хотели сохранить временные изменения? Пожалуйста:
 
  $ git checkout -b dirty
 
-and commit before switching back to the master branch. Whenever you want to return to the dirty changes, simply type
+а затем сделайте коммит перед тем, как переключетесь на ветвь master. Всякий раз когда вы захотите вернуться к черновым изменениям, просто выполните:
 
  $ git checkout dirty
 
-We touched upon this command in an earlier chapter, when discussing loading old states. At last we can tell the whole story: the files change to the requested state, but we must leave the master branch. Any commits made from now on take your files down a different road, which can be named later.
+Мы говорили об этой команде ранее, в другой главе, когда обсуждали загрузку старых состояний. Теперь у нас перед глазами полная картина: файлы меняются на нужное состояние, но мы должны оставить ветвь master. Любые коммиты, сделанные с этого момента, направят файлы по другому пути, который может быть назван позже.
 
-In other words, after checking out an old state, Git automatically puts you in a new, unnamed branch, which can be named and saved with *git checkout -b*.
+Другими словами, после переключения с более старого состояния, Git автоматически направляет вас в новую еще не названную ветвь, которой можно дать имя и сохранить с помощью *git checkout -b*.
 
-=== Quick Fixes ===
+=== Быстрые исправления ===
 
-You're in the middle of something when you are told to drop everything and fix a newly discovered bug:
+Ваша работа в самом разгаре, когда вдруг выясняется, что нужно все бросить и исправить только что обнаруженную ошибку:
 
  $ git commit -a
  $ git checkout -b fixes SHA1_HASH
 
-Then once you've fixed the bug:
+Затем, после того, как вы исправили ошибку:
 
- $ git commit -a -m "Bug fixed"
- $ git push  # to the central repository
+ $ git commit -a -m "Ошибка исправлена"
+ $ git push # в центральный репозиторий
  $ git checkout master
 
-and resume work on your original task.
+и вернитесь к работе над вашими исходными задачами.
 
-=== Uninterrupted Workflow ===
+=== Бесперебойный рабочий процесс ===
 
-Some projects require your code to be reviewed before you may submit it. To make life easier for those reviewing your code, if you have a big change to make you might break it into two or more parts, and get each part separately reviewed.
+В некоторых проектах необходимо проверять код до того, как выложить его. Чтобы облегчить задачу другим разработчикам, которые будут проверять ваш код, при внесении значительных изменений, разбивайте измененный проект на 2 или более частей и выкладывайте по одной для проверки.
 
-What if the second part cannot be written until the first part is approved and checked in? In many version control systems, you'd have to send the first part to the reviewers, and then wait until it has been approved before starting on the second part.
+А что, если вторую часть нельзя записать до того, как первая часть проверена и принята? Во многих системах управления версиями отправить на рассмотрение вторую часть можно только после утверждения первой части.
 
-Actually that's not quite true, but in these systems editing Part II before submitting Part I involves suffering and hardship. In Git, branching and merging are painless (a technical term for fast and local). So after you've committed the first part and sent it for review:
+На самом деле это не совсем правда, но необходимость в таких системах редактировать часть II перед тем, как отправить часть I, связана с трудностями и неудобствами. В Git, ветвление и слияние гораздо безболезненней (говоря техническим языком - это можно сделать быстрее и на локальном уровне). Поэтому, после того, как вы сделали коммит первой части, и направили его для рассмотрения:
 
  $ git checkout -b part2
 
-Next, code the second part of the big change without waiting for the first part to be accepted. When the first part is approved and submitted,
+Далее, можно изменять вторую часть, не ожидая принятия первой части. После того, как первая часть утверждена и выложена,
+
+ $ git checkout master 
+ $ git merge part2 
+ $ git branch -d part2 # эта ветка больше не нужна
+
+и вторая часть правок готова к проверке.
+
+Однако не торопитесь! Что, если не все так просто? Что, если в первой части вы сделали ошибку, которую необходимо было исправить до отправки. Запросто! Во-первых, вернитесь в master-ветвь с помощью:
 
  $ git checkout master
- $ git merge part2
- $ git branch -d part2  # don't need this branch anymore
 
-and the second part of the change is ready to review.
+Исправьте изменения в первой части и отправьте на проверку. Если же они не будут приняты, можно просто повторить этот шаг. Вы, вероятно, также захотите произвести слияние исправлений части I с частью II, тогда выполните:
 
-But wait! What if it wasn't that simple? Say you made a mistake in the first part, which you have to correct before submitting. No problem! First, switch back to the master branch with
-
- $ git checkout master
-
-Fix the issue with the first part of the change and hope it gets approved. If not we simply repeat this step. You'll probably want to merge the fixed version of Part I into Part II as well:
-
- $ git checkout part2
+ $ git checkout part2 
  $ git merge master
 
-Now it's the same as before. Once the first part has been approved and submitted:
+И теперь - тоже самое. После того, как первая часть утверждена и выложена:
 
- $ git checkout master
+ $ git checkout master 
  $ git merge part2
  $ git branch -d part2
 
-and again, the second part is ready to be reviewed.
+и снова, вторая часть готова к проверке.
 
-It's easy to extend this trick for any number of parts.
+Вы можете легко использовать этот трюк для любого количества частей.
 
-=== Reorganizing a Medley ===
+=== Собрать все в кучу===
 
-Perhaps you like to work on all aspects of a project in the same branch. You want to keep works-in-progress to yourself and want others to see your commits only when they have been neatly organized. Start a couple of branches:
+Предположим, вам нравится работать над всеми аспектами проекта в одной и той же ветке. Вы хотите закрыть свой рабочий процесс от других, чтобы все видели ваши коммиты только после того, как они будут хорошо оформлены. Создайте несколько веток:
 
-  $ git checkout -b sanitized
-  $ git checkout -b medley
+ $ git checkout -b sanitized
+ $ git checkout -b medley
 
-Next, work on anything: fix bugs, add features, add temporary code, and so forth, committing often along the way. Then:
+Далее, работайте над чем угодно: исправляйте ошибки, добавляйте новые функции, добавляйте временный код и т.д., при этом постоянно выполняя коммиты. Затем:
 
-  $ git checkout sanitized
-  $ git cherry-pick SHA1_HASH
+ $ git checkout sanitized 
+ $ git cherry-pick SHA1_HASH
 
-applies a given commit to the "sanitized" branch. With appropriate cherry-picks you can construct a branch that contains only permanent code, and has related commits grouped together.
+применит данный коммит для ветви"sanitized". С правильно выбранными элементами вы сможете собрать ветвь, которая будет содержать только проверенный код и соответствующие коммиты, сгруппированные вместе.
 
-=== Managing Branches ===
+=== Управление Ветками ===
 
-List all branches by typing:
+Для просмотра списка всех веток наберите:
 
  $ git branch
 
-There is always a branch named "master", and you start here by default. Some
-advocate leaving the "master" branch untouched and creating new branches for
-your own edits.
+Здесь всегда будет ветка с названием "master", с нее вы начинаете работать по умолчанию. Кому-то нравится оставлять ветку "master" нетронутой и создавать новые ветки со своими изменениями.
 
-The *-d* and *-m* options allow you to delete and move (rename) branches.
-See *git help branch*.
+Опции *-d* и *-m* позволяют удалять и перемещать (переименовывать) ветки.
 
-The "master" branch is a useful convention. Others may assume that your
-repository has a branch with this name, and that it contains the official
-version of your project. You can rename or obliterate the "master" branch, but
-you might as well respect this custom.
+См. *git help branch*.
 
-=== Temporary Branches ===
+Ветка "master" - это полезная традиция. Все считают очевидным то, что ваш репозиторий должен содержать ветку с таким именем, и эта ветка содержит официальную версию проекта. Вы можете переименовать или удалить ветку "master", однако лучше соблюсти всеобщую традицию.
 
-After a while you may realize you are creating short-lived branches
-frequently for similar reasons: every other branch merely serves to
-save the current state so you can briefly hop back to an older state to
-fix a high-priority bug or something.
+=== Временные Ветки ===
 
-It's analogous to changing the TV channel temporarily to see what else is on.
-But instead of pushing a couple of buttons, you have to create, check out and
-delete temporary branches and commits. Luckily, Git has a shorcut that
-is as convenient as a TV remote control:
+Через какое-то время вы можете обнаружить, что создаете множество временных веток для одной и той краткосрочной цели: нужно сохранить текущее состояние, чтобы была возможность вернуться назад и исправить грубую ошибку или сделать что-то еще.
+
+Это похоже на то, как вы переключаете телевизионные каналы, чтобы посмотреть что показывают по другим. Но здесь, вместо того, чтобы нажать на пару кнопок на пульте, нужно будет создать, сделать отладку, а затем удалить временные ветки и коммиты. К счастью, в Git есть удобные ярлыки, имитирующие работу дистанционного пульта правления.
 
  $ git stash
 
-This saves the current state in a temporary location (a 'stash') and
-restores the previous state. Your working directory appears exactly as it was
-before you started editing, and you can fix bugs, pull in upstream changes, and
-so on. When you want to go back to the stashed state, type:
+Это сохраняет текущее состояние в во временном месте ('копилке') и востанавливает предыдущее состояние. Ваша директория становиться точно такой, как и была до того, как вы начали редактирование, и вы можете исправить ошибки, загрузить удаленные изменения и прочее. Когда вы хотите вернуться назад в состояние копилки, наберите:
 
- $ git stash apply  # You may need to resolve some conflicts.
+ $ git stash apply # Возможно, понадобится устранить какие-либо конфликты.
 
-You can have multiple stashes, and manipulate them in various ways. See
-*git help stash*. As you may have guessed, Git maintains branches behind the scenes to perform this magic trick.
+Можно создавать несколько копилок, приумножать их и использовать по-разному. Смотрите
 
-=== Work How You Want ===
+*git help stash*. Как вы могли догадаться, этот чудесный прием возможен благодаря способности Git поддерживать создание закрытых "тайных" веток.
 
-Applications such as http://www.mozilla.com/[Mozilla Firefox] allow you to open multiple tabs and multiple windows. Switching tabs gives you different content in the same window. Git branching is like tabs for your working directory. Continuing this analogy, Git cloning is like opening a new window. Being able to do both improves the user experience.
+=== Работайте как вам нравится ===
 
-On a higher level, several Linux window managers support multiple desktops.
-Branching in Git is similar to switching to a different desktop, while cloning
-is similar to attaching another monitor to gain another desktop.
+Такие приложения как http://www.mozilla.com/[Mozilla Firefox] позволяют открывать несколько вкладок, и несколько окон. Переключение вкладок позволяет обозревать разное содержание в одном и том же окне. Ветки в Git подобны вкладкам для вашей рабочей директории. Если продолжить аналогию, клонирование в Git подобно открытию нового окна. Эти две возможности делают работу в Git удобной и приятной для пользователя. 
 
-Yet another example is the http://www.gnu.org/software/screen/[*screen*] utility. This gem lets you create, destroy and switch between multiple terminal sessions in the same terminal. Instead of opening new terminals (clone), you can use the same one if you run *screen* (branch). In fact, you can do a lot more with *screen* but that's a topic for another text.
+На более высоком уровне, многие оконные менеджеры Linux поддерживают несколько рабочих столов.
 
-Cloning, branching, and merging are fast and local in Git, encouraging you to use the combination that best suits you. Git lets you work exactly how you want.
+Ветки в Git подобны переключению на другой рабочий стол, а клонирование
+
+подобно подключению дополнительно монитора для получения дополнительного рабочего стола.
+
+Другой пример - это утилита http://www.gnu.org/software/screen/[*screen*]. Эта программа позволяет создавать, закрывать и переключаться между множеством терминальных сессий в одном и том же терминале. Вместо открытия нового терминала (операция клонирования), можно использовать этот, запустив *screen* (создать ветвь). На самом деле  у *screen* еще много возможностей, но это уже тема для другой главы.
+
+Наличие возможностей клонирования, ветвления и быстрого локального слияния позволяет вам выбрать комбинировать их так, как удобно и нужно вам. Git позволяет работать именно так, как вам хочется.
