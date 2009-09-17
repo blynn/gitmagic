@@ -127,7 +127,7 @@ and *git gc* is run.
 
 You may also wish to disable automatic invocations of *git gc*:
 
-  $ git conifg gc.auto 0
+  $ git config gc.auto 0
 
 in which case commits will only be deleted when you run *git gc* manually.
 
