@@ -1,48 +1,47 @@
-= Git Magic =
+= Магия Git =
 Ben Lynn
-August 2007
+Август 2007
 
 == Предисловие  ==
 
-http://git.or.cz/[Git] is a version control Swiss army knife. A reliable versatile multipurpose revision control tool whose extraordinary flexibility makes it tricky to learn, let alone master.
+http://git.or.cz/[Git] это Швейцарский армейский нож контроля версий. Надежный универсальный многоцелевой инструмент контроля версий, чья черезвычайная гибкость делает его сложным в изучении даже для многих профессионалов.
 
-As Arthur C. Clarke observed, any sufficiently advanced technology is indistinguishable from magic. This is a great way to approach Git: newbies can ignore its inner workings and view Git as a gizmo that can amaze friends and infuriate enemies with its wondrous abilities.
+Как говорил Артур Кларк - любая достаточно развитая технология неотличима от магии. Это отличный способ подхода Git: новички могут игнорировать принципы его внутренней работы и рассматривать Git как гизмо, который может поражать друзей и приводить в бешенство врагов своими чудесными способностями.
 
-Rather than go into details, we provide rough instructions for particular effects. After repeated use, gradually you will understand how each trick works, and how to tailor the recipes for your needs.
+Вместо того, чтобы вдаваться в подробности, мы предоставляем грубую инструкций для конкретных действий. После частого использования, постепенно вы поймете, как каждый трюк работает, и как адаптировать рецепты для ваших нужд.
 
-.Translations
+.Переводчики
 
- - http://docs.google.com/View?id=dfwthj68_675gz3bw8kj[Chinese (Simplified)]: by JunJie, Meng and JiangWei. Hosted by Google Docs.
- - link:/~blynn/gitmagic/intl/es/[Spanish]: by Rodrigo Toledo.
+ - http://docs.google.com/View?id=dfwthj68_675gz3bw8kj[	Китайский (упрощенный)]: JunJie, Meng и JiangWei. Хостинг - Google Docs.
+ - link:/~blynn/gitmagic/intl/es/[Испанский]: Rodrigo Toledo.
 
-.Other Editions
+.Другие Издания
 
- - link:book.html[Single webpage]: barebones HTML, with no CSS.
- - link:book.pdf[PDF file]: printer-friendly.
- - http://packages.debian.org/search?searchon=names&keywords=gitmagic[Debian package]: get a fast and local copy of this site. http://packages.ubuntu.com/jaunty/gitmagic[Ubuntu package (Jaunty Jackalope)] also available. Handy http://csdcf.stanford.edu/status/[when this server is offline for maintenance].
+ - link:book.html[HTML одной страницей]: один HTML без CSS.
+ - link:book.pdf[PDF файл]: для печати.
+ - http://packages.debian.org/search?searchon=names&keywords=gitmagic[Пакет Debian]: получите локальную копию этого сайта. http://packages.ubuntu.com/jaunty/gitmagic[Пакет Ubuntu (Jaunty Jackalope)]. Также доступен http://csdcf.stanford.edu/status/[когда этот сервер недоступен для сопровождающих].
 
 === Благодарности ===
 
-Kudos to Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael Budde, Richard Albury, Tarmigan, Derek Mahar and Frode Aannevik for suggestions and improvements. Thanks to Daniel Baumann for creating and maintaining the Debian package. Thanks also to JunJie, Meng and JiangWei for the Chinese translation, and Rodrigo Toledo for the Spanish translation. [If I've left you out, please tell me because I often forget to update this section.]
+Благодарю Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael Budde, Richard Albury, Tarmigan, Derek Mahar и Frode Aannevik за внесенные предложения и улучшения. Спасибо Daniel Baumann за создание и сопровождение пакета для Debian. Также благодарен JunJie, Meng и JiangWei за перевод на китайский, и Rodrigo Toledo за перевод на испанский. [Если я забыл про вас, пожалуйста, сообщите мне, поскольку я часто забывают обновлять этот раздел.]
 
-My gratitute goes to many others for your support and praise. I wish this were a real physical book, so I could quote your generous words on the cover to promote it! In seriousness, I greatly appreciate each message. Reading one always brightens my mood.
+Мои благодарности остальным за вашу поддержку и похвалу. Я хотел бы это была реальная физическая книги, чтобы я смог процитировать ваши щедрые слова на обложку, чтобы прорекламировать ее! Серьезно, я высоко ценю каждое ваше сообщение. Чтение их всегда скрашивает мое настроение.
 
-.Free Git hosting
+.Бесплатные хостинги Git
 
- - http://repo.or.cz/[http://repo.or.cz/] hosts free projects. The first Git hosting site. Founded and maintained by one of the earliest Git developers.
- - http://gitorious.org/[http://gitorious.org/] is another Git hosting site aimed at open-source projects.
- - http://github.com/[http://github.com/] hosts open-source projects for free, and private projects for a fee.
+ - http://repo.or.cz/[http://repo.or.cz/] хостинг свободных проектов. Первый Git хостинг сайта. Основан и поддерживается одним из первых разработчиков Git.
+ - http://gitorious.org/[http://gitorious.org/] другой Git хостинг сайта, направленной на проектов с открытым кодом.
+ - http://github.com/[http://github.com/] хостинг проектов с открытым кодом, и закрытых проектов на платной основе.
 
-Many thanks to each of these sites for hosting this guide.
+Большое спасибо каждому из этих участков для размещения данного руководства.
 
-=== License ===
+=== Лицензия ===
 
-This guide is released under http://www.gnu.org/licenses/gpl-3.0.html[the GNU General Public License version 3]. Naturally, the source is kept in a Git
-repository, and can be obtained by typing:
+Это руководство выпущено под http://www.gnu.org/licenses/gpl-3.0.html[GNU General Public License version 3]. Естественно, что источник находится в репозитории Git, и можно получить, набрав:
 
- $ git clone git://repo.or.cz/gitmagic.git  # Creates "gitmagic" directory.
+ $ git clone git://repo.or.cz/gitmagic.git  # Создает каталог "gitmagic".
 
-or from one of the mirrors:
+или с одного из зеркал:
 
  $ git clone git://github.com/blynn/gitmagic.git
  $ git clone git://gitorious.org/gitmagic/mainline.git
