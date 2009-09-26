@@ -171,7 +171,7 @@ fix a high-priority bug or something.
 
 It's analogous to changing the TV channel temporarily to see what else is on.
 But instead of pushing a couple of buttons, you have to create, check out and
-delete temporary branches and commits. Luckily, Git has a shorcut that
+delete temporary branches and commits. Luckily, Git has a shortcut that
 is as convenient as a TV remote control:
 
  $ git stash
