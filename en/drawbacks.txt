@@ -95,18 +95,3 @@ There are worse cases unfortunately. If several branches with different initial 
 For commits A and B, the meaning of the expressions "A..B" and "A...B" depends
 on whether the command expects two endpoints or a range. See *git help diff*
 and *git help rev-parse*.
-
-Some error messages are inscrutable. For example, if Git cannot create the
-lockfile +packed-refs.lock+, then you might see:
-
- $ git branch -D foo
- error: cannot delete 'refs/heads/foo' from packed refs
- error: Error deleting branch 'foo'
-
-This could happen if say filesystem trouble prevented the lockfile from being
-deleted in a previous Git command. In this case the solution is to delete the
-lockfile and try again, after ensuring no Git commands are still running.
-
-The push command ignores the state of the working directory of the target
-repository. To prevent confusion, push only into bare repositories, or setup a
-dedicated push-only branch.
