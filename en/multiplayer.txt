@@ -112,7 +112,7 @@ The resulting files can be given to *git-send-email*, or sent by hand. You can a
 
  $ git format-patch START_COMMIT..END_COMMIT
 
-On the receving end, save an email to a file, then type:
+On the receiving end, save an email to a file, then type:
 
  $ git am < FILE
 

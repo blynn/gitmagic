@@ -34,7 +34,7 @@ Baumann.
 JunJie, Meng, JiangWei, Rodrigo Toledo, and Leonardo Siqueira Rodrigues
 worked on translations of this guide.
 
-My gratitute goes to many others for your support and praise. If this were
+My gratitude goes to many others for your support and praise. If this were
 a real physical book, I'd quote your generous words on the cover to promote it.
 
 If I've left you out by mistake, please tell me or just send me a patch!

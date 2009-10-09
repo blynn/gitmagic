@@ -157,7 +157,7 @@ The +contrib+ subdirectory is a treasure trove of tools built on Git.
 In time, some of them may be promoted to official commands. On Debian and
 Ubuntu, this directory lives at +/usr/share/doc/git-core/contrib+.
 
-One popular resident is +workdir/git-new-workdir+. Via clever symlinking, this script creates a new working directory whose history is shared with the original respository:
+One popular resident is +workdir/git-new-workdir+. Via clever symlinking, this script creates a new working directory whose history is shared with the original repository:
 
   $ git-new-workdir an/existing/repo new/directory
 
