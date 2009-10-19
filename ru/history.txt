@@ -1,114 +1,97 @@
-== Lessons of History ==
+== Уроки истории ==
 
-A consequence of Git's distributed nature is that history can be edited
-easily. But if you tamper with the past, take care: only rewrite that part of
-history which you alone possess. Just as nations forever argue over who
-committed what atrocity, if someone else has a clone whose version of history
-differs to yours, you will have trouble reconciling when your trees interact.
+Вследствие распределенной природы Git, историю изменений можно легко редактировать. Однако, если вы вмешиваетесь в прошлое, будьте осторожны: изменяйте только ту часть истории, которой владеете вы и только вы. И также как государства бесконечно выясняют, кто же именно совершил и какие бесчинства, так и у вас будут проблемы с примирением после взаимодействия деревьев истории.
 
-Of course, if you control all the other trees too, then there is no problem
-since you can overwrite them.
+Конечно, если вы также контролируете и все остальные деревья, то нет никаких проблем поскольку вы можете переписать их.
 
-Some developers strongly feel history should be immutable, warts and all.
-Others feel trees should be made presentable before they are unleashed in
-public. Git accommodates both viewpoints. Like cloning, branching and merging,
-rewriting history is simply another power Git gives you. It is up to you
-to use it wisely.
+Некоторые разработчики убеждены, что история должна быть неизменна со всеми огрехами и прочим.  
+Другие считают, что деревья должны быть презентабельными, до того как они выпустят их в публичный доступ.
+Git учитывает оба мнения. Также как клонирование, ветвление и слияние, переписывание истории - это просто еще одна возможность, которую дает вам Git. Разумное ее использование зависит только от вас.
 
-=== I Stand Corrected ===
+=== Оставаясь корректным ===
 
-Did you just commit, but wish you had typed a different message? Then run:
+Только что сделали коммит и уже хотите изменить запись в журнале? Запустите:
 
  $ git commit --amend
 
-to change the last message. Realized you forgot to add a file? Run *git add* to
-add it, and then run the above command.
+чтобы изменить последнее сообщение коммита. Осознали, что забыли добавить файл? Запустите *git add*, чтобы это сделать и выполните вышеуказанную команду.
 
-Want to include a few more edits in that last commit? Then make those edits and run:
+Захотелось добавить еще немного изменений в последнюю фиксацию (commit)? Так сделайте их и запустите:
 
  $ git commit --amend -a
 
-=== ... And Then Some ===
+=== ...И кое-что еще ===
 
-Let's suppose the previous problem is ten times worse. After a lengthy session you've made a bunch of commits. But you're not quite happy with the way they're organized, and some of those commit messages could use rewording. Then type:
+Давайте представим себе, что предыдущая проблема на самом деле в десять раз хуже. После длительной работы вы сделали ряд фиксаций, но вы не очень-то довольны тем, как они организованы и кое-какие записи в журнале (commit messages) надо бы слегка переформулировать. В этом случае запустите:
 
  $ git rebase -i HEAD~10
 
-and the last 10 commits will appear in your favourite $EDITOR. A sample excerpt:
+и записи в журнале от последних 10-ти фиксаций появятся в вашем любимом редаторе (задается переменной окружения  $EDITOR). Вот кусок примера:
 
-    pick 5c6eb73 Added repo.or.cz link
-    pick a311a64 Reordered analogies in "Work How You Want"
-    pick 100834f Added push target to Makefile
+    pick 5c6eb73 Добавил ссылку repo.or.cz
+    pick a311a64 Сменил порядок в "Работай как хочешь"
+    pick 100834f Добавил цель для push в Makefile
 
-Then:
+После чего:
 
-- Remove commits by deleting lines.
-- Reorder commits by reordering lines.
-- Replace "pick" with "edit" to mark a commit for amending.
-- Replace "pick" with "squash" to merge a commit with the previous one.
+- Убираем коммиты, удаляя строки.
+- Меняем порядок коммитов, меняя порядок строк.
+- Заменяем "pick" на "edit", если требуется внести изменения в коммиты.
+- Заменяем "pick" на "squash" для слияния коммита с предыдущим.
 
-If you marked a commit for editing, then run:
+Если вы отметили коммит для исправлений, запустите:
 
  $ git commit --amend
 
-Otherwise, run:
+Если нет, запустите:
 
  $ git rebase --continue
 
-So commit early and commit often: you can easily tidy up later with rebase.
+В общем, делайте коммиты как можно раньше и как можно чаще - всегда потом сможете за собой подчистить при помощи rebase.
 
-=== Local Changes Last ===
+=== Локальные изменения сохраняются ===
 
-You're working on an active project. You make some local commits over time, and
-then you sync with the official tree with a merge. This cycle repeats itself a few times before you're ready to push to the central tree.
+Предположим, вы работаете над активным проектом. За какое-то время были проведены несколько коммитов, после чего синхронизируетесь с официальным деревом через слияние. Цикл повторяется несколько раз до тех пор, пока вы не готовы отправить (push) изменения в центральное дерево.
 
-But now the history in your local Git clone is a messy jumble of your changes and the official changes. You'd prefer to see all your changes in one contiguous section, and after all the official changes.
+Однако теперь история изменений в локальном клоне Git представляет собой кашу из ваших и официальных изменений. Вам бы хотелось видеть все  изменения непрерывной секцией даже после слияния с официальными.
 
-This is a job for *git rebase* as described above. In many cases you can use
-the *--onto* flag and avoid interaction.
+Это работа для команды *git rebase* в виде, описанном выше. Зачастую, имеет смысл использовать флаг *--onto*, чтобы не использовать интерактивный режим. 
 
-Also see *git help rebase* for detailed examples of this amazing command. You can split commits. You can even rearrange branches of a tree.
+Также стоит взглянуть на вывод команды *git help rebase* для получения подробных примеров использования этой замечательной команды. Вы можете объединять фиксации, вы можете даже перестраивать ветки.
 
-=== Rewriting History ===
+=== Переписывая историю ===
 
-Occasionally, you need the source control equivalent of airbrushing people out
-of official photos, erasing them from history in a Stalinesque fashion. For
-example, suppose we intend to release a project, but it involves a file that
-should be kept private for some reason. Perhaps I left my credit card number in
-a text file and accidentally added it to the project. Deleting the file is
-insufficient, for the file can be accessed from older commits. We must remove
-the file from all commits:
+Время от времени вам может понадобиться эквивалент "замазывания" людей на официальных фотографиях, только  для систем контроля версий, как бы стирая их из истории в духе сталинизма. Например, предположим, что мы уже собираемся выпустить релиз проекта, но он содержит файл, который не должен стать достоянием общественности по каким-то причинам. Может я сохранил номер своей кредитки в текстовый файл и случайно добавил этот файл к файлам проекта? Просто стирать файл бесполезно - из-за контроля версий всегда можно вытащить такую из старых версий, где этот документ еще есть. Нам надо удалить файл из всех версий когда-либо существовавших. Для этого:
 
  $ git filter-branch --tree-filter 'rm top/secret/file' HEAD
 
-See *git help filter-branch*, which discusses this example and gives a faster
-method. In general, *filter-branch* lets you alter large sections of history
-with a single command.
+Стоит посмотреть вывод команды *git help filter-branch*, где обсуждается этот пример и даже предлагается  более быстрый метод решения. Короче говоря, *filter-branch* позволяет изменять существенные части истории при помощи одной-единственной команды.
 
-Afterwards, the +.git/refs/original+ directory describes the state of affairs before the operation. Check the filter-branch command did what you wanted, then delete this directory if you wish to run more filter-branch commands.
+В результате директория +.git/refs/original+ будет описывать состояние дел до выполнения операции. Убедитесь, что команда filter-branch проделала все, что вы хотели, и, если хотите опять использовать команду, удалите эту директорию.
 
-Lastly, replace clones of your project with your revised version if you want to interact with them later.
+И, наконец, замените клоны вашего проекта обновленной версией, если собираетесь в дальнейшем с ними иметь дело.
 
-=== Making History ===
+=== Создавая Историю ===
 
 [[makinghistory]]
-Want to migrate a project to Git? If it's managed with one of the more well-known systems, then chances are someone has already written a script to export the whole history to Git.
+Хотите перевести проект под управление Git? Если сейчас он находится под управлением какой-либо из хорошо известных систем контроля версий, то весьма велики шансы на то, что кто-нибудь уже позаботился и написал необходимые скрипты для экспорта всей истории проекта в Git.
 
-Otherwise, look up *git fast-import*, which reads text input in a specific
-format to create Git history from scratch. Typically a script using this
-command is hastily cobbled together and run once, migrating the project in a
-single shot.
+А если все-таки нет? Тогда смотрите в сторону команды *git fast-import*, которая считывает текстовый ввод в специальном формате для создания истории Git "с нуля".
 
-As an example, paste the following listing into temporary file, such as `/tmp/history`:
+Обычно скрипт, использующий эту команду - это наспех состряпанное нечто, 
+предназначенное для однократного использования, чтоб "перетащить" проект за один раз.
+
+В качестве примера, вставьте следующий листинг в какой-нибудь файл, типа '/tmp/history':
+
 ----------------------------------
 commit refs/heads/master
 committer Alice <alice@example.com> Thu, 01 Jan 1970 00:00:00 +0000
 data <<EOT
-Initial commit.
+Стартовый коммит.
 EOT
 
 M 100644 inline hello.c
-data <<EOT
+data <<EOT 
 #include <stdio.h>
 
 int main() {
@@ -117,15 +100,14 @@ int main() {
 }
 EOT
 
-
 commit refs/heads/master
 committer Bob <bob@example.com> Tue, 14 Mar 2000 01:59:26 -0800
 data <<EOT
-Replace printf() with write().
+Заменен printf() на write()
 EOT
 
 M 100644 inline hello.c
-data <<EOT
+data <<EOT 
 #include <unistd.h>
 
 int main() {
@@ -136,101 +118,63 @@ EOT
 
 ----------------------------------
 
-Then create a Git repository from this temporary file by typing:
+Затем создайте репозиторий Git из этого временного файла при помощи команд:
 
- $ mkdir project; cd project; git init
- $ git fast-import < /tmp/history
+$ mkdir project; cd project; git init
+$ git fast-import < /tmp/history
 
-You can checkout the latest version of the project with:
+Вы можете извлечь (checkout) последнюю версию проекта при помощи команды:
 
  $ git checkout master .
 
-The *git fast-export* command converts any git repository to the
-*git fast-import* format, whose output you can study for writing exporters,
-and also to transport git repositories in a human-readable format. Indeed,
-these commands can send repositories of text files over text-only channels.
+Команда *git fast-export* преобразует любой репозиторий Git в формат, понимаемый командой *git fast-import*. То есть, ее выход может быть использован как образец для тех кто пишет скрипты-преобразователи и для того, чтобы переносить репозитории в формате, хоть как-то пригодном для чтения человеком. Естественно, при помощи этих команд можно пересылать репозитории текстовых файлов через каналы передачи текста.
 
-=== Where Did It All Go Wrong? ===
+=== Когда же все пошло не так? ===
 
-You've just discovered a broken feature in your program which you know for sure was working a few months ago. Argh! Where did this bug come from? If only you had been testing the feature as you developed.
+Вы только что обнаружили, что кое-какой функционал вашей программы не работает, но вы совершенно отчетливо помните, что он работал всего несколько месяцев назад. Ну вот, блин! Откуда же взялась ошибка? Вы же это проверяли сразу как разработали.
 
-It's too late for that now. However, provided you've been committing often, Git
-can pinpoint the problem:
+В любом случае, уже поздно сожалеть. Однако, если вам хватило ума фиксировать свои изменения часто, то Git сможет сильно помочь точно определить проблему.
 
  $ git bisect start
  $ git bisect bad SHA1_OF_BAD_VERSION
  $ git bisect good SHA1_OF_GOOD_VERSION
 
-Git checks out a state halfway in between. Test the feature, and if it's still broken:
+Git извлечет состояние ровно посередине. Проверьте работает ли то, что сломалось, и если все еще нет, то введите:
 
  $ git bisect bad
 
-If not, replace "bad" with "good". Git again transports you to a state halfway
-between the known good and bad versions, narrowing down the possibilities.
-After a few iterations, this binary search will lead you to the commit that
-caused the trouble. Once you've finished your investigation, return to your
-original state by typing:
+Если же работает, то замените "bad" на "good" в предыдущей команде. Git снова переместит вас в состояние посередине между "хорошей" и "плохой" ревизиями, при этом сузив круг подозреваемых ревизий вдвое.
+
+После нескольких итераций, этот бинарный поиск приведет вас к тому коммиту, на котором все и сломалось. После окончания выяснения, вернуть исходное состояние можно командой:
 
  $ git bisect reset
 
-Instead of testing every change by hand, automate the search by running:
+Вместо того, чтоб вручную тестировать каждое изменение - автоматизируйте этот процесс при помощи команды:
 
  $ git bisect run COMMAND
 
-Git uses the return value of the given command, typically a one-off script, to
-decide whether a change is good or bad: the command should exit with code 0
-when good, 125 when the change should be skipped, and anything else between 1
-and 127 if it is bad. A negative return value aborts the bisect.
+Git использует возвращаемое значение заданной команды, обычно "одноразового" скрипта, чтоб определить "хорошее" это было изменение или "плохое". Скрипт должен вернуть 0, если "хорошее", 125 если изменение надо пропустить и любое число от 1 до 127 если "плохое". Отрицательное возвращаемое значение прерывает бинарный поиск.
 
-You can do much more: the help page explains how to visualize bisects, examine
-or replay the bisect log, and eliminate known innocent changes for a speedier
-search.
+На самом деле возможностей еще больше! На странице помощи объясняется как визуализировать бинарный поиск, проанализировать или даже воспроизвести журнал поиска, исключить изменения в которых точно все в порядке для ускорения поиска.
 
-=== Who Made It All Go Wrong? ===
+=== Из-за кого все пошло наперекосяк? ===
 
-Like many other version control systems, Git has a blame command:
+Как и многие другие системы конроля версий, Git поддерживает команду blame:
 
  $ git blame FILE
 
-which annotates every line in the given file showing who last changed it, and when. Unlike many other version control systems, this operation works offline, reading only from local disk.
+которая показывает кто и когда изменил каждую строку выбранного файла. В отличие же от многих других систем контроля версий эта операция происходит оффлайн, то есть данные берутся с локального диска.
 
-=== Personal Experience ===
+=== Личный опыт ===
 
-In a centralized version control system, history modification is a difficult
-operation, and only available to administrators. Cloning, branching, and
-merging are impossible without network communication. So are basic operations
-such as browsing history, or committing a change. In some systems, users
-require network connectivity just to view their own changes or open a file for
-editing.
+В централизованных системах контроля версий, изменения истории - достаточно сложная операция и для ее проведения необходимо привлечение администраторов. Процедуры клонирования, ветвления и слияния невозможно осуществить без сетевого соединения. Также обстоят дела и с такими базовыми операциями как просмотр журнала изменений или фиксация изменений. В некоторых системах сетевое соединение требуется даже для просмотра собственных изменений или открытия файла для редактирования.
 
-Centralized systems preclude working offline, and need more expensive network
-infrastructure, especially as the number of developers grows. Most
-importantly, all operations are slower to some degree, usually to the point
-where users shun advanced commands unless absolutely necessary. In extreme
-cases this is true of even the most basic commands. When users must run slow
-commands, productivity suffers because of an interrupted work flow.
+Централизованные системы исключают возможность работать оффлайн и требуют более дорогой сетевой инфраструктуры, особенно с увеличением количества разработчиков. Еще более важно, из-за того все операции происходят медленнее, пользователи избегают пользоваться "продвинутыми" командами до тех пор пока не "припечет как следует". В особо "запущенных" случаях это касается и большинства базовых команд тоже. Продуктивность страдает из-за остановок в работе, когда пользователи вынуждены запускать "долгоиграющие"  команды.
 
-I experienced these phenomena first-hand. Git was the first version control
-system I used. I quickly grew accustomed to it, taking many features for
-granted. I simply assumed other systems were similar: choosing a version
-control system ought to be no different from choosing a text editor or web
-browser.
+Я испытал этот феномен на себе. Git был моей первой системой контроля версий. Я быстро привык нему и стал относится к его возможностям как к должному. Я предположил, что и другие системы похожи на него: выбор системы контроля версий не должен отличаться от выбора текстового редактора или браузера.
 
-I was shocked when later forced to use a centralized system. My often flaky
-internet connection matters little with Git, but makes development unbearable
-when it needs to be as reliable as local disk. Additionally, I found myself
-conditioned to avoid certain commands because of the latencies involved, which
-ultimately prevented me from following my desired work flow.
+Когда, немного позже, я был вынужден использовать централизованную систему контроля версий, я был шокирован. При использовании Git, мое, зачастую капризное, интернет-соединение не имело большого значения, но теперь разработка стала невыносимой когда от него потребовалась надежность как у жесткого диска. Плюс к этому, я обнаружил, что стал избегать использовать некоторые команды из-за получающихся в результате их выполнения задержек, а без них оказалось невозможным следовать моему стилю разработки.
 
-When I had to run a slow command, the interruption to my train of thought
-dealt a disproportionate amount of damage. While waiting for server
-communication to complete, I'd do something else to pass the time, such as
-check email or write documentation. By the time I returned to the original
-task, the command had finished long ago, and I would waste more time trying to
-remember what I was doing. Humans are bad at context switching.
+Когда мне было нужно запустить "медленную" команду, нарушение хода цепочки моих мыслей оказывало несоизмеримый ущерб разработке. Ожидая окончания связи с сервером, я должен был заниматься чем-то другим, чтоб скоротать время, например, чтением почты или написанием документации. Через некоторое время я возвращался к первоначальной задаче, но приходилось тратить уйму времени, чтоб вспомнить на чем же я остановился и что хотел делать дальше. Все-таки люди не очень приспособлены для многозадачности.
 
-There was also an interesting tragedy-of-the-commons effect: anticipating
-network congestion, individuals would consume more bandwidth than necessary on
-various operations in an attempt to reduce future delays. The combined efforts
-intensified congestion, encouraging individuals to consume even more bandwidth
-next time to avoid even longer delays.
+Есть еще один интересный эффект, так называемая, трагедия общин: предвидя будущую загрузку сети, некоторые люди начинают использовать более "широкие" каналы чем им реально требуются для текущих операций в попытке предотвратить будущие задержки. Суммарная активность увеличивает загрузку сети, поощряя людей задействовать еще более высокоскоростные каналы в следующий раз, чтоб избежать еще больших задержек.
