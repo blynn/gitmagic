@@ -90,7 +90,8 @@ In a court of law, events can be stricken from the record. Likewise, you can pic
  $ git commit -a
  $ git revert SHA1_HASH
 
-will undo just the commit with the given hash. Running *git log* reveals the revert is recorded as a new commit.
+will undo just the commit with the given hash. The revert is recorded as a new
+commit, which you can confirm by running *git log*.
 
 === Changelog Generation ===
 

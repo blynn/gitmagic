@@ -113,7 +113,7 @@ If you're lucky, or very good, you can skip these lines.
 Eventually, Part I is approved:
 
  $ git checkout master  # Go back to Part I.
- $ some_command         # Maybe you're supposed to run something when the
+ $ some_command         # Some command you're supposed to run when the
                         # current working directory is officially ready.
  $ git merge part2      # Merge in Part II.
  $ git branch -d part2
@@ -150,9 +150,8 @@ List all branches by typing:
 
  $ git branch
 
-There is always a branch named "master", and you start here by default. Some
-advocate leaving the "master" branch untouched and creating new branches for
-your own edits.
+By default, you start in a branch named "master". Some advocate leaving the
+"master" branch untouched and creating new branches for your own edits.
 
 The *-d* and *-m* options allow you to delete and move (rename) branches.
 See *git help branch*.
@@ -190,9 +189,9 @@ You can have multiple stashes, and manipulate them in various ways. See
 
 Applications such as http://www.mozilla.com/[Mozilla Firefox] allow you to open multiple tabs and multiple windows. Switching tabs gives you different content in the same window. Git branching is like tabs for your working directory. Continuing this analogy, Git cloning is like opening a new window. Being able to do both improves the user experience.
 
-On a higher level, several Linux window managers support multiple desktops.
-Branching in Git is similar to switching to a different desktop, while cloning
-is similar to attaching another monitor to gain another desktop.
+On a higher level, several window managers support multiple desktops. Branching
+in Git is similar to switching to a different desktop, while cloning is similar
+to attaching another monitor to gain another desktop.
 
 Yet another example is the http://www.gnu.org/software/screen/[*screen*] utility. This gem lets you create, destroy and switch between multiple terminal sessions in the same terminal. Instead of opening new terminals (clone), you can use the same one if you run *screen* (branch). In fact, you can do a lot more with *screen* but that's a topic for another text.
 

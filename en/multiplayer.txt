@@ -136,7 +136,7 @@ The +remote.origin.url+ option controls the source URL; "origin" is a nickname
 given to the source repository. As with the "master" branch convention, we may
 change or delete this nickname but there is usually no reason for doing so.
 
-If the the original repository moves, we can update the URL via:
+If the original repository moves, we can update the URL via:
 
  $ git config remote.origin.url NEW_URL
 
