@@ -26,7 +26,7 @@ Rather than go into details, we provide rough instructions for particular effect
 
 Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone,
 Michael Budde, Richard Albury, Tarmigan, Derek Mahar, Frode Aannevik, Keith
-Rarick, Andy Somerville, Ralf Recker, Øyvind A. Holm, Miklos Vajna,
+Rarick, Andy Somerville, Ralf Recker, Øyvind A. Holm, Miklos Vajna, and
 Sébastien Hinderer contributed corrections and improvements.
 
 Francois Marier maintains the Debian package originally created by Daniel

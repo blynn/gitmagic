@@ -1,6 +1,7 @@
 # The language we are building.
 # For example, Run "make LANG=es" to build the Spanish edition.
 LANG := en
+SHELL := /bin/bash
 
 .PHONY: target clean sync push
 
@@ -12,12 +13,15 @@ TXTFILES := preface.txt intro.txt basic.txt clone.txt branch.txt history.txt \
     multiplayer.txt grandmaster.txt secrets.txt drawbacks.txt translate.txt
 
 book.xml: $(addprefix $(LANG)/,$(TXTFILES))
-	# Kludge to make preface sections work for languages besides English.
-	echo '[specialsections]' > conf
-	sed -n '/^== .* ==$$/p' $(LANG)/preface.txt | sed 's/^== \(.*\) ==$$/^\1$$=sect-preface/' >> conf
 	# Concatenate the text files and feed to AsciiDoc.
 	# If a file has not yet been translated for the target language,
 	# then substitute the English version.
+	# Kludge to make preface sections work for languages besides English
+	# for older AsciiDoc versions.
+	if [[ `asciidoc --version | cut -f 2 -d ' '` < "8.5.0" ]]; then \
+	echo '[specialsections]' > conf ; \
+	sed -n '/^== .* ==$$/p' $(LANG)/preface.txt | sed 's/^== \(.*\) ==$$/^\1$$=sect-preface/' >> conf ; \
+	else echo "" > conf ; fi; \
 	( for FILE in $^ ; do if [ -f $$FILE ]; then cat $$FILE; else \
 	cat en/$$(basename $$FILE); fi; echo ; done ) | \
 	asciidoc -a lang=$(LANG) -d book -b docbook -f conf - > $@
