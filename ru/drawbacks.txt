@@ -1,91 +1,87 @@
-== Git Shortcomings ==
+== Недостатки Git ==
 
-There are some Git issues I've swept under the carpet. Some can be handled easily with scripts and hooks, some require reorganizing or redefining the project, and for the few remaining annoyances, one will just have to wait. Or better yet, pitch in and help!
+Есть некоторые проблемы Git, которые я спрятал под сукно. Некоторые из них можно легко решить с помощью сценариев и хуков, некоторые требуют реорганизации или пересмотра проекта, и из нескольких оставшихся неприятности, одну придется терпеть. Или еще лучше, взяться за нее и решить!
 
-=== SHA1 Weaknesses ===
+=== Недостатки SHA1 ===
 
-As time passes, cryptographers discover more and more SHA1 weaknesses. Already,
-finding hash collisions is feasible for well-funded organizations. Within
-years, perhaps even a typical PC will have enough computing power to silently
-corrupt a Git repository.
+Со временем, криптографы обнаружать более слабые SHA1. Уже нахождения хэш столкновений является допустимым для хорошо финансируемой организации. За годы, возможно, даже типичный ПК будет иметь достаточную вычислительную мощность, чтобы потихоньку скоррумпировать Git репозиторий.
 
-Hopefully Git will migrate to a better hash function before further research
-destroys SHA1.
+Надеюсь Git мигрирует к лучшей хэш-функции до того, как дальнейшие исследования разрушат SHA1.
 
 === Microsoft Windows ===
 
-Git on Microsoft Windows can be cumbersome:
+Git на Microsoft Windows может быть накладным:
 
-- http://cygwin.com/[Cygwin], a Linux-like environment for Windows, contains http://cygwin.com/packages/git/[a Windows port of Git].
+- http://cygwin.com/[Cygwin], Linux-среда для Windows, содержит http://cygwin.com/packages/git/[порт Git на Windows].
 
-- http://code.google.com/p/msysgit/[Git on MSys] is an alternative requiring minimal runtime support, though a few of the commands need some work.
+-http://code.google.com/p/msysgit/[Git на MSys] вариант, требующий минимальной рантайм поддержки, хотя для нескольких комманд, нужна доработка.
 
-=== Unrelated Files ===
+=== Несвязанные файлы ===
 
-If your project is very large and contains many unrelated files that are constantly being changed, Git may be disadvantaged more than other systems because single files are not tracked. Git tracks changes to the whole project, which is usually beneficial.
+Если ваш проект очень большой и содержит много не связанных файлов, которые постоянно изменяются, Git могжет оказаться в невыгодном положении больше, чем другие системы, поскольку отдельные файлы не отслеживаются. Git отслеживает изменения всего проекта, такой подход, как правило, полезен.
 
-A solution is to break up your project into pieces, each consisting of related files. Use *git submodule* if you still want to keep everything in a single repository.
+Решение - разбить проект на части, каждая из которых состоит из связанных файлов. Используйте *git submodule* если вы все еще хотите держать все в одном репозитории.
 
-=== Who's Editing What? ===
+=== Кто и что редактировал ? ===
 
-Some version control systems force you to explicitly mark a file in some way before editing. While this is especially annoying when this involves talking to a central server, it does have two benefits:
+Некоторые системы контроля версий заставить вас отметить файл до редактирования. Хотя это особенно раздражает, когда речь идет о работе с центральным сервером, этот способ имеет два преимущества:
 
-  1. Diffs are quick because only the marked files need be examined.
+  1. Diff'ы быстры, потому что только отмеченные файлы должны быть изучены.
 
-  2. One can discover who else is working on the file by asking the central server who has marked it for editing.
+  2. Можно обнаружить, кто еще работает с этим файлом, спросив центральный сервер, кто отметил его для редактирования.
 
-With appropriate scripting, you can achieve the same with Git. This requires cooperation from the programmer, who should execute particular scripts when editing a file.
+При наличии соответствующих сценариев, вы можете добиться того же с Git. Это требует сотрудничества со стороны других программистов, которые должны выполнять сценарии при редактировании файла.
 
-=== File History ===
+=== История файлов ===
 
-Since Git records project-wide changes, reconstructing the history of a single file requires more work than in version control systems that track individual files.
+Поскольку Git записывает изменения всего проекта, то чтобы восстановить историю одного файла требуется больше работы, чем в системах управления версиями, которые позволяют отслеживать отдельные файлы.
 
-The penalty is typically slight, and well worth having as other operations are incredibly efficient. For example, `git checkout` is faster than `cp -a`, and project-wide deltas compress better than collections of file-based deltas.
+Потери, как правило, небольшие, а также стоит иметь в виду, что другие операции являются невероятно эффективными. Например, `git checkout` быстрее, чем `cp -a`, и вся дельта проекта сжимаются лучше, чем коллекций на основе дельт файлов.
 
-=== Initial Clone ===
+=== Начальное Клонирование ===
 
-Creating a clone is more expensive than checking out code in other version control systems when there is a lengthy history.
+Создание клона репозитория дороже обычного чекаута в другие системы управления версиями, особенно когда существует большая история.
 
-The initial cost is worth paying in the long run, as most future operations will then be fast and offline. However, in some situations, it may be preferable to create a shallow clone with the `--depth` option. This is much faster, but the resulting clone has reduced functionality.
+Первоначальная цена окупается в долгосрочной перспективе, так как большинство операций, затем будут происходить быстро и в автономном режиме. Однако в некоторых ситуациях может быть предпочтительным создание мелких клонов с опцией `--depth`. Это намного быстрее, но в результате снижается функциональность клона.
 
-=== Volatile Projects ===
+=== Изменчивые Проекты ===
 
-Git was written to be fast with respect to the size of the changes. Humans make small edits from version to version. A one-liner bugfix here, a new feature there, emended comments, and so forth. But if your files are radically different in successive revisions, then on each commit, your history necessarily grows by the size of your whole project.
+Git была написана, чтобы быть быстрым по отношению к большим изменениям. Люди делают небольшие исправления от версии к версии. Однострочные исправление здесь, новые функции там, исправленные комментарии, и так далее. Но если ваши файлы, радикально отличаются в следующей ревизии, то на каждой фиксации, ваша история обязательно увеличивается на размер всего вашего проекта.
 
-There is nothing any version control system can do about this, but standard Git users will suffer more since normally histories are cloned.
+Не существует системы управления версиями, которая может решить эту проблему, но пользователи Git пострадают больше, поскольку клонируется вся история.
 
-The reasons why the changes are so great should be examined. Perhaps file formats should be changed. Minor edits should only cause minor changes to at most a few files.
+Причины, почему эти изменения бывают настолько велики, должны быть изучены. Возможно, формат файла должен быть изменен. Малые изменения должны быть причиной малых изменений в самих файлах.
 
-Or perhaps a database or backup/archival solution is what is actually being sought, not a version control system. For example, version control may be ill-suited for managing photos periodically taken from a webcam.
+Или, возможно, то, что вам было нужно, это базы данных или система резервного копирования или архивы, а не система контроля версий. Например, контроль версий может быть плохо приспособлен для управления фотографиями периодически получаемых с веб-камеры.
 
-If the files really must be constantly morphing and they really must be versioned, a possibility is to use Git in a centralized fashion. One can create shallow clones, which checks out little or no history of the project. Of course, many Git tools will be unavailable, and fixes must be submitted as patches. This is probably fine as it's unclear why anyone would want the history of wildly unstable files.
+Если файлы действительно должны постоянно изменяться, и они действительно должно быть версионироваться, возможность использовать Git централизованным образом. Можно создать мелкой клоны, с небольшой или без истории проекта. Конечно, многие инструменты Git будут недоступны, и исправления должны быть представлены в виде патчей. Вероятно, это штраф, потому как неясно, почему кто-то хочет вести историю дико неустойчиво файлов.
 
-Another example is a project depending on firmware, which takes the form of a huge binary file. The history of the firmware is uninteresting to users, and updates compress poorly, so firmware revisions would unnecessarily blow up the size of the repository.
+Другим примером является проект, зависимый от прошивки, которая принимает форму огромного бинарного файла. История этой микропрограммы неинтересна для пользователей, и обновления сжимаются плохо, так версии микропрограммы могут излишне увеличить размера хранилища.
 
-In this case, the source code should be stored in a Git repository, and the binary file should be kept separately. To make life easier, one could distribute a script that uses Git to clone the code, and rsync or a Git shallow clone for the firmware.
+В этом случае исходный код должен храниться в хранилище Git, а бинарные файлы - отдельно. Чтобы сделать жизнь проще, можно было бы распространять скрипт, который используется Git чтобы клонировать код и Rsync или мелкий клон Git для прошивки.
 
-=== Global Counter ===
+=== Глобальный счетчик ===
 
-Some centralized version control systems maintain a positive integer that increases when a new commit is accepted. Git refers to changes by their hash, which is better in many circumstances.
+Некоторые централизованные системы контроля версий, используют положительные числа, которые возрастают, когда происходит новый коммит. Git идентифицирует изменения их хэшем, который лучше во многих обстоятельствах.
 
-But some people like having this integer around. Luckily, it's easy to write scripts so that with every update, the central Git repository increments an integer, perhaps in a tag, and associates it with the hash of the latest commit.
+Но некоторым люди нравится эти целые вокруг. К счастью, легко написать сценарии, чтобы при каждом обновлении центральный репозиторий Git увеличивал целое число, возможно, в теге, и связывает его с хэшем последним коммитом.
 
-Every clone could maintain such a counter, but this would probably be useless, since only the central repository and its counter matters to everyone.
+Каждай клон может поддерживать такой счетчик, но это, вероятно, будет бесполезным, поскольку только центральный репозиторий имеет значение для всех.
 
-=== Empty Subdirectories ===
+=== Пустые подкаталоги ===
 
-Empty subdirectories cannot be tracked. Create dummy files to work around this problem.
+Пустые подкаталоги не могут быть отслежены. Создайте пустой файл, чтобы обойти эту проблему.
 
-The current implementation of Git, rather than its design, is to blame for this drawback. With luck, once Git gains more traction, more users will clamour for this feature and it will be implemented.
+В этом виноват не дизайн Git, а его текущая реализация. Если повезет и пользователи Git уделят больше внимания этой функции, возможно она будет реализована.
 
-=== Initial Commit ===
+=== Первоначальный коммит ===
 
-A stereotypical computer scientist counts from 0, rather than 1. Unfortunately, with respect to commits, git does not adhere to this convention. Many commands are unfriendly before the initial commit. Additionally, some corner cases must be handled specially, such as rebasing a branch with a different initial commit.
+Обычный ученый в области информатики считает от 0, а не от 1. К сожалению, Git с его коммитами не присоединиться к этой конвенции. Многие команды плохо работают до первого коммита. Кроме того, некоторые частные случаи должны быть обработаны специально, такие, как rebase веток с различными начальными коммитами.
 
-Git would benefit from defining the zero commit: as soon as a repository is constructed, HEAD would be set to the string consisting of 20 zero bytes. This special commit represents an empty tree, with no parent, at some time predating all Git repositories.
+Git'у желательно определение нулевого совершения: как только будет построено хранилище, HEAD будет установлен в строку, состоящую из 20 нулевых байтов. Эта специальный коммит представляет собой пустое дерево, без родителей, предшествовавшие всему в Git репозитории.
 
-Then running git log, for example, would inform the user that no commits have been made yet, instead of exiting with a fatal error. Similarly for other tools.
+Затем запустить *git log*, например, будет показывать пользователю, что коммиты еще не были сделаны вместо выхода с фатальной ошибкой. Аналогично для других инструментов.
 
-Every initial commit is implicitly a descendant of this zero commit. For example, rebasing an unrelated branch would cause the whole branch to be grafted on to the target. Currently, all but the initial commit is applied, resulting in a merge conflict. One workaround is to use `git checkout` followed by `git commit -C` on the initial commit, then rebase the rest.
+Каждая первоначальная фиксация - неявный потомок этого нулевого коммита. Например, несвязанный с какой-либо веткой rebase в целом будет привита на эту цель. В настоящее время применяются все, кроме первоначального коммита, в результате чего получается конфликт слияния. Один из способов заключается в использовании `git checkout` после `git commit -C` первоначального коммита, тогда rebase пройдет нормально.
 
-There are worse cases unfortunately. If several branches with different initial commits are merged together, then rebasing the result requires substantial manual intervention.
+К сожалению, в худшем случае, если несколько ветвей с различными начальными коммитами сливаются, то rebase результата требует значительного ручного вмешательства.
