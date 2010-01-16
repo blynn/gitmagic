@@ -1,28 +1,27 @@
-== Appendix B: Translating This Guide ==
+== Приложение А: Перевод этого руководства ==
 
-Clone the source, then create a directory corresponding to the target http://www.iana.org/assignments/language-subtag-registry[language's IETF tag]: see
-http://www.w3.org/International/articles/language-tags/Overview.en.php[the W3C article on internationalization]. For example, English is "en", Japanese is "ja", and Traditional Chinese is "zh-Hant". In the new directory, and translate the +txt+ files from the "en" subdirectory. 
+Клонируйте исходные тексты, затем создайте соответствующую директорию http://www.iana.org/assignments/language-subtag-registry[языковой тег IETF]: см
+http://www.w3.org/International/articles/language-tags/Overview.en.php[статья W3C по интернационализации]. К примеру, английский язык "en", японский "ja", традиционный китайский "zh-Hant". Скопируйте в директорию файлы +txt+ из "en" поддиректории и переведите их. 
 
-For instance, to translate the guide into http://en.wikipedia.org/wiki/Klingon_language[Klingon], you might type:
+К примеру, для перевода руководства на  http://en.wikipedia.org/wiki/Klingon_language[Klingon], вы можете набрать:
 
  $ git clone git://repo.or.cz/gitmagic.git
  $ cd gitmagic
- $ mkdir tlh  # "tlh" is the IETF language code for Klingon.
+ $ mkdir tlh  # "tlh" - IETF языковой код для Klingon.
  $ cd tlh
  $ cp ../en/intro.txt .
- $ edit intro.txt  # Translate the file.
+ $ edit intro.txt  # Переведите файл.
 
-and so on for each text file. You can review your work incrementally:
+и так с каждым файлом. Вы можете просмотреть всю вашу работу:
 
  $ make LANG=tlh
  $ firefox book.html
 
-Commit your changes often, then let me know when they're ready.
-GitHub.com has an interface that facilitates this: fork the "gitmagic" project,
-push your changes, then ask me to merge.
-
-I like to have translations follow the above scheme so my scripts can produce
-HTML and PDF versions. Also, it conveniently keeps all the translations in the
-official repository. But please do whatever suits you best: for example, the
-Chinese translators used Google Docs. I'm happy as long as your work
-enables more people to access my work.
+Почаще делайте коммиты, потом дайте знать когда ваш перевод готов
+На GitHub.com есть веб-интерфейс, который позволяет упростить всю работу:
+сделать форк "gitmagic" проекта, внести ваши изменения, потом попросить меня о слиянии.
+Я бы хотел чтобы переводы придерживались такой схемы и мои скрипты могли легко создать
+HTML и PDF версии. Также эта схема позволяет удобно хранить все переводы в официальном
+репозитории. Но пожалуйста, поступайте как вам удобнее: к примеру, китайский переводчик
+использовал Google Docs. Я рад тому что ваша работа открывает доступ большему числу людей 
+к моей работе.
