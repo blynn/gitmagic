@@ -22,19 +22,20 @@ Falls alles geklappt hat, kannst du den neuen Stand speichern:
 
  $ git commit -a -m "Noch ein Backup"
 
-==== Add, Delete, Rename ====
+==== Hinzufügen, Löschen, Verschieben  ====
 
-The above will only keep track of the files that were present when you first ran *git add*. If you add new files or subdirectories, you'll have to tell Git:
+Bisher kümmert sich git nur um Dateien die existierten als du das erste mal git add ausgeführt hast.
+Für neue Dateien oder Verzeichnisse musst du git noch folgendes mitteilen:
 
- $ git add NEWFILES...
+ $ git add NEUE_DATEIEN...
 
-Similarly, if you want Git to forget about certain files, maybe because you've deleted them:
+Falls git eine Datei "Vergessen" soll:
 
- $ git rm OLDFILES...
+ $ git rm ALTE_DATEI...
 
-Renaming a file is the same as removing the old name and adding the new name. There's also the shortcut *git mv* which has the same syntax as the *mv* command. For example:
+Eine Datei umzubenennen bedeutet im Endeffekt dasselbe wie sie zu löschen und unter neuem Namen hinzuzufügen. Git benutzt hierzu mv (selber syntax wie mv (1) 
 
- $ git mv OLDFILE NEWFILE
+ $ git mv ALTER_NAME NEUER_NAME
 
 === Advanced Undo/Redo ===
 
