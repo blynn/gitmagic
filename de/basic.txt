@@ -37,19 +37,19 @@ Eine Datei umzubenennen bedeutet im Endeffekt dasselbe wie sie zu löschen und u
 
  $ git mv ALTER_NAME NEUER_NAME
 
-=== Advanced Undo/Redo ===
+===  Fortgeschrittenes Rückgängigmachen/Wiederherstellen===
 
-Sometimes you just want to go back and forget about every change past a certain point because they're all wrong. Then:
+Es kann vorkommen das du jede Änderung ab einem bestimmten Zeitpunkt wegwerfen willst weil alles bockmist ist:
 
  $ git log
 
-shows you a list of recent commits, and their SHA1 hashes. Next, type:
+Zeight dir eine Liste der letzten Commits und die zugehörigen SHA1 hashes. Jetzt:
 
  $ git reset --hard SHA1_HASH
 
-to restore the state to a given commit and erase all newer commits from the record permanently.
+um den Stand des betreffenden Commits wieder herzustellen und alle nachfolgenden Änderungen für immer zu Verwerfen.
 
-Other times you want to hop to an old state briefly. In this case, type:
+Ein ander mal willst du nur kurz zu einem alten Stand springen, in diesem Fall:
 
  $ git checkout SHA1_HASH
 
