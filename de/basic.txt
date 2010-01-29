@@ -53,9 +53,9 @@ Ein ander mal willst du nur kurz zu einem alten Stand springen, in diesem Fall:
 
  $ git checkout SHA1_HASH
 
-This takes you back in time, while preserving newer commits. However, like time travel in a science-fiction movie, if you now edit and commit, you will be in an alternate reality, because your actions are different to what they were the first time around.
+Damit springst du in der Zeit zurück, erhältst aber neuere Änderungen. Aber, wie in jedem guten Sciencefiction Film: Wenn du jetzt etwas änderst, gelangst du in ein alternatives Universum. Wenn du dich das zweite mal anders als das erste Verhälst, änderst du nicht die Zukunft, du wechselst in eine paralele Realität
 
-This alternate reality is called a 'branch', and <<branch,we'll have more to say about this later>>. For now, just remember that
+Diese Alternative Realität heist "Branch". Wir kommen später darauf zurück, aber merke dir schonmal den Namen.
 
  $ git checkout master
 
