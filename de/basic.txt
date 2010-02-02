@@ -49,7 +49,7 @@ Zeight dir eine Liste der letzten Commits und die zugehörigen SHA1 hashes. Jetz
 
 um den Stand des betreffenden Commits wieder herzustellen und alle nachfolgenden Änderungen für immer zu Verwerfen.
 
-Ein ander mal willst du nur kurz zu einem alten Stand springen, in diesem Fall:
+Ein anderes mal willst du nur kurz zu einem alten Stand springen, in diesem Fall:
 
  $ git checkout SHA1_HASH
 
