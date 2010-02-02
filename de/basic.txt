@@ -59,68 +59,67 @@ Diese Alternative Realität heist "Branch". Wir kommen später darauf zurück, a
 
  $ git checkout master
 
-will take you back to the present. Also, to stop Git complaining, always
-commit or reset your changes before running checkout.
+Bringt dich wieder in die Gegenwart.
+Btw: Um zu verhidnern das sich Git geschwert, solltest du änderungen vor jedem Checkout immer commiten oder  reseten.
 
-To take the computer game analogy again:
+Um uns wieder der Computerspiel-analogie zuzuwenden:
 
-- *`git reset --hard`*: load an old save and delete all saved games newer than the one just loaded.
+- *`git reset --hard`*: Ein alten Stand laden und alle neueren Stände wegwerfen.
 
-- *`git checkout`*: load an old game, but if you play on, the game state will deviate from the newer saves you made the first time around. Any saved games you make now will end up in a separate branch representing the alternate reality you have entered. <<branch,We deal with this later>>.
+- *`git checkout`*: Einen alten Spielstand laden. Wenn du hier weiterspielst, weichst du von der bisherigen Realität ab und kommst in ein paraleluniversum (branch, reden wir später drüber) 
 
-You can choose only to restore particular files and subdirectories by appending them after the command:
+Du kannst auch nur einzelne Dateien oder Verzeichnisse wiederherstellen indem du sie an den Befehl anhängst:
 
- $ git checkout SHA1_HASH some.file another.file
+ $ git checkout SHA1_HASH eine.datei nocheine.datei
 
-Take care, as this form of *checkout* can silently overwrite files. To
-prevent accidents, commit before running any checkout command, especially when
-first learning Git. In general, whenever you feel unsure about any operation, Git command or not, first run *git commit -a*.
+Aber sein Vorsichtig! diese art des Checkouts kann dateien überschreiben ohne das du etwas merkst.
+Um Unfälle zu vermeiden solltest du immer commiten befor du ein Checkout machst. 
+Allgemein gilt: Im zweifel erst commiten, besonders am Anfang wenn du Git noch nicht so genau kennst.
 
-Don't like cutting and pasting hashes? Then use:
+Keine lust immer Hashes einzutippen? Nutze:
 
- $ git checkout :/"My first b"
+ $ git checkout :/"Mein erster Co"
 
-to jump to the commit that starts with a given message.
-You can also ask for the 5th-last saved state:
+um zu einem Commit zu springen dessen nachricht so anfängt
+Du kannst auch nach dem 5. letzten Commit fragen: 
 
  $ git checkout master~5
 
-==== Reverting ====
+==== Rückgängig machen ====
 
-In a court of law, events can be stricken from the record. Likewise, you can pick specific commits to undo.
+Du kannst einzelne Commits wieder rückgängig machen:
 
  $ git commit -a
  $ git revert SHA1_HASH
 
-will undo just the commit with the given hash. The revert is recorded as a new
-commit, which you can confirm by running *git log*.
+macht nur den angebenen commit wieder rückgängig. Die revert operation wird als neuer Commit gespeichert, wie
+dir ein Blick in git log verät.
 
-=== Changelog Generation ===
+=== Changelog Erstellen ===
 
-Some projects require a http://en.wikipedia.org/wiki/Changelog[changelog].
-Generate one by typing:
+Einige Projekte benötigen ein http://de.wikipedia.org/wiki/Changelog[changelog]:
 
  $ git log > ChangeLog
 
-=== Downloading Files ===
+=== Dateien Downloaden ===
 
-Get a copy of a project managed with Git by typing:
+Besorge dir eine Kopie eines mit Git verwalteten Projektes:
 
- $ git clone git://server/path/to/files
+ $ git clone git://server/pfad/zur/datei
 
-For example, to get all the files I used to create this site:
+um zum Beispiel alle Dateien für dieses Buch zu bekommen:
 
  $ git clone git://git.or.cz/gitmagic.git
 
-We'll have much to say about the *clone* command soon.
+Wir reden später noch ausführlicher über den clone befehl
 
-=== The Bleeding Edge ===
+=== Das Neueste vom Neuen ===
 
-If you've already downloaded a copy of a project using *git clone*, you can upgrade to the latest version with:
+Wenn du schon eine Kopie eines Projektes hast, und dieses auf die letzte Version updaten möchtest:
 
  $ git pull
 
-=== Instant Publishing ===
+=== Unverzügliches Veröffentlichen ===
 
 Suppose you've written a script you'd like to share with others. You could just tell them to download from your computer, but if they do so while you're improving the script or making experimental changes, they could wind up in trouble.  Of course, this is why release cycles exist. Developers may work on a project frequently, but they only make the code available when they feel it is presentable.
 
