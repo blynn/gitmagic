@@ -5,6 +5,6 @@ basic.txt           09751f37469d32da649b1c64862023820e0d0499
 clone.txt           46c05532226868b8b3b121d9320c0150491fd181
 branch.txt          46c05532226868b8b3b121d9320c0150491fd181
 history.txt         b17fbe91cafc00866c8c82d705920cd6c5a476d3
-grandmaster.txt
+grandmaster.txt     b17fbe91cafc00866c8c82d705920cd6c5a476d3
 secrets.txt
 drawbacks.txt
