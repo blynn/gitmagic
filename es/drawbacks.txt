@@ -1,0 +1,143 @@
+== Apéndice A: Defectos de Git ==
+
+Hay algunos problema con Git que barrí bajo la alfombra. Algunos pueden ser manejados con facilidad
+utilizando scripts y hooks, otros requieren reorganizar or redefinir el proyecto, y por las molestias
+que quedan, uno simplemente va a tener que esperar. ¡O mejor aún, unirse y ayudar!
+
+=== Debilidades De SHA1 ===
+
+A medida que pasa el tiempo, los criptógrafos descubren más y más debilidades de SHA1.
+Al día de hoy, encontrar colisiones en los hashes es feasible para organizaciones con buenos fondos.
+En unos años, quizás incluso una PC típica tendrá suficiente poder de cómputo para
+corromper un repositorio de Git de manera silenciosa.
+
+Esperemos que Git migre a una función de hash mejor antes de que nuevas investigaciones
+destruyan el SHA1.
+
+=== Microsoft Windows ===
+
+Git en Microsoft Windows puede ser engorroso:
+
+- http://cygwin.com/[Cygwin], un ambiente similar a Linux para Windows, contiene http://cygwin.com/packages/git/[una versión de Git para Windows].
+
+- http://code.google.com/p/msysgit/[Git en MSys] es una alternativa que requiere un soporte mínimo para la ejecución, aunqeu algunos de los comandos necesitan cierto trabajo.
+
+=== Archivos No Relacionados ===
+
+Si tu proyecto es muy grande y contiene muchos archivos no relacionados
+que están siendo cambiados de manera constante,
+Git puede estar en desventaja ante otros sistemas, porque no se monitorean
+archivos simples. Git maneja proyectos enteros, lo cual suele ser beneficioso.
+
+Una solución es partir tu proyecto en pedazos, cada uno consistiendo
+de archivos relacionados. Usa *git submodule* si quieres mantener todo en un único repositorio.
+
+=== ¿Quién Edita Qué? ===
+
+Algunos sistemas de control de versiones te fuerzan a marcar un archivo de manera explícita antes de editarlo.
+Si bien esto es especialmente molesto cuando esto involucra comunicarse con un servidor central,
+también tiene dos beneficios:
+
+  1. Los diffs son rápidos porque solo se precisa examinar los archivos marcados.
+
+  2. Uno puede descubrir quién más está trabajando en el archivo preguntándole al servidor central quien lo marcó para edición.
+
+Con scripts apropiados, se puede alcanzar lo mismo con Git. Esto requiere cooperación del programador, quien debería ejecutar ciertos scripts cuando edita un archivo.
+
+=== Historia Por Archivo ===
+
+Como Git guarda cambios por proyecto, reconstruir la historia de un archivo dado requiere más trabajo que en sistemas de control de versiones que administran archivos individuales.
+
+El problema suele ser leve, y vale tenerlo dado que otras operaciones son increíblemente eficientes.
+Por ejemplo, `git checkout` es más rápido que `cp -a`, y los deltas de
+un proyecto completo comprimen mejor que colecciones de deltas por archivo.
+
+=== Clonado inicial ===
+
+Cuando hay una historia larga, crear un clon es más costoso que hacer
+checkout de código en otros sistemas de control de versiones.
+
+El costo inicial lo vale a la larga, dado que la mayoría de
+las operaciones futuras van a ser rápidas y desconectado. De todos modos,
+en algunas situaciones, seria preferible crear un clon sin profundidad
+usando la opción `--depth`. Esto es mucho más rápido, pero el clon
+resultante tiene su funcionalidad reducida.
+
+=== Proyectos Volátiles ===
+
+Git fue escrito para ser rápido respecto al tamaño de los cambios. Los humanos hacen pequeñas ediciones
+de versión a versión. Un bugfix de una línea acá, una nueva funcionalidad allá,
+comentarios retocados, y así en adelante. Pero si tus archivos son radicalmente
+diferentes en revisiones sucesivas, entonces en cada commit, tu historia crece necesariamente igual que 
+tu proyecto entero.
+
+No hay nada que ningún sistema de control de versiones pueda hacer sobre esto, pero los usuarios standard de Git van a sufrir más, dado que las historias son clonadas.
+
+La razón por la que los cambios son tan grandes deberían ser examinadas.
+Tal vez los formatos de los archivos deberían ser cambiados, ediciones
+pequeñas deberían causar cambios menores en a lo sumo unos pocos archivos.
+
+O tal vez una base de datos o una solución de backup/archivado es lo que realmente se necesita, no un sistema de control de versiones. Por ejemplo, un el control de versiones es poco adecuado para administrar fotos tomadas periódicamente con una webcam.
+
+
+Si los archivos deben cambiar constantemente, y realmente se necesita que estén versionados, una posibilidad es usar Git de una forma centralizada.
+Uno puede crear clones sin profundidad, lo cual acarrea poco y nada de la historia del proyecto.
+Por supuesto, muchas herramientas de git no van a estar disponibles,
+y los arreglos deben ser enviados como patches.
+Esto probablement no sea problema, dado que no está claro por qué alguien quisiera un historial de archivos salvajemente inestables.
+
+Otro ejemplo es un proyecto que depende de firmware, que toma la forma de 
+un archivo binario enorme. La historia de este firmware no es de interés para los usuarios,
+y las actualizaciones comprimen de forma insatisfactoria, por lo que las revisiones
+de firmware aumentarían el tamaño del repositorio de manera innecesaria.
+
+En este caso, el código fuente debe ser guardado en un repositorio de Git,
+y el archivo binario debe ser mantenido de forma separada. Para hacer la vida
+más fácil, uno puede distribuír un script que usa Git para clonar el código y rsync
+o un clon sin profundidad de Git para el firmware.
+
+=== Contador Global ===
+
+Algunos sistemas de control de versiones centralizados, mantienen un entero positivo que aumenta cuando un nuevo commit es aceptado.
+Git se refiere a los cambios por su hash, lo que es mejor en muchas circunstancias.
+
+Pero a algunas personas les gusta tener este entero a mano. Por suerte es fácil escribir
+scripts de forma que con cada update, el repositorio central de git incrementa un entero,
+tal vez en un tag, y lo asocia con el hash del último commit.
+
+Cada clon podría mantener esete contador, pero esto sería probablemente inútil,
+dado que solo el repositorio central y su contador son los que importan.
+
+=== Subdirectorios Vacíos ===
+
+Los subdirectorios vacíos no pueden ser administrados. Crea archivos dummy para evitar este problema.
+
+La implementación actual de Git, y no su diseño, es quien tiene la culpa de este problema. Con suerte,
+una vez que Git gane más tracción, más usuarios van a clamar por
+esta funcionalidad y va a ser implementada.
+
+=== Commit Inicial ===
+
+El estereotipo de de un informático teórico cuenta desde 0, en lugar de desde 1.
+Lamentablemente, con respecto a los commit, Git no mantiene esta convención. Muchos
+comandos son poco amigables antes del commit inicial. Adicionalmente algunos casos
+borde deben ser manejados de forma especial, como hacer rebase de una rama con
+un commit inicial distinto.
+
+Git se beneficiaría al definiri el commit cero: tan pronto como se construye un 
+repositorio, HEAD debería ser un string conteniendo 20 bytes de 0. Este commit especial
+representa un árbol vacío, sin padre, que en algún momento es parte de todos los repositorios de Git.
+
+Entonces el correr git log, por ejemplo, informaría al usuario que no se han hecho commits aún,
+en lugar de salir con un error fatal. Algo similar pasaría con otras herramientas.
+
+Cada commit inicial es de forma implícita un descendiente de este commit cero.
+
+Lamentablemente igual hay algunos casos que presentan problemas.
+Si varias ramas con commits iniciales diferentes se mergean juntas,
+entonces un rebase del resultado requiere una buena cantidad de intervención manual.
+
+=== Rarezas De La Interfaz ===
+
+Para los commits A y B, el significado de las expresiones "A..B" y "A...B" depende
+de si el comando espera dos puntas o un rango. Ver *git help diff* y *git help rev-parse*
