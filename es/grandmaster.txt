@@ -1,4 +1,4 @@
-== Gran Maestría en Git==
+== Gran Maestría en Git ==
 
 Esta página con nombre pretencioso es el cajón donde dejar los trucos de Git no categorizados.
 

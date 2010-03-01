@@ -43,9 +43,8 @@ A popular misconception is that distributed systems are ill-suited for projects 
 A good first approximation is that anything a centralized version control system can do, a well-designed distributed system can do better. Network resources are simply costlier than local resources. While we shall later see there are drawbacks to a distributed approach, one is less likely to make erroneous comparisons with this rule of thumb.
 
 A small project may only need a fraction of the features offered by such a
-system, but saying you should use systems that don't scale well when your
-project is tiny is like saying you should use Roman numerals for calculations
-involving small numbers.
+system, but using systems that scale poorly for tiny projects is like using
+Roman numerals for calculations involving small numbers.
 
 Moreover, your project may grow beyond your original expectations. Using Git from the outset is like carrying a Swiss army knife even though you mostly use it to open bottles. On the day you desperately need a screwdriver you'll be glad you have more than a plain bottle-opener.
 

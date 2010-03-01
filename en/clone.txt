@@ -40,7 +40,7 @@ Push your project to the central server with:
 
  $ git push git://central.server/path/to/proj.git HEAD
 
-We're ready. To check out source, a developer types
+The central server now holds a 'bare repository': a repository with no working directory. In other words, the central server has the history of your project, but never contains a snapshot of it. To check out source, a developer types:
 
  $ git clone git://central.server/path/to/proj.git
 
@@ -56,14 +56,11 @@ If the main server has been updated, the latest version needs to be checked out 
 
 ==== Push versus pull ====
 
-We mostly avoid pushing into a repository, because confusion can ensue
-if the destination has a working directory with changes. However, pushing into
-a bare repository is a straightforward operation and more suitable than a pull
-in this case.
+A push is more convenient than a pull in the above example. If we pulled from the server, we would have to login to the server first, and give the pull command the network address of the machine we're pulling from. Firewalls may interfere, and we might not even have shell access to the server.
 
-Pulling from the server requires shelling into the server, and also
-knowing the network address of the machine you happen to be working on.
-Furthermore, firewalls may interfere.
+However, we usually avoid pushing into a repository, because confusion can ensue if the destination has a working directory with changes. But since a bare repository by definition has no working directory, pushing to a bare repository is a straightforward operation.
+
+In short, while learning Git, only push when the target is a bare repository; otherwise pull.
 
 === Forking a Project ===
 
