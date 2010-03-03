@@ -18,7 +18,7 @@ book.xml: $(addprefix $(LANG)/,$(TXTFILES))
 	# then substitute the English version.
 	# Kludge to make preface sections work for languages besides English
 	# for older AsciiDoc versions.
-	if [[ `asciidoc --version | cut -f 2 -d ' '` < "8.5.0" ]]; then \
+	if [[ `asciidoc --version | cut -f 2 -d ' '` < "8.4.5" ]]; then \
 	echo '[specialsections]' > conf ; \
 	sed -n '/^== .* ==$$/p' $(LANG)/preface.txt | sed 's/^== \(.*\) ==$$/^\1$$=sect-preface/' >> conf ; \
 	else echo "" > conf ; fi; \
@@ -66,7 +66,7 @@ clean:
 	-rm -rf book.xml book.html book
 
 sync: target
-	rsync -r book.html book.pdf book/* blynn@tl1.stanford.edu:www/gitmagic/intl/$(LANG)/
+	rsync -r book.html book.pdf book/* blynn@xenon.stanford.edu:www/gitmagic/intl/$(LANG)/
 
 public:
 	git push blynn@git.or.cz:srv/git/gitmagic.git
