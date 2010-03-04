@@ -27,10 +27,12 @@ The above will only keep track of the files that were present when you first ran
 
  $ git add readme.txt Documentation
 
-Similarly, if you want Git to forget about certain files, maybe because you've deleted them:
+Similarly, if you want Git to forget about certain files:
 
  $ git rm kludge.h obsolete.c
  $ git rm -r incriminating/evidence/
+
+Git deletes these files for you if you haven't already.
 
 Renaming a file is the same as removing the old name and adding the new name. There's also the shortcut *git mv* which has the same syntax as the *mv* command. For example:
 
@@ -106,7 +108,7 @@ You can also ask for the 5th-last saved state:
 In a court of law, events can be stricken from the record. Likewise, you can pick specific commits to undo.
 
  $ git commit -a
- $ git revert SHA1_HASH
+ $ git revert 1b6d
 
 will undo just the commit with the given hash. The revert is recorded as a new
 commit, which you can confirm by running *git log*.
@@ -176,7 +178,7 @@ Or since yesterday:
 
 Or between a particular version and 2 versions ago:
 
- $ git diff SHA1_HASH "master~2"
+ $ git diff 1b6d "master~2"
 
 In each case the output is a patch that can be applied with *git apply*.
 Try also:
@@ -201,7 +203,7 @@ There are at least three solutions. Assuming we are at D:
 
   2. Since we saved the files back at A, we can retrieve them:
 
-   $ git checkout A FILES...
+   $ git checkout A foo.c bar.h
 
   3. We can view going from A to B as a change we want to undo:
 
