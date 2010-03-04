@@ -118,6 +118,48 @@ Then go to the new directory and run:
 
 The procedure for giving your changes to everyone else depends on the other version control system. The new directory contains the files with your changes. Run whatever commands of the other version control system are needed to upload them to the central repository.
 
-The *git svn* command automates the above for Subversion repositories, and can
-also be used to
-http://google-opensource.blogspot.com/2008/05/export-git-project-to-google-code.html[export a Git project to a Subversion repository].
+Subversion, perhaps the best centralized version control system, is used by countless projects. The *git svn* command automates the above for Subversion repositories, and can also be used to http://google-opensource.blogspot.com/2008/05/export-git-project-to-google-code.html[export a Git project to a Subversion repository].
+
+=== Mercurial ===
+
+Mercurial is a similar version control system that can almost seamlessly work in tandem with Git. With the `hg-git` plugin, a Mercurial user can losslessly push to and pull from a Git repository.
+
+Obtain the `hg-git` plugin with Git:
+
+ $ git clone git://github.com/schacon/hg-git.git
+
+or Mercurial:
+
+ $ hg clone http://bitbucket.org/durin42/hg-git/
+
+Sadly, I am unaware of an analogous plugin for Git. For this reason, I advocate Git over Mercurial for the main repository, even if you prefer Mercurial. With a Mercurial project, usually a volunteer maintains a parallel Git repository to accommodate Git users, whereas thanks to the `hg-git` plugin, a Git project automatically accommodates Mercurial users.
+
+Although the plugin can convert a Mercurial repository to a Git repository by pushing to an empty repository, this job is easier with the `hg-fast-export.sh` script, available from:
+
+ $ git clone git://repo.or.cz/fast-export.git
+
+To convert, in an empty directory:
+
+ $ git init
+ $ hg-fast-export.sh -r /hg/repo
+
+after adding the script to your `$PATH`.
+
+=== Bazaar ===
+
+We briefly mention Bazaar because it is the most popular free distributed
+version control system after Git and Mercurial.
+
+Bazaar has the advantage of hindsight, as it is relatively young; its designers could learn from mistakes of the past, and sidestep minor historical warts. Additionally, its developers are mindful of portability and interoperation with other version control systems.
+
+A `bzr-git` plugin lets Bazaar users work with Git repositories to some extent. The `tailor` program converts Bazaar repositories to Git repositories, and can do so incrementally, while `bzr-fast-export` is well-suited for one-shot conversions.
+
+=== Why I use Git ===
+
+I originally chose Git because I heard it could manage the unimaginably unmanageable Linux kernel source. I've never since felt a need to switch. Git has served admirably, and I've yet to be bitten by its flaws. As I primarily use Linux, issues on other platforms are of no concern.
+
+Also, I prefer C programs and bash scripts to executables such as Python scripts: there are fewer dependencies, and I'm addicted to fast running times.
+
+I did think about how Git could be improved, going so far as to write my own Git-like tool, but only as an academic exercise. Had I completed my project, I would have stayed with Git anyway, as the gains are too slight to justify using an oddball system.
+
+Naturally, your needs and wants likely differ, and you may be better off with another system. Nonetheless, you can't go far wrong with Git.
