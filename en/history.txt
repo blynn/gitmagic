@@ -139,7 +139,7 @@ EOT
 Then create a Git repository from this temporary file by typing:
 
  $ mkdir project; cd project; git init
- $ git fast-import < /tmp/history
+ $ git fast-import --date-format=rfc2822 < /tmp/history
 
 You can checkout the latest version of the project with:
 
