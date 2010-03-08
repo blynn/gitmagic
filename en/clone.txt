@@ -54,7 +54,7 @@ If the main server has been updated, the latest version needs to be checked out 
  $ git commit -a
  $ git pull
 
-==== Push versus pull ====
+=== Push versus pull ===
 
 A push is more convenient than a pull in the above example. If we pulled from the server, we would have to login to the server first, and give the pull command the network address of the machine we're pulling from. Firewalls may interfere, and we might not even have shell access to the server.
 

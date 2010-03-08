@@ -21,7 +21,7 @@ To save the state again:
 
  $ git commit -a -m "Another backup"
 
-==== Add, Delete, Rename ====
+=== Add, Delete, Rename ===
 
 The above will only keep track of the files that were present when you first ran *git add*. If you add new files or subdirectories, you'll have to tell Git:
 
@@ -103,7 +103,7 @@ You can also ask for the 5th-last saved state:
 
  $ git checkout master~5
 
-==== Reverting ====
+=== Reverting ===
 
 In a court of law, events can be stricken from the record. Likewise, you can pick specific commits to undo.
 

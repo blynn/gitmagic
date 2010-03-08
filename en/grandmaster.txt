@@ -58,7 +58,7 @@ you can stage or unstage several files at a time, or review and select changes
 in particular files only. Alternatively, run *git commit \--interactive* which
 automatically commits after you're done.
 
-==== Staged Changes ====
+=== The Index: Git's Staging Area ===
 
 So far we have avoided Git's famous 'index', but we must now confront it to
 explain the above. The index is a temporary staging area. Git seldom shuttles

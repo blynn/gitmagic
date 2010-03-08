@@ -92,7 +92,7 @@ or:
 
 since you have already pushed the bugfix to the main repository.
 
-==== Merging ====
+=== Merging ===
 
 With many version control systems, creating branches is easy but merging them
 back together is tough. With Git, merging is so trivial that you might be
