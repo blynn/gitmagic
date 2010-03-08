@@ -70,9 +70,10 @@ The receiver can even do this from an empty repository. Despite its
 size, +somefile+ contains the entire original git repository.
 
 In larger projects, eliminate waste by bundling only changes the other
-repository lacks:
+repository lacks. For example, suppose the commit "1bd6..." is the most
+recent commit shared by both parties:
 
- $ git bundle create somefile HEAD ^COMMON_SHA1
+ $ git bundle create somefile HEAD ^1bd6
 
 If done frequently, one could easily forget which commit was last sent. The
 help page suggests using tags to solve this. Namely, after you send a bundle,
@@ -94,27 +95,27 @@ your side, all you require is an email account: there's no need to setup an onli
 
 Recall from the first chapter:
 
- $ git diff COMMIT
+ $ git diff 1bd6 > my.patch
 
 outputs a patch which can be pasted into an email for discussion. In a Git
 repository, type:
 
- $ git apply < FILE
+ $ git apply < my.patch
 
 to apply the patch.
 
 In more formal settings, when author names and perhaps signatures should be
 recorded, generate the corresponding patches past a certain point by typing:
 
- $ git format-patch START_COMMIT
+ $ git format-patch 1bd6
 
 The resulting files can be given to *git-send-email*, or sent by hand. You can also specify a range of commits:
 
- $ git format-patch START_COMMIT..END_COMMIT
+ $ git format-patch 1bd6..HEAD^^
 
 On the receiving end, save an email to a file, then type:
 
- $ git am < FILE
+ $ git am < email.txt
 
 This applies the incoming patch and also creates a commit, including information such as the author.
 
@@ -138,7 +139,7 @@ change or delete this nickname but there is usually no reason for doing so.
 
 If the original repository moves, we can update the URL via:
 
- $ git config remote.origin.url NEW_URL
+ $ git config remote.origin.url git://example.com/new.git
 
 The +branch.master.merge+ option specifies the default remote branch in
 a *git pull*. During the initial clone, it is set to the current branch of the
@@ -150,7 +151,7 @@ This option only applies to the repository we first cloned from, which is
 recorded in the option +branch.master.remote+. If we pull in from other
 repositories we must explicitly state which branch we want:
 
- $ git pull ANOTHER_URL master
+ $ git pull git://example.com/other.git master
 
 The above explains why some of our earlier push and pull examples had no
 arguments.
@@ -188,7 +189,7 @@ Or you can see what the "experimental" branch has been up to:
 Suppose two other developers are working on our project, and we want to
 keep tabs on both. We can follow more than one repository at a time with:
 
- $ git remote add other ANOTHER_URL
+ $ git remote add other git://example.com/some_repo.git
  $ git pull other some_branch
 
 Now we have merged in a branch from the second repository, and we have
@@ -206,10 +207,11 @@ run:
 
 This fetches their histories and nothing more, so although the working
 directory remains untouched, we can refer to any branch of any repository in
-a Git command. By the way, behind the scenes, a pull is simply a fetch followed
-by *git merge*; recall the latter merges a given commit into the working
-directory. Usually we pull because we want to merge after a fetch; this
-situation is a notable exception.
+a Git command because we now possess a local copy.
+
+Recall that behind the scenes, a pull is simply a *fetch* then *merge*.
+Usually we *pull* because we want to merge the latest commit after a fetch;
+this situation is a notable exception.
 
 See *git help remote* for how to remove remote repositories, ignore certain
 branches, and more.

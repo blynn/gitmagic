@@ -86,7 +86,7 @@ But how can you go back to the future? The past commits know nothing of the futu
 
 If you have the SHA1 of the original HEAD then:
 
- $ git reset SHA1
+ $ git reset 1bd6
 
 But suppose you never took it down? Don't worry, for commands like these, Git saves the original HEAD as a tag called ORIG_HEAD, and you can return safe and sound with:
 
@@ -171,21 +171,21 @@ commands.
 
 *Checkout*: Uncommitted changes cause checkout to fail. To destroy your changes, and checkout a given commit anyway, use the force flag:
 
-  $ git checkout -f COMMIT
+  $ git checkout -f HEAD^
 
 On the other hand, if you specify particular paths for checkout, then there are no safety checks. The supplied paths are quietly overwritten. Take care if you use checkout in this manner.
 
 *Reset*: Reset also fails in the presence of uncommitted changes. To force it through, run:
 
-  $ git reset --hard [COMMIT]
+  $ git reset --hard 1bd6
 
 *Branch*: Deleting branches fails if this causes changes to be lost. To force a deletion, type:
 
-  $ git branch -D BRANCH  # instead of -d
+  $ git branch -D dead_branch  # instead of -d
 
 Similarly, attempting to overwrite a branch via a move fails if data loss would ensue. To force a branch move, type:
 
-  $ git branch -M [SOURCE] TARGET  # instead of -m
+  $ git branch -M source target  # instead of -m
 
 Unlike checkout and reset, these two commands defer data destruction. The
 changes are still stored in the .git subdirectory, and can be retrieved by
