@@ -16,7 +16,7 @@ With this magic word, the files in your directory suddenly shapeshift from one v
 
 === The Boss Key ===
 
-Ever play one of those games where at the push of a button ("the boss key"), the screen would instantly display a spreadsheet or something? So if the boss walked in the office while you were playing the game you could quickly hide it away?
+Ever play one of those games where at the push of a button (``the boss key''), the screen would instantly display a spreadsheet or something? So if the boss walked in the office while you were playing the game you could quickly hide it away?
 
 In some directory:
 
@@ -69,7 +69,7 @@ In other words, after checking out an old state, Git automatically puts you in a
 
 === Quick Fixes ===
 
-You're in the middle of something when you are told to drop everything and fix a newly discovered bug in commit starting with "1b6d":
+You're in the middle of something when you are told to drop everything and fix a newly discovered bug in commit `1b6d...`:
 
  $ git commit -a
  $ git checkout -b fixes 1b6d
@@ -98,23 +98,17 @@ With many version control systems, creating branches is easy but merging them
 back together is tough. With Git, merging is so trivial that you might be
 unaware of it happening.
 
-Indeed, though we have just introduced *git merge*, we encountered merging long
-ago. The *pull* command in fact fetches commits and then merges them into your
-current branch. If you have no local changes, then this merge becomes a 'fast
-forward', akin to fetching the latest version in a centralized version control
-system. But if you do have local changes, Git will automatically merge, and
-report any conflicts.
+Indeed, though we have just introduced *git merge*, we encountered merging long ago. The *pull* command in fact fetches commits and then merges them into your current branch. If you have no local changes, then the merge is a 'fast forward', a degenerate case akin to fetching the latest version in a centralized version control system. But if you do have local changes, Git will automatically merge, and report any conflicts.
 
 Ordinarily, a commit has exactly one parent, namely, the previous commit.
-Merging creates a commit with at least two parents. This begs the question:
-what commit does `HEAD~10` really refer to? A commit could have multiple
-parents, so which one do we follow?
+Merging other branches creates a commit with at least two parents. This begs
+the question: what commit does `HEAD~10` really refer to? A commit could have
+multiple parents, so which one do we follow?
 
-The answer is this notation means we follow the first parent if there is ever a
-choice. This is usually desired, because commits in the current branch always
-become first parents in a *git merge*; frequently you're only concerned with
-the changes you made in the current branch, as opposed to changes merged in
-from other branches.
+It turns out we follow the first parent at every step. This is usually desired,
+because commits in the current branch always become first parents in a *git
+merge*; frequently you're only concerned with the changes you made in the
+current branch, as opposed to changes merged in from other branches.
 
 You can refer to a specific parent with a caret. For example, to show
 the logs from the second parent:
@@ -130,7 +124,7 @@ You can combine this notation with other types. For example:
 
  $ git checkout 1bd6^^2~10 -b ancient
 
-starts a new branch "ancient" representing the state 10 commits back from the
+starts a new branch ``ancient'' representing the state 10 commits back from the
 second parent of the first parent of the commit starting with 1bd6.
 
 === Uninterrupted Workflow ===
@@ -190,7 +184,7 @@ Next, work on anything: fix bugs, add features, add temporary code, and so forth
   $ git checkout sanitized
   $ git cherry-pick medley^^
 
-applies the grandparent of the head commit of the "medley" branch to the "sanitized" branch. With appropriate cherry-picks you can construct a branch that contains only permanent code, and has related commits grouped together.
+applies the grandparent of the head commit of the ``medley'' branch to the ``sanitized'' branch. With appropriate cherry-picks you can construct a branch that contains only permanent code, and has related commits grouped together.
 
 === Managing Branches ===
 
@@ -198,16 +192,16 @@ List all branches by typing:
 
  $ git branch
 
-By default, you start in a branch named "master". Some advocate leaving the
-"master" branch untouched and creating new branches for your own edits.
+By default, you start in a branch named ``master''. Some advocate leaving the
+``master'' branch untouched and creating new branches for your own edits.
 
 The *-d* and *-m* options allow you to delete and move (rename) branches.
 See *git help branch*.
 
-The "master" branch is a useful convention. Others may assume that your
+The ``master'' branch is a useful custom. Others may assume that your
 repository has a branch with this name, and that it contains the official
-version of your project. You can rename or obliterate the "master" branch, but
-you might as well respect this custom.
+version of your project. Although you can rename or obliterate the ``master''
+branch, you might as well respect this convention.
 
 === Temporary Branches ===
 

@@ -156,7 +156,7 @@ A `bzr-git` plugin lets Bazaar users work with Git repositories to some extent. 
 
 === Why I use Git ===
 
-I originally chose Git because I heard it could manage the unimaginably unmanageable Linux kernel source. I've never since felt a need to switch. Git has served admirably, and I've yet to be bitten by its flaws. As I primarily use Linux, issues on other platforms are of no concern.
+I originally chose Git because I heard it could manage the unimaginably unmanageable Linux kernel source. I've never felt a need to switch. Git has served admirably, and I've yet to be bitten by its flaws. As I primarily use Linux, issues on other platforms are of no concern.
 
 Also, I prefer C programs and bash scripts to executables such as Python scripts: there are fewer dependencies, and I'm addicted to fast running times.
 

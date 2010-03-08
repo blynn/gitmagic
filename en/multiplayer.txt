@@ -30,7 +30,7 @@ your web directory:
 
  $ GIT_DIR=proj.git git init
 
-In the "proj.git" directory, run:
+In the `proj.git` directory, run:
 
  $ git --bare update-server-info
  $ cp hooks/post-update.sample hooks/post-update
@@ -70,7 +70,7 @@ The receiver can even do this from an empty repository. Despite its
 size, +somefile+ contains the entire original git repository.
 
 In larger projects, eliminate waste by bundling only changes the other
-repository lacks. For example, suppose the commit "1bd6..." is the most
+repository lacks. For example, suppose the commit ``1bd6...'' is the most
 recent commit shared by both parties:
 
  $ git bundle create somefile HEAD ^1bd6
@@ -133,8 +133,8 @@ config options initialized created with the clone. Let's take a peek:
 
  $ git config --list
 
-The +remote.origin.url+ option controls the source URL; "origin" is a nickname
-given to the source repository. As with the "master" branch convention, we may
+The +remote.origin.url+ option controls the source URL; ``origin'' is a nickname
+given to the source repository. As with the ``master'' branch convention, we may
 change or delete this nickname but there is usually no reason for doing so.
 
 If the original repository moves, we can update the URL via:
@@ -180,7 +180,7 @@ logs for the appropriate SHA1 hash, but it's much easier to type:
 
  $ git diff origin/HEAD
 
-Or you can see what the "experimental" branch has been up to:
+Or you can see what the ``experimental'' branch has been up to:
 
  $ git log origin/experimental
 
