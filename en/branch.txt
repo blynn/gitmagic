@@ -44,10 +44,10 @@ You can switch between the two versions of the file as much as you like, and com
 === Dirty Work ===
 
 [[branch]]
-Say you're working on some feature, and for some reason, you need to go back to an old version and temporarily put in a few prints statements to see how something works. Then:
+Say you're working on some feature, and for some reason, you need to go back three versions and temporarily put in a few prints statements to see how something works. Then:
 
  $ git commit -a
- $ git checkout SHA1_HASH
+ $ git checkout HEAD~3
 
 Now you can add ugly temporary code all over the place. You can even commit these changes. When you're done,
 
@@ -69,10 +69,10 @@ In other words, after checking out an old state, Git automatically puts you in a
 
 === Quick Fixes ===
 
-You're in the middle of something when you are told to drop everything and fix a newly discovered bug:
+You're in the middle of something when you are told to drop everything and fix a newly discovered bug in commit starting with "1b6d":
 
  $ git commit -a
- $ git checkout -b fixes SHA1_HASH
+ $ git checkout -b fixes 1b6d
 
 Then once you've fixed the bug:
 
@@ -82,22 +82,70 @@ Then once you've fixed the bug:
 
 and resume work on your original task.
 
+You can even merge in the bugfix you just made, either by typing:
+
+ $ git merge fixes
+
+or:
+
+ $ git pull
+
+since you have already pushed the bugfix to the main repository.
+
+==== Merging ====
+
+With many version control systems, creating branches is easy but merging them
+back together is tough. With Git, merging is so trivial that you might be
+unaware of it happening.
+
+Indeed, though we have just introduced *git merge*, we encountered merging long
+ago. The *pull* command in fact fetches commits and then merges them into your
+current branch. If you have no local changes, then this merge becomes a 'fast
+forward', akin to fetching the latest version in a centralized version control
+system. But if you do have local changes, Git will automatically merge, and
+report any conflicts.
+
+Ordinarily, a commit has exactly one parent, namely, the previous commit.
+Merging creates a commit with at least two parents. This begs the question:
+what commit does `HEAD~10` really refer to? A commit could have multiple
+parents, so which one do we follow?
+
+The answer is this notation means we follow the first parent if there is ever a
+choice. This is usually desired, because commits in the current branch always
+become first parents in a *git merge*; frequently you're only concerned with
+the changes you made in the current branch, as opposed to changes merged in
+from other branches.
+
+You can refer to a specific parent with a caret. For example, to show
+the logs from the second parent:
+
+ $ git log HEAD^2
+
+If you want the first parent, you can leave out the number. For example, to
+show the differences with the first parent:
+
+ $ git diff HEAD^
+
+You can combine this notation with other types. For example:
+
+ $ git checkout 1bd6^^2~10 -b ancient
+
+starts a new branch "ancient" representing the state 10 commits back from the
+second parent of the first parent of the commit starting with 1bd6.
+
 === Uninterrupted Workflow ===
 
-Often in hardware projects, the second step of a plan must wait for the first
-step to be completed before it can begin. A car undergoing repairs might sit
-idly in a garage until a particular part arrives from the factory. A prototype
-might wait for a chip to be fabricated before construction can continue.
+Often in hardware projects, the second step of a plan must await the completion of the first step. A car undergoing repairs might sit idly in a garage until a particular part arrives from the factory. A prototype might wait for a chip to be fabricated before construction can continue.
 
 Software projects can be similar. The second part of a new feature may have to
 wait until the first part has been released and tested. Some projects require
 your code to be reviewed before accepting it, so you might wait until the first
 part is approved before starting the second part.
 
-In Git, thanks to painless branching and merging, we can bend the rules and
-work on Part II before Part I is officially ready. Suppose you have committed
-Part I and sent it for review. Let's say you're in the `master` branch. Then
-branch off:
+Thanks to painless branching and merging, we can bend the rules and work on
+Part II before Part I is officially ready. Suppose you have committed Part I
+and sent it for review. Let's say you're in the `master` branch. Then branch
+off:
 
  $ git checkout -b part2
 
@@ -122,10 +170,10 @@ Now you're in the `master` branch again, with Part II in the working directory.
 
 It's easy to extend this trick for any number of parts. It's also easy to
 branch off retroactively: suppose you belatedly realize you should have created
-a branch several commits ago. Then type:
+a branch 7 commits ago. Then type:
 
  $ git branch -m master part2   # Rename "master" branch to "part2".
- $ git checkout SHA1 -b master  # The commit representing Part I.
+ $ git checkout HEAD~7 -b master
 
 The `master` branch now contains just Part I, and the `part2` branch contains
 the rest.
@@ -140,9 +188,9 @@ Perhaps you like to work on all aspects of a project in the same branch. You wan
 Next, work on anything: fix bugs, add features, add temporary code, and so forth, committing often along the way. Then:
 
   $ git checkout sanitized
-  $ git cherry-pick SHA1_HASH
+  $ git cherry-pick medley^^
 
-applies a given commit to the "sanitized" branch. With appropriate cherry-picks you can construct a branch that contains only permanent code, and has related commits grouped together.
+applies the grandparent of the head commit of the "medley" branch to the "sanitized" branch. With appropriate cherry-picks you can construct a branch that contains only permanent code, and has related commits grouped together.
 
 === Managing Branches ===
 
@@ -169,9 +217,9 @@ save the current state so you can briefly hop back to an older state to
 fix a high-priority bug or something.
 
 It's analogous to changing the TV channel temporarily to see what else is on.
-But instead of pushing a couple of buttons, you have to create, check out and
-delete temporary branches and commits. Luckily, Git has a shortcut that
-is as convenient as a TV remote control:
+But instead of pushing a couple of buttons, you have to create, check out,
+merge, and delete temporary branches. Luckily, Git has a shortcut that is as
+convenient as a TV remote control:
 
  $ git stash
 
@@ -187,12 +235,17 @@ You can have multiple stashes, and manipulate them in various ways. See
 
 === Work How You Want ===
 
-Applications such as http://www.mozilla.com/[Mozilla Firefox] allow you to open multiple tabs and multiple windows. Switching tabs gives you different content in the same window. Git branching is like tabs for your working directory. Continuing this analogy, Git cloning is like opening a new window. Being able to do both improves the user experience.
+You might wonder if branches are worth the bother. After all, clones are almost
+as fast, and you can use *cd* to switch between them, instead of esoteric Git
+commands.
 
-On a higher level, several window managers support multiple desktops. Branching
-in Git is similar to switching to a different desktop, while cloning is similar
-to attaching another monitor to gain another desktop.
+Consider web browsers. Why support multiple tabs as well as multiple windows?
+Because allowing both accommodates a wide variety of styles. Some users like to
+keep only one browser window open, and use tabs for multiple webpages. Others
+might insist on the other extreme: multiple windows with no extra tabs anywhere.
+Yet others prefer something in between.
 
-Yet another example is the http://www.gnu.org/software/screen/[*screen*] utility. This gem lets you create, destroy and switch between multiple terminal sessions in the same terminal. Instead of opening new terminals (clone), you can use the same one if you run *screen* (branch). In fact, you can do a lot more with *screen* but that's a topic for another text.
-
-Cloning, branching, and merging are fast and local in Git, encouraging you to use the combination that best suits you. Git lets you work exactly how you want.
+Branching is like tabs for your working directory, and cloning is like opening
+a new browser window. These operations are fast and local, so why not
+experiment to find the combination that best suits you? Git lets you work
+exactly how you want.
