@@ -16,7 +16,7 @@ With this magic word, the files in your directory suddenly shapeshift from one v
 
 === The Boss Key ===
 
-Ever play one of those games where at the push of a button ("the boss key"), the screen would instantly display a spreadsheet or something? So if the boss walked in the office while you were playing the game you could quickly hide it away?
+Ever played one of those games where at the push of a button ("the boss key"), the screen would instantly display a spreadsheet or something? So if the boss walked in the office while you were playing the game you could quickly hide it away?
 
 In some directory:
 
@@ -44,7 +44,7 @@ You can switch between the two versions of the file as much as you like, and com
 === Dirty Work ===
 
 [[branch]]
-Say you're working on some feature, and for some reason, you need to go back to an old version and temporarily put in a few prints statements to see how something works. Then:
+Say you're working on some feature, and for some reason, you need to go back to an old version and temporarily put in a few print statements to see how something works. Then:
 
  $ git commit -a
  $ git checkout SHA1_HASH
