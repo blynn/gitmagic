@@ -45,7 +45,9 @@ Then:
 - Remove commits by deleting lines.
 - Reorder commits by reordering lines.
 - Replace "pick" with "edit" to mark a commit for amending.
+- Replace "pick" with "reword" to change the log message.
 - Replace "pick" with "squash" to merge a commit with the previous one.
+- Replace "pick" with "fixup" to merge a commit with the previous one and discard the log message.
 
 If you marked a commit for editing, then run:
 
