@@ -158,8 +158,8 @@ It's too late for that now. However, provided you've been committing often, Git
 can pinpoint the problem:
 
  $ git bisect start
- $ git bisect bad SHA1_OF_BAD_VERSION
- $ git bisect good SHA1_OF_GOOD_VERSION
+ $ git bisect bad HEAD
+ $ git bisect good 1bd6
 
 Git checks out a state halfway in between. Test the feature, and if it's still broken:
 
@@ -175,7 +175,7 @@ original state by typing:
 
 Instead of testing every change by hand, automate the search by running:
 
- $ git bisect run COMMAND
+ $ git bisect run my_script
 
 Git uses the return value of the given command, typically a one-off script, to
 decide whether a change is good or bad: the command should exit with code 0
@@ -190,7 +190,7 @@ search.
 
 Like many other version control systems, Git has a blame command:
 
- $ git blame FILE
+ $ git blame bug.c
 
 which annotates every line in the given file showing who last changed it, and when. Unlike many other version control systems, this operation works offline, reading only from local disk.
 

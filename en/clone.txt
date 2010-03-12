@@ -40,7 +40,7 @@ Push your project to the central server with:
 
  $ git push git://central.server/path/to/proj.git HEAD
 
-The central server now holds a 'bare repository': a repository with no working directory. In other words, the central server has the history of your project, but never contains a snapshot of it. To check out source, a developer types:
+The central server now holds a 'bare repository': a repository with no working directory. In other words, the central server has the history of your project, but never contains a snapshot of it. To check out the source, a developer types:
 
  $ git clone git://central.server/path/to/proj.git
 
