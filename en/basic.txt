@@ -23,7 +23,7 @@ To save the state again:
 
 === Add, Delete, Rename ===
 
-The above will only keep track of the files that were present when you first ran *git add*. If you add new files or subdirectories, you'll have to tell Git:
+The above only keeps track of the files that were present when you first ran *git add*. If you add new files or subdirectories, you'll have to tell Git:
 
  $ git add readme.txt Documentation
 
@@ -164,7 +164,7 @@ and your users can upgrade their version by changing to the directory containing
 
  $ git pull
 
-Your users will never end up with a version of your script you don't want them to see. Obviously this trick works for anything, not just scripts.
+Your users will never end up with a version of your script you don't want them to see.
 
 === What Have I Done? ===
 
@@ -193,7 +193,7 @@ fire up any web browser.
 
 === Exercise ===
 
-Let A, B, C, D be four successive commits where B is the same as A except some files have been removed. We want to add the files back at D and not at B. How can we do this?
+Let A, B, C, D be four successive commits where B is the same as A except some files have been removed. We want to add the files back at D. How can we do this?
 
 There are at least three solutions. Assuming we are at D:
 

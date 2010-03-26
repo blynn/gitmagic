@@ -6,9 +6,6 @@ history which you alone possess. Just as nations forever argue over who
 committed what atrocity, if someone else has a clone whose version of history
 differs to yours, you will have trouble reconciling when your trees interact.
 
-Of course, if you control all the other trees too, you can simply overwrite
-them.
-
 Some developers strongly feel history should be immutable, warts and all.
 Others feel trees should be made presentable before they are unleashed in
 public. Git accommodates both viewpoints. Like cloning, branching and merging,
@@ -44,12 +41,14 @@ Then:
 
 - Remove commits by deleting lines.
 - Reorder commits by reordering lines.
-- Replace "pick" with "edit" to mark a commit for amending.
-- Replace "pick" with "reword" to change the log message.
-- Replace "pick" with "squash" to merge a commit with the previous one.
-- Replace "pick" with "fixup" to merge a commit with the previous one and discard the log message.
+- Replace `pick` with:
+   * `edit` to mark a commit for amending.
+   * `reword` to change the log message.
+   * `squash` to merge a commit with the previous one.
+   * `fixup` to merge a commit with the previous one and discard the log message.
 
-If you marked a commit for editing, then run:
+Save and quit. If you marked a commit for editing, then
+run:
 
  $ git commit --amend
 
@@ -57,7 +56,7 @@ Otherwise, run:
 
  $ git rebase --continue
 
-So commit early and commit often: you can easily tidy up later with rebase.
+So commit early and commit often: you can tidy up later with rebase.
 
 === Local Changes Last ===
 
@@ -147,9 +146,9 @@ You can checkout the latest version of the project with:
 
  $ git checkout master .
 
-The *git fast-export* command converts any git repository to the
+The *git fast-export* command converts any repository to the
 *git fast-import* format, whose output you can study for writing exporters,
-and also to transport git repositories in a human-readable format. Indeed,
+and also to transport repositories in a human-readable format. Indeed,
 these commands can send repositories of text files over text-only channels.
 
 === Where Did It All Go Wrong? ===
@@ -161,7 +160,7 @@ can pinpoint the problem:
 
  $ git bisect start
  $ git bisect bad HEAD
- $ git bisect good 1bd6
+ $ git bisect good 1b6d
 
 Git checks out a state halfway in between. Test the feature, and if it's still broken:
 

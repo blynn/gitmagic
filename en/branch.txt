@@ -82,7 +82,7 @@ Then once you've fixed the bug:
 
 and resume work on your original task.
 
-You can even merge in the bugfix you just made, either by typing:
+You can even 'merge' in the bugfix you just made, either by typing:
 
  $ git merge fixes
 
@@ -94,20 +94,20 @@ since you have already pushed the bugfix to the main repository.
 
 === Merging ===
 
-With many version control systems, creating branches is easy but merging them
+With some version control systems, creating branches is easy but merging them
 back together is tough. With Git, merging is so trivial that you might be
 unaware of it happening.
 
 Indeed, though we have just introduced *git merge*, we encountered merging long ago. The *pull* command in fact fetches commits and then merges them into your current branch. If you have no local changes, then the merge is a 'fast forward', a degenerate case akin to fetching the latest version in a centralized version control system. But if you do have local changes, Git will automatically merge, and report any conflicts.
 
-Ordinarily, a commit has exactly one parent, namely, the previous commit.
-Merging other branches creates a commit with at least two parents. This begs
-the question: what commit does `HEAD~10` really refer to? A commit could have
-multiple parents, so which one do we follow?
+Ordinarily, a commit has exactly one 'parent commit', namely, the previous
+commit. Merging branches together produces a commit with at least two parents.
+This begs the question: what commit does `HEAD~10` really refer to? A commit
+could have multiple parents, so which one do we follow?
 
-It turns out we follow the first parent at every step. This is usually desired,
-because commits in the current branch always become first parents in a *git
-merge*; frequently you're only concerned with the changes you made in the
+It turns out this notation chooses the first parent every time. This is
+desirable because commits in the current branch become the first parents during
+a merge; frequently you're only concerned with the changes you made in the
 current branch, as opposed to changes merged in from other branches.
 
 You can refer to a specific parent with a caret. For example, to show
@@ -115,17 +115,17 @@ the logs from the second parent:
 
  $ git log HEAD^2
 
-If you want the first parent, you can leave out the number. For example, to
-show the differences with the first parent:
+You may omit the number for the first parent. For example, to show the
+differences with the first parent:
 
  $ git diff HEAD^
 
 You can combine this notation with other types. For example:
 
- $ git checkout 1bd6^^2~10 -b ancient
+ $ git checkout 1b6d^^2~10 -b ancient
 
 starts a new branch ``ancient'' representing the state 10 commits back from the
-second parent of the first parent of the commit starting with 1bd6.
+second parent of the first parent of the commit starting with 1b6d.
 
 === Uninterrupted Workflow ===
 
@@ -230,14 +230,14 @@ You can have multiple stashes, and manipulate them in various ways. See
 === Work How You Want ===
 
 You might wonder if branches are worth the bother. After all, clones are almost
-as fast, and you can use *cd* to switch between them, instead of esoteric Git
+as fast, and you can switch between them with *cd* instead of esoteric Git
 commands.
 
 Consider web browsers. Why support multiple tabs as well as multiple windows?
 Because allowing both accommodates a wide variety of styles. Some users like to
 keep only one browser window open, and use tabs for multiple webpages. Others
 might insist on the other extreme: multiple windows with no extra tabs anywhere.
-Yet others prefer something in between.
+Others still prefer something in between.
 
 Branching is like tabs for your working directory, and cloning is like opening
 a new browser window. These operations are fast and local, so why not

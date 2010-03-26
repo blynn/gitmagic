@@ -2,11 +2,11 @@
 
 In older version control systems, checkout is the standard operation to get files. You retrieve a bunch of files in the requested saved state.
 
-In Git and other distributed version control systems, cloning is the standard operation. To get files you create a clone of the entire repository. In other words, you practically mirror the central server. Anything the main repository can do, you can do.
+In Git and other distributed version control systems, cloning is the standard operation. To get files, you create a 'clone' of the entire repository. In other words, you practically mirror the central server. Anything the main repository can do, you can do.
 
 === Sync Computers ===
 
-This is the reason I first used Git. I can tolerate making tarballs or using *rsync* for backups and basic syncing. But sometimes I edit on my laptop, other times on my desktop, and the two may not have talked to each other in between.
+I can tolerate making tarballs or using *rsync* for backups and basic syncing. But sometimes I edit on my laptop, other times on my desktop, and the two may not have talked to each other in between. This situation drove me to learn Git in the first place.
 
 Initialize a Git repository and commit your files on one machine. Then on the other:
 
@@ -17,7 +17,7 @@ to create a second copy of the files and Git repository. From now on,
  $ git commit -a
  $ git pull other.computer:/path/to/files HEAD
 
-will pull in the state of the files on the other computer into the one you're working on. If you've recently made conflicting edits in the same file, Git will let you know and you should commit again after resolving them.
+will 'pull' in the state of the files on the other computer into the one you're working on. If you've recently made conflicting edits in the same file, Git will let you know and you should commit again after resolving them.
 
 === Classic Source Control ===
 
@@ -27,38 +27,61 @@ Initialize a Git repository for your files:
  $ git add .
  $ git commit -m "Initial commit"
 
-On the central server, initialize an empty Git repository with some name,
-and start the Git daemon if necessary:
+On the central server, initialize a 'bare repository' in some directory:
 
- $ GIT_DIR=proj.git git init
- $ git daemon --detach  # it might already be running
+ $ mkdir proj.git
+ $ cd proj.git
+ $ git init --bare
+ $ # one-liner alternative: GIT_DIR=proj.git git init
+
+Start the Git daemon if necessary:
+
+ $ git daemon --detach  # it may already be running
 
 For Git hosting services, follow the instructions to setup the initially
 empty Git repository. Typically one fills in a form on a webpage.
 
-Push your project to the central server with:
+'Push' your project to the central server with:
 
  $ git push git://central.server/path/to/proj.git HEAD
 
-The central server now holds a 'bare repository': a repository with no working directory. In other words, the central server has the history of your project, but never contains a snapshot of it. To check out the source, a developer types:
+The bare repository is so named because it contains no working directory and exposes files that are hidden away in the `.git` subdirectory of a normal Git repository. In other words, the central server maintains the history of your project, and never carries a snapshot of any given version.
+
+To check out the source, a developer types:
 
  $ git clone git://central.server/path/to/proj.git
 
-After making changes, the code is checked in to the main server by:
+After making changes, the developer saves changes locally:
 
  $ git commit -a
+
+To update to the latest version:
+
+ $ git pull
+
+Any merge conflicts should be resolved then committed:
+
+ $ git commit -a
+
+To check in local changes into the central repository:
+
  $ git push
 
-If the main server has been updated, the latest version needs to be checked out before the push. To sync to the latest version:
-
- $ git commit -a
- $ git pull
+If the main server has new changes due to activity by other developers, the
+push fails, and the developer should pull the latest version, resolve any merge
+conflicts, then try again.
 
 === Push versus pull ===
 
-A push is more convenient than a pull in the above example. If we pulled from the server, we would have to login to the server first, and give the pull command the network address of the machine we're pulling from. Firewalls may interfere, and we might not even have shell access to the server.
+A push is more convenient than a pull in the above example. Firstly, pull fails
+on bare repositories (you must 'fetch' instead; we discuss this in a later
+chapter). But even if we kept a normal repository on the central server,
+pulling into it is still cumbersome. Each time, we would have to login to the
+server first, and give the pull command the network address of the machine
+we're pulling from. Firewalls may interfere, and we might not even have shell
+access to the server.
 
-However, we usually avoid pushing into a repository, because confusion can ensue if the destination has a working directory with changes. But since a bare repository by definition has no working directory, pushing to a bare repository is a straightforward operation.
+However, apart from this case, we discourage pushing into a repository, because confusion can ensue when the destination has a working directory.
 
 In short, while learning Git, only push when the target is a bare repository; otherwise pull.
 

@@ -86,9 +86,9 @@ But how can you go back to the future? The past commits know nothing of the futu
 
 If you have the SHA1 of the original HEAD then:
 
- $ git reset 1bd6
+ $ git reset 1b6d
 
-But suppose you never took it down? Don't worry, for commands like these, Git saves the original HEAD as a tag called ORIG_HEAD, and you can return safe and sound with:
+But suppose you never took it down? Don't worry: for commands like these, Git saves the original HEAD as a tag called ORIG_HEAD, and you can return safe and sound with:
 
  $ git reset ORIG_HEAD
 
@@ -161,7 +161,7 @@ One popular resident is +workdir/git-new-workdir+. Via clever symlinking, this s
 
   $ git-new-workdir an/existing/repo new/directory
 
-The new directory and files within can be thought of as a clone, except since the history is shared, the two trees automatically stay in sync. There's no need to merge, push or pull.
+The new directory and the files within can be thought of as a clone, except since the history is shared, the two trees automatically stay in sync. There's no need to merge, push or pull.
 
 === Daring Stunts ===
 
@@ -177,7 +177,7 @@ On the other hand, if you specify particular paths for checkout, then there are 
 
 *Reset*: Reset also fails in the presence of uncommitted changes. To force it through, run:
 
-  $ git reset --hard 1bd6
+  $ git reset --hard 1b6d
 
 *Branch*: Deleting branches fails if this causes changes to be lost. To force a deletion, type:
 
@@ -200,10 +200,10 @@ directories are expendable, then delete them mercilessly with:
 
 Next time, that pesky command will work!
 
-=== Improve Your Public Image ===
+=== Preventing Bad Commits ===
 
 Stupid mistakes abound in the histories of many of my projects. The most
-frightening are missing files due to forgetting to run *git add*. Luckily I
+frightening are missing files due to a forgotten *git add*. Luckily I
 have yet to lose crucial data though accidental omission because I rarely
 delete original working directories. I typically notice the error a few commits
 later, so the only damage is a bit of missing history and a sheepish admission
@@ -238,5 +238,7 @@ Several git operations support hooks; see *git help hooks*. One can write hooks
 to complain about spelling mistakes in commit messages, add new files, indent
 paragraphs, append an entry to a webpage, play a sound, and so on.
 
-We encountered the *post-update* hook earlier when discussing Git over
-HTTP. This hook updates a few files Git needs for non-native communication.
+We activated the sample *post-update* hook earlier when discussing Git over
+HTTP; this causes Git to run this script whenever the head has moved. The
+sample post-update script updates a few files Git needs for communication over
+Git-agnostic transports such as HTTP.
