@@ -1,12 +1,12 @@
 == Cloning Around ==
 
-In older version control systems, checkout is the standard operation to get files. You retrieve a bunch of files in the requested saved state.
+In older version control systems, checkout is the standard operation to get files. You retrieve a bunch of files in a particular saved state.
 
 In Git and other distributed version control systems, cloning is the standard operation. To get files, you create a 'clone' of the entire repository. In other words, you practically mirror the central server. Anything the main repository can do, you can do.
 
 === Sync Computers ===
 
-I can tolerate making tarballs or using *rsync* for backups and basic syncing. But sometimes I edit on my laptop, other times on my desktop, and the two may not have talked to each other in between. This situation drove me to learn Git in the first place.
+I can tolerate making tarballs or using *rsync* for backups and basic syncing. But sometimes I edit on my laptop, other times on my desktop, and the two may not have talked to each other in between.
 
 Initialize a Git repository and commit your files on one machine. Then on the other:
 
@@ -32,7 +32,7 @@ On the central server, initialize a 'bare repository' in some directory:
  $ mkdir proj.git
  $ cd proj.git
  $ git init --bare
- $ # one-liner alternative: GIT_DIR=proj.git git init
+ $  # one-line variant: GIT_DIR=proj.git git init
 
 Start the Git daemon if necessary:
 
@@ -44,8 +44,6 @@ empty Git repository. Typically one fills in a form on a webpage.
 'Push' your project to the central server with:
 
  $ git push git://central.server/path/to/proj.git HEAD
-
-The bare repository is so named because it contains no working directory and exposes files that are hidden away in the `.git` subdirectory of a normal Git repository. In other words, the central server maintains the history of your project, and never carries a snapshot of any given version.
 
 To check out the source, a developer types:
 
@@ -71,15 +69,28 @@ If the main server has new changes due to activity by other developers, the
 push fails, and the developer should pull the latest version, resolve any merge
 conflicts, then try again.
 
+=== Bare repositories ===
+
+A bare repository is so named because it has no working directory; it only contains files that are normally hidden away in the `.git` subdirectory. In other words, it maintains the history of a project, and never holds a snapshot of any given version.
+
+A bare repository plays a role similar to that of the main server in a
+centralized version control system: the home of your project. Developers clone
+your project from it, and push the latest official changes to it. Typically it
+resides on a server that does little else but disseminate data. Development
+occurs in the clones, so the home repository can do without a working
+directory.
+
+Many Git commands fail on bare repositories unless the `GIT_DIR` environment variable is set to the repository path, or the `--bare` option is supplied.
+
 === Push versus pull ===
 
-A push is more convenient than a pull in the above example. Firstly, pull fails
-on bare repositories (you must 'fetch' instead; we discuss this in a later
-chapter). But even if we kept a normal repository on the central server,
-pulling into it is still cumbersome. Each time, we would have to login to the
-server first, and give the pull command the network address of the machine
-we're pulling from. Firewalls may interfere, and we might not even have shell
-access to the server.
+Why did we introduce the push command, rather than rely on the familiar pull
+command? Firstly, pulling fails on bare repositories: instead you must 'fetch',
+a command we later discuss. But even if we kept a normal repository on the
+central server, pulling into it would still be cumbersome. We would have to
+login to the server first, and give the pull command the network address of the
+machine we're pulling from. Firewalls may interfere, and what if we have no
+shell access to the server in the first place?
 
 However, apart from this case, we discourage pushing into a repository, because confusion can ensue when the destination has a working directory.
 
@@ -91,7 +102,7 @@ Sick of the way a project is being run? Think you could do a better job? Then on
 
  $ git clone git://main.server/path/to/files
 
-Next tell everyone about your fork of the project at your server.
+Next, tell everyone about your fork of the project at your server.
 
 At any later time, you can merge in the changes from the original project with:
 

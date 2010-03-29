@@ -136,7 +136,7 @@ change or delete this nickname but there is usually no reason for doing so.
 
 If the original repository moves, we can update the URL via:
 
- $ git config remote.origin.url git://example.com/new.git
+ $ git config remote.origin.url git://new.url/proj.git
 
 The +branch.master.merge+ option specifies the default remote branch in
 a *git pull*. During the initial clone, it is set to the current branch of the
