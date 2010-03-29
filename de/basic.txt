@@ -148,22 +148,22 @@ und deine Nutzer können ihr script updaten mit:
 
 Sie werden nie mit Versionen in kontakt kommen von den du es nicht willst. Natürlich funktioniert der Trick für fast alles, nicht nur Scripts
 
-=== What Have I Done? ===
+=== Was habe ich getan? ===
 
-Find out what changes you've made since the last commit with:
+Finde heraus was du seit dem letzten Commit getan hast:
 
  $ git diff
 
-Or since yesterday:
+Oder seit Gestern:
 
  $ git diff "@{yesterday}"
 
-Or between a particular version and 2 versions ago:
+oder zwischen einer bestimmtern Version und der 2 versionen vorher
 
  $ git diff SHA1_HASH "master~2"
 
-In each case the output is a patch that can be applied with *git apply*.
-Try also:
+Du bekommst immer einen Patch der mit *git apply* angewendet werden kann
+Versuche mal:
 
  $ git whatchanged --since="2 weeks ago"
 
