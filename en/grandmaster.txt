@@ -1,6 +1,9 @@
 == Git Grandmastery ==
 
-This pretentiously named page is my dumping ground for uncategorized Git tricks.
+By now, you should be able to navigate the *git help* pages and understand
+almost everything. However, pinpointing the exact command required to solve a
+given problem can be tedious. Perhaps I can save you some time: below are some
+recipes I have needed in the past.
 
 === Source Releases ===
 
@@ -72,7 +75,7 @@ step permanently records the snapshot now in the index. Committing without the
 *-a* option only performs the second step, and only makes sense after running
 commands that somehow change the index, such as *git add*.
 
-Usually we can ignore the index and pretend we are reading straight from and writing straight to the history. On this occasion, we want finer control on what gets written to history, and are forced to manipulate the index. We place a snapshot of some, but not all, of our changes into the index, and then permanently record this carefully rigged snapshot.
+Usually we can ignore the index and pretend we are reading straight from and writing straight to the history. On this occasion, we want finer control, so we manipulate the index. We place a snapshot of some, but not all, of our changes into the index, and then permanently record this carefully rigged snapshot.
 
 === Don't Lose Your HEAD ===
 
