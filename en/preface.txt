@@ -20,7 +20,8 @@ Rather than go into details, we provide rough instructions for particular effect
 
  - link:book.html[Single webpage]: barebones HTML, with no CSS.
  - link:book.pdf[PDF file]: printer-friendly.
- - http://packages.debian.org/search?searchon=names&keywords=gitmagic[Debian package]: get a fast and local copy of this site. http://packages.ubuntu.com/jaunty/gitmagic[Ubuntu package (Jaunty Jackalope)] also available. Handy http://csdcf.stanford.edu/status/[when this server is offline for maintenance].
+ - http://packages.debian.org/gitmagic[Debian package], http:://packages.ubuntu.com/gitmagic[Ubuntu package]: get a fast and local copy of this site. Handy http://csdcf.stanford.edu/status/[when this server is offline].
+ - http://www.amazon.com/Git-Magic-Ben-Lynn/dp/1451523343/[Physical book [Amazon.com]]: 64 pages, 15.24cm x 22.86cm, black and white. Handy when there is no electricity.
 
 === Thanks! ===
 
@@ -32,8 +33,8 @@ Baumann.
 JunJie, Meng, JiangWei, Rodrigo Toledo, and Leonardo Siqueira Rodrigues
 worked on translations of this guide.
 
-My gratitude goes to many others for your support and praise. If this were
-a real physical book, I'd quote your generous words on the cover to promote it.
+My gratitude goes to many others for your support and praise. I'm tempted to
+quote you here, but it might raise expectations to ridiculous heights!
 
 If I've left you out by mistake, please tell me or just send me a patch!
 
