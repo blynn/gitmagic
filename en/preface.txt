@@ -12,26 +12,31 @@ Rather than go into details, we provide rough instructions for particular effect
 
 .Translations
 
- - http://docs.google.com/View?id=dfwthj68_675gz3bw8kj[Chinese (Simplified)]: by JunJie, Meng and JiangWei. Hosted by Google Docs.
+ - http://docs.google.com/View?id=dfwthj68_675gz3bw8kj[Chinese (Simplified)]: by JunJie, Meng and JiangWei.
  - link:/~blynn/gitmagic/intl/es/[Spanish]: by Rodrigo Toledo.
+ - http://www.slideshare.net/slide_user/magia-git[Portuguese]: by Leonardo Siqueira Rodrigues [http://www.slideshare.net/slide_user/magia-git-verso-odt[ODT version]].
 
 .Other Editions
 
  - link:book.html[Single webpage]: barebones HTML, with no CSS.
  - link:book.pdf[PDF file]: printer-friendly.
- - http://packages.debian.org/search?searchon=names&keywords=gitmagic[Debian package]: get a fast and local copy of this site. http://packages.ubuntu.com/jaunty/gitmagic[Ubuntu package (Jaunty Jackalope)] also available. Handy http://csdcf.stanford.edu/status/[when this server is offline for maintenance].
+ - http://packages.debian.org/gitmagic[Debian package], http:://packages.ubuntu.com/gitmagic[Ubuntu package]: get a fast and local copy of this site. Handy http://csdcf.stanford.edu/status/[when this server is offline].
+ - http://www.amazon.com/Git-Magic-Ben-Lynn/dp/1451523343/[Physical book [Amazon.com]]: 64 pages, 15.24cm x 22.86cm, black and white. Handy when there is no electricity.
 
 === Thanks! ===
 
-Kudos to Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone,
-Michael Budde, Richard Albury, Tarmigan, Derek Mahar, Frode Aannevik, and
-Keith Rarick for suggestions and improvements. Thanks to Daniel Baumann for
-creating and maintaining the Debian package. Thanks also to JunJie, Meng and
-JiangWei for the Chinese translation, and Rodrigo Toledo for the Spanish
-translation. [If I've left you out, please tell me because I often forget to
-update this section.]
+Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael Budde, Richard Albury, Tarmigan, Derek Mahar, Frode Aannevik, Keith Rarick, Andy Somerville, Ralf Recker, Øyvind A. Holm, Miklos Vajna, Sébastien Hinderer, Thomas Miedema, and Joe Malin contributed corrections and improvements.
 
-My gratitute goes to many others for your support and praise. I wish this were a real physical book, so I could quote your generous words on the cover to promote it! In seriousness, I greatly appreciate each message. Reading one always brightens my mood.
+François Marier maintains the Debian package originally created by Daniel
+Baumann.
+
+JunJie, Meng, JiangWei, Rodrigo Toledo, and Leonardo Siqueira Rodrigues
+worked on translations of this guide.
+
+My gratitude goes to many others for your support and praise. I'm tempted to
+quote you here, but it might raise expectations to ridiculous heights!
+
+If I've left you out by mistake, please tell me or just send me a patch!
 
 .Free Git hosting
 
