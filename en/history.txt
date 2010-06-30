@@ -6,9 +6,6 @@ history which you alone possess. Just as nations forever argue over who
 committed what atrocity, if someone else has a clone whose version of history
 differs to yours, you will have trouble reconciling when your trees interact.
 
-Of course, if you control all the other trees too, then there is no problem
-since you can overwrite them.
-
 Some developers strongly feel history should be immutable, warts and all.
 Others feel trees should be made presentable before they are unleashed in
 public. Git accommodates both viewpoints. Like cloning, branching and merging,
@@ -44,10 +41,14 @@ Then:
 
 - Remove commits by deleting lines.
 - Reorder commits by reordering lines.
-- Replace "pick" with "edit" to mark a commit for amending.
-- Replace "pick" with "squash" to merge a commit with the previous one.
+- Replace `pick` with:
+   * `edit` to mark a commit for amending.
+   * `reword` to change the log message.
+   * `squash` to merge a commit with the previous one.
+   * `fixup` to merge a commit with the previous one and discard the log message.
 
-If you marked a commit for editing, then run:
+Save and quit. If you marked a commit for editing, then
+run:
 
  $ git commit --amend
 
@@ -55,7 +56,7 @@ Otherwise, run:
 
  $ git rebase --continue
 
-So commit early and commit often: you can easily tidy up later with rebase.
+So commit early and commit often: you can tidy up later with rebase.
 
 === Local Changes Last ===
 
@@ -139,15 +140,15 @@ EOT
 Then create a Git repository from this temporary file by typing:
 
  $ mkdir project; cd project; git init
- $ git fast-import < /tmp/history
+ $ git fast-import --date-format=rfc2822 < /tmp/history
 
 You can checkout the latest version of the project with:
 
  $ git checkout master .
 
-The *git fast-export* command converts any git repository to the
+The *git fast-export* command converts any repository to the
 *git fast-import* format, whose output you can study for writing exporters,
-and also to transport git repositories in a human-readable format. Indeed,
+and also to transport repositories in a human-readable format. Indeed,
 these commands can send repositories of text files over text-only channels.
 
 === Where Did It All Go Wrong? ===
@@ -158,8 +159,8 @@ It's too late for that now. However, provided you've been committing often, Git
 can pinpoint the problem:
 
  $ git bisect start
- $ git bisect bad SHA1_OF_BAD_VERSION
- $ git bisect good SHA1_OF_GOOD_VERSION
+ $ git bisect bad HEAD
+ $ git bisect good 1b6d
 
 Git checks out a state halfway in between. Test the feature, and if it's still broken:
 
@@ -175,7 +176,7 @@ original state by typing:
 
 Instead of testing every change by hand, automate the search by running:
 
- $ git bisect run COMMAND
+ $ git bisect run my_script
 
 Git uses the return value of the given command, typically a one-off script, to
 decide whether a change is good or bad: the command should exit with code 0
@@ -190,7 +191,7 @@ search.
 
 Like many other version control systems, Git has a blame command:
 
- $ git blame FILE
+ $ git blame bug.c
 
 which annotates every line in the given file showing who last changed it, and when. Unlike many other version control systems, this operation works offline, reading only from local disk.
 
@@ -216,11 +217,11 @@ granted. I simply assumed other systems were similar: choosing a version
 control system ought to be no different from choosing a text editor or web
 browser.
 
-I was shocked when later forced to use a centralized system. My often flaky
-internet connection matters little with Git, but makes development unbearable
-when it needs to be as reliable as local disk. Additionally, I found myself
-conditioned to avoid certain commands because of the latencies involved, which
-ultimately prevented me from following my desired work flow.
+I was shocked when later forced to use a centralized system. A flaky internet
+connection matters little with Git, but makes development unbearable when it
+needs to be as reliable as local disk. Additionally, I found myself conditioned
+to avoid certain commands because of the latencies involved, which ultimately
+prevented me from following my desired work flow.
 
 When I had to run a slow command, the interruption to my train of thought
 dealt a disproportionate amount of damage. While waiting for server
