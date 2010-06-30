@@ -13,27 +13,30 @@ in the current directory with:
  $ git add .
  $ git commit -m "My first backup"
 
-Now if your new edits go awry, run:
+Now if your new edits go awry, restore the pristine version:
 
  $ git reset --hard
 
-to go back to where you were. To save the state again:
+To save the state again:
 
  $ git commit -a -m "Another backup"
 
-==== Add, Delete, Rename ====
+=== Add, Delete, Rename ===
 
-The above will only keep track of the files that were present when you first ran *git add*. If you add new files or subdirectories, you'll have to tell Git:
+The above only keeps track of the files that were present when you first ran *git add*. If you add new files or subdirectories, you'll have to tell Git:
 
- $ git add NEWFILES...
+ $ git add readme.txt Documentation
 
-Similarly, if you want Git to forget about certain files, maybe because you've deleted them:
+Similarly, if you want Git to forget about certain files:
 
- $ git rm OLDFILES...
+ $ git rm kludge.h obsolete.c
+ $ git rm -r incriminating/evidence/
+
+Git deletes these files for you if you haven't already.
 
 Renaming a file is the same as removing the old name and adding the new name. There's also the shortcut *git mv* which has the same syntax as the *mv* command. For example:
 
- $ git mv OLDFILE NEWFILE
+ $ git mv bug.c feature.c
 
 === Advanced Undo/Redo ===
 
@@ -41,15 +44,32 @@ Sometimes you just want to go back and forget about every change past a certain 
 
  $ git log
 
-shows you a list of recent commits, and their SHA1 hashes. Next, type:
+shows you a list of recent commits, and their SHA1 hashes:
 
- $ git reset --hard SHA1_HASH
+----------------------------------
+commit 766f9881690d240ba334153047649b8b8f11c664
+Author: Bob <bob@example.com>
+Date:   Tue Mar 14 01:59:26 2000 -0800
+
+    Replace printf() with write().
+
+commit 82f5ea346a2e651544956a8653c0f58dc151275c
+Author: Alice <alice@example.com>
+Date:   Thu Jan 1 00:00:00 1970 +0000
+
+    Initial commit.
+----------------------------------
+
+The first few characters of the hash are enough to specify the commit;
+alternatively, copy and paste the entire hash. Type:
+
+ $ git reset --hard 766f
 
 to restore the state to a given commit and erase all newer commits from the record permanently.
 
 Other times you want to hop to an old state briefly. In this case, type:
 
- $ git checkout SHA1_HASH
+ $ git checkout 82f5
 
 This takes you back in time, while preserving newer commits. However, like time travel in a science-fiction movie, if you now edit and commit, you will be in an alternate reality, because your actions are different to what they were the first time around.
 
@@ -68,7 +88,7 @@ To take the computer game analogy again:
 
 You can choose only to restore particular files and subdirectories by appending them after the command:
 
- $ git checkout SHA1_HASH some.file another.file
+ $ git checkout 82f5 some.file another.file
 
 Take care, as this form of *checkout* can silently overwrite files. To
 prevent accidents, commit before running any checkout command, especially when
@@ -83,14 +103,15 @@ You can also ask for the 5th-last saved state:
 
  $ git checkout master~5
 
-==== Reverting ====
+=== Reverting ===
 
 In a court of law, events can be stricken from the record. Likewise, you can pick specific commits to undo.
 
  $ git commit -a
- $ git revert SHA1_HASH
+ $ git revert 1b6d
 
-will undo just the commit with the given hash. Running *git log* reveals the revert is recorded as a new commit.
+will undo just the commit with the given hash. The revert is recorded as a new
+commit, which you can confirm by running *git log*.
 
 === Changelog Generation ===
 
@@ -143,7 +164,7 @@ and your users can upgrade their version by changing to the directory containing
 
  $ git pull
 
-Your users will never end up with a version of your script you don't want them to see. Obviously this trick works for anything, not just scripts.
+Your users will never end up with a version of your script you don't want them to see.
 
 === What Have I Done? ===
 
@@ -157,7 +178,7 @@ Or since yesterday:
 
 Or between a particular version and 2 versions ago:
 
- $ git diff SHA1_HASH "master~2"
+ $ git diff 1b6d "master~2"
 
 In each case the output is a patch that can be applied with *git apply*.
 Try also:
@@ -172,7 +193,7 @@ fire up any web browser.
 
 === Exercise ===
 
-Let A, B, C, D be four successive commits where B is the same as A except some files have been removed. We want to add the files back at D and not at B. How can we do this?
+Let A, B, C, D be four successive commits where B is the same as A except some files have been removed. We want to add the files back at D. How can we do this?
 
 There are at least three solutions. Assuming we are at D:
 
@@ -182,7 +203,7 @@ There are at least three solutions. Assuming we are at D:
 
   2. Since we saved the files back at A, we can retrieve them:
 
-   $ git checkout A FILES...
+   $ git checkout A foo.c bar.h
 
   3. We can view going from A to B as a change we want to undo:
 
