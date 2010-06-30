@@ -44,7 +44,7 @@ JunJie, Meng, JiangWei, Rodrigo Toledo, and Leonardo Siqueira Rodrigues рабо
 
 === Лицензия ===
 
-Это руководство выпущено под http://www.gnu.org/licenses/gpl-3.0.html[GNU General Public License version 3]. Естественно, источник находится в репозитории Git и может быть получен командой:
+Это руководство выпущено под http://www.gnu.org/licenses/gpl-3.0.html[GNU General Public License version 3]. Естественно, источник находится в хранилище Git и может быть получен командой:
 
  $ git clone git://repo.or.cz/gitmagic.git  # Создает каталог "gitmagic".
 
