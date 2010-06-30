@@ -54,17 +54,6 @@ If the main server has been updated, the latest version needs to be checked out 
  $ git commit -a
  $ git pull
 
-==== Push versus pull ====
-
-We mostly avoid pushing into a repository, because confusion can ensue
-if the destination has a working directory with changes. However, pushing into
-a bare repository is a straightforward operation and more suitable than a pull
-in this case.
-
-Pulling from the server requires shelling into the server, and also
-knowing the network address of the machine you happen to be working on.
-Furthermore, firewalls may interfere.
-
 === Forking a Project ===
 
 Sick of the way a project is being run? Think you could do a better job? Then on your server:
