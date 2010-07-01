@@ -29,9 +29,7 @@ Download, compile and install Git in your account, and create a repository in
 your web directory:
 
  $ GIT_DIR=proj.git git init
-
-In the "proj.git" directory, run:
-
+ $ cd proj.git
  $ git --bare update-server-info
  $ cp hooks/post-update.sample hooks/post-update
 
@@ -60,9 +58,8 @@ The sender creates a 'bundle':
  $ git bundle create somefile HEAD
 
 then transports the bundle, +somefile+, to the other party somehow: email,
-thumb drive, floppy disk, an *xxd* printout and an OCR machine,
-reading bits over the phone, smoke signals, etc. The receiver retrieves
-commits from the bundle by typing:
+thumb drive, an *xxd* printout and an OCR scanner, reading bits over the phone,
+smoke signals, etc. The receiver retrieves commits from the bundle by typing:
 
  $ git pull somefile
 
@@ -70,9 +67,10 @@ The receiver can even do this from an empty repository. Despite its
 size, +somefile+ contains the entire original git repository.
 
 In larger projects, eliminate waste by bundling only changes the other
-repository lacks:
+repository lacks. For example, suppose the commit ``1b6d...'' is the most
+recent commit shared by both parties:
 
- $ git bundle create somefile HEAD ^COMMON_SHA1
+ $ git bundle create somefile HEAD ^1b6d
 
 If done frequently, one could easily forget which commit was last sent. The
 help page suggests using tags to solve this. Namely, after you send a bundle,
@@ -94,27 +92,27 @@ your side, all you require is an email account: there's no need to setup an onli
 
 Recall from the first chapter:
 
- $ git diff COMMIT
+ $ git diff 1b6d > my.patch
 
 outputs a patch which can be pasted into an email for discussion. In a Git
 repository, type:
 
- $ git apply < FILE
+ $ git apply < my.patch
 
 to apply the patch.
 
 In more formal settings, when author names and perhaps signatures should be
 recorded, generate the corresponding patches past a certain point by typing:
 
- $ git format-patch START_COMMIT
+ $ git format-patch 1b6d
 
 The resulting files can be given to *git-send-email*, or sent by hand. You can also specify a range of commits:
 
- $ git format-patch START_COMMIT..END_COMMIT
+ $ git format-patch 1b6d..HEAD^^
 
-On the receving end, save an email to a file, then type:
+On the receiving end, save an email to a file, then type:
 
- $ git am < FILE
+ $ git am < email.txt
 
 This applies the incoming patch and also creates a commit, including information such as the author.
 
@@ -128,17 +126,17 @@ without reading tutorials!
 
 After cloning a repository, running *git push* or *git pull* will automatically
 push to or pull from the original URL. How does Git do this? The secret lies in
-config options initialized created with the clone. Let's take a peek:
+config options created with the clone. Let's take a peek:
 
  $ git config --list
 
-The +remote.origin.url+ option controls the source URL; "origin" is a nickname
-given to the source repository. As with the "master" branch convention, we may
+The +remote.origin.url+ option controls the source URL; ``origin'' is a nickname
+given to the source repository. As with the ``master'' branch convention, we may
 change or delete this nickname but there is usually no reason for doing so.
 
-If the the original repository moves, we can update the URL via:
+If the original repository moves, we can update the URL via:
 
- $ git config remote.origin.url NEW_URL
+ $ git config remote.origin.url git://new.url/proj.git
 
 The +branch.master.merge+ option specifies the default remote branch in
 a *git pull*. During the initial clone, it is set to the current branch of the
@@ -150,7 +148,7 @@ This option only applies to the repository we first cloned from, which is
 recorded in the option +branch.master.remote+. If we pull in from other
 repositories we must explicitly state which branch we want:
 
- $ git pull ANOTHER_URL master
+ $ git pull git://example.com/other.git master
 
 The above explains why some of our earlier push and pull examples had no
 arguments.
@@ -179,7 +177,7 @@ logs for the appropriate SHA1 hash, but it's much easier to type:
 
  $ git diff origin/HEAD
 
-Or you can see what the "experimental" branch has been up to:
+Or you can see what the ``experimental'' branch has been up to:
 
  $ git log origin/experimental
 
@@ -188,7 +186,7 @@ Or you can see what the "experimental" branch has been up to:
 Suppose two other developers are working on our project, and we want to
 keep tabs on both. We can follow more than one repository at a time with:
 
- $ git remote add other ANOTHER_URL
+ $ git remote add other git://example.com/some_repo.git
  $ git pull other some_branch
 
 Now we have merged in a branch from the second repository, and we have
@@ -198,32 +196,31 @@ easy access to all branches of all repositories:
 
 But what if we just want to compare their changes without affecting our own
 work? In other words, we want to examine their branches without having
-their changes invade our working directory. In this case, rather than pull,
-run:
+their changes invade our working directory. Then rather than pull, run:
 
  $ git fetch        # Fetch from origin, the default.
  $ git fetch other  # Fetch from the second programmer.
 
-This fetches their histories and nothing more, so although the working
-directory remains untouched, we can refer to any branch of any repository in
-a Git command. By the way, behind the scenes, a pull is simply a fetch followed
-by *git merge*; recall the latter merges a given commit into the working
-directory. Usually we pull because we want to merge after a fetch; this
-situation is a notable exception.
+This just fetches histories. Although the working directory remains untouched,
+we can refer to any branch of any repository in a Git command because we now
+possess a local copy.
+
+Recall that behind the scenes, a pull is simply a *fetch* then *merge*.
+Usually we *pull* because we want to merge the latest commit after a fetch;
+this situation is a notable exception.
 
 See *git help remote* for how to remove remote repositories, ignore certain
 branches, and more.
 
 === My Preferences ===
 
-For my projects, I like contributors to prepare Git repositories which I can
+For my projects, I like contributors to prepare repositories from which I can
 pull. Some Git hosting services let you host your own fork of a project with
 the click of a button.
 
 After I fetch a tree, I run Git commands to navigate and examine the changes,
-which ideally are well-organized and well-described. I merge unpublished
-changes of my own, and perhaps make further edits. Once satisfied, I push to
-the official repository.
+which ideally are well-organized and well-described. I merge my own changes,
+and perhaps make further edits. Once satisfied, I push to the main repository.
 
 Though I infrequently receive contributions, I believe this approach scales
 well. See
@@ -231,7 +228,6 @@ http://torvalds-family.blogspot.com/2009/06/happiness-is-warm-scm.html[this
 blog post by Linus Torvalds].
 
 Staying in the Git world is slightly more convenient than patch files, as it
-saves me the step of converting them to Git commits. Furthermore, Git
-automatically handles details such as recording the author's name and email
-address, as well as the time and date, and asks the author to describe
-their own change.
+saves me from converting them to Git commits. Furthermore, Git handles details
+such as recording the author's name and email address, as well as the time and
+date, and asks the author to describe their own change.
