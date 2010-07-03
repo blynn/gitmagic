@@ -86,27 +86,12 @@ Git would benefit from defining the zero commit: as soon as a repository is cons
 
 Then running git log, for example, would inform the user that no commits have been made yet, instead of exiting with a fatal error. Similarly for other tools.
 
-Every initial commit is implicitly a descendant of this zero commit. For example, rebasing an unrelated branch would cause the whole branch to be grafted on to the target. Currently, all but the initial commit is applied, resulting in a merge conflict. One workaround is to use `git checkout` followed by `git commit -C` on the initial commit, then rebase the rest.
+Every initial commit is implicitly a descendant of this zero commit.
 
-There are worse cases unfortunately. If several branches with different initial commits are merged together, then rebasing the result requires substantial manual intervention.
+However there are some problem cases unfortunately. If several branches with different initial commits are merged together, then rebasing the result requires substantial manual intervention.
 
 === Interface Quirks ===
 
-For commits A, B, the meaning of the expressions "A..B" and "A...B" depends
+For commits A and B, the meaning of the expressions "A..B" and "A...B" depends
 on whether the command expects two endpoints or a range. See *git help diff*
 and *git help rev-parse*.
-
-Some error messages are inscrutable. For example, if Git cannot create the
-lockfile +packed-refs.lock+, then you might see:
-
- $ git branch -D foo
- error: cannot delete 'refs/heads/foo' from packed refs
- error: Error deleting branch 'foo'
-
-This could happen if say filesystem trouble prevented the lockfile from being
-deleted in a previous Git command. In this case the solution is to delete the
-lockfile and try again, after ensuring no Git commands are still running.
-
-The push command ignores the state of the working directory of the target
-repository. To prevent confusion, push only into bare repositories, or setup a
-dedicated push-only branch.
