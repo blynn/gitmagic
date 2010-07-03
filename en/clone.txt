@@ -1,12 +1,12 @@
 == Cloning Around ==
 
-In older version control systems, checkout is the standard operation to get files. You retrieve a bunch of files in the requested saved state.
+In older version control systems, checkout is the standard operation to get files. You retrieve a bunch of files in a particular saved state.
 
-In Git and other distributed version control systems, cloning is the standard operation. To get files you create a clone of the entire repository. In other words, you practically mirror the central server. Anything the main repository can do, you can do.
+In Git and other distributed version control systems, cloning is the standard operation. To get files, you create a 'clone' of the entire repository. In other words, you practically mirror the central server. Anything the main repository can do, you can do.
 
 === Sync Computers ===
 
-This is the reason I first used Git. I can tolerate making tarballs or using *rsync* for backups and basic syncing. But sometimes I edit on my laptop, other times on my desktop, and the two may not have talked to each other in between.
+I can tolerate making tarballs or using *rsync* for backups and basic syncing. But sometimes I edit on my laptop, other times on my desktop, and the two may not have talked to each other in between.
 
 Initialize a Git repository and commit your files on one machine. Then on the other:
 
@@ -17,7 +17,7 @@ to create a second copy of the files and Git repository. From now on,
  $ git commit -a
  $ git pull other.computer:/path/to/files HEAD
 
-will pull in the state of the files on the other computer into the one you're working on. If you've recently made conflicting edits in the same file, Git will let you know and you should commit again after resolving them.
+will 'pull' in the state of the files on the other computer into the one you're working on. If you've recently made conflicting edits in the same file, Git will let you know and you should commit again after resolving them.
 
 === Classic Source Control ===
 
@@ -27,32 +27,74 @@ Initialize a Git repository for your files:
  $ git add .
  $ git commit -m "Initial commit"
 
-On the central server, initialize an empty Git repository with some name,
-and start the Git daemon if necessary:
+On the central server, initialize a 'bare repository' in some directory:
 
- $ GIT_DIR=proj.git git init
- $ git daemon --detach  # it might already be running
+ $ mkdir proj.git
+ $ cd proj.git
+ $ git init --bare
+ $  # one-line variant: GIT_DIR=proj.git git init
+
+Start the Git daemon if necessary:
+
+ $ git daemon --detach  # it may already be running
 
 For Git hosting services, follow the instructions to setup the initially
 empty Git repository. Typically one fills in a form on a webpage.
 
-Push your project to the central server with:
+'Push' your project to the central server with:
 
  $ git push git://central.server/path/to/proj.git HEAD
 
-We're ready. To check out source, a developer types
+To check out the source, a developer types:
 
  $ git clone git://central.server/path/to/proj.git
 
-After making changes, the code is checked in to the main server by:
+After making changes, the developer saves changes locally:
 
  $ git commit -a
+
+To update to the latest version:
+
+ $ git pull
+
+Any merge conflicts should be resolved then committed:
+
+ $ git commit -a
+
+To check in local changes into the central repository:
+
  $ git push
 
-If the main server has been updated, the latest version needs to be checked out before the push. To sync to the latest version:
+If the main server has new changes due to activity by other developers, the
+push fails, and the developer should pull the latest version, resolve any merge
+conflicts, then try again.
 
- $ git commit -a
- $ git pull
+=== Bare repositories ===
+
+A bare repository is so named because it has no working directory; it only contains files that are normally hidden away in the `.git` subdirectory. In other words, it maintains the history of a project, and never holds a snapshot of any given version.
+
+A bare repository plays a role similar to that of the main server in a
+centralized version control system: the home of your project. Developers clone
+your project from it, and push the latest official changes to it. Typically it
+resides on a server that does little else but disseminate data. Development
+occurs in the clones, so the home repository can do without a working
+directory.
+
+Many Git commands fail on bare repositories unless the `GIT_DIR` environment variable is set to the repository path, or the `--bare` option is supplied.
+
+=== Push versus pull ===
+
+Why did we introduce the push command, rather than rely on the familiar pull
+command? Firstly, pulling fails on bare repositories: instead you must 'fetch',
+a command we later discuss. But even if we kept a normal repository on the
+central server, pulling into it would still be cumbersome. We would have to
+login to the server first, and give the pull command the network address of the
+machine we're pulling from. Firewalls may interfere, and what if we have no
+shell access to the server in the first place?
+
+However, apart from this case, we discourage pushing into a repository, because confusion can ensue when the destination has a working directory.
+
+In short, while learning Git, only push when the target is a bare repository; otherwise pull.
 
 === Forking a Project ===
 
@@ -60,7 +102,7 @@ Sick of the way a project is being run? Think you could do a better job? Then on
 
  $ git clone git://main.server/path/to/files
 
-Next tell everyone about your fork of the project at your server.
+Next, tell everyone about your fork of the project at your server.
 
 At any later time, you can merge in the changes from the original project with:
 
@@ -110,6 +152,48 @@ Then go to the new directory and run:
 
 The procedure for giving your changes to everyone else depends on the other version control system. The new directory contains the files with your changes. Run whatever commands of the other version control system are needed to upload them to the central repository.
 
-The *git svn* command automates the above for Subversion repositories, and can
-also be used to
-http://google-opensource.blogspot.com/2008/05/export-git-project-to-google-code.html[export a Git project to a Subversion repository].
+Subversion, perhaps the best centralized version control system, is used by countless projects. The *git svn* command automates the above for Subversion repositories, and can also be used to http://google-opensource.blogspot.com/2008/05/export-git-project-to-google-code.html[export a Git project to a Subversion repository].
+
+=== Mercurial ===
+
+Mercurial is a similar version control system that can almost seamlessly work in tandem with Git. With the `hg-git` plugin, a Mercurial user can losslessly push to and pull from a Git repository.
+
+Obtain the `hg-git` plugin with Git:
+
+ $ git clone git://github.com/schacon/hg-git.git
+
+or Mercurial:
+
+ $ hg clone http://bitbucket.org/durin42/hg-git/
+
+Sadly, I am unaware of an analogous plugin for Git. For this reason, I advocate Git over Mercurial for the main repository, even if you prefer Mercurial. With a Mercurial project, usually a volunteer maintains a parallel Git repository to accommodate Git users, whereas thanks to the `hg-git` plugin, a Git project automatically accommodates Mercurial users.
+
+Although the plugin can convert a Mercurial repository to a Git repository by pushing to an empty repository, this job is easier with the `hg-fast-export.sh` script, available from:
+
+ $ git clone git://repo.or.cz/fast-export.git
+
+To convert, in an empty directory:
+
+ $ git init
+ $ hg-fast-export.sh -r /hg/repo
+
+after adding the script to your `$PATH`.
+
+=== Bazaar ===
+
+We briefly mention Bazaar because it is the most popular free distributed
+version control system after Git and Mercurial.
+
+Bazaar has the advantage of hindsight, as it is relatively young; its designers could learn from mistakes of the past, and sidestep minor historical warts. Additionally, its developers are mindful of portability and interoperation with other version control systems.
+
+A `bzr-git` plugin lets Bazaar users work with Git repositories to some extent. The `tailor` program converts Bazaar repositories to Git repositories, and can do so incrementally, while `bzr-fast-export` is well-suited for one-shot conversions.
+
+=== Why I use Git ===
+
+I originally chose Git because I heard it could manage the unimaginably unmanageable Linux kernel source. I've never felt a need to switch. Git has served admirably, and I've yet to be bitten by its flaws. As I primarily use Linux, issues on other platforms are of no concern.
+
+Also, I prefer C programs and bash scripts to executables such as Python scripts: there are fewer dependencies, and I'm addicted to fast running times.
+
+I did think about how Git could be improved, going so far as to write my own Git-like tool, but only as an academic exercise. Had I completed my project, I would have stayed with Git anyway, as the gains are too slight to justify using an oddball system.
+
+Naturally, your needs and wants likely differ, and you may be better off with another system. Nonetheless, you can't go far wrong with Git.
