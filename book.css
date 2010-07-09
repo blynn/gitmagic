@@ -13,7 +13,8 @@ pre {
 }
 
 ul li p {
-    margin-bottom:0;
+    margin: 0;
+    padding: 0;
 }
 
 /* Based on http://phrogz.net/CSS/columns3.html */
