@@ -27,7 +27,7 @@
 Аналогично, если вы хотите, чтобы Git забыл о некоторых файлах:
 
  $ git rm kludge.h obsolete.c
- $ git rm -r улики/
+ $ git rm -r incriminating/evidence/
 
 Git удалит эти файлы для вас, если вы не удалили их сами.
 
