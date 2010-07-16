@@ -185,11 +185,7 @@ Try also:
 
  $ git whatchanged --since="2 weeks ago"
 
-Often I'll browse history with http://sourceforge.net/projects/qgit[qgit]
-instead, due to its slick photogenic interface, or
-http://jonas.nitro.dk/tig/[tig], a text-mode interface that works well over
-slow connections. Alternatively, install a web server, run *git instaweb* and
-fire up any web browser.
+Often I'll browse history with http://sourceforge.net/projects/qgit[qgit] instead, due to its slick photogenic interface, or http://jonas.nitro.dk/tig/[tig], a text-mode interface that works well over slow connections. Alternatively, install a web server, run *git instaweb* and fire up any web browser.
 
 === Exercise ===
 
