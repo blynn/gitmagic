@@ -18,13 +18,10 @@ book.xml: $(addprefix $(LANG)/,$(TXTFILES))
 	# then substitute the English version.
 	# Kludge to make preface sections work for languages besides English
 	# for older AsciiDoc versions.
-	if [[ `asciidoc --version | cut -f 2 -d ' '` < "8.4.5" ]]; then \
-	echo '[specialsections]' > conf ; \
-	sed -n '/^== .* ==$$/p' $(LANG)/preface.txt | sed 's/^== \(.*\) ==$$/^\1$$=sect-preface/' >> conf ; \
-	else echo "" > conf ; fi; \
+	CONF=lang-$(LANG).conf; [ -f $$CONF ] || CONF=lang-en.conf; \
 	( for FILE in $^ ; do if [ -f $$FILE ]; then cat $$FILE; else \
 	cat en/$$(basename $$FILE); fi; echo ; done ) | \
-	asciidoc -a lang=$(LANG) -d book -b docbook -f conf - > $@
+	asciidoc -a lang=$(LANG) -d book -b docbook -f $$CONF - > $@
 
 # This rule allows unfinished translations to build.
 # Report an error if the English version of the text file is missing.
