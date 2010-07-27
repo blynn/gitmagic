@@ -66,8 +66,7 @@ To check in local changes into the central repository:
  $ git push
 
 If the main server has new changes due to activity by other developers, the
-push fails, and the developer should pull the latest version, resolve any merge
-conflicts, then try again.
+push fails, and the developer should pull the latest version, resolve any merge conflicts, then try again.
 
 === Bare repositories ===
 
