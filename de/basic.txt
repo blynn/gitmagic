@@ -148,30 +148,30 @@ und deine Nutzer können ihr script updaten mit:
 
 Sie erden nie mit Versionen in kontakt kommen von den du es nicht willst. Natütlich funktioniert der Trick für fast alles, nicht nur Scripts
 
-=== What Have I Done? ===
+=== Was habe ich getan? ===
 
-Find out what changes you've made since the last commit with:
+Um Herauszufinden was du seit deinem letzten Commit gemacht hast nutze:
 
  $ git diff
 
-Or since yesterday:
+Oder seit Gestern:
 
  $ git diff "@{yesterday}"
 
-Or between a particular version and 2 versions ago:
+Oder zwischen einer bestimmten Version und der 2. Letzten Version:
 
  $ git diff SHA1_HASH "master~2"
 
-In each case the output is a patch that can be applied with *git apply*.
-Try also:
+Jedesmal ist die Ausgabe ein Patch der mit *git apply* eingespielt werden kann
+Auch gut:
 
  $ git whatchanged --since="2 weeks ago"
 
-Often I'll browse history with http://sourceforge.net/projects/qgit[qgit]
-instead, due to its slick photogenic interface, or
-http://jonas.nitro.dk/tig/[tig], a text-mode interface that works well over
-slow connections. Alternatively, install a web server, run *git instaweb* and
-fire up any web browser.
+Um mir die Geschichte eines Repositories anzuzeigen benutze ich häufig
+http://sourceforge.net/projects/qgit[qgit]
+da es ein schickes Interface hat. Es git aber auch andere GUIs wie zum Beispiel
+http://jonas.nitro.dk/tig/[tig], ein textinterface, welches sich gut über das INternet beutzen lässt.
+Du kannst auch mit *git instaweb* einen Server aufsetzen und die alles in deinem Browser anschauen
 
 === Exercise ===
 
