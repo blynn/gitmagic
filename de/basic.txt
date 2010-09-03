@@ -138,7 +138,7 @@ sage den nutzern folgendes:
 
  $ git clone git://dein.computer/pfad/zum/script
 
-Immer wenn dein Script reif für eine Veröffenltichung ist:
+Immer wenn dein Script reif für eine Veröffentlichung ist:
 
  $ git commit -a -m "Nöchstes release"
 
