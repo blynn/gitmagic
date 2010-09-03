@@ -146,11 +146,11 @@ und deine Nutzer können ihr script updaten mit:
 
  $ git pull
 
-Sie erden nie mit Versionen in kontakt kommen von den du es nicht willst. Natütlich funktioniert der Trick für fast alles, nicht nur Scripts
+Sie werden nie mit Versionen in kontakt kommen von den du es nicht willst. Natürlich funktioniert der Trick für fast alles, nicht nur Scripts
 
 === Was habe ich getan? ===
 
-Um Herauszufinden was du seit deinem letzten Commit gemacht hast nutze:
+Finde heraus was du seit dem letzten Commit getan hast:
 
  $ git diff
 
