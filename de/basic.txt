@@ -140,7 +140,7 @@ sage den nutzern folgendes:
 
 Immer wenn dein Script reif für eine Veröffentlichung ist:
 
- $ git commit -a -m "Nöchstes release"
+ $ git commit -a -m "Nächstes release"
 
 und deine Nutzer können ihr script updaten mit:
 
