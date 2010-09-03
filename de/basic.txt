@@ -173,22 +173,26 @@ da es ein schickes Interface hat. Es git aber auch andere GUIs wie zum Beispiel
 http://jonas.nitro.dk/tig/[tig], ein textinterface, welches sich gut über das INternet beutzen lässt.
 Du kannst auch mit *git instaweb* einen Server aufsetzen und die alles in deinem Browser anschauen
 
-=== Exercise ===
+=== Beispiel ===
 
-Let A, B, C, D be four successive commits where B is the same as A except some files have been removed. We want to add the files back at D and not at B. How can we do this?
+A, B, C, D sind 4 aufeinanderfolgende Commits. B ist identisch mit A außer das einige Dateien gelöscht wurden. Wir mochten die Dateien in D wieder hinzufügen, aber nicht in B.
+wie mache wir das?
 
-There are at least three solutions. Assuming we are at D:
+Es gibt mindestens 3 Lösungen.
 
-  1. The difference between A and B are the removed files. We can create a patch representing this difference and apply it:
+Wir sind bei D:
+
+  1. Der Unterschied zwischen A und B sind die gelöschten Dateien. Wir können einen Patch erstellen der diesen Unterschied darstellt, und diesen dann auf D anwenden:
 
    $ git diff B A | git apply
 
-  2. Since we saved the files back at A, we can retrieve them:
+  2. Da die dateien im Repositorie unter dem Commit A gespeichert sind, können wir sie wieder herstellen:
 
-   $ git checkout A FILES...
+   $ git checkout A DATEIEN...
 
-  3. We can view going from A to B as a change we want to undo:
+  3. Wir können den commit B einfach rückgängig machen:
 
    $ git revert B
 
-Which choice is best? Whichever you prefer most. It is easy to get what you want with Git, and often there are many ways to get it.
+Welche ist die beste Lösung? Die die Dir am besten gefällt. 
+Es ist einfach mit git das zu bekommen was du willst. und oft führen mehre Wege nach Rom.
