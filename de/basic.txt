@@ -1,0 +1,198 @@
+== Grundlegendes ==
+
+
+Bevor wir uns in ein Meer von Git-Befehlen stürzen, schauen wir uns ein paar einfache Beispiele
+an. Obwohl "einfach", sind alle davon wichtig und nützlich.
+Um erhlich zu sein, meine ersten Monate mit Git brauchte ich nicht mehr als in diesem Kapitel beschrieben steht.
+
+=== Abspeichern ===
+
+Hast du irgendetwas dramatisches vor? 
+Nur zu, aber speichere deinen aktuellen Stand lieber nochmal ab:
+
+ $ git init
+ $ git add .
+ $ git commit -m "Mein erstes Backup"
+
+Falls deine Änderungen etwas kaput gemacht haben, kannst du jetzt die alte Version wiederherstellen:
+
+ $ git reset --hard
+
+Falls alles geklappt hat, kannst du den neuen Stand speichern:
+
+ $ git commit -a -m "Noch ein Backup"
+
+==== Hinzufügen, Löschen, Verschieben  ====
+
+Bisher kümmert sich git nur um Dateien die existierten als du das erste mal git add ausgeführt hast.
+Für neue Dateien oder Verzeichnisse musst du git noch folgendes mitteilen:
+
+ $ git add NEUE_DATEIEN...
+
+Falls git eine Datei "Vergessen" soll:
+
+ $ git rm ALTE_DATEI...
+
+Eine Datei umzubenennen bedeutet im Endeffekt dasselbe wie sie zu löschen und unter neuem Namen hinzuzufügen. Git benutzt hierzu mv (selber syntax wie mv (1) 
+
+ $ git mv ALTER_NAME NEUER_NAME
+
+===  Fortgeschrittenes Rückgängigmachen/Wiederherstellen===
+
+Es kann vorkommen das du jede Änderung ab einem bestimmten Zeitpunkt wegwerfen willst weil alles bockmist ist:
+
+ $ git log
+
+Zeight dir eine Liste der letzten Commits und die zugehörigen SHA1 hashes. Jetzt:
+
+ $ git reset --hard SHA1_HASH
+
+um den Stand des betreffenden Commits wieder herzustellen und alle nachfolgenden Änderungen für immer zu Verwerfen.
+
+Ein anderes mal willst du nur kurz zu einem alten Stand springen, in diesem Fall:
+
+ $ git checkout SHA1_HASH
+
+Damit springst du in der Zeit zurück, erhältst aber neuere Änderungen. Aber, wie in jedem guten Sciencefiction Film: Wenn du jetzt etwas änderst, gelangst du in ein alternatives Universum. Wenn du dich das zweite mal anders als das erste Verhälst, änderst du nicht die Zukunft, du wechselst in eine paralele Realität
+
+Diese Alternative Realität heist "Branch". Wir kommen später darauf zurück, aber merke dir schonmal den Namen.
+
+ $ git checkout master
+
+Bringt dich wieder in die Gegenwart.
+Btw: Um zu verhidnern das sich Git geschwert, solltest du änderungen vor jedem Checkout immer commiten oder  reseten.
+
+Um uns wieder der Computerspiel-analogie zuzuwenden:
+
+- *`git reset --hard`*: Ein alten Stand laden und alle neueren Stände wegwerfen.
+
+- *`git checkout`*: Einen alten Spielstand laden. Wenn du hier weiterspielst, weichst du von der bisherigen Realität ab und kommst in ein paraleluniversum (branch, reden wir später drüber) 
+
+Du kannst auch nur einzelne Dateien oder Verzeichnisse wiederherstellen indem du sie an den Befehl anhängst:
+
+ $ git checkout SHA1_HASH eine.datei nocheine.datei
+
+Aber sein Vorsichtig! diese art des Checkouts kann dateien überschreiben ohne das du etwas merkst.
+Um Unfälle zu vermeiden solltest du immer commiten befor du ein Checkout machst. 
+Allgemein gilt: Im zweifel erst commiten, besonders am Anfang wenn du Git noch nicht so genau kennst.
+
+Keine lust immer Hashes einzutippen? Nutze:
+
+ $ git checkout :/"Mein erster Co"
+
+um zu einem Commit zu springen dessen nachricht so anfängt
+Du kannst auch nach dem 5. letzten Commit fragen: 
+
+ $ git checkout master~5
+
+==== Rückgängig machen ====
+
+Du kannst einzelne Commits wieder rückgängig machen:
+
+ $ git commit -a
+ $ git revert SHA1_HASH
+
+macht nur den angebenen commit wieder rückgängig. Die revert operation wird als neuer Commit gespeichert, wie
+dir ein Blick in git log verät.
+
+=== Changelog Erstellen ===
+
+Einige Projekte benötigen ein http://de.wikipedia.org/wiki/Changelog[changelog]:
+
+ $ git log > ChangeLog
+
+=== Dateien Downloaden ===
+
+Besorge dir eine Kopie eines mit Git verwalteten Projektes:
+
+ $ git clone git://server/pfad/zur/datei
+
+um zum Beispiel alle Dateien für dieses Buch zu bekommen:
+
+ $ git clone git://git.or.cz/gitmagic.git
+
+Wir reden später noch ausführlicher über den clone befehl
+
+=== Das Neueste vom Neuen ===
+
+Wenn du schon eine Kopie eines Projektes hast, und dieses auf die letzte Version updaten möchtest:
+
+ $ git pull
+
+=== Unverzügliches Veröffentlichen ===
+
+Nehmen wir an du hast ein Script geschrieben und möchtest es anderen zugänglich machen. Du könntest sie einfach bitten es immer von deinem Computer herunterzuladen, aber falls sie das tun während du experimentierst oder das Script verbessert könnten sie eine fehlerhafte Version bekommen. Genau deswegen gibt es Releasezyklen. Entwickler arbeiten regelmäßig an einem Projekt, veröffentlichen den Code 
+aber nur wenn sie ihn für vorzeigbar halten.
+Um dies in Git zu tun, gehe ins Verzeichniss in dem das script liegt:
+
+ $ git init
+ $ git add .
+ $ git commit -m "Erster Release"
+
+Dann sage deinen Nutzern:
+
+ $ git clone dein.computer:/pfad/zum/script
+
+um dein Script zu Downloaden. Das Funtioniert nur wenn sie SSH-Zugriff haben, falls nicht, führe *git deamon* aus und 
+sage den nutzern folgendes:
+
+ $ git clone git://dein.computer/pfad/zum/script
+
+Immer wenn dein Script reif für eine Veröffentlichung ist:
+
+ $ git commit -a -m "Nächstes release"
+
+und deine Nutzer können ihr script updaten mit:
+
+ $ git pull
+
+Sie werden nie mit Versionen in kontakt kommen von den du es nicht willst. Natürlich funktioniert der Trick für fast alles, nicht nur Scripts
+
+=== Was habe ich getan? ===
+
+Finde heraus was du seit dem letzten Commit getan hast:
+
+ $ git diff
+
+Oder seit Gestern:
+
+ $ git diff "@{yesterday}"
+
+Oder zwischen einer bestimmten Version und der 2. Letzten Version:
+
+ $ git diff SHA1_HASH "master~2"
+
+Jedesmal ist die Ausgabe ein Patch der mit *git apply* eingespielt werden kann
+Auch gut:
+
+ $ git whatchanged --since="2 weeks ago"
+
+Um mir die Geschichte eines Repositories anzuzeigen benutze ich häufig
+http://sourceforge.net/projects/qgit[qgit]
+da es ein schickes Interface hat. Es git aber auch andere GUIs wie zum Beispiel
+http://jonas.nitro.dk/tig/[tig], ein textinterface, welches sich gut über das INternet beutzen lässt.
+Du kannst auch mit *git instaweb* einen Server aufsetzen und die alles in deinem Browser anschauen
+
+=== Beispiel ===
+
+A, B, C, D sind 4 aufeinanderfolgende Commits. B ist identisch mit A außer das einige Dateien gelöscht wurden. Wir mochten die Dateien in D wieder hinzufügen, aber nicht in B.
+wie mache wir das?
+
+Es gibt mindestens 3 Lösungen.
+
+Wir sind bei D:
+
+  1. Der Unterschied zwischen A und B sind die gelöschten Dateien. Wir können einen Patch erstellen der diesen Unterschied darstellt, und diesen dann auf D anwenden:
+
+   $ git diff B A | git apply
+
+  2. Da die dateien im Repositorie unter dem Commit A gespeichert sind, können wir sie wieder herstellen:
+
+   $ git checkout A DATEIEN...
+
+  3. Wir können den commit B einfach rückgängig machen:
+
+   $ git revert B
+
+Welche ist die beste Lösung? Die die Dir am besten gefällt. 
+Es ist einfach mit git das zu bekommen was du willst. und oft führen mehre Wege nach Rom.
