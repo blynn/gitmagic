@@ -22,7 +22,7 @@ Falls alles geklappt hat, kannst du den neuen Stand speichern:
 
  $ git commit -a -m "Noch ein Backup"
 
-==== Hinzufügen, Löschen, Verschieben  ====
+=== Hinzufügen, Löschen, Verschieben  ===
 
 Bisher kümmert sich git nur um Dateien die existierten als du das erste mal git add ausgeführt hast.
 Für neue Dateien oder Verzeichnisse musst du git noch folgendes mitteilen:
@@ -37,7 +37,7 @@ Eine Datei umzubenennen bedeutet im Endeffekt dasselbe wie sie zu löschen und u
 
  $ git mv ALTER_NAME NEUER_NAME
 
-===  Fortgeschrittenes Rückgängigmachen/Wiederherstellen===
+=== Fortgeschrittenes Rückgängigmachen/Wiederherstellen ===
 
 Es kann vorkommen das du jede Änderung ab einem bestimmten Zeitpunkt wegwerfen willst weil alles bockmist ist:
 
@@ -85,7 +85,7 @@ Du kannst auch nach dem 5. letzten Commit fragen:
 
  $ git checkout master~5
 
-==== Rückgängig machen ====
+=== Rückgängig machen ===
 
 Du kannst einzelne Commits wieder rückgängig machen:
 

@@ -14,6 +14,7 @@ Rather than go into details, we provide rough instructions for particular effect
 
  - http://docs.google.com/View?id=dfwthj68_675gz3bw8kj[Chinese (Simplified)]: by JunJie, Meng and JiangWei.
  - link:/~blynn/gitmagic/intl/es/[Spanish]: by Rodrigo Toledo.
+ - link:/~blynn/gitmagic/intl/de/[German]: by Benjamin Bellee.
  - http://www.slideshare.net/slide_user/magia-git[Portuguese]: by Leonardo Siqueira Rodrigues [http://www.slideshare.net/slide_user/magia-git-verso-odt[ODT version]].
 
 .Other Editions
@@ -34,7 +35,7 @@ JunJie, Meng, JiangWei, Rodrigo Toledo, and Leonardo Siqueira Rodrigues
 worked on translations of this guide.
 
 My gratitude goes to many others for your support and praise. I'm tempted to
-quote you here, but it might raise expectations to ridiculous heights!
+quote you here, but it might raise expectations to ridiculous heights.
 
 If I've left you out by mistake, please tell me or just send me a patch!
 
