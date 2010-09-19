@@ -1,13 +1,12 @@
 == Grundlegendes ==
 
-
 Bevor wir uns in ein Meer von Git-Befehlen stürzen, schauen wir uns ein paar einfache Beispiele
 an. Obwohl "einfach", sind alle davon wichtig und nützlich.
 Um erhlich zu sein, meine ersten Monate mit Git brauchte ich nicht mehr als in diesem Kapitel beschrieben steht.
 
 === Abspeichern ===
 
-Hast du irgendetwas dramatisches vor? 
+Hast du irgendetwas dramatisches vor?
 Nur zu, aber speichere deinen aktuellen Stand lieber nochmal ab:
 
  $ git init
@@ -33,7 +32,7 @@ Falls git eine Datei "Vergessen" soll:
 
  $ git rm ALTE_DATEI...
 
-Eine Datei umzubenennen bedeutet im Endeffekt dasselbe wie sie zu löschen und unter neuem Namen hinzuzufügen. Git benutzt hierzu mv (selber syntax wie mv (1) 
+Eine Datei umzubenennen bedeutet im Endeffekt dasselbe wie sie zu löschen und unter neuem Namen hinzuzufügen. Git benutzt hierzu mv (selber syntax wie mv (1)
 
  $ git mv ALTER_NAME NEUER_NAME
 
@@ -66,14 +65,14 @@ Um uns wieder der Computerspiel-analogie zuzuwenden:
 
 - *`git reset --hard`*: Ein alten Stand laden und alle neueren Stände wegwerfen.
 
-- *`git checkout`*: Einen alten Spielstand laden. Wenn du hier weiterspielst, weichst du von der bisherigen Realität ab und kommst in ein paraleluniversum (branch, reden wir später drüber) 
+- *`git checkout`*: Einen alten Spielstand laden. Wenn du hier weiterspielst, weichst du von der bisherigen Realität ab und kommst in ein paraleluniversum (branch, reden wir später drüber)
 
 Du kannst auch nur einzelne Dateien oder Verzeichnisse wiederherstellen indem du sie an den Befehl anhängst:
 
  $ git checkout SHA1_HASH eine.datei nocheine.datei
 
 Aber sein Vorsichtig! diese art des Checkouts kann dateien überschreiben ohne das du etwas merkst.
-Um Unfälle zu vermeiden solltest du immer commiten befor du ein Checkout machst. 
+Um Unfälle zu vermeiden solltest du immer commiten befor du ein Checkout machst.
 Allgemein gilt: Im zweifel erst commiten, besonders am Anfang wenn du Git noch nicht so genau kennst.
 
 Keine lust immer Hashes einzutippen? Nutze:
@@ -81,7 +80,7 @@ Keine lust immer Hashes einzutippen? Nutze:
  $ git checkout :/"Mein erster Co"
 
 um zu einem Commit zu springen dessen nachricht so anfängt
-Du kannst auch nach dem 5. letzten Commit fragen: 
+Du kannst auch nach dem 5. letzten Commit fragen:
 
  $ git checkout master~5
 
@@ -121,7 +120,7 @@ Wenn du schon eine Kopie eines Projektes hast, und dieses auf die letzte Version
 
 === Unverzügliches Veröffentlichen ===
 
-Nehmen wir an du hast ein Script geschrieben und möchtest es anderen zugänglich machen. Du könntest sie einfach bitten es immer von deinem Computer herunterzuladen, aber falls sie das tun während du experimentierst oder das Script verbessert könnten sie eine fehlerhafte Version bekommen. Genau deswegen gibt es Releasezyklen. Entwickler arbeiten regelmäßig an einem Projekt, veröffentlichen den Code 
+Nehmen wir an du hast ein Script geschrieben und möchtest es anderen zugänglich machen. Du könntest sie einfach bitten es immer von deinem Computer herunterzuladen, aber falls sie das tun während du experimentierst oder das Script verbessert könnten sie eine fehlerhafte Version bekommen. Genau deswegen gibt es Releasezyklen. Entwickler arbeiten regelmäßig an einem Projekt, veröffentlichen den Code
 aber nur wenn sie ihn für vorzeigbar halten.
 Um dies in Git zu tun, gehe ins Verzeichniss in dem das script liegt:
 
@@ -133,7 +132,7 @@ Dann sage deinen Nutzern:
 
  $ git clone dein.computer:/pfad/zum/script
 
-um dein Script zu Downloaden. Das Funtioniert nur wenn sie SSH-Zugriff haben, falls nicht, führe *git deamon* aus und 
+um dein Script zu Downloaden. Das Funtioniert nur wenn sie SSH-Zugriff haben, falls nicht, führe *git deamon* aus und
 sage den nutzern folgendes:
 
  $ git clone git://dein.computer/pfad/zum/script
@@ -194,5 +193,5 @@ Wir sind bei D:
 
    $ git revert B
 
-Welche ist die beste Lösung? Die die Dir am besten gefällt. 
+Welche ist die beste Lösung? Die die Dir am besten gefällt.
 Es ist einfach mit git das zu bekommen was du willst. und oft führen mehre Wege nach Rom.

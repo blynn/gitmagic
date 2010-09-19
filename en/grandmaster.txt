@@ -164,7 +164,7 @@ One popular resident is +workdir/git-new-workdir+. Via clever symlinking, this s
 
   $ git-new-workdir an/existing/repo new/directory
 
-The new directory and the files within can be thought of as a clone, except since the history is shared, the two trees automatically stay in sync. There's no need to merge, push or pull.
+The new directory and the files within can be thought of as a clone, except since the history is shared, the two trees automatically stay in sync. There's no need to merge, push, or pull.
 
 === Daring Stunts ===
 
@@ -205,23 +205,12 @@ Next time, that pesky command will work!
 
 === Preventing Bad Commits ===
 
-Stupid mistakes abound in the histories of many of my projects. The most
-frightening are missing files due to a forgotten *git add*. Luckily I
-have yet to lose crucial data though accidental omission because I rarely
-delete original working directories. I typically notice the error a few commits
-later, so the only damage is a bit of missing history and a sheepish admission
-of guilt.
-
-I also regularly commit (literally and git-erally) the lesser transgression of
-trailing whitespace. Though harmless, I wish these also never appeared on the
+Stupid mistakes pollute my repositories. Most frightening are missing files due
+to a forgotten *git add*. Lesser transgressions are trailing whitespace and
+unresolved merge conflicts: though harmless, I wish these never appeared on the
 public record.
 
-In addition, though unscathed so far, I worry about leaving merge conflicts
-unresolved. Usually I catch them when I build a project, but there are some
-cases this can overlook.
-
-If only I had bought idiot insurance by using a _hook_ to alert me about these
-problems:
+If only I had bought idiot insurance by using a _hook_ to alert me about these problems:
 
  $ cd .git/hooks
  $ cp pre-commit.sample pre-commit  # Older Git versions: chmod +x pre-commit
@@ -237,11 +226,7 @@ For this guide, I eventually added the following to the beginning of the
    exit 1
  fi
 
-Several git operations support hooks; see *git help hooks*. One can write hooks
-to complain about spelling mistakes in commit messages, add new files, indent
-paragraphs, append an entry to a webpage, play a sound, and so on.
-
-We activated the sample *post-update* hook earlier when discussing Git over
-HTTP; this causes Git to run this script whenever the head has moved. The
-sample post-update script updates a few files Git needs for communication over
-Git-agnostic transports such as HTTP.
+Several git operations support hooks; see *git help hooks*. We activated the
+sample *post-update* hook earlier when discussing Git over HTTP. This runs
+whenever the head moves. The sample post-update script updates files Git needs
+for communication over Git-agnostic transports such as HTTP.

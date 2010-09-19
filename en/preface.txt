@@ -31,8 +31,8 @@ Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael B
 François Marier maintains the Debian package originally created by Daniel
 Baumann.
 
-JunJie, Meng, JiangWei, Rodrigo Toledo, and Leonardo Siqueira Rodrigues
-worked on translations of this guide.
+JunJie, Meng, JiangWei, Rodrigo Toledo, Leonardo Siqueira Rodrigues, and
+Benjamin Bellee worked on translations of this guide.
 
 My gratitude goes to many others for your support and praise. I'm tempted to
 quote you here, but it might raise expectations to ridiculous heights.
