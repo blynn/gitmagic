@@ -14,51 +14,44 @@ Plutôt que de rentrer dans le détails, nous donnons des instructions pour tel 
 
 .Traductions
 
-aaaaaaaaaaaaaaa
+ - http://docs.google.com/View?id=dfwthj68_675gz3bw8kj[Chinois ( Simplifié )]: par JunJie, Meng et JiangWei.
+ - link:/~blynn/gitmagic/intl/es/[Espagnol]: par Rodrigo Toledo.
+ - link:/~blynn/gitmagic/intl/de/[Allemand]: par Benjamin Bellee.
+ - http://www.slideshare.net/slide_user/magia-git[Potugais]: par Leonardo Siqueira Rodrigues [http://www.slideshare.net/slide_user/magia-git-verso-odt[version ODT]].
 
- - http://docs.google.com/View?id=dfwthj68_675gz3bw8kj[Chinese (Simplified)]: by JunJie, Meng and JiangWei.
- - link:/~blynn/gitmagic/intl/es/[Spanish]: by Rodrigo Toledo.
- - link:/~blynn/gitmagic/intl/de/[German]: by Benjamin Bellee.
- - http://www.slideshare.net/slide_user/magia-git[Portuguese]: by Leonardo Siqueira Rodrigues [http://www.slideshare.net/slide_user/magia-git-verso-odt[ODT version]].
+.Autres Édition
 
-.Other Editions
+ - link:book.html[sur une seule page web]: HTML nu, sans CSS ;
+ - link:book.pdf[fichier PDF]: version imorimable.
 
- - link:book.html[Single webpage]: barebones HTML, with no CSS.
- - link:book.pdf[PDF file]: printer-friendly.
- - http://packages.debian.org/gitmagic[Debian package], http:://packages.ubuntu.com/gitmagic[Ubuntu package]: get a fast and local copy of this site. Handy http://csdcf.stanford.edu/status/[when this server is offline].
- - http://www.amazon.com/Git-Magic-Ben-Lynn/dp/1451523343/[Physical book [Amazon.com]]: 64 pages, 15.24cm x 22.86cm, black and white. Handy when there is no electricity.
+=== Merci ! ===
 
-=== Thanks! ===
+Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael Budde, Richard Albury, Tarmigan, Derek Mahar, Frode Aannevik, Keith Rarick, Andy Somerville, Ralf Recker, Øyvind A. Holm, Miklos Vajna, Sébastien Hinderer, Thomas Miedema, et Joe Malin pour les corrections et améliorations.
 
-Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael Budde, Richard Albury, Tarmigan, Derek Mahar, Frode Aannevik, Keith Rarick, Andy Somerville, Ralf Recker, Øyvind A. Holm, Miklos Vajna, Sébastien Hinderer, Thomas Miedema, and Joe Malin contributed corrections and improvements.
+François Marier maintiens le paquet Debian, créé à l'origine par Daniel Baumarr.
 
-François Marier maintains the Debian package originally created by Daniel
-Baumann.
+JunJie, Meng, JiangWei, Rodrigo Toledo, et Leonardo Siqueira Rodrigues
+ont travaillé sur des traductions de ce guide.
 
-JunJie, Meng, JiangWei, Rodrigo Toledo, and Leonardo Siqueira Rodrigues
-worked on translations of this guide.
+Ma gratitude va également à beaucoup d'autres pour leurs encouragements et compliments. Je suis tenté de vous citer ici, toutefois ceci risquerai de porter vos attentes à des sommets ridicules.
 
-My gratitude goes to many others for your support and praise. I'm tempted to
-quote you here, but it might raise expectations to ridiculous heights.
+Si par erreur je vous ai oublié, merci de me le signaler ou, plus simplement, envoyez-moi un patch !  
 
-If I've left you out by mistake, please tell me or just send me a patch!
+.Hébergement Git Gratuit
 
-.Free Git hosting
+ - http://repo.or.cz/[http://repo.or.cz/]  héberge des projets libres. C'est le premier hébergement Git, fondé et maintenu par les premiers développeurs Git.
+ - http://gitorious.org/[http://gitorious.org/] est un autre site d'hébergement Git fait pour les projets Open-Source.
+ - http://github.com/[http://github.com/] héberge des projets Open-Source gratuitement et des projets privés contre payement.
 
- - http://repo.or.cz/[http://repo.or.cz/] hosts free projects. The first Git hosting site. Founded and maintained by one of the earliest Git developers.
- - http://gitorious.org/[http://gitorious.org/] is another Git hosting site aimed at open-source projects.
- - http://github.com/[http://github.com/] hosts open-source projects for free, and private projects for a fee.
+Un grand merci à ces sites pour l'hébergement de ce guide.
 
-Many thanks to each of these sites for hosting this guide.
+=== Licence ===
 
-=== License ===
+Ce guide est publié sous http://www.gnu.org/licenses/gpl-3.0.html[la GNU General Public License version 3]. Bien évidement, les sources sont dans un dépot Git et peuvent être obtenues en saisissant :
 
-This guide is released under http://www.gnu.org/licenses/gpl-3.0.html[the GNU General Public License version 3]. Naturally, the source is kept in a Git
-repository, and can be obtained by typing:
+ $ git clone git://repo.or.cz/gitmagic.git  # Ceci crée le dossier gitmagic
 
- $ git clone git://repo.or.cz/gitmagic.git  # Creates "gitmagic" directory.
-
-or from one of the mirrors:
+ou à partir d'un des mirroirs :
 
  $ git clone git://github.com/blynn/gitmagic.git
  $ git clone git://gitorious.org/gitmagic/mainline.git
