@@ -1,0 +1,60 @@
+== Introduction ==
+
+Je vais me servir d'une analogie pour présenter la gestion de versions. Référez-vous à http://fr.wikipedia.org/wiki/Gestion_de_versions[la page de wikipedia sur la gestion de versions] pour une explication plus censée.
+
+=== Le Travail comme un jeu ===
+
+J'ai joué à des jeux vidéos presque toute ma vie. Par contre, je n'ai commencé à utiliser des systèmes de gestion de versions qu'à l'age adulte. Je suspect ne pas être le seul et comparer les deux peuvent rendre les concepts plus simples à expliquer et à comprendre.
+
+Pensez à l'édition de votre code, ou document, comme s'il sagissait de jouer à un jeux. Quand vous avez bien progressé, vous aimeriez faire une sauvegarde. Pour cela vous cliquez sur le bouton 'enregistrer' de votre éditeur de confiance.
+
+Mais ceci va écraser l'ancienne version. C'est comme ces jeux anciens qui n'avaient qu'un emplacement : oui vous pouviez faire une sauvegarde, mais vous ne pouviez pas revenir dans un état précédent. Quel dépit, vu que votre sauvegarde précédente pouvait éventuellement être situé à un passage du jeu particulièrement amusant sur lequel vous seriez bien revenu un de ces jours. Ou encore pire, votre sauvegarde actuelle est dans un état qui ne permet pas de gagner, et vous devez tout recommencer à zéro.
+
+=== Gestion de versions ===
+
+Lorsque vous modifiez un document vous pouvez l'"Enregistrer Sous …" un nom de fichier différent, ou copier le fichier quelque part avant de l'enregistrer si vous voulez pouvoir savourez les anciennes versions. Vous pouvez même les compresser pour gagner de l'espace. C'est une forme primitive et laborieuse de gestion de versions. Les jeux vidéo ce sont amélioré sur ce point depuis longtemps, un grand nombre proposant différent emplacements de sauvegarde automatiquement horodatés.
+
+Rendons le problème légèrement plus coriace. Imaginez que vous ayez un ensemble de fichier qui vont ensemble comme le code source d'un projet, ou les fichiers pour un site web. Dans ce cas si vous voulez conserver une ancienne version, vous devez archiver le dossier en entier. Conserver un grand nombre de versiors à la main n'est pas pratique.
+
+
+With some computer games, a saved game really does consist of a directory full of files. These games hide this detail from the player and present a convenient interface to manage different versions of this directory.
+
+Version control systems are no different. They all have nice interfaces to manage a directory of stuff. You can save the state of the directory every so often, and you can load any one of the saved states later on. Unlike most computer games, they're usually smart about conserving space. Typically, only a few files change between version to version, and not by much. Storing the differences instead of entire new copies saves room.
+
+=== Distributed Control ===
+
+Now imagine a very difficult computer game. So difficult to finish that many experienced gamers all over the world decide to team up and share their saved games to try to beat it. Speedruns are real-life examples: players specializing in different levels of the same game collaborate to produce amazing results.
+
+How would you set up a system so they can get at each other's saves easily? And upload new ones?
+
+In the old days, every project used centralized version control. A server somewhere held all the saved games. Nobody else did. Every player kept at most a few saved games on their machine. When a player wanted to make progress, they'd download the latest save from the main server, play a while, save and upload back to the server for everyone else to use.
+
+What if a player wanted to get an older saved game for some reason? Maybe the current saved game is in an unwinnable state because somebody forgot to pick up an object back in level three, and they want to find the latest saved game where the game can still be completed. Or maybe they want to compare two older saved games to see how much work a particular player did.
+
+There could be many reasons to want to see an older revision, but the outcome is the same. They have to ask the central server for that old saved game. The more saved games they want, the more they need to communicate.
+
+The new generation of version control systems, of which Git is a member, are known as distributed systems, and can be thought of as a generalization of centralized systems. When players download from the main server they get every saved game, not just the latest one. It's as if they're mirroring the central server.
+
+This initial cloning operation can be expensive, especially if there's a long history, but it pays off in the long run. One immediate benefit is that when an old save is desired for any reason, communication with the central server is unnecessary.
+
+=== A Silly Superstition ===
+
+A popular misconception is that distributed systems are ill-suited for projects requiring an official central repository. Nothing could be further from the truth. Photographing someone does not cause their soul to be stolen. Similarly, cloning the master repository does not diminish its importance.
+
+A good first approximation is that anything a centralized version control system can do, a well-designed distributed system can do better. Network resources are simply costlier than local resources. While we shall later see there are drawbacks to a distributed approach, one is less likely to make erroneous comparisons with this rule of thumb.
+
+A small project may only need a fraction of the features offered by such a
+system, but using systems that scale poorly for tiny projects is like using
+Roman numerals for calculations involving small numbers.
+
+Moreover, your project may grow beyond your original expectations. Using Git from the outset is like carrying a Swiss army knife even though you mostly use it to open bottles. On the day you desperately need a screwdriver you'll be glad you have more than a plain bottle-opener.
+
+=== Merge Conflicts ===
+
+For this topic, our computer game analogy becomes too thinly stretched. Instead, let us again consider editing a document.
+
+Suppose Alice inserts a line at the beginning of a file, and Bob appends one at the end of his copy. They both upload their changes. Most systems will automatically deduce a reasonable course of action: accept and merge their changes, so both Alice's and Bob's edits are applied.
+
+Now suppose both Alice and Bob have made distinct edits to the same line. Then it is impossible to proceed without human intervention. The second person to upload is informed of a _merge conflict_, and must choose one edit over another, or revise the line entirely.
+
+More complex situations can arise. Version control systems handle the simpler cases themselves, and leave the difficult cases for humans. Usually their behaviour is configurable.
