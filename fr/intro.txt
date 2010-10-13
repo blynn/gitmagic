@@ -16,18 +16,17 @@ Lorsque vous modifiez un document vous pouvez l'"Enregistrer Sous …" un nom d
 
 Rendons le problème légèrement plus coriace. Imaginez que vous ayez un ensemble de fichier qui vont ensemble comme le code source d'un projet, ou les fichiers pour un site web. Dans ce cas si vous voulez conserver une ancienne version, vous devez archiver le dossier en entier. Conserver un grand nombre de versiors à la main n'est pas pratique.
 
+Dans le cas de certains jeux vidéo, l'enregistrement d'une partie consiste vraiment en un dossier rempli de fichiers. Ces jeux cachent ce détail au joueur et présentent une interface adaptée pour gérer différentes versions de ce dossier.
 
-With some computer games, a saved game really does consist of a directory full of files. These games hide this detail from the player and present a convenient interface to manage different versions of this directory.
+Les systèmes de gestion de versions ne font pas autre chose. Ils ont tous de belles interfaces pour gérer des dossiers de trucs. Vous pouvez enregistrer l'état du dossier aussi souvent que vous voulez et vous pouvez recharget l'un des états enregistré plus tard. À la différence de la plupart des jeux vidéos, ils sont générallement forts pour économiser l'espace. Typiquement, seul quelques fichiers changent entre une version et une autre, et pas de beaucoup. Stocker les differences au lieu de copies entièrement nouvelles économise de l'espace.
 
-Version control systems are no different. They all have nice interfaces to manage a directory of stuff. You can save the state of the directory every so often, and you can load any one of the saved states later on. Unlike most computer games, they're usually smart about conserving space. Typically, only a few files change between version to version, and not by much. Storing the differences instead of entire new copies saves room.
+=== Gestion Distribuée ===
 
-=== Distributed Control ===
+Imaginez maintenant un jeux vidéo très difficile. Si difficile à terminer que plein de joueurs expérimentés de toute la planête décident de faire équipe et de partager leurs parties enregistrées pour essayer d'en venir à bout. http://fr.wikipedia.org/wiki/Speedrun[Les Speedruns] sont un exemple concret : des joueurs qui se spécializent dans différents niveaux du même jeux collaborent pour produire des résultats surprenants.
 
-Now imagine a very difficult computer game. So difficult to finish that many experienced gamers all over the world decide to team up and share their saved games to try to beat it. Speedruns are real-life examples: players specializing in different levels of the same game collaborate to produce amazing results.
+Comment mettriez-vous en place un système pour qu'ils puissent accéder facilement aux sauvegardes les uns des autres ? Et puissent en téléverser de nouveaux ?
 
-How would you set up a system so they can get at each other's saves easily? And upload new ones?
-
-In the old days, every project used centralized version control. A server somewhere held all the saved games. Nobody else did. Every player kept at most a few saved games on their machine. When a player wanted to make progress, they'd download the latest save from the main server, play a while, save and upload back to the server for everyone else to use.
+Dans le passé, tout les projets utilisaient une gestion de version centralisée. Quelque part un serveur contenait l'ensemble des sauvegardes du jeux et personne d'autre. Chaque joueur conservait au plus quelques sauvegardes de parties sur leur machine. Quand un joueur voulait progresser, il téléchargeait les dernières sauvegardes du serveur, jouait un moment, sauvegardait et téléversait à nouveau sur le serveur pour mettre à disposition de tous les autres.
 
 What if a player wanted to get an older saved game for some reason? Maybe the current saved game is in an unwinnable state because somebody forgot to pick up an object back in level three, and they want to find the latest saved game where the game can still be completed. Or maybe they want to compare two older saved games to see how much work a particular player did.
 
