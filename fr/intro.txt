@@ -28,25 +28,23 @@ Comment mettriez-vous en place un système pour qu'ils puissent accéder facilem
 
 Dans le passé, tout les projets utilisaient une gestion de version centralisée. Quelque part un serveur contenait l'ensemble des sauvegardes du jeux et personne d'autre. Chaque joueur conservait au plus quelques sauvegardes de parties sur leur machine. Quand un joueur voulait progresser, il téléchargeait les dernières sauvegardes du serveur, jouait un moment, sauvegardait et téléversait à nouveau sur le serveur pour mettre à disposition de tous les autres.
 
-What if a player wanted to get an older saved game for some reason? Maybe the current saved game is in an unwinnable state because somebody forgot to pick up an object back in level three, and they want to find the latest saved game where the game can still be completed. Or maybe they want to compare two older saved games to see how much work a particular player did.
+Qu'en était-t'il si pour une raison quelconque, un joueur voulait obtenir une partie enregistrée antérieurement ? Peut-être la sauvegarde actuelle de la partie est-elle dans un état sans possibilité de victoire parceque quelqu'un a oublié de prendre un objet au niveau trois, et ils voudraient retrouver la dernière partie enregistrée au moment où la partie pouvait encore être gagnée. Ou peut-être veulent-ils comparer deux parties enregistrées précédemment pour voir le travail réalisé par un joueur précis.
 
-There could be many reasons to want to see an older revision, but the outcome is the same. They have to ask the central server for that old saved game. The more saved games they want, the more they need to communicate.
+Il peut y avoir beaucoup de raisons de vouloir voir une révision, mais le résultat est le màme : ils doivent demander au serveur central cette partie précédement sauvegardée. Plus ils veulent de parties sauvegardées, plus ils doivent communiquer.
 
-The new generation of version control systems, of which Git is a member, are known as distributed systems, and can be thought of as a generalization of centralized systems. When players download from the main server they get every saved game, not just the latest one. It's as if they're mirroring the central server.
+La nouvelle génération des systèmes de gestion de versions, dont Git fait partie, sont dit systèmes distribués et peuvent être vus comme une généralisation des systèmes centralisés. Quand les joueurs téléchargent du serveur principal ils obtiennent toutes les parties sauvegardées, pas uniquement la dernière. C'est comme s'ils faisaient un http://fr.wikipedia.org/wiki/Site_miroir[miroir] du serveur central.
 
-This initial cloning operation can be expensive, especially if there's a long history, but it pays off in the long run. One immediate benefit is that when an old save is desired for any reason, communication with the central server is unnecessary.
+Cette opération initiale de clonage peut être couteuse, surtout s'il y a un long historique, mais ça paie sur le long terme. Un avantage immédiat est que lorsque l'on désire une partie enregistrée, quelqu'en soit la raison, aucune communication avec le serveur central n'est nécessaire.
 
-=== A Silly Superstition ===
+=== Une superstition idiote ===
 
-A popular misconception is that distributed systems are ill-suited for projects requiring an official central repository. Nothing could be further from the truth. Photographing someone does not cause their soul to be stolen. Similarly, cloning the master repository does not diminish its importance.
+Un croyance populaire veut que les systèmes distribués ne soit pas adapté aux projets qui ont besoin d'un dépot central officiel. Rien n'est moins vrai. Photographier quelqu'un n'a jamais eu pour effet de voler son âme. De même, cloner le dépot principal ne diminue pas son importance.
 
-A good first approximation is that anything a centralized version control system can do, a well-designed distributed system can do better. Network resources are simply costlier than local resources. While we shall later see there are drawbacks to a distributed approach, one is less likely to make erroneous comparisons with this rule of thumb.
+une première approximation assez bonne est que tout ce qu'un système centralisé de gestion de versions peut faire, un systèmt distribué bien conçu peut le faire en mieux. Les ressourses réseau sont simplement plus coûteuses que les ressources locales. Bien que nous verrons éventuellement qu'il y a des inconvénients à l'approche distribuée, il est moins probable de faire des comparaisons érronées en utilisant cette approximation.
 
-A small project may only need a fraction of the features offered by such a
-system, but using systems that scale poorly for tiny projects is like using
-Roman numerals for calculations involving small numbers.
+Un petit projet peut ne nécessiter que d'une fraction des fonctionnalités offerteu par un tel système, mais utiliser un systémes qui ne passe pas à l'échelle pour les petits projets c'est comme utiliser les chiffres romains pour les calculs sur des petits nombres.
 
-Moreover, your project may grow beyond your original expectations. Using Git from the outset is like carrying a Swiss army knife even though you mostly use it to open bottles. On the day you desperately need a screwdriver you'll be glad you have more than a plain bottle-opener.
+De plus, votre projet peut grossir au delà de vos prévisions de départ. Utiliser Git même pour les cas simples est comparable au fait d'avoir sur sois un couteau Suisse même si vous l'utilisez surtout pour ouvrir des bouteilles. Le jour où vous avez besoin d'un tournevis vous serez content d'avoir plus qu'un simple tire-bouchon.
 
 === Merge Conflicts ===
 
