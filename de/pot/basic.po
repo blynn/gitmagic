@@ -1,0 +1,720 @@
+# Git Magic - A guide to using Git
+# This file is distributed under the GNU GENERAL PUBLIC LICENSE Version 3.
+# Benn Lynn <benlynn@gmail.com>, 2007.
+# Armin Stebich <armin@lordofbikes.de>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Git Magic deutsch\n"
+"POT-Creation-Date: 2010-09-12 12:56+0300\n"
+"PO-Revision-Date: 2010-11-01 22:14+0100\n"
+"Last-Translator: Armin Stebich <armin@lordofbikes.de>\n"
+"Language-Team: DE <gitmagic@lordofbikes.de>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: UTF-8\n"
+"Report-Msgid-Bugs-To: git-magic@lordofbikes.de\n"
+"Plural-Forms: \n"
+
+#. type: Plain text
+#: basic.txt:2
+msgid "== Basic Tricks =="
+msgstr "== Erste Schritte =="
+
+#. type: Plain text
+#: basic.txt:6
+msgid ""
+"Rather than diving into a sea of Git commands, use these elementary examples "
+"to get your feet wet. Despite their simplicity, each of them are useful.  "
+"Indeed, in my first months with Git I never ventured beyond the material in "
+"this chapter."
+msgstr ""
+"Bevor wir uns in ein Meer von Git-Befehlen stürzen, schauen wir uns ein paar "
+"einfache Beispiele an. Trotz ihrer Einfachheit, sind alle davon wichtig und "
+"nützlich. Um ehrlich zu sein, meine ersten Monate mit Git brauchte ich nicht "
+"mehr als in diesem Kapitel beschrieben steht."
+
+#. type: Plain text
+#: basic.txt:8
+msgid "=== Saving State ==="
+msgstr "=== Stand sichern ==="
+
+#. type: Plain text
+#: basic.txt:11
+msgid ""
+"About to attempt something drastic? Before you do, take a snapshot of all "
+"files in the current directory with:"
+msgstr ""
+"Hast du gravierende Änderungen vor? Nur zu, aber speichere deinen aktuellen "
+"Stand vorher lieber nochmal ab:"
+
+#. type: Plain text
+#: basic.txt:15
+#, no-wrap
+msgid ""
+" $ git init\n"
+" $ git add .\n"
+" $ git commit -m \"My first backup\"\n"
+msgstr ""
+" $ git init\n"
+" $ git add .\n"
+" $ git commit -m \"Meine erste Sicherung\"\n"
+
+#. type: Plain text
+#: basic.txt:17
+msgid "Now if your new edits go awry, restore the pristine version:"
+msgstr ""
+"Falls deine Änderungen schief gehen, kannst du jetzt die alte Version "
+"wiederherstellen:"
+
+#. type: Plain text
+#: basic.txt:19
+#, no-wrap
+msgid " $ git reset --hard\n"
+msgstr " $ git reset --hard\n"
+
+#. type: Plain text
+#: basic.txt:21
+msgid "To save the state again:"
+msgstr "Um den neuen Stand zu sichern:"
+
+#. type: Plain text
+#: basic.txt:23
+#, no-wrap
+msgid " $ git commit -a -m \"Another backup\"\n"
+msgstr " $ git commit -a -m \"Eine andere Sicherung\"\n"
+
+#. type: Plain text
+#: basic.txt:25
+msgid "=== Add, Delete, Rename ==="
+msgstr "=== Hinzufügen, Löschen, Umbenennen ==="
+
+#. type: Plain text
+#: basic.txt:27
+msgid ""
+"The above only keeps track of the files that were present when you first ran "
+"*git add*. If you add new files or subdirectories, you'll have to tell Git:"
+msgstr ""
+"Bisher kümmert sich Git nur um Dateien, die existierten, als du das erste "
+"Mal *git add* ausgeführt hast. Wenn du Dateien oder Verzeichnisse "
+"hinzufügst, musst du Git das mitteilen:"
+
+#. type: Plain text
+#: basic.txt:29
+#, no-wrap
+msgid " $ git add readme.txt Documentation\n"
+msgstr " $ git add readme.txt Dokumentation\n"
+
+#. type: Plain text
+#: basic.txt:31
+msgid "Similarly, if you want Git to forget about certain files:"
+msgstr "Ebenso, wenn Git Dateien vergessen soll:"
+
+#. type: Plain text
+#: basic.txt:34
+#, no-wrap
+msgid ""
+" $ git rm kludge.h obsolete.c\n"
+" $ git rm -r incriminating/evidence/\n"
+msgstr ""
+" $ git rm ramsch.h veraltet.c\n"
+" $ git rm -r belastendes/material/\n"
+
+#. type: Plain text
+#: basic.txt:36
+msgid "Git deletes these files for you if you haven't already."
+msgstr "Git löscht diese Dateien für dich, falls du es noch nicht getan hast."
+
+#. type: Plain text
+#: basic.txt:38
+msgid ""
+"Renaming a file is the same as removing the old name and adding the new "
+"name. There's also the shortcut *git mv* which has the same syntax as the "
+"*mv* command. For example:"
+msgstr ""
+"Eine Datei umzubenennen ist das selbe wie sie zu löschen und unter neuem "
+"Namen hinzuzufügen. Git benutzt hierzu die Abkürzung *git mv*, welche die "
+"gleiche Syntax wie *mv* hat. Zum Beispiel:"
+
+#. type: Plain text
+#: basic.txt:40
+#, no-wrap
+msgid " $ git mv bug.c feature.c\n"
+msgstr " $ git mv fehler.c feature.c\n"
+
+#. type: Plain text
+#: basic.txt:42
+msgid "=== Advanced Undo/Redo ==="
+msgstr "=== Fortgeschrittenes Rückgängig machen/Wiederherstellen ==="
+
+#. type: Plain text
+#: basic.txt:44
+msgid ""
+"Sometimes you just want to go back and forget about every change past a "
+"certain point because they're all wrong. Then:"
+msgstr ""
+"Manchmal möchtest du einfach zurück gehen und alle Änderungen ab einem "
+"bestimmten Zeitpunkt verwerfen, weil sie falsch waren. Dann:"
+
+#. type: Plain text
+#: basic.txt:46
+#, no-wrap
+msgid " $ git log\n"
+msgstr " $ git log\n"
+
+#. type: Plain text
+#: basic.txt:48
+msgid "shows you a list of recent commits, and their SHA1 hashes:"
+msgstr ""
+"zeigt dir eine Liste der bisherigen 'Commits' und deren SHA1 Hashwerte:"
+
+#. type: Plain text
+#: basic.txt:49
+#, no-wrap
+msgid "----------------------------------\n"
+msgstr "----------------------------------\n"
+
+#. type: Plain text
+#: basic.txt:53
+#, no-wrap
+msgid ""
+"commit 766f9881690d240ba334153047649b8b8f11c664\n"
+"Author: Bob <bob@example.com>\n"
+"Date:   Tue Mar 14 01:59:26 2000 -0800\n"
+msgstr ""
+"commit 766f9881690d240ba334153047649b8b8f11c664\n"
+"Author: Bob <bob@example.com>\n"
+"Date:   Tue Mar 14 01:59:26 2000 -0800\n"
+
+#. type: Plain text
+#: basic.txt:55
+#, no-wrap
+msgid "    Replace printf() with write().\n"
+msgstr "    Ersetze printf() mit write().\n"
+
+#. type: Plain text
+#: basic.txt:59
+#, no-wrap
+msgid ""
+"commit 82f5ea346a2e651544956a8653c0f58dc151275c\n"
+"Author: Alice <alice@example.com>\n"
+"Date:   Thu Jan 1 00:00:00 1970 +0000\n"
+msgstr ""
+"commit 82f5ea346a2e651544956a8653c0f58dc151275c\n"
+"Author: Alice <alice@example.com>\n"
+"Date:   Thu Jan 1 00:00:00 1970 +0000\n"
+
+#. type: Plain text
+#: basic.txt:61
+#, no-wrap
+msgid ""
+"    Initial commit.\n"
+"----------------------------------\n"
+msgstr ""
+"    Initial commit.\n"
+"----------------------------------\n"
+
+#. type: Plain text
+#: basic.txt:65
+msgid ""
+"The first few characters of the hash are enough to specify the commit; "
+"alternatively, copy and paste the entire hash. Type:"
+msgstr ""
+"Die ersten paar Zeichen eines Hashwert reichen aus um einen 'Commit' zu "
+"identifizieren; alternativ benutze kopieren und einfügen für den kompletten "
+"Hashwert. Gib ein:"
+
+#. type: Plain text
+#: basic.txt:67
+#, no-wrap
+msgid " $ git reset --hard 766f\n"
+msgstr " $ git reset --hard 766f\n"
+
+#. type: Plain text
+#: basic.txt:69
+msgid ""
+"to restore the state to a given commit and erase all newer commits from the "
+"record permanently."
+msgstr ""
+"um den Stand eines bestimmten 'Commits' wieder herzustellen und alle "
+"nachfolgenden Änderungen für immer zu löschen."
+
+#. type: Plain text
+#: basic.txt:71
+msgid ""
+"Other times you want to hop to an old state briefly. In this case, type:"
+msgstr ""
+"Ein anderes Mal willst du nur kurz zu einem älteren Stand springen. In "
+"diesem Fall, gib folgendes ein:"
+
+#. type: Plain text
+#: basic.txt:73
+#, no-wrap
+msgid " $ git checkout 82f5\n"
+msgstr " $ git checkout 82f5\n"
+
+#. type: Plain text
+#: basic.txt:75
+msgid ""
+"This takes you back in time, while preserving newer commits. However, like "
+"time travel in a science-fiction movie, if you now edit and commit, you will "
+"be in an alternate reality, because your actions are different to what they "
+"were the first time around."
+msgstr ""
+"Damit springst du in der Zeit zurück, behältst aber neuere Änderungen. Aber, "
+"wie bei Zeitreisen in einem Science-Fiction-Film, wenn du jetzt etwas "
+"änderst und 'commitest', gelangst du in ein alternative Realität, denn deine "
+"Änderungen sind anders als beim früheren 'Commit'."
+
+#. type: Plain text
+#: basic.txt:77
+msgid ""
+"This alternate reality is called a 'branch', and <<branch,we'll have more to "
+"say about this later>>. For now, just remember that"
+msgstr ""
+"Diese alternative Realität heißt 'Branch' und <<branch,wir kommen später "
+"darauf zurück>>. Für jetzt, merke dir"
+
+#. type: Plain text
+#: basic.txt:79
+#, no-wrap
+msgid " $ git checkout master\n"
+msgstr " $ git checkout master\n"
+
+#. type: Plain text
+#: basic.txt:82
+msgid ""
+"will take you back to the present. Also, to stop Git complaining, always "
+"commit or reset your changes before running checkout."
+msgstr ""
+"bringt dich wieder in die Gegenwart. Um zu verhindern, dass sich Git "
+"beschwert, solltest du vor einem 'Checkout' alle Änderungen 'commiten' oder "
+"'reseten'."
+
+#. type: Plain text
+#: basic.txt:84
+msgid "To take the computer game analogy again:"
+msgstr "Um wieder die Computerspielanalogie anzuwenden:"
+
+#. type: Plain text
+#: basic.txt:86
+msgid ""
+"- *`git reset --hard`*: load an old save and delete all saved games newer "
+"than the one just loaded."
+msgstr ""
+"- *`git reset --hard`*: Lade einen alten Stand und lösche alle Spielstände, "
+"die neuer sind als der jetzt geladene."
+
+#. type: Plain text
+#: basic.txt:88
+msgid ""
+"- *`git checkout`*: load an old game, but if you play on, the game state "
+"will deviate from the newer saves you made the first time around. Any saved "
+"games you make now will end up in a separate branch representing the "
+"alternate reality you have entered. <<branch,We deal with this later>>."
+msgstr ""
+"- *`git checkout`*: Lade einen alten Spielstand, aber wenn du weiterspielst, "
+"wird der Spielstand von den früher gesicherten Spielständen abweichen. Jeder "
+"Spielstand, der ab jetzt gesichert wird, entsteht in dem separaten 'Branch', "
+"welcher der alternative Realität entspricht. <<branch,Dazu kommen wir "
+"später>>."
+
+#. type: Plain text
+#: basic.txt:90
+msgid ""
+"You can choose only to restore particular files and subdirectories by "
+"appending them after the command:"
+msgstr ""
+"Du kannst auch nur einzelne Dateien oder Verzeichnisse wiederherstellen "
+"indem du sie an den Befehl anhängst:"
+
+#. type: Plain text
+#: basic.txt:92
+#, no-wrap
+msgid " $ git checkout 82f5 some.file another.file\n"
+msgstr " $ git checkout 82f5 eine.datei andere.datei\n"
+
+#. type: Plain text
+#: basic.txt:96
+msgid ""
+"Take care, as this form of *checkout* can silently overwrite files. To "
+"prevent accidents, commit before running any checkout command, especially "
+"when first learning Git. In general, whenever you feel unsure about any "
+"operation, Git command or not, first run *git commit -a*."
+msgstr ""
+"Sei Vorsichtig, diese Art des '*Checkout*' kann Dateien überschreiben, ohne "
+"dass du etwas merkst. Um Unfälle zu vermeiden solltest du immer 'commiten' "
+"bevor du ein 'Checkout' machst, besonders am Anfang wenn du Git noch "
+"erlernst. Allgemein gilt: Wenn du unsicher bist, egal ob ein Git Befehl oder "
+"irgendeine andere Operation, führe zuerst *git commit -a* aus."
+
+#. type: Plain text
+#: basic.txt:98
+msgid "Don't like cutting and pasting hashes? Then use:"
+msgstr "Du magst Kopieren und Einfügen von Hashes nicht? Dann nutze:"
+
+#. type: Plain text
+#: basic.txt:100
+#, no-wrap
+msgid " $ git checkout :/\"My first b\"\n"
+msgstr " $ git checkout :/\"Meine erste Si\"\n"
+
+#. type: Plain text
+#: basic.txt:103
+msgid ""
+"to jump to the commit that starts with a given message.  You can also ask "
+"for the 5th-last saved state:"
+msgstr ""
+"um zu einem 'Commit' zu springen, dessen Beschreibung so anfängt. Du kannst "
+"auch nach dem 5. letzten 'Commit' fragen:"
+
+#. type: Plain text
+#: basic.txt:105
+#, no-wrap
+msgid " $ git checkout master~5\n"
+msgstr " $ git checkout master~5\n"
+
+#. type: Plain text
+#: basic.txt:107
+msgid "=== Reverting ==="
+msgstr "=== Rückgängig machen ==="
+
+#. type: Plain text
+#: basic.txt:109
+msgid ""
+"In a court of law, events can be stricken from the record. Likewise, you can "
+"pick specific commits to undo."
+msgstr ""
+"In einem Gerichtssaal können Ereignisse aus den Akten gelöscht werden. "
+"Ähnlich kannst du gezielt 'Commits' rückgängig machen."
+
+#. type: Plain text
+#: basic.txt:112
+#, no-wrap
+msgid ""
+" $ git commit -a\n"
+" $ git revert 1b6d\n"
+msgstr ""
+" $ git commit -a\n"
+" $ git revert 1b6d\n"
+
+#. type: Plain text
+#: basic.txt:115
+msgid ""
+"will undo just the commit with the given hash. The revert is recorded as a "
+"new commit, which you can confirm by running *git log*."
+msgstr ""
+"wird den 'Commit' mit dem angegebenen Hashwert rückgängig machen. Das "
+"Rückgängig machen wird als neuer 'Commit' erstellt, was mit *git log* "
+"überprüft werden kann."
+
+#. type: Plain text
+#: basic.txt:117
+msgid "=== Changelog Generation ==="
+msgstr "=== Changelog erstellen ==="
+
+#. type: Plain text
+#: basic.txt:120
+msgid ""
+"Some projects require a http://en.wikipedia.org/wiki/Changelog[changelog].  "
+"Generate one by typing:"
+msgstr ""
+"Verschiedene Projekte benötigen ein http://de.wikipedia.org/wiki/"
+"%C3%84nderungsprotokoll[Änderungsprotokoll]. Das kannst du mit folgendem "
+"Befehl erstellen:"
+
+#. type: Plain text
+#: basic.txt:122
+#, no-wrap
+msgid " $ git log > ChangeLog\n"
+msgstr " $ git log > ChangeLog\n"
+
+#. type: Plain text
+#: basic.txt:124
+msgid "=== Downloading Files ==="
+msgstr "=== Dateien herunterladen ==="
+
+#. type: Plain text
+#: basic.txt:126
+msgid "Get a copy of a project managed with Git by typing:"
+msgstr "Eine Kopie eines mit Git verwalteten Projekts bekommst du mit:"
+
+#. type: Plain text
+#: basic.txt:128
+#, no-wrap
+msgid " $ git clone git://server/path/to/files\n"
+msgstr " $ git clone git://server/pfad/zu/dateien\n"
+
+#. type: Plain text
+#: basic.txt:130
+msgid "For example, to get all the files I used to create this site:"
+msgstr ""
+"Um zum Beispiel alle Dateien zu bekommen, die ich zum Erzeugen dieser Seiten "
+"benutze:"
+
+#. type: Plain text
+#: basic.txt:132
+#, no-wrap
+msgid " $ git clone git://git.or.cz/gitmagic.git\n"
+msgstr " $ git clone git://git.or.cz/gitmagic.git\n"
+
+#. type: Plain text
+#: basic.txt:134
+msgid "We'll have much to say about the *clone* command soon."
+msgstr "Es gibt gleich noch viel mehr über den 'clone' Befehl zu sagen."
+
+#. type: Plain text
+#: basic.txt:136
+msgid "=== The Bleeding Edge ==="
+msgstr "=== Das Neueste vom Neuen ==="
+
+#. type: Plain text
+#: basic.txt:138
+msgid ""
+"If you've already downloaded a copy of a project using *git clone*, you can "
+"upgrade to the latest version with:"
+msgstr ""
+"Wenn du schon eine Kopie eines Projektes hast, kannst du es auf die neuste "
+"Version aktualisieren mit:"
+
+#. type: Plain text
+#: basic.txt:140 basic.txt:166
+#, no-wrap
+msgid " $ git pull\n"
+msgstr " $ git pull\n"
+
+#. type: Plain text
+#: basic.txt:142
+msgid "=== Instant Publishing ==="
+msgstr "=== Einfaches Veröffentlichen ==="
+
+#. type: Plain text
+#: basic.txt:144
+msgid ""
+"Suppose you've written a script you'd like to share with others. You could "
+"just tell them to download from your computer, but if they do so while "
+"you're improving the script or making experimental changes, they could wind "
+"up in trouble.  Of course, this is why release cycles exist. Developers may "
+"work on a project frequently, but they only make the code available when "
+"they feel it is presentable."
+msgstr ""
+"Angenommen du hast ein Skript geschrieben und möchtest es anderen zugänglich "
+"machen. Du könntest sie einfach bitten es von deinem Computer "
+"herunterzuladen, aber falls sie das tun während du experimentierst oder das "
+"Skript verbesserst könnten sie in Schwierigkeiten geraten. Genau deswegen "
+"gibt es Releasezyklen. Entwickler arbeiten regelmäßig an einem Projekt, "
+"veröffentlichen den Code aber nur, wenn sie ihn für vorzeigbar halten."
+
+#. type: Plain text
+#: basic.txt:146
+msgid "To do this with Git, in the directory where your script resides:"
+msgstr "Um dies in Git zu tun, gehe ins Verzeichnis in dem das Skript liegt:"
+
+#. type: Plain text
+#: basic.txt:150
+#, no-wrap
+msgid ""
+" $ git init\n"
+" $ git add .\n"
+" $ git commit -m \"First release\"\n"
+msgstr ""
+" $ git init\n"
+" $ git add .\n"
+" $ git commit -m \"Erster Stand\"\n"
+
+#. type: Plain text
+#: basic.txt:152
+msgid "Then tell your users to run:"
+msgstr "Dann sage deinen Nutzern:"
+
+#. type: Plain text
+#: basic.txt:154
+#, no-wrap
+msgid " $ git clone your.computer:/path/to/script\n"
+msgstr " $ git clone dein.computer:/pfad/zum/skript\n"
+
+#. type: Plain text
+#: basic.txt:156
+msgid ""
+"to download your script. This assumes they have ssh access. If not, run *git "
+"daemon* and tell your users to instead run:"
+msgstr ""
+"um dein Skript herunterzuladen. Das setzt voraus, dass sie einen SSH-Zugang "
+"haben. Falls nicht, führe *git deamon* aus und sage den Nutzern folgendes:"
+
+#. type: Plain text
+#: basic.txt:158
+#, no-wrap
+msgid " $ git clone git://your.computer/path/to/script\n"
+msgstr " $ git clone git://dein.computer/pfad/zum/skript\n"
+
+#. type: Plain text
+#: basic.txt:160
+msgid "From now on, every time your script is ready for release, execute:"
+msgstr "Ab jetzt, immer wenn dein Skript reif für eine Veröffentlichung ist:"
+
+#. type: Plain text
+#: basic.txt:162
+#, no-wrap
+msgid " $ git commit -a -m \"Next release\"\n"
+msgstr " $ git commit -a -m \"Nächster Stand\"\n"
+
+#. type: Plain text
+#: basic.txt:164
+msgid ""
+"and your users can upgrade their version by changing to the directory "
+"containing your script and typing:"
+msgstr "und deine Nutzer können ihr Skript aktualisieren mit:"
+
+#. type: Plain text
+#: basic.txt:168
+msgid ""
+"Your users will never end up with a version of your script you don't want "
+"them to see."
+msgstr ""
+"Deine Nutzer werden nie mit Versionen in Kontakt kommen, von denen du es "
+"nicht willst. Natürlich funktioniert der Trick für fast alles, nicht nur "
+"Skripts."
+
+#. type: Plain text
+#: basic.txt:170
+msgid "=== What Have I Done? ==="
+msgstr "=== Was habe ich getan? ==="
+
+#. type: Plain text
+#: basic.txt:172
+msgid "Find out what changes you've made since the last commit with:"
+msgstr "Finde heraus was du seit dem letzten 'Commit' getan hast:"
+
+#. type: Plain text
+#: basic.txt:174
+#, no-wrap
+msgid " $ git diff\n"
+msgstr " $ git diff\n"
+
+#. type: Plain text
+#: basic.txt:176
+msgid "Or since yesterday:"
+msgstr "Oder seit Gestern:"
+
+#. type: Plain text
+#: basic.txt:178
+#, no-wrap
+msgid " $ git diff \"@{yesterday}\"\n"
+msgstr " $ git diff \"@{gestern}\"\n"
+
+#. type: Plain text
+#: basic.txt:180
+msgid "Or between a particular version and 2 versions ago:"
+msgstr "Oder zwischen irgendeiner Version und der vorvorletzten:"
+
+#. type: Plain text
+#: basic.txt:182
+#, no-wrap
+msgid " $ git diff 1b6d \"master~2\"\n"
+msgstr " $ git diff 1b6d \"master~2\"\n"
+
+#. type: Plain text
+#: basic.txt:185
+msgid ""
+"In each case the output is a patch that can be applied with *git apply*.  "
+"Try also:"
+msgstr ""
+"Jedes mal ist die Ausgabe ein 'Patch' der mit *git apply* eingespielt werden "
+"kann. Versuche auch:"
+
+#. type: Plain text
+#: basic.txt:187
+#, no-wrap
+msgid " $ git whatchanged --since=\"2 weeks ago\"\n"
+msgstr " $ git whatchanged --since=\"2 weeks ago\"\n"
+
+#. type: Plain text
+#: basic.txt:193
+msgid ""
+"Often I'll browse history with http://sourceforge.net/projects/qgit[qgit] "
+"instead, due to its slick photogenic interface, or http://jonas.nitro.dk/tig/"
+"[tig], a text-mode interface that works well over slow connections. "
+"Alternatively, install a web server, run *git instaweb* and fire up any web "
+"browser."
+msgstr ""
+"Um mir die Geschichte eines 'Repositories' anzuzeigen benutze ich häufig "
+"http://sourceforge.net/projects/qgit[qgit] da es eine schicke "
+"Benutzeroberfläche hat, oder http://jonas.nitro.dk/tig/[tig], eine "
+"Konsolenanwendung, die sehr gut über langsame Verbindungen funktioniert. "
+"Alternativ kannst du einen Webserver installieren mit *git instaweb*, dann "
+"kannst du mit jedem Webbrowser darauf zugreifen."
+
+#. type: Plain text
+#: basic.txt:195
+msgid "=== Exercise ==="
+msgstr "=== Übung ==="
+
+#. type: Plain text
+#: basic.txt:197
+msgid ""
+"Let A, B, C, D be four successive commits where B is the same as A except "
+"some files have been removed. We want to add the files back at D. How can we "
+"do this?"
+msgstr ""
+"A, B, C, D sind 4 aufeinander folgende 'Commits'. B ist identisch mit A, "
+"außer dass einige Dateien gelöscht wurden. Wir möchten die Dateien in D "
+"wieder hinzufügen, aber nicht in B. Wie machen wir das?"
+
+#. type: Plain text
+#: basic.txt:199
+msgid "There are at least three solutions. Assuming we are at D:"
+msgstr "Es gibt mindestens 3 Lösungen. Angenommen, wir sind bei D:"
+
+#. type: Bullet: '  1. '
+#: basic.txt:201
+msgid ""
+"The difference between A and B are the removed files. We can create a patch "
+"representing this difference and apply it:"
+msgstr ""
+"Der Unterschied zwischen A und B sind die gelöschten Dateien. Wir können "
+"einen 'Patch' erstellen, der diesen Unterschied darstellt und diesen dann "
+"auf D anwenden:"
+
+#. type: Plain text
+#: basic.txt:203
+#, no-wrap
+msgid "   $ git diff B A | git apply\n"
+msgstr "   $ git diff B A | git apply\n"
+
+#. type: Bullet: '  2. '
+#: basic.txt:205
+msgid "Since we saved the files back at A, we can retrieve them:"
+msgstr ""
+"Da die Dateien im 'Repository' unter dem 'Commit' A gespeichert sind, können "
+"wir sie wieder herstellen:"
+
+#. type: Plain text
+#: basic.txt:207
+#, no-wrap
+msgid "   $ git checkout A foo.c bar.h\n"
+msgstr "   $ git checkout A foo.c bar.h\n"
+
+#. type: Bullet: '  3. '
+#: basic.txt:209
+msgid "We can view going from A to B as a change we want to undo:"
+msgstr ""
+"Wir können den 'Commit' von A auf B als Änderung betrachten, die wir "
+"rückgängig machen wollen:"
+
+#. type: Plain text
+#: basic.txt:211
+#, no-wrap
+msgid "   $ git revert B\n"
+msgstr "   $ git revert B\n"
+
+#. type: Plain text
+#: basic.txt:212
+msgid ""
+"Which choice is best? Whichever you prefer most. It is easy to get what you "
+"want with Git, and often there are many ways to get it."
+msgstr ""
+"Welche Lösung ist die beste? Die, welche dir am besten gefällt. Es ist "
+"einfach mit Git das zu bekommen was du willst und oft führen viele Wege zum "
+"Ziel."

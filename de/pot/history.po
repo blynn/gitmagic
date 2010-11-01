@@ -1,0 +1,538 @@
+# Git Magic - A guide to using Git
+# This file is distributed under the GNU GENERAL PUBLIC LICENSE Version 3.
+# Benn Lynn <benlynn@gmail.com>, 2007.
+# Armin Stebich <armin@lordofbikes.de>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: Git Magic deutsch\n"
+"Report-Msgid-Bugs-To: bennlynn@gmail.com\n"
+"POT-Creation-Date: 2010-10-30 08:21+0300\n"
+"PO-Revision-Date: 2010-10-26 18:38+0300\n"
+"Last-Translator: Armin Stebich <armin@lordofbikes.de>\n"
+"Language-Team: de <git-magic@lordofbikes.de>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: Plain text
+#: ../en/history.txt:2
+msgid "== Lessons of History =="
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:8
+msgid ""
+"A consequence of Git's distributed nature is that history can be edited "
+"easily. But if you tamper with the past, take care: only rewrite that part "
+"of history which you alone possess. Just as nations forever argue over who "
+"committed what atrocity, if someone else has a clone whose version of "
+"history differs to yours, you will have trouble reconciling when your trees "
+"interact."
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:14
+msgid ""
+"Some developers strongly feel history should be immutable, warts and all.  "
+"Others feel trees should be made presentable before they are unleashed in "
+"public. Git accommodates both viewpoints. Like cloning, branching, and "
+"merging, rewriting history is simply another power Git gives you. It is up "
+"to you to use it wisely."
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:16
+msgid "=== I Stand Corrected ==="
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:18
+msgid ""
+"Did you just commit, but wish you had typed a different message? Then run:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:20 ../en/history.txt:54
+#, no-wrap
+msgid " $ git commit --amend\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:23
+msgid ""
+"to change the last message. Realized you forgot to add a file? Run *git add* "
+"to add it, and then run the above command."
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:25
+msgid ""
+"Want to include a few more edits in that last commit? Then make those edits "
+"and run:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:27
+#, no-wrap
+msgid " $ git commit --amend -a\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:29
+msgid "=== ... And Then Some ==="
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:31
+msgid ""
+"Let's suppose the previous problem is ten times worse. After a lengthy "
+"session you've made a bunch of commits. But you're not quite happy with the "
+"way they're organized, and some of those commit messages could use "
+"rewording. Then type:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:33
+#, no-wrap
+msgid " $ git rebase -i HEAD~10\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:35
+msgid ""
+"and the last 10 commits will appear in your favourite $EDITOR. A sample "
+"excerpt:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:39
+#, no-wrap
+msgid ""
+"    pick 5c6eb73 Added repo.or.cz link\n"
+"    pick a311a64 Reordered analogies in \"Work How You Want\"\n"
+"    pick 100834f Added push target to Makefile\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:41
+msgid "Then:"
+msgstr ""
+
+#. type: Bullet: '- '
+#: ../en/history.txt:49
+msgid "Remove commits by deleting lines."
+msgstr ""
+
+#. type: Bullet: '- '
+#: ../en/history.txt:49
+msgid "Reorder commits by reordering lines."
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:49
+#, no-wrap
+msgid ""
+"- Replace `pick` with:\n"
+"   * `edit` to mark a commit for amending.\n"
+"   * `reword` to change the log message.\n"
+"   * `squash` to merge a commit with the previous one.\n"
+"   * `fixup` to merge a commit with the previous one and discard the log message.\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:52
+msgid "Save and quit. If you marked a commit for editing, then run:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:56
+msgid "Otherwise, run:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:58
+#, no-wrap
+msgid " $ git rebase --continue\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:60
+msgid "So commit early and commit often: you can tidy up later with rebase."
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:62
+msgid "=== Local Changes Last ==="
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:65
+msgid ""
+"You're working on an active project. You make some local commits over time, "
+"and then you sync with the official tree with a merge. This cycle repeats "
+"itself a few times before you're ready to push to the central tree."
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:67
+msgid ""
+"But now the history in your local Git clone is a messy jumble of your "
+"changes and the official changes. You'd prefer to see all your changes in "
+"one contiguous section, and after all the official changes."
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:70
+msgid ""
+"This is a job for *git rebase* as described above. In many cases you can use "
+"the *--onto* flag and avoid interaction."
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:72
+msgid ""
+"Also see *git help rebase* for detailed examples of this amazing command. "
+"You can split commits. You can even rearrange branches of a tree."
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:74
+msgid "=== Rewriting History ==="
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:82
+msgid ""
+"Occasionally, you need the source control equivalent of airbrushing people "
+"out of official photos, erasing them from history in a Stalinesque fashion. "
+"For example, suppose we intend to release a project, but it involves a file "
+"that should be kept private for some reason. Perhaps I left my credit card "
+"number in a text file and accidentally added it to the project. Deleting the "
+"file is insufficient, for the file can be accessed from older commits. We "
+"must remove the file from all commits:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:84
+#, no-wrap
+msgid " $ git filter-branch --tree-filter 'rm top/secret/file' HEAD\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:88
+msgid ""
+"See *git help filter-branch*, which discusses this example and gives a "
+"faster method. In general, *filter-branch* lets you alter large sections of "
+"history with a single command."
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:90
+msgid ""
+"Afterwards, the +.git/refs/original+ directory describes the state of "
+"affairs before the operation. Check the filter-branch command did what you "
+"wanted, then delete this directory if you wish to run more filter-branch "
+"commands."
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:92
+msgid ""
+"Lastly, replace clones of your project with your revised version if you want "
+"to interact with them later."
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:94
+msgid "=== Making History ==="
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:97
+msgid ""
+"[[makinghistory]] Want to migrate a project to Git? If it's managed with one "
+"of the more well-known systems, then chances are someone has already written "
+"a script to export the whole history to Git."
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:102
+msgid ""
+"Otherwise, look up *git fast-import*, which reads text input in a specific "
+"format to create Git history from scratch. Typically a script using this "
+"command is hastily cobbled together and run once, migrating the project in a "
+"single shot."
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:104
+#, no-wrap
+msgid ""
+"As an example, paste the following listing into temporary file, such as `/tmp/history`:\n"
+"----------------------------------\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:110
+msgid ""
+"commit refs/heads/master committer Alice <alice@example.com> Thu, 01 Jan "
+"1970 00:00:00 +0000 data <<EOT Initial commit.  EOT"
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:114
+msgid "M 100644 inline hello.c data <<EOT #include <stdio.h>"
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:120
+#, no-wrap
+msgid ""
+"int main() {\n"
+"  printf(\"Hello, world!\\n\");\n"
+"  return 0;\n"
+"}\n"
+"EOT\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:127
+msgid ""
+"commit refs/heads/master committer Bob <bob@example.com> Tue, 14 Mar 2000 "
+"01:59:26 -0800 data <<EOT Replace printf() with write().  EOT"
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:131
+msgid "M 100644 inline hello.c data <<EOT #include <unistd.h>"
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:137
+#, no-wrap
+msgid ""
+"int main() {\n"
+"  write(1, \"Hello, world!\\n\", 14);\n"
+"  return 0;\n"
+"}\n"
+"EOT\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:138
+#, no-wrap
+msgid "----------------------------------\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:141
+msgid "Then create a Git repository from this temporary file by typing:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:144
+#, no-wrap
+msgid ""
+" $ mkdir project; cd project; git init\n"
+" $ git fast-import --date-format=rfc2822 < /tmp/history\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:146
+msgid "You can checkout the latest version of the project with:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:148
+#, no-wrap
+msgid " $ git checkout master .\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:153
+msgid ""
+"The *git fast-export* command converts any repository to the *git fast-"
+"import* format, whose output you can study for writing exporters, and also "
+"to transport repositories in a human-readable format. Indeed, these commands "
+"can send repositories of text files over text-only channels."
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:155
+msgid "=== Where Did It All Go Wrong? ==="
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:157
+msgid ""
+"You've just discovered a broken feature in your program which you know for "
+"sure was working a few months ago. Argh! Where did this bug come from? If "
+"only you had been testing the feature as you developed."
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:160
+msgid ""
+"It's too late for that now. However, provided you've been committing often, "
+"Git can pinpoint the problem:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:164
+#, no-wrap
+msgid ""
+" $ git bisect start\n"
+" $ git bisect bad HEAD\n"
+" $ git bisect good 1b6d\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:166
+msgid ""
+"Git checks out a state halfway in between. Test the feature, and if it's "
+"still broken:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:168
+#, no-wrap
+msgid " $ git bisect bad\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:174
+msgid ""
+"If not, replace \"bad\" with \"good\". Git again transports you to a state "
+"halfway between the known good and bad versions, narrowing down the "
+"possibilities.  After a few iterations, this binary search will lead you to "
+"the commit that caused the trouble. Once you've finished your investigation, "
+"return to your original state by typing:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:176
+#, no-wrap
+msgid " $ git bisect reset\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:178
+msgid ""
+"Instead of testing every change by hand, automate the search by running:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:180
+#, no-wrap
+msgid " $ git bisect run my_script\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:185
+msgid ""
+"Git uses the return value of the given command, typically a one-off script, "
+"to decide whether a change is good or bad: the command should exit with code "
+"0 when good, 125 when the change should be skipped, and anything else "
+"between 1 and 127 if it is bad. A negative return value aborts the bisect."
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:189
+msgid ""
+"You can do much more: the help page explains how to visualize bisects, "
+"examine or replay the bisect log, and eliminate known innocent changes for a "
+"speedier search."
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:191
+msgid "=== Who Made It All Go Wrong? ==="
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:193
+msgid "Like many other version control systems, Git has a blame command:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:195
+#, no-wrap
+msgid " $ git blame bug.c\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:197
+msgid ""
+"which annotates every line in the given file showing who last changed it, "
+"and when. Unlike many other version control systems, this operation works "
+"offline, reading only from local disk."
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:199
+msgid "=== Personal Experience ==="
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:206
+msgid ""
+"In a centralized version control system, history modification is a difficult "
+"operation, and only available to administrators. Cloning, branching, and "
+"merging are impossible without network communication. So are basic "
+"operations such as browsing history, or committing a change. In some "
+"systems, users require network connectivity just to view their own changes "
+"or open a file for editing."
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:213
+msgid ""
+"Centralized systems preclude working offline, and need more expensive "
+"network infrastructure, especially as the number of developers grows. Most "
+"importantly, all operations are slower to some degree, usually to the point "
+"where users shun advanced commands unless absolutely necessary. In extreme "
+"cases this is true of even the most basic commands. When users must run slow "
+"commands, productivity suffers because of an interrupted work flow."
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:219
+msgid ""
+"I experienced these phenomena first-hand. Git was the first version control "
+"system I used. I quickly grew accustomed to it, taking many features for "
+"granted. I simply assumed other systems were similar: choosing a version "
+"control system ought to be no different from choosing a text editor or web "
+"browser."
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:225
+msgid ""
+"I was shocked when later forced to use a centralized system. A flaky "
+"internet connection matters little with Git, but makes development "
+"unbearable when it needs to be as reliable as local disk. Additionally, I "
+"found myself conditioned to avoid certain commands because of the latencies "
+"involved, which ultimately prevented me from following my desired work flow."
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:232
+msgid ""
+"When I had to run a slow command, the interruption to my train of thought "
+"dealt a disproportionate amount of damage. While waiting for server "
+"communication to complete, I'd do something else to pass the time, such as "
+"check email or write documentation. By the time I returned to the original "
+"task, the command had finished long ago, and I would waste more time trying "
+"to remember what I was doing. Humans are bad at context switching."
+msgstr ""
+
+#. type: Plain text
+#: ../en/history.txt:237
+msgid ""
+"There was also an interesting tragedy-of-the-commons effect: anticipating "
+"network congestion, individuals would consume more bandwidth than necessary "
+"on various operations in an attempt to reduce future delays. The combined "
+"efforts intensified congestion, encouraging individuals to consume even more "
+"bandwidth next time to avoid even longer delays."
+msgstr ""

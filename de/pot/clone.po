@@ -1,0 +1,580 @@
+# Git Magic - A guide to using Git
+# This file is distributed under the GNU GENERAL PUBLIC LICENSE Version 3.
+# Benn Lynn <benlynn@gmail.com>, 2007.
+# Armin Stebich <armin@lordofbikes.de>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: Git Magic deutsch\n"
+"Report-Msgid-Bugs-To: bennlynn@gmail.com\n"
+"POT-Creation-Date: 2010-10-30 08:21+0300\n"
+"PO-Revision-Date: 2010-10-26 18:38+0300\n"
+"Last-Translator: Armin Stebich <armin@lordofbikes.de>\n"
+"Language-Team: de <git-magic@lordofbikes.de>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: Plain text
+#: ../en/clone.txt:2
+msgid "== Cloning Around =="
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:4
+msgid ""
+"In older version control systems, checkout is the standard operation to get "
+"files. You retrieve a bunch of files in a particular saved state."
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:6
+msgid ""
+"In Git and other distributed version control systems, cloning is the "
+"standard operation. To get files, you create a 'clone' of the entire "
+"repository. In other words, you practically mirror the central server. "
+"Anything the main repository can do, you can do."
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:8
+msgid "=== Sync Computers ==="
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:10
+msgid ""
+"I can tolerate making tarballs or using *rsync* for backups and basic "
+"syncing. But sometimes I edit on my laptop, other times on my desktop, and "
+"the two may not have talked to each other in between."
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:12
+msgid ""
+"Initialize a Git repository and commit your files on one machine. Then on "
+"the other:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:14
+#, no-wrap
+msgid " $ git clone other.computer:/path/to/files\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:16
+msgid "to create a second copy of the files and Git repository. From now on,"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:19
+#, no-wrap
+msgid ""
+" $ git commit -a\n"
+" $ git pull other.computer:/path/to/files HEAD\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:21
+msgid ""
+"will 'pull' in the state of the files on the other computer into the one "
+"you're working on. If you've recently made conflicting edits in the same "
+"file, Git will let you know and you should commit again after resolving them."
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:23
+msgid "=== Classic Source Control ==="
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:25
+msgid "Initialize a Git repository for your files:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:29 ../en/clone.txt:138
+#, no-wrap
+msgid ""
+" $ git init\n"
+" $ git add .\n"
+" $ git commit -m \"Initial commit\"\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:31
+msgid ""
+"On the central server, initialize a 'bare repository' in some directory:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:36
+#, no-wrap
+msgid ""
+" $ mkdir proj.git\n"
+" $ cd proj.git\n"
+" $ git init --bare\n"
+" $  # one-line variant: GIT_DIR=proj.git git init\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:38
+msgid "Start the Git daemon if necessary:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:40
+#, no-wrap
+msgid " $ git daemon --detach  # it may already be running\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:43
+msgid ""
+"For Git hosting services, follow the instructions to setup the initially "
+"empty Git repository. Typically one fills in a form on a webpage."
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:45
+msgid "'Push' your project to the central server with:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:47
+#, no-wrap
+msgid " $ git push git://central.server/path/to/proj.git HEAD\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:49
+msgid "To check out the source, a developer types:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:51
+#, no-wrap
+msgid " $ git clone git://central.server/path/to/proj.git\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:53
+msgid "After making changes, the developer saves changes locally:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:55 ../en/clone.txt:63
+#, no-wrap
+msgid " $ git commit -a\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:57
+msgid "To update to the latest version:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:59 ../en/clone.txt:110
+#, no-wrap
+msgid " $ git pull\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:61
+msgid "Any merge conflicts should be resolved then committed:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:65
+msgid "To check in local changes into the central repository:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:67
+#, no-wrap
+msgid " $ git push\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:71
+msgid ""
+"If the main server has new changes due to activity by other developers, the "
+"push fails, and the developer should pull the latest version, resolve any "
+"merge conflicts, then try again."
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:73
+msgid "=== Bare repositories ==="
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:75
+msgid ""
+"A bare repository is so named because it has no working directory; it only "
+"contains files that are normally hidden away in the `.git` subdirectory. In "
+"other words, it maintains the history of a project, and never holds a "
+"snapshot of any given version."
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:82
+msgid ""
+"A bare repository plays a role similar to that of the main server in a "
+"centralized version control system: the home of your project. Developers "
+"clone your project from it, and push the latest official changes to it. "
+"Typically it resides on a server that does little else but disseminate data. "
+"Development occurs in the clones, so the home repository can do without a "
+"working directory."
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:84
+msgid ""
+"Many Git commands fail on bare repositories unless the `GIT_DIR` environment "
+"variable is set to the repository path, or the `--bare` option is supplied."
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:86
+msgid "=== Push versus pull ==="
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:94
+msgid ""
+"Why did we introduce the push command, rather than rely on the familiar pull "
+"command? Firstly, pulling fails on bare repositories: instead you must "
+"'fetch', a command we later discuss. But even if we kept a normal repository "
+"on the central server, pulling into it would still be cumbersome. We would "
+"have to login to the server first, and give the pull command the network "
+"address of the machine we're pulling from. Firewalls may interfere, and what "
+"if we have no shell access to the server in the first place?"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:96
+msgid ""
+"However, apart from this case, we discourage pushing into a repository, "
+"because confusion can ensue when the destination has a working directory."
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:98
+msgid ""
+"In short, while learning Git, only push when the target is a bare "
+"repository; otherwise pull."
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:100
+msgid "=== Forking a Project ==="
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:102
+msgid ""
+"Sick of the way a project is being run? Think you could do a better job? "
+"Then on your server:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:104
+#, no-wrap
+msgid " $ git clone git://main.server/path/to/files\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:106
+msgid "Next, tell everyone about your fork of the project at your server."
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:108
+msgid ""
+"At any later time, you can merge in the changes from the original project "
+"with:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:112
+msgid "=== Ultimate Backups ==="
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:114
+msgid ""
+"Want numerous tamper-proof geographically diverse redundant archives? If "
+"your project has many developers, don't do anything! Every clone of your "
+"code is effectively a backup. Not just of the current state, but of your "
+"project's entire history. Thanks to cryptographic hashing, if anyone's clone "
+"becomes corrupted, it will be spotted as soon as they try to communicate "
+"with others."
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:116
+msgid ""
+"If your project is not so popular, find as many servers as you can to host "
+"clones."
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:118
+msgid ""
+"The truly paranoid should always write down the latest 20-byte SHA1 hash of "
+"the HEAD somewhere safe. It has to be safe, not private. For example, "
+"publishing it in a newspaper would work well, because it's hard for an "
+"attacker to alter every copy of a newspaper."
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:120
+msgid "=== Light-Speed Multitask ==="
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:122
+msgid ""
+"Say you want to work on several features in parallel. Then commit your "
+"project and run:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:124 ../en/clone.txt:142
+#, no-wrap
+msgid " $ git clone . /some/new/directory\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:126
+msgid ""
+"Git exploits hard links and file sharing as much as safely possible to "
+"create this clone, so it will be ready in a flash, and you can now work on "
+"two independent features simultaneously. For example, you can edit one clone "
+"while the other is compiling."
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:128
+msgid "At any time, you can commit and pull changes from the other clone."
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:130
+#, no-wrap
+msgid " $ git pull /the/other/clone HEAD\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:132
+msgid "=== Guerilla Version Control ==="
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:134
+msgid ""
+"Are you working on a project that uses some other version control system, "
+"and you sorely miss Git? Then initialize a Git repository in your working "
+"directory:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:140
+msgid "then clone it:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:144
+msgid ""
+"Now go to the new directory and work here instead, using Git to your heart's "
+"content. Once in a while, you'll want to sync with everyone else, in which "
+"case go to the original directory, sync using the other version control "
+"system, and type:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:147
+#, no-wrap
+msgid ""
+" $ git add .\n"
+" $ git commit -m \"Sync with everyone else\"\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:149
+msgid "Then go to the new directory and run:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:152
+#, no-wrap
+msgid ""
+" $ git commit -a -m \"Description of my changes\"\n"
+" $ git pull\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:154
+msgid ""
+"The procedure for giving your changes to everyone else depends on the other "
+"version control system. The new directory contains the files with your "
+"changes. Run whatever commands of the other version control system are "
+"needed to upload them to the central repository."
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:156
+msgid ""
+"Subversion, perhaps the best centralized version control system, is used by "
+"countless projects. The *git svn* command automates the above for Subversion "
+"repositories, and can also be used to http://google-opensource.blogspot."
+"com/2008/05/export-git-project-to-google-code.html[export a Git project to a "
+"Subversion repository]."
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:158
+msgid "=== Mercurial ==="
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:160
+msgid ""
+"Mercurial is a similar version control system that can almost seamlessly "
+"work in tandem with Git. With the `hg-git` plugin, a Mercurial user can "
+"losslessly push to and pull from a Git repository."
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:162
+msgid "Obtain the `hg-git` plugin with Git:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:164
+#, no-wrap
+msgid " $ git clone git://github.com/schacon/hg-git.git\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:166
+msgid "or Mercurial:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:168
+#, no-wrap
+msgid " $ hg clone http://bitbucket.org/durin42/hg-git/\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:170
+msgid ""
+"Sadly, I am unaware of an analogous plugin for Git. For this reason, I "
+"advocate Git over Mercurial for the main repository, even if you prefer "
+"Mercurial. With a Mercurial project, usually a volunteer maintains a "
+"parallel Git repository to accommodate Git users, whereas thanks to the `hg-"
+"git` plugin, a Git project automatically accommodates Mercurial users."
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:172
+msgid ""
+"Although the plugin can convert a Mercurial repository to a Git repository "
+"by pushing to an empty repository, this job is easier with the `hg-fast-"
+"export.sh` script, available from:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:174
+#, no-wrap
+msgid " $ git clone git://repo.or.cz/fast-export.git\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:176
+msgid "To convert, in an empty directory:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:179
+#, no-wrap
+msgid ""
+" $ git init\n"
+" $ hg-fast-export.sh -r /hg/repo\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:181
+msgid "after adding the script to your `$PATH`."
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:183
+msgid "=== Bazaar ==="
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:186
+msgid ""
+"We briefly mention Bazaar because it is the most popular free distributed "
+"version control system after Git and Mercurial."
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:188
+msgid ""
+"Bazaar has the advantage of hindsight, as it is relatively young; its "
+"designers could learn from mistakes of the past, and sidestep minor "
+"historical warts. Additionally, its developers are mindful of portability "
+"and interoperation with other version control systems."
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:190
+msgid ""
+"A `bzr-git` plugin lets Bazaar users work with Git repositories to some "
+"extent. The `tailor` program converts Bazaar repositories to Git "
+"repositories, and can do so incrementally, while `bzr-fast-export` is well-"
+"suited for one-shot conversions."
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:192
+msgid "=== Why I use Git ==="
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:194
+msgid ""
+"I originally chose Git because I heard it could manage the unimaginably "
+"unmanageable Linux kernel source. I've never felt a need to switch. Git has "
+"served admirably, and I've yet to be bitten by its flaws. As I primarily use "
+"Linux, issues on other platforms are of no concern."
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:196
+msgid ""
+"Also, I prefer C programs and bash scripts to executables such as Python "
+"scripts: there are fewer dependencies, and I'm addicted to fast running "
+"times."
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:198
+msgid ""
+"I did think about how Git could be improved, going so far as to write my own "
+"Git-like tool, but only as an academic exercise. Had I completed my project, "
+"I would have stayed with Git anyway, as the gains are too slight to justify "
+"using an oddball system."
+msgstr ""
+
+#. type: Plain text
+#: ../en/clone.txt:199
+msgid ""
+"Naturally, your needs and wants likely differ, and you may be better off "
+"with another system. Nonetheless, you can't go far wrong with Git."
+msgstr ""

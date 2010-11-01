@@ -1,0 +1,367 @@
+# Git Magic - A guide to using Git
+# This file is distributed under the GNU GENERAL PUBLIC LICENSE Version 3.
+# Benn Lynn <benlynn@gmail.com>, 2007.
+# Armin Stebich <armin@lordofbikes.de>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Git Magic deutsch\n"
+"Report-Msgid-Bugs-To: bennlynn@gmail.com\n"
+"POT-Creation-Date: 2010-10-30 08:41+0300\n"
+"PO-Revision-Date: 2010-10-31 13:54+0100\n"
+"Last-Translator: Armin Stebich <armin@lordofbikes.de>\n"
+"Language-Team: DE <gitmagic@lordofbikes.de>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: UTF-8\n"
+"Plural-Forms: \n"
+
+#. type: Plain text
+#: ../en/intro.txt:2
+msgid "== Introduction =="
+msgstr "== Einleitung =="
+
+#. type: Plain text
+#: ../en/intro.txt:4
+msgid ""
+"I'll use an analogy to introduce version control. See http://en.wikipedia."
+"org/wiki/Revision_control[the Wikipedia entry on revision control] for a "
+"saner explanation."
+msgstr ""
+"Ich benutze eine Analogie um in die Versionsverwaltung einzuführen. Für eine "
+"vernünftigere Erklärung siehe http://de.wikipedia.org/wiki/Versionsverwaltung"
+"[den Wikipedia Artikel zur Versionsverwaltung]."
+
+#. type: Plain text
+#: ../en/intro.txt:6
+msgid "=== Work is Play ==="
+msgstr "=== Arbeit ist Spiel ==="
+
+#. type: Plain text
+#: ../en/intro.txt:8
+msgid ""
+"I've played computer games almost all my life. In contrast, I only started "
+"using version control systems as an adult. I suspect I'm not alone, and "
+"comparing the two may make these concepts easier to explain and understand."
+msgstr ""
+"Ich spiele Computerspiele schon fast mein ganzes Leben. Im Gegensatz dazu "
+"habe ich erst als Erwachsener damit begonnen Versionsverwaltungssysteme zu "
+"benutzen. Ich vermute, dass ich damit nicht alleine bin und der Vergleich "
+"hilft vielleicht dabei die Konzepte einfacher zu erklären und zu verstehen."
+
+#. type: Plain text
+#: ../en/intro.txt:10
+msgid ""
+"Think of editing your code, or document, as playing a game. Once you've made "
+"a lot of progress, you'd like to save. To do so, you click on the 'Save' "
+"button in your trusty editor."
+msgstr ""
+"Stelle dir das Bearbeiten deines Codes oder deiner Dokumente wie ein "
+"Computerspiel vor. Wenn du gut voran gekommen bist, willst du das Erreichte "
+"sichern. Um das zu tun, klickst du auf auf Speichern in deinem vertrauten "
+"Editor."
+
+#. type: Plain text
+#: ../en/intro.txt:12
+msgid ""
+"But this will overwrite the old version. It's like those old school games "
+"which only had one save slot: sure you could save, but you could never go "
+"back to an older state. Which was a shame, because your previous save might "
+"have been right at an exceptionally fun part of the game that you'd like to "
+"revisit one day. Or worse still, your current save is in an unwinnable "
+"state, and you have to start again."
+msgstr ""
+"Aber, das überschreibt die vorherige Version. Das ist wie bei den Spielen "
+"der alten Schule, die nur Speicherplatz für eine Sicherung hatten: "
+"sicherlich konntest du speichern, aber du konntest nie zu einem älteren "
+"Stand zurück. Das war eine Schande, denn vielleicht war deine vorherige "
+"Sicherung an einer außergewöhnlich spannenden Stelle des Spiels, zu der du "
+"später gerne noch einmal zurückkehren möchtest. Oder noch schlimmer, deine "
+"aktuelle Sicherung ist in einem nicht lösbaren Stand, dann musst du von ganz "
+"vorne beginnen."
+
+#. type: Plain text
+#: ../en/intro.txt:14
+msgid "=== Version Control ==="
+msgstr "=== Versionsverwaltung ==="
+
+#. type: Plain text
+#: ../en/intro.txt:16
+msgid ""
+"When editing, you can 'Save As...' a different file, or copy the file "
+"somewhere first before saving if you want to savour old versions. You can "
+"compress them too to save space. This is a primitive and labour-intensive "
+"form of version control. Computer games improved on this long ago, many of "
+"them providing multiple automatically timestamped save slots."
+msgstr ""
+"Beim Editieren kannst du deine Datei durch 'Speichern unter ...' mit einem "
+"neuen Namen abspeichern oder du kopierst sie vor dem Speichern irgendwo hin "
+"um die alte Version zu erhalten. Außerdem kannst du sie komprimieren um "
+"Speicherplatz zu sparen. Das ist eine primitive und mühselige Form der "
+"Versionsverwaltung. Computerspiele machten das lange Zeit so, viele von "
+"ihnen hatten automatisch erstellte Sicherungspunkte mit Zeitstempel."
+
+#. type: Plain text
+#: ../en/intro.txt:18
+msgid ""
+"Let's make the problem slightly tougher. Say you have a bunch of files that "
+"go together, such as source code for a project, or files for a website. Now "
+"if you want to keep an old version you have to archive a whole directory. "
+"Keeping many versions around by hand is inconvenient, and quickly becomes "
+"expensive."
+msgstr ""
+"Jetzt lass uns das Problem etwas komplizierter machen. Sagen wir, du hast "
+"einen Haufen Dateien, die zusammen gehören, z.B. Quellcodes für ein Projekt "
+"oder Dateien einer Website. Wenn du nun eine alte Version erhalten willst, "
+"musst du den ganzen Ordner archivieren. Viele Versionen auf diese Art zu "
+"archivieren ist mühselig und kann sehr schnell teuer werden."
+
+#. type: Plain text
+#: ../en/intro.txt:20
+msgid ""
+"With some computer games, a saved game really does consist of a directory "
+"full of files. These games hide this detail from the player and present a "
+"convenient interface to manage different versions of this directory."
+msgstr ""
+"Bei einigen Computerspielen bestand ein gesicherter Stand wirklich aus einem "
+"Ordner voller Dateien. Diese Spiele versteckten die Details vor dem Spieler "
+"und präsentierten eine bequeme Oberfläche um verschiedene Versionen des "
+"Ordners zu verwalten."
+
+#. type: Plain text
+#: ../en/intro.txt:22
+msgid ""
+"Version control systems are no different. They all have nice interfaces to "
+"manage a directory of stuff. You can save the state of the directory every "
+"so often, and you can load any one of the saved states later on. Unlike most "
+"computer games, they're usually smart about conserving space. Typically, "
+"only a few files change between version to version, and not by much. Storing "
+"the differences instead of entire new copies saves room."
+msgstr ""
+"Versionsverwaltungen sind nicht anders. Sie alle haben bequeme "
+"Schnittstellen um Ordner voller Dateien zu verwalten. Du kannst den Zustand "
+"des Ordners sichern so oft du willst und du kannst später jeden "
+"Sicherungspunkt wieder herstellen. Im Gegensatz zu den meisten "
+"Computerspielen sind sie aber in der Regel dafür ausgelegt sparsam mit dem "
+"Speicherplatz umzugehen. Normalerweise ändern sich immer nur wenige Dateien "
+"zwischen zwei Versionen und die Änderungen selbst sind oft nicht groß. Die "
+"Platzersparnis beruht auf dem Speichern der Unterschiede an Stelle einer "
+"Kopie der ganzen Datei."
+
+#. type: Plain text
+#: ../en/intro.txt:24
+msgid "=== Distributed Control ==="
+msgstr "=== Verteilte Kontrolle ==="
+
+#. type: Plain text
+#: ../en/intro.txt:26
+msgid ""
+"Now imagine a very difficult computer game. So difficult to finish that many "
+"experienced gamers all over the world decide to team up and share their "
+"saved games to try to beat it. Speedruns are real-life examples: players "
+"specializing in different levels of the same game collaborate to produce "
+"amazing results."
+msgstr ""
+"Nun stell dir ein ganz kompliziertes Computerspiel vor. So schwierig zu "
+"lösen, dass viele erfahrene Spieler auf der ganzen Welt beschließen sich "
+"zusammen zu tun und ihre gespeicherten Spielstände auszutauschen um das "
+"Spiel zu beenden. 'Speedruns' sind Beispiele aus dem echten Leben: Spieler, "
+"die sich in unterschiedlichen Spielebenen des selben Spiels spezialisiert "
+"haben, arbeiten zusammen um erstaunliche Ergebnisse zu erzielen."
+
+#. type: Plain text
+#: ../en/intro.txt:28
+msgid ""
+"How would you set up a system so they can get at each other's saves easily? "
+"And upload new ones?"
+msgstr ""
+"Wie würdest du ein System erstellen, bei dem jeder auf einfache Weise die "
+"Sicherungen der anderen bekommt? Und eigene Sicherungen bereitstellt?"
+
+#. type: Plain text
+#: ../en/intro.txt:30
+msgid ""
+"In the old days, every project used centralized version control. A server "
+"somewhere held all the saved games. Nobody else did. Every player kept at "
+"most a few saved games on their machine. When a player wanted to make "
+"progress, they'd download the latest save from the main server, play a "
+"while, save and upload back to the server for everyone else to use."
+msgstr ""
+"Früher nutzte jedes Projekt eine zentralisierte Versionsverwaltung. Irgendwo "
+"speicherte ein Server alle gespeicherten Spiele, sonst niemand. Jeder "
+"Spieler hatte nur ein paar gespeicherte Spiele auf seinem Rechner. Wenn ein "
+"Spieler einen Fortschritt machen wollte, musste er den aktuellsten Stand vom "
+"Hauptserver herunterladen, eine Weile spielen, sichern und den Stand dann "
+"wieder auf den Server laden, damit irgendjemand ihn nutzen kann."
+
+#. type: Plain text
+#: ../en/intro.txt:32
+msgid ""
+"What if a player wanted to get an older saved game for some reason? Maybe "
+"the current saved game is in an unwinnable state because somebody forgot to "
+"pick up an object back in level three, and they want to find the latest "
+"saved game where the game can still be completed. Or maybe they want to "
+"compare two older saved games to see how much work a particular player did."
+msgstr ""
+"Was, wenn ein Spieler aus irgendeinem Grund einen alten Spielstand will? "
+"Vielleicht ist der aktuell gesicherte Spielstand nicht mehr lösbar, weil "
+"jemand in der dritten Ebene vergessen hat ein Objekt aufzunehmen und sie "
+"versuchen den letzten Spielstand zu finden, ab dem das Spiel wieder lösbar "
+"ist. Oder sie wollen zwei Spielstände vergleichen, um festzustellen wie viel "
+"ein Spieler geleistet hat."
+
+#. type: Plain text
+#: ../en/intro.txt:34
+msgid ""
+"There could be many reasons to want to see an older revision, but the "
+"outcome is the same. They have to ask the central server for that old saved "
+"game. The more saved games they want, the more they need to communicate."
+msgstr ""
+"Es gibt viele Gründe warum man einen älteren Stand sehen will, aber das "
+"Ergebnis ist das selbe. Man muss vom Hauptserver das alte gespeicherte Spiel "
+"anfordern. Je mehr gespeicherte Spiele benötigt werden, desto mehr "
+"Kommunikation ist erforderlich."
+
+#. type: Plain text
+#: ../en/intro.txt:36
+msgid ""
+"The new generation of version control systems, of which Git is a member, are "
+"known as distributed systems, and can be thought of as a generalization of "
+"centralized systems. When players download from the main server they get "
+"every saved game, not just the latest one. It's as if they're mirroring the "
+"central server."
+msgstr ""
+"Die neue Generation der Versionsverwaltungssysteme, zu denen Git gehört, "
+"werden verteilte Systeme genannt und können als eine Verallgemeinerung der "
+"zentralisierten Systeme verstanden werden. Wenn Spieler vom Hauptserver "
+"herunterladen, erhalten sie jedes gespeichertes Spiel, nicht nur das zuletzt "
+"gespeicherte. Es ist als ob der Hauptserver gespiegelt wird."
+
+#. type: Plain text
+#: ../en/intro.txt:38
+msgid ""
+"This initial cloning operation can be expensive, especially if there's a "
+"long history, but it pays off in the long run. One immediate benefit is that "
+"when an old save is desired for any reason, communication with the central "
+"server is unnecessary."
+msgstr ""
+"Dieses erste 'Cloning' kann teuer sein, vor allem, wenn eine lange "
+"Geschichte existiert, aber auf Dauer wird es sich lohnen. Ein unmittelbarer "
+"Vorteil ist, wenn aus irgendeinem Grund ein älterer Stand benötigt wird, ist "
+"keine Kommunikation mit dem Hauptserver notwendig."
+
+#. type: Plain text
+#: ../en/intro.txt:40
+msgid "=== A Silly Superstition ==="
+msgstr "=== Ein dummer Aberglaube ==="
+
+#. type: Plain text
+#: ../en/intro.txt:42
+msgid ""
+"A popular misconception is that distributed systems are ill-suited for "
+"projects requiring an official central repository. Nothing could be further "
+"from the truth. Photographing someone does not cause their soul to be "
+"stolen. Similarly, cloning the master repository does not diminish its "
+"importance."
+msgstr ""
+"Ein weit verbreitetes Missverständnis ist, dass verteilte System ungeeignet "
+"sind für Projekte, die ein offizielles zentrales 'Repository' benötigen. "
+"Nichts könnte weiter von der Wahrheit entfernt sein. Jemanden zu "
+"fotografieren stiehlt nicht dessen Seele. Genauso wenig setzt das 'Clonen' "
+"des zentralen 'Repository' dessen Bedeutung herab."
+
+#. type: Plain text
+#: ../en/intro.txt:44
+msgid ""
+"A good first approximation is that anything a centralized version control "
+"system can do, a well-designed distributed system can do better. Network "
+"resources are simply costlier than local resources. While we shall later see "
+"there are drawbacks to a distributed approach, one is less likely to make "
+"erroneous comparisons with this rule of thumb."
+msgstr ""
+"Eine gute erste Annäherung ist, dass alles was eine zentralisierte "
+"Versionsverwaltung kann, ein gut durchdachtes verteiltes System besser kann. "
+"Netzwerkressourcen sind einfach teurer als lokale Ressourcen. Auch wenn wir "
+"später Nachteile beim verteilten Ansatz sehen werden, ist man mit dieser "
+"Faustregel weniger anfällig für falsche Vergleiche."
+
+#. type: Plain text
+#: ../en/intro.txt:48
+msgid ""
+"A small project may only need a fraction of the features offered by such a "
+"system, but using systems that scale poorly for tiny projects is like using "
+"Roman numerals for calculations involving small numbers."
+msgstr ""
+"Ein kleines Projekt mag nur einen Bruchteil der Möglichkeiten benötigen, die "
+"so ein System bietet. Aber deshalb ein einfacheres, schlecht erweiterbares "
+"System zu benutzen, ist wie römische Ziffern zum Rechnen mit kleinen Zahlen "
+"zu verwenden."
+
+#. type: Plain text
+#: ../en/intro.txt:50
+msgid ""
+"Moreover, your project may grow beyond your original expectations. Using Git "
+"from the outset is like carrying a Swiss army knife even though you mostly "
+"use it to open bottles. On the day you desperately need a screwdriver you'll "
+"be glad you have more than a plain bottle-opener."
+msgstr ""
+"Außerdem könnte dein Projekt weit über die ursprünglichen Erwartungen "
+"hinauswachsen. Git von Anfang an zu benutzen, ist wie ein Schweizer "
+"Taschenmesser mit sich zu tragen, auch wenn damit meistens nur Flaschen "
+"geöffnet werden. Eines Tages brauchst du vielleicht dringend einen "
+"Schraubendreher, dann bist du froh mehr als nur einen einfachen "
+"Flaschenöffner bei dir zu haben."
+
+#. type: Plain text
+#: ../en/intro.txt:52
+msgid "=== Merge Conflicts ==="
+msgstr "=== 'Merge' Konflikte ==="
+
+#. type: Plain text
+#: ../en/intro.txt:54
+msgid ""
+"For this topic, our computer game analogy becomes too thinly stretched. "
+"Instead, let us again consider editing a document."
+msgstr ""
+"Für diesen Punkt ist unsere Computerspielanalogie ungeeignet. Stattdessen "
+"stellen wir uns wieder vor, wir editieren ein Dokument."
+
+#. type: Plain text
+#: ../en/intro.txt:56
+msgid ""
+"Suppose Alice inserts a line at the beginning of a file, and Bob appends one "
+"at the end of his copy. They both upload their changes. Most systems will "
+"automatically deduce a reasonable course of action: accept and merge their "
+"changes, so both Alice's and Bob's edits are applied."
+msgstr ""
+"Stell dir vor, Alice fügt eine Zeile am Dateianfang hinzu und Bob eine am "
+"Dateiende. Beide laden ihre Änderungen hoch. Die meisten Systeme wählen "
+"automatisch eine vernünftige Vorgehensweise: akzeptiere beide Änderungen und "
+"füge sie zusammen, damit fließen beide Änderungen in das Dokument mit ein."
+
+#. type: Plain text
+#: ../en/intro.txt:58
+msgid ""
+"Now suppose both Alice and Bob have made distinct edits to the same line. "
+"Then it is impossible to proceed without human intervention. The second "
+"person to upload is informed of a _merge conflict_, and must choose one edit "
+"over another, or revise the line entirely."
+msgstr ""
+"Nun stell dir vor beide, Alice und Bob, machen Änderungen in der selben "
+"Zeile. Dann ist es unmöglich ohne menschlichen Eingriff fortzufahren. Die "
+"zweite Person, welche die Datei hoch lädt, wird über einen _'Merge' "
+"Konflikt_ informiert und muss entscheiden, welche Änderung übernommen wird "
+"oder die ganze Zeile überarbeiten. "
+
+#. type: Plain text
+#: ../en/intro.txt:59
+msgid ""
+"More complex situations can arise. Version control systems handle the "
+"simpler cases themselves, and leave the difficult cases for humans. Usually "
+"their behaviour is configurable."
+msgstr ""
+"Es können noch weitaus kompliziertere Situationen entstehen. "
+"Versionsverwaltungssysteme behandeln die einfacheren Fälle selbst und "
+"überlassen die schwierigen uns Menschen. Üblicherweise ist deren Verhalten "
+"einstellbar."
