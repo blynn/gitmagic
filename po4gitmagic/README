@@ -1,0 +1,33 @@
+This Makefile should make it easy to translate gitmagic with gettext tools on Linux systems.
+To use it, you have to install the po4a package.
+
+To start, clone the gitmagic project.
+
+Make the directory corresponding to your language tag and change into it.
+	mkdir xx
+	chdir xx
+
+Create a symlink to this Makefile:
+	ln -s ../po4gitmagic/Makefile Makefile
+
+Now run make to create the pot folder and all the .po files in there.
+	make gettext
+
+Start translating with your prefered .po file editor (e.g. poedit, gtranslator).
+
+You need to have 80% of a .po file translated, then you can run:
+	make translate
+
+This will create a translated .txt file in your language folder for each .po file that is more than 80% translated.
+
+To proof your work change in the gitmagic root folder an run:
+	make LANG=xx
+Where xx is your subfolder name  and language tag
+
+If something in the original .txt files changed, goto your language folder and run:
+	make update
+
+This will update your .po files and mark the changed items as 'fuzzy'. 
+
+Check the .po files for changes, translate them and run again:
+	make translate
