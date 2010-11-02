@@ -2,23 +2,25 @@
 # This file is distributed under the GNU GENERAL PUBLIC LICENSE Version 3.
 # Benn Lynn <benlynn@gmail.com>, 2007.
 # Armin Stebich <armin@lordofbikes.de>, 2010.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Git Magic deutsch\n"
 "Report-Msgid-Bugs-To: bennlynn@gmail.com\n"
 "POT-Creation-Date: 2010-10-30 08:21+0300\n"
-"PO-Revision-Date: 2010-10-26 18:38+0300\n"
+"PO-Revision-Date: 2010-11-02 19:21+0100\n"
 "Last-Translator: Armin Stebich <armin@lordofbikes.de>\n"
-"Language-Team: de <git-magic@lordofbikes.de>\n"
+"Language-Team: DE <gitmagic@lordofbikes.de>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: UTF-8\n"
+"Plural-Forms: \n"
 
 #. type: Plain text
 #: ../en/clone.txt:2
 msgid "== Cloning Around =="
-msgstr ""
+msgstr "== Rund ums 'Clonen' =="
 
 #. type: Plain text
 #: ../en/clone.txt:4
@@ -39,7 +41,7 @@ msgstr ""
 #. type: Plain text
 #: ../en/clone.txt:8
 msgid "=== Sync Computers ==="
-msgstr ""
+msgstr "=== Computer synchronisieren ==="
 
 #. type: Plain text
 #: ../en/clone.txt:10
@@ -86,7 +88,7 @@ msgstr ""
 #. type: Plain text
 #: ../en/clone.txt:23
 msgid "=== Classic Source Control ==="
-msgstr ""
+msgstr "=== Klassische Quellcodeverwaltung ==="
 
 #. type: Plain text
 #: ../en/clone.txt:25
@@ -207,7 +209,7 @@ msgstr ""
 #. type: Plain text
 #: ../en/clone.txt:73
 msgid "=== Bare repositories ==="
-msgstr ""
+msgstr "=== 'Bare Repositories' ==="
 
 #. type: Plain text
 #: ../en/clone.txt:75
@@ -239,7 +241,7 @@ msgstr ""
 #. type: Plain text
 #: ../en/clone.txt:86
 msgid "=== Push versus pull ==="
-msgstr ""
+msgstr "=== 'Push' oder 'Pull' ==="
 
 #. type: Plain text
 #: ../en/clone.txt:94
@@ -270,7 +272,7 @@ msgstr ""
 #. type: Plain text
 #: ../en/clone.txt:100
 msgid "=== Forking a Project ==="
-msgstr ""
+msgstr "=== 'Fork' eines Projekts ==="
 
 #. type: Plain text
 #: ../en/clone.txt:102
@@ -300,7 +302,7 @@ msgstr ""
 #. type: Plain text
 #: ../en/clone.txt:112
 msgid "=== Ultimate Backups ==="
-msgstr ""
+msgstr "=== Ultimative Datensicherung ==="
 
 #. type: Plain text
 #: ../en/clone.txt:114
@@ -332,7 +334,7 @@ msgstr ""
 #. type: Plain text
 #: ../en/clone.txt:120
 msgid "=== Light-Speed Multitask ==="
-msgstr ""
+msgstr "=== Multitasking mit Lichtgeschwindigkeit ==="
 
 #. type: Plain text
 #: ../en/clone.txt:122
@@ -370,7 +372,7 @@ msgstr ""
 #. type: Plain text
 #: ../en/clone.txt:132
 msgid "=== Guerilla Version Control ==="
-msgstr ""
+msgstr "=== Versionsverwaltung im Untergrund ==="
 
 #. type: Plain text
 #: ../en/clone.txt:134
@@ -437,7 +439,7 @@ msgstr ""
 #. type: Plain text
 #: ../en/clone.txt:158
 msgid "=== Mercurial ==="
-msgstr ""
+msgstr "=== Mercurial ==="
 
 #. type: Plain text
 #: ../en/clone.txt:160
@@ -514,7 +516,7 @@ msgstr ""
 #. type: Plain text
 #: ../en/clone.txt:183
 msgid "=== Bazaar ==="
-msgstr ""
+msgstr "=== Bazaar ==="
 
 #. type: Plain text
 #: ../en/clone.txt:186
@@ -544,7 +546,7 @@ msgstr ""
 #. type: Plain text
 #: ../en/clone.txt:192
 msgid "=== Why I use Git ==="
-msgstr ""
+msgstr "=== Warum ich Git benutze ==="
 
 #. type: Plain text
 #: ../en/clone.txt:194
