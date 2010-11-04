@@ -46,12 +46,12 @@ Un petit projet peut ne nécessiter que d'une fraction des fonctionnalités offe
 
 De plus, votre projet peut grossir au delà de vos prévisions de départ. Utiliser Git même pour les cas simples est comparable au fait d'avoir sur sois un couteau Suisse même si vous l'utilisez surtout pour ouvrir des bouteilles. Le jour où vous avez besoin d'un tournevis vous serez content d'avoir plus qu'un simple tire-bouchon.
 
-=== Merge Conflicts ===
+=== Conflits fusionnels ===
 
-For this topic, our computer game analogy becomes too thinly stretched. Instead, let us again consider editing a document.
+Pour aborder ce sujet, notre analogy avec le jeux vidéo serait trop tirée par les cheveux. En revanche, revenons au cas de l'édition d'un document.
 
-Suppose Alice inserts a line at the beginning of a file, and Bob appends one at the end of his copy. They both upload their changes. Most systems will automatically deduce a reasonable course of action: accept and merge their changes, so both Alice's and Bob's edits are applied.
+Imaginons que Alice insère une ligne au début d'un fichier, et Bob en ajoute unt à la fin de sa propre copie. Ils anvoient tout les deux leurs modifications. La plupart des sxstèmes vont automatiquement déduire un traitement raisonable des actions : accepter et fusioner leur modifications, ainsi les modifications d'Alices et de Bob sont appliquées.
 
-Now suppose both Alice and Bob have made distinct edits to the same line. Then it is impossible to proceed without human intervention. The second person to upload is informed of a _merge conflict_, and must choose one edit over another, or revise the line entirely.
+Maintenant immaginez que tous les deux, Alice et Bob ont faits des modifications différentes de la même ligne. Il devient alors impossible de procéder sans intervention humaine. Celui qui envois ses modifications en second est informé d'un _conflit de fusion_ (merge conflict), et doit choisir l'une des deux lignes, ou revoir complètement la ligne.
 
-More complex situations can arise. Version control systems handle the simpler cases themselves, and leave the difficult cases for humans. Usually their behaviour is configurable.
+Des situations plus complexes se présentes. Les systèmes de gestion de versions s'occuppent eux même des cas les plus simples, et laissent les cas difficiles aux humains. En général leur comportement est configurable.

@@ -1,0 +1,187 @@
+== Clonons gaiment ==
+
+Avec les ancienne systèmes de gestion de version, l'opération standard pour obtenir un fichier est le checkout xxx. Vous obtenez un ensemble de fichiers correspondant à un état particulié précédement enregistré.
+
+Avec Git et d'autre systèmes distribués de gestion de version, le clonage est l'opération standard. Pour obtenir des fichier, on crée un 'clone' du dépôt entier. En d'autres termes, il s'agit de faire un http://fr.wikipedia.org/wiki/Site_miroir[miroir] du serveur central. Tout ce qui peut se faire sur le dépôt central peut être fait sur le votre.
+
+=== Machines Synchros ===
+
+Je peux imaginer faire des archives *tar* ou utiliser *rsync* pour des sauvegardes ou une synchronisation simple. Mais parfois j'édite sur mon portable, d'autre sur mon fixe, et les deux peuvent ne pas avoir communiqué entre temps.
+
+Initialisez un dépôt Git et faite le *commit* de vos fichiers sur une machine. Ensuite sur l'autre :
+
+ $ git clone autre.ordinateur:/chemin/vers/les/fichiers
+
+pour créer une deuxième copie de ces fichiers et dépôt Git.
+
+À partir de ce moment,
+
+ $ git commit -a
+ $ git pull autre.ordinateur:/chemin/vers/les/fichiers HEAD
+
+ira chercher l'état des fichiers sur l'autre ordinateur pour mettre à jour celui sur lequel vous travaillez. Si vous avez fait récement des modifications en conflit dans le même fichies, Git vous le signalera et vous devrez répéter à nouveau le commit aprés avoir résolu ces conflits.
+
+=== gestion classique des sources ===
+
+Initialisez ur dépôt Git de vos fichiers :
+ $ git init
+ $ git add .
+ $ git commit -m "Commit initial"
+
+Sur le serveur central, initialisez un 'dépôt nu' (*bare* dans la terminologie G dans un dossier quelconque :
+
+ $ mkdir proj.git
+ $ cd proj.git
+ $ git init --bare
+ $  # variante en une ligne : GIT_DIR=proj.git git init
+
+Si besoin démarrez le démpn (service) :
+
+ $ git daemon --detach  # peut être tourne-t'il déjà
+
+Pour les services d'hébergement en ligne, suivez les instructions fournies pour mettre en place le dépôt Git initialement vide. En général il s'agit de remplir un formulaire sur une page web.
+
+'Poussez' votre projet au serveur central en utilisant :
+
+ $ git push git://serveur.central/chemin/du/proj.git HEAD
+
+Pour obtenir les source, un développeur saisi :
+
+ $ git clone git://serveur.central/chemin/du/proj.git
+
+Après avoir fait des modifications, le développeur enregistre ses modifications en local :
+
+ $ git commit -a
+
+Met à jour à la dernière version :
+
+ $ git pull
+
+Tous conflit lors de la fusion doit être résolu puis validés :
+
+ $ git commit -a
+
+Pour envoyer vos modifications locales au dépôt central :
+
+ $ git push
+
+Si le serveur principal a des nouvelles modifications dûes à d'autres développeurs, l'envoie échoue et le développeur doit se mettre à jour de la dernière version, résoudre les éventuels conflits de fusion, puis essayer à nouveau.
+
+=== Dépots nus ===
+
+Un dépôt nu (*bare repository*) est nommé ainsi car il n'a pas de dossier de travaille : il ne contient que des fichiers qui sont normalement cachés dans le sous dossier `.git`. En d'autres mots, il conserve l'historique d'un projet, et ne contient jamais le rendu d'une version donnée.
+
+Un dépot nu joue un rôle similaire à celui du serveur principal dans un système de gestion de version centralisé : le receptacle de vos projets. Les développeurs clone vos projets à partir de celui-ci et y poussent les dernières modifications officielles. En général il est placé sur un serveur qui ne fait quasiment que ce travail de distribution de l'information. Le développement s'opère sur les clônes de sorte que le dépôt principal peut se passer d'un dossier de travail.
+
+Beaucoup des commandes de Git échouent sur un dépôt nu tant que la variable d'envirronement `GIT_DIR` n'est pas renseignée avec le chemin vers le dépôt ou que l'option `--bare` n'est pas utilisée.
+
+=== envoi contre rappatriement ( push contre pull ) ===
+
+Pourquoi a-t'on introduit la commande `push` ( envoie ) au lieu de se contenter de la commande `pull` ( rappatriement ) plus familiére ? Premièrement, la commande `pull` échoue sur un dépôt nu : il faut y utiliser la commande `fetch` dont nous parlerons plus tard. Mais même si nous conservions un dépôt standard sur le serveur central, y rappatrier les modifications serait peu pratique. Nous devrions d'abord nous connecter au serveur et donner en argument à la commande `pull` l'adresse de la machine de laquelle nous avons à rappatrier des modifications. Des pare-feu peuvent éventuellement nous embêter, et que faire si nous n'avons déjà pas d'accès `shell` au serveur ?
+
+Quoiqu'il en soit, ce cas mis à part, nous décourageons l'envoie ( en comparaison du rappatriement ) parce que cela peut entrainer des confusions lorsque la destination possède un dossier de travail.
+
+En condensé, pendant la phase d'apprentissage de Git, utilisez l'envoie ( push ) uniquement si la destination est un dépôt nu ; sinon rappatriez ( pull ).
+
+=== Forker un projet ===
+
+Vous en avez marre de la manière dont est géré un projet ? Vous pensez pouvoir faire mieux ? Dans ce cas, sur votre serveur :
+
+ $ git clone git://serveur.principal/chemin/vers/les/fichiers
+
+Ensuite, informez tout le monde de votre fork du projet sur votre serveur.
+
+Par la suite, vous pouvez fusionner les modifications du projet originel avec :
+
+ $ git pull
+
+=== Ultime système de sauvegarde ===
+
+Vous voulez des archives redondantes et géographiquement distribués, permetant de faire face à un désastre XXX ? Si votre projet à beaucoup de développeurs, vous n'avez rien à faire ! Chaque clone de votre code est de fait une sauvegarde. Non seulemert de l'état actuel, mais de l'historique complet. Grâce aux empreintes cryptographiques, si le clône de quelqu'un est corrompu, il serat reppéré dès qu'il tentera de communiquer avec d'autres.
+
+
+If your project is not so popular, find as many servers as you can to host clones.
+
+The truly paranoid should always write down the latest 20-byte SHA1 hash of the HEAD somewhere safe. It has to be safe, not private. For example, publishing it in a newspaper would work well, because it's hard for an attacker to alter every copy of a newspaper.
+
+=== Light-Speed Multitask ===
+
+Say you want to work on several features in parallel. Then commit your project and run:
+
+ $ git clone . /some/new/directory
+
+Git exploits hard links and file sharing as much as safely possible to create this clone, so it will be ready in a flash, and you can now work on two independent features simultaneously. For example, you can edit one clone while the other is compiling.
+
+At any time, you can commit and pull changes from the other clone.
+
+ $ git pull /the/other/clone HEAD
+
+=== Guerilla Version Control ===
+
+Are you working on a project that uses some other version control system, and you sorely miss Git? Then initialize a Git repository in your working directory:
+
+ $ git init
+ $ git add .
+ $ git commit -m "Initial commit"
+
+then clone it:
+
+ $ git clone . /some/new/directory
+
+Now go to the new directory and work here instead, using Git to your heart's content. Once in a while, you'll want to sync with everyone else, in which case go to the original directory, sync using the other version control system, and type:
+
+ $ git add .
+ $ git commit -m "Sync with everyone else"
+
+Then go to the new directory and run:
+
+ $ git commit -a -m "Description of my changes"
+ $ git pull
+
+The procedure for giving your changes to everyone else depends on the other version control system. The new directory contains the files with your changes. Run whatever commands of the other version control system are needed to upload them to the central repository.
+
+Subversion, perhaps the best centralized version control system, is used by countless projects. The *git svn* command automates the above for Subversion repositories, and can also be used to http://google-opensource.blogspot.com/2008/05/export-git-project-to-google-code.html[export a Git project to a Subversion repository].
+
+=== Mercurial ===
+
+Mercurial is a similar version control system that can almost seamlessly work in tandem with Git. With the `hg-git` plugin, a Mercurial user can losslessly push to and pull from a Git repository.
+
+Obtain the `hg-git` plugin with Git:
+
+ $ git clone git://github.com/schacon/hg-git.git
+
+or Mercurial:
+
+ $ hg clone http://bitbucket.org/durin42/hg-git/
+
+Sadly, I am unaware of an analogous plugin for Git. For this reason, I advocate Git over Mercurial for the main repository, even if you prefer Mercurial. With a Mercurial project, usually a volunteer maintains a parallel Git repository to accommodate Git users, whereas thanks to the `hg-git` plugin, a Git project automatically accommodates Mercurial users.
+
+Although the plugin can convert a Mercurial repository to a Git repository by pushing to an empty repository, this job is easier with the `hg-fast-export.sh` script, available from:
+
+ $ git clone git://repo.or.cz/fast-export.git
+
+To convert, in an empty directory:
+
+ $ git init
+ $ hg-fast-export.sh -r /hg/repo
+
+after adding the script to your `$PATH`.
+
+=== Bazaar ===
+
+We briefly mention Bazaar because it is the most popular free distributed
+version control system after Git and Mercurial.
+
+Bazaar has the advantage of hindsight, as it is relatively young; its designers could learn from mistakes of the past, and sidestep minor historical warts. Additionally, its developers are mindful of portability and interoperation with other version control systems.
+
+A `bzr-git` plugin lets Bazaar users work with Git repositories to some extent. The `tailor` program converts Bazaar repositories to Git repositories, and can do so incrementally, while `bzr-fast-export` is well-suited for one-shot conversions.
+
+=== Why I use Git ===
+
+I originally chose Git because I heard it could manage the unimaginably unmanageable Linux kernel source. I've never felt a need to switch. Git has served admirably, and I've yet to be bitten by its flaws. As I primarily use Linux, issues on other platforms are of no concern.
+
+Also, I prefer C programs and bash scripts to executables such as Python scripts: there are fewer dependencies, and I'm addicted to fast running times.
+
+I did think about how Git could be improved, going so far as to write my own Git-like tool, but only as an academic exercise. Had I completed my project, I would have stayed with Git anyway, as the gains are too slight to justify using an oddball system.
+
+Naturally, your needs and wants likely differ, and you may be better off with another system. Nonetheless, you can't go far wrong with Git.
