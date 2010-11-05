@@ -2,29 +2,33 @@
 # This file is distributed under the GNU GENERAL PUBLIC LICENSE Version 3.
 # Benn Lynn <benlynn@gmail.com>, 2007.
 # Armin Stebich <armin@lordofbikes.de>, 2010.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Git Magic deutsch\n"
 "Report-Msgid-Bugs-To: bennlynn@gmail.com\n"
 "POT-Creation-Date: 2010-10-30 08:21+0300\n"
-"PO-Revision-Date: 2010-10-26 18:38+0300\n"
+"PO-Revision-Date: 2010-11-05 18:45+0100\n"
 "Last-Translator: Armin Stebich <armin@lordofbikes.de>\n"
-"Language-Team: de <git-magic@lordofbikes.de>\n"
+"Language-Team: DE <gitmagic@lordofbikes.de>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: UTF-8\n"
+"Plural-Forms: \n"
 
 #. type: Plain text
 #: ../en/branch.txt:2
 msgid "== Branch Wizardry =="
-msgstr ""
+msgstr "== 'Branch'-Magie =="
 
 #. type: Plain text
 #: ../en/branch.txt:4
 msgid ""
 "Instant branching and merging are the most lethal of Git's killer features."
 msgstr ""
+"Unverzügliches 'Branchen' und 'Mergen' sind die hervorstechenden "
+"Eigenschaften von Git."
 
 #. type: Plain text
 #: ../en/branch.txt:8
@@ -33,7 +37,7 @@ msgid ""
 "*Problem*: External factors inevitably necessitate context switching. A severe\n"
 "bug manifests in the released version without warning. The deadline for a\n"
 "certain feature is moved closer. A developer whose help you need for a key section of the project is about to leave. In all cases, you must abruptly drop what you are doing and focus on a completely different task.\n"
-msgstr ""
+msgstr "*Problem*: Externe Faktoren zwingen zum Wechsel des Kontext. Ein schwerwiegender Fehler in der veröffentlichten Version tritt ohne Vorwarnung auf. Die Frist für ein bestimmtes Leistungsmerkmal rückt näher. Ein Entwickler, dessen Unterstützung für eine Schlüsselstelle im Projekt wichtig ist, verlässt das Team. In allen Fällen musst du alles stehen und liegen lassen und dich auf eine komplett andere Aufgabe konzentrieren.\n"
 
 #. type: Plain text
 #: ../en/branch.txt:10
@@ -44,6 +48,11 @@ msgid ""
 "central server. Distributed systems fare better, as we can clone the desired "
 "version locally."
 msgstr ""
+"Den Gedankengang zu unterbrechen ist schlecht für die Produktivität und je "
+"komplizierter der Kontextwechsel ist, desto größer ist der Verlust. Mit "
+"zentraler Versionsverwaltung müssen wir eine neue Arbeitskopie vom Server "
+"herunterladen. Bei verteilen Systemen ist das viel besser, da wir die "
+"benötigt Version lokal 'clonen' können."
 
 #. type: Plain text
 #: ../en/branch.txt:12
