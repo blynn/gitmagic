@@ -37,7 +37,7 @@ translate: $(TXTFILES)
 update:
 	( for FILE in $(FILES) ; \
 		do if [ -f $(ORGDIR)/$$FILE.txt ]; \
-			then po4a-updatepo -f text -m $(ORGDIR)/$$FILE.txt -p $(POTDIR)/$$FILE.po; echo $$FILE; \
+			then po4a-updatepo -f text -m $(ORGDIR)/$$FILE.txt -M UTF-8 -p $(POTDIR)/$$FILE.po; echo $$FILE; \
 		fi; \
 	done )
 
