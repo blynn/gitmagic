@@ -1,0 +1,39 @@
+== Anhang B: Diese Anleitung übersetzen ==
+
+'Clone' die Quelltexte, dann erstelle ein Verzeichnis mit dem Namen des
+http://www.iana.org/assignments/language-subtag-registry[IETF Sprachkürzel]
+der übersetzten Sprache: siehe
+http://www.w3.org/International/articles/language-tags/Overview.en.php[den
+W3C Artikel über Internationalisierung]. Zum Beispiel, Englisch ist "en",
+Japanisch ist "ja" und traditionelles Chinesisch ist "zh-Hant". Kopiere alle
+txt-Dateien aus dem "en"-Verzeichnis in das neue Verzeichnis und übersetze
+diese.
+
+Um zum Beispiel die Anleitung auf
+http://de.wikipedia.org/wiki/Klingonische_Sprache[Klingonisch] zu
+übersetzen, mußt du folgendes machen:
+
+ $ git clone git://repo.or.cz/gitmagic.git
+ $ cd gitmagic
+ $ mkdir tlh  # "tlh" ist das IETF Sprachkürzel für Klingonisch.
+ $ cd tlh
+ $ cp ../en/intro.txt .
+ $ edit intro.txt  # Übersetze diese Datei.
+
+und das machst du für jede txt-Datei. Du kannst deine Arbeit jederzeit wie
+folgt überprüfen:
+
+ $ make LANG=tlh
+ $ firefox book.html
+
+'Committe' deine Änderungen oft und wenn du fertig bist, gib bitte
+Bescheid. GitHub.com hat eine Schnittstelle, die das erleichtert: Erzeuge
+deine eigene 'Fork' vom "gitmagic" Projekt, 'pushe' deine Änderungen, dann
+gib mir Bescheid, deine Änderungen zu 'mergen'.
+
+Ich bevorzuge Übersetzungen nach diesem Schema, denn so können meine
+Skripte HTML und PDF Versionen erstellen. Außerdem hält es alle
+Übersetzungen bequem im offiziellen 'Repository'. Trotzdem, wähle den Weg,
+der dir am besten liegt. Die chinesischen Übersetzer zum Beispiel benutzen
+Google Docs. Ich bin glücklich, so lange deine Arbeit mehr Menschen den
+Zugang zu meiner Arbeit ermöglicht.

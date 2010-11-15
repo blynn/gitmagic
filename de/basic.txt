@@ -1,198 +1,257 @@
-== Grundlegendes ==
+== Erste Schritte ==
 
+Bevor wir uns in ein Meer von Git-Befehlen stürzen, schauen wir uns ein paar
+einfache Beispiele an. Trotz ihrer Einfachheit, sind alle davon wichtig und
+nützlich. Um ehrlich zu sein, meine ersten Monate mit Git brauchte ich nicht
+mehr als in diesem Kapitel beschrieben steht.
 
-Bevor wir uns in ein Meer von Git-Befehlen stürzen, schauen wir uns ein paar einfache Beispiele
-an. Obwohl "einfach", sind alle davon wichtig und nützlich.
-Um erhlich zu sein, meine ersten Monate mit Git brauchte ich nicht mehr als in diesem Kapitel beschrieben steht.
+=== Stand sichern ===
 
-=== Abspeichern ===
-
-Hast du irgendetwas dramatisches vor? 
-Nur zu, aber speichere deinen aktuellen Stand lieber nochmal ab:
+Hast du gravierende Änderungen vor? Nur zu, aber speichere deinen aktuellen
+Stand vorher lieber nochmal ab:
 
  $ git init
  $ git add .
- $ git commit -m "Mein erstes Backup"
+ $ git commit -m "Meine erste Sicherung"
 
-Falls deine Änderungen etwas kaput gemacht haben, kannst du jetzt die alte Version wiederherstellen:
+Falls deine Änderungen schief gehen, kannst du jetzt die alte Version
+wiederherstellen:
 
  $ git reset --hard
 
-Falls alles geklappt hat, kannst du den neuen Stand speichern:
+Um den neuen Stand zu sichern:
 
- $ git commit -a -m "Noch ein Backup"
+ $ git commit -a -m "Eine andere Sicherung"
 
-=== Hinzufügen, Löschen, Verschieben  ===
+=== Hinzufügen, Löschen, Umbenennen ===
 
-Bisher kümmert sich git nur um Dateien die existierten als du das erste mal git add ausgeführt hast.
-Für neue Dateien oder Verzeichnisse musst du git noch folgendes mitteilen:
+Bisher kümmert sich Git nur um Dateien, die existierten, als du das erste
+Mal *git add* ausgeführt hast. Wenn du Dateien oder Verzeichnisse
+hinzufügst, musst du Git das mitteilen:
 
- $ git add NEUE_DATEIEN...
+ $ git add readme.txt Dokumentation
 
-Falls git eine Datei "Vergessen" soll:
+Ebenso, wenn Git Dateien vergessen soll:
 
- $ git rm ALTE_DATEI...
+ $ git rm ramsch.h veraltet.c
+ $ git rm -r belastendes/material/
 
-Eine Datei umzubenennen bedeutet im Endeffekt dasselbe wie sie zu löschen und unter neuem Namen hinzuzufügen. Git benutzt hierzu mv (selber syntax wie mv (1) 
+Git löscht diese Dateien für dich, falls du es noch nicht getan hast.
 
- $ git mv ALTER_NAME NEUER_NAME
+Eine Datei umzubenennen ist das selbe wie sie zu löschen und unter neuem
+Namen hinzuzufügen. Git benutzt hierzu die Abkürzung *git mv*, welche die
+gleiche Syntax wie *mv* hat. Zum Beispiel:
 
-=== Fortgeschrittenes Rückgängigmachen/Wiederherstellen ===
+ $ git mv fehler.c feature.c
 
-Es kann vorkommen das du jede Änderung ab einem bestimmten Zeitpunkt wegwerfen willst weil alles bockmist ist:
+=== Fortgeschrittenes Rückgängig machen/Wiederherstellen ===
+
+Manchmal möchtest du einfach zurück gehen und alle Änderungen ab einem
+bestimmten Zeitpunkt verwerfen, weil sie falsch waren. Dann:
 
  $ git log
 
-Zeight dir eine Liste der letzten Commits und die zugehörigen SHA1 hashes. Jetzt:
+zeigt dir eine Liste der bisherigen 'Commits' und deren SHA1 Hashwerte:
 
- $ git reset --hard SHA1_HASH
+----------------------------------
+commit 766f9881690d240ba334153047649b8b8f11c664
+Author: Bob <bob@example.com>
+Date:   Tue Mar 14 01:59:26 2000 -0800
 
-um den Stand des betreffenden Commits wieder herzustellen und alle nachfolgenden Änderungen für immer zu Verwerfen.
+    Ersetze printf() mit write().
 
-Ein anderes mal willst du nur kurz zu einem alten Stand springen, in diesem Fall:
+commit 82f5ea346a2e651544956a8653c0f58dc151275c
+Author: Alice <alice@example.com>
+Date:   Thu Jan 1 00:00:00 1970 +0000
 
- $ git checkout SHA1_HASH
+    Initial commit.
+----------------------------------
 
-Damit springst du in der Zeit zurück, erhältst aber neuere Änderungen. Aber, wie in jedem guten Sciencefiction Film: Wenn du jetzt etwas änderst, gelangst du in ein alternatives Universum. Wenn du dich das zweite mal anders als das erste Verhälst, änderst du nicht die Zukunft, du wechselst in eine paralele Realität
+Die ersten paar Zeichen eines Hashwert reichen aus um einen 'Commit' zu
+identifizieren; alternativ benutze kopieren und einfügen für den kompletten
+Hashwert. Gib ein:
 
-Diese Alternative Realität heist "Branch". Wir kommen später darauf zurück, aber merke dir schonmal den Namen.
+ $ git reset --hard 766f
+
+um den Stand eines bestimmten 'Commits' wieder herzustellen und alle
+nachfolgenden Änderungen für immer zu löschen.
+
+Ein anderes Mal willst du nur kurz zu einem älteren Stand springen. In
+diesem Fall, gib folgendes ein:
+
+ $ git checkout 82f5
+
+Damit springst du in der Zeit zurück, behältst aber neuere Änderungen. Aber,
+wie bei Zeitreisen in einem Science-Fiction-Film, wenn du jetzt etwas
+änderst und 'commitest', gelangst du in ein alternative Realität, denn deine
+Änderungen sind anders als beim früheren 'Commit'.
+
+Diese alternative Realität heißt 'Branch' und <<branch,wir kommen später
+darauf zurück>>. Für jetzt, merke dir
 
  $ git checkout master
 
-Bringt dich wieder in die Gegenwart.
-Btw: Um zu verhidnern das sich Git geschwert, solltest du änderungen vor jedem Checkout immer commiten oder  reseten.
+bringt dich wieder in die Gegenwart. Um zu verhindern, dass sich Git
+beschwert, solltest du vor einem 'Checkout' alle Änderungen 'commiten' oder
+'reseten'.
 
-Um uns wieder der Computerspiel-analogie zuzuwenden:
+Um wieder die Computerspielanalogie anzuwenden:
 
-- *`git reset --hard`*: Ein alten Stand laden und alle neueren Stände wegwerfen.
+- *`git reset --hard`*: Lade einen alten Stand und lösche alle Spielstände,
+die neuer sind als der jetzt geladene.
 
-- *`git checkout`*: Einen alten Spielstand laden. Wenn du hier weiterspielst, weichst du von der bisherigen Realität ab und kommst in ein paraleluniversum (branch, reden wir später drüber) 
+- *`git checkout`*: Lade einen alten Spielstand, aber wenn du weiterspielst,
+wird der Spielstand von den früher gesicherten Spielständen abweichen. Jeder
+Spielstand, der ab jetzt gesichert wird, entsteht in dem separaten 'Branch',
+welcher der alternative Realität entspricht. <<branch,Dazu kommen wir
+später>>.
 
-Du kannst auch nur einzelne Dateien oder Verzeichnisse wiederherstellen indem du sie an den Befehl anhängst:
+Du kannst auch nur einzelne Dateien oder Verzeichnisse wiederherstellen
+indem du sie an den Befehl anhängst:
 
- $ git checkout SHA1_HASH eine.datei nocheine.datei
+ $ git checkout 82f5 eine.datei andere.datei
 
-Aber sein Vorsichtig! diese art des Checkouts kann dateien überschreiben ohne das du etwas merkst.
-Um Unfälle zu vermeiden solltest du immer commiten befor du ein Checkout machst. 
-Allgemein gilt: Im zweifel erst commiten, besonders am Anfang wenn du Git noch nicht so genau kennst.
+Sei Vorsichtig, diese Art des '*Checkout*' kann Dateien überschreiben, ohne
+dass du etwas merkst. Um Unfälle zu vermeiden solltest du immer 'commiten'
+bevor du ein 'Checkout' machst, besonders am Anfang wenn du Git noch
+erlernst. Allgemein gilt: Wenn du unsicher bist, egal ob ein Git Befehl oder
+irgendeine andere Operation, führe zuerst *git commit -a* aus.
 
-Keine lust immer Hashes einzutippen? Nutze:
+Du magst Kopieren und Einfügen von Hashes nicht? Dann nutze:
 
- $ git checkout :/"Mein erster Co"
+ $ git checkout :/"Meine erste Si"
 
-um zu einem Commit zu springen dessen nachricht so anfängt
-Du kannst auch nach dem 5. letzten Commit fragen: 
+um zu einem 'Commit' zu springen, dessen Beschreibung so anfängt. Du kannst
+auch nach dem 5. letzten 'Commit' fragen:
 
  $ git checkout master~5
 
 === Rückgängig machen ===
 
-Du kannst einzelne Commits wieder rückgängig machen:
+In einem Gerichtssaal können Ereignisse aus den Akten gelöscht
+werden. Ähnlich kannst du gezielt 'Commits' rückgängig machen.
 
  $ git commit -a
- $ git revert SHA1_HASH
+ $ git revert 1b6d
 
-macht nur den angebenen commit wieder rückgängig. Die revert operation wird als neuer Commit gespeichert, wie
-dir ein Blick in git log verät.
+wird den 'Commit' mit dem angegebenen Hashwert rückgängig machen. Das
+Rückgängig machen wird als neuer 'Commit' erstellt, was mit *git log*
+überprüft werden kann.
 
-=== Changelog Erstellen ===
+=== Changelog erstellen ===
 
-Einige Projekte benötigen ein http://de.wikipedia.org/wiki/Changelog[changelog]:
+Verschiedene Projekte benötigen ein
+http://de.wikipedia.org/wiki/%C3%84nderungsprotokoll[Änderungsprotokoll].
+Das kannst du mit folgendem Befehl erstellen:
 
  $ git log > ChangeLog
 
-=== Dateien Downloaden ===
+=== Dateien herunterladen ===
 
-Besorge dir eine Kopie eines mit Git verwalteten Projektes:
+Eine Kopie eines mit Git verwalteten Projekts bekommst du mit:
 
- $ git clone git://server/pfad/zur/datei
+ $ git clone git://server/pfad/zu/dateien
 
-um zum Beispiel alle Dateien für dieses Buch zu bekommen:
+Um zum Beispiel alle Dateien zu bekommen, die ich zum Erzeugen dieser Seiten
+benutze:
 
  $ git clone git://git.or.cz/gitmagic.git
 
-Wir reden später noch ausführlicher über den clone befehl
+Es gibt gleich noch viel mehr über den 'clone' Befehl zu sagen.
 
 === Das Neueste vom Neuen ===
 
-Wenn du schon eine Kopie eines Projektes hast, und dieses auf die letzte Version updaten möchtest:
+Wenn du schon eine Kopie eines Projektes hast, kannst du es auf die neuste
+Version aktualisieren mit:
 
  $ git pull
 
-=== Unverzügliches Veröffentlichen ===
+=== Einfaches Veröffentlichen ===
 
-Nehmen wir an du hast ein Script geschrieben und möchtest es anderen zugänglich machen. Du könntest sie einfach bitten es immer von deinem Computer herunterzuladen, aber falls sie das tun während du experimentierst oder das Script verbessert könnten sie eine fehlerhafte Version bekommen. Genau deswegen gibt es Releasezyklen. Entwickler arbeiten regelmäßig an einem Projekt, veröffentlichen den Code 
-aber nur wenn sie ihn für vorzeigbar halten.
-Um dies in Git zu tun, gehe ins Verzeichniss in dem das script liegt:
+Angenommen du hast ein Skript geschrieben und möchtest es anderen zugänglich
+machen. Du könntest sie einfach bitten es von deinem Computer
+herunterzuladen, aber falls sie das tun während du experimentierst oder das
+Skript verbesserst könnten sie in Schwierigkeiten geraten. Genau deswegen
+gibt es Releasezyklen. Entwickler arbeiten regelmäßig an einem Projekt,
+veröffentlichen den Code aber nur, wenn sie ihn für vorzeigbar halten.
+
+Um dies in Git zu tun, gehe ins Verzeichnis in dem das Skript liegt:
 
  $ git init
  $ git add .
- $ git commit -m "Erster Release"
+ $ git commit -m "Erster Stand"
 
 Dann sage deinen Nutzern:
 
- $ git clone dein.computer:/pfad/zum/script
+ $ git clone dein.computer:/pfad/zum/skript
 
-um dein Script zu Downloaden. Das Funtioniert nur wenn sie SSH-Zugriff haben, falls nicht, führe *git deamon* aus und 
-sage den nutzern folgendes:
+um dein Skript herunterzuladen. Das setzt voraus, dass sie einen SSH-Zugang
+haben. Falls nicht, führe *git deamon* aus und sage den Nutzern folgendes:
 
- $ git clone git://dein.computer/pfad/zum/script
+ $ git clone git://dein.computer/pfad/zum/skript
 
-Immer wenn dein Script reif für eine Veröffentlichung ist:
+Ab jetzt, immer wenn dein Skript reif für eine Veröffentlichung ist:
 
- $ git commit -a -m "Nächstes release"
+ $ git commit -a -m "Nächster Stand"
 
-und deine Nutzer können ihr script updaten mit:
+und deine Nutzer können ihr Skript aktualisieren mit:
 
  $ git pull
 
-Sie werden nie mit Versionen in kontakt kommen von den du es nicht willst. Natürlich funktioniert der Trick für fast alles, nicht nur Scripts
+Deine Nutzer werden nie mit Versionen in Kontakt kommen, von denen du es
+nicht willst. Natürlich funktioniert der Trick für fast alles, nicht nur
+Skripts.
 
 === Was habe ich getan? ===
 
-Finde heraus was du seit dem letzten Commit getan hast:
+Finde heraus was du seit dem letzten 'Commit' getan hast:
 
  $ git diff
 
 Oder seit Gestern:
 
- $ git diff "@{yesterday}"
+ $ git diff "@{gestern}"
 
-Oder zwischen einer bestimmten Version und der 2. Letzten Version:
+Oder zwischen irgendeiner Version und der vorvorletzten:
 
- $ git diff SHA1_HASH "master~2"
+ $ git diff 1b6d "master~2"
 
-Jedesmal ist die Ausgabe ein Patch der mit *git apply* eingespielt werden kann
-Auch gut:
+Jedes mal ist die Ausgabe ein 'Patch' der mit *git apply* eingespielt werden
+kann. Versuche auch:
 
  $ git whatchanged --since="2 weeks ago"
 
-Um mir die Geschichte eines Repositories anzuzeigen benutze ich häufig
-http://sourceforge.net/projects/qgit[qgit]
-da es ein schickes Interface hat. Es git aber auch andere GUIs wie zum Beispiel
-http://jonas.nitro.dk/tig/[tig], ein textinterface, welches sich gut über das INternet beutzen lässt.
-Du kannst auch mit *git instaweb* einen Server aufsetzen und die alles in deinem Browser anschauen
+Um mir die Geschichte eines 'Repositories' anzuzeigen benutze ich häufig
+http://sourceforge.net/projects/qgit[qgit] da es eine schicke
+Benutzeroberfläche hat, oder http://jonas.nitro.dk/tig/[tig], eine
+Konsolenanwendung, die sehr gut über langsame Verbindungen
+funktioniert. Alternativ kannst du einen Webserver installieren mit *git
+instaweb*, dann kannst du mit jedem Webbrowser darauf zugreifen.
 
-=== Beispiel ===
+=== Übung ===
 
-A, B, C, D sind 4 aufeinanderfolgende Commits. B ist identisch mit A außer das einige Dateien gelöscht wurden. Wir mochten die Dateien in D wieder hinzufügen, aber nicht in B.
-wie mache wir das?
+A, B, C, D sind 4 aufeinander folgende 'Commits'. B ist identisch mit A,
+außer dass einige Dateien gelöscht wurden. Wir möchten die Dateien in D
+wieder hinzufügen, aber nicht in B. Wie machen wir das?
 
-Es gibt mindestens 3 Lösungen.
+Es gibt mindestens 3 Lösungen. Angenommen, wir sind bei D:
 
-Wir sind bei D:
-
-  1. Der Unterschied zwischen A und B sind die gelöschten Dateien. Wir können einen Patch erstellen der diesen Unterschied darstellt, und diesen dann auf D anwenden:
+  1. Der Unterschied zwischen A und B sind die gelöschten Dateien. Wir
+     können einen 'Patch' erstellen, der diesen Unterschied darstellt und
+     diesen dann auf D anwenden:
 
    $ git diff B A | git apply
 
-  2. Da die dateien im Repositorie unter dem Commit A gespeichert sind, können wir sie wieder herstellen:
+  2. Da die Dateien im 'Repository' unter dem 'Commit' A gespeichert sind,
+     können wir sie wieder herstellen:
 
-   $ git checkout A DATEIEN...
+   $ git checkout A foo.c bar.h
 
-  3. Wir können den commit B einfach rückgängig machen:
+  3. Wir können den 'Commit' von A auf B als Änderung betrachten, die wir
+     rückgängig machen wollen:
 
    $ git revert B
 
-Welche ist die beste Lösung? Die die Dir am besten gefällt. 
-Es ist einfach mit git das zu bekommen was du willst. und oft führen mehre Wege nach Rom.
+Welche Lösung ist die beste? Die, welche dir am besten gefällt. Es ist
+einfach mit Git das zu bekommen was du willst und oft führen viele Wege zum
+Ziel.

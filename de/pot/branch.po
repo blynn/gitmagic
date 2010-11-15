@@ -1,0 +1,655 @@
+# Git Magic - A guide to using Git
+# This file is distributed under the GNU GENERAL PUBLIC LICENSE Version 3.
+# Benn Lynn <benlynn@gmail.com>, 2007.
+# Armin Stebich <armin@lordofbikes.de>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: Git Magic deutsch\n"
+"Report-Msgid-Bugs-To: bennlynn@gmail.com\n"
+"POT-Creation-Date: 2010-10-30 08:21+0300\n"
+"PO-Revision-Date: 2010-10-26 18:38+0300\n"
+"Last-Translator: Armin Stebich <armin@lordofbikes.de>\n"
+"Language-Team: de <git-magic@lordofbikes.de>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: Plain text
+#: ../en/branch.txt:2
+msgid "== Branch Wizardry =="
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:4
+msgid ""
+"Instant branching and merging are the most lethal of Git's killer features."
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:8
+#, no-wrap
+msgid ""
+"*Problem*: External factors inevitably necessitate context switching. A severe\n"
+"bug manifests in the released version without warning. The deadline for a\n"
+"certain feature is moved closer. A developer whose help you need for a key section of the project is about to leave. In all cases, you must abruptly drop what you are doing and focus on a completely different task.\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:10
+msgid ""
+"Interrupting your train of thought can be detrimental to your productivity, "
+"and the more cumbersome it is to switch contexts, the greater the loss. With "
+"centralized version control we must download a fresh working copy from the "
+"central server. Distributed systems fare better, as we can clone the desired "
+"version locally."
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:12
+msgid ""
+"But cloning still entails copying the whole working directory as well as the "
+"entire history up to the given point. Even though Git reduces the cost of "
+"this with file sharing and hard links, the project files themselves must be "
+"recreated in their entirety in the new working directory."
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:14
+#, no-wrap
+msgid "*Solution*: Git has a better tool for these situations that is much faster and more space-efficient than cloning: *git branch*.\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:16
+msgid ""
+"With this magic word, the files in your directory suddenly shapeshift from "
+"one version to another. This transformation can do more than merely go back "
+"or forward in history. Your files can morph from the last release to the "
+"experimental version to the current development version to your friend's "
+"version and so on."
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:18
+msgid "=== The Boss Key ==="
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:20
+msgid ""
+"Ever played one of those games where at the push of a button (``the boss "
+"key''), the screen would instantly display a spreadsheet or something? So if "
+"the boss walked in the office while you were playing the game you could "
+"quickly hide it away?"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:22
+msgid "In some directory:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:27
+#, no-wrap
+msgid ""
+" $ echo \"I'm smarter than my boss\" > myfile.txt\n"
+" $ git init\n"
+" $ git add .\n"
+" $ git commit -m \"Initial commit\"\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:29
+msgid ""
+"We have created a Git repository that tracks one text file containing a "
+"certain message. Now type:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:33
+#, no-wrap
+msgid ""
+" $ git checkout -b boss  # nothing seems to change after this\n"
+" $ echo \"My boss is smarter than me\" > myfile.txt\n"
+" $ git commit -a -m \"Another commit\"\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:35
+msgid ""
+"It looks like we've just overwritten our file and committed it. But it's an "
+"illusion. Type:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:37
+#, no-wrap
+msgid " $ git checkout master  # switch to original version of the file\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:39
+msgid ""
+"and hey presto! The text file is restored. And if the boss decides to snoop "
+"around this directory, type:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:41
+#, no-wrap
+msgid " $ git checkout boss  # switch to version suitable for boss' eyes\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:43
+msgid ""
+"You can switch between the two versions of the file as much as you like, and "
+"commit to each independently."
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:45
+msgid "=== Dirty Work ==="
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:48
+msgid ""
+"[[branch]] Say you're working on some feature, and for some reason, you need "
+"to go back three versions and temporarily put in a few print statements to "
+"see how something works. Then:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:51
+#, no-wrap
+msgid ""
+" $ git commit -a\n"
+" $ git checkout HEAD~3\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:53
+msgid ""
+"Now you can add ugly temporary code all over the place. You can even commit "
+"these changes. When you're done,"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:55
+#, no-wrap
+msgid " $ git checkout master\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:57
+msgid ""
+"to return to your original work. Observe that any uncommitted changes are "
+"carried over."
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:59
+msgid "What if you wanted to save the temporary changes after all? Easy:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:61
+#, no-wrap
+msgid " $ git checkout -b dirty\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:63
+msgid ""
+"and commit before switching back to the master branch. Whenever you want to "
+"return to the dirty changes, simply type:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:65
+#, no-wrap
+msgid " $ git checkout dirty\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:67
+msgid ""
+"We touched upon this command in an earlier chapter, when discussing loading "
+"old states. At last we can tell the whole story: the files change to the "
+"requested state, but we must leave the master branch. Any commits made from "
+"now on take your files down a different road, which can be named later."
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:69
+msgid ""
+"In other words, after checking out an old state, Git automatically puts you "
+"in a new, unnamed branch, which can be named and saved with *git checkout -"
+"b*."
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:71
+msgid "=== Quick Fixes ==="
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:73
+msgid ""
+"You're in the middle of something when you are told to drop everything and "
+"fix a newly discovered bug in commit `1b6d...`:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:76
+#, no-wrap
+msgid ""
+" $ git commit -a\n"
+" $ git checkout -b fixes 1b6d\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:78
+msgid "Then once you've fixed the bug:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:82
+#, no-wrap
+msgid ""
+" $ git commit -a -m \"Bug fixed\"\n"
+" $ git push  # to the central repository\n"
+" $ git checkout master\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:84
+msgid "and resume work on your original task."
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:86
+msgid "You can even 'merge' in the bugfix you just made, either by typing:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:88
+#, no-wrap
+msgid " $ git merge fixes\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:90
+msgid "or:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:92
+#, no-wrap
+msgid " $ git pull\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:94
+msgid "since you have already pushed the bugfix to the main repository."
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:96
+msgid "=== Merging ==="
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:100
+msgid ""
+"With some version control systems, creating branches is easy but merging "
+"them back together is tough. With Git, merging is so trivial that you might "
+"be unaware of it happening."
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:106
+msgid ""
+"We actually encountered merging long ago. The *pull* command in fact "
+"'fetches' commits and then merges them into your current branch. If you have "
+"no local changes, then the merge is a 'fast forward', a degenerate case akin "
+"to fetching the latest version in a centralized version control system. But "
+"if you do have local changes, Git will automatically merge, and report any "
+"conflicts."
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:111
+msgid ""
+"Ordinarily, a commit has exactly one 'parent commit', namely, the previous "
+"commit. Merging branches together produces a commit with at least two "
+"parents.  This begs the question: what commit does `HEAD~10` really refer "
+"to? A commit could have multiple parents, so which one do we follow?"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:116
+msgid ""
+"It turns out this notation chooses the first parent every time. This is "
+"desirable because the current branch becomes the first parent during a "
+"merge; frequently you're only concerned with the changes you made in the "
+"current branch, as opposed to changes merged in from other branches."
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:119
+msgid ""
+"You can refer to a specific parent with a caret. For example, to show the "
+"logs from the second parent:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:121
+#, no-wrap
+msgid " $ git log HEAD^2\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:124
+msgid ""
+"You may omit the number for the first parent. For example, to show the "
+"differences with the first parent:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:126
+#, no-wrap
+msgid " $ git diff HEAD^\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:128
+msgid "You can combine this notation with other types. For example:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:130
+#, no-wrap
+msgid " $ git checkout 1b6d^^2~10 -b ancient\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:133
+msgid ""
+"starts a new branch ``ancient'' representing the state 10 commits back from "
+"the second parent of the first parent of the commit starting with 1b6d."
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:135
+msgid "=== Uninterrupted Workflow ==="
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:137
+msgid ""
+"Often in hardware projects, the second step of a plan must await the "
+"completion of the first step. A car undergoing repairs might sit idly in a "
+"garage until a particular part arrives from the factory. A prototype might "
+"wait for a chip to be fabricated before construction can continue."
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:142
+msgid ""
+"Software projects can be similar. The second part of a new feature may have "
+"to wait until the first part has been released and tested. Some projects "
+"require your code to be reviewed before accepting it, so you might wait "
+"until the first part is approved before starting the second part."
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:147
+msgid ""
+"Thanks to painless branching and merging, we can bend the rules and work on "
+"Part II before Part I is officially ready. Suppose you have committed Part I "
+"and sent it for review. Let's say you're in the `master` branch. Then branch "
+"off:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:149
+#, no-wrap
+msgid " $ git checkout -b part2\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:153
+msgid ""
+"Next, work on Part II, committing your changes along the way. To err is "
+"human, and often you'll want to go back and fix something in Part I.  If "
+"you're lucky, or very good, you can skip these lines."
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:159
+#, no-wrap
+msgid ""
+" $ git checkout master  # Go back to Part I.\n"
+" $ fix_problem\n"
+" $ git commit -a        # Commit the fixes.\n"
+" $ git checkout part2   # Go back to Part II.\n"
+" $ git merge master     # Merge in those fixes.\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:161
+msgid "Eventually, Part I is approved:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:166
+#, no-wrap
+msgid ""
+" $ git checkout master  # Go back to Part I.\n"
+" $ submit files         # Release to the world!\n"
+" $ git merge part2      # Merge in Part II.\n"
+" $ git branch -d part2\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:168
+msgid ""
+"Now you're in the `master` branch again, with Part II in the working "
+"directory."
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:172
+msgid ""
+"It's easy to extend this trick for any number of parts. It's also easy to "
+"branch off retroactively: suppose you belatedly realize you should have "
+"created a branch 7 commits ago. Then type:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:176
+#, no-wrap
+msgid ""
+" $ git branch -m master part2\n"
+" $  # Rename \"master\" branch to \"part2\".\n"
+" $ git checkout HEAD~7 -b master\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:179
+msgid ""
+"The `master` branch now contains just Part I, and the `part2` branch "
+"contains the rest."
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:181
+msgid "=== Reorganizing a Medley ==="
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:183
+msgid ""
+"Perhaps you like to work on all aspects of a project in the same branch. You "
+"want to keep works-in-progress to yourself and want others to see your "
+"commits only when they have been neatly organized. Start a couple of "
+"branches:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:186
+#, no-wrap
+msgid ""
+"  $ git checkout -b sanitized\n"
+"  $ git checkout -b medley\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:188
+msgid ""
+"Next, work on anything: fix bugs, add features, add temporary code, and so "
+"forth, committing often along the way. Then:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:191
+#, no-wrap
+msgid ""
+"  $ git checkout sanitized\n"
+"  $ git cherry-pick medley^^\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:193
+msgid ""
+"applies the grandparent of the head commit of the ``medley'' branch to the "
+"``sanitized'' branch. With appropriate cherry-picks you can construct a "
+"branch that contains only permanent code, and has related commits grouped "
+"together."
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:195
+msgid "=== Managing Branches ==="
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:197
+msgid "List all branches by typing:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:199
+#, no-wrap
+msgid " $ git branch\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:202
+msgid ""
+"By default, you start in a branch named ``master''. Some advocate leaving "
+"the ``master'' branch untouched and creating new branches for your own edits."
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:205
+msgid ""
+"The *-d* and *-m* options allow you to delete and move (rename) branches.  "
+"See *git help branch*."
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:210
+msgid ""
+"The ``master'' branch is a useful custom. Others may assume that your "
+"repository has a branch with this name, and that it contains the official "
+"version of your project. Although you can rename or obliterate the "
+"``master'' branch, you might as well respect this convention."
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:212
+msgid "=== Temporary Branches ==="
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:217
+msgid ""
+"After a while you may realize you are creating short-lived branches "
+"frequently for similar reasons: every other branch merely serves to save the "
+"current state so you can briefly hop back to an older state to fix a high-"
+"priority bug or something."
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:222
+msgid ""
+"It's analogous to changing the TV channel temporarily to see what else is "
+"on.  But instead of pushing a couple of buttons, you have to create, check "
+"out, merge, and delete temporary branches. Luckily, Git has a shortcut that "
+"is as convenient as a TV remote control:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:224
+#, no-wrap
+msgid " $ git stash\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:229
+msgid ""
+"This saves the current state in a temporary location (a 'stash') and "
+"restores the previous state. Your working directory appears exactly as it "
+"was before you started editing, and you can fix bugs, pull in upstream "
+"changes, and so on. When you want to go back to the stashed state, type:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:231
+#, no-wrap
+msgid " $ git stash apply  # You may need to resolve some conflicts.\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:234
+msgid ""
+"You can have multiple stashes, and manipulate them in various ways. See *git "
+"help stash*. As you may have guessed, Git maintains branches behind the "
+"scenes to perform this magic trick."
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:236
+msgid "=== Work How You Want ==="
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:240
+msgid ""
+"You might wonder if branches are worth the bother. After all, clones are "
+"almost as fast, and you can switch between them with *cd* instead of "
+"esoteric Git commands."
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:246
+msgid ""
+"Consider web browsers. Why support multiple tabs as well as multiple "
+"windows? Because allowing both accommodates a wide variety of styles. Some "
+"users like to keep only one browser window open, and use tabs for multiple "
+"webpages. Others might insist on the other extreme: multiple windows with no "
+"tabs anywhere.  Others still prefer something in between."
+msgstr ""
+
+#. type: Plain text
+#: ../en/branch.txt:250
+msgid ""
+"Branching is like tabs for your working directory, and cloning is like "
+"opening a new browser window. These operations are fast and local, so why "
+"not experiment to find the combination that best suits you? Git lets you "
+"work exactly how you want."
+msgstr ""

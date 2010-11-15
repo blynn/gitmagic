@@ -1,0 +1,221 @@
+# Git Magic - A guide to using Git
+# This file is distributed under the GNU GENERAL PUBLIC LICENSE Version 3.
+# Benn Lynn <benlynn@gmail.com>, 2007.
+# Armin Stebich <gitmagic@lordofbikes.de>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Git Magic deutsch\n"
+"Report-Msgid-Bugs-To: bennlynn@gmail.com\n"
+"POT-Creation-Date: 2010-10-26 18:38+0300\n"
+"PO-Revision-Date: 2010-10-26 20:30+0200\n"
+"Last-Translator: Armin Stebich <gitmagic@lordofbikes.de>\n"
+"Language-Team: DE <info@lordofbikes.de>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: UTF-8\n"
+
+#. type: Plain text
+#: ../en/preface.txt:4
+msgid "= Git Magic = Ben Lynn August 2007"
+msgstr "= Git Magic = Ben Lynn August 2007"
+
+#. type: Plain text
+#: ../en/preface.txt:6
+msgid "== Preface =="
+msgstr "== Vorwort =="
+
+#. type: Plain text
+#: ../en/preface.txt:8
+msgid ""
+"http://git.or.cz/[Git] is a version control Swiss army knife. A reliable "
+"versatile multipurpose revision control tool whose extraordinary flexibility "
+"makes it tricky to learn, let alone master."
+msgstr ""
+"http://git.or.cz/[Git] is a version control Swiss army knife. A reliable "
+"versatile multipurpose revision control tool whose extraordinary flexibility "
+"makes it tricky to learn, let alone master."
+
+#. type: Plain text
+#: ../en/preface.txt:10
+msgid ""
+"As Arthur C. Clarke observed, any sufficiently advanced technology is "
+"indistinguishable from magic. This is a great way to approach Git: newbies "
+"can ignore its inner workings and view Git as a gizmo that can amaze friends "
+"and infuriate enemies with its wondrous abilities."
+msgstr ""
+
+#. type: Plain text
+#: ../en/preface.txt:12
+msgid ""
+"Rather than go into details, we provide rough instructions for particular "
+"effects. After repeated use, gradually you will understand how each trick "
+"works, and how to tailor the recipes for your needs."
+msgstr ""
+
+#. type: Plain text
+#: ../en/preface.txt:14
+msgid ".Translations"
+msgstr ""
+
+#. type: Bullet: ' - '
+#: ../en/preface.txt:19
+msgid ""
+"http://docs.google.com/View?id=dfwthj68_675gz3bw8kj[Chinese (Simplified)]: "
+"by JunJie, Meng and JiangWei."
+msgstr ""
+
+#. type: Bullet: ' - '
+#: ../en/preface.txt:19
+msgid "link:/~blynn/gitmagic/intl/es/[Spanish]: by Rodrigo Toledo."
+msgstr ""
+
+#. type: Bullet: ' - '
+#: ../en/preface.txt:19
+msgid "link:/~blynn/gitmagic/intl/de/[German]: by Benjamin Bellee."
+msgstr ""
+
+#. type: Bullet: ' - '
+#: ../en/preface.txt:19
+msgid ""
+"http://www.slideshare.net/slide_user/magia-git[Portuguese]: by Leonardo "
+"Siqueira Rodrigues [http://www.slideshare.net/slide_user/magia-git-verso-odt"
+"[ODT version]]."
+msgstr ""
+
+#. type: Plain text
+#: ../en/preface.txt:21
+msgid ".Other Editions"
+msgstr ""
+
+#. type: Bullet: ' - '
+#: ../en/preface.txt:26
+msgid "link:book.html[Single webpage]: barebones HTML, with no CSS."
+msgstr ""
+
+#. type: Bullet: ' - '
+#: ../en/preface.txt:26
+msgid "link:book.pdf[PDF file]: printer-friendly."
+msgstr ""
+
+#. type: Bullet: ' - '
+#: ../en/preface.txt:26
+msgid ""
+"http://packages.debian.org/gitmagic[Debian package], http:://packages.ubuntu."
+"com/gitmagic[Ubuntu package]: get a fast and local copy of this site. Handy "
+"http://csdcf.stanford.edu/status/[when this server is offline]."
+msgstr ""
+
+#. type: Bullet: ' - '
+#: ../en/preface.txt:26
+msgid ""
+"http://www.amazon.com/Git-Magic-Ben-Lynn/dp/1451523343/[Physical book "
+"[Amazon.com]]: 64 pages, 15.24cm x 22.86cm, black and white. Handy when "
+"there is no electricity."
+msgstr ""
+
+#. type: Plain text
+#: ../en/preface.txt:28
+msgid "=== Thanks! ==="
+msgstr ""
+
+#. type: Plain text
+#: ../en/preface.txt:30
+msgid ""
+"Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, "
+"Michael Budde, Richard Albury, Tarmigan, Derek Mahar, Frode Aannevik, Keith "
+"Rarick, Andy Somerville, Ralf Recker, Øyvind A. Holm, Miklos Vajna, "
+"Sébastien Hinderer, Thomas Miedema, and Joe Malin contributed corrections "
+"and improvements."
+msgstr ""
+
+#. type: Plain text
+#: ../en/preface.txt:33
+msgid ""
+"François Marier maintains the Debian package originally created by Daniel "
+"Baumann."
+msgstr ""
+
+#. type: Plain text
+#: ../en/preface.txt:36
+msgid ""
+"JunJie, Meng, JiangWei, Rodrigo Toledo, Leonardo Siqueira Rodrigues, and "
+"Benjamin Bellee worked on translations of this guide."
+msgstr ""
+
+#. type: Plain text
+#: ../en/preface.txt:39
+msgid ""
+"My gratitude goes to many others for your support and praise. I'm tempted to "
+"quote you here, but it might raise expectations to ridiculous heights."
+msgstr ""
+
+#. type: Plain text
+#: ../en/preface.txt:41
+msgid ""
+"If I've left you out by mistake, please tell me or just send me a patch!"
+msgstr ""
+
+#. type: Plain text
+#: ../en/preface.txt:43
+msgid ".Free Git hosting"
+msgstr ""
+
+#. type: Bullet: ' - '
+#: ../en/preface.txt:47
+msgid ""
+"http://repo.or.cz/[http://repo.or.cz/] hosts free projects. The first Git "
+"hosting site. Founded and maintained by one of the earliest Git developers."
+msgstr ""
+
+#. type: Bullet: ' - '
+#: ../en/preface.txt:47
+msgid ""
+"http://gitorious.org/[http://gitorious.org/] is another Git hosting site "
+"aimed at open-source projects."
+msgstr ""
+
+#. type: Bullet: ' - '
+#: ../en/preface.txt:47
+msgid ""
+"http://github.com/[http://github.com/] hosts open-source projects for free, "
+"and private projects for a fee."
+msgstr ""
+
+#. type: Plain text
+#: ../en/preface.txt:49
+msgid "Many thanks to each of these sites for hosting this guide."
+msgstr ""
+
+#. type: Plain text
+#: ../en/preface.txt:51
+msgid "=== License ==="
+msgstr ""
+
+#. type: Plain text
+#: ../en/preface.txt:54
+msgid ""
+"This guide is released under http://www.gnu.org/licenses/gpl-3.0.html[the "
+"GNU General Public License version 3]. Naturally, the source is kept in a "
+"Git repository, and can be obtained by typing:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/preface.txt:56
+#, no-wrap
+msgid " $ git clone git://repo.or.cz/gitmagic.git  # Creates \"gitmagic\" directory.\n"
+msgstr ""
+
+#. type: Plain text
+#: ../en/preface.txt:58
+msgid "or from one of the mirrors:"
+msgstr ""
+
+#. type: Plain text
+#: ../en/preface.txt:60
+#, no-wrap
+msgid ""
+" $ git clone git://github.com/blynn/gitmagic.git\n"
+" $ git clone git://gitorious.org/gitmagic/mainline.git\n"
+msgstr ""
