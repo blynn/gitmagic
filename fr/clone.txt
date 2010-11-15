@@ -1,4 +1,4 @@
-== Clonons gaiment ==
+== Clonons gaiement ==
 
 Avec les ancienne systèmes de gestion de version, l'opération standard pour obtenir un fichier est le checkout xxx. Vous obtenez un ensemble de fichiers correspondant à un état particulié précédement enregistré.
 
@@ -99,46 +99,46 @@ Par la suite, vous pouvez fusionner les modifications du projet originel avec :
 
 Vous voulez des archives redondantes et géographiquement distribués, permetant de faire face à un désastre XXX ? Si votre projet à beaucoup de développeurs, vous n'avez rien à faire ! Chaque clone de votre code est de fait une sauvegarde. Non seulemert de l'état actuel, mais de l'historique complet. Grâce aux empreintes cryptographiques, si le clône de quelqu'un est corrompu, il serat reppéré dès qu'il tentera de communiquer avec d'autres.
 
+Si votre projet n'est pas si populaire, trouver autant de serveur que possible afin d'héberger vos clones.
 
-If your project is not so popular, find as many servers as you can to host clones.
+Le vrai paranoïac devrait toujours noter la dernière empreinte SHA1 de 20 octets du HEAD dans un endroit sûr. Ce doit être sûr, pas privé. Par exemple, le publier dans un quotidien marcherai bien, parce qu'il est difficile pour un attaquant l'ensemble des copies d'un journal.
 
-The truly paranoid should always write down the latest 20-byte SHA1 hash of the HEAD somewhere safe. It has to be safe, not private. For example, publishing it in a newspaper would work well, because it's hard for an attacker to alter every copy of a newspaper.
+=== Le multi-tâche à la vitesse de la lumière ===
 
-=== Light-Speed Multitask ===
+Immaginons que vous travailliez sur plusieurs fonctionnalités en parallèle. Dans ce cas validez ( commit ) votre projet et lancez :
 
-Say you want to work on several features in parallel. Then commit your project and run:
+ $ git clone . /un/nouveau/dossier
 
- $ git clone . /some/new/directory
+Git exploite les http://fr.wikipedia.org/wiki/Lien_mat%C3%A9riel[liens matériels] et le partage des fichiers de la maniére la plus sûre possible pour créer ce clone, il est donc très rapidement disponible, et vous pouvez maintenant travailler simultanément sur deux fonctionnalités indépendantes. Par exemple vous pouvez modifier l'un des clones pendant que l'autre est en train de compiler.
 
-Git exploits hard links and file sharing as much as safely possible to create this clone, so it will be ready in a flash, and you can now work on two independent features simultaneously. For example, you can edit one clone while the other is compiling.
+À n'importe quel moment vous pouvez valider ( `commit` ) et rappatrier ( `pull` ) les modifications de l'autre clone.
 
-At any time, you can commit and pull changes from the other clone.
+ $ git pull /mon/autre/clone HEAD
 
- $ git pull /the/other/clone HEAD
+=== Guerilla du contrôle de version ===
 
-=== Guerilla Version Control ===
-
-Are you working on a project that uses some other version control system, and you sorely miss Git? Then initialize a Git repository in your working directory:
+Alors que vous travaillez sur un projet qui utilise un autre système de gestion de versions et Git vous manque ? Dans ce cas initialisez un dépôt Git dans votre dossier de travail.
 
  $ git init
  $ git add .
- $ git commit -m "Initial commit"
+ $ git commit -m "Commit initial"
 
-then clone it:
+puis clonez-le :
 
- $ git clone . /some/new/directory
+ $ git clone . /un/nouveau/dossier
 
-Now go to the new directory and work here instead, using Git to your heart's content. Once in a while, you'll want to sync with everyone else, in which case go to the original directory, sync using the other version control system, and type:
+Allez ensuite dans le nouveau dossier et travaillez plutôt là, utilisant Git comme vous le voulez. De temps en temps, quand vous voulez vous synchroniser avec les autres, rendez-vous dans le dossier de départ, synchronisez en utilisant l'autre système de gestion de version, puis en saisissant :
 
  $ git add .
- $ git commit -m "Sync with everyone else"
+ $ git commit -m "Synchro avec les autres"
 
-Then go to the new directory and run:
+Puis allez dans le nouveau dossier et lancez :
 
- $ git commit -a -m "Description of my changes"
+ $ git commit -a -m "Description de mes modifications"
  $ git pull
 
-The procedure for giving your changes to everyone else depends on the other version control system. The new directory contains the files with your changes. Run whatever commands of the other version control system are needed to upload them to the central repository.
+La procédure pour partager vos modifications aux autres dépend de l'autre système de gestion de versiors. Le nouveau dossier contient les fichiers avec vos modifications. Lancez toute commande de l'autre système de gestion de versions nécessaire pour les envoyer au dépôt central.
+
 
 Subversion, perhaps the best centralized version control system, is used by countless projects. The *git svn* command automates the above for Subversion repositories, and can also be used to http://google-opensource.blogspot.com/2008/05/export-git-project-to-google-code.html[export a Git project to a Subversion repository].
 
