@@ -170,9 +170,8 @@ It's easy to extend this trick for any number of parts. It's also easy to
 branch off retroactively: suppose you belatedly realize you should have created
 a branch 7 commits ago. Then type:
 
- $ git branch -m master part2
- $  # Rename "master" branch to "part2".
- $ git checkout HEAD~7 -b master
+ $ git branch -m master part2     # Rename "master" branch to "part2".
+ $ git checkout HEAD~7 -b master  # Create new "master" branch, 7 commits upstream, and switch to it
 
 The `master` branch now contains just Part I, and the `part2` branch contains
 the rest.
