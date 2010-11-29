@@ -185,8 +185,8 @@ instead of `git checkout -b`.
 
 Perhaps you like to work on all aspects of a project in the same branch. You want to keep works-in-progress to yourself and want others to see your commits only when they have been neatly organized. Start a couple of branches:
 
-  $ git checkout -b sanitized
-  $ git checkout -b medley
+  $ git branch sanitized    # Create a branch for sanitized commits
+  $ git checkout -b medley  # Create a branch for works-in-progress, and switch to it.
 
 Next, work on anything: fix bugs, add features, add temporary code, and so forth, committing often along the way. Then:
 
