@@ -174,7 +174,12 @@ a branch 7 commits ago. Then type:
  $ git checkout HEAD~7 -b master  # Create new "master" branch, 7 commits upstream, and switch to it
 
 The `master` branch now contains just Part I, and the `part2` branch contains
-the rest.
+the rest. Also, we are now working on the newly created `master` branch. If you just 
+want to create the `master` branch without switching to it, use
+
+ $ git branch master HEAD~7
+ 
+instead of `git checkout -b`.
 
 === Reorganizing a Medley ===
 
