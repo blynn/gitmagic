@@ -1,28 +1,28 @@
-== Appendix B: Translating This Guide ==
+﻿== Appendix B: Dịch phần Hướng dẫn này ==
 
-Clone the source, then create a directory corresponding to the target http://www.iana.org/assignments/language-subtag-registry[language's IETF tag]: see
-http://www.w3.org/International/articles/language-tags/Overview.en.php[the W3C article on internationalization]. For example, English is "en", Japanese is "ja", and Traditional Chinese is "zh-Hant". In the new directory, and translate the +txt+ files from the "en" subdirectory. 
+Lấy một bản sao của mã nguồn, sau đó tạo một thư mục tương ứng với ngôn ngữ bạn dịch http://www.iana.org/assignments/language-subtag-registry[language's IETF tag]: xem tại
+http://www.w3.org/International/articles/language-tags/Overview.en.php[the W3C article on internationalization]. Ví dụ, tiếng Anh là "en", Nhật là "ja", tiếng Trung Quốc Cổ Điển là "zh-Hant". Trong thư mục mới đó, và dịch tệp tin +txt+ từ thư mục con "en". 
 
-For instance, to translate the guide into http://en.wikipedia.org/wiki/Klingon_language[Klingon], you might type:
+Một ví dụ cụ thể là để dịch phần hướng dẫn này thành ngôn ngữ http://en.wikipedia.org/wiki/Klingon_language[Klingon], bạn hãy gõ vào:
 
  $ git clone git://repo.or.cz/gitmagic.git
  $ cd gitmagic
- $ mkdir tlh  # "tlh" is the IETF language code for Klingon.
+ $ mkdir tlh  # "tlh" là mã ngôn ngữ IETF dành cho Klingon.
  $ cd tlh
  $ cp ../en/intro.txt .
- $ edit intro.txt  # Translate the file.
+ $ edit intro.txt  # Dịch tệp tin này.
 
-and so on for each text file. You can review your work incrementally:
+và cứ như thế cho những tệp tin khác. Bạn có thể xem thử kết quả công việc của mình như sau:
 
  $ make LANG=tlh
  $ firefox book.html
 
-Commit your changes often, then let me know when they're ready.
-GitHub.com has an interface that facilitates this: fork the "gitmagic" project,
-push your changes, then ask me to merge.
+Hãy commit công việc của bạn thường xuyên, và cho tôi biết khi nào thì chúng sẵn sàng để sử dụng.
+GitHub.com có giao diện thuận lợi như sau: tạo nhánh cho dự án "gitmagic",
+push các thay đổi của bạn lên, sau đó nói với tôi để tôi trộn.
 
-I like to have translations follow the above scheme so my scripts can produce
-HTML and PDF versions. Also, it conveniently keeps all the translations in the
-official repository. But please do whatever suits you best: for example, the
-Chinese translators used Google Docs. I'm happy as long as your work
-enables more people to access my work.
+Tôi thích các bản dịch làm theo cách trên bởi vì scripts của tôi có thể tạo
+các văn bản với định dạng HTML và PDF. Hơn nữa, nó còn tiện lợi cho việc giữ các bản dịch
+trong kho của dự án này. Nhưng cũng có thể chọn một cách mà bạn cho là tiện lợi nhất: ví dụ như là
+người dịch sang tiếng Trung Quốc sử dụng Google Docs. Tôi cảm thấy rất hạnh phúc nếu như công việc của bạn
+cho phép mọi người có thể có được thành quả lao động của tôi.

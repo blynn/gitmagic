@@ -1,6 +1,6 @@
-﻿== Basic Tricks ==
+﻿== Vài mẹo Cơ bản ==
 
-Thay vì lao vào cả "biển lệnh" của Git, hãy sử dụng các ví dụ cơ bản để bắt đầu.
+Thay vì lao vào cả một "biển lệnh" của Git, hãy sử dụng các ví dụ cơ bản để bắt đầu.
 Mặc dù chúng rất đơn giản, nhưng tất cả chúng đều rất hữu dụng.
 Quả thực là vậy, trong tháng đầu tiên sử dụng Git Tôi chưa bao giờ vượt qua những gì nói trong chương này.
 
@@ -12,17 +12,17 @@ About to attempt something drastic? Trước khi làm điều đó, thực hiệ
  $ git add .
  $ git commit -m "My first backup"
 
-Now if your new edits go awry, restore the pristine version:
+Bây giờ nếu như các thay đổi của bạn không như mong đợi, hãy phục hồi lại bản cũ:
 
  $ git reset --hard
 
-To save the state again:
+Lưu lại state lần nữa:
 
  $ git commit -a -m "Another backup"
 
 === Thêm, Xóa, Đổi tên ===
 
-The above only keeps track of the files that were present when you first ran *git add*. If you add new files or subdirectories, you'll have to tell Git:
+Lệnh ở trên chỉ giữ dấu vết các tệp tin và hiện diện tại thời điểm vạn chạy lệnh *git add*. Nếu bạn thêm các tệp tin hay thư mục, bạn sẽ phải thông báo với Git:
 
  $ git add readme.txt Documentation
 
@@ -31,19 +31,19 @@ Tương tự như vậy, nếu bạn muốn Git bỏ qua các tệp tin nào đ�
  $ git rm kludge.h obsolete.c
  $ git rm -r incriminating/evidence/
 
-Git xóa bỏ những tệp tin nếu như bạn chưa làm.
+Git xóa bỏ những tệp tin nếu như bạn chưa làm vậy.
 
-Renaming a file is the same as removing the old name and adding the new name. There's also the shortcut *git mv* which has the same syntax as the *mv* command. Ví dụ:
+Đổi tên tệp tin thì cũng giống như là việc bạn gỡ bỏ tên cũ và đặt vào tên mới. Sử dụng lệnh *git mv* có cú pháp rất giống lệnh *mv*. Ví dụ:
 
  $ git mv bug.c feature.c
 
 === Advanced Undo/Redo ===
 
-Đôi khi bạn chỉ muốn quay trở lại và bỏ đi những thay đổi trong quá khứ tại một thời điểm nào đó bởi vì chúng tất cả đã sai. Thì:
+Đôi khi bạn chỉ muốn quay trở lại và bỏ đi những thay đổi trong quá khứ tại một thời điểm nào đó bởi vì chúng tất cả đã sai. Thì lệnh:
 
  $ git log
 
-hiển thị cho bạn danh sách các lần commit gần đây cùng với giá trị băm SHA1:
+sẽ hiển thị cho bạn danh sách các lần commit gần đây cùng với giá trị băm SHA1:
 
 ----------------------------------
 commit 766f9881690d240ba334153047649b8b8f11c664
@@ -64,19 +64,19 @@ một cách khác là chép và dán giá trị băm. Gõ:
 
  $ git reset --hard 766f
 
-to restore the state to a given commit and erase all newer commits from the record permanently.
+để phục hồi lại state đã chỉ ra và xóa bỏ tất cả các lần commit mới hơn kể từ đó.
 
-Other times you want to hop to an old state briefly. In this case, type:
+Một lúc nào đó bạn lại muốn nhảy tới một cái cũ hơn. Trong trường hợp này thì gõ:
 
  $ git checkout 82f5
 
 This takes you back in time, while preserving newer commits. However, like time travel in a science-fiction movie, if you now edit and commit, you will be in an alternate reality, because your actions are different to what they were the first time around.
 
-This alternate reality is called a 'branch', and <<branch,we'll have more to say about this later>>. For now, just remember that
+This alternate reality is called a 'branch', và <<branch, chúng ta có nhiều điều để nói về nó sau này>>. Bây giờ, chỉ cần nhớ là
 
  $ git checkout master
 
-will take you back to the present. Also, to stop Git complaining, always
+sẽ mang chúng ta trở về hiện tại. Also, to stop Git complaining, always
 commit or reset your changes before running checkout.
 
 To take the computer game analogy again:
@@ -89,16 +89,16 @@ You can choose only to restore particular files and subdirectories by appending 
 
  $ git checkout 82f5 some.file another.file
 
-Take care, as this form of *checkout* can silently overwrite files. To
-prevent accidents, commit before running any checkout command, especially when
-first learning Git. In general, whenever you feel unsure about any operation, Git command or not, first run *git commit -a*.
+Hãy cẩn thận, như là lệnh *checkout* có thể âm thầm ghi đè lên các tệp tin. Để
+ngăn ngừa rủi ro như thế, hãy commit trước khi chạy lệnh checkout, nhất là khi
+mới học sử dụng Git. Tóm lại, bất kỳ khi nào bạn không chắc chắn về một lệnh nào đó, dù có là lệnh của Git hay không, đầu tiên hãy chạy lệnh *git commit -a*.
 
 Bạn không thích việc cắt dán ư? Hãy sử dụng:
 
  $ git checkout :/"My first b"
 
-to jump to the commit that starts with a given message.
-You can also ask for the 5th-last saved state:
+để nhảy tới lần commit mà bắt đầu với thông điệp đã cho.
+Bạn cũng có thể yêu cầu state thứ 5 kể từ cuối cùng:
 
  $ git checkout master~5
 
@@ -114,8 +114,8 @@ commit, which you can confirm by running *git log*.
 
 === Changelog Generation ===
 
-Some projects require a http://en.wikipedia.org/wiki/Changelog[changelog].
-Generate one by typing:
+Một số dự án yêu cầu có http://en.wikipedia.org/wiki/Changelog[changelog].
+Tạo một cái bằng cách gõ:
 
  $ git log > ChangeLog
 
@@ -151,23 +151,23 @@ Sau đó nói với những người sử dụng hãy chạy:
 
  $ git clone your.computer:/path/to/script
 
-để tải script về. This assumes they have ssh access. If not, run *git daemon* and tell your users to instead run:
+để tải script về. This assumes they have ssh access. Nếu không, chạy *git daemon* và nói với người sử dụng là chạy lệnh sau để thay thế:
 
  $ git clone git://your.computer/path/to/script
 
-From now on, every time your script is ready for release, execute:
+Kể từ lúc này, bất cứ khi nào mã nguồn của bạn đã sẵn sàng, chỉ việc thực hiện:
 
  $ git commit -a -m "Next release"
 
-and your users can upgrade their version by changing to the directory containing your script and typing:
+và những người sử dụng có thể cập nhật dữ liệu của họ bằng cách chuyển tới thư mục làm việc tương ứng và gõ:
 
  $ git pull
 
 Your users will never end up with a version of your script you don't want them to see.
 
-=== What Have I Done? ===
+=== Tôi Phải Làm Gì? ===
 
-Find out what changes you've made since the last commit with:
+Tìm tất cả các thay đổi kề từ lần bạn commit lần cuối bằng lệnh:
 
  $ git diff
 
@@ -175,7 +175,7 @@ Hay từ hôm qua:
 
  $ git diff "@{yesterday}"
 
-Or between a particular version and 2 versions ago:
+Hay giữa một bản nào đó và bản trước đây 2 bản:
 
  $ git diff 1b6d "master~2"
 
@@ -184,15 +184,15 @@ Try also:
 
  $ git whatchanged --since="2 weeks ago"
 
-Often I'll browse history with http://sourceforge.net/projects/qgit[qgit]
-instead, due to its slick photogenic interface, or
-http://jonas.nitro.dk/tig/[tig], a text-mode interface that works well over
-slow connections. Alternatively, install a web server, run *git instaweb* and
-fire up any web browser.
+Thường thường, tôi sẽ dùng http://sourceforge.net/projects/qgit[qgit]
+để thay thế cách ở trên, bởi vì nó có giao diện đồ họa bóng bẩy, hay
+http://jonas.nitro.dk/tig/[tig], có giao diện dòng lệnh làm việc rất tối với
+các máy có kết nối chậm. Một lựa chọn khác là cài đặt máy chủ web, chạy lệnh *git instaweb*
+và sử dụng bất kỳ trình duyệt web vao.
 
 === Bài tập===
 
-Let A, B, C, D be four successive commits where B is the same as A except some files have been removed. We want to add the files back at D. How can we do this?
+Coi A, B, C, D là 4 lần commit thành công where B is the same as A except some files have been removed. We want to add the files back at D. How can we do this?
 
 There are at least three solutions. Assuming we are at D:
 
