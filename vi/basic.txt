@@ -1,6 +1,6 @@
 ﻿== Vài mẹo Cơ bản ==
 
-Thay vì lao vào cả một "biển lệnh" của Git, hãy sử dụng các ví dụ cơ bản để bắt đầu.
+Thay vì lao vào cả một biển lệnh với Git, hãy sử dụng các ví dụ cơ bản để bắt đầu.
 Mặc dù chúng rất đơn giản, nhưng tất cả chúng đều rất hữu dụng.
 Quả thực là vậy, trong tháng đầu tiên sử dụng Git Tôi chưa bao giờ vượt qua những gì nói trong chương này.
 
@@ -37,7 +37,7 @@ Git xóa bỏ những tệp tin nếu như bạn chưa làm vậy.
 
  $ git mv bug.c feature.c
 
-=== Advanced Undo/Redo ===
+===  Chức năng Undo/Redo  ===
 
 Đôi khi bạn chỉ muốn quay trở lại và bỏ đi những thay đổi trong quá khứ tại một thời điểm nào đó bởi vì chúng tất cả đã sai. Thì lệnh:
 
@@ -110,9 +110,9 @@ In a court of law, events can be stricken from the record. Likewise, you can pic
  $ git revert 1b6d
 
 will undo just the commit with the given hash. The revert is recorded as a new
-commit, which you can confirm by running *git log*.
+commit, bạn có thể xác nhận bằng lệnh *git log*.
 
-=== Changelog Generation ===
+=== Tạo Changelog ===
 
 Một số dự án yêu cầu có http://en.wikipedia.org/wiki/Changelog[changelog].
 Tạo một cái bằng cách gõ:
@@ -147,7 +147,7 @@ Thực hiện điều này với Git, trong thư mục nơi script của bạn n
  $ git add .
  $ git commit -m "First release"
 
-Sau đó nói với những người sử dụng hãy chạy:
+Sau đó nói với những người cùng sử dụng hãy chạy:
 
  $ git clone your.computer:/path/to/script
 
@@ -188,19 +188,19 @@ Thường thường, tôi sẽ dùng http://sourceforge.net/projects/qgit[qgit]
 để thay thế cách ở trên, bởi vì nó có giao diện đồ họa bóng bẩy, hay
 http://jonas.nitro.dk/tig/[tig], có giao diện dòng lệnh làm việc rất tối với
 các máy có kết nối chậm. Một lựa chọn khác là cài đặt máy chủ web, chạy lệnh *git instaweb*
-và sử dụng bất kỳ trình duyệt web vao.
+và sử dụng bất kỳ trình duyệt web nào.
 
 === Bài tập===
 
-Coi A, B, C, D là 4 lần commit thành công where B is the same as A except some files have been removed. We want to add the files back at D. How can we do this?
+Coi A, B, C, D là 4 lần commit thành công where B is the same as A except some files have been removed. Chúng ta muốn thêm các tệp tin đó trở lại D. Chúng ta thực hiện điều này bằng cách nào?
 
-There are at least three solutions. Assuming we are at D:
+Ở đây chúng ta có ít nhất 3 giải pháp. Giả thiết chúng ta đang ở D:
 
-  1. The difference between A and B are the removed files. We can create a patch representing this difference and apply it:
+  1. Sự khác nhau giữa A và B là việc các tệp tin đã bị gỡ bỏ. We can create a patch representing this difference and apply it:
 
    $ git diff B A | git apply
 
-  2. Since we saved the files back at A, we can retrieve them:
+  2. Since we saved the files back at A, chúng ta có thể lấy lại:
 
    $ git checkout A foo.c bar.h
 

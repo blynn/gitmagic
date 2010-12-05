@@ -1,4 +1,4 @@
-= Git Magic =
+﻿= Git Magic =
 Ben Lynn
 August 2007
 
@@ -12,40 +12,41 @@ Rather than go into details, we provide rough instructions for particular effect
 
 .Bản dịch
 
- - http://docs.google.com/View?id=dfwthj68_675gz3bw8kj[Chinese (Simplified)]: by JunJie, Meng and JiangWei.
- - link:/~blynn/gitmagic/intl/es/[Spanish]: by Rodrigo Toledo.
- - link:/~blynn/gitmagic/intl/de/[German]: by Benjamin Bellee and Armin Stebich. Armin also hosts http://gitmagic.lordofbikes.de/[the German translation on his website].
- - http://www.slideshare.net/slide_user/magia-git[Portuguese]: by Leonardo Siqueira Rodrigues [http://www.slideshare.net/slide_user/magia-git-verso-odt[ODT version]].
+ - http://docs.google.com/View?id=dfwthj68_675gz3bw8kj[Chinese (Simplified)]: dịch bởi JunJie, Meng and JiangWei.
+ - link:/~blynn/gitmagic/intl/es/[tiếng Tây Ban Nha]: dịch bởi Rodrigo Toledo.
+ - link:/~blynn/gitmagic/intl/de/[tiếng Đức]: dịch bởi Benjamin Bellee and Armin Stebich. Armin xuất bản
+http://gitmagic.lordofbikes.de/[bản dịch tiếng Đức trên website của chính mình].
+ - http://www.slideshare.net/slide_user/magia-git[Bồ Đào Nha]: dịch bởi Leonardo Siqueira Rodrigues [http://www.slideshare.net/slide_user/magia-git-verso-odt[định dạng ODT]].
 
 .Các định dạng văn bản khác
 
  - link:book.html[Single webpage]: HTML đơn giản, không định dạng bằng CSS.
  - link:book.pdf[PDF file]: thuận tiện cho việc in ấn.
- - http://packages.debian.org/gitmagic[Debian package], http:://packages.ubuntu.com/gitmagic[Ubuntu package]: get a fast and local copy of this site. Handy http://csdcf.stanford.edu/status/[when this server is offline].
+ - http://packages.debian.org/gitmagic[Debian package], http:://packages.ubuntu.com/gitmagic[Ubuntu package]: get a fast and local copy of this site. Làm thủ công tại http://csdcf.stanford.edu/status/[khi bạn không có kết nối mạng].
  - http://www.amazon.com/Git-Magic-Ben-Lynn/dp/1451523343/[Physical book [Amazon.com]]: 64 trang, 15.24cm x 22.86cm, đen trắng. Rất tiện sử dụng vì không cần đến điện.
 
 === Lời cảm ơn! ===
 
 Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael Budde, Richard Albury, Tarmigan, Derek Mahar, Frode Aannevik, Keith Rarick, Andy Somerville, Ralf Recker, Øyvind A. Holm, Miklos Vajna, Sébastien Hinderer, Thomas Miedema, và Joe Malin đã đóng góp trong việc sửa chữa và cải tiến.
 
-François Marier đã bảo trì gói Debian đã được Daniel
+François Marier đã bảo trì gói Debian do Daniel
 Baumann khởi xướng.
 
 JunJie, Meng, JiangWei, Rodrigo Toledo, Leonardo Siqueira Rodrigues,
 Benjamin Bellee, và Armin Stebich đã dịch bản hướng dẫn này.
 
-My gratitude goes to many others for your support and praise. I'm tempted to
-quote you here, but it might raise expectations to ridiculous heights.
+Tôi cũng gửi lời cảm ơn tới sự giúp đỡ và sự tán dương của các bạn. Tôi muốn 
+trích dẫn các bạn ra ở đây, but it might raise expectations to ridiculous heights.
 
 Nếu tôi có sai sót gì, xin hãy gửi phản hồi hay miếng vá cho tôi!
 
 .Free Git hosting
 
- - http://repo.or.cz/[http://repo.or.cz/] hosts free projects. The first Git hosting site. Founded and maintained by one of the earliest Git developers.
- - http://gitorious.org/[http://gitorious.org/] is another Git hosting site aimed at open-source projects.
- - http://github.com/[http://github.com/] hosts open-source projects for free, and private projects for a fee.
+ - http://repo.or.cz/[http://repo.or.cz/] lưu trữ các dự án miễn phí. Đây là địa chỉ lưu trữ Git đầu tiên. Được thành lập và bảo trì bởi một trong số những người phát triển Git đầu tiên.
+ - http://gitorious.org/[http://gitorious.org/] là một địa chỉ lưu giữ Git khác nhằm vào các dự án nguồn mở.
+ - http://github.com/[http://github.com/] lưu giữ các dự án nguồn mở miễn phí, và dự án private có thu phí.
 
-Many thanks to each of these sites for hosting this guide.
+Trân thành cảm ơn các địa chỉ đã lưu giữ bản hướng dẫn này.
 
 === Giấy phép sử dụng ===
 
