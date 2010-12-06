@@ -1,29 +1,30 @@
 ﻿= Git Magic =
 Ben Lynn
-August 2007
+Tháng Tám 2007
 
 == Lời nói đầu ==
 
-http://git.or.cz/[Git] is a version control Swiss army knife. A reliable versatile multipurpose revision control tool whose extraordinary flexibility makes it tricky to learn, let alone master.
+http://git.or.cz/[Git] là công cụ quản lý mã nguồn sắc bén. Một công cụ quản lý mã nguồn tin cậy, chắc chắn, đa dụng và sự cực kỳ mềm dẻo của Git làm cho việc học nó trở nên khó khăn, tất nhiên là không nói đến chủ nhân của nó.
 
-As Arthur C. Clarke observed, any sufficiently advanced technology is indistinguishable from magic. This is a great way to approach Git: newbies can ignore its inner workings and view Git as a gizmo that can amaze friends and infuriate enemies with its wondrous abilities.
+Theo quan sát của Arthur C. Clarke, bất kể công nghệ tiên tiến nào thì cũng không thể phân biệt được sự kỳ diệu của nó. Đây cũng là cách hay đề đề cập đến Git: những người mới sử dụng không cần quan tâm đến bên trong nó làm việc như thế nào và xem Git như là một gizmo có thể làm những người bạn sửng sốt và làm điên đầu các đối thủ với khả năng thần kỳ của nó.
 
-Rather than go into details, we provide rough instructions for particular effects. After repeated use, gradually you will understand how each trick works, and how to tailor the recipes for your needs.
+Thay vì đi sâu vào chi tiết, chúng tôi đưa ra phác thảo cách làm việc của các hiệu ứng chuyên biệt. Sau khi sử dụng lặp lại nhiều lần, từ từ bạn sẽ hiểu từng mẹo một, và thực hiện được những việc mà mình muốn làm.
 
 .Bản dịch
 
- - http://docs.google.com/View?id=dfwthj68_675gz3bw8kj[Chinese (Simplified)]: dịch bởi JunJie, Meng and JiangWei.
+ - http://docs.google.com/View?id=dfwthj68_675gz3bw8kj[Tiếng Trung Quốc (Hiện đại)]: dịch bởi JunJie, Meng and JiangWei.
  - link:/~blynn/gitmagic/intl/es/[tiếng Tây Ban Nha]: dịch bởi Rodrigo Toledo.
  - link:/~blynn/gitmagic/intl/de/[tiếng Đức]: dịch bởi Benjamin Bellee and Armin Stebich. Armin xuất bản
 http://gitmagic.lordofbikes.de/[bản dịch tiếng Đức trên website của chính mình].
  - http://www.slideshare.net/slide_user/magia-git[Bồ Đào Nha]: dịch bởi Leonardo Siqueira Rodrigues [http://www.slideshare.net/slide_user/magia-git-verso-odt[định dạng ODT]].
+ - link:/~blynn/gitmagic/intl/vi/[tiếng Việt]: dịch bởi Trần Ngọc Quân.
 
-.Các định dạng văn bản khác
+.Các định dạng khác
 
  - link:book.html[Single webpage]: HTML đơn giản, không định dạng bằng CSS.
  - link:book.pdf[PDF file]: thuận tiện cho việc in ấn.
- - http://packages.debian.org/gitmagic[Debian package], http:://packages.ubuntu.com/gitmagic[Ubuntu package]: get a fast and local copy of this site. Làm thủ công tại http://csdcf.stanford.edu/status/[khi bạn không có kết nối mạng].
- - http://www.amazon.com/Git-Magic-Ben-Lynn/dp/1451523343/[Physical book [Amazon.com]]: 64 trang, 15.24cm x 22.86cm, đen trắng. Rất tiện sử dụng vì không cần đến điện.
+ - http://packages.debian.org/gitmagic[gói dành cho Debian], http:://packages.ubuntu.com/gitmagic[gói dành cho Ubuntu]: cài tự động tại địa chỉ này. Làm thủ công tại http://csdcf.stanford.edu/status/[khi bạn không có kết nối mạng].
+ - http://www.amazon.com/Git-Magic-Ben-Lynn/dp/1451523343/[Sách giấy [Amazon.com]]: 64 trang, 15.24cm x 22.86cm, đen trắng. Rất tiện sử dụng vì chẳng cần đến điện.
 
 === Lời cảm ơn! ===
 
@@ -33,29 +34,29 @@ François Marier đã bảo trì gói Debian do Daniel
 Baumann khởi xướng.
 
 JunJie, Meng, JiangWei, Rodrigo Toledo, Leonardo Siqueira Rodrigues,
-Benjamin Bellee, và Armin Stebich đã dịch bản hướng dẫn này.
+Benjamin Bellee, Armin Stebich, và Trần Ngọc Quân đã dịch bản hướng dẫn này.
 
 Tôi cũng gửi lời cảm ơn tới sự giúp đỡ và sự tán dương của các bạn. Tôi muốn 
-trích dẫn các bạn ra ở đây, but it might raise expectations to ridiculous heights.
+trích dẫn lời các bạn ra ở đây, nhưng làm như thế có vẻ hơi lố bịch.
 
-Nếu tôi có sai sót gì, xin hãy gửi phản hồi hay miếng vá cho tôi!
+Nếu tôi có sai sót gì, xin hãy thông tin hay gửi bản vá cho tôi!
 
-.Free Git hosting
+.Nơi lưu giữ Git miễn phí
 
- - http://repo.or.cz/[http://repo.or.cz/] lưu trữ các dự án miễn phí. Đây là địa chỉ lưu trữ Git đầu tiên. Được thành lập và bảo trì bởi một trong số những người phát triển Git đầu tiên.
+ - http://repo.or.cz/[http://repo.or.cz/] lưu trữ các dự án miễn phí. Đây là địa chỉ lưu giữ Git đầu tiên. Được thành lập và bảo trì bởi một trong số những người phát triển Git đầu tiên.
  - http://gitorious.org/[http://gitorious.org/] là một địa chỉ lưu giữ Git khác nhằm vào các dự án nguồn mở.
- - http://github.com/[http://github.com/] lưu giữ các dự án nguồn mở miễn phí, và dự án private có thu phí.
+ - http://github.com/[http://github.com/] lưu giữ các dự án nguồn mở miễn phí, và dự án riêng có thu phí.
 
 Trân thành cảm ơn các địa chỉ đã lưu giữ bản hướng dẫn này.
 
 === Giấy phép sử dụng ===
 
-Hướng dẫn này được phát hành dựa trên giấy phép http://www.gnu.org/licenses/gpl-3.0.html[the GNU General Public License version 3]. Đương nhiên, mã nguồn được giữ trong kho Git,
+Hướng dẫn này được phát hành dựa trên giấy phép http://www.gnu.org/licenses/gpl-3.0.html[the GNU General Public License version 3]. Đương nhiên, mã nguồn được lưu giữ trong kho Git,
 và bạn có thể dễ dàng có được nó bằng cách gõ:
 
  $ git clone git://repo.or.cz/gitmagic.git  # Creates "gitmagic" directory.
 
-hay từ các địa chỉ khác:
+hay từ các kho chứa khác:
 
  $ git clone git://github.com/blynn/gitmagic.git
  $ git clone git://gitorious.org/gitmagic/mainline.git
