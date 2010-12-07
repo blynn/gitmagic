@@ -6,7 +6,8 @@ Quả thực là vậy, trong tháng đầu tiên sử dụng Git Tôi chưa bao
 
 === Ghi lại State ===
 
-Bạn muốn thử một điều gì đó quyết liệt ư? Trước khi làm điều đó, thực hiện các lệnh sau trong thư mục hiện hành chứa các văn bản mà bạn muốn quản lý:
+Bạn muốn thử một điều gì đó quyết liệt ư? Trước khi làm điều đó, thực hiện các lệnh sau 
+trong thư mục hiện hành chứa các văn bản mà bạn muốn quản lý:
 
  $ git init
  $ git add .
@@ -79,13 +80,13 @@ Có cách thực tế hơn là sử dụng 'branch', và <<branch, chúng ta có
 sẽ mang chúng ta trở về hiện tại. Ngoài ra, để không phải oán trách Git, luôn luôn
 commit hay reset các thay đổi của bạn trước khi chạy lệnh checkout.
 
-To take the computer game analogy again:
+Sự tương đồng với game trên máy tính:
 
-- *`git reset --hard`*: lấy cái cũ đã lưu lại và xóa tất cả các games mới hơn cái vừa lấy.
+- *`git reset --hard`*: lấy cái cũ đã được lưu lại và xóa tất cả các games mới hơn cái vừa lấy.
 
-- *`git checkout`*: lấy một cái cũ, nhưng chỉ chơi với nó, the game state will deviate from the newer saves you made the first time around. Any saved games you make now will end up in a separate branch representing the alternate reality you have entered. <<branch, Chúng tôi sẽ nói sau>>.
+- *`git checkout`*: lấy một cái cũ, nhưng chỉ chơi với nó, the game state will deviate from the newer saves you made the first time around. Bất kỳ game nào bạn tạo từ bây giờ sẽ là bản cuối cùng trong nhánh riêng rẽ tương ứng với một thực tại khác mà bạn gia nhập vào. <<branch, Chúng tôi sẽ nói sau>>.
 
-You can choose only to restore particular files and subdirectories by appending them after the command:
+Bạn có thể chọn chỉ phục hồi lại các tệp tin hay thư mục đã được chỉ định bằng cách thêm vào phần sau của câu lệnh:
 
  $ git checkout 82f5 some.file another.file
 
@@ -97,7 +98,7 @@ Bạn không thích việc cắt dán ư? Hãy sử dụng:
 
  $ git checkout :/"My first b"
 
-để nhảy tới lần commit mà bắt đầu với thông điệp đã cho.
+để nhảy tới lần commit mà bắt đầu với phần chú thích đã cho.
 Bạn cũng có thể yêu cầu state thứ 5 kể từ cuối cùng:
 
  $ git checkout master~5
@@ -163,7 +164,7 @@ và những người sử dụng có thể cập nhật dữ liệu của họ b
 
  $ git pull
 
-Your users will never end up with a version of your script của bạn mà bạn không muốn họ thấy.
+Những người sử dụng sẽ không bao giờ thấy được script cuối cùng của bạn mà bạn không muốn họ thấy.
 
 === Tôi Phải Làm Gì? ===
 
