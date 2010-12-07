@@ -84,7 +84,7 @@ Sự tương đồng với game trên máy tính:
 
 - *`git reset --hard`*: lấy cái cũ đã được lưu lại và xóa tất cả các games mới hơn cái vừa lấy.
 
-- *`git checkout`*: lấy một cái cũ, nhưng chỉ chơi với nó, the game state will deviate from the newer saves you made the first time around. Bất kỳ game nào bạn tạo từ bây giờ sẽ là bản cuối cùng trong nhánh riêng rẽ tương ứng với một thực tại khác mà bạn gia nhập vào. <<branch, Chúng tôi sẽ nói sau>>.
+- *`git checkout`*: lấy một cái cũ, nhưng chỉ chơi với nó, state của game sẽ rời về phía mới hơn chỗ mà bạn đã ghi lại lần đầu tiên will deviate from the newer saves you made the first time around. Bất kỳ game nào bạn tạo từ bây giờ sẽ là bản cuối cùng trong nhánh riêng rẽ tương ứng với một thực tại khác mà bạn gia nhập vào. <<branch, Chúng tôi sẽ nói sau>>.
 
 Bạn có thể chọn chỉ phục hồi lại các tệp tin hay thư mục đã được chỉ định bằng cách thêm vào phần sau của câu lệnh:
 
@@ -105,7 +105,7 @@ Bạn cũng có thể yêu cầu state thứ 5 kể từ cuối cùng:
 
 === Sự quay lại ===
 
-Trong một phiên tòa, events can be stricken from the record. Cũng giống thế, bạn có thể chọn lệnh commit để undo.
+Trong một phiên tòa, mỗi sự kiện được gắn với một bản ghi. Cũng giống thế, bạn có thể chọn lệnh commit để undo.
 
  $ git commit -a
  $ git revert 1b6d
@@ -140,7 +140,7 @@ Nếu bạn đã tải về một bản sao của một dự án sử dụng *gi
 
 === Instant Publishing ===
 
-Giả sử bạn đã tạo được script và bạn muốn chia sẻ nó với người khác. Bạn có thể bảo họ tải về từ máy tính của mình, nhưng nếu họ làm như thế trong khi bạn đang cải tiến script hay có những thay đổi mang tính thử nghiệm, họ có thể gặp trục trặc.  Dĩ nhiên, đây là lý do tại sao chu kỳ phát hành phần mềm lại tồn tại. Những người phát triển có thể làm việc trên một dự án thường xuyên, như họ chỉ đưa ra những đoạn mã mà họ cảm thấy nó có thể dùng được để tránh ảnh hưởng đến người khác.
+Giả sử bạn đã tạo được script và bạn muốn chia sẻ nó với người khác. Bạn có thể bảo họ tải về từ máy tính của mình, nhưng nếu họ làm như thế trong khi bạn đang cải tiến script hay có những thay đổi mang tính thử nghiệm, họ có thể gặp trục trặc.  Dĩ nhiên, đây là lý do tại sao mà chu kỳ phát hành phần mềm lại tồn tại phải không nào. Những người phát triển có thể làm việc thường xuyên trên một dự án, nhưng họ chỉ đưa ra những đoạn mã mà họ cảm thấy nó có thể dùng được để tránh ảnh hưởng đến người khác.
 
 Thực hiện điều này với Git, trong thư mục làm việc của Git:
 
@@ -201,11 +201,11 @@ Coi A, B, C, D là 4 lần commit thành công nơi mà B giống A ngoại tr�
 
    $ git diff B A | git apply
 
-  2. Since we saved the files back at A, chúng ta có thể lấy lại:
+  2. Kể từ lúc chúng ta ghi lại các tệp tin tại A, chúng ta có thể lấy lại:
 
    $ git checkout A foo.c bar.h
 
-  3. We can view going from A to B as a change we want to undo:
+  3. Chúng ta có thể xem sự di chuyển từ A tới B giống như là một thay đổi mà chúng ta muốn undo:
 
    $ git revert B
 
