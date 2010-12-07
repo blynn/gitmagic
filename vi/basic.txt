@@ -6,7 +6,7 @@ Quả thực là vậy, trong tháng đầu tiên sử dụng Git Tôi chưa bao
 
 === Ghi lại State ===
 
-About to attempt something drastic? Trước khi làm điều đó, thực hiện với tất cả các tệp tin trong thư mục hiện hành bằng cách:
+Bạn muốn thử một điều gì đó drastic ư? Trước khi làm điều đó, thực hiện với tất cả các tệp tin trong thư mục hiện hành bằng cách:
 
  $ git init
  $ git add .
@@ -70,20 +70,20 @@ Một lúc nào đó bạn lại muốn nhảy tới một cái cũ hơn. Trong 
 
  $ git checkout 82f5
 
-This takes you back in time, while preserving newer commits. However, like time travel in a science-fiction movie, if you now edit and commit, you will be in an alternate reality, because your actions are different to what they were the first time around.
+Nó giúp bạn quay lại đúng thời điểm đó, trong khi vẫn giữ lại những lần commit mới hơn. Tuy nhiên, giống như cỗ máy thời gian trong các bộ phim khoa học viễn tưởng, nếu bây giờ bạn sửa và commit, bạn sẽ ở trong một thực tại khác, bởi vì hành động của bạn bây giờ đã khác với chúng trong lần đầu tiên ở tại đây.
 
-This alternate reality is called a 'branch', và <<branch, chúng ta có nhiều điều để nói về nó sau này>>. Bây giờ, chỉ cần nhớ là
+Có cách thực tế hơn là sử dụng 'branch', và <<branch, chúng ta có nhiều điều để nói về nó sau này>>. Bây giờ, chỉ cần nhớ là
 
  $ git checkout master
 
-sẽ mang chúng ta trở về hiện tại. Also, to stop Git complaining, always
-commit or reset your changes before running checkout.
+sẽ mang chúng ta trở về hiện tại. Ngoài ra, để không phải oán trách Git, luôn luôn
+commit hay reset các thay đổi của bạn trước khi chạy lệnh checkout.
 
 To take the computer game analogy again:
 
-- *`git reset --hard`*: load an old save and delete all saved games newer than the one just loaded.
+- *`git reset --hard`*: lấy cái cũ đã lưu lại và xóa tất cả các games mới hơn cái vừa lấy.
 
-- *`git checkout`*: load an old game, but if you play on, the game state will deviate from the newer saves you made the first time around. Any saved games you make now will end up in a separate branch representing the alternate reality you have entered. <<branch,We deal with this later>>.
+- *`git checkout`*: lấy một cái cũ, nhưng chỉ chơi với nó, the game state will deviate from the newer saves you made the first time around. Any saved games you make now will end up in a separate branch representing the alternate reality you have entered. <<branch,We deal with this later>>.
 
 You can choose only to restore particular files and subdirectories by appending them after the command:
 
@@ -102,7 +102,7 @@ Bạn cũng có thể yêu cầu state thứ 5 kể từ cuối cùng:
 
  $ git checkout master~5
 
-=== Reverting ===
+=== Sự quay lại ===
 
 In a court of law, events can be stricken from the record. Likewise, you can pick specific commits to undo.
 
@@ -151,7 +151,7 @@ Sau đó nói với những người cùng sử dụng hãy chạy:
 
  $ git clone your.computer:/path/to/script
 
-để tải script về. This assumes they have ssh access. Nếu không, chạy *git daemon* và nói với người sử dụng là chạy lệnh sau để thay thế:
+để tải script về. Giả định là họ truy cập thông qua ssh. Nếu không, chạy *git daemon* và nói với người sử dụng là chạy lệnh sau để thay thế:
 
  $ git clone git://your.computer/path/to/script
 
