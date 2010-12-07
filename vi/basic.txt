@@ -6,7 +6,7 @@ Quả thực là vậy, trong tháng đầu tiên sử dụng Git Tôi chưa bao
 
 === Ghi lại State ===
 
-Bạn muốn thử một điều gì đó drastic ư? Trước khi làm điều đó, thực hiện với tất cả các tệp tin trong thư mục hiện hành bằng cách:
+Bạn muốn thử một điều gì đó quyết liệt ư? Trước khi làm điều đó, thực hiện các lệnh sau trong thư mục hiện hành chứa các văn bản mà bạn muốn quản lý:
 
  $ git init
  $ git add .
@@ -22,7 +22,7 @@ Lưu lại state lần nữa:
 
 === Thêm, Xóa, Đổi tên ===
 
-Lệnh ở trên chỉ giữ dấu vết các tệp tin và hiện diện tại thời điểm vạn chạy lệnh *git add*. Nếu bạn thêm các tệp tin hay thư mục, bạn sẽ phải thông báo với Git:
+Lệnh ở trên chỉ giữ dấu vết các tệp tin và hiện diện tại thời điểm bạn chạy lệnh *git add*. Nếu bạn thêm các tệp tin hay thư mục, bạn sẽ phải thông báo với Git:
 
  $ git add readme.txt Documentation
 
@@ -59,7 +59,7 @@ Date:   Thu Jan 1 00:00:00 1970 +0000
     Initial commit.
 ----------------------------------
 
-Chỉ vài ký tự của giá trị băm là đủ để chỉ ra một commit;
+Chỉ vài ký tự của giá trị băm là đủ để chỉ ra một commit cụ thể;
 một cách khác là chép và dán giá trị băm. Gõ:
 
  $ git reset --hard 766f
@@ -83,7 +83,7 @@ To take the computer game analogy again:
 
 - *`git reset --hard`*: lấy cái cũ đã lưu lại và xóa tất cả các games mới hơn cái vừa lấy.
 
-- *`git checkout`*: lấy một cái cũ, nhưng chỉ chơi với nó, the game state will deviate from the newer saves you made the first time around. Any saved games you make now will end up in a separate branch representing the alternate reality you have entered. <<branch,We deal with this later>>.
+- *`git checkout`*: lấy một cái cũ, nhưng chỉ chơi với nó, the game state will deviate from the newer saves you made the first time around. Any saved games you make now will end up in a separate branch representing the alternate reality you have entered. <<branch, Chúng tôi sẽ nói sau>>.
 
 You can choose only to restore particular files and subdirectories by appending them after the command:
 
@@ -104,13 +104,13 @@ Bạn cũng có thể yêu cầu state thứ 5 kể từ cuối cùng:
 
 === Sự quay lại ===
 
-In a court of law, events can be stricken from the record. Likewise, you can pick specific commits to undo.
+Trong một phiên tòa, events can be stricken from the record. Cũng giống thế, bạn có thể chọn lệnh commit để undo.
 
  $ git commit -a
  $ git revert 1b6d
 
-will undo just the commit with the given hash. The revert is recorded as a new
-commit, bạn có thể xác nhận bằng lệnh *git log*.
+sẽ chỉ undo lần commit với giá trị băm đã chỉ ra. Sự quay trở lại được ghi nhận như là một lần
+commit mới, bạn có thể xác nhận bằng lệnh *git log*.
 
 === Tạo Changelog ===
 
@@ -139,9 +139,9 @@ Nếu bạn đã tải về một bản sao của một dự án sử dụng *gi
 
 === Instant Publishing ===
 
-Suppose you've written a script you'd like to share with others. You could just tell them to download from your computer, but if they do so while you're improving the script or making experimental changes, they could wind up in trouble.  Of course, this is why release cycles exist. Developers may work on a project frequently, but they only make the code available when they feel it is presentable.
+Giả sử bạn đã tạo được script và bạn muốn chia sẻ nó với người khác. Bạn có thể bảo họ tải về từ máy tính của mình, nhưng nếu họ làm như thế trong khi bạn đang cải tiến script hay có những thay đổi mang tính thử nghiệm, họ có thể gặp trục trặc.  Dĩ nhiên, đây là lý do tại sao chu kỳ phát hành phần mềm lại tồn tại. Những người phát triển có thể làm việc trên một dự án thường xuyên, như họ chỉ đưa ra những đoạn mã mà họ cảm thấy nó có thể dùng được để tránh ảnh hưởng đến người khác.
 
-Thực hiện điều này với Git, trong thư mục nơi script của bạn nằm trong:
+Thực hiện điều này với Git, trong thư mục làm việc của Git:
 
  $ git init
  $ git add .
@@ -155,7 +155,7 @@ Sau đó nói với những người cùng sử dụng hãy chạy:
 
  $ git clone git://your.computer/path/to/script
 
-Kể từ lúc này, bất cứ khi nào mã nguồn của bạn đã sẵn sàng, chỉ việc thực hiện:
+Kể từ lúc này, bất cứ khi nào mã nguồn của bạn đã có thể sử dụng được, chỉ việc thực hiện:
 
  $ git commit -a -m "Next release"
 
@@ -163,7 +163,7 @@ và những người sử dụng có thể cập nhật dữ liệu của họ b
 
  $ git pull
 
-Your users will never end up with a version of your script you don't want them to see.
+Your users will never end up with a version of your script của bạn mà bạn không muốn họ thấy.
 
 === Tôi Phải Làm Gì? ===
 
@@ -179,7 +179,7 @@ Hay giữa một bản nào đó và bản trước đây 2 bản:
 
  $ git diff 1b6d "master~2"
 
-In each case the output is a patch that can be applied with *git apply*.
+Trong từng trường hợp, đầu ra là một bản vá cái mà có thể được áp dụng với *git apply*.
 Try also:
 
  $ git whatchanged --since="2 weeks ago"
@@ -192,11 +192,11 @@ và sử dụng bất kỳ trình duyệt web nào.
 
 === Bài tập===
 
-Coi A, B, C, D là 4 lần commit thành công where B is the same as A except some files have been removed. Chúng ta muốn thêm các tệp tin đó trở lại D. Chúng ta thực hiện điều này bằng cách nào?
+Coi A, B, C, D là 4 lần commit thành công nơi mà B giống A ngoại trừ một số tệp tin bị xóa bỏ. Chúng ta muốn thêm các tệp tin đó trở lại D. Chúng ta thực hiện điều này bằng cách nào?
 
 Ở đây chúng ta có ít nhất 3 giải pháp. Giả thiết chúng ta đang ở D:
 
-  1. Sự khác nhau giữa A và B là việc các tệp tin đã bị gỡ bỏ. We can create a patch representing this difference and apply it:
+  1. Sự khác nhau giữa A và B là việc các tệp tin đã bị gỡ bỏ. Chúng ta có thể tạo miếng vá tương ứng với sự khác biệt này và apply nó:
 
    $ git diff B A | git apply
 
@@ -208,4 +208,4 @@ Coi A, B, C, D là 4 lần commit thành công where B is the same as A except s
 
    $ git revert B
 
-Lựa chọn nào là tốt nhất? Cái nào bạn thích nhất. It is easy to get what you want with Git, and often there are many ways to get it.
+Lựa chọn nào là tốt nhất? Cách nào bạn thích nhất. Nó là dễ dàng để có được thứ mà bạn muốn với Git, và thường là có nhiều cách để thực hiện được điều đó.
