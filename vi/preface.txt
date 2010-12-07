@@ -6,13 +6,13 @@ Tháng Tám 2007
 
 http://git.or.cz/[Git] là công cụ quản lý mã nguồn sắc bén. Một công cụ quản lý mã nguồn tin cậy, chắc chắn, đa dụng và sự cực kỳ mềm dẻo của Git làm cho việc học nó trở nên khó khăn, tất nhiên là không nói đến chủ nhân của nó.
 
-Theo quan sát của Arthur C. Clarke, bất kể công nghệ tiên tiến nào thì cũng không thể phân biệt được sự kỳ diệu của nó. Đây cũng là cách hay đề đề cập đến Git: những người mới sử dụng không cần quan tâm đến bên trong nó làm việc như thế nào và xem Git như là một gizmo có thể làm những người bạn sửng sốt và làm điên đầu các đối thủ với khả năng thần kỳ của nó.
+Theo quan sát của Arthur C. Clarke, bất kể công nghệ tiên tiến nào cũng không thể phân biệt được nó có kỳ diệu hay không. Đây cũng là cách hay đề đề cập đến Git: những người mới sử dụng không cần quan tâm đến bên trong nó làm việc như thế nào và xem Git như là một  điệu gizmo có thể làm những người coi nó là bạn sửng sốt và làm điên đầu các những người đối với khả năng thần kỳ của mình.
 
 Thay vì đi sâu vào chi tiết, chúng tôi đưa ra phác thảo cách làm việc của các hiệu ứng chuyên biệt. Sau khi sử dụng lặp lại nhiều lần, từ từ bạn sẽ hiểu từng mẹo một, và thực hiện được những việc mà mình muốn làm.
 
 .Bản dịch
 
- - http://docs.google.com/View?id=dfwthj68_675gz3bw8kj[Tiếng Trung Quốc (Hiện đại)]: dịch bởi JunJie, Meng and JiangWei.
+ - http://docs.google.com/View?id=dfwthj68_675gz3bw8kj[Tiếng Trung Quốc (Giản thể)]: dịch bởi JunJie, Meng and JiangWei.
  - link:/~blynn/gitmagic/intl/es/[tiếng Tây Ban Nha]: dịch bởi Rodrigo Toledo.
  - link:/~blynn/gitmagic/intl/de/[tiếng Đức]: dịch bởi Benjamin Bellee and Armin Stebich. Armin xuất bản
 http://gitmagic.lordofbikes.de/[bản dịch tiếng Đức trên website của chính mình].
@@ -54,7 +54,7 @@ Trân thành cảm ơn các địa chỉ đã lưu giữ bản hướng dẫn n�
 Hướng dẫn này được phát hành dựa trên giấy phép http://www.gnu.org/licenses/gpl-3.0.html[the GNU General Public License version 3]. Đương nhiên, mã nguồn được lưu giữ trong kho Git,
 và bạn có thể dễ dàng có được nó bằng cách gõ:
 
- $ git clone git://repo.or.cz/gitmagic.git  # Creates "gitmagic" directory.
+ $ git clone git://repo.or.cz/gitmagic.git  # Tạo thư mục "gitmagic".
 
 hay từ các kho chứa khác:
 
