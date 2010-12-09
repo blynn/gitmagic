@@ -1,4 +1,4 @@
-﻿== Vài mẹo Cơ bản ==
+﻿== Các Lệnh Cơ bản ==
 
 Thay vì lao vào cả một biển lệnh với Git, hãy sử dụng các ví dụ cơ bản để bắt đầu.
 Mặc dù chúng rất đơn giản, nhưng tất cả chúng đều rất hữu dụng.
@@ -13,7 +13,7 @@ trong thư mục hiện hành chứa các văn bản mà bạn muốn quản lý
  $ git add .
  $ git commit -m "My first backup"
 
-Bây giờ nếu như các thay đổi của bạn không như mong đợi, hãy phục hồi lại bản cũ:
+Bây giờ nếu như các thay đổi của bạn không như mong đợi, hãy phục hồi lại bản cũ (bản cuối cùng bạn commit):
 
  $ git reset --hard
 
@@ -32,7 +32,7 @@ Tương tự như vậy, nếu bạn muốn Git bỏ qua các tệp tin nào đ�
  $ git rm kludge.h obsolete.c
  $ git rm -r incriminating/evidence/
 
-Git xóa bỏ những tệp tin nếu như bạn chưa làm vậy.
+Git xóa bỏ những tệp tin nếu như bạn chưa làm.
 
 Đổi tên tệp tin thì cũng giống như là việc bạn gỡ bỏ tên cũ và đặt vào tên mới. Sử dụng lệnh *git mv* có cú pháp rất giống lệnh *mv*. Ví dụ:
 
@@ -84,9 +84,9 @@ Sự tương đồng với game trên máy tính:
 
 - *`git reset --hard`*: lấy cái cũ đã được lưu lại và xóa tất cả các games mới hơn cái vừa lấy.
 
-- *`git checkout`*: lấy một cái cũ, nhưng chỉ chơi với nó, state của game sẽ rời về phía mới hơn chỗ mà bạn đã ghi lại lần đầu tiên will deviate from the newer saves you made the first time around. Bất kỳ game nào bạn tạo từ bây giờ sẽ là bản cuối cùng trong nhánh riêng rẽ tương ứng với một thực tại khác mà bạn gia nhập vào. <<branch, Chúng tôi sẽ nói sau>>.
+- *`git checkout`*: lấy một cái cũ, nhưng chỉ chơi với nó, state của game sẽ tách rời về phía mới hơn chỗ mà bạn đã ghi lại lần đầu tiên will deviate from the newer saves you made the first time around. Bất kỳ game nào bạn tạo từ bây giờ sẽ là bản cuối cùng trong nhánh riêng rẽ tương ứng với một thực tại khác mà bạn đã gia nhập vào. <<branch, Chúng tôi sẽ nói sau>>.
 
-Bạn có thể chọn chỉ phục hồi lại các tệp tin hay thư mục đã được chỉ định bằng cách thêm vào phần sau của câu lệnh:
+Bạn có thể chọn chỉ phục hồi lại các tệp tin hay thư mục bạn muốn bằng cách thêm vào nó vào phần sau của câu lệnh:
 
  $ git checkout 82f5 some.file another.file
 
@@ -98,7 +98,7 @@ Bạn không thích việc cắt dán ư? Hãy sử dụng:
 
  $ git checkout :/"My first b"
 
-để nhảy tới lần commit mà bắt đầu với phần chú thích đã cho.
+để nhảy tới lần commit mà phần chú thích của nó bắt đầu với chuỗi bạn cho.
 Bạn cũng có thể yêu cầu state thứ 5 kể từ cuối cùng:
 
  $ git checkout master~5
@@ -132,13 +132,13 @@ Ví dụ, để lấy tất cả các tệp tin mà tôi đã dùng để tạo 
 
 Chúng ta sẽ có nhiều điều để nói về lệnh *clone* sớm thôi.
 
-=== The Bleeding Edge ===
+=== Thử Nghiệm ===
 
 Nếu bạn đã tải về một bản sao của một dự án sử dụng *git clone*, bạn có thể nâng cấp lên phiên bản cuối cùng với lệnh:
 
  $ git pull
 
-=== Instant Publishing ===
+=== Xuất bản ===
 
 Giả sử bạn đã tạo được script và bạn muốn chia sẻ nó với người khác. Bạn có thể bảo họ tải về từ máy tính của mình, nhưng nếu họ làm như thế trong khi bạn đang cải tiến script hay có những thay đổi mang tính thử nghiệm, họ có thể gặp trục trặc.  Dĩ nhiên, đây là lý do tại sao mà chu kỳ phát hành phần mềm lại tồn tại phải không nào. Những người phát triển có thể làm việc thường xuyên trên một dự án, nhưng họ chỉ đưa ra những đoạn mã mà họ cảm thấy nó có thể dùng được để tránh ảnh hưởng đến người khác.
 
@@ -193,7 +193,7 @@ và sử dụng bất kỳ trình duyệt web nào.
 
 === Bài tập===
 
-Coi A, B, C, D là 4 lần commit thành công nơi mà B giống A ngoại trừ một số tệp tin bị xóa bỏ. Chúng ta muốn thêm các tệp tin đó trở lại D. Chúng ta thực hiện điều này bằng cách nào?
+Coi A, B, C, D là 4 lần commit thành công, nơi mà B giống A ngoại trừ một số tệp tin bị xóa bỏ. Chúng ta muốn thêm các tệp tin đó trở lại D. Chúng ta thực hiện điều này bằng cách nào?
 
 Ở đây chúng ta có ít nhất 3 giải pháp. Giả thiết chúng ta đang ở D:
 
@@ -209,4 +209,4 @@ Coi A, B, C, D là 4 lần commit thành công nơi mà B giống A ngoại tr�
 
    $ git revert B
 
-Lựa chọn nào là tốt nhất? Cách nào bạn thích nhất. Nó là dễ dàng để có được thứ mà bạn muốn với Git, và thường là có nhiều cách để thực hiện được điều đó.
+Lựa chọn nào là tốt nhất? Cách nào bạn thích nhất. Thật dễ dàng để có được thứ mà bạn muốn với Git, và thường là có nhiều cách để thực hiện được điều đó.
