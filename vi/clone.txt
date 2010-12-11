@@ -1,12 +1,12 @@
-﻿== Cloning Around ==
+﻿== Lệnh Clone ==
 
 Trong các hệ thống quản lý mã nguồn trước đây, checkout là tác vụ cơ bản để lấy các tệp tin về. Bạn lấy về toàn bộ các tập tin được lưu giữ trong từng phiên bản riêng biệt.
 
-Với Git và các hệ thống quản lý mã nguồn phân tán, cloning là tác vụ cơ bản. Để lấy các tệp tin, bạn tạo một 'clone' (bản sao) của toàn bộ kho chứa. Nói cách khác, bạn thực tế là một bản sao của máy chủ trung tâm. Bất kỳ cái gì bạn làm với kho chứa chính thì cũng làm được ở đây.
+Với Git và các hệ thống quản lý mã nguồn phân tán, clone là tác vụ cơ bản. Để lấy các tệp tin, bạn tạo một 'clone' (bản sao) của toàn bộ kho chứa. Nói cách khác, bạn thực tế là một bản sao của máy chủ trung tâm. Bất kỳ cái gì bạn thể làm được với kho chứa chính thì cũng làm được ở đây.
 
 === Đồng bộ hóa Các Máy tính ===
 
-I can tolerate making tarballs or using *rsync* for backups and basic syncing. But sometimes I edit on my laptop, other times on my desktop, and the two may not have talked to each other in between.
+Tôi có thể tạo gói tarball hay sử dụng lệnh *rsync* để sao lưu (backup) và đồng bộ hóa dữ liệu. Nhưng thỉnh thoảng, tôi biên tập trên laptop của mình, nhưng lúc khác lại trên máy tính để bàn, and the two may not have talked to each other in between.
 
 Khởi tạo kho chứa Git và commit các tệp tin trên một máy tính. Sau đó trên máy tính kia chạy lệnh:
 
@@ -34,9 +34,9 @@ Trên máy chủ trung tâm, khởi tạo 'bare repository' ở một thư mục
  $ git init --bare
  $  # one-line variant: GIT_DIR=proj.git git init
 
-Khởi động Git daemon nếu cần:
+Khởi động dịch vụ Git daemon nếu cần:
 
- $ git daemon --detach  # it may already be running
+ $ git daemon --detach  # nó có thể đang chạy rồi
 
 For Git hosting services, follow the instructions to setup the initially
 empty Git repository. Typically one fills in a form on a webpage.
@@ -57,7 +57,7 @@ Sau khi thay đổi, các nhà phát triển phần mềm sẽ lưu lại các t
 
  $ git pull
 
-Any merge conflicts should be resolved then committed:
+Mọi xung đột phải được xử lý trước, sau đó commit:
 
  $ git commit -a
 
@@ -65,13 +65,13 @@ Gửi thay đổi của mình lên máy chủ trung tâm:
 
  $ git push
 
-If the main server has new changes due to activity by other developers, the
-push fails, and the developer should pull the latest version, resolve any merge
-conflicts, sau đó thử lại.
+Nếu máy chủ trung tâm có thay đổi bởi hành động của một người phát triển phần mềm khác, quá trình
+push sẽ bị lỗi, và anh ta phải pull về bản mới nhất, xử lý các xung đột
+khi trộn, sau đó thử lại.
 
-=== Bare repositories ===
+=== Kho Bare ===
 
-A bare repository is so named because it has no working directory; it only contains files that are normally hidden away in the `.git` subdirectory. In other words, it maintains the history of a project, and never holds a snapshot of any given version.
+Kho bare (kho trần) được đặt tên như vậy vì nó không chứa thư mục làm việc; nó chỉ chứa các tệp tin thường là ẩn trong thư mục phụ `.git`. Hay nói cách khác, nó chứa lịch sử mã nguồn của một dự án, and never holds a snapshot of any given version.
 
 A bare repository plays a role similar to that of the main server in a
 centralized version control system: the home of your project. Developers clone
@@ -80,7 +80,7 @@ resides on a server that does little else but disseminate data. Development
 occurs in the clones, so the home repository can do without a working
 directory.
 
-Many Git commands fail on bare repositories unless the `GIT_DIR` environment variable is set to the repository path, or the `--bare` option is supplied.
+Nhiều lệnh Git commands gặp lỗi fail on bare repositories trừ phi biến môi trường `GIT_DIR` được đặt environment variable is set to the repository path, hay tùy chọn `--bare` được áp dụng.
 
 === Push versus pull ===
 
@@ -94,7 +94,7 @@ shell access to the server in the first place?
 
 However, apart from this case, we discourage pushing into a repository, because confusion can ensue when the destination has a working directory.
 
-In short, while learning Git, only push when the target is a bare repository; otherwise pull.
+Tóm lại, khi học Git, chỉ push khi đích là kho bare; nếu không thì dùng pull.
 
 === Forking a Project ===
 
@@ -118,19 +118,19 @@ The truly paranoid should always write down the latest 20-byte SHA1 hash of the 
 
 === Light-Speed Multitask ===
 
-Say you want to work on several features in parallel. Then commit your project and run:
+Say you want to work on several features in parallel. Sau đó commit dự án của bạn và chạy:
 
  $ git clone . /some/new/directory
 
-Git exploits hard links and file sharing as much as safely possible to create this clone, so it will be ready in a flash, and you can now work on two independent features simultaneously. For example, you can edit one clone while the other is compiling.
+Git exploits hard links and file sharing as much as safely possible to create this clone, so it will be ready in a flash, and you can now work on two independent features simultaneously. Ví dụ như, you can edit one clone while the other is compiling.
 
-At any time, you can commit and pull changes from the other clone.
+Bất kỳ lúc nào, bạn cũng có thể commit và pull các thay đổi từ một bản sao (clone) khác.
 
  $ git pull /the/other/clone HEAD
 
 === Guerilla Version Control ===
 
-Bạn đang làm việc cho một dự án có sử dụng hệ thống quản lý mã nguồn cũ, và bạn lại muốn sử dụng Git? Thế thì khởi tạo kho chứa Git trong thư mục bạn đang làm việc:
+Bạn đang làm việc cho một dự án có sử dụng hệ thống quản lý mã nguồn cũ, và bạn lại muốn sử dụng Git? Thế thì hãy khởi tạo kho chứa Git trong thư mục bạn đang làm việc:
 
  $ git init
  $ git add .
@@ -162,13 +162,13 @@ Lấy plugin `hg-git` dành cho Git bằng cách:
 
  $ git clone git://github.com/schacon/hg-git.git
 
-hay sử dụng Mercurial:
+hay là sử dụng Mercurial:
 
  $ hg clone http://bitbucket.org/durin42/hg-git/
 
 Thật buồn là tôi hay rằng có am unaware of an analogous plugin dành cho Git. Vì vậy, I advocate Git over Mercurial for the main repository, dù là bạn thích Mercurial. Với một dự án Mercurial, usually a volunteer maintains a parallel Git repository to accommodate Git users, whereas thanks to the `hg-git` plugin, a Git project automatically accommodates Mercurial users.
 
-Although the plugin can convert a Mercurial repository to a Git repository by pushing to an empty repository, this job is easier with the `hg-fast-export.sh` script, available from:
+Although the plugin can convert a Mercurial repository to a Git repository by pushing to an empty repository, công việc này là dễ dàng với script `hg-fast-export.sh`, đã có từ:
 
  $ git clone git://repo.or.cz/fast-export.git
 
@@ -181,19 +181,19 @@ sau khi đặt script vào trong biến môi trường `$PATH`.
 
 === Bazaar ===
 
-We briefly mention Bazaar because it is the most popular free distributed
-version control system after Git and Mercurial.
+Chúng tôi đề cập vắn tắt về Bazaar bởi vì nó là hệ thống quản lý mã nguồn phân tán
+miễn phí và phổ biến nhất chỉ sau Git và Mercurial.
 
-Bazaar has the advantage of hindsight, as it is relatively young; its designers could learn from mistakes of the past, and sidestep minor historical warts. Additionally, its developers are mindful of portability and interoperation with other version control systems.
+Bazaar has the advantage of hindsight, as it is relatively young; its designers could learn from mistakes of the past, and sidestep minor historical warts. Ngoài ra, its developers are mindful of portability and interoperation with other version control systems.
 
 A `bzr-git` plugin lets Bazaar users work with Git repositories to some extent. The `tailor` program converts Bazaar repositories to Git repositories, and can do so incrementally, while `bzr-fast-export` is well-suited for one-shot conversions.
 
 === Tại sao Tôi sử dụng Git ===
 
-I originally chose Git because I heard it could manage the unimaginably unmanageable Linux kernel source. I've never felt a need to switch. Git has served admirably, and I've yet to be bitten by its flaws. As I primarily use Linux, issues on other platforms are of no concern.
+Trước tiên, tôi chọn Git bởi tôi nghe nói nó có thể quản lý mã nguồn cho nhân (kernel) của hệ điều hành Linux unimaginably unmanageable Linux kernel source. I've never felt a need to switch. Git has served admirably, and I've yet to be bitten by its flaws. As I primarily use Linux, issues on other platforms are of no concern.
 
-Also, I prefer C programs and bash scripts to executables such as Python scripts: there are fewer dependencies, and I'm addicted to fast running times.
+Ngoài ra, Thôi thích lập trình bằng ngôn ngữ C và bash scripts to executables such as Python scripts: there are fewer dependencies, and I'm addicted to fast running times.
 
 I did think about how Git could be improved, going so far as to write my own Git-like tool, but only as an academic exercise. Had I completed my project, I would have stayed with Git anyway, as the gains are too slight to justify using an oddball system.
 
-Naturally, your needs and wants likely differ, and you may be better off with another system. Nonetheless, you can't go far wrong with Git.
+Rất tự nhiên, những điều bạn cần và muốn your needs and wants có lẽ khác nhau, and you may be better off with another system. Nonetheless, you can't go far wrong with Git.
