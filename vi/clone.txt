@@ -6,7 +6,7 @@ Với Git và các hệ thống quản lý mã nguồn phân tán, clone là tá
 
 === Đồng bộ hóa Các Máy tính ===
 
-Tôi có thể tạo gói tarball hay sử dụng lệnh *rsync* để sao lưu (backup) và đồng bộ hóa dữ liệu. Nhưng thỉnh thoảng, tôi biên tập trên laptop của mình, nhưng lúc khác lại trên máy tính để bàn, and the two may not have talked to each other in between.
+Tôi có thể tạo gói tarball hay sử dụng lệnh *rsync* để sao lưu (backup) và đồng bộ hóa dữ liệu. Nhưng thỉnh thoảng, tôi biên tập trên laptop của mình, nhưng lúc khác lại trên máy tính để bàn, và chúng có thể không có sự trao đổi với nhau.
 
 Khởi tạo kho chứa Git và commit các tệp tin trên một máy tính. Sau đó trên máy tính kia chạy lệnh:
 
@@ -17,7 +17,8 @@ Khởi tạo kho chứa Git và commit các tệp tin trên một máy tính. Sa
  $ git commit -a
  $ git pull other.computer:/path/to/files HEAD
 
-sẽ 'pull' in the state of the files on the other computer into the one you're working on. If you've recently made conflicting edits in the same file, Git sẽ cho bạn biết và bạn có thể commit lại sau khi sửa chữa chúng.
+sẽ 'pull' in the state of the files on the other computer into the one you're working on. Nếu bạn vừa tạo ra một sự chỉnh sửa
+xung đột trong cùng một tệp tin , Git sẽ cho bạn biết và bạn có thể commit lại sau khi sửa chữa chúng.
 
 === Classic Source Control ===
 
@@ -38,14 +39,14 @@ Khởi động dịch vụ Git daemon nếu cần:
 
  $ git daemon --detach  # nó có thể đang chạy rồi
 
-For Git hosting services, follow the instructions to setup the initially
-empty Git repository. Typically one fills in a form on a webpage.
+Để làm một máy chủ chạy dịch vụ Git, làm theo các chỉ dẫn sau để cài đặt
+và khởi tạo kho Git. Typically one fills in a form on a webpage.
 
 'Push' dự án của bạn lên máy chủ trung tâm bằng lệnh:
 
  $ git push git://central.server/path/to/proj.git HEAD
 
-Để check out mã nguồn, các nhà phát triển chỉ cần gõ:
+Để check out mã nguồn, các nhà phát triển phần mềm chỉ cần gõ:
 
  $ git clone git://central.server/path/to/proj.git
 
@@ -57,7 +58,7 @@ Sau khi thay đổi, các nhà phát triển phần mềm sẽ lưu lại các t
 
  $ git pull
 
-Mọi xung đột phải được xử lý trước, sau đó commit:
+Mọi xung đột phải được xử lý trước, sau đó mới commit:
 
  $ git commit -a
 
@@ -98,13 +99,13 @@ Tóm lại, khi học Git, chỉ push khi đích là kho bare; nếu không thì
 
 === Forking a Project ===
 
-Sick of the way a project is being run? Think you could do a better job? Then on your server:
+Bạn chán ngấy cách mà dự án mà bạn đang làm việc chạy? Bạn nghĩ mình có thể làm tốt hơn thế? Thế thì trên máy chủ của mình:
 
  $ git clone git://main.server/path/to/files
 
-Next, tell everyone about your fork of the project at your server.
+Tiếp theo, nói với mọi người về nhánh rẽ từ dự án của bạn tại máy chủ của bạn.
 
-At any later time, you can merge in the changes from the original project with:
+Từ giờ trở đi, bạn có thể trộn các sự thay đổi từ dự án gốc với you can merge in the changes from the original project with:
 
  $ git pull
 
@@ -114,7 +115,7 @@ Want numerous tamper-proof geographically diverse redundant archives? If your pr
 
 If your project is not so popular, find as many servers as you can to host clones.
 
-The truly paranoid should always write down the latest 20-byte SHA1 hash of the HEAD somewhere safe. It has to be safe, not private. For example, publishing it in a newspaper would work well, because it's hard for an attacker to alter every copy of a newspaper.
+The truly paranoid should always write down the latest 20-byte giá trị băm SHA1 của HEAD ở đâu đó an toàn. Nó phải an toàn, không riêng tư. Ví dụ, xuất bản nó lên báo giấy cũng tốt, bởi vì rất khó để thay đổi tất cả các bản sao của nó.
 
 === Light-Speed Multitask ===
 
@@ -140,7 +141,7 @@ sau đó clone nó:
 
  $ git clone . /some/new/directory
 
-Bây giờ hãy chuyển đến thư mục mới đó và làm việc ở đây thay vì chỗ cũ, using Git to your heart's content. Once in a while, you'll want to sync with everyone else, in which case go to the original directory, sync using the other version control system, and type:
+Bây giờ hãy chuyển đến thư mục mới đó và làm việc ở đây thay vì chỗ cũ, sử dụng Git to your heart's content. Đôi khi, bạn sẽ muốn đồng bộ hóa với những người khác nữa, in which case go to the original directory, sync using the other version control system, and type:
 
  $ git add .
  $ git commit -m "Sync with everyone else"
@@ -152,11 +153,11 @@ Sau đó chuyển tới thư mục mới và chạy:
 
 The procedure for giving your changes to everyone else depends on the other version control system. The new directory contains the files with your changes. Run whatever commands of the other version control system are needed to upload them to the central repository.
 
-Subversion, perhaps the best centralized version control system, is used by countless projects. The *git svn* command automates the above for Subversion repositories, and can also be used to http://google-opensource.blogspot.com/2008/05/export-git-project-to-google-code.html[export a Git project to a Subversion repository].
+Subversion, có lẽ là hệ thống quản lý mã nguồn tập trung tốt nhất, được sử dụng trong vô số các dự án. Lệnh *git svn* automates the above for Subversion repositories, and can also be used to http://google-opensource.blogspot.com/2008/05/export-git-project-to-google-code.html[export a Git project to a Subversion repository].
 
 === Mercurial ===
 
-Mercurial là hệ thống quản lý mã nguồn is a similar version control system that can almost seamlessly work in tandem with Git. Với  plugin `hg-git`, người sử dụng Mercurial có thể push và pull từ kho Git mà không tổn thất gì.
+Mercurial là hệ thống quản lý mã nguồn is a similar version control system that can almost seamlessly work in tandem with Git. Với  plugin `hg-git`, người sử dụng Mercurial có thể push và pull từ kho Git mà không mất mát gì.
 
 Lấy plugin `hg-git` dành cho Git bằng cách:
 
@@ -186,14 +187,14 @@ miễn phí và phổ biến nhất chỉ sau Git và Mercurial.
 
 Bazaar has the advantage of hindsight, as it is relatively young; its designers could learn from mistakes of the past, and sidestep minor historical warts. Ngoài ra, its developers are mindful of portability and interoperation with other version control systems.
 
-A `bzr-git` plugin lets Bazaar users work with Git repositories to some extent. The `tailor` program converts Bazaar repositories to Git repositories, and can do so incrementally, while `bzr-fast-export` is well-suited for one-shot conversions.
+Plugin `bzr-git` giúp người dùng Bazaar làm việc với kho Git to some extent. The `tailor` program converts Bazaar repositories to Git repositories, and can do so incrementally, trong khi `bzr-fast-export` thích hợp nhất cho one-shot conversions.
 
 === Tại sao Tôi sử dụng Git ===
 
-Trước tiên, tôi chọn Git bởi tôi nghe nói nó có thể quản lý mã nguồn cho nhân (kernel) của hệ điều hành Linux unimaginably unmanageable Linux kernel source. I've never felt a need to switch. Git has served admirably, and I've yet to be bitten by its flaws. As I primarily use Linux, issues on other platforms are of no concern.
+Trước tiên, tôi chọn Git bởi tôi nghe nói nó làm được việc phi thường là có thể quản lý mã nguồn cho một thứ khó quản lý như nhân (kernel) của hệ điều hành Linux. Tôi chưa bao giờ nghĩ đến việc chuyển sang cái khác. Git làm được những việc thật đáng ngưỡng mộ, and I've yet to be bitten by its flaws. As I primarily use Linux, issues on other platforms are of no concern.
 
 Ngoài ra, Thôi thích lập trình bằng ngôn ngữ C và bash scripts to executables such as Python scripts: there are fewer dependencies, and I'm addicted to fast running times.
 
-I did think about how Git could be improved, going so far as to write my own Git-like tool, but only as an academic exercise. Had I completed my project, I would have stayed with Git anyway, as the gains are too slight to justify using an oddball system.
+Tôi đã nghĩ về việc  about how Git could be improved, xa hơn nữa là tự mình viết một công cụ tương tự như Git, but only as an academic exercise. Had I completed my project, I would have stayed with Git anyway, as the gains are too slight to justify using an oddball system.
 
-Rất tự nhiên, những điều bạn cần và muốn your needs and wants có lẽ khác nhau, and you may be better off with another system. Nonetheless, you can't go far wrong with Git.
+Rất tự nhiên, những điều bạn cần và muốn your needs and wants có lẽ khác nhau, và bạn có thể tốt hơn nếu ở một hệ thống khác. Dù sao, bạn sẽ không bao giờ phải hối tiếc với Git.
