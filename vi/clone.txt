@@ -37,10 +37,10 @@ Trên máy chủ trung tâm, khởi tạo 'bare repository' ở một thư mục
 
 Khởi động dịch vụ Git daemon nếu cần:
 
- $ git daemon --detach  # nó có thể đang chạy rồi
+ $ git daemon --detach  # nó có thể đã hoạt động rồi
 
 Để làm một máy chủ chạy dịch vụ Git, làm theo các chỉ dẫn sau để cài đặt
-và khởi tạo kho Git. Typically one fills in a form on a webpage.
+và khởi tạo kho Git. Cách thường thấy là điền vào form trên trang web.
 
 'Push' dự án của bạn lên máy chủ trung tâm bằng lệnh:
 
@@ -72,32 +72,32 @@ khi trộn, sau đó thử lại.
 
 === Kho Bare ===
 
-Kho bare (kho trần) được đặt tên như vậy vì nó không chứa thư mục làm việc; nó chỉ chứa các tệp tin thường là ẩn trong thư mục phụ `.git`. Hay nói cách khác, nó chứa lịch sử mã nguồn của một dự án, and never holds a snapshot of any given version.
+Kho bare (kho trần) được đặt tên như vậy vì nó không chứa thư mục làm việc; nó chỉ chứa các tệp tin thường là ẩn trong thư mục phụ `.git`. Hay nói cách khác, nó chứa lịch sử mã nguồn của một dự án, và không bao giờ giữ snapshot của bất kỳ phiên bản nào.
 
-A bare repository plays a role similar to that of the main server in a
-centralized version control system: the home of your project. Developers clone
-your project from it, and push the latest official changes to it. Typically it
+Kho bare có vai trò hoạt động giống như máy chủ trung tâm trong các hệ thống
+quản lý mã nguồn tập trung: the home of your project. Các nhà phát triển phần mềm clone
+dữ liệu dự án của bạn ở đây, và push các thay đổi chính thức lên đó. Typically it
 resides on a server that does little else but disseminate data. Development
 occurs in the clones, so the home repository can do without a working
 directory.
 
-Nhiều lệnh Git commands gặp lỗi fail on bare repositories trừ phi biến môi trường `GIT_DIR` được đặt environment variable is set to the repository path, hay tùy chọn `--bare` được áp dụng.
+Nhiều lệnh Git commands gặp lỗi fail on bare repositories trừ phi biến môi trường `GIT_DIR` được đặt với giá trị là đường dẫn đến kho chứa, hay tùy chọn `--bare` được áp dụng.
 
 === Push versus pull ===
 
 Why did we introduce the push command, rather than rely on the familiar pull
-command? Firstly, pulling fails on bare repositories: instead you must 'fetch',
+command? Trước hết, pulling fails on bare repositories: instead you must 'fetch',
 a command we later discuss. But even if we kept a normal repository on the
 central server, pulling into it would still be cumbersome. We would have to
 login to the server first, and give the pull command the network address of the
 machine we're pulling from. Firewalls may interfere, and what if we have no
 shell access to the server in the first place?
 
-However, apart from this case, we discourage pushing into a repository, because confusion can ensue when the destination has a working directory.
+Tuy nhiên, ngoài trường hợp này ra, we discourage pushing into a repository, bởi vì tình trạng hỗn loạn có thể xảy khi thư mục đích có chứa thư mục làm việc.
 
 Tóm lại, khi học Git, chỉ push khi đích là kho bare; nếu không thì dùng pull.
 
-=== Forking a Project ===
+=== Rẽ nhánh Dự án ===
 
 Bạn chán ngấy cách mà dự án mà bạn đang làm việc chạy? Bạn nghĩ mình có thể làm tốt hơn thế? Thế thì trên máy chủ của mình:
 
@@ -111,9 +111,9 @@ Từ giờ trở đi, bạn có thể trộn các sự thay đổi từ dự án
 
 === Ultimate Backups ===
 
-Want numerous tamper-proof geographically diverse redundant archives? If your project has many developers, don't do anything! Every clone of your code is effectively a backup. Not just of the current state, but of your project's entire history. Thanks to cryptographic hashing, if anyone's clone becomes corrupted, it will be spotted as soon as they try to communicate with others.
+Want numerous tamper-proof geographically diverse redundant archives? Nếu dự án của bạn có nhiều người cùng phát triển, bạn không cần phải làm gì cả! Mỗi một bản clone đều đồng thời có tác dụng như một bản sao lưu dự phòng. Not just of the current state, but of your project's entire history. Thanks to cryptographic hashing, if anyone's clone becomes corrupted, it will be spotted as soon as they try to communicate with others.
 
-If your project is not so popular, find as many servers as you can to host clones.
+Nếu dự án của bạn không phổ biến, hãy tìm càng nhiều máy chủ lưu giữ bản clone của bạn càng nhiều càng tốt.
 
 The truly paranoid should always write down the latest 20-byte giá trị băm SHA1 của HEAD ở đâu đó an toàn. Nó phải an toàn, không riêng tư. Ví dụ, xuất bản nó lên báo giấy cũng tốt, bởi vì rất khó để thay đổi tất cả các bản sao của nó.
 
@@ -141,7 +141,7 @@ sau đó clone nó:
 
  $ git clone . /some/new/directory
 
-Bây giờ hãy chuyển đến thư mục mới đó và làm việc ở đây thay vì chỗ cũ, sử dụng Git to your heart's content. Đôi khi, bạn sẽ muốn đồng bộ hóa với những người khác nữa, in which case go to the original directory, sync using the other version control system, and type:
+Bây giờ hãy chuyển đến thư mục mới đó và làm việc ở đây thay vì chỗ cũ, sử dụng Git to your heart's content. Đôi khi, bạn sẽ muốn đồng bộ hóa với những người khác nữa, trong trường hợp đó hãy chuyển tới thư mục nguyên bản (original), đồng bộ hóa bằng cách sử dụng một hệ thống quản lý mã nguồn khác, và gõ:
 
  $ git add .
  $ git commit -m "Sync with everyone else"
@@ -153,7 +153,7 @@ Sau đó chuyển tới thư mục mới và chạy:
 
 The procedure for giving your changes to everyone else depends on the other version control system. The new directory contains the files with your changes. Run whatever commands of the other version control system are needed to upload them to the central repository.
 
-Subversion, có lẽ là hệ thống quản lý mã nguồn tập trung tốt nhất, được sử dụng trong vô số các dự án. Lệnh *git svn* automates the above for Subversion repositories, and can also be used to http://google-opensource.blogspot.com/2008/05/export-git-project-to-google-code.html[export a Git project to a Subversion repository].
+Subversion, có lẽ là hệ thống quản lý mã nguồn tập trung tốt nhất, được sử dụng bởi vô số các dự án. Lệnh *git svn* sẽ tự động hóa những việc đã nói ở trên dành cho Subversion, bạn cũng có thể làm như thế để http://google-opensource.blogspot.com/2008/05/export-git-project-to-google-code.html[xuất dự án Git thành Subversion].
 
 === Mercurial ===
 
@@ -167,9 +167,9 @@ hay là sử dụng Mercurial:
 
  $ hg clone http://bitbucket.org/durin42/hg-git/
 
-Thật buồn là tôi hay rằng có am unaware of an analogous plugin dành cho Git. Vì vậy, I advocate Git over Mercurial for the main repository, dù là bạn thích Mercurial. Với một dự án Mercurial, usually a volunteer maintains a parallel Git repository to accommodate Git users, whereas thanks to the `hg-git` plugin, a Git project automatically accommodates Mercurial users.
+Thật buồn là tôi hay rằng có am unaware of an analogous plugin dành cho Git. Vì vậy, tôi ủng hộ Git hơn Mercurial để for the main repository, dù là bạn thích Mercurial. Với một dự án Mercurial, usually a volunteer maintains a parallel Git repository to accommodate Git users, whereas thanks to the `hg-git` plugin, a Git project automatically accommodates Mercurial users.
 
-Although the plugin can convert a Mercurial repository to a Git repository by pushing to an empty repository, công việc này là dễ dàng với script `hg-fast-export.sh`, đã có từ:
+Mặc dù plugin có thể chuyển đổi Mercurial sang Git bằng cách push tới một kho rỗng, công việc này là dễ dàng với script `hg-fast-export.sh`, đã sẵn dùng từ:
 
  $ git clone git://repo.or.cz/fast-export.git
 
@@ -187,14 +187,14 @@ miễn phí và phổ biến nhất chỉ sau Git và Mercurial.
 
 Bazaar has the advantage of hindsight, as it is relatively young; its designers could learn from mistakes of the past, and sidestep minor historical warts. Ngoài ra, its developers are mindful of portability and interoperation with other version control systems.
 
-Plugin `bzr-git` giúp người dùng Bazaar làm việc với kho Git to some extent. The `tailor` program converts Bazaar repositories to Git repositories, and can do so incrementally, trong khi `bzr-fast-export` thích hợp nhất cho one-shot conversions.
+Plugin `bzr-git` giúp người dùng Bazaar làm việc với kho Git to some extent. The `tailor` program chuyển đổi Bazaar thành Git, and can do so incrementally, trong khi `bzr-fast-export` thích hợp nhất cho one-shot conversions.
 
 === Tại sao Tôi sử dụng Git ===
 
-Trước tiên, tôi chọn Git bởi tôi nghe nói nó làm được việc phi thường là có thể quản lý mã nguồn cho một thứ khó quản lý như nhân (kernel) của hệ điều hành Linux. Tôi chưa bao giờ nghĩ đến việc chuyển sang cái khác. Git làm được những việc thật đáng ngưỡng mộ, and I've yet to be bitten by its flaws. As I primarily use Linux, issues on other platforms are of no concern.
+Trước tiên, tôi chọn Git bởi tôi nghe nói nó làm được việc phi thường là có thể quản lý mã nguồn cho một thứ khó quản lý như nhân (kernel) của hệ điều hành Linux. Tôi chưa bao giờ nghĩ đến việc chuyển sang cái khác. Git làm được những việc thật đáng ngưỡng mộ, and I've yet to be bitten by its flaws. Do tôi hoạt động chủ yếu trên Linux, issues on other platforms are of no concern.
 
 Ngoài ra, Thôi thích lập trình bằng ngôn ngữ C và bash scripts to executables such as Python scripts: there are fewer dependencies, and I'm addicted to fast running times.
 
-Tôi đã nghĩ về việc  about how Git could be improved, xa hơn nữa là tự mình viết một công cụ tương tự như Git, but only as an academic exercise. Had I completed my project, I would have stayed with Git anyway, as the gains are too slight to justify using an oddball system.
+Tôi đã nghĩ về việc làm thế nào để Git có thể phát triển, xa hơn nữa là tự mình viết một công cụ tương tự như Git, but only as an academic exercise. Had I completed my project, I would have stayed with Git anyway, as the gains are too slight to justify using an oddball system.
 
-Rất tự nhiên, những điều bạn cần và muốn your needs and wants có lẽ khác nhau, và bạn có thể tốt hơn nếu ở một hệ thống khác. Dù sao, bạn sẽ không bao giờ phải hối tiếc với Git.
+Rất tự nhiên, những thứ cần thiết và mong muốn của bạn có lẽ khác nhau, và bạn có thể tốt hơn nếu ở một hệ thống khác. Dù sao đi nữa, bạn sẽ không bao giờ phải hối tiếc vì đã chọn Git.
