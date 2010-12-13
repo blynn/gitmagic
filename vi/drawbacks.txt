@@ -38,7 +38,7 @@ With appropriate scripting, you can achieve the same with Git. Điều này yêu
 
 === Lịch sử Tệp tin  ===
 
-Since Git records project-wide changes, reconstructing the history of a single file requires more work than in version control systems that track individual files.
+Since Git records project-wide changes, việc cấu trúc lại lịch sử của một tệp tin đơn lẻ yêu cầu more work than in version control systems that track individual files.
 
 The penalty is typically slight, and well worth having as other operations are incredibly efficient. Ví dụ, `git checkout` nhanh hơn `cp -a`, and project-wide deltas compress better than collections of file-based deltas.
 
