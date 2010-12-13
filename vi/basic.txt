@@ -2,18 +2,18 @@
 
 Thay vì lao vào cả một biển lệnh với Git, hãy sử dụng các ví dụ cơ bản để bắt đầu.
 Mặc dù chúng rất đơn giản, nhưng tất cả chúng đều rất hữu dụng.
-Quả thực là vậy, trong tháng đầu tiên sử dụng Git Tôi chưa bao giờ vượt qua những gì nói trong chương này.
+Quả thực là vậy, trong tháng đầu tiên sử dụng Git tôi chưa bao giờ vượt qua những gì nói trong chương này.
 
 === Ghi lại State ===
 
-Bạn muốn thử một điều gì đó quyết liệt ư? Trước khi làm điều đó, thực hiện các lệnh sau 
+Bạn muốn thử một số lệnh gì đó với Git? Trước khi làm điều đó, thực hiện các lệnh sau 
 trong thư mục hiện hành chứa các văn bản mà bạn muốn quản lý:
 
  $ git init
  $ git add .
  $ git commit -m "My first backup"
 
-Bây giờ nếu như các thay đổi của bạn không như mong đợi, hãy phục hồi lại bản cũ (bản cuối cùng bạn commit):
+Bây giờ nếu như các sửa đổi của bạn không như mong đợi, hãy phục hồi lại bản cũ (bản cuối cùng bạn commit):
 
  $ git reset --hard
 
@@ -23,18 +23,18 @@ Lưu lại state lần nữa:
 
 === Thêm, Xóa, Đổi tên ===
 
-Lệnh ở trên chỉ giữ dấu vết các tệp tin và hiện diện tại thời điểm bạn chạy lệnh *git add*. Nếu bạn thêm các tệp tin hay thư mục, bạn sẽ phải thông báo với Git:
+Lệnh ở trên chỉ giữ dấu vết các tệp tin và hiện diện tại thời điểm bạn chạy lệnh *git add*. Nếu bạn thêm các tệp tin hay thư mục, thì bạn sẽ phải thông báo với Git:
 
  $ git add readme.txt Documentation
 
-Tương tự như vậy, nếu bạn muốn Git bỏ qua các tệp tin nào đó:
+Tương tự như vậy, nếu bạn muốn Git bỏ đi các tệp tin nào đó:
 
  $ git rm kludge.h obsolete.c
  $ git rm -r incriminating/evidence/
 
 Git xóa bỏ những tệp tin nếu như bạn chưa làm.
 
-Đổi tên tệp tin thì cũng giống như là việc bạn gỡ bỏ tên cũ và đặt vào tên mới. Sử dụng lệnh *git mv* có cú pháp rất giống lệnh *mv*. Ví dụ:
+Đổi tên tệp tin thì cũng giống như là việc bạn gỡ bỏ tên cũ và đặt vào nó cái tên mới. Sử dụng lệnh *git mv* có cú pháp rất giống lệnh *mv*. Ví dụ:
 
  $ git mv bug.c feature.c
 
@@ -61,11 +61,11 @@ Date:   Thu Jan 1 00:00:00 1970 +0000
 ----------------------------------
 
 Chỉ vài ký tự của giá trị băm là đủ để chỉ ra một commit cụ thể;
-một cách khác là chép và dán giá trị băm. Gõ:
+một cách khác là chép (copy) và dán (paste) giá trị băm. Gõ:
 
  $ git reset --hard 766f
 
-để phục hồi lại state đã chỉ ra và xóa bỏ tất cả các lần commit mới hơn kể từ đó.
+để phục hồi lại state đã được chỉ ra và xóa bỏ tất cả các lần commit mới hơn kể từ đó.
 
 Một lúc nào đó bạn lại muốn nhảy tới một cái cũ hơn. Trong trường hợp này thì gõ:
 
@@ -84,7 +84,7 @@ Sự tương đồng với game trên máy tính:
 
 - *`git reset --hard`*: lấy cái cũ đã được lưu lại và xóa tất cả các games mới hơn cái vừa lấy.
 
-- *`git checkout`*: lấy một cái cũ, nhưng chỉ chơi với nó, state của game sẽ tách rời về phía mới hơn chỗ mà bạn đã ghi lại lần đầu tiên will deviate from the newer saves you made the first time around. Bất kỳ game nào bạn tạo từ bây giờ sẽ là bản cuối cùng trong nhánh riêng rẽ tương ứng với một thực tại khác mà bạn đã gia nhập vào. <<branch, Chúng tôi sẽ nói sau>>.
+- *`git checkout`*: lấy một cái cũ, nhưng chỉ chơi với nó, state của game sẽ tách riêng về phía mới hơn chỗ mà bạn đã ghi lại lần đầu tiên. Bất kỳ game nào bạn tạo từ bây giờ sẽ là bản cuối cùng trong nhánh riêng rẽ tương ứng với một thực tại khác mà bạn đã gia nhập vào. <<branch, chúng tôi sẽ nói sau>>.
 
 Bạn có thể chọn chỉ phục hồi lại các tệp tin hay thư mục bạn muốn bằng cách thêm vào nó vào phần sau của câu lệnh:
 
@@ -98,8 +98,8 @@ Bạn không thích việc cắt dán ư? Hãy sử dụng:
 
  $ git checkout :/"My first b"
 
-để nhảy tới lần commit mà phần chú thích của nó bắt đầu với chuỗi bạn cho.
-Bạn cũng có thể yêu cầu state thứ 5 kể từ cuối cùng:
+để nhảy tới lần commit mà phần chú thích của nó bắt đầu với chuỗi bạn đã cho.
+Bạn cũng có thể yêu cầu state thứ 5 kể từ cuối:
 
  $ git checkout master~5
 
@@ -140,7 +140,7 @@ Nếu bạn đã tải về một bản sao của một dự án sử dụng *gi
 
 === Xuất bản ===
 
-Giả sử bạn đã tạo được script và bạn muốn chia sẻ nó với người khác. Bạn có thể bảo họ tải về từ máy tính của mình, nhưng nếu họ làm như thế trong khi bạn đang cải tiến script hay có những thay đổi mang tính thử nghiệm, họ có thể gặp trục trặc.  Dĩ nhiên, đây là lý do tại sao mà chu kỳ phát hành phần mềm lại tồn tại phải không nào. Những người phát triển có thể làm việc thường xuyên trên một dự án, nhưng họ chỉ đưa ra những đoạn mã mà họ cảm thấy nó có thể dùng được để tránh ảnh hưởng đến người khác.
+Giả sử bạn đã tạo được script và bạn muốn chia sẻ nó với người khác. Bạn có thể bảo họ tải về từ máy tính của mình, nhưng nếu họ làm như thế trong khi bạn đang cải tiến script hay có những thay đổi mang tính thử nghiệm, họ có thể gặp trục trặc. Dĩ nhiên, đây là lý do tại sao mà chu kỳ phát hành phần mềm lại tồn tại phải không nào. Những người phát triển có thể làm việc thường xuyên trên một dự án, nhưng họ chỉ đưa ra những đoạn mã mà họ cảm thấy nó có thể dùng được để tránh ảnh hưởng đến người khác.
 
 Thực hiện điều này với Git, trong thư mục làm việc của Git:
 
@@ -166,7 +166,7 @@ và những người sử dụng có thể cập nhật dữ liệu của họ b
 
 Những người sử dụng sẽ không bao giờ thấy được script cuối cùng của bạn mà bạn không muốn họ thấy.
 
-=== Tôi Phải Làm Gì? ===
+=== Tôi Đã Làm Gì? ===
 
 Tìm tất cả các thay đổi kề từ lần bạn commit lần cuối bằng lệnh:
 
@@ -209,4 +209,4 @@ Coi A, B, C, D là 4 lần commit thành công, nơi mà B giống A ngoại tr�
 
    $ git revert B
 
-Lựa chọn nào là tốt nhất? Cách nào bạn thích nhất. Thật dễ dàng để có được thứ mà bạn muốn với Git, và thường là có nhiều cách để thực hiện được điều đó.
+Lựa chọn nào là tốt nhất? Cách nào bạn thích nhất. Thật dễ dàng để có được thứ mà bạn muốn với Git, và thường là có nhiều cách để thực hiện được một thứ bạn muốn.
