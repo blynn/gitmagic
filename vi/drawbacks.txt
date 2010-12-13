@@ -1,13 +1,13 @@
 ﻿== Phụ lục A: Hạn chế của Git ==
 
-There are some Git issues I've swept under the carpet. Some can be handled easily with scripts and hooks, some require reorganizing or redefining the project, and for the few remaining annoyances, one will just have to wait. Or better yet, pitch in and help!
+There are some Git issues I've swept under the carpet. Một số có thể xử lý thủ công một cách dễ dàng bằng các script và hook, một số yêu cầu phải tổ chức lại hay xác lập lại dự án, and for the few remaining annoyances, one will just have to wait. Or better yet, bắt tay vào và giúp đỡ!
 
-=== SHA1 Weaknesses ===
+=== Điểm yếu SHA1 ===
 
-As time passes, cryptographers discover more and more SHA1 weaknesses. Already,
+Thời gian trôi đi, những nhà mật mã đã phát hiện ra ngày càng nhiều điểm yếu của thuật toán SHA1. Already,
 finding hash collisions is feasible for well-funded organizations. Trong khoảng
-vài năm, perhaps even a typical PC will have enough computing power to silently
-corrupt a Git repository.
+vài năm, có lẽ những chiếc PC thông thường cũng đủ sức để âm thầm
+làm hư hỏng một kho Git.
 
 Hopefully Git will migrate to a better hash function before further research
 destroys SHA1.
@@ -22,7 +22,7 @@ Sử dụng Git trên hệ điều hành Microsoft Windows có vẻ hơi cồng 
 
 === Unrelated Files ===
 
-Nếu dự án của bạn rất lơn và chứa rất nhiều tệp tin không có liên quan mà luôn luôn bị thay đổi, Git may be disadvantaged more than other systems because single files are not tracked. Git tracks changes to the whole project, which is usually beneficial.
+Nếu dự án của bạn rất lơn và chứa rất nhiều tệp tin không có liên quan mà luôn luôn bị thay đổi, Git có thể chịu thiệt thòi hơn các hệ thống khác bởi vì các tệp tin riêng lẻ không được giữ dấu viết. Git giữ các dấu vết thay đổi cho toàn bộ dự án, điều này thường có lợi.
 
 Giải pháp là chia nhỏ dự án của bạn ra, mỗi một phần bao gồm các tệp tin liên quan. Hãy sử dụng *git submodule* nếu bạn vẫn muốn giữ mọi thứ trong một kho chung.
 
@@ -34,9 +34,9 @@ Một số hệ thống quản lý mã nguồn bắt buộc bạn đánh dấu r
 
   2. One can discover who else is working on the file by asking the central server who has marked it for editing.
 
-With appropriate scripting, you can achieve the same with Git. This requires cooperation from the programmer, who should execute particular scripts when editing a file.
+With appropriate scripting, you can achieve the same with Git. Điều này yêu cầu sự hợp tác từ người lập trình, who should execute particular scripts khi biên soạn một tệp tin.
 
-=== File History ===
+=== Lịch sử Tệp tin  ===
 
 Since Git records project-wide changes, reconstructing the history of a single file requires more work than in version control systems that track individual files.
 
@@ -46,7 +46,7 @@ The penalty is typically slight, and well worth having as other operations are i
 
 Việc tạo một bản sao có vẻ hơi xa xỉ hơn là checking out trong các hệ thống quản lý mã nguồn khác khi nó có lịch sử phát triển lâu dài.
 
-The initial cost is worth paying in the long run, như thế các tác vụ cần làm trong tương lai sẽ nhanh chóng và không cần mạng. Tuy nhiên, trong một số hoàn cảnh, it may be preferable to create a shallow clone with the với tùy chọn `--depth`. Điều này giúp làm nhanh hơn, but the resulting clone has reduced functionality.
+The initial cost is worth paying in the long run, như thế các tác vụ cần làm trong tương lai sẽ nhanh chóng và không cần mạng. Tuy nhiên, trong một số hoàn cảnh, việc làm thích đáng hơn là tạo một bản sao không đầy đủ tất cả với tùy chọn `--depth`. Điều này giúp làm nhanh hơn, but the resulting clone has reduced functionality.
 
 === Volatile Projects ===
 
@@ -56,17 +56,17 @@ There is nothing any version control system can do about this, but standard Git 
 
 The reasons why the changes are so great should be examined. Perhaps file formats should be changed. Minor edits should only cause minor changes to at most a few files.
 
-Or perhaps a database or backup/archival solution is what is actually being sought, not a version control system. For example, version control may be ill-suited for managing photos periodically taken from a webcam.
+Or perhaps a database or backup/archival solution is what is actually being sought, not a version control system. Ví dụ, quản lý mã nguồn không thích hợp cho việc quản lý ảnh được chụp một cách định kỳ từ webcam.
 
 If the files really must be constantly morphing and they really must be versioned, a possibility is to use Git in a centralized fashion. One can create shallow clones, which checks out little or no history of the project. Of course, many Git tools will be unavailable, and fixes must be submitted as patches. This is probably fine as it's unclear why anyone would want the history of wildly unstable files.
 
-Another example is a project depending on firmware, which takes the form of a huge binary file. The history of the firmware is uninteresting to users, and updates compress poorly, so firmware revisions would unnecessarily blow up the size of the repository.
+Một ví dụ khác là dự án phụ thuộc vào firmware, which takes the form of a huge binary file. Người sử dụng không quan tâm tới lịch sử của firmware, and updates compress poorly, vì vậy quản lý firmware để làm phình to kích thước kho chứa có lẽ là không cần thiết.
 
-In this case, the source code should be stored in a Git repository, and the binary file should be kept separately. To make life easier, one could distribute a script that uses Git to clone the code, and rsync or a Git shallow clone for the firmware.
+Trong trường hợp này, mã nguồn có thể lưu giữ trong kho Git, và tệp tin nhị phân được giữ ở nơi khác. To make life easier, one could distribute a script that uses Git để clone mã nguồn, và dùng lệnh rsync hay Git shallow clone cho firmware.
 
 === Global Counter ===
 
-Some centralized version control systems maintain a positive integer that increases when a new commit is accepted. Git refers to changes by their hash, which is better in many circumstances.
+Một số hệ quản trị mã nguồn tập trung duy trì một số nguyên dương tự động tăng lên khi có lần commit mới được chấp nhận. Git quy các thay đổi này bởi giá trị băm của chúng, điều này là tốt trong phần lớn hoàn cảnh.
 
 Nhưng một số người thích có nó ở dạng số nguyên. May mắn thay, it's easy to write scripts so that with every update, the central Git repository increments an integer, perhaps in a tag, and associates it with the hash of the latest commit.
 
@@ -82,11 +82,11 @@ Xét về mặt thi hành của Git, thay vì sự thiết kế của nó, đi�
 
 A stereotypical computer scientist counts từ 0, thay vì 1. Thật không may, with respect to commits, git does not adhere to this convention. Many commands are unfriendly before the initial commit. Thêm nữa, some corner cases must be handled specially, such as rebasing a branch with a different initial commit.
 
-Git would benefit from defining the zero commit: as soon as a repository is constructed, HEAD được đặt cho một chuỗi ký tự bao gồm 20 byte rỗng. This special commit tương ứng với một cây (tree) rỗng, không có gốc, at some time predating all Git repositories.
+Git would benefit from defining the zero commit: as soon as a repository is constructed, HEAD được đặt cho một chuỗi ký tự bao gồm 20 byte rỗng. Lần commit đặc biệt này tương ứng với một cây (tree) rỗng, không có gốc, at some time predating all Git repositories.
 
 Then running git log, for example, would inform the user that no commits have been made yet, instead of exiting with a fatal error. Similarly for other tools.
 
-Every initial commit is implicitly a descendant of this zero commit.
+Tất cả các bản commit đầu tiên hoàn toàn là con cháu của bản 0 (zero).
 
 Tuy nhiên, ở đây có một số vấn đề there are some problem cases unfortunately. Nếu nhiều nhánh  If several branches with different initial commits are merged together, then rebasing the result requires substantial manual intervention.
 
