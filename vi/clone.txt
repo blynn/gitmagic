@@ -17,7 +17,7 @@ Khởi tạo kho chứa Git và commit các tệp tin trên một máy tính. Sa
  $ git commit -a
  $ git pull other.computer:/path/to/files HEAD
 
-sẽ 'pull' in the state of the files on the other computer into the one you're working on. Nếu bạn vừa tạo ra một sự chỉnh sửa
+sẽ 'pull' state của các tệp tin trên máy tính khác về máy bạn đang làm việc. Nếu bạn vừa tạo ra một sự chỉnh sửa
 xung đột trong cùng một tệp tin , Git sẽ cho bạn biết và bạn có thể commit lại sau khi sửa chữa chúng.
 
 === Classic Source Control ===
@@ -105,7 +105,7 @@ Bạn chán ngấy cách mà dự án mà bạn đang làm việc chạy? Bạn 
 
 Tiếp theo, nói với mọi người về nhánh rẽ từ dự án của bạn tại máy chủ của bạn.
 
-Từ giờ trở đi, bạn có thể trộn các sự thay đổi từ dự án gốc với you can merge in the changes from the original project with:
+Từ giờ trở đi, bạn có thể trộn các sự thay đổi từ dự án gốc với lệnh:
 
  $ git pull
 
@@ -119,17 +119,17 @@ The truly paranoid should always write down the latest 20-byte giá trị băm S
 
 === Light-Speed Multitask ===
 
-Say you want to work on several features in parallel. Sau đó commit dự án của bạn và chạy:
+Bạn muốn làm nhiều việc cùng một lúc trên một dự án. Thế thì hãy commit dự án của bạn và chạy:
 
  $ git clone . /some/new/directory
 
-Git exploits hard links and file sharing as much as safely possible to create this clone, so it will be ready in a flash, and you can now work on two independent features simultaneously. Ví dụ như, you can edit one clone while the other is compiling.
+Git lợi dụng liên kết cứng (hard links) và sự chia sẻ tệp tin càng nhiều càng an toàn để tạo bản sao (clone) này, so it will be ready in a flash, và bây giờ bạn có thể làm hai việc độc lập cùng một lúc. Ví dụ như, bạn soạn thảo trên bản sao này trong khi đó lại dịch trên cái kia.
 
 Bất kỳ lúc nào, bạn cũng có thể commit và pull các thay đổi từ một bản sao (clone) khác.
 
  $ git pull /the/other/clone HEAD
 
-=== Guerilla Version Control ===
+=== Guerilla  ===
 
 Bạn đang làm việc cho một dự án có sử dụng hệ thống quản lý mã nguồn cũ, và bạn lại muốn sử dụng Git? Thế thì hãy khởi tạo kho chứa Git trong thư mục bạn đang làm việc:
 
@@ -193,8 +193,8 @@ Plugin `bzr-git` giúp người dùng Bazaar làm việc với kho Git to some e
 
 Trước tiên, tôi chọn Git bởi tôi nghe nói nó làm được việc phi thường là có thể quản lý mã nguồn cho một thứ khó quản lý như nhân (kernel) của hệ điều hành Linux. Tôi chưa bao giờ nghĩ đến việc chuyển sang cái khác. Git làm được những việc thật đáng ngưỡng mộ, and I've yet to be bitten by its flaws. Do tôi hoạt động chủ yếu trên Linux, issues on other platforms are of no concern.
 
-Ngoài ra, Thôi thích lập trình bằng ngôn ngữ C và bash scripts to executables such as Python scripts: there are fewer dependencies, and I'm addicted to fast running times.
+Ngoài ra, Thôi thích lập trình bằng ngôn ngữ C và bash scripts to executables such as Python scripts: there are fewer dependencies, và tôi I'm addicted to fast running times.
 
 Tôi đã nghĩ về việc làm thế nào để Git có thể phát triển, xa hơn nữa là tự mình viết một công cụ tương tự như Git, but only as an academic exercise. Had I completed my project, I would have stayed with Git anyway, as the gains are too slight to justify using an oddball system.
 
-Rất tự nhiên, những thứ cần thiết và mong muốn của bạn có lẽ khác nhau, và bạn có thể tốt hơn nếu ở một hệ thống khác. Dù sao đi nữa, bạn sẽ không bao giờ phải hối tiếc vì đã chọn Git.
+Rất tự nhiên, những thứ cần thiết và thứ bạn mong muốn có lẽ khác nhau, và bạn có thể tốt hơn nếu ở một hệ thống khác. Dù sao đi nữa, bạn sẽ không bao giờ phải hối tiếc vì đã chọn Git.
