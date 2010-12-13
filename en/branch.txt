@@ -77,20 +77,12 @@ You're in the middle of something when you are told to drop everything and fix a
 Then once you've fixed the bug:
 
  $ git commit -a -m "Bug fixed"
- $ git push  # to the central repository
  $ git checkout master
 
-and resume work on your original task.
-
-You can even 'merge' in the bugfix you just made, either by typing:
+and resume work on your original task. You can even 'merge' in the freshly
+baked bugfix:
 
  $ git merge fixes
-
-or:
-
- $ git pull
-
-since you have already pushed the bugfix to the main repository.
 
 === Merging ===
 
@@ -162,7 +154,7 @@ Eventually, Part I is approved:
  $ git checkout master  # Go back to Part I.
  $ submit files         # Release to the world!
  $ git merge part2      # Merge in Part II.
- $ git branch -d part2
+ $ git branch -d part2  # Delete "part2" branch.
 
 Now you're in the `master` branch again, with Part II in the working directory.
 
@@ -170,23 +162,22 @@ It's easy to extend this trick for any number of parts. It's also easy to
 branch off retroactively: suppose you belatedly realize you should have created
 a branch 7 commits ago. Then type:
 
- $ git branch -m master part2     # Rename "master" branch to "part2".
- $ git checkout HEAD~7 -b master  # Create new "master" branch, 7 commits upstream, and switch to it
+ $ git branch -m master part2  # Rename "master" branch to "part2".
+ $ git branch master HEAD~7    # Create new "master", 7 commits upstream.
 
 The `master` branch now contains just Part I, and the `part2` branch contains
-the rest. Also, we are now working on the newly created `master` branch. If you just 
-want to create the `master` branch without switching to it, use
+the rest. We are in the latter branch; we created `master` without switching to
+it, because we want to continue work on `part2`. This is unusual. Until now,
+we've been switching to branches immediately after creation, as in:
 
- $ git branch master HEAD~7
- 
-instead of `git checkout -b`.
+ $ git checkout HEAD~7 -b master  # Create a branch, and switch to it.
 
 === Reorganizing a Medley ===
 
 Perhaps you like to work on all aspects of a project in the same branch. You want to keep works-in-progress to yourself and want others to see your commits only when they have been neatly organized. Start a couple of branches:
 
-  $ git branch sanitized    # Create a branch for sanitized commits
-  $ git checkout -b medley  # Create a branch for works-in-progress, and switch to it.
+  $ git branch sanitized    # Create a branch for sanitized commits.
+  $ git checkout -b medley  # Create and switch to a branch to work in.
 
 Next, work on anything: fix bugs, add features, add temporary code, and so forth, committing often along the way. Then:
 
