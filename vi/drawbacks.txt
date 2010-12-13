@@ -1,12 +1,12 @@
-== Appendix A: Git Shortcomings ==
+﻿== Phụ lục A: Hạn chế của Git ==
 
 There are some Git issues I've swept under the carpet. Some can be handled easily with scripts and hooks, some require reorganizing or redefining the project, and for the few remaining annoyances, one will just have to wait. Or better yet, pitch in and help!
 
 === SHA1 Weaknesses ===
 
 As time passes, cryptographers discover more and more SHA1 weaknesses. Already,
-finding hash collisions is feasible for well-funded organizations. Within
-years, perhaps even a typical PC will have enough computing power to silently
+finding hash collisions is feasible for well-funded organizations. Trong khoảng
+vài năm, perhaps even a typical PC will have enough computing power to silently
 corrupt a Git repository.
 
 Hopefully Git will migrate to a better hash function before further research
@@ -14,21 +14,21 @@ destroys SHA1.
 
 === Microsoft Windows ===
 
-Git on Microsoft Windows can be cumbersome:
+Sử dụng Git trên hệ điều hành Microsoft Windows có vẻ hơi cồng kềnh một chút:
 
-- http://cygwin.com/[Cygwin], a Linux-like environment for Windows, contains http://cygwin.com/packages/git/[a Windows port of Git].
+- http://cygwin.com/[Cygwin], a Linux-like environment for Windows, có chứa  http://cygwin.com/packages/git/[Git đã chuyển đổi để chạy trên Windows].
 
-- http://code.google.com/p/msysgit/[Git on MSys] is an alternative requiring minimal runtime support, though a few of the commands need some work.
+- http://code.google.com/p/msysgit/[Git chạy trên MSys] là một thay thế với các hỗ trợ tối thiểu nhất, bởi vì chỉ cần một số lệnh để làm một số việc thôi.
 
 === Unrelated Files ===
 
-If your project is very large and contains many unrelated files that are constantly being changed, Git may be disadvantaged more than other systems because single files are not tracked. Git tracks changes to the whole project, which is usually beneficial.
+Nếu dự án của bạn rất lơn và chứa rất nhiều tệp tin không có liên quan mà luôn luôn bị thay đổi, Git may be disadvantaged more than other systems because single files are not tracked. Git tracks changes to the whole project, which is usually beneficial.
 
-A solution is to break up your project into pieces, each consisting of related files. Use *git submodule* if you still want to keep everything in a single repository.
+Giải pháp là chia nhỏ dự án của bạn ra, mỗi một phần bao gồm các tệp tin liên quan. Hãy sử dụng *git submodule* nếu bạn vẫn muốn giữ mọi thứ trong một kho chung.
 
 === Who's Editing What? ===
 
-Some version control systems force you to explicitly mark a file in some way before editing. While this is especially annoying when this involves talking to a central server, it does have two benefits:
+Một số hệ thống quản lý mã nguồn bắt buộc bạn đánh dấu rõ ràng vào tệp tin theo một cách nào đó trước khi biên soạn. While this is especially annoying when this involves talking to a central server, it does have two benefits:
 
   1. Diffs are quick because only the marked files need be examined.
 
@@ -40,13 +40,13 @@ With appropriate scripting, you can achieve the same with Git. This requires coo
 
 Since Git records project-wide changes, reconstructing the history of a single file requires more work than in version control systems that track individual files.
 
-The penalty is typically slight, and well worth having as other operations are incredibly efficient. For example, `git checkout` is faster than `cp -a`, and project-wide deltas compress better than collections of file-based deltas.
+The penalty is typically slight, and well worth having as other operations are incredibly efficient. Ví dụ, `git checkout` nhanh hơn `cp -a`, and project-wide deltas compress better than collections of file-based deltas.
 
-=== Initial Clone ===
+=== Khởi tạo Bản sao ===
 
-Creating a clone is more expensive than checking out code in other version control systems when there is a lengthy history.
+Việc tạo một bản sao có vẻ hơi xa xỉ hơn là checking out trong các hệ thống quản lý mã nguồn khác khi nó có lịch sử phát triển lâu dài.
 
-The initial cost is worth paying in the long run, as most future operations will then be fast and offline. However, in some situations, it may be preferable to create a shallow clone with the `--depth` option. This is much faster, but the resulting clone has reduced functionality.
+The initial cost is worth paying in the long run, như thế các tác vụ cần làm trong tương lai sẽ nhanh chóng và không cần mạng. Tuy nhiên, trong một số hoàn cảnh, it may be preferable to create a shallow clone with the với tùy chọn `--depth`. Điều này giúp làm nhanh hơn, but the resulting clone has reduced functionality.
 
 === Volatile Projects ===
 
@@ -68,30 +68,30 @@ In this case, the source code should be stored in a Git repository, and the bina
 
 Some centralized version control systems maintain a positive integer that increases when a new commit is accepted. Git refers to changes by their hash, which is better in many circumstances.
 
-But some people like having this integer around. Luckily, it's easy to write scripts so that with every update, the central Git repository increments an integer, perhaps in a tag, and associates it with the hash of the latest commit.
+Nhưng một số người thích có nó ở dạng số nguyên. May mắn thay, it's easy to write scripts so that with every update, the central Git repository increments an integer, perhaps in a tag, and associates it with the hash of the latest commit.
 
 Every clone could maintain such a counter, but this would probably be useless, since only the central repository and its counter matters to everyone.
 
-=== Empty Subdirectories ===
+=== Các thư mục rỗng ===
 
-Empty subdirectories cannot be tracked. Create dummy files to work around this problem.
+Các thư mục rỗng không được theo dõi. Create dummy files to work around this problem.
 
-The current implementation of Git, rather than its design, is to blame for this drawback. With luck, once Git gains more traction, more users will clamour for this feature and it will be implemented.
+Xét về mặt thi hành của Git, thay vì sự thiết kế của nó, điều hạn chế này này là đáng trách. With luck, once Git gains more traction, more users will clamour for this feature and it will be implemented.
 
 === Initial Commit ===
 
-A stereotypical computer scientist counts from 0, rather than 1. Unfortunately, with respect to commits, git does not adhere to this convention. Many commands are unfriendly before the initial commit. Additionally, some corner cases must be handled specially, such as rebasing a branch with a different initial commit.
+A stereotypical computer scientist counts từ 0, thay vì 1. Thật không may, with respect to commits, git does not adhere to this convention. Many commands are unfriendly before the initial commit. Thêm nữa, some corner cases must be handled specially, such as rebasing a branch with a different initial commit.
 
-Git would benefit from defining the zero commit: as soon as a repository is constructed, HEAD would be set to the string consisting of 20 zero bytes. This special commit represents an empty tree, with no parent, at some time predating all Git repositories.
+Git would benefit from defining the zero commit: as soon as a repository is constructed, HEAD được đặt cho một chuỗi ký tự bao gồm 20 byte rỗng. This special commit tương ứng với một cây (tree) rỗng, không có gốc, at some time predating all Git repositories.
 
 Then running git log, for example, would inform the user that no commits have been made yet, instead of exiting with a fatal error. Similarly for other tools.
 
 Every initial commit is implicitly a descendant of this zero commit.
 
-However there are some problem cases unfortunately. If several branches with different initial commits are merged together, then rebasing the result requires substantial manual intervention.
+Tuy nhiên, ở đây có một số vấn đề there are some problem cases unfortunately. Nếu nhiều nhánh  If several branches with different initial commits are merged together, then rebasing the result requires substantial manual intervention.
 
-=== Interface Quirks ===
+=== Giao diện Lập lờ ===
 
-For commits A and B, the meaning of the expressions "A..B" and "A...B" depends
-on whether the command expects two endpoints or a range. See *git help diff*
-and *git help rev-parse*.
+Để commit A và B, nghĩa của biểu thức "A..B" và "A...B" tùy thuộc vào
+việc lệnh mong đó là hai điểm mút hay một vùng. Xem *git help diff*
+và *git help rev-parse*.
