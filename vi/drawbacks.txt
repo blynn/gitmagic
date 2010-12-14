@@ -1,6 +1,6 @@
 ﻿== Phụ lục A: Hạn chế của Git ==
 
-There are some Git issues I've swept under the carpet. Một số có thể xử lý thủ công một cách dễ dàng bằng các script và hook, một số yêu cầu phải tổ chức lại hay xác lập lại dự án, and for the few remaining annoyances, one will just have to wait. Or better yet, bắt tay vào và giúp đỡ!
+There are some Git issues I've swept under the carpet. Một số có thể xử lý thủ công một cách dễ dàng bằng các script và hook, một số yêu cầu phải tổ chức lại hay xác lập lại dự án, and for the few remaining annoyances, chỉ có cách là ngồi đợi. Hay tốt hơn cả là bắt tay vào và giúp đỡ!
 
 === Điểm yếu SHA1 ===
 
@@ -46,13 +46,13 @@ The penalty is typically slight, and well worth having as other operations are i
 
 Việc tạo một bản sao có vẻ hơi xa xỉ hơn là checking out trong các hệ thống quản lý mã nguồn khác khi nó có lịch sử phát triển lâu dài.
 
-The initial cost is worth paying in the long run, như thế các tác vụ cần làm trong tương lai sẽ nhanh chóng và không cần mạng. Tuy nhiên, trong một số hoàn cảnh, việc làm thích đáng hơn là tạo một bản sao không đầy đủ tất cả với tùy chọn `--depth`. Điều này giúp làm nhanh hơn, but the resulting clone has reduced functionality.
+The initial cost is worth paying in the long run, như thế các tác vụ cần làm trong tương lai sẽ nhanh chóng và không cần mạng. Tuy nhiên, trong một số hoàn cảnh, việc làm thích đáng hơn là tạo một bản sao không đầy đủ tất cả với tùy chọn `--depth`. Điều này giúp làm nhanh hơn, nhưng bản sao nhận được sẽ thiếu đi một số chức năng.
 
 === Volatile Projects ===
 
-Git was written to be fast with respect to the size of the changes. Humans make small edits from version to version. A one-liner bugfix here, a new feature there, emended comments, and so forth. But if your files are radically different in successive revisions, then on each commit, your history necessarily grows by the size of your whole project.
+Git was written to be fast with respect to the size of the changes. Humans make small edits from version to version. A one-liner bugfix here, a new feature there, emended comments, and so forth. Nhưng nếu các tệp tin của bạn căn bản khác nhau  different in successive revisions, then on each commit, your history necessarily grows by the size of toàn bộ dự án của bạn.
 
-There is nothing any version control system can do about this, but standard Git users will suffer more since normally histories are cloned.
+Không có  bất kỳ một hệ thống quản lý mã nguồn nào có thể làm được điều này, but standard Git users will suffer more since normally histories are cloned.
 
 The reasons why the changes are so great should be examined. Perhaps file formats should be changed. Minor edits should only cause minor changes to at most a few files.
 
@@ -68,30 +68,30 @@ Trong trường hợp này, mã nguồn có thể lưu giữ trong kho Git, và 
 
 Một số hệ quản trị mã nguồn tập trung duy trì một số nguyên dương tự động tăng lên khi có lần commit mới được chấp nhận. Git quy các thay đổi này bởi giá trị băm của chúng, điều này là tốt trong phần lớn hoàn cảnh.
 
-Nhưng một số người thích có nó ở dạng số nguyên. May mắn thay, it's easy to write scripts so that with every update, the central Git repository increments an integer, perhaps in a tag, and associates it with the hash of the latest commit.
+Nhưng một số người thích có nó ở dạng số nguyên. May mắn thay, rất dễ dàng để viết các script như thế với mỗi lần cập nhật, kho Git trung tâm Git gia một số nguyên, có thể là trong một thẻ (tag), và kết hợp nó với giá trị băm của lần commit cuối.
 
 Every clone could maintain such a counter, but this would probably be useless, since only the central repository and its counter matters to everyone.
 
 === Các thư mục rỗng ===
 
-Các thư mục rỗng không được theo dõi. Create dummy files to work around this problem.
+Các thư mục rỗng không được theo dõi. Tạo ra các tệp tin giả để thử trục trặc này.
 
-Xét về mặt thi hành của Git, thay vì sự thiết kế của nó, điều hạn chế này này là đáng trách. With luck, once Git gains more traction, more users will clamour for this feature and it will be implemented.
+Xét về mặt thi hành của Git, thay vì sự thiết kế của nó, điều hạn chế này này là đáng trách. Với một chút may mắn, once Git gains more traction, thêm nhiều người đòi hỏi tính năng này và nó sẽ được thực hiện.
 
 === Initial Commit ===
 
 A stereotypical computer scientist counts từ 0, thay vì 1. Thật không may, with respect to commits, git does not adhere to this convention. Many commands are unfriendly before the initial commit. Thêm nữa, some corner cases must be handled specially, such as rebasing a branch with a different initial commit.
 
-Git would benefit from defining the zero commit: as soon as a repository is constructed, HEAD được đặt cho một chuỗi ký tự bao gồm 20 byte rỗng. Lần commit đặc biệt này tương ứng với một cây (tree) rỗng, không có gốc, at some time predating all Git repositories.
+Git would benefit from defining the zero commit: ngay khi kho chứa được tạo ra, HEAD được đặt cho một chuỗi ký tự bao gồm 20 byte rỗng. Lần commit đặc biệt này tương ứng với một cây (tree) rỗng, không có gốc, at some time predating all Git repositories.
 
-Then running git log, for example, would inform the user that no commits have been made yet, instead of exiting with a fatal error. Similarly for other tools.
+Sau đó chạy lệnh git log, ví dụ thế, thì báo cho người sử dụng biết chưa có lần commit nào, thay vì phát ra một lỗi nghiêm trọng. Điều tương tự xảy ra với các công cụ khác.
 
 Tất cả các bản commit đầu tiên hoàn toàn là con cháu của bản 0 (zero).
 
-Tuy nhiên, ở đây có một số vấn đề there are some problem cases unfortunately. Nếu nhiều nhánh  If several branches with different initial commits are merged together, then rebasing the result requires substantial manual intervention.
+Tuy nhiên, ở đây có một số vấn đề there are some problem cases unfortunately. Nếu nhiều nhánh với các lần khởi tạo commit khác nhau được trộn với nhau, then rebasing the result requires substantial manual intervention.
 
 === Giao diện Lập lờ ===
 
 Để commit A và B, nghĩa của biểu thức "A..B" và "A...B" tùy thuộc vào
-việc lệnh mong đó là hai điểm mút hay một vùng. Xem *git help diff*
+việc lệnh mong đó là hai điểm mút hay là một vùng. Xem *git help diff*
 và *git help rev-parse*.

@@ -17,7 +17,7 @@ Khởi tạo kho chứa Git và commit các tệp tin trên một máy tính. Sa
  $ git commit -a
  $ git pull other.computer:/path/to/files HEAD
 
-sẽ 'pull' state của các tệp tin trên máy tính khác về máy bạn đang làm việc. Nếu bạn vừa tạo ra một sự chỉnh sửa
+sẽ lấy (pull) một state của các tệp tin trên máy tính khác về máy bạn đang làm việc. Nếu bạn vừa tạo ra một sự chỉnh sửa
 xung đột trong cùng một tệp tin , Git sẽ cho bạn biết và bạn có thể commit lại sau khi sửa chữa chúng.
 
 === Classic Source Control ===
@@ -26,7 +26,7 @@ Khởi tạo kho Git cho các tệp tin của bạn:
 
  $ git init
  $ git add .
- $ git commit -m "Initial commit"
+ $ git commit -m "Lần commit khởi tạo"
 
 Trên máy chủ trung tâm, khởi tạo 'bare repository' ở một thư mục nào đó:
 
@@ -76,21 +76,21 @@ Kho bare (kho trần) được đặt tên như vậy vì nó không chứa thư
 
 Kho bare có vai trò hoạt động giống như máy chủ trung tâm trong các hệ thống
 quản lý mã nguồn tập trung: the home of your project. Các nhà phát triển phần mềm clone
-dữ liệu dự án của bạn ở đây, và push các thay đổi chính thức lên đó. Typically it
-resides on a server that does little else but disseminate data. Development
+dữ liệu dự án của bạn ở đây, và push các thay đổi chính thức lên đó. Thông thường nó
+đặt tại máy chủ resides on a server that does little else but disseminate data. Development
 occurs in the clones, so the home repository can do without a working
 directory.
 
-Nhiều lệnh Git commands gặp lỗi fail on bare repositories trừ phi biến môi trường `GIT_DIR` được đặt với giá trị là đường dẫn đến kho chứa, hay tùy chọn `--bare` được áp dụng.
+Nhiều lệnh Git gặp lỗi trên kho bare trừ phi biến môi trường `GIT_DIR` được đặt với giá trị là đường dẫn đến kho chứa, hay tùy chọn `--bare` được áp dụng.
 
-=== Push versus pull ===
+=== Push đối lập với pull ===
 
-Why did we introduce the push command, rather than rely on the familiar pull
-command? Trước hết, pulling fails on bare repositories: instead you must 'fetch',
-a command we later discuss. But even if we kept a normal repository on the
-central server, pulling into it would still be cumbersome. We would have to
-login to the server first, and give the pull command the network address of the
-machine we're pulling from. Firewalls may interfere, and what if we have no
+Tại sao chúng tôi lại giới thiệu lệnh push, thay vì trông cậy vào lệnh pull
+quen thuộc? Trước hết, việc pull gặp lỗi trên kho trần: thay vào đó bạn phải dùng lệnh 'fetch',
+lệnh này chúng ta sẽ nói sau. Nhưng dù là we kept a normal repository on the
+central server, pulling into it would still be cumbersome. Chúng ta phải
+đăng nhập vào máy chủ trước, và cung cấp cho lệnh pull địa chỉ mạng
+của máy chúng ta đang pull từ đó. Firewalls có thể gây trở ngại, and what if we have no
 shell access to the server in the first place?
 
 Tuy nhiên, ngoài trường hợp này ra, we discourage pushing into a repository, bởi vì tình trạng hỗn loạn có thể xảy khi thư mục đích có chứa thư mục làm việc.
@@ -105,19 +105,19 @@ Bạn chán ngấy cách mà dự án mà bạn đang làm việc chạy? Bạn 
 
 Tiếp theo, nói với mọi người về nhánh rẽ từ dự án của bạn tại máy chủ của bạn.
 
-Từ giờ trở đi, bạn có thể trộn các sự thay đổi từ dự án gốc với lệnh:
+Từ bây giờ trở đi, bạn có thể trộn các sự thay đổi từ dự án gốc với lệnh:
 
  $ git pull
 
-=== Ultimate Backups ===
+=== Backup Không giới hạn ===
 
-Want numerous tamper-proof geographically diverse redundant archives? Nếu dự án của bạn có nhiều người cùng phát triển, bạn không cần phải làm gì cả! Mỗi một bản clone đều đồng thời có tác dụng như một bản sao lưu dự phòng. Not just of the current state, but of your project's entire history. Thanks to cryptographic hashing, if anyone's clone becomes corrupted, it will be spotted as soon as they try to communicate with others.
+Want numerous tamper-proof geographically diverse redundant archives? Nếu dự án của bạn có nhiều người cùng phát triển, bạn không cần phải làm gì cả! Mỗi một bản clone đều đồng thời có tác dụng như một bản sao lưu dự phòng. Not just of the current state, but of your project's entire history. Thanks to cryptographic hashing, nếu bản sao của người nào đó bị hỏng, nó sẽ được spotted ngay sau khi họ liên lạc với những người khác.
 
-Nếu dự án của bạn không phổ biến, hãy tìm càng nhiều máy chủ lưu giữ bản clone của bạn càng nhiều càng tốt.
+Nếu dự án của bạn không phổ biến, hãy tìm càng nhiều máy chủ lưu giữ bản sao của bạn càng tốt.
 
-The truly paranoid should always write down the latest 20-byte giá trị băm SHA1 của HEAD ở đâu đó an toàn. Nó phải an toàn, không riêng tư. Ví dụ, xuất bản nó lên báo giấy cũng tốt, bởi vì rất khó để thay đổi tất cả các bản sao của nó.
+The truly paranoid should luôn luôn ghi ra 20-byte giá trị băm SHA1 cuối của HEAD ở đâu đó an toàn. Nó phải an toàn, không riêng tư. Ví dụ, xuất bản nó lên báo giấy cũng tốt, bởi vì rất khó để thay đổi tất cả các bản sao của nó.
 
-=== Light-Speed Multitask ===
+=== Làm nhiều việc cùng lúc ===
 
 Bạn muốn làm nhiều việc cùng một lúc trên một dự án. Thế thì hãy commit dự án của bạn và chạy:
 
@@ -135,7 +135,7 @@ Bạn đang làm việc cho một dự án có sử dụng hệ thống quản l
 
  $ git init
  $ git add .
- $ git commit -m "Initial commit"
+ $ git commit -m "Lần commit khởi tạo"
 
 sau đó clone nó:
 
@@ -144,14 +144,14 @@ sau đó clone nó:
 Bây giờ hãy chuyển đến thư mục mới đó và làm việc ở đây thay vì chỗ cũ, sử dụng Git to your heart's content. Đôi khi, bạn sẽ muốn đồng bộ hóa với những người khác nữa, trong trường hợp đó hãy chuyển tới thư mục nguyên bản (original), đồng bộ hóa bằng cách sử dụng một hệ thống quản lý mã nguồn khác, và gõ:
 
  $ git add .
- $ git commit -m "Sync with everyone else"
+ $ git commit -m "Đồng bộ hóa với những người khác"
 
 Sau đó chuyển tới thư mục mới và chạy:
 
- $ git commit -a -m "Description of my changes"
+ $ git commit -a -m "Mô tả về các thay đổi của tôi"
  $ git pull
 
-The procedure for giving your changes to everyone else depends on the other version control system. The new directory contains the files with your changes. Run whatever commands of the other version control system are needed to upload them to the central repository.
+The procedure for giving your changes to everyone else depends on the other version control system. The new directory contains the files with your changes. Chạy các lệnh mà hệ thống quản lý mã nguồn khác cần để tải chúng lên kho chứa trung tâm.
 
 Subversion, có lẽ là hệ thống quản lý mã nguồn tập trung tốt nhất, được sử dụng bởi vô số các dự án. Lệnh *git svn* sẽ tự động hóa những việc đã nói ở trên dành cho Subversion, bạn cũng có thể làm như thế để http://google-opensource.blogspot.com/2008/05/export-git-project-to-google-code.html[xuất dự án Git thành Subversion].
 
@@ -167,7 +167,7 @@ hay là sử dụng Mercurial:
 
  $ hg clone http://bitbucket.org/durin42/hg-git/
 
-Thật buồn là tôi hay rằng có am unaware of an analogous plugin dành cho Git. Vì vậy, tôi ủng hộ Git hơn Mercurial để for the main repository, dù là bạn thích Mercurial. Với một dự án Mercurial, usually a volunteer maintains a parallel Git repository to accommodate Git users, whereas thanks to the `hg-git` plugin, a Git project automatically accommodates Mercurial users.
+Thật buồn là tôi không biết rằng có một plugin tương tự dành cho Git. Vì vậy, tôi ủng hộ Git hơn Mercurial để for the main repository, dù là bạn thích Mercurial. Với một dự án Mercurial, usually a volunteer maintains a parallel Git repository to accommodate Git users, whereas thanks to the `hg-git` plugin, a Git project automatically accommodates Mercurial users.
 
 Mặc dù plugin có thể chuyển đổi Mercurial sang Git bằng cách push tới một kho rỗng, công việc này là dễ dàng với script `hg-fast-export.sh`, đã sẵn dùng từ:
 
@@ -185,16 +185,16 @@ sau khi đặt script vào trong biến môi trường `$PATH`.
 Chúng tôi đề cập vắn tắt về Bazaar bởi vì nó là hệ thống quản lý mã nguồn phân tán
 miễn phí và phổ biến nhất chỉ sau Git và Mercurial.
 
-Bazaar has the advantage of hindsight, as it is relatively young; its designers could learn from mistakes of the past, and sidestep minor historical warts. Ngoài ra, its developers are mindful of portability and interoperation with other version control systems.
+Bazaar có lợi thế vì phát triển sau, as it is relatively young; những người thiết kế ra nó có thể học hỏi được nhiều từ các sai lầm trong quá khứ, và tránh được vết xe đổ. Ngoài ra, các nhà phát triển còn lưu tâm đến khả năng chuyển đổi và tương tác với các hệ thống quản lý mã nguồn khác.
 
-Plugin `bzr-git` giúp người dùng Bazaar làm việc với kho Git to some extent. The `tailor` program chuyển đổi Bazaar thành Git, and can do so incrementally, trong khi `bzr-fast-export` thích hợp nhất cho one-shot conversions.
+Plugin `bzr-git` giúp người dùng Bazaar làm việc với kho Git trong chừng mực nào đó. The `tailor` program chuyển đổi Bazaar thành Git, and can do so incrementally, trong khi `bzr-fast-export` thích hợp nhất cho việc chuyển đổi một lần duy nhất.
 
 === Tại sao Tôi sử dụng Git ===
 
-Trước tiên, tôi chọn Git bởi tôi nghe nói nó làm được việc phi thường là có thể quản lý mã nguồn cho một thứ khó quản lý như nhân (kernel) của hệ điều hành Linux. Tôi chưa bao giờ nghĩ đến việc chuyển sang cái khác. Git làm được những việc thật đáng ngưỡng mộ, and I've yet to be bitten by its flaws. Do tôi hoạt động chủ yếu trên Linux, issues on other platforms are of no concern.
+Trước tiên, tôi chọn Git bởi tôi nghe nói nó làm được việc phi thường là có thể quản lý mã nguồn cho một thứ khó quản lý như nhân (kernel) của hệ điều hành Linux. Tôi chưa bao giờ nghĩ đến việc chuyển sang cái khác. Git làm được những việc thật đáng ngưỡng mộ, and I've yet to be bitten by its flaws. Do tôi hoạt động chủ yếu trên Linux, phát hành trên các nền tảng khác không phải là điều tôi quan tâm.
 
-Ngoài ra, Thôi thích lập trình bằng ngôn ngữ C và bash scripts to executables such as Python scripts: there are fewer dependencies, và tôi I'm addicted to fast running times.
+Ngoài ra, tôi thích lập trình bằng ngôn ngữ C và bash scripts to executables như là Python scripts: ở đây có rất ít sự phụ thuộc, và tôi I'm addicted to fast running times.
 
-Tôi đã nghĩ về việc làm thế nào để Git có thể phát triển, xa hơn nữa là tự mình viết một công cụ tương tự như Git, but only as an academic exercise. Had I completed my project, I would have stayed with Git anyway, as the gains are too slight to justify using an oddball system.
+Tôi đã nghĩ về việc làm thế nào để Git có thể phát triển, xa hơn nữa là tự mình viết một công cụ tương tự như Git, but only as an academic exercise. Had I completed my project, dù sao đi nữa tôi vẫn sẽ dùng Git, as the gains are too slight to justify using an oddball system.
 
-Rất tự nhiên, những thứ cần thiết và thứ bạn mong muốn có lẽ khác nhau, và bạn có thể tốt hơn nếu ở một hệ thống khác. Dù sao đi nữa, bạn sẽ không bao giờ phải hối tiếc vì đã chọn Git.
+Theo lẽ tự nhiên, những thứ cần thiết cho bạn và những thứ bạn mong muốn có lẽ khác nhau, và bạn có thể tốt hơn nếu ở một hệ thống khác. Dù sao đi nữa, bạn sẽ không bao giờ phải hối tiếc vì đã chọn Git.
