@@ -1,4 +1,4 @@
-== Git Grandmastery ==
+﻿== Git Grandmastery ==
 
 By now, you should be able to navigate the *git help* pages and understand
 almost everything. However, pinpointing the exact command required to solve a
@@ -39,7 +39,7 @@ Have you neglected to commit for too long? Been coding furiously and forgotten
 about source control until now? Made a series of unrelated changes, because
 that's your style?
 
-No worries. Run:
+Đừng lo lắng. Chạy:
 
  $ git add -p
 
@@ -47,7 +47,7 @@ For each edit you made, Git will show you the hunk of code that was changed,
 and ask if it should be part of the next commit. Answer with "y" or "n". You
 have other options, such as postponing the decision; type "?" to learn more.
 
-Once you're satisfied, type
+Khi nào bạn thỏa mãn thì gõ
 
  $ git commit
 
@@ -110,15 +110,15 @@ The reflog command provides a friendly interface to these log files. Try
 
   $ git reflog
 
-Instead of cutting and pasting hashes from the reflog, try:
+Thay vì phải cắt và dán giá trị băm từ reflog, hãy thử:
 
  $ git checkout "@{10 minutes ago}"
 
-Or checkout the 5th-last visited commit via:
+Hay checkout lần thứ 5th-last visited commit via:
 
  $ git checkout "@{5}"
 
-See the ``Specifying Revisions'' section of *git help rev-parse* for more.
+Xem chương ``Specifying Revisions'' từ lệnh *git help rev-parse* để biết thêm chi tiết.
 
 You may wish to configure a longer grace period for doomed commits. For
 example:

@@ -1,13 +1,13 @@
 ﻿== Các Lệnh Cơ bản ==
 
-Thay vì lao vào cả một biển lệnh với Git, hãy sử dụng các ví dụ cơ bản để bắt đầu.
+Thay vì lao vào cả một biển lệnh với Git, bạn hãy sử dụng các ví dụ cơ bản để bắt đầu.
 Mặc dù chúng rất đơn giản, nhưng tất cả chúng đều rất hữu dụng.
 Quả thực là vậy, trong tháng đầu tiên sử dụng Git tôi chưa bao giờ vượt qua những gì nói trong chương này.
 
 === Ghi lại State ===
 
 Bạn muốn thử một số lệnh gì đó với Git? Trước khi làm điều đó, thực hiện các lệnh sau 
-trong thư mục hiện hành chứa các văn bản mà bạn muốn quản lý:
+trong thư mục hiện hành chứa các mã nguồn hay văn bản mà bạn muốn quản lý:
 
  $ git init
  $ git add .
@@ -67,17 +67,17 @@ một cách khác là chép (copy) và dán (paste) giá trị băm. Gõ:
 
 để phục hồi lại state đã được chỉ ra và xóa bỏ tất cả các lần commit mới hơn kể từ đó.
 
-Một lúc nào đó bạn lại muốn nhảy tới một cái cũ hơn. Trong trường hợp này thì gõ:
+Một lúc nào đó bạn lại muốn nhảy tới một bản cũ hơn. Trong trường hợp này thì gõ:
 
  $ git checkout 82f5
 
-Nó giúp bạn quay lại đúng thời điểm đó, trong khi vẫn giữ lại những lần commit mới hơn. Tuy nhiên, giống như cỗ máy thời gian trong các bộ phim khoa học viễn tưởng, nếu bây giờ bạn sửa và commit, bạn sẽ ở trong một thực tại khác, bởi vì hành động của bạn bây giờ đã khác với chúng trong lần đầu tiên ở tại đây.
+Nó giúp bạn quay lại đúng thời điểm đó, trong khi vẫn giữ lại những lần commit mới hơn. Tuy nhiên, giống như cỗ máy thời gian trong các bộ phim khoa học viễn tưởng, nếu bây giờ bạn sửa sau đó commit, bạn sẽ ở trong một thực tại khác, bởi vì hành động của bạn bây giờ đã khác với chúng trong lần đầu tiên ở tại đây.
 
 Có cách thực tế hơn là sử dụng 'branch', và <<branch, chúng ta có nhiều điều để nói về nó sau này>>. Bây giờ, chỉ cần nhớ là
 
  $ git checkout master
 
-sẽ mang chúng ta trở về hiện tại. Ngoài ra, để không phải oán trách Git, luôn luôn
+sẽ mang chúng ta trở về hiện tại. Ngoài ra, để tránh rủi ro khi sử dụng Git, thì luôn luôn
 commit hay reset các thay đổi của bạn trước khi chạy lệnh checkout.
 
 Sự tương đồng với game trên máy tính:
@@ -90,7 +90,7 @@ Bạn có thể chọn chỉ phục hồi lại các tệp tin hay thư mục b�
 
  $ git checkout 82f5 some.file another.file
 
-Hãy cẩn thận, như là lệnh *checkout* có thể âm thầm ghi đè lên các tệp tin. Để
+Bạn phải cẩn thận khi sử dụng các lệnh, như là lệnh *checkout* có thể âm thầm ghi đè lên các tệp tin. Để
 ngăn ngừa rủi ro như thế, hãy commit trước khi chạy lệnh checkout, nhất là khi
 mới học sử dụng Git. Tóm lại, bất kỳ khi nào bạn không chắc chắn về một lệnh nào đó, dù có là lệnh của Git hay không, đầu tiên hãy chạy lệnh *git commit -a*.
 
@@ -111,7 +111,7 @@ Trong một phiên tòa, mỗi sự kiện được gắn với một bản ghi.
  $ git revert 1b6d
 
 sẽ chỉ undo lần commit với giá trị băm đã chỉ ra. Sự quay trở lại được ghi nhận như là một lần
-commit mới, bạn có thể xác nhận bằng lệnh *git log*.
+commit mới, bạn có thể xác nhận lại điều này bằng lệnh *git log*.
 
 === Tạo Changelog ===
 
@@ -140,7 +140,7 @@ Nếu bạn đã tải về một bản sao của một dự án sử dụng *gi
 
 === Xuất bản ===
 
-Giả sử bạn đã tạo được script và bạn muốn chia sẻ nó với người khác. Bạn có thể bảo họ tải về từ máy tính của mình, nhưng nếu họ làm như thế trong khi bạn đang cải tiến script hay có những thay đổi mang tính thử nghiệm, họ có thể gặp trục trặc. Dĩ nhiên, đây là lý do tại sao mà chu kỳ phát hành phần mềm lại tồn tại phải không nào. Những người phát triển có thể làm việc thường xuyên trên một dự án, nhưng họ chỉ đưa ra những đoạn mã mà họ cảm thấy nó có thể dùng được để tránh ảnh hưởng đến người khác.
+Giả sử bạn đã tạo được script và bạn muốn chia sẻ nó với người khác. Bạn có thể bảo họ tải về từ máy tính của mình, nhưng nếu họ làm như thế trong khi bạn đang cải tiến script hay có những thay đổi mang tính thử nghiệm, họ có thể gặp trục trặc. Dĩ nhiên, đây là lý do tại sao mà chu kỳ phát hành phần mềm lại tồn tại phải không nào. Những người phát triển có thể làm việc thường xuyên trên một dự án, nhưng họ chỉ xuất bản những đoạn mã mà họ cảm thấy nó có thể dùng được để tránh ảnh hưởng đến người khác.
 
 Thực hiện điều này với Git, trong thư mục làm việc của Git:
 
@@ -187,7 +187,7 @@ Try also:
 
 Thường thường, tôi sẽ dùng http://sourceforge.net/projects/qgit[qgit]
 để thay thế cách ở trên, bởi vì nó có giao diện đồ họa bóng bẩy, hay
-http://jonas.nitro.dk/tig/[tig], có giao diện dòng lệnh làm việc rất tối với
+http://jonas.nitro.dk/tig/[tig], có giao diện dòng lệnh làm việc rất tốt với
 các máy có kết nối chậm. Một lựa chọn khác là cài đặt máy chủ web, chạy lệnh *git instaweb*
 và sử dụng bất kỳ trình duyệt web nào.
 
