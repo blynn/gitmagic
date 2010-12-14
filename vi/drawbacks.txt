@@ -1,6 +1,6 @@
 ﻿== Phụ lục A: Hạn chế của Git ==
 
-There are some Git issues I've swept under the carpet. Một số có thể xử lý thủ công một cách dễ dàng bằng các script và hook, một số yêu cầu phải tổ chức lại hay xác lập lại dự án, and for the few remaining annoyances, chỉ có cách là ngồi đợi. Hay tốt hơn cả là bắt tay vào và giúp đỡ!
+Git bộc lộ một số nhược điểm mà tôi đã gặp qua. Một số có thể xử lý thủ công một cách dễ dàng bằng các script và hook, một số yêu cầu phải tổ chức lại hay xác lập lại dự án, một số ít rắc rối còn lại, chỉ còn cách là ngồi đợi. Hay tốt hơn cả là bắt tay vào và giúp đỡ!
 
 === Điểm yếu SHA1 ===
 
@@ -9,86 +9,85 @@ finding hash collisions is feasible for well-funded organizations. Trong khoản
 vài năm, có lẽ những chiếc PC thông thường cũng đủ sức để âm thầm
 làm hư hỏng một kho Git.
 
-Hopefully Git will migrate to a better hash function before further research
-destroys SHA1.
+Hy vọng là Git sẽ chuyển sang sử dụng hàm băm tốt hơn trước khi tìm ra cách phá mã SHA1.
 
 === Microsoft Windows ===
 
 Sử dụng Git trên hệ điều hành Microsoft Windows có vẻ hơi cồng kềnh một chút:
 
-- http://cygwin.com/[Cygwin], a Linux-like environment for Windows, có chứa  http://cygwin.com/packages/git/[Git đã chuyển đổi để chạy trên Windows].
+- http://cygwin.com/[Cygwin], mô phỏng Linux dành cho Windows, có chứa  http://cygwin.com/packages/git/[Git đã chuyển đổi để chạy trên Windows].
 
-- http://code.google.com/p/msysgit/[Git chạy trên MSys] là một thay thế với các hỗ trợ tối thiểu nhất, bởi vì chỉ cần một số lệnh để làm một số việc thôi.
+- http://code.google.com/p/msysgit/[Git chạy trên MSys] là một thay thế với các hỗ trợ tối thiểu nhất, bởi vì chỉ cần một ít lệnh để thực hiện một số việc mà thôi.
 
-=== Unrelated Files ===
+=== Các Tệp tin Không liên quan ===
 
-Nếu dự án của bạn rất lơn và chứa rất nhiều tệp tin không có liên quan mà luôn luôn bị thay đổi, Git có thể chịu thiệt thòi hơn các hệ thống khác bởi vì các tệp tin riêng lẻ không được giữ dấu viết. Git giữ các dấu vết thay đổi cho toàn bộ dự án, điều này thường có lợi.
+Nếu dự án của bạn rất lớn và chứa rất nhiều tệp tin không có liên quan mà luôn luôn bị thay đổi, Git có thể chịu thiệt thòi hơn các hệ thống khác bởi vì các tệp tin riêng lẻ không được giữ dấu viết. Git giữ các dấu vết thay đổi cho toàn bộ dự án, điều này thường là có lợi.
 
-Giải pháp là chia nhỏ dự án của bạn ra, mỗi một phần bao gồm các tệp tin liên quan. Hãy sử dụng *git submodule* nếu bạn vẫn muốn giữ mọi thứ trong một kho chung.
+Giải pháp là chia nhỏ dự án của bạn ra, mỗi một phần bao gồm các tệp tin liên quan đến nhau. Hãy sử dụng *git submodule* nếu bạn vẫn muốn giữ mọi thứ trong một kho chung.
 
-=== Who's Editing What? ===
+=== Ai sửa và Sửa gì? ===
 
-Một số hệ thống quản lý mã nguồn bắt buộc bạn đánh dấu rõ ràng vào tệp tin theo một cách nào đó trước khi biên soạn. While this is especially annoying when this involves talking to a central server, it does have two benefits:
+Một số hệ thống quản lý mã nguồn bắt buộc bạn đánh dấu rõ ràng vào tệp tin theo một cách nào đó trước khi biên soạn. While this is especially annoying when this involves talking to a máy chủ trung tâm, việc làm này có hai lợi ích:
 
-  1. Diffs are quick because only the marked files need be examined.
+  1. Diffs thì nhanh bởi vì nó chỉ kểm tra các tệp tin đã đánh dấu.
 
-  2. One can discover who else is working on the file by asking the central server who has marked it for editing.
+  2. One can discover ai khác đang làm việc trên một tệp tin bằng cách hỏi máy chủ trung tâm ai đã đánh dấu là đang sửa.
 
-With appropriate scripting, you can achieve the same with Git. Điều này yêu cầu sự hợp tác từ người lập trình, who should execute particular scripts khi biên soạn một tệp tin.
+Với một script thích hợp, you can achieve the same with Git. Điều này yêu cầu sự hợp tác từ người lập trình, người có thể chạy các script chuyên biệt khi biên soạn một tệp tin.
 
 === Lịch sử Tệp tin  ===
 
 Since Git records project-wide changes, việc cấu trúc lại lịch sử của một tệp tin đơn lẻ yêu cầu more work than in version control systems that track individual files.
 
-The penalty is typically slight, and well worth having as other operations are incredibly efficient. Ví dụ, `git checkout` nhanh hơn `cp -a`, and project-wide deltas compress better than collections of file-based deltas.
+The penalty is typically slight, and well worth having as other operations có hiệu quả không ngờ. Ví dụ, `git checkout` nhanh hơn `cp -a`, and project-wide deltas compress better than collections of file-based deltas.
 
 === Khởi tạo Bản sao ===
 
-Việc tạo một bản sao có vẻ hơi xa xỉ hơn là checking out trong các hệ thống quản lý mã nguồn khác khi nó có lịch sử phát triển lâu dài.
+Việc tạo một bản sao có vẻ hơi xa xỉ hơn là checking out trong các hệ thống quản lý mã nguồn khác khi phần mềm có lịch sử phát triển lâu dài.
 
-The initial cost is worth paying in the long run, như thế các tác vụ cần làm trong tương lai sẽ nhanh chóng và không cần mạng. Tuy nhiên, trong một số hoàn cảnh, việc làm thích đáng hơn là tạo một bản sao không đầy đủ tất cả với tùy chọn `--depth`. Điều này giúp làm nhanh hơn, nhưng bản sao nhận được sẽ thiếu đi một số chức năng.
+Cái giá phải trả ban đầu là cần nhiều thời gian để lấy về, nhưng nếu làm như thế, các tác vụ cần làm trong tương lai sẽ nhanh chóng và không cần có mạng. Tuy nhiên, trong một số hoàn cảnh, cách làm thích đáng hơn là tạo một bản sao không đầy đủ tất cả với tùy chọn `--depth`. Điều này giúp ta làm nhanh hơn, nhưng bản sao nhận được sẽ thiếu đi một số chức năng do đó bạn sẽ không thể thực thi được một số lệnh.
 
-=== Volatile Projects ===
+=== Các Dự Án Hay Thay Đổi ===
 
-Git was written to be fast with respect to the size of the changes. Humans make small edits from version to version. A one-liner bugfix here, a new feature there, emended comments, and so forth. Nhưng nếu các tệp tin của bạn căn bản khác nhau  different in successive revisions, then on each commit, your history necessarily grows by the size of toàn bộ dự án của bạn.
+Git was written to be fast with respect to the size of the changes. Con người chỉ tạo ra sự thay đổi rất nhỏ giữa các phiên bản. A one-liner bugfix here, có đặc tính mới ở đây, sửa lỗi chú thích, v.v... Nhưng nếu các tệp tin của bạn căn bản khác nhau  different in successive revisions, thì trong mỗi lần commit, phần ghi lịch sử toàn bộ dự án của bạn tất yếu sẽ tăng kích cỡ.
 
 Không có  bất kỳ một hệ thống quản lý mã nguồn nào có thể làm được điều này, but standard Git users will suffer more since normally histories are cloned.
 
-The reasons why the changes are so great should be examined. Perhaps file formats should be changed. Minor edits should only cause minor changes to at most a few files.
+The reasons why the changes are so great should be examined. Perhaps file formats should be changed. Các thay đổi nhỏ should only cause minor changes phần lớn tại một số ít tệp tin.
 
-Or perhaps a database or backup/archival solution is what is actually being sought, not a version control system. Ví dụ, quản lý mã nguồn không thích hợp cho việc quản lý ảnh được chụp một cách định kỳ từ webcam.
+Or perhaps a database or backup/archival solution is what is actually being sought, không phải là hệ thống quản lý mã nguồn. Ví dụ, quản lý mã nguồn không thích hợp cho việc quản lý ảnh được chụp một cách định kỳ từ webcam.
 
-If the files really must be constantly morphing and they really must be versioned, a possibility is to use Git in a centralized fashion. One can create shallow clones, which checks out little or no history of the project. Of course, many Git tools will be unavailable, and fixes must be submitted as patches. This is probably fine as it's unclear why anyone would want the history of wildly unstable files.
+If the files really must be constantly morphing and they really must be versioned, a possibility is to use Git in a centralized fashion. One can create shallow clones, which checks out little or no history of the project. Dĩ nhiên, nhiều công cụ dành cho Git sẽ không thể hoạt động được, và sự sửa chữa phải được chuyển lên như là các miếng vá. This is probably fine as it's unclear why anyone would want the history of wildly unstable files.
 
-Một ví dụ khác là dự án phụ thuộc vào firmware, which takes the form of a huge binary file. Người sử dụng không quan tâm tới lịch sử của firmware, and updates compress poorly, vì vậy quản lý firmware để làm phình to kích thước kho chứa có lẽ là không cần thiết.
+Một ví dụ khác là dự án phụ thuộc vào firmware, cái này có dạng thức là tệp tin nhị phân có kích thước rất lớn. Người sử dụng không quan tâm tới lịch sử của firmware, and updates compress poorly, vì vậy quản lý firmware có lẽ là không cần thiết vì nó làm phình to kích thước kho chứa.
 
-Trong trường hợp này, mã nguồn có thể lưu giữ trong kho Git, và tệp tin nhị phân được giữ ở nơi khác. To make life easier, one could distribute a script that uses Git để clone mã nguồn, và dùng lệnh rsync hay Git shallow clone cho firmware.
+Trong trường hợp này, mã nguồn có thể lưu giữ trong kho Git, và tệp tin nhị phân được giữ ở nơi khác. Để cho công việc trở nên dễ dàng hơn, một người có thể phân phối một script mà nó sử dụng Git để clone mã nguồn, và dùng lệnh rsync hay Git shallow clone cho firmware.
 
-=== Global Counter ===
+=== Bộ Đếm ===
 
 Một số hệ quản trị mã nguồn tập trung duy trì một số nguyên dương tự động tăng lên khi có lần commit mới được chấp nhận. Git quy các thay đổi này bởi giá trị băm của chúng, điều này là tốt trong phần lớn hoàn cảnh.
 
 Nhưng một số người thích có nó ở dạng số nguyên. May mắn thay, rất dễ dàng để viết các script như thế với mỗi lần cập nhật, kho Git trung tâm Git gia một số nguyên, có thể là trong một thẻ (tag), và kết hợp nó với giá trị băm của lần commit cuối.
 
-Every clone could maintain such a counter, but this would probably be useless, since only the central repository and its counter matters to everyone.
+Mỗi bản sao có thể có một bộ đếm riêng, nhưng điều này chẳng ích lợi gì, chỉ có kho chứa trung tâm và bộ đếm của nó là có ý nghĩa với mọi người.
 
-=== Các thư mục rỗng ===
+=== Các thư mục Rỗng ===
 
 Các thư mục rỗng không được theo dõi. Tạo ra các tệp tin giả để thử trục trặc này.
 
-Xét về mặt thi hành của Git, thay vì sự thiết kế của nó, điều hạn chế này này là đáng trách. Với một chút may mắn, once Git gains more traction, thêm nhiều người đòi hỏi tính năng này và nó sẽ được thực hiện.
+Xét về mặt thi hành của Git, thay vì thiết kế của nó, điều hạn chế này này là đáng trách. Với một chút may mắn, một khi Git gains more traction, thêm nhiều người đòi hỏi tính năng này và nó sẽ được thực hiện.
 
-=== Initial Commit ===
+=== Lần Commit Khởi tạo ===
 
-A stereotypical computer scientist counts từ 0, thay vì 1. Thật không may, with respect to commits, git does not adhere to this convention. Many commands are unfriendly before the initial commit. Thêm nữa, some corner cases must be handled specially, such as rebasing a branch with a different initial commit.
+A stereotypical computer scientist đếm từ 0, thay vì 1. Thật không may, with respect to commits, git does not adhere to this convention. Many commands are unfriendly before the initial commit. Thêm nữa, some corner cases phải được đối đãi theo một cách đặc biệt, such as rebasing a branch with a different initial commit.
 
 Git would benefit from defining the zero commit: ngay khi kho chứa được tạo ra, HEAD được đặt cho một chuỗi ký tự bao gồm 20 byte rỗng. Lần commit đặc biệt này tương ứng với một cây (tree) rỗng, không có gốc, at some time predating all Git repositories.
 
-Sau đó chạy lệnh git log, ví dụ thế, thì báo cho người sử dụng biết chưa có lần commit nào, thay vì phát ra một lỗi nghiêm trọng. Điều tương tự xảy ra với các công cụ khác.
+Sau đó chạy lệnh git log, ví dụ thế, thì Git nên báo cho người dùng biết chưa có lần commit nào, thay vì phát ra một lỗi nghiêm trọng. Điều tương tự xảy ra với các công cụ khác.
 
 Tất cả các bản commit đầu tiên hoàn toàn là con cháu của bản 0 (zero).
 
-Tuy nhiên, ở đây có một số vấn đề there are some problem cases unfortunately. Nếu nhiều nhánh với các lần khởi tạo commit khác nhau được trộn với nhau, then rebasing the result requires substantial manual intervention.
+Tuy nhiên, ở đây có một số vấn đề there are some problem cases unfortunately. Nếu nhiều nhánh với các lần khởi tạo commit khác nhau được trộn với nhau, then rebasing the result đòi hỏi substantial sự can thiệp bằng tay.
 
 === Giao diện Lập lờ ===
 
