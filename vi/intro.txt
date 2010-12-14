@@ -1,6 +1,6 @@
 ﻿== Giới thiệu ==
 
-I'll use an analogy to introduce version control. Xem tại http://en.wikipedia.org/wiki/Revision_control[the Wikipedia entry on revision control] để có được sự giải thích thỏa đáng.
+Tôi sử dụng cách suy diễn để giới thiệu quản lý mã nguồn. Xem tại http://en.wikipedia.org/wiki/Revision_control[the Wikipedia entry on revision control] để có được sự giải thích thỏa đáng.
 
 === Work is Play ===
 
@@ -14,19 +14,19 @@ Nhưng việc làm này sẽ ghi đè lên bản cũ. It's like those old school
 
 Khi biên soạn, bạn có thể chọn 'Save As...' để tạo tệp tin với tên khác, hay là sao chép tệp tin ra một chỗ khác trước khi bạn ghi lại, nếu như bạn muốn dùng cả các bản cũ. Bạn có thể nén chúng lại để tiết kiệm dung lượng lưu trữ. Đây là dạng thức nguyên thủy và tốn nhiều công sức cho việc quản lý dữ liệu. Computer games improved on this long ago, many of them providing multiple automatically timestamped save slots.
 
-Let's make the problem slightly tougher. Say you have a bunch of files that go together, such as source code for a project, or files for a website. Now if you want to keep an old version you have to archive a whole directory. Keeping many versions around by hand is inconvenient, and quickly becomes expensive.
+Let's make the problem slightly tougher. Say you have a bunch of files that go together, như mã nguồn cho một dự án chẳng hạn, hay các tệp tin cho một website. Bây giờ bạn muốn giữ một phiên bản cũ bạn phải lưu giữ toàn bộ thư mục. Giữ nhiều phiên bản như thế bằng cách thủ công thật bất tiện, và nhanh chóng trở nên xa hoa.
 
-With some computer games, a saved game really does consist of a directory full of files. These games hide this detail from the player and present a convenient interface to manage different versions of this directory.
+Với một số games, ghi lại một game really does consist of a directory full of files. These games hide this detail from the player and present a convenient interface to manage different versions of this directory.
 
-Version control systems are no different. They all have nice interfaces to manage a directory of stuff. You can save the state of the directory every so often, and you can load any one of the saved states later on. Unlike most computer games, they're usually smart about conserving space. Typically, only a few files change between version to version, and not by much. Storing the differences instead of entire new copies saves room.
+Hệ thống quản lý mã nguồn không có sự khác biệt nào. They all have nice interfaces to manage a directory of stuff. You can save the state of the directory every so often, and you can load any one of the saved states later on. Unlike most computer games, they're usually smart about conserving space. Typically, only a few files change between version to version, and not by much. Storing the differences instead of entire new copies saves room.
 
 === Hệ Phân tán ===
 
-Now imagine a very difficult computer game. So difficult to finish that many experienced gamers all over the world decide to team up and share their saved games to try to beat it. Speedruns are real-life examples: players specializing in different levels of the same game collaborate to produce amazing results.
+Bây giờ hãy tưởng tượng có một game rất khó. So difficult to finish that many experienced gamers all over the world decide to team up and share their saved games to try to beat it. Speedruns are real-life examples: players specializing in different levels of the same game collaborate to produce amazing results.
 
-How would you set up a system so they can get at each other's saves easily? Và tải lên cái mới hơn?
+Làm thế nào bạn có thể cài đặt một hệ thống mà chúng có thể lấy được  at each other's saves một cách dễ dàng? Và tải lên cái mới hơn?
 
-In the old days, every project used centralized version control. A server somewhere held all the saved games. Nobody else did. Every player kept at most a few saved games on their machine. When a player wanted to make progress, they'd download the latest save from the main server, play a while, save and upload back to the server for everyone else to use.
+Ngày xưa, mọi dự án đều sử dụng hệ thống quản lý tập trung. Máy chủ ở đâu đó giữ tất cả các game đã được ghi lại. Không còn ai khác làm điều đó nữa. Every player kept at most a few saved games on their machine. When a player wanted to make progress, they'd download the latest save from the main server, play a while, save and upload back to the server for everyone else to use.
 
 What if a player wanted to get an older saved game for some reason? Maybe the current saved game is in an unwinnable state because somebody forgot to pick up an object back in level three, and they want to find the latest saved game where the game can still be completed. Or maybe they want to compare two older saved games to see how much work a particular player did.
 
@@ -34,26 +34,26 @@ There could be many reasons to want to see an older revision, but the outcome is
 
 The new generation of version control systems, of which Git is a member, are known as distributed systems, and can be thought of as a generalization of centralized systems. When players download from the main server they get every saved game, not just the latest one. It's as if they're mirroring the central server.
 
-This initial cloning operation can be expensive, especially if there's a long history, but it pays off in the long run. One immediate benefit is that when an old save is desired for any reason, communication with the central server is unnecessary.
+Việc khởi tạo bản sao có vẻ hơi xa hoa, đặc biệt là nếu nó có lịch sử phát triển lâu dài, nhưng cũng chỉ là việc kéo dài thời gian để chạy. Một lợi ích trực tiếp là khi các tài liệu cũ cần đến, việc liên lạc với máy chủ trung tâm là không cần thiết.
 
-=== A Silly Superstition ===
+=== Mê tín Vớ vẩn ===
 
-A popular misconception is that distributed systems are ill-suited for projects requiring an official central repository. Nothing could be further from the truth. Photographing someone does not cause their soul to be stolen. Similarly, cloning the master repository does not diminish its importance.
+Một quan niêm phổ biến là hệ thống phân tán không thích hợp với dự án yêu cầu một kho chứa trung tâm chính thức. Nothing could be further from the truth. Chụp ảnh ai đó không có nghĩa là lấy mất đi linh hồn họ. Cũng thế, nhân bản kho chính cũng không làm giảm đi sự quan trọng của nó.
 
 A good first approximation is that anything a centralized version control system can do, a well-designed distributed system can do better. Network resources are simply costlier than local resources. While we shall later see there are drawbacks to a distributed approach, one is less likely to make erroneous comparisons with this rule of thumb.
 
-A small project may only need a fraction of the features offered by such a
-system, but using systems that scale poorly for tiny projects is like using
+Một dự án nhỏ có thể chỉ cần một phần nhỏ các đặc tính được đưa ra bởi một
+hệ thống như thế, but using systems that scale poorly for tiny projects is like using
 Roman numerals for calculations involving small numbers.
 
-Moreover, your project may grow beyond your original expectations. Using Git from the outset is like carrying a Swiss army knife even though you mostly use it to open bottles. On the day you desperately need a screwdriver you'll be glad you have more than a plain bottle-opener.
+Hơn thế nữa, dự án của bạn có thể lớn vượt ra ngoài mong đợi ban đầu. Việc sử dụng Git từ lúc khởi sự thì cũng giống như việc mang mang một bộ dao vạn năng chỉ để phục vụ cho việc mở nút chai. Đến một ngày nào đó bạn cấn đến một cái chìa vít bạn sẽ vui sướng vì mình không chỉ có mỗi cái mở nút chai.
 
 === Merge Conflicts ===
 
 Với chủ đề này, our computer game analogy becomes too thinly stretched. Instead, let us again consider editing a document.
 
-Suppose Alice inserts a line at the beginning of a file, and Bob appends one at the end of his copy. They both upload their changes. Most systems will automatically deduce a reasonable course of action: accept and merge their changes, so both Alice's and Bob's edits are applied.
+Giả sử Alice chèn thêm một dòng vào đầu một tệp tin, và Bob nối một dòng vào cuối của bản sao của mình. Họ đều tải lên các thay đổi của mình. Most systems will automatically deduce a reasonable course of action: accept and merge their changes, so both Alice's and Bob's edits are applied.
 
 Now suppose both Alice and Bob have made distinct edits to the same line. Then it is impossible to proceed without human intervention. The second person to upload is informed of a _merge conflict_, and must choose one edit over another, or revise the line entirely.
 
-More complex situations can arise. Version control systems handle the simpler cases themselves, and leave the difficult cases for humans. Usually their behaviour is configurable.
+More complex situations can arise. Version control systems handle the simpler cases themselves, and leave the difficult cases for humans. Thông thường cách ứng sử của chúng có thể chỉnh sửa.
