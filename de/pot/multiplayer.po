@@ -1,24 +1,26 @@
 # Git Magic - A guide to using Git
 # This file is distributed under the GNU GENERAL PUBLIC LICENSE Version 3.
 # Benn Lynn <benlynn@gmail.com>, 2007.
-# Armin Stebich <armin@lordofbikes.de>, 2010.
+# Armin Stebich <armin@lordofbikes.de>, 2010, 2011.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Git Magic deutsch\n"
 "Report-Msgid-Bugs-To: bennlynn@gmail.com\n"
 "POT-Creation-Date: 2010-11-05 17:51+0100\n"
-"PO-Revision-Date: 2010-10-26 18:38+0300\n"
+"PO-Revision-Date: 2011-01-03 19:55+0100\n"
 "Last-Translator: Armin Stebich <armin@lordofbikes.de>\n"
-"Language-Team: de <git-magic@lordofbikes.de>\n"
+"Language-Team: DE <gitmagic@lordofbikes.de>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: UTF-8\n"
+"Plural-Forms: \n"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:2
 msgid "== Multiplayer Git =="
-msgstr ""
+msgstr "== Multiplayer Git =="
 
 #. type: Plain text
 #: ../en/multiplayer.txt:6
@@ -27,6 +29,10 @@ msgid ""
 "Amongst the commands related to Git's distributed nature, I needed only "
 "*pull* and *clone* so could I keep the same project in different places."
 msgstr ""
+"Anfangs benutzte ich Git bei einem privaten Projekt, bei dem ich der einzige "
+"Entwickler war. Unter den Befehlen im Zusammenhang mit Git's verteilter Art, "
+"brauchte ich nur *pull* und *clone*, damit konnte ich das selbe Projekt an "
+"unterschiedlichen Orten halten."
 
 #. type: Plain text
 #: ../en/multiplayer.txt:11
@@ -36,11 +42,15 @@ msgid ""
 "from all over the world. Fortunately, this is Git's forte, and arguably its "
 "raison d'être."
 msgstr ""
+"Später wollte ich meinen Code mit Git veröffentlichen und Änderungen von "
+"Mitstreitern einbinden. Ich musste lernen, wie man Projekte verwaltet, an "
+"denen mehrere Entwickler aus aller Welt beteiligt waren. Glücklicherweise "
+"ist das Git's Stärke und wohl auch seine Daseinsberechtigung."
 
 #. type: Plain text
 #: ../en/multiplayer.txt:13
 msgid "=== Who Am I? ==="
-msgstr ""
+msgstr "=== Wer bin ich? ==="
 
 #. type: Plain text
 #: ../en/multiplayer.txt:17
@@ -49,6 +59,9 @@ msgid ""
 "default, Git uses system settings to populate these fields.  To set them "
 "explicitly, type:"
 msgstr ""
+"Jeder 'Commit' enthält Name und eMail-Adresse des Autors, welche mit *git "
+"log* angezeigt werden. Standardmäßig nutzt Git Systemeinstellungen um diese "
+"Felder auszufüllen. Um diese Angaben explizit zu setzen, gib ein:"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:20
@@ -57,17 +70,21 @@ msgid ""
 "  $ git config --global user.name \"John Doe\"\n"
 "  $ git config --global user.email johndoe@example.com\n"
 msgstr ""
+"  $ git config --global user.name \"Max Mustermann\"\n"
+"  $ git config --global user.email maxmustermann@beispiel.de\n"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:22
 msgid ""
 "Omit the global flag to set these options only for the current repository."
 msgstr ""
+"Lasse den -global Schalter weg um diese Einstellungen für das aktuelle "
+"'Repository' zu setzen."
 
 #. type: Plain text
 #: ../en/multiplayer.txt:24
 msgid "=== Git Over SSH, HTTP ==="
-msgstr ""
+msgstr "=== Git über SSH, HTTP ==="
 
 #. type: Plain text
 #: ../en/multiplayer.txt:27
@@ -76,6 +93,9 @@ msgid ""
 "Though less efficient than its native protocol, Git can communicate over "
 "HTTP."
 msgstr ""
+"Angenommen, Du hast einen SSH-Zugang zu einem Webserver aber Git ist nicht "
+"installiert. Wenn auch nicht so effizient wie mit dem systemeigenen "
+"Protokoll, kann Git über HTTP kommunizieren."
 
 #. type: Plain text
 #: ../en/multiplayer.txt:30
@@ -83,6 +103,8 @@ msgid ""
 "Download, compile and install Git in your account, and create a repository "
 "in your web directory:"
 msgstr ""
+"Lade Git herunter, compiliere und installiere es unter Deinem Benutzerkonto "
+"und erstellen ein 'Repository' in Deinem Webverzeichnis:"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:35
@@ -93,44 +115,52 @@ msgid ""
 " $ git --bare update-server-info\n"
 " $ cp hooks/post-update.sample hooks/post-update\n"
 msgstr ""
+" $ GIT_DIR=proj.git git init\n"
+" $ cd proj.git\n"
+" $ git --bare update-server-info\n"
+" $ cp hooks/post-update.sample hooks/post-update\n"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:37
 msgid "For older versions of Git, the copy command fails and you should run:"
 msgstr ""
+"Bei älteren Git Versionen funktioniert der 'copy'-Befehl nicht, stattdessen "
+"gib ein:"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:39
 #, no-wrap
 msgid " $ chmod a+x hooks/post-update\n"
-msgstr ""
+msgstr " $ chmod a+x hooks/post-update\n"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:41
 msgid "Now you can publish your latest edits via SSH from any clone:"
 msgstr ""
+"Nun kannst Du Deine letzten Änderungen über SSH von jedem 'Clone' aus "
+"veröffentlichen."
 
 #. type: Plain text
 #: ../en/multiplayer.txt:43
 #, no-wrap
 msgid " $ git push web.server:/path/to/proj.git master\n"
-msgstr ""
+msgstr " $ git push web.server:/pfad/zu/proj.git master\n"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:45
 msgid "and anybody can get your project with:"
-msgstr ""
+msgstr "und jedermann kann Dein Projekt abrufen mit:"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:47
 #, no-wrap
 msgid " $ git clone http://web.server/proj.git\n"
-msgstr ""
+msgstr " $ git clone http://web.server/proj.git\n"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:49
 msgid "=== Git Over Anything ==="
-msgstr ""
+msgstr "=== Git über alles ==="
 
 #. type: Plain text
 #: ../en/multiplayer.txt:55
@@ -142,17 +172,24 @@ msgid ""
 "and forth to transport git repositories over any medium, but a more "
 "efficient tool is *git bundle*."
 msgstr ""
+"Willst Du 'Repositories' ohne Server synchronisieren oder gar ohne "
+"Netzwerkverbindung? Musst Du während eines Notfalls improvisieren? Wir haben "
+"gesehen, dass man mit <<makinghistory, *git fast-export* und *git fast-"
+"import* 'Repositories' in eine einzige Datei konvertieren kann und zurück>>. "
+"Wir können solche Dateien hin und her schicken um Git 'Repositories' über "
+"jedes beliebige Medium zu transportieren, aber ein effizienteres Werkzeug "
+"ist *git bundle*."
 
 #. type: Plain text
 #: ../en/multiplayer.txt:57
 msgid "The sender creates a 'bundle':"
-msgstr ""
+msgstr "Der Absender erstellt ein 'bundle':"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:59
 #, no-wrap
 msgid " $ git bundle create somefile HEAD\n"
-msgstr ""
+msgstr " $ git bundle create einedatei HEAD\n"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:63
@@ -162,12 +199,16 @@ msgid ""
 "phone, smoke signals, etc. The receiver retrieves commits from the bundle by "
 "typing:"
 msgstr ""
+"und transportiert das 'Bundle' +einedatei+ irgendwie zum anderen "
+"Beteiligten: per eMail, USB-Stick, einen *xxd* Hexdump und einen OCR "
+"Scanner, Morsecode über Telefon, Rauchzeichen usw. Der Empfänger holt sich "
+"die 'Commits' aus dem 'Bundle' durch Eingabe von:"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:65
 #, no-wrap
 msgid " $ git pull somefile\n"
-msgstr ""
+msgstr " $ git pull einedatei\n"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:68
@@ -175,6 +216,8 @@ msgid ""
 "The receiver can even do this from an empty repository. Despite its size, "
 "+somefile+ contains the entire original git repository."
 msgstr ""
+"Der Empfänger kann das sogar mit einem leeren 'Repository' tun. Trotz seiner "
+"Größe, +einedatei+ enthält das komplette original Git 'Repository'."
 
 #. type: Plain text
 #: ../en/multiplayer.txt:72
@@ -183,12 +226,16 @@ msgid ""
 "repository lacks. For example, suppose the commit ``1b6d...'' is the most "
 "recent commit shared by both parties:"
 msgstr ""
+"In größeren Projekten, vermeidest Du Datenmüll indem Du nur Änderungen "
+"'bundlest', die in den anderen 'Repositories' fehlen. Zum Beispiel, nehmen "
+"wir an, der 'Commit' ``1b6d...'' ist der aktuellste, den beide Parteien "
+"haben:"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:74
 #, no-wrap
 msgid " $ git bundle create somefile HEAD ^1b6d\n"
-msgstr ""
+msgstr " $ git bundle create einedatei HEAD ^1b6d\n"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:78
@@ -197,28 +244,32 @@ msgid ""
 "help page suggests using tags to solve this. Namely, after you send a "
 "bundle, type:"
 msgstr ""
+"Macht man das regelmäßig, kann man leicht vergessen, welcher 'Commit' "
+"zuletzt gesendet wurde. Die Hilfeseiten schlagen vor 'Tags' zu benutzen um "
+"dieses Problem zu lösen. Das heißt, nachdem Du ein 'Bundle' gesendet hast, "
+"gib ein:"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:80
 #, no-wrap
 msgid " $ git tag -f lastbundle HEAD\n"
-msgstr ""
+msgstr " $ git tag -f letztesbundle HEAD\n"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:82
 msgid "and create new refresher bundles with:"
-msgstr ""
+msgstr "und erstelle neue Aktuelisierungsbundles mit:"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:84
 #, no-wrap
 msgid " $ git bundle create newbundle HEAD ^lastbundle\n"
-msgstr ""
+msgstr " $ git bundle create neuesbundle HEAD ^letztesbundle\n"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:86
 msgid "=== Patches: The Global Currency ==="
-msgstr ""
+msgstr "=== Patches: Das globale Zahlungsmittel ==="
 
 #. type: Plain text
 #: ../en/multiplayer.txt:92
@@ -230,17 +281,24 @@ msgid ""
 "your edits. Similarly, on your side, all you require is an email account: "
 "there's no need to setup an online Git repository."
 msgstr ""
+"'Patches' sind die Klartextdarstellung Deiner Änderungen, die von Computern "
+"und Menschen gleichermaßen einfach verstanden werden. Dies verleiht ihnen "
+"eine universelle Anziehungskraft. Du kannst einen 'Patch' Entwicklern "
+"schicken, ganz egal, was für ein Versionsverwaltungssystem sie benutzen. "
+"Solange Deine Mitstreiter ihre eMails lesen können, können sie auch Deine "
+"Änderungen sehen. Auch auf Deiner Seite ist alles was Du brauchst ein eMail-"
+"Konto: es gibt keine Notwendigkeit ein Online Git 'Repository' aufzusetzen."
 
 #. type: Plain text
 #: ../en/multiplayer.txt:94
 msgid "Recall from the first chapter:"
-msgstr ""
+msgstr "Erinnere Dich an das erste Kapitel:"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:96
 #, no-wrap
 msgid " $ git diff 1b6d > my.patch\n"
-msgstr ""
+msgstr " $ git diff 1b6d > mein.patch\n"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:99
@@ -248,17 +306,19 @@ msgid ""
 "outputs a patch which can be pasted into an email for discussion. In a Git "
 "repository, type:"
 msgstr ""
+"gibt einen 'Patch' aus, der zur Diskussion einfach in eine eMail eingefügt "
+"werden kann. In einem Git 'Repository' gib ein:"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:101
 #, no-wrap
 msgid " $ git apply < my.patch\n"
-msgstr ""
+msgstr " $ git apply < mein.patch\n"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:103
 msgid "to apply the patch."
-msgstr ""
+msgstr "um den 'Patch' anzuwenden."
 
 #. type: Plain text
 #: ../en/multiplayer.txt:106
@@ -266,12 +326,15 @@ msgid ""
 "In more formal settings, when author names and perhaps signatures should be "
 "recorded, generate the corresponding patches past a certain point by typing:"
 msgstr ""
+"In einer offizielleren Umgebung, wenn Autorennamen und eventuell Signaturen "
+"aufgezeichnet werden sollen, erstelle die entsprechenden 'Patches' nach "
+"einem bestimmten Punkt durch Eingabe von:"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:108
 #, no-wrap
 msgid " $ git format-patch 1b6d\n"
-msgstr ""
+msgstr " $ git format-patch 1b6d\n"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:110
@@ -279,23 +342,26 @@ msgid ""
 "The resulting files can be given to *git-send-email*, or sent by hand. You "
 "can also specify a range of commits:"
 msgstr ""
+"Die resultierenden Dateien können an *git-send-email* übergeben werden oder "
+"von Hand verschickt werden. Du kannst auch eine Gruppe von 'Commits' angeben:"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:112
 #, no-wrap
 msgid " $ git format-patch 1b6d..HEAD^^\n"
-msgstr ""
+msgstr " $ git format-patch 1b6d..HEAD^^\n"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:114
 msgid "On the receiving end, save an email to a file, then type:"
 msgstr ""
+"Auf der Empfängerseite speichere die eMail in eine Datei, dann gib ein:"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:116
 #, no-wrap
 msgid " $ git am < email.txt\n"
-msgstr ""
+msgstr " $ git am < email.txt\n"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:118
@@ -303,6 +369,8 @@ msgid ""
 "This applies the incoming patch and also creates a commit, including "
 "information such as the author."
 msgstr ""
+"Das wendet den eingegangenen 'Patch' an und erzeugt einen 'Commit', "
+"inklusive der Informationen wie z.B. den Autor."
 
 #. type: Plain text
 #: ../en/multiplayer.txt:120
@@ -310,6 +378,9 @@ msgid ""
 "With a browser email client, you may need to click a button to see the email "
 "in its raw original form before saving the patch to a file."
 msgstr ""
+"Mit einer Webmail Anwendung musst Du eventuell ein Button anklicken um die "
+"eMail in ihrem rohen Originalformat anzuzeigen, bevor Du den 'Patch' in eine "
+"Datei sicherst."
 
 #. type: Plain text
 #: ../en/multiplayer.txt:124
@@ -318,11 +389,14 @@ msgid ""
 "one of these, you're probably the sort of person who can figure them out "
 "easily without reading tutorials!"
 msgstr ""
+"Es gibt geringfügige Unterschiede bei mbox-basierten eMail Anwendungen, aber "
+"wenn Du eine davon benutzt, gehörst Du vermutlich zu der Gruppe Personen, "
+"die damit einfach umgehen können ohne Anleitungen zu lesen.!"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:126
 msgid "=== Sorry, We've Moved ==="
-msgstr ""
+msgstr "=== Entschuldigung, wir sind umgezogen. ==="
 
 #. type: Plain text
 #: ../en/multiplayer.txt:130
@@ -331,12 +405,16 @@ msgid ""
 "automatically push to or pull from the original URL. How does Git do this? "
 "The secret lies in config options created with the clone. Let's take a peek:"
 msgstr ""
+"Nach dem 'Clonen' eines 'Repositories', wird *git push* oder *git pull* "
+"automatisch auf die original URL zugreifen. Wie macht Git das? Das Geheimnis "
+"liegt in der Konfiguration, die beim 'Clonen' erzeugt wurde. Lasst uns einen "
+"Blick riskieren:"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:132
 #, no-wrap
 msgid " $ git config --list\n"
-msgstr ""
+msgstr " $ git config --list\n"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:136
@@ -346,17 +424,23 @@ msgid ""
 "convention, we may change or delete this nickname but there is usually no "
 "reason for doing so."
 msgstr ""
+"Die +remote.origin.url+ Option kontrolliert die Quell-URL; ``origin'' ist "
+"der Spitzname, der dem Quell-'Repository' gegeben wurde. Wie mit der "
+"``master'' 'Branch' Konvention können wir diesen Spitznamen ändern oder "
+"löschen, aber es gibt für gewöhnlich keinen Grund dies zu tun."
 
 #. type: Plain text
 #: ../en/multiplayer.txt:138
 msgid "If the original repository moves, we can update the URL via:"
 msgstr ""
+"Wenn das original 'Repository' verschoben wird, können wir die URL "
+"aktualisieren mit:"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:140
 #, no-wrap
 msgid " $ git config remote.origin.url git://new.url/proj.git\n"
-msgstr ""
+msgstr " $ git config remote.origin.url git://neue.url/proj.git\n"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:146
@@ -367,6 +451,11 @@ msgid ""
 "moves to a different branch, a later pull will faithfully follow the "
 "original branch."
 msgstr ""
+"Die +branch.master.merge+ Option definiert den Standard-Remote-'Branch' bei "
+"einem *git pull*. Während dem ursprünglichen 'clonen', wird sie auf den "
+"aktuellen 'Branch' des Quell-'Repository' gesetzt, so dass selbst dann, wenn "
+"der 'HEAD' des Quell-'Repository' inzwischen auf einen anderen 'Branch' "
+"gewechselt hat, ein späterer 'pull' wird treu dem original 'Branch' folgen."
 
 #. type: Plain text
 #: ../en/multiplayer.txt:150
@@ -375,12 +464,16 @@ msgid ""
 "recorded in the option +branch.master.remote+. If we pull in from other "
 "repositories we must explicitly state which branch we want:"
 msgstr ""
+"Diese Option gilt nur für das 'Repository', von dem als erstes 'gecloned' "
+"wurde, was in der Option +branch.master.remote+ hinterlegt ist. Bei einem "
+"'pull' aus  anderen 'Repositories' müssen wir explizit angeben, welchen "
+"'Branch' wir wollen:"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:152
 #, no-wrap
 msgid " $ git pull git://example.com/other.git master\n"
-msgstr ""
+msgstr " $ git pull git://beispiel.com/anderes.git master\n"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:155
@@ -388,11 +481,13 @@ msgid ""
 "The above explains why some of our earlier push and pull examples had no "
 "arguments."
 msgstr ""
+"Das obige erklärt, warum einige von unseren früheren 'push' und 'pull' "
+"Beispielen keine Argumente hatten."
 
 #. type: Plain text
 #: ../en/multiplayer.txt:157
 msgid "=== Remote Branches ==="
-msgstr ""
+msgstr "=== Entfernte 'Branches' ==="
 
 #. type: Plain text
 #: ../en/multiplayer.txt:162
@@ -402,22 +497,27 @@ msgid ""
 "specifically.  This prevents branches in the remote repository from "
 "interfering with your branches, and also makes Git easier for beginners."
 msgstr ""
+"Wenn Du ein 'Repository' 'clonst', 'clonst' Du auch alle seine 'Branches'. "
+"Das hast Du vielleicht noch nicht bemerkt, denn Git versteckt diese: Du "
+"musst speziell danach fragen. Das verhindert, dass 'Branches' vom entfernten "
+"'Repository' Deine lokalen 'Branches' stören und es macht Git einfacher für "
+"Anfänger."
 
 #. type: Plain text
 #: ../en/multiplayer.txt:164
 msgid "List the remote branches with:"
-msgstr ""
+msgstr "Zeige die entfernten 'Branches' an mit:"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:166
 #, no-wrap
 msgid " $ git branch -r\n"
-msgstr ""
+msgstr " $ git branch -r\n"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:168
 msgid "You should see something like:"
-msgstr ""
+msgstr "Du solltes etwas sehen wie:"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:172
@@ -427,6 +527,9 @@ msgid ""
 " origin/master\n"
 " origin/experimental\n"
 msgstr ""
+" origin/HEAD\n"
+" origin/master\n"
+" origin/experimentell\n"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:177
@@ -437,28 +540,35 @@ msgid ""
 "search through the logs for the appropriate SHA1 hash, but it's much easier "
 "to type:"
 msgstr ""
+"Diese Liste zeigt die 'Branches' und den HEAD des entfernten 'Repository', "
+"welche auch in regulären Git Anweisungen verwendet werden können. Zum "
+"Beispiel, angenommen Du hast viele 'Commits' gemacht und möchtest einen "
+"Vergleich zur letzten abgeholten Version machen. Du kannst die Logs nach dem "
+"entsprechenden SHA1 Hashwert durchsuchen, aber es ist viel einfacher "
+"folgendes einzugeben:"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:179
 #, no-wrap
 msgid " $ git diff origin/HEAD\n"
-msgstr ""
+msgstr " $ git diff origin/HEAD\n"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:181
 msgid "Or you can see what the ``experimental'' branch has been up to:"
 msgstr ""
+"Oder Du kannst schauen, was auf dem 'Branch' ``experimentell'' los war:"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:183
 #, no-wrap
 msgid " $ git log origin/experimental\n"
-msgstr ""
+msgstr " $ git log origin/experimentell\n"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:185
 msgid "=== Multiple Remotes ==="
-msgstr ""
+msgstr "=== Mehrere 'Remotes' ==="
 
 #. type: Plain text
 #: ../en/multiplayer.txt:188
@@ -466,6 +576,9 @@ msgid ""
 "Suppose two other developers are working on our project, and we want to keep "
 "tabs on both. We can follow more than one repository at a time with:"
 msgstr ""
+"Angenommen, zwei andere Entwickler arbeiten an Deinem Projekt und wir wollen "
+"beide im Auge behalten. Wir können mehr als ein 'Repository' gleichzeitig "
+"beobachten mit:"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:191
@@ -474,6 +587,8 @@ msgid ""
 " $ git remote add other git://example.com/some_repo.git\n"
 " $ git pull other some_branch\n"
 msgstr ""
+" $ git remote add other git://example.com/some_repo.git\n"
+" $ git pull other some_branch\n"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:194
@@ -481,12 +596,14 @@ msgid ""
 "Now we have merged in a branch from the second repository, and we have easy "
 "access to all branches of all repositories:"
 msgstr ""
+"Nun haben wir einen 'Branch' vom zweiten 'Repository' eingebunden und wir "
+"haben einfachen Zugriff auf alle 'Branches' von allen 'Repositories':"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:196
 #, no-wrap
 msgid " $ git diff origin/experimental^ other/some_branch~5\n"
-msgstr ""
+msgstr " $ git diff origin/experimentell^ other/some_branch~5\n"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:200
@@ -495,6 +612,10 @@ msgid ""
 "work? In other words, we want to examine their branches without having their "
 "changes invade our working directory. Then rather than pull, run:"
 msgstr ""
+"Aber was, wenn wir nur deren Änderungen vergleichen wollen, ohne unsere "
+"eigene Arbeit zu beeinflussen? Mit anderen Worten, wir wollen ihre "
+"'Branches' untersuchen ohne dass deren Änderungen in unser "
+"Arbeitsverzeichnis einfließen. Anstatt 'pull' benutzt Du dann:"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:203
@@ -503,6 +624,8 @@ msgid ""
 " $ git fetch        # Fetch from origin, the default.\n"
 " $ git fetch other  # Fetch from the second programmer.\n"
 msgstr ""
+" $ git fetch        # Fetch vom origin, der Standard.\n"
+" $ git fetch other  # Fetch vom zweiten Programmierer.\n"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:207
@@ -511,6 +634,9 @@ msgid ""
 "untouched, we can refer to any branch of any repository in a Git command "
 "because we now possess a local copy."
 msgstr ""
+"Dies holt lediglich die Chroniken. Obwohl das Arbeitsverzeichnis unverändert "
+"bleibt, können wir nun jeden 'Branch' aus jedem 'Repository' in einer Git "
+"Anweisung referenzieren, da wir eine lokale Kopie besitzen."
 
 #. type: Plain text
 #: ../en/multiplayer.txt:211
@@ -519,6 +645,10 @@ msgid ""
 "Usually we *pull* because we want to merge the latest commit after a fetch; "
 "this situation is a notable exception."
 msgstr ""
+"Erinnere Dich, dass ein 'Pull' hinter den Kulissen einfach ein *fetch* "
+"gefolgt von einem *merge* ist. Normalerweise machen wir einen *pull* weil "
+"wir die letzten 'Commits' abrufen und einbinden wollen. Die beschriebene "
+"Situation ist eine erwähnenswerte Ausnahme."
 
 #. type: Plain text
 #: ../en/multiplayer.txt:214
@@ -526,11 +656,13 @@ msgid ""
 "See *git help remote* for how to remove remote repositories, ignore certain "
 "branches, and more."
 msgstr ""
+"Siehe *git help remote* um zu sehen wie man Remote-'Repositories' entfernt, "
+"bestimmte 'Branches' ignoriert und mehr."
 
 #. type: Plain text
 #: ../en/multiplayer.txt:216
 msgid "=== My Preferences ==="
-msgstr ""
+msgstr "=== Meine Einstellungen ==="
 
 #. type: Plain text
 #: ../en/multiplayer.txt:220
@@ -539,6 +671,9 @@ msgid ""
 "can pull. Some Git hosting services let you host your own fork of a project "
 "with the click of a button."
 msgstr ""
+"Für meine Projekte bevorzuge ich es, wenn Unterstützer 'Repositories' "
+"vorbereiten, von denen ich 'pullen' kann. Verschiedene Git Hosting Anbieter "
+"lassen Dich mit einem Klick deine eigene 'Fork' eines Projekts hosten."
 
 #. type: Plain text
 #: ../en/multiplayer.txt:224
@@ -548,6 +683,11 @@ msgid ""
 "changes, and perhaps make further edits. Once satisfied, I push to the main "
 "repository."
 msgstr ""
+"Nachdem ich einen Zweig abgerufen habe, benutze ich Git Anweisungen um durch "
+"die Änderungen zu navigieren und zu untersuchen, die idealerweise gut "
+"organisiert und dokumentiert sind. Ich 'merge' meine eigenen Änderungen und "
+"führe eventuell weitere Änderungen durch. Wenn ich zufrieden bin, 'pushe' "
+"ich in das zentrale 'Repository'."
 
 #. type: Plain text
 #: ../en/multiplayer.txt:229
@@ -556,6 +696,9 @@ msgid ""
 "well. See http://torvalds-family.blogspot.com/2009/06/happiness-is-warm-scm."
 "html[this blog post by Linus Torvalds]."
 msgstr ""
+"Obwohl ich nur unregelmäßig Beiträge erhalte, glaube ich, dass diese Methode "
+"sich auszahlt. Siehe http://torvalds-family.blogspot.com/2009/06/happiness-"
+"is-warm-scm.html[diesen Blog Beitrag von Linus Torvalds (englisch)]."
 
 #. type: Plain text
 #: ../en/multiplayer.txt:233
@@ -565,3 +708,8 @@ msgid ""
 "details such as recording the author's name and email address, as well as "
 "the time and date, and asks the author to describe their own change."
 msgstr ""
+"In der Git Welt zu bleiben ist etwas bequemer als 'Patch'-Dateien, denn es "
+"erspart mir sie in Git 'Commits' zu konvertieren. Außerdem kümmert sich Git "
+"um die Details wie Autorname und eMail-Adresse, genauso wie um Datum und "
+"Uhrzeit und es fordert den Autor zum Beschreiben seiner eigenen Änderungen "
+"auf."
