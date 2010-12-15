@@ -1,4 +1,4 @@
-﻿== Lệnh Clone ==
+﻿== Nhân Bản ==
 
 Trong các hệ thống quản lý mã nguồn trước đây, checkout là tác vụ cơ bản để lấy các tệp tin về. Bạn lấy về toàn bộ các tập tin được lưu giữ trong từng phiên bản riêng biệt.
 
@@ -77,8 +77,8 @@ Kho bare (kho trần) được đặt tên như vậy vì nó không chứa thư
 Kho bare có vai trò hoạt động giống như máy chủ trung tâm trong các hệ thống
 quản lý mã nguồn tập trung: thư mục chủ dự án của bạn. Các nhà phát triển phần mềm clone
 dữ liệu dự án của bạn ở đây, và push các thay đổi chính thức lên đó. Thông thường nó
-đặt tại máy chủ resides on a server that does little else nhưng phổ biến dữ liệu. Development
-occurs in the clones, vì vậy thư mục chủ của kho chứa có thể hoạt động mà không cần
+đặt tại máy chủ mà máy này đôi khi còn làm một số việc khác nữa nhưng phổ biến dữ liệu. Sự phát triển
+xảy ra trên bản sao, vì vậy thư mục chủ của kho chứa có thể hoạt động mà không cần
 thư mục làm việc.
 
 Nhiều lệnh Git gặp lỗi trên kho bare trừ phi biến môi trường `GIT_DIR` được đặt với giá trị là đường dẫn đến kho chứa, hay tùy chọn `--bare` được áp dụng.
@@ -95,7 +95,7 @@ shell access to the server in the first place?
 
 Tuy nhiên, ngoài trường hợp này ra, chúng ta còn nản lòng với việc push lên kho chứa, bởi vì tình trạng hỗn loạn có thể xảy khi thư mục đích có chứa thư mục làm việc.
 
-Tóm lại, khi học Git, chỉ push khi đích là kho bare; nếu không thì dùng pull.
+Tóm lại, khi bạn học Git, chỉ push khi đích là kho bare; nếu không thì dùng pull.
 
 === Rẽ nhánh Dự án ===
 
@@ -103,7 +103,7 @@ Bạn chán ngấy cách mà dự án mà bạn đang làm việc chạy? Bạn 
 
  $ git clone git://main.server/path/to/files
 
-Tiếp theo, nói với mọi người về nhánh rẽ từ dự án của bạn tại máy chủ của bạn.
+Tiếp theo, nói với mọi người về việc nhánh rẽ từ dự án tại máy chủ của bạn.
 
 Từ bây giờ trở đi, bạn có thể trộn các sự thay đổi từ dự án gốc với lệnh:
 
@@ -123,7 +123,7 @@ Bạn muốn làm nhiều việc cùng một lúc trên một dự án. Thế th
 
  $ git clone . /some/new/directory
 
-Git lợi dụng liên kết cứng (hard links) và sự chia sẻ tệp tin càng nhiều càng an toàn để tạo bản sao (clone) này, so it will be ready in a flash, và bây giờ bạn có thể làm hai việc độc lập cùng một lúc. Ví dụ như, bạn soạn thảo trên bản sao này trong khi đó lại dịch trên cái kia.
+Git lợi dụng liên kết cứng (hard links) và sự chia sẻ tệp tin càng nhiều càng an toàn để tạo bản sao (clone) này, so it will be ready in a flash, và bây giờ bạn có thể làm hai việc độc lập cùng một lúc. Ví dụ như, bạn soạn thảo trên bản sao này trong khi đó lại biên dịch trên cái kia.
 
 Bất kỳ lúc nào, bạn cũng có thể commit và pull các thay đổi từ một bản sao (clone) khác.
 
@@ -148,16 +148,16 @@ Bây giờ hãy chuyển đến thư mục mới đó và làm việc ở đây 
 
 Sau đó chuyển tới thư mục mới và chạy:
 
- $ git commit -a -m "Mô tả về các thay đổi của tôi"
+ $ git commit -a -m "Mô tả về các thay đổi của mình"
  $ git pull
 
-The procedure for giving your changes to everyone else depends on hệ thống quản lý mã nguồn khác. Thư mục mới có chứa các tệp tin mà bạn thay đổi. Chạy các lệnh mà hệ thống quản lý mã nguồn khác cần để tải chúng lên kho chứa trung tâm.
+Thủ tục đem lại các thay đổi của bạn tới những người khác nữa trên hệ thống quản lý mã nguồn khác. Thư mục mới có chứa các tệp tin mà bạn thay đổi. Chạy các lệnh mà hệ thống quản lý mã nguồn khác cần để tải chúng lên kho chứa trung tâm.
 
 Subversion, có lẽ là hệ thống quản lý mã nguồn tập trung tốt nhất, được sử dụng bởi vô số các dự án. Lệnh *git svn* sẽ tự động hóa những việc đã nói ở trên dành cho Subversion, bạn cũng có thể làm như thế để http://google-opensource.blogspot.com/2008/05/export-git-project-to-google-code.html[xuất dự án Git thành Subversion].
 
 === Mercurial ===
 
-Mercurial là hệ thống quản lý mã nguồn is a similar version control system that can almost seamlessly work in tandem with Git. Với  plugin `hg-git`, người sử dụng Mercurial có thể push và pull từ kho Git mà không mất mát gì.
+Mercurial tương tự như hệ thống quản lý mã nguồn that can almost seamlessly work in tandem with Git. Với  plugin `hg-git`, người sử dụng Mercurial có thể push và pull từ kho Git mà không mất mát gì.
 
 Lấy plugin `hg-git` dành cho Git bằng cách:
 
@@ -167,7 +167,7 @@ hay là sử dụng Mercurial:
 
  $ hg clone http://bitbucket.org/durin42/hg-git/
 
-Thật buồn là tôi không biết rằng có một plugin tương tự dành cho Git. Vì vậy, tôi ủng hộ Git hơn Mercurial để for the main repository, dù là bạn thích Mercurial. Với một dự án Mercurial, usually a volunteer maintains a parallel Git repository to accommodate Git users, whereas thanks to the `hg-git` plugin, a Git project automatically accommodates Mercurial users.
+Thật buồn là tôi không biết rằng có một plugin tương tự dành cho Git. Vì vậy, tôi ủng hộ Git hơn Mercurial để for the main repository, dù là bạn thích Mercurial. Với một dự án Mercurial, usually a volunteer maintains a parallel Git repository to accommodate Git users, whereas thanks to the `hg-git` plugin, một dự án Git tự động tiếp nhận người sử dụng Mercurial.
 
 Mặc dù plugin có thể chuyển đổi Mercurial sang Git bằng cách push tới một kho rỗng, công việc này là dễ dàng với script `hg-fast-export.sh`, đã sẵn dùng từ:
 
@@ -187,14 +187,14 @@ miễn phí và phổ biến nhất chỉ sau Git và Mercurial.
 
 Bazaar có lợi thế vì phát triển sau, có tuổi tương đối trẻ; những người thiết kế ra nó có thể học hỏi được nhiều từ các sai lầm trong quá khứ, và tránh được vết xe đổ. Ngoài ra, các nhà phát triển còn lưu tâm đến khả năng chuyển đổi và tương tác với các hệ thống quản lý mã nguồn khác.
 
-Plugin `bzr-git` giúp người dùng Bazaar làm việc với kho Git trong chừng mực nào đó. The `tailor` program chuyển đổi Bazaar thành Git, and can do so incrementally, trong khi `bzr-fast-export` thích hợp nhất cho việc chuyển đổi một lần duy nhất.
+Plugin `bzr-git` giúp người dùng Bazaar làm việc với kho Git trong chừng mực nào đó. Chương trình chuyển đổi Bazaar thành Git, and can do so incrementally, trong khi `bzr-fast-export` thích hợp nhất cho việc chuyển đổi một lần duy nhất.
 
 === Tại sao Tôi sử dụng Git ===
 
-Trước tiên, tôi chọn Git bởi tôi nghe nói nó làm được việc phi thường là có thể quản lý mã nguồn cho một thứ khó quản lý như nhân (kernel) của hệ điều hành Linux. Tôi chưa bao giờ nghĩ đến việc chuyển sang cái khác. Git làm được những việc thật đáng ngưỡng mộ, and I've yet to be bitten by its flaws. Do tôi hoạt động chủ yếu trên Linux, phát hành trên các nền tảng khác không phải là điều mà tôi quan tâm.
+Trước tiên, tôi chọn Git bởi tôi nghe nói nó làm được việc phi thường là có thể quản lý mã nguồn cho một thứ khó quản lý như nhân (kernel) của hệ điều hành Linux. Tôi chưa bao giờ nghĩ đến việc chuyển sang cái khác. Git làm được những việc thật đáng ngưỡng mộ, và tôi chưa từng bao giờ and I've yet to be bitten by its flaws sai sót của nó. Do tôi hoạt động chủ yếu trên Linux, phát hành trên các nền tảng khác không phải là điều mà tôi quan tâm.
 
-Ngoài ra, tôi thích lập trình bằng ngôn ngữ C và bash scripts to executables như là Python scripts: ở đây có rất ít sự phụ thuộc, và tôi I'm addicted to fast running times.
+Ngoài ra, tôi thích lập trình bằng ngôn ngữ C và bash scripts để thực thi như là Python script: ở đây có rất ít sự phụ thuộc, và tôi đam mê với I'm addicted to fast running times.
 
-Tôi đã nghĩ về việc làm thế nào để Git có thể phát triển, xa hơn nữa là tự mình viết một công cụ tương tự như Git, nhưng đây không phải là bài tập có tính thực tế. Had I completed my project, dù sao đi nữa tôi vẫn sẽ dùng Git, as the gains are too slight to justify using an oddball system.
+Tôi đã nghĩ về việc làm thế nào để Git có thể phát triển, xa hơn nữa là tự mình viết một công cụ tương tự như Git, nhưng đây không phải là bài tập có tính thực tế. Had I completed my project, dù sao đi nữa tôi vẫn sẽ dùng Git, với lợi thế là có thể chuyển đổi từ hệ thống cũ sang một cách nhanh chóng.
 
 Theo lẽ tự nhiên, những thứ cần thiết cho bạn và những thứ bạn mong muốn có lẽ khác nhau, và bạn có thể tốt hơn nếu ở một hệ thống khác. Dù sao đi nữa, bạn sẽ không bao giờ phải hối tiếc vì đã chọn Git.
