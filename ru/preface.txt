@@ -1,11 +1,6 @@
 = Магия Git =
 Ben Lynn
 Август 2007
-(Апрель 2010)
-
-Перевод: ..., Дмитрий Ажичаков
-Редактор перевода: Тихон Тарнавский
-Декабрь 2010
 
 == От редактора перевода ==
 
@@ -27,7 +22,7 @@ http://git.or.cz/[Git] это швейцарский нож управления
 
  - http://docs.google.com/View?id=dfwthj68_675gz3bw8kj[	Китайский (упрощенный)]: JunJie, Meng и JiangWei.
  - link:/~blynn/gitmagic/intl/es/[Испанский]: Rodrigo Toledo.
- - link:/~blynn/gitmagic/intl/de/[German]: Benjamin Bellee и Armin Stebich. Armin также разместил http://gitmagic.lordofbikes.de/[немецкий перевод  на его сайте].
+ - link:/~blynn/gitmagic/intl/de/[Немецкий]: Benjamin Bellee и Armin Stebich. Armin также разместил http://gitmagic.lordofbikes.de/[немецкий перевод  на его сайте].
  - http://www.slideshare.net/slide_user/magia-git[Португальский]: Leonardo Siqueira Rodrigues [http://www.slideshare.net/slide_user/magia-git-verso-odt[в формате ODT]].
 
 .Другие варианты
