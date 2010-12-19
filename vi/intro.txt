@@ -1,14 +1,14 @@
 ﻿== Giới thiệu ==
 
-Tôi sử dụng cách suy diễn để giới thiệu quản lý mã nguồn. Xem tại http://en.wikipedia.org/wiki/Revision_control[the Wikipedia entry on revision control] để có được sự giải thích thỏa đáng.
+Tôi sử dụng cách ví von để giới thiệu về quản lý mã nguồn. Xem tại http://en.wikipedia.org/wiki/Revision_control[the Wikipedia entry on revision control] để có được sự giải thích thỏa đáng.
 
-=== Work is Play ===
+=== Làm việc là một Trò chơi ===
 
-I've played computer games almost all my life. In contrast, I only started using version control systems as an adult. Tôi tin rằng không chỉ có tôi như thế, and comparing the two may make these concepts easier to explain and understand.
+I've played computer games almost all my life. Ngược lại, Tôi chỉ bắt đầu sử dụng hệ thống quản lý mã nguồn khi đã trưởng thành. Tôi tin rằng không chỉ có tôi như thế, và việc so sánh giữa hai điều đó sẽ làm có các khái niệm trở nên dễ hiểu, dễ giải thích.
 
-Hãy nghĩ việc biên soạn mã nguồn, tài liệu cũng giống như việc chúng ta đang chơi game. Một khi bạn đã làm được tương đối nhiều, bạn sẽ muốn ghi lại thành quả công việc. Để làm điều đó, bạn chỉ việc bấm vào nút 'Save' trong chương trình biên soạn của mình.
+Hãy nghĩ việc biên soạn mã nguồn, tài liệu cũng giống như việc chúng ta đang chơi game. Một khi bạn đã làm được kha khá, bạn sẽ muốn ghi lại thành quả công việc của mình. Để làm điều đó, bạn chỉ việc bấm vào nút 'Save' trong chương trình biên soạn của mình.
 
-Nhưng việc làm này sẽ ghi đè lên bản cũ. It's like those old school games which only had one save slot: sure you could save, but you could never go back to an older state. Which was a shame, because your previous save might have been right at an exceptionally fun part of the game that you'd like to revisit one day. Or worse still, your current save is in an unwinnable state, và bạn sẽ phải bắt đầu lại.
+Nhưng việc làm này sẽ ghi đè lên bản cũ. It's like those old school games which only had one save slot: sure you could save, but you could never go back to an older state. Which was a shame, because your previous save might have been right at an exceptionally fun part of the game that you'd like to revisit one day. Tệ hơn nữa, bản ghi lại hiện tại lại không đúng, và thế là bạn sẽ phải bắt đầu lại.
 
 === Quản lý Mã nguồn ===
 
@@ -26,9 +26,9 @@ Bây giờ hãy tưởng tượng có một game rất khó. So difficult to fin
 
 Làm thế nào bạn có thể cài đặt một hệ thống mà chúng có thể lấy được  at each other's saves một cách dễ dàng? Và tải lên cái mới hơn?
 
-Ngày xưa, mọi dự án đều sử dụng hệ thống quản lý tập trung. Máy chủ ở đâu đó giữ tất cả các game đã được ghi lại. Không còn ai khác làm điều đó nữa. Every player kept at most a few saved games on their machine. When a player wanted to make progress, they'd download the latest save from the main server, play a while, save and upload back to the server for everyone else to use.
+Ngày xưa, mọi dự án đều sử dụng hệ thống quản lý tập trung. Máy chủ ở đâu đó giữ tất cả các game đã được ghi lại. Không còn ai khác làm điều đó nữa. Mọi người giữ phần lớn các game được ghi lại trong máy của họ. When a player wanted to make progress, họ có thể tải về bản ghi lại cuối cùng đã lưu lại ở máy chủ, chơi một lúc, ghi lại và tải trở lại máy chủ để mọi người có thể sử dụng.
 
-What if a player wanted to get an older saved game for some reason? Maybe the current saved game is in an unwinnable state because somebody forgot to pick up an object back in level three, and they want to find the latest saved game where the game can still be completed. Or maybe they want to compare two older saved games to see how much work a particular player did.
+Điều gì xảy ra khi một người chơi, vì một lý do nào đó, muốn có được lần chơi cũ hơn? Có thể là lần chơi hiện tại không ổn định hay có sai sót bởi vì một người chơi nào đó quên không chỉnh lại trò chơi về mức 3, và họ muốn tìm lần chơi đã ghi lại cuối cùng mà họ vẫn chưa hoàn thành. Hay có thể là họ muốn so sánh sự  khác nhau giữa các lần chơi để thấy được công việc đã làm của từng người chơi.
 
 There could be many reasons to want to see an older revision, but the outcome is the same. They have to ask the central server for that old saved game. The more saved games they want, the more they need to communicate.
 
@@ -48,12 +48,12 @@ Roman numerals for calculations involving small numbers.
 
 Hơn thế nữa, dự án của bạn có thể lớn vượt ra ngoài mong đợi ban đầu. Việc sử dụng Git từ lúc khởi sự thì cũng giống như việc mang mang một bộ dao vạn năng chỉ để phục vụ cho việc mở nút chai. Đến một ngày nào đó bạn cấn đến một cái chìa vít bạn sẽ vui sướng vì mình không chỉ có mỗi cái mở nút chai.
 
-=== Merge Conflicts ===
+=== Xung đột khi Trộn ===
 
-Với chủ đề này, our computer game analogy becomes too thinly stretched. Instead, let us again consider editing a document.
+Với chủ đề này, sự ví von nó với một trò chơi trên máy tính hơi khó. Thay vì thế, để chủng tôi dùng hành động biên soạn một tài liệu để giải thích cho bạn.
 
-Giả sử Alice chèn thêm một dòng vào đầu một tệp tin, và Bob nối một dòng vào cuối của bản sao của mình. Họ đều tải lên các thay đổi của mình. Most systems will automatically deduce a reasonable course of action: accept and merge their changes, so both Alice's and Bob's edits are applied.
+Giả sử Alice chèn thêm một dòng vào đầu một tệp tin, và Bob nối một dòng vào cuối của bản sao của mình. Họ đều tải lên các thay đổi của mình. Phần lớn các hệ thống sẽ tự động luận ra hành động hợp lý: chấp nhận và trộn các sự thay đổi của họ, do đó cả hai sự chỉnh sửa của Alice và Bob đều được dùng.
 
-Now suppose both Alice and Bob have made distinct edits to the same line. Then it is impossible to proceed without human intervention. The second person to upload is informed of a _merge conflict_, and must choose one edit over another, or revise the line entirely.
+Bây giờ giả định cả Alice và Bob đã chỉnh sửa tạo ra sự khác biệt trên cùng một dòng. Thế thì điều này không thể sử lý được mà không có sự can thiệp của con người. Người thứ hai tải lên sẽ được thông báo có xung đột xảy ra, _merge conflict_, và phải chọn một and must choose one edit over another, hay sửa lại toàn bộ dòng.
 
-More complex situations can arise. Version control systems handle the simpler cases themselves, and leave the difficult cases for humans. Thông thường cách ứng sử của chúng có thể chỉnh sửa.
+Nhiều tình huống phức tạp có thể nảy sinh. Hệ thống quản lý mã nguồn giữ phần dễ dàng cho chúng, và để lại những tình huống khó khăn cho chúng ta. Thông thường cách ứng xử của chúng có thể chỉnh sửa.

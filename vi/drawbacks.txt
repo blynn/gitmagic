@@ -33,11 +33,11 @@ Một số hệ thống quản lý mã nguồn bắt buộc bạn đánh dấu r
 
   2. One can discover ai khác đang làm việc trên một tệp tin bằng cách hỏi máy chủ trung tâm ai đã đánh dấu là đang sửa.
 
-Với một script thích hợp, you can achieve the same with Git. Điều này yêu cầu sự hợp tác từ người lập trình, người có thể chạy các script chuyên biệt khi biên soạn một tệp tin.
+Với một script thích hợp, bạn có thể lưu giữ  theo cách này với. Điều này yêu cầu sự hợp tác từ người lập trình, người có thể chạy các script chuyên biệt khi biên soạn một tệp tin.
 
 === Lịch sử Tệp tin  ===
 
-Since Git records project-wide changes, việc cấu trúc lại lịch sử của một tệp tin đơn lẻ yêu cầu more work than in version control systems that track individual files.
+Since Git records project-wide changes, việc cấu trúc lại lịch sử của một tệp tin đơn lẻ yêu cầu phải làm việc nhiều hơn các chương trình quản lý mã nguồn giữ dấu vết theo các tệp tin riêng lẻ.
 
 The penalty is typically slight, and well worth having as other operations có hiệu quả không ngờ. Ví dụ, `git checkout` nhanh hơn `cp -a`, and project-wide deltas compress better than collections of file-based deltas.
 
@@ -79,7 +79,7 @@ Xét về mặt thi hành của Git, thay vì thiết kế của nó, điều h�
 
 === Lần Commit Khởi tạo ===
 
-A stereotypical computer scientist đếm từ 0, thay vì 1. Thật không may, with respect to commits, git does not adhere to this convention. Many commands are unfriendly before the initial commit. Thêm nữa, some corner cases phải được đối đãi theo một cách đặc biệt, such as rebasing a branch with a different initial commit.
+A stereotypical computer scientist đếm từ 0, thay vì 1. Thật không may, with respect to commits, git does not adhere to this convention. Rất nhiều lệnh bất lợi trước lần commit khởi tạo. Thêm nữa, some corner cases phải được đối đãi theo một cách đặc biệt, such as rebasing a branch with a different initial commit.
 
 Git would benefit from defining the zero commit: ngay khi kho chứa được tạo ra, HEAD được đặt cho một chuỗi ký tự bao gồm 20 byte rỗng. Lần commit đặc biệt này tương ứng với một cây (tree) rỗng, không có gốc, at some time predating all Git repositories.
 
