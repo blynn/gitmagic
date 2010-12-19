@@ -90,8 +90,8 @@ quen thuộc? Trước hết, việc pull gặp lỗi trên kho trần: thay và
 lệnh này chúng ta sẽ nói sau. Nhưng dù là chúng ta giữ kho chứa thông thường trên
 máy chủ trung tâm, việc pull lên nó hơi cồng kềnh. Chúng ta phải
 đăng nhập vào máy chủ trước, và cung cấp cho lệnh pull địa chỉ mạng
-của máy chúng ta đang pull từ đó. Firewalls có thể gây trở ngại, and what if we have no
-shell access to the server in the first place?
+của máy chúng ta đang pull từ đó. Firewalls có thể gây trở ngại, và điều gì xảy ra khi chúng ta không
+có khả năng truy cập shell máy chủ trong chỗ đầu tiên đó?
 
 Tuy nhiên, ngoài trường hợp này ra, chúng ta còn nản lòng với việc push lên kho chứa, bởi vì tình trạng hỗn loạn có thể xảy khi thư mục đích có chứa thư mục làm việc.
 
@@ -157,7 +157,7 @@ Subversion, có lẽ là hệ thống quản lý mã nguồn tập trung tốt n
 
 === Mercurial ===
 
-Mercurial tương tự như hệ thống quản lý mã nguồn that can almost seamlessly work in tandem with Git. Với  plugin `hg-git`, người sử dụng Mercurial có thể push và pull từ kho Git mà không mất mát gì.
+Mercurial là hệ thống tương tự như hệ thống quản lý mã nguồn có thể làm việc gần giống như Git. Với  plugin `hg-git`, người sử dụng Mercurial có thể push và pull từ kho Git mà không mất mát gì.
 
 Lấy plugin `hg-git` dành cho Git bằng cách:
 
@@ -167,7 +167,7 @@ hay là sử dụng Mercurial:
 
  $ hg clone http://bitbucket.org/durin42/hg-git/
 
-Thật buồn là tôi không biết rằng có một plugin tương tự dành cho Git. Vì vậy, tôi ủng hộ Git hơn Mercurial để for the main repository, dù là bạn thích Mercurial. Với một dự án Mercurial, usually a volunteer maintains a parallel Git repository to accommodate Git users, whereas thanks to the `hg-git` plugin, một dự án Git tự động tiếp nhận người sử dụng Mercurial.
+Thật buồn là tôi không biết rằng có một plugin tương tự dành cho Git. Vì vậy, tôi ủng hộ Git hơn Mercurial khi dùng cho kho chứa chính, dù là bạn thích Mercurial hơn. Với một dự án Mercurial, thường thường một người tình nguyện duy trì  parallel Git repository  cho tương thích với người sử dụng Git, cũng phải cảm ơn plugin `hg-git`, một dự án Git tự động tiếp nhận người sử dụng Mercurial.
 
 Mặc dù plugin có thể chuyển đổi Mercurial sang Git bằng cách push tới một kho rỗng, công việc này là dễ dàng với script `hg-fast-export.sh`, đã sẵn dùng từ:
 
@@ -187,14 +187,14 @@ miễn phí và phổ biến nhất chỉ sau Git và Mercurial.
 
 Bazaar có lợi thế vì phát triển sau, có tuổi tương đối trẻ; những người thiết kế ra nó có thể học hỏi được nhiều từ các sai lầm trong quá khứ, và tránh được vết xe đổ. Ngoài ra, các nhà phát triển còn lưu tâm đến khả năng chuyển đổi và tương tác với các hệ thống quản lý mã nguồn khác.
 
-Plugin `bzr-git` giúp người dùng Bazaar làm việc với kho Git trong chừng mực nào đó. Chương trình chuyển đổi Bazaar thành Git, and can do so incrementally, trong khi `bzr-fast-export` thích hợp nhất cho việc chuyển đổi một lần duy nhất.
+Plugin `bzr-git` giúp người dùng Bazaar làm việc với kho Git trong chừng mực nào đó. Chương trình chuyển đổi Bazaar thành Git, và có thể làm hơn thế nữa, trong khi `bzr-fast-export` thích hợp nhất cho việc chuyển đổi một lần duy nhất.
 
 === Tại sao Tôi sử dụng Git ===
 
-Trước tiên, tôi chọn Git bởi tôi nghe nói nó làm được việc phi thường là có thể quản lý mã nguồn cho một thứ khó quản lý như nhân (kernel) của hệ điều hành Linux. Tôi chưa bao giờ nghĩ đến việc chuyển sang cái khác. Git làm được những việc thật đáng ngưỡng mộ, và tôi chưa từng bao giờ and I've yet to be bitten by its flaws sai sót của nó. Do tôi hoạt động chủ yếu trên Linux, phát hành trên các nền tảng khác không phải là điều mà tôi quan tâm.
+Trước tiên, tôi chọn Git bởi tôi nghe nói nó làm được việc phi thường là có thể quản lý mã nguồn cho một thứ khó quản lý như nhân (kernel) của hệ điều hành Linux. Tôi chưa bao giờ nghĩ đến việc chuyển sang cái khác. Git làm được những việc thật đáng ngưỡng mộ, và tôi chưa từng bao giờ gặp các vấn đề với sai sót của nó. Do tôi hoạt động chủ yếu trên Linux, phát hành trên các nền tảng khác không phải là điều mà tôi quan tâm.
 
-Ngoài ra, tôi thích lập trình bằng ngôn ngữ C và bash scripts để thực thi như là Python script: ở đây có rất ít sự phụ thuộc, và tôi đam mê với I'm addicted to fast running times.
+Ngoài ra, tôi thích lập trình bằng ngôn ngữ C và bash scripts để thực thi như là Python script: ở đây có rất ít sự phụ thuộc, và tôi đam mê với những hệ thống thi hành nhanh chóng.
 
-Tôi đã nghĩ về việc làm thế nào để Git có thể phát triển, xa hơn nữa là tự mình viết một công cụ tương tự như Git, nhưng đây không phải là bài tập có tính thực tế. Had I completed my project, dù sao đi nữa tôi vẫn sẽ dùng Git, với lợi thế là có thể chuyển đổi từ hệ thống cũ sang một cách nhanh chóng.
+Tôi đã nghĩ về việc làm thế nào để Git có thể phát triển, xa hơn nữa là tự mình viết một công cụ tương tự như Git, nhưng đây không phải là bài tập có tính thực tế. Khi tôi hoàn thành dự án của mình, dù sao đi nữa tôi vẫn sẽ dùng Git, với lợi thế là có thể chuyển đổi từ hệ thống cũ sang một cách nhanh chóng.
 
 Theo lẽ tự nhiên, những thứ cần thiết cho bạn và những thứ bạn mong muốn có lẽ khác nhau, và bạn có thể tốt hơn nếu ở một hệ thống khác. Dù sao đi nữa, bạn sẽ không bao giờ phải hối tiếc vì đã chọn Git.
