@@ -49,11 +49,11 @@ Cái giá phải trả ban đầu là cần nhiều thời gian để lấy về
 
 === Các Dự Án Hay Thay Đổi ===
 
-Git was written to be fast with respect to the size of the changes. Con người chỉ tạo ra sự thay đổi rất nhỏ giữa các phiên bản. A one-liner bugfix here, có đặc tính mới ở đây, sửa lỗi chú thích, v.v... Nhưng nếu các tệp tin của bạn căn bản khác nhau  different in successive revisions, thì trong mỗi lần commit, phần ghi lịch sử toàn bộ dự án của bạn tất yếu sẽ tăng kích cỡ.
+Git was written to be fast with respect to the size of the changes. Con người chỉ tạo ra sự thay đổi rất nhỏ giữa các phiên bản. Một lời nhận xét có sửa lỗi ở đây, có đặc tính mới ở đây, sửa lỗi chú thích, v.v... Nhưng nếu các tệp tin của bạn căn bản khác nhau  different in successive revisions, thì trong mỗi lần commit, phần ghi lịch sử toàn bộ dự án của bạn tất yếu sẽ tăng kích cỡ.
 
 Không có  bất kỳ một hệ thống quản lý mã nguồn nào có thể làm được điều này, but standard Git users will suffer more since normally histories are cloned.
 
-The reasons why the changes are so great should be examined. Perhaps file formats should be changed. Các thay đổi nhỏ should only cause minor changes phần lớn tại một số ít tệp tin.
+The reasons why the changes are so great should be examined. Định dạng các tệp tin có thể bị thay đổi. Các thay đổi nhỏ should only cause minor changes phần lớn tại một số ít tệp tin.
 
 Or perhaps a database or backup/archival solution is what is actually being sought, không phải là hệ thống quản lý mã nguồn. Ví dụ, quản lý mã nguồn không thích hợp cho việc quản lý ảnh được chụp một cách định kỳ từ webcam.
 
@@ -79,15 +79,15 @@ Xét về mặt thi hành của Git, thay vì thiết kế của nó, điều h�
 
 === Lần Commit Khởi tạo ===
 
-A stereotypical computer scientist đếm từ 0, thay vì 1. Thật không may, with respect to commits, git does not adhere to this convention. Rất nhiều lệnh bất lợi trước lần commit khởi tạo. Thêm nữa, some corner cases phải được đối đãi theo một cách đặc biệt, such as rebasing a branch with a different initial commit.
+A stereotypical computer scientist đếm từ 0, thay vì 1. Thật không may, with respect to commits, git không tôn trọng quy ước này. Rất nhiều lệnh bất lợi trước lần commit khởi tạo. Thêm nữa, some corner cases phải được đối đãi theo một cách đặc biệt, như là việc rebasing a một nhánh với lần commit khởi tạo khác.
 
-Git would benefit from defining the zero commit: ngay khi kho chứa được tạo ra, HEAD được đặt cho một chuỗi ký tự bao gồm 20 byte rỗng. Lần commit đặc biệt này tương ứng với một cây (tree) rỗng, không có gốc, at some time predating all Git repositories.
+Git có thể có được lợi ích từ việc định nghĩa lần commit zero: ngay khi kho chứa được tạo ra, HEAD được đặt cho một chuỗi ký tự bao gồm 20 byte rỗng. Lần commit đặc biệt này tương ứng với một cây (tree) rỗng, không có gốc, at some time predating all Git repositories.
 
 Sau đó chạy lệnh git log, ví dụ thế, thì Git nên báo cho người dùng biết chưa có lần commit nào, thay vì phát ra một lỗi nghiêm trọng. Điều tương tự xảy ra với các công cụ khác.
 
 Tất cả các bản commit đầu tiên hoàn toàn là con cháu của bản 0 (zero).
 
-Tuy nhiên, ở đây có một số vấn đề there are some problem cases unfortunately. Nếu nhiều nhánh với các lần khởi tạo commit khác nhau được trộn với nhau, then rebasing the result đòi hỏi substantial sự can thiệp bằng tay.
+Tuy nhiên, ở đây có một số vấn đề xảy ra trong một số trường hợp đặc biệt. Nếu nhiều nhánh với các lần khởi tạo commit khác nhau được trộn với nhau, then rebasing the result đòi hỏi thực chất có sự can thiệp bằng tay.
 
 === Giao diện Lập lờ ===
 
