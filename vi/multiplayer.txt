@@ -1,4 +1,4 @@
-== Multiplayer Git ==
+﻿== Multiplayer Git ==
 
 Initially I used Git on a private project where I was the sole developer.
 Amongst the commands related to Git's distributed nature, I needed only *pull*
@@ -20,7 +20,7 @@ To set them explicitly, type:
 
 Omit the global flag to set these options only for the current repository.
 
-=== Git Over SSH, HTTP ===
+=== Git Thông Qua SSH, HTTP ===
 
 Suppose you have SSH access to a web server, but Git is not installed. Though
 less efficient than its native protocol, Git can communicate over HTTP.

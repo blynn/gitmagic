@@ -4,7 +4,7 @@ Tôi sử dụng cách ví von để giới thiệu về quản lý mã nguồn.
 
 === Làm việc là một Trò chơi ===
 
-I've played computer games almost all my life. Ngược lại, Tôi chỉ bắt đầu sử dụng hệ thống quản lý mã nguồn khi đã trưởng thành. Tôi tin rằng không chỉ có tôi như thế, và việc so sánh giữa hai điều đó sẽ làm có các khái niệm trở nên dễ hiểu, dễ giải thích.
+Tôi đã chơi trò chơi trên máy tính suốt từ bé đến giờ. Ngược lại, Tôi chỉ bắt đầu sử dụng hệ thống quản lý mã nguồn khi đã trưởng thành. Tôi tin rằng không chỉ có tôi như thế, và việc so sánh giữa hai điều đó sẽ làm có các khái niệm trở nên dễ hiểu, dễ giải thích hơn.
 
 Hãy nghĩ việc biên soạn mã nguồn, tài liệu cũng giống như việc chúng ta đang chơi game. Một khi bạn đã làm được kha khá, bạn sẽ muốn ghi lại thành quả công việc của mình. Để làm điều đó, bạn chỉ việc bấm vào nút 'Save' trong chương trình biên soạn của mình.
 
@@ -12,19 +12,19 @@ Nhưng việc làm này sẽ ghi đè lên bản cũ. It's like those old school
 
 === Quản lý Mã nguồn ===
 
-Khi biên soạn, bạn có thể chọn 'Save As...' để tạo tệp tin với tên khác, hay là sao chép tệp tin ra một chỗ khác trước khi bạn ghi lại, nếu như bạn muốn dùng cả các bản cũ. Bạn có thể nén chúng lại để tiết kiệm dung lượng lưu trữ. Đây là dạng thức nguyên thủy và tốn nhiều công sức cho việc quản lý dữ liệu. Computer games improved on this long ago, many of them providing multiple automatically timestamped save slots.
+Khi biên soạn, bạn có thể chọn 'Save As...' để tạo tệp tin với tên khác, hay là sao chép tệp tin ra một chỗ khác trước khi bạn ghi lại, nếu như bạn muốn dùng cả các bản cũ. Bạn có thể nén chúng lại để tiết kiệm dung lượng lưu trữ. Đây là dạng thức nguyên thủy và tốn nhiều công sức cho việc quản lý dữ liệu. Trò chơi trên máy tính đã cải tiến cách này từ rất lâu rồi, rất nhiều trong số chúng cung cấp khả năng ghi lại tự động theo thời gian.
 
 Let's make the problem slightly tougher. Say you have a bunch of files that go together, như mã nguồn cho một dự án chẳng hạn, hay các tệp tin cho một website. Bây giờ bạn muốn giữ một phiên bản cũ bạn phải lưu giữ toàn bộ thư mục. Giữ nhiều phiên bản như thế bằng cách thủ công thật bất tiện, và nhanh chóng trở nên xa hoa.
 
-Với một số games, ghi lại một game really does consist of a directory full of files. These games hide this detail from the player and present a convenient interface to manage different versions of this directory.
+Với một số games, ghi lại một trò chơi thực tế bao gồm toàn bộ thư mục. These games hide this detail from the player and present a convenient interface to manage different versions of this directory.
 
-Hệ thống quản lý mã nguồn không có sự khác biệt nào. They all have nice interfaces to manage a directory of stuff. You can save the state of the directory every so often, and you can load any one of the saved states later on. Unlike most computer games, they're usually smart about conserving space. Typically, only a few files change between version to version, and not by much. Storing the differences instead of entire new copies saves room.
+Hệ thống quản lý mã nguồn không có sự khác biệt nào. Chúng có một giao diện tinh tế để quản lý một nhóm các thứ trong thư mục. Bạn có thể ghi lại trạng thái của thư mục một cách thường xuyên, và bạn có thể tải lên bất kỳ một trạng thái nào đã được ghi lại trước đó. Không giống như các trò chơi trên máy tính, chúng thường khôn khéo hơn về việc tiết kiệm không gian ổ đĩa. Thông thường, chỉ có một số ít tài liệu được sửa đổi giữa các lần, và cũng không nhiều. Chỉ lưu giữ sự khác nhau thay vì toàn bộ tất cả.
 
 === Hệ Phân tán ===
 
-Bây giờ hãy tưởng tượng có một game rất khó. So difficult to finish that many experienced gamers all over the world decide to team up and share their saved games to try to beat it. Speedruns are real-life examples: players specializing in different levels of the same game collaborate to produce amazing results.
+Bây giờ hãy tưởng tượng có một trò chơi rất khó. So difficult to finish that many experienced gamers all over the world decide to team up and share their saved games to try to beat it. Speedruns are real-life examples: players specializing in different levels of the same game collaborate to produce amazing results.
 
-Làm thế nào bạn có thể cài đặt một hệ thống mà chúng có thể lấy được  at each other's saves một cách dễ dàng? Và tải lên cái mới hơn?
+Làm thế nào bạn có thể cài đặt một hệ thống mà chúng có thể lấy được từng bản ghi của mỗi người một cách dễ dàng? Và tải lên cái mới hơn?
 
 Ngày xưa, mọi dự án đều sử dụng hệ thống quản lý tập trung. Máy chủ ở đâu đó giữ tất cả các game đã được ghi lại. Không còn ai khác làm điều đó nữa. Mọi người giữ phần lớn các game được ghi lại trong máy của họ. When a player wanted to make progress, họ có thể tải về bản ghi lại cuối cùng đã lưu lại ở máy chủ, chơi một lúc, ghi lại và tải trở lại máy chủ để mọi người có thể sử dụng.
 
@@ -32,28 +32,28 @@ Ngày xưa, mọi dự án đều sử dụng hệ thống quản lý tập trun
 
 There could be many reasons to want to see an older revision, but the outcome is the same. They have to ask the central server for that old saved game. The more saved games they want, the more they need to communicate.
 
-The new generation of version control systems, of which Git is a member, are known as distributed systems, and can be thought of as a generalization of centralized systems. When players download from the main server they get every saved game, not just the latest one. It's as if they're mirroring the central server.
+The new generation of version control systems, of which Git is a member, are known as distributed systems, and can be thought of as a generalization of hệ thống tập trung. Khi người chơi tải về từ máy chủ chính, họ lấy toàn bộ tất cả các lần đã ghi lại, không chỉ bản cuối. It's as if they're mirroring the máy chủ trung tâm.
 
 Việc khởi tạo bản sao có vẻ hơi xa hoa, đặc biệt là nếu nó có lịch sử phát triển lâu dài, nhưng cũng chỉ là việc kéo dài thời gian để chạy. Một lợi ích trực tiếp là khi các tài liệu cũ cần đến, việc liên lạc với máy chủ trung tâm là không cần thiết.
 
 === Mê tín Vớ vẩn ===
 
-Một quan niêm phổ biến là hệ thống phân tán không thích hợp với dự án yêu cầu một kho chứa trung tâm chính thức. Nothing could be further from the truth. Chụp ảnh ai đó không có nghĩa là lấy mất đi linh hồn họ. Cũng thế, nhân bản kho chính cũng không làm giảm đi sự quan trọng của nó.
+Một quan niệm phổ biến là hệ thống phân tán không thích hợp với dự án yêu cầu một kho chứa trung tâm chính thức. Không gì có thể phủ nhận được sự thật. Chụp ảnh ai đó không có nghĩa là lấy mất đi linh hồn họ. Cũng thế, nhân bản kho chính cũng không làm giảm đi sự quan trọng của nó.
 
-A good first approximation is that anything a centralized version control system can do, a well-designed distributed system can do better. Network resources are simply costlier than local resources. While we shall later see there are drawbacks to a distributed approach, one is less likely to make erroneous comparisons with this rule of thumb.
+A good first approximation is that anything a một hệ thống quản lý mã nguồn tập trung có thể làm, a well-designed distributed system can do better. Tài nguyên mạng thường thì đắt tiền hơn các tài nguyên nội bộ. While we shall later see there are drawbacks to a distributed approach, one is less likely to make erroneous comparisons with this rule of thumb.
 
-Một dự án nhỏ có thể chỉ cần một phần nhỏ các đặc tính được đưa ra bởi một
-hệ thống như thế, but using systems that scale poorly for tiny projects is like using
-Roman numerals for calculations involving small numbers.
+Một dự án nhỏ có thể chỉ cần dùng một phần nhỏ các đặc tính được đưa ra bởi một
+hệ thống như thế, nhưng sử dụng một hệ thống có thể but using systems that scale poorly for tiny projects is like using
+hệ thống số La Mã để tính toán các số nhỏ ations involving small numbers.
 
-Hơn thế nữa, dự án của bạn có thể lớn vượt ra ngoài mong đợi ban đầu. Việc sử dụng Git từ lúc khởi sự thì cũng giống như việc mang mang một bộ dao vạn năng chỉ để phục vụ cho việc mở nút chai. Đến một ngày nào đó bạn cấn đến một cái chìa vít bạn sẽ vui sướng vì mình không chỉ có mỗi cái mở nút chai.
+Hơn thế nữa, dự án của bạn có thể lớn vượt ra ngoài mong đợi ban đầu. Việc sử dụng Git từ lúc khởi sự thì cũng giống như việc mang một bộ dao vạn năng chỉ để phục vụ cho việc mở nút chai. Đến một ngày nào đó bạn cấn đến một cái chìa vít bạn sẽ vui sướng vì mình không chỉ có mỗi cái mở nút chai.
 
 === Xung đột khi Trộn ===
 
-Với chủ đề này, sự ví von nó với một trò chơi trên máy tính hơi khó. Thay vì thế, để chủng tôi dùng hành động biên soạn một tài liệu để giải thích cho bạn.
+Với chủ đề này, sự ví von nó với một trò chơi trên máy tính là hơi khó. Thay vì thế, để chúng tôi dùng việc biên soạn một tài liệu để giải thích cho bạn.
 
 Giả sử Alice chèn thêm một dòng vào đầu một tệp tin, và Bob nối một dòng vào cuối của bản sao của mình. Họ đều tải lên các thay đổi của mình. Phần lớn các hệ thống sẽ tự động luận ra hành động hợp lý: chấp nhận và trộn các sự thay đổi của họ, do đó cả hai sự chỉnh sửa của Alice và Bob đều được dùng.
 
-Bây giờ giả định cả Alice và Bob đã chỉnh sửa tạo ra sự khác biệt trên cùng một dòng. Thế thì điều này không thể sử lý được mà không có sự can thiệp của con người. Người thứ hai tải lên sẽ được thông báo có xung đột xảy ra, _merge conflict_, và phải chọn một and must choose one edit over another, hay sửa lại toàn bộ dòng.
+Bây giờ giả định cả Alice và Bob đã chỉnh sửa tạo ra sự khác biệt trên cùng một dòng. Thế thì điều này không thể sử lý được mà không có sự can thiệp của con người. Người thứ hai tải lên sẽ được thông báo có xung đột xảy ra, _merge conflict_, và phải chọn một bản and must choose one edit over another, hay sửa lại toàn bộ dòng.
 
 Nhiều tình huống phức tạp có thể nảy sinh. Hệ thống quản lý mã nguồn giữ phần dễ dàng cho chúng, và để lại những tình huống khó khăn cho chúng ta. Thông thường cách ứng xử của chúng có thể chỉnh sửa.
