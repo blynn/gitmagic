@@ -1,19 +1,20 @@
 ﻿== Multiplayer Git ==
 
-Initially I used Git on a private project where I was the sole developer.
-Amongst the commands related to Git's distributed nature, I needed only *pull*
-and *clone* so could I keep the same project in different places.
+Lúc đầu tôi sử dụng Git cho dự án riêng mà tôi là người duy nhất phát triển nó.
+Amongst the commands related to Git's distributed nature, Tôi chỉ cần lệnh *pull*
+và *clone* so could I keep the same project in different places.
 
-Later I wanted to publish my code with Git, and include changes from
-contributors. I had to learn how to manage projects with multiple developers
-from all over the world. Fortunately, this is Git's forte, and arguably its
-raison d'être.
+Sau đó tôi muốn mã nguồn của mình được phổ biến trên mạng bằng việc sử dụng Git, và bao gồm cả những thay đổi từ
+những người đóng góp. Tôi đã phải học cách làm thế nào để quản lý các dự án có nhiều người phát triển phần mềm
+ở khắp nơi trên toàn thế giới. May mắn thay, đây là sở trường của Git, và người ta có thể nói đây là
+điều sống còn
 
-=== Who Am I? ===
 
-Every commit has an author name and email, which is shown by *git log*.
-By default, Git uses system settings to populate these fields.
-To set them explicitly, type:
+=== Tôi Là Ai? ===
+
+Mỗi lần commit sẽ có tên và địa chỉ thư điện tử, điều này có thể nhìn thấy bằng lệnh *git log*.
+Theo mặc định, Git uses system settings to populate these fields.
+Để chỉ định chúng một cách rõ ràng, hãy gõ:
 
   $ git config --global user.name "John Doe"
   $ git config --global user.email johndoe@example.com
@@ -22,8 +23,8 @@ Omit the global flag to set these options only for the current repository.
 
 === Git Thông Qua SSH, HTTP ===
 
-Suppose you have SSH access to a web server, but Git is not installed. Though
-less efficient than its native protocol, Git can communicate over HTTP.
+Giả sử bạn có thể truy cập vào một máy chủ web qua SSH, nhưng Git lại chưa được cài đặt ở đây. Mặc dù
+không hiệu quả như giao thức nguyên bản của nó, nhưng Git vẫn có thể truyền thông thông qua HTTP.
 
 Download, compile and install Git in your account, and create a repository in
 your web directory:
@@ -33,15 +34,15 @@ your web directory:
  $ git --bare update-server-info
  $ cp hooks/post-update.sample hooks/post-update
 
-For older versions of Git, the copy command fails and you should run:
+Với các phiên bản Git cũ, lệnh copy không thực hiện được và bạn phải chạy:
 
  $ chmod a+x hooks/post-update
 
-Now you can publish your latest edits via SSH from any clone:
+Now you can publish your latest edits thông qua SSH từ một bản sao bất kỳ:
 
  $ git push web.server:/path/to/proj.git master
 
-and anybody can get your project with:
+và mọi người có thể lấy dự án của bạn với lệnh:
 
  $ git clone http://web.server/proj.git
 
@@ -49,17 +50,17 @@ and anybody can get your project with:
 
 Want to synchronize repositories without servers, or even a network connection?
 Need to improvise during an emergency? We've seen <<makinghistory, *git
-fast-export* and *git fast-import* can convert repositories to a single file
-and back>>. We could shuttle such files back and forth to transport git
-repositories over any medium, but a more efficient tool is *git bundle*.
+fast-export* và *git fast-import* có thể chuyển đổi một kho chứa thành một tệp tin đơn
+và ngược lại>>. We could shuttle such files back and forth to transport git
+repositories over any medium, nhưng có một công cụ hiệu quả hơn đó chính là *git bundle*.
 
 The sender creates a 'bundle':
 
  $ git bundle create somefile HEAD
 
-then transports the bundle, +somefile+, to the other party somehow: email,
-thumb drive, an *xxd* printout and an OCR scanner, reading bits over the phone,
-smoke signals, etc. The receiver retrieves commits from the bundle by typing:
+then transports the bundle, +somefile+, to the other party somehow: thư điện tử,
+ổ đĩa USB, an *xxd* printout and an OCR scanner, reading bits over the phone,
+smoke signals, v.v.. The receiver retrieves commits from the bundle by typing:
 
  $ git pull somefile
 
@@ -122,19 +123,19 @@ There are slight differences for mbox-based email clients, but if you use one
 of these, you're probably the sort of person who can figure them out easily
 without reading tutorials!
 
-=== Sorry, We've Moved ===
+=== Rất tiếc! Tôi đã chuyển đi ===
 
-After cloning a repository, running *git push* or *git pull* will automatically
-push to or pull from the original URL. How does Git do this? The secret lies in
-config options created with the clone. Let's take a peek:
+Sau khi nhân bản kho chứa, việc chạy lệnh *git push* hay *git pull* sẽ tự động
+push tới hay pull từ URL gốc. Git đã làm điều này như thế nào? Bí mật nằm ở chỗ
+các tùy chọn config đã được tạo ra cùng với bản sao. Hãy xem thử:
 
  $ git config --list
 
-The +remote.origin.url+ option controls the source URL; ``origin'' is a nickname
-given to the source repository. As with the ``master'' branch convention, we may
-change or delete this nickname but there is usually no reason for doing so.
+Tùy chọn +remote.origin.url+ sẽ lưu giữ URL; ``origin'' là cái tên
+được đặt cho kho nguồn. As with the ``master'' branch convention, chúng ta có thể
+thay đổi hay xóa các tên này nhưng chẳng có lý do gì để phải làm như thế cả.
 
-If the original repository moves, we can update the URL via:
+Nếu kho chứa nguyên bản đã chuyển chỗ, chúng ta có thể cập nhật URL thông qua:
 
  $ git config remote.origin.url git://new.url/proj.git
 
@@ -155,23 +156,23 @@ arguments.
 
 === Remote Branches ===
 
-When you clone a repository, you also clone all its branches. You may not have
+Khi bạn nhân bản một kho chứa, bạn cũng đồng thời nhân bản tất cả các nhánh của nó. You may not have
 noticed this because Git hides them away: you must ask for them specifically.
 This prevents branches in the remote repository from interfering with
-your branches, and also makes Git easier for beginners.
+your branches, và cũng làm cho Git dễ dàng hơn với người mới dùng.
 
-List the remote branches with:
+Ta liệt kê các nhánh bằng lệnh:
 
  $ git branch -r
 
-You should see something like:
+Bạn nhận được kết quả trông giống như thế này:
 
  origin/HEAD
  origin/master
  origin/experimental
 
 These represent branches and the HEAD of the remote repository, and can be used
-in regular Git commands. For example, suppose you have made many commits, and
+trong các lệnh Git thông thường. Ví dụ như là, suppose you have made many commits, and
 wish to compare against the last fetched version. You could search through the
 logs for the appropriate SHA1 hash, but it's much easier to type:
 
@@ -183,19 +184,19 @@ Or you can see what the ``experimental'' branch has been up to:
 
 === Multiple Remotes ===
 
-Suppose two other developers are working on our project, and we want to
-keep tabs on both. We can follow more than one repository at a time with:
+Giả sử hai người cùng phát triển trên một sự án của chúng ta, và họ muốn
+keep tabs on both. Chúng ta theo dõi hơn một kho chứa tại một thời điểm với lệnh:
 
  $ git remote add other git://example.com/some_repo.git
  $ git pull other some_branch
 
-Now we have merged in a branch from the second repository, and we have
+Bây giờ chúng ta có thể trộn in a branch from the second repository, and we have
 easy access to all branches of all repositories:
 
  $ git diff origin/experimental^ other/some_branch~5
 
 But what if we just want to compare their changes without affecting our own
-work? In other words, we want to examine their branches without having
+work? Nói cách khác, we want to examine their branches without having
 their changes invade our working directory. Then rather than pull, run:
 
  $ git fetch        # Fetch from origin, the default.
@@ -205,29 +206,28 @@ This just fetches histories. Although the working directory remains untouched,
 we can refer to any branch of any repository in a Git command because we now
 possess a local copy.
 
-Recall that behind the scenes, a pull is simply a *fetch* then *merge*.
-Usually we *pull* because we want to merge the latest commit after a fetch;
-this situation is a notable exception.
+Recall that behind the scenes, lệnh pull đơn giản là *fetch* sau đó *merge*.
+Thông thường chúng ta *pull* bởi vì chúng ta muốn trộn với lần commit cuối cùng sau khi fetch;
+việc làm này this situation is a notable exception.
 
-See *git help remote* for how to remove remote repositories, ignore certain
-branches, and more.
+Xem *git help remote* for how to remove remote repositories, ignore certain
+branches, và những thứ khác nữa.
 
 === My Preferences ===
 
-For my projects, I like contributors to prepare repositories from which I can
+Với dự án của mình, tôi thích những người cộng tác tạo các kho chứa ở nơi mà tôi có thể
 pull. Some Git hosting services let you host your own fork of a project with
-the click of a button.
+chỉ cần sử dụng chuột.
 
 After I fetch a tree, I run Git commands to navigate and examine the changes,
 which ideally are well-organized and well-described. I merge my own changes,
 and perhaps make further edits. Once satisfied, I push to the main repository.
 
-Though I infrequently receive contributions, I believe this approach scales
-well. See
-http://torvalds-family.blogspot.com/2009/06/happiness-is-warm-scm.html[this
-blog post by Linus Torvalds].
+Mặc dù tôi ít nhận được sự cộng tác, nhưng tôi tin rằng việc này sẽ thay đổi theo chiều hướng
+tốt lên. Hãy đọc
+http://torvalds-family.blogspot.com/2009/06/happiness-is-warm-scm.html[blog của Linus Torvalds].
 
 Staying in the Git world is slightly more convenient than patch files, as it
-saves me from converting them to Git commits. Furthermore, Git handles details
-such as recording the author's name and email address, as well as the time and
-date, and asks the author to describe their own change.
+saves me from converting them to Git commits. Hơn thế nữa, Git giữ các thông tin rất chi tiết
+như là ghi lại tên và địa chỉ thư điện tử của tác giả, cũng như là ngày tháng và
+thời gian, và nó cũng đòi hỏi tác giả phải mô tả về những thay đổi của họ.

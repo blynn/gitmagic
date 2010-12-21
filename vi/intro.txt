@@ -14,19 +14,19 @@ Nhưng việc làm này sẽ ghi đè lên bản cũ. It's like those old school
 
 Khi biên soạn, bạn có thể chọn 'Save As...' để tạo tệp tin với tên khác, hay là sao chép tệp tin ra một chỗ khác trước khi bạn ghi lại, nếu như bạn muốn dùng cả các bản cũ. Bạn có thể nén chúng lại để tiết kiệm dung lượng lưu trữ. Đây là dạng thức nguyên thủy và tốn nhiều công sức cho việc quản lý dữ liệu. Trò chơi trên máy tính đã cải tiến cách này từ rất lâu rồi, rất nhiều trong số chúng cung cấp khả năng ghi lại tự động theo thời gian.
 
-Let's make the problem slightly tougher. Bạn nói rằng bạn có nhiều tệp tin cần làm việc cùng nhau, như mã nguồn cho một dự án chẳng hạn, hay các tệp tin cho một website. Bây giờ bạn muốn giữ một phiên bản cũ bạn phải lưu giữ toàn bộ thư mục. Giữ nhiều phiên bản như thế bằng cách thủ công thật bất tiện, và nhanh chóng trở nên xa hoa.
+Let's make the problem slightly tougher. Bạn nói rằng bạn có nhiều tệp tin cần làm việc cùng nhau, như mã nguồn cho một dự án chẳng hạn, hay các tệp tin cho một website. Bây giờ bạn muốn giữ một phiên bản cũ bạn phải lưu giữ toàn bộ thư mục. Giữ nhiều phiên bản như thế bằng cách thủ công thật bất tiện, và sẽ nhanh chóng trở nên xa hoa.
 
-Với một số games, ghi lại một trò chơi thực tế bao gồm toàn bộ thư mục. Những trò chơi này che giấu những chi tiết detail from the player and và phơi bày ra một giao diện thích hợp để quản lý các phiên bản của thư mục này.
+Đối với một số trò chơi, ghi lại một trò chơi thực tế bao gồm toàn bộ thư mục. Những trò chơi này che giấu những chi tiết từ phía người chơi và phơi bày ra một giao diện thích hợp để quản lý các phiên bản của thư mục này.
 
 Hệ thống quản lý mã nguồn không có sự khác biệt nào. Chúng có một giao diện tinh tế để quản lý một nhóm các thứ trong thư mục. Bạn có thể ghi lại trạng thái của thư mục một cách thường xuyên, và bạn có thể tải lên bất kỳ một trạng thái nào đã được ghi lại trước đó. Không giống như các trò chơi trên máy tính, chúng thường khôn khéo hơn về việc tiết kiệm không gian lưu trữ. Thông thường, chỉ có một số ít tài liệu được sửa đổi giữa các lần, và cũng không nhiều. Chỉ lưu giữ những cái có thay đổi thay vì toàn bộ tất cả.
 
-=== Hệ Phân tán ===
+=== Hệ Thống Phân Tán ===
 
 Bây giờ hãy tưởng tượng có một trò chơi rất khó. So difficult to finish that many experienced gamers trên toàn thế giới quyết định lập thành đội và chia sẻ những trò chơi mà họ đã lưu lại để thử theo dõi  chúng. Speedruns là những ví dụ trong đời sống thực: các đấu thủ được phân hóa theo các mức của cùng một trò chơi hợp tác với nhau để đạt được các kết quả đáng kinh ngạc.
 
 Làm thế nào bạn có thể cài đặt một hệ thống mà chúng có thể lấy được từng bản ghi của mỗi người một cách dễ dàng? Và tải lên cái mới hơn?
 
-Ngày xưa, mọi dự án đều sử dụng hệ thống quản lý tập trung. Máy chủ ở đâu đó giữ tất cả các game đã được ghi lại. Không còn ai khác làm điều đó nữa. Mọi người giữ phần lớn các game được ghi lại trong máy của họ. Khi một đấu thủ muốn chơi, họ có thể tải về bản ghi lại cuối cùng đã lưu lại ở máy chủ, chơi một lúc, ghi lại và tải trở lại máy chủ để mọi người có thể sử dụng.
+Ngày xưa, mọi dự án đều sử dụng hệ thống quản lý tập trung. Máy chủ ở một chỗ đâu đó và giữ tất cả các trò chơi đã được ghi lại. Không còn ai khác làm điều đó nữa. Mọi người giữ phần lớn các trò chơi được ghi lại trong máy của họ. Khi một đấu thủ muốn chơi, họ có thể tải về bản ghi lại cuối cùng đã lưu lại ở máy chủ, chơi một lúc, ghi lại và tải trở lại máy chủ để mọi người có thể sử dụng.
 
 Điều gì xảy ra khi một người chơi, vì một lý do nào đó, muốn có được lần chơi cũ hơn? Có thể là lần chơi hiện tại không ổn định hay có sai sót bởi vì một người chơi nào đó quên không chỉnh lại trò chơi về mức 3, và họ muốn tìm lần chơi đã ghi lại cuối cùng mà họ vẫn chưa hoàn thành. Hay có thể là họ muốn so sánh sự  khác nhau giữa các lần chơi để thấy được công việc đã làm của từng người chơi.
 
@@ -40,7 +40,7 @@ Việc khởi tạo bản sao như thế có vẻ hơi xa hoa, đặc biệt là
 
 Một quan niệm phổ biến là hệ thống phân tán không thích hợp với dự án yêu cầu một kho chứa trung tâm chính thức. Không gì có thể phủ nhận được sự thật. Chụp ảnh ai đó không có nghĩa là lấy mất đi linh hồn họ. Cũng thế, nhân bản kho chính cũng không làm giảm đi sự quan trọng của nó.
 
-A good first approximation is that anything a một hệ thống quản lý mã nguồn tập trung có thể làm, a well-designed distributed system can do better. Tài nguyên mạng thường thì đắt tiền hơn các tài nguyên nội bộ. While we shall later see there are drawbacks to a distributed approach, one is less likely to make erroneous comparisons with this rule of thumb.
+A good first approximation is that anything a một hệ thống quản lý mã nguồn tập trung có thể làm, một hệ thống phân tán được thiết kế tốt có thể làm nhiều hơn thế. Tài nguyên mạng thường thì đắt tiền hơn các tài nguyên nội bộ. While we shall later see there are drawbacks to a distributed approach, one is less likely to make erroneous comparisons with this rule of thumb.
 
 Một dự án nhỏ có thể chỉ cần dùng một phần nhỏ các đặc tính được đưa ra bởi một
 hệ thống như thế, nhưng sử dụng một hệ thống ít chức năng cho một dự án nhỏ thì cũng giống như việc sử dụng 
