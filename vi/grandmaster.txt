@@ -7,8 +7,8 @@ chiêu mà tôi đã từng sử dụng trong quá khứ.
 
 === Phát hành Mã Nguồn ===
 
-For my projects, Git tracks exactly the files I'd like to archive and release
-to users. Để tạo gói tarball cho mã nguồn, Tôi chạy:
+Với dự án của tôi, Git giữ theo dõi chính xác các tệp tin tôi muốn lưu trữ và phát hành tới
+người dùng. Để tạo gói tarball cho mã nguồn, tôi chạy:
 
  $ git archive --format=tar --prefix=proj-1.2.3/ HEAD
 
@@ -20,8 +20,8 @@ các dự án nào đó. Thay vào đó, bạn có thể gõ:
  $ git add .
  $ git add -u
 
-Git sẽ xem tất cả các tệp tin trong thư mục hiện tại and work out the details by
-itself. Thay vì chạy lệnh add thứ hai, hãy chạy  `git commit -a` nếu bạn cũng có
+Git sẽ xem tất cả các tệp tin trong thư mục hiện tại và làm công việc mà nó phải
+làm. Thay vì chạy lệnh add thứ hai, hãy chạy  `git commit -a` nếu bạn cũng có
 ý định commit vào lúc này. Xem *git help ignore* để biết làm cách nào để chỉ ra
 các tệp tin bỏ qua.
 
@@ -29,14 +29,14 @@ Bạn có thể thi hành những điều trên chỉ cần một dòng lệnh:
 
  $ git ls-files -d -m -o -z | xargs -0 git update-index --add --remove
 
-Tùy chọn *-z* và *-0*  prevent ill side-effects from filenames containing
-strange characters. As this command adds ignored files, bạn có thể muốn sử dụng
+Tùy chọn *-z* và *-0*  prevent ill side-effects từ những tệp tin có chứa
+các ký tự đặc biệt. As this command adds ignored files, bạn có thể muốn sử dụng
 tùy chọn `-x` hay `-X`.
 
 === Lần commit này Nhiều Quá! ===
 
-Bạn quên việc commit quá lâu? Been coding furiously and forgotten
-about source control until now? Bạn muốn những thay đổi liên quan đến nhau phải được commit riêng từng lần và nối tiếp nhau, bởi vì
+Bạn quên việc commit quá lâu? Bạn quá mải mê với việc viết mã nguồn mà quên đi
+việc quản lý nó? Bạn muốn những thay đổi liên quan đến nhau phải được commit riêng từng lần và nối tiếp nhau, bởi vì
 đây là phong cách của bạn?
 
 Đừng lo lắng. Chạy:
@@ -51,14 +51,14 @@ Khi nào bạn thỏa mãn thì gõ
 
  $ git commit
 
-to commit precisely the changes you selected (the 'staged' changes). Make sure
-you omit the *-a* option, otherwise Git will commit all the edits.
+to commit precisely the changes you selected (the 'staged' changes). Hãy chắc chắn là
+bạn đã không dùng tùy chọn *-a*, nếu không thì Git sẽ commit tất cả.
 
 What if you've edited many files in many places? Reviewing each change one by
-one becomes frustratingly mind-numbing. In this case, use *git add -i*, whose
-interface is less straightforward, but more flexible. With a few keystrokes,
+one becomes frustratingly mind-numbing. Trong trường hợp này, sử dụng lệnh *git add -i*, whose
+interface is less straightforward, nhưng uyển chuyển hơn. With a few keystrokes,
 you can stage or unstage several files at a time, or review and select changes
-in particular files only. Alternatively, run *git commit \--interactive* which
+in particular files only. Có một sự lựa chọn khác, chạy lệnh *git commit \--interactive* which
 automatically commits after you're done.
 
 === The Index: Git's Staging Area ===
@@ -69,42 +69,42 @@ data directly between your project and its history. Rather, Git first writes
 data to the index, and then copies the data in the index to its final
 destination.
 
-For example, *commit -a* is really a two-step process. The first step places a
-snapshot of the current state of every tracked file into the index. The second
-step permanently records the snapshot now in the index. Committing without the
-*-a* option only performs the second step, and only makes sense after running
-commands that somehow change the index, such as *git add*.
+Ví dụ, lệnh *commit -a* thực sự bao gồm hai quá trình. Bước thứ nhất là đặt
+snapshot of the current state of every tracked file vào chỉ mục (index). Bước thứ
+hai là permanently records the snapshot now in the index. Committing without the
+*-a* option chỉ thi hành bước thứ hai, and only makes sense after running
+commands that somehow change the index, như là lệnh *git add*.
 
-Usually we can ignore the index and pretend we are reading straight from and writing straight to the history. On this occasion, we want finer control, so we manipulate the index. We place a snapshot of some, but not all, of our changes into the index, and then permanently record this carefully rigged snapshot.
+Usually we can ignore the index and pretend we are reading straight from and ghi thẳng vào trong lịch sử. On this occasion, we want finer control, so we manipulate the index. We place a snapshot of some, không phải tất cả, các thay đổi của chúng ta vào chỉ mục, and then permanently record this carefully rigged snapshot.
 
 === Đừng Quên HEAD của Mình ===
 
-Thẻ HEAD giống như một con trỏ, nó trỏ đến lần commit cuối cùng, advancing with each new commit. Some Git commands let you move it. Ví dụ như:
+Thẻ HEAD giống như một con trỏ, nó trỏ đến lần commit cuối cùng, tự động di chuyển theo mỗi lần commit mới. Một số lệnh của Git giúp bạn di chuyển nó. Ví dụ như:
 
  $ git reset HEAD~3
 
 sẽ chuyển HEAD lên vị trí lần commit cách đây ba lần. Thus all Git commands now act as if you hadn't made those last three commits, while your files remain in the present. See the help page for some applications.
 
-But how can you go back to the future? The past commits know nothing of the future.
+Nhưng ta lại muốn quay trở lại phần sau này? Lần commit cũ không biết gì về phần sau này cả.
 
 Nếu bạn có giá trị băm SHA1 của HEAD gốc thì:
 
  $ git reset 1b6d
 
-But suppose you never took it down? Đừng lo: for commands like these, Git ghi lại HEAD gốc với thẻ có tên là ORIG_HEAD, và bạn có thể trở về ngon lành và an toàn với lệnh:
+Nhưng giả sử bạn không có được nó? Đừng lo: for commands like these, Git ghi lại HEAD gốc với thẻ có tên là ORIG_HEAD, và bạn có thể trở về ngon lành và an toàn với lệnh:
 
  $ git reset ORIG_HEAD
 
-=== HEAD-hunting ===
+=== Săn tìm-HEAD ===
 
-Có thể ORIG_HEAD là chưa đủ. Perhaps you've just realized you made a monumental mistake and you need to go back to an ancient commit in a long-forgotten branch.
+Có thể ORIG_HEAD là chưa đủ. Có lẽ you've just realized you made a monumental mistake and you need to go back to an ancient commit in a long-forgotten branch.
 
-By default, Git keeps a commit for at least two weeks, even if you ordered
+Theo mặc định, Git giữ một lần commit ít nhất là hai tuần lễ, even if you ordered
 Git to destroy the branch containing it. The trouble is finding the appropriate
 hash. You could look at all the hash values in `.git/objects` and use trial
 and error to find the one you want. But there's a much easier way.
 
-Git records every hash of a commit it computes in `.git/logs`. The subdirectory `refs` contains the history of all activity on all branches, while the file `HEAD` shows every hash value it has ever taken. The latter can be used to find hashes of commits on branches that have been accidentally lopped off.
+Git ghi lại mọi giá trị băm của mọi lần commit trong máy tính tại thư mục `.git/logs`. Thư mục con `refs` chứa lịch sử của tất cả contains the history of all activity on all branches, trong khi tệp tin `HEAD` giữ tất cả các giá trị băm mà nó từng có được. The latter can be used to find hashes of commits on branches that have been accidentally lopped off.
 
 Lệnh reflog cung cấp cho chúng ta một giao diện thân thiện dành cho các tệp tin log. Hãy thử bằng lệnh:
 
@@ -120,34 +120,34 @@ Hay checkout lần thứ 5th-last visited commit via:
 
 Xem chương ``Specifying Revisions'' từ lệnh *git help rev-parse* để biết thêm chi tiết.
 
-You may wish to configure a longer grace period for doomed commits. For
-example:
+You may wish to configure a longer grace period for doomed commits. Ví
+dụ:
 
   $ git config gc.pruneexpire "30 days"
 
-means a deleted commit will only be permanently lost once 30 days have passed
+có nghĩa là a deleted commit will only be permanently lost once 30 days have passed
 and *git gc* is run.
 
-You may also wish to disable automatic invocations of *git gc*:
+Bạn cũng có thể không cho phép chạy lệnh *git gc* một cách tự động:
 
   $ git config gc.auto 0
 
-in which case commits will only be deleted when you run *git gc* manually.
+trong trường hợp này những lần commit sẽ chỉ bị xóa bỏ khi bạn chạy lệnh *git gc*.
 
 === Building On Git ===
 
-In true UNIX fashion, Git's design allows it to be easily used as a low-level component of other programs, như là giao diện đồ họa GUI và giao diện Web, thay thế cho giao diện dòng lệnh, patch managements tools, các công cụ nhập và chuyển đổi, và những thứ tương tự như thế. Trên thực tế, một số lệnh Git bản chất nó cũng là các kịch bản (scripts) standing on the shoulders of giants. With a little tinkering, you can customize Git to suit your preferences.
+In true UNIX fashion, Git's design allows it to be easily used as a low-level component of other programs, như là giao diện đồ họa GUI và giao diện Web, thay thế cho giao diện dòng lệnh, công cụ quản lý các miếng vá, các công cụ nhập và chuyển đổi, và những thứ tương tự như thế. Trên thực tế, một số lệnh Git bản chất nó cũng là các kịch bản (scripts) đứng trên vai của những người khổng lồ. Chỉ cần sửa đổi một chút, bạn có thể bắt Git làm việc phù hợp với sở thích của mình.
 
-One easy trick is to use built-in Git aliases to shorten your most frequently
-used commands:
+Một mẹo nhỏ là sử dụng một built-in của Git là gán bí danh cho các lệnh để nó trở nên ngắn gọn hơn
+sử dụng lệnh:
 
-  $ git config --global alias.co checkout
-  $ git config --global --get-regexp alias  # display current aliases
+  $ git config --global alias.co checkout  #gán bí danh cho lệnh checkout là co
+  $ git config --global --get-regexp alias  # hiển thị bí danh hiện hành
   alias.co checkout
-  $ git co foo                              # same as 'git checkout foo'
+  $ git co foo                              # có kết quả giống như chạy lệnh 'git checkout foo'
 
 Another is to print the current branch in the prompt, or window title.
-Invoking
+Gọi lệnh
 
   $ git symbolic-ref HEAD
 
@@ -192,12 +192,12 @@ Cũng tương tự như thế, attempting to overwrite a branch via a move fails
 
 Không giống như checkout và reset, these two commands defer data destruction. The
 changes are still stored trong thư mục con .git, and can be retrieved by
-recovering the appropriate giá trị băm `.git/logs` (xem "HEAD-hunting" ở phía trên).
-By default, they will be kept for at least two weeks.
+recovering the appropriate giá trị băm `.git/logs` (xem "Săn tìm - HEAD" ở phía trên).
+Theo mặc định, chúng sẽ giữ ít nhất là hai tuần lễ.
 
-*Clean*: Some git commands refuse to proceed because they're worried about
-clobbering untracked files. If you're certain that all untracked files and
-directories are expendable, then delete them mercilessly with:
+*Clean*: Một số lệnh Git từ chối commands refuse to proceed because they're worried about
+clobbering untracked files. Nếu bạn chắc chắn về tất cả các tệp tin và thư mục không cần Git
+theo dõi nữa và muốn phá hủy chúng đi, thế thì xóa chúng triệt để với lệnh:
 
   $ git clean -f -d
 
@@ -205,9 +205,9 @@ Next time, that pesky command will work!
 
 === Preventing Bad Commits ===
 
-Stupid mistakes pollute my repositories. Most frightening are missing files due
-to a forgotten *git add*. Lesser transgressions are trailing whitespace and
-unresolved merge conflicts: though harmless, I wish these never appeared on the
+Stupid mistakes pollute my repositories. Điều tồi tệ nhất là để sót các tệp tin bởi vì
+quên lệnh *git add*. Lesser transgressions are trailing whitespace and
+unresolved merge conflicts: mặc dù cũng chẳng tệ hại lắm, I wish these never appeared on the
 public record.
 
 If only I had bought idiot insurance by using a _hook_ to alert me about these problems:
@@ -226,7 +226,7 @@ Với bản hướng dẫn này, I eventually added the following to the beginni
    exit 1
  fi
 
-Nhiều hoạt động của Git hỗ trợ hooks; hãy xem *git help hooks*. We activated the
-sample *post-update* hook earlier when discussing Git over HTTP. This runs
+Nhiều hoạt động của Git hỗ trợ hooks; hãy xem *git help hooks*. Chúng tôi đã kích hoạt
+một hook mẫu là *post-update* trước earlier when discussing Git thông qua HTTP. This runs
 whenever the head moves. Đoạn script ví dụ post-update cập nhật các tệp tin Git cần
 for communication over Git-agnostic transports giống như là HTTP.
