@@ -1,8 +1,8 @@
 ﻿== Git Grandmastery ==
 
 Bây giờ, bạn có thể thông qua lệnh *git help* để bật trang trợ giúp lên và có thể hiểu
-gần như tất cả mọi thứ. Tuy nhiên, việc xác định chính xác lệnh yêu cầu xact command required to solve a
-given problem can be tedious. Có lẽ tôi có thể giúp bạn tiết kiệm được thời gian: bên dưới là một vài
+gần như tất cả mọi thứ. Tuy nhiên, việc xác định chính xác lệnh cần sử dụng để giải quyết
+các vấn đề đặt ra có lẽ chẳng dễ dàng gì. Có lẽ tôi có thể giúp bạn tiết kiệm được thời gian: bên dưới là một vài
 chiêu mà tôi đã từng sử dụng trong quá khứ.
 
 === Phát hành Mã Nguồn ===
@@ -36,7 +36,7 @@ tùy chọn `-x` hay `-X`.
 === Lần commit này Nhiều Quá! ===
 
 Bạn quên việc commit quá lâu? Been coding furiously and forgotten
-about source control until now? Made a series of unrelated changes, bởi vì
+about source control until now? Bạn muốn những thay đổi liên quan đến nhau phải được commit riêng từng lần và nối tiếp nhau, bởi vì
 đây là phong cách của bạn?
 
 Đừng lo lắng. Chạy:
@@ -79,11 +79,11 @@ Usually we can ignore the index and pretend we are reading straight from and wri
 
 === Đừng Quên HEAD của Mình ===
 
-Thẻ HEAD is like a cursor that normally points at the latest commit, advancing with each new commit. Some Git commands let you move it. For example:
+Thẻ HEAD giống như một con trỏ, nó trỏ đến lần commit cuối cùng, advancing with each new commit. Some Git commands let you move it. Ví dụ như:
 
  $ git reset HEAD~3
 
-will move the HEAD three commits back. Thus all Git commands now act as if you hadn't made those last three commits, while your files remain in the present. See the help page for some applications.
+sẽ chuyển HEAD lên vị trí lần commit cách đây ba lần. Thus all Git commands now act as if you hadn't made those last three commits, while your files remain in the present. See the help page for some applications.
 
 But how can you go back to the future? The past commits know nothing of the future.
 
@@ -91,7 +91,7 @@ Nếu bạn có giá trị băm SHA1 của HEAD gốc thì:
 
  $ git reset 1b6d
 
-But suppose you never took it down? Đừng lo: for commands like these, Git ghi lại HEAD gốc với thẻ có tên làORIG_HEAD, và bạn có thể trở về ngon lành và an toàn với:
+But suppose you never took it down? Đừng lo: for commands like these, Git ghi lại HEAD gốc với thẻ có tên là ORIG_HEAD, và bạn có thể trở về ngon lành và an toàn với lệnh:
 
  $ git reset ORIG_HEAD
 
@@ -106,7 +106,7 @@ and error to find the one you want. But there's a much easier way.
 
 Git records every hash of a commit it computes in `.git/logs`. The subdirectory `refs` contains the history of all activity on all branches, while the file `HEAD` shows every hash value it has ever taken. The latter can be used to find hashes of commits on branches that have been accidentally lopped off.
 
-The reflog command provides a friendly interface to these log files. Try
+Lệnh reflog cung cấp cho chúng ta một giao diện thân thiện dành cho các tệp tin log. Hãy thử bằng lệnh:
 
   $ git reflog
 
@@ -136,7 +136,7 @@ in which case commits will only be deleted when you run *git gc* manually.
 
 === Building On Git ===
 
-In true UNIX fashion, Git's design allows it to be easily used as a low-level component of other programs, such as GUI and web interfaces, alternative command-line interfaces, patch managements tools, importing and conversion tools and so on. In fact, some Git commands are themselves scripts standing on the shoulders of giants. With a little tinkering, you can customize Git to suit your preferences.
+In true UNIX fashion, Git's design allows it to be easily used as a low-level component of other programs, như là giao diện đồ họa GUI và giao diện Web, thay thế cho giao diện dòng lệnh, patch managements tools, các công cụ nhập và chuyển đổi, và những thứ tương tự như thế. Trên thực tế, một số lệnh Git bản chất nó cũng là các kịch bản (scripts) standing on the shoulders of giants. With a little tinkering, you can customize Git to suit your preferences.
 
 One easy trick is to use built-in Git aliases to shorten your most frequently
 used commands:
@@ -186,13 +186,13 @@ On the other hand, if you specify particular paths for checkout, then there are 
 
   $ git branch -D dead_branch  # instead of -d
 
-Similarly, attempting to overwrite a branch via a move fails if data loss would ensue. To force a branch move, type:
+Cũng tương tự như thế, attempting to overwrite a branch via a move fails if data loss would ensue. To force a branch move, type:
 
   $ git branch -M source target  # instead of -m
 
-Unlike checkout and reset, these two commands defer data destruction. The
-changes are still stored in the .git subdirectory, and can be retrieved by
-recovering the appropriate hash from `.git/logs` (see "HEAD-hunting" above).
+Không giống như checkout và reset, these two commands defer data destruction. The
+changes are still stored trong thư mục con .git, and can be retrieved by
+recovering the appropriate giá trị băm `.git/logs` (xem "HEAD-hunting" ở phía trên).
 By default, they will be kept for at least two weeks.
 
 *Clean*: Some git commands refuse to proceed because they're worried about
