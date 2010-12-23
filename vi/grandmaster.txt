@@ -58,12 +58,12 @@ Nhưng bạn lại có những tài liệu đã được chỉnh sửa đặt t�
 becomes frustratingly mind-numbing. Trong trường hợp này, sử dụng lệnh *git add -i*, whose
 interface is less straightforward, nhưng uyển chuyển hơn. With a few keystrokes,
 you can stage or unstage several files at a time, or review and select changes
-in particular files only. Có một sự lựa chọn khác, chạy lệnh *git commit \--interactive* which
+chỉ trong các tệp tin riêng biệt. Có một sự lựa chọn khác, chạy lệnh *git commit \--interactive* which
 automatically commits after you're done.
 
 === The Index: Git's Staging Area ===
 
-So far we have avoided Git's famous 'index', but we must now confront it to
+So far we have avoided Git's famous 'index', nhưng chúng ta phải đối mặt it to
 explain the above. The index is a temporary staging area. Git seldom shuttles
 data directly between your project and its history. Đúng hơn là Git đầu tiên ghi
 dữ liệu vào chỉ mục, và sau đó sao chép dữ liệu trong chỉ mục vào chỗ ghi
@@ -83,7 +83,7 @@ Thẻ HEAD giống như một con trỏ, nó trỏ đến lần commit cuối c�
 
  $ git reset HEAD~3
 
-sẽ chuyển HEAD lên vị trí lần commit cách đây ba lần. Thus all Git commands now act as if you hadn't made those last three commits, while your files remain in the present. See the help page for some applications.
+sẽ chuyển HEAD lên vị trí lần commit cách đây ba lần. Thus all Git commands now act as if you hadn't made those last three commits, while your files remain in the present. Xem thêm phần trợ giúp cho một số ứng dụng.
 
 Nhưng ta lại muốn quay trở lại phần sau này? Lần commit cũ không biết gì về phần sau này cả.
 
@@ -120,7 +120,7 @@ Hay checkout lần thứ 5th-last visited commit via:
 
 Xem chương ``Specifying Revisions'' từ lệnh *git help rev-parse* để biết thêm chi tiết.
 
-You may wish to configure a longer grace period for doomed commits. Ví
+Bạn muốn cấu hình You may wish to configure a longer grace period for doomed commits. Ví
 dụ:
 
   $ git config gc.pruneexpire "30 days"
@@ -156,27 +156,27 @@ the "refs/heads/" and ignore errors:
 
   $ git symbolic-ref HEAD 2> /dev/null | cut -b 12-
 
-The +contrib+ subdirectory is a treasure trove of tools built on Git.
-In time, some of them may be promoted to official commands. On Debian and
-Ubuntu, this directory lives at +/usr/share/doc/git-core/contrib+.
+Thư mục con +contrib+ là kho báu is a treasure trove of tools built on Git.
+In time, some of them may be promoted to official commands. Trên hệ thống Debian và
+Ubuntu, thư mục này ở tại +/usr/share/doc/git-core/contrib+.
 
 One popular resident is +workdir/git-new-workdir+. Via clever symlinking, this script creates a new working directory whose history is shared with the original repository:
 
   $ git-new-workdir an/existing/repo new/directory
 
-Thư mục mới và các tệp tin trong nó có thể can be thought of as a clone, except since the history is shared, the two trees automatically stay in sync. Ở đây không cần có sự trộn, push, hay pull.
+Thư mục mới và các tệp tin trong nó có thể can be thought of như một bản sao, except since the history is shared, the two trees automatically stay in sync. Ở đây không cần có sự trộn, push, hay pull.
 
 === Daring Stunts ===
 
-These days, Git makes it difficult for the user to accidentally destroy data.
-But if you know what you are doing, you can override safeguards for common
-commands.
+These days, Git makes it difficult for the user to accidentally phá hủy dữ liệu.
+But if you know what you are doing, you can override safeguards for các lệnh
+thông thường.
 
 *Checkout*: Uncommitted changes cause checkout to fail. To destroy your changes, and checkout a given commit anyway, use the force flag:
 
   $ git checkout -f HEAD^
 
-On the other hand, if you specify particular paths for checkout, then there are no safety checks. The supplied paths are quietly overwritten. Take care if you use checkout in this manner.
+On the other hand, if you specify particular paths for checkout, then there are no safety checks. The supplied paths are quietly overwritten. Hãy cẩn thận nếu bạn sử dụng checkout theo cách này.
 
 *Reset*: Reset also fails in the presence of uncommitted changes. To force it through, run:
 
@@ -190,36 +190,35 @@ Cũng tương tự như thế, attempting to overwrite a branch via a move fails
 
   $ git branch -M source target  # thay vì sử dụng tùy chọn -m
 
-Không giống như checkout và reset, hai lệnh trên trì hoãn việc phá hủy dữ liệu. The
-changes are still stored trong thư mục con .git, và có thể lấy lại được bằng cách
+Không giống như checkout và reset, hai lệnh trên trì hoãn việc phá hủy dữ liệu. Các
+thay đổi vẫn còn lưu giữ trong thư mục con .git, và có thể lấy lại được bằng cách
 lấy giá trị băm `.git/logs` thích hợp (xem "Săn tìm - HEAD" ở phía trên).
 Theo mặc định, chúng sẽ giữ ít nhất là hai tuần lễ.
 
-*Clean*: Một số lệnh Git từ chối commands refuse to proceed because they're worried about
-clobbering untracked files. Nếu bạn chắc chắn về tất cả các tệp tin và thư mục không cần Git
+*Clean*: Một số lệnh Git từ chối thi hành bởi vì chúng lo lắng về việc làm như thế
+làm mất dấu hoàn toàn các tệp tin. Nếu bạn chắc chắn về tất cả các tệp tin và thư mục không cần Git
 theo dõi nữa và muốn phá hủy chúng đi, thế thì xóa chúng triệt để với lệnh:
 
   $ git clean -f -d
 
-Next time, that pesky command will work!
+Sau này, lệnh rầy rà đó sẽ hoạt động!
 
 === Preventing Bad Commits ===
 
-Stupid mistakes pollute my repositories. Điều tồi tệ nhất là để sót các tệp tin bởi vì
-quên lệnh *git add*. Ít tệ hại hơn là các ký tự khoảng trắng đã gây nên xung đột khi trộnLesser transgressions are trailing whitespace and
+Có một số lỗi ngớ ngẩn đã xảy ra với tôi. Điều tồi tệ nhất là để sót các tệp tin bởi vì
+quên lệnh *git add*. Ít tệ hại hơn là các ký tự khoảng trắng đã gây nên xung đột khi trộn are trailing whitespace and
 unresolved merge conflicts: mặc dù cũng chẳng tệ hại lắm, Tôi mong rằng những điều này sẽ không xảy ra
 với mọi người.
 
-If only I had bought idiot insurance by using a _hook_ to alert me about these problems:
+If only I had bought idiot insurance bằng cách sử dụng một _hook_ để cảnh báo người dùng khi có những vấn đề:
 
  $ cd .git/hooks
  $ cp pre-commit.sample pre-commit  # Older Git versions: chmod +x pre-commit
 
-Now Git aborts a commit if useless whitespace or unresolved merge conflicts are
-detected.
+Ngày nay Git sẽ không commit nếu nó tìm thấy những khoảng trắng vô ích hay or unresolved merge conflicts.
 
 Với bản hướng dẫn này, I eventually added the following to the beginning of the
-*pre-commit* hook to guard against absent-mindedness:
+*pre-commit* hook để đề phòng khi ta lơ đãng:
 
  if git ls-files -o | grep '\.txt$'; then
    echo FAIL! Untracked .txt files.
@@ -228,5 +227,5 @@ Với bản hướng dẫn này, I eventually added the following to the beginni
 
 Nhiều hoạt động của Git hỗ trợ hooks; hãy xem *git help hooks*. Chúng tôi đã kích hoạt
 một hook mẫu là *post-update* trước earlier when discussing Git thông qua HTTP. This runs
-whenever the head moves. Đoạn script ví dụ post-update cập nhật các tệp tin Git cần
-for communication over Git-agnostic transports giống như là HTTP.
+mỗi khi head di chuyển. Đoạn script ví dụ post-update cập nhật các tệp tin Git cần
+for truyền thông thông qua Git-agnostic transports giống như là HTTP.
