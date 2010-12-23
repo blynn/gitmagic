@@ -172,11 +172,11 @@ These days, Git makes it difficult for the user to accidentally phá hủy dữ 
 But if you know what you are doing, you can override safeguards for các lệnh
 thông thường.
 
-*Checkout*: Uncommitted changes cause checkout to fail. To destroy your changes, and checkout a given commit anyway, use the force flag:
+*Checkout*: Uncommitted changes cause checkout to fail. Để phá hủy sự thay đổi của mình, và dẫu sao cũng checkout commit đã cho, sử dụng cờ bắt buộc (force):
 
   $ git checkout -f HEAD^
 
-On the other hand, if you specify particular paths for checkout, then there are no safety checks. The supplied paths are quietly overwritten. Hãy cẩn thận nếu bạn sử dụng checkout theo cách này.
+On the other hand, if you specify particular paths for checkout, then there are no safety checks. The supplied paths are quietly overwritten. Hãy cẩn thận nếu bạn sử dụng lệnh checkout theo cách này.
 
 *Reset*: Reset also fails in the presence of uncommitted changes. To force it through, run:
 
@@ -215,10 +215,11 @@ If only I had bought idiot insurance bằng cách sử dụng một _hook_ để
  $ cd .git/hooks
  $ cp pre-commit.sample pre-commit  # Older Git versions: chmod +x pre-commit
 
-Ngày nay Git sẽ không commit nếu nó tìm thấy những khoảng trắng vô ích hay or unresolved merge conflicts.
+Ngày nay Git sẽ không commit nếu khi nó trộn nó chỉ tìm thấy những khoảng trắng vô ích hay
+những or unresolved merge conflicts.
 
-Với bản hướng dẫn này, I eventually added the following to the beginning of the
-*pre-commit* hook để đề phòng khi ta lơ đãng:
+Với bản hướng dẫn này, Tôi cuối cùng đã thêm vào dòng đầu của
+hook *pre-commit* để đề phòng khi ta lơ đãng:
 
  if git ls-files -o | grep '\.txt$'; then
    echo FAIL! Untracked .txt files.
@@ -228,4 +229,4 @@ Với bản hướng dẫn này, I eventually added the following to the beginni
 Nhiều hoạt động của Git hỗ trợ hooks; hãy xem *git help hooks*. Chúng tôi đã kích hoạt
 một hook mẫu là *post-update* trước earlier when discussing Git thông qua HTTP. This runs
 mỗi khi head di chuyển. Đoạn script ví dụ post-update cập nhật các tệp tin Git cần
-for truyền thông thông qua Git-agnostic transports giống như là HTTP.
+cho việc truyền thông thông qua Git-agnostic transports giống như là HTTP.
