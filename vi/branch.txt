@@ -1,4 +1,4 @@
-== Branch Wizardry ==
+﻿== Branch Wizardry ==
 
 Instant branching and merging are the most lethal of Git's killer features.
 
@@ -8,9 +8,9 @@ certain feature is moved closer. A developer whose help you need for a key secti
 
 Interrupting your train of thought can be detrimental to your productivity, and the more cumbersome it is to switch contexts, the greater the loss. With centralized version control we must download a fresh working copy from the central server. Distributed systems fare better, as we can clone the desired version locally.
 
-But cloning still entails copying the whole working directory as well as the entire history up to the given point. Even though Git reduces the cost of this with file sharing and hard links, the project files themselves must be recreated in their entirety in the new working directory.
+But cloning still entails copying the whole working directory as well as the entire history up to the given point. Dù là Git reduces the cost of this with file sharing and hard links, the project files themselves must be recreated in their entirety in the new working directory.
 
-*Solution*: Git has a better tool for these situations that is much faster and more space-efficient than cloning: *git branch*.
+*Solution*: Git có một công cụ tốt hơn để sử lý tình huống này that is much faster and more space-efficient hơn là cloning: *git branch*.
 
 With this magic word, the files in your directory suddenly shapeshift from one version to another. This transformation can do more than merely go back or forward in history. Your files can morph from the last release to the experimental version to the current development version to your friend's version and so on.
 
@@ -18,24 +18,24 @@ With this magic word, the files in your directory suddenly shapeshift from one v
 
 Ever played one of those games where at the push of a button (``the boss key''), the screen would instantly display a spreadsheet or something? So if the boss walked in the office while you were playing the game you could quickly hide it away?
 
-In some directory:
+Ở thư mục nào đó:
 
  $ echo "I'm smarter than my boss" > myfile.txt
  $ git init
  $ git add .
- $ git commit -m "Initial commit"
+ $ git commit -m "Lần commit bắt đầu"
 
-We have created a Git repository that tracks one text file containing a certain message. Now type:
+We have created a Git repository that tracks one text file containing a certain message. Giờ hãy gõ:
 
  $ git checkout -b boss  # nothing seems to change after this
  $ echo "My boss is smarter than me" > myfile.txt
  $ git commit -a -m "Another commit"
 
-It looks like we've just overwritten our file and committed it. But it's an illusion. Type:
+It looks like we've just overwritten our file and committed it. But it's an illusion. Gõ:
 
  $ git checkout master  # switch to original version of the file
 
-and hey presto! The text file is restored. And if the boss decides to snoop around this directory, type:
+and hey presto! The text file is restored. And if the boss decides to snoop around this directory, gõ:
 
  $ git checkout boss  # switch to version suitable for boss' eyes
 
@@ -55,7 +55,7 @@ Now you can add ugly temporary code all over the place. You can even commit thes
 
 to return to your original work. Observe that any uncommitted changes are carried over.
 
-What if you wanted to save the temporary changes after all? Easy:
+What if you wanted to save the temporary changes after all? Rất dễ:
 
  $ git checkout -b dirty
 
@@ -86,7 +86,7 @@ You can even 'merge' in the bugfix you just made, either by typing:
 
  $ git merge fixes
 
-or:
+hay là:
 
  $ git pull
 
@@ -208,7 +208,7 @@ repository has a branch with this name, and that it contains the official
 version of your project. Although you can rename or obliterate the ``master''
 branch, you might as well respect this convention.
 
-=== Temporary Branches ===
+=== Nhánh Tạm ===
 
 After a while you may realize you are creating short-lived branches
 frequently for similar reasons: every other branch merely serves to
