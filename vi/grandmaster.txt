@@ -2,8 +2,8 @@
 
 Bây giờ, bạn có thể thông qua lệnh *git help* để bật trang trợ giúp lên và có thể hiểu
 gần như tất cả mọi thứ. Tuy nhiên, việc xác định chính xác lệnh cần sử dụng để giải quyết
-các vấn đề đặt ra có lẽ chẳng dễ dàng gì. Có lẽ tôi có thể giúp bạn tiết kiệm được thời gian: bên dưới là một vài
-chiêu mà tôi đã từng sử dụng trong quá khứ.
+các vấn đề đặt ra có lẽ chẳng dễ dàng gì. Có thể tôi có thể giúp bạn tiết kiệm được thời gian: bên dưới là một vài
+cách giải quyết các vấn đề thực tế đặt ra mà tôi đã từng sử dụng trong quá khứ.
 
 === Phát hành Mã Nguồn ===
 
@@ -176,17 +176,17 @@ thông thường.
 
   $ git checkout -f HEAD^
 
-Mặt khác, nếu bạn chỉ định rõ một đường dẫn chi tiết cho lệnh, thế thì ở đây không có sự kiểm tra an toàn nào cả. The supplied paths are quietly overwritten. Hãy cẩn thận nếu bạn sử dụng lệnh checkout theo cách này.
+Mặt khác, nếu bạn chỉ định rõ một đường dẫn chi tiết cho lệnh, thế thì ở đây không có sự kiểm tra an toàn nào cả. Đường dẫn được áp dụng sẽ bị âm thầm ghi đè lên. Hãy cẩn thận nếu bạn sử dụng lệnh checkout theo cách này.
 
 *Reset*: Reset also fails in the presence of uncommitted changes. To force it through, run:
 
   $ git reset --hard 1b6d
 
-*Branch*: Deleting branches fails if this causes changes to be lost. Để ép buộc việc xóa, hãy gõ:
+*Branch*: Việc xóa các nhánh Deleting branches fails if this causes changes to be lost. Để ép buộc việc xóa, hãy gõ:
 
   $ git branch -D dead_branch  #thay vì sử dụng tùy chọn -d
 
-Cũng tương tự như thế, attempting to overwrite a branch via a move fails if data loss would ensue. To force a branch move, type:
+Cũng tương tự như thế, việc cố gắng ghi đè lên một nhánh bằng cách a move fails if data loss would ensue. To force a branch move, type:
 
   $ git branch -M source target  # thay vì sử dụng tùy chọn -m
 
@@ -206,8 +206,8 @@ Sau này, lệnh rầy rà đó sẽ hoạt động!
 === Ngăn Ngừa Commit Sai ===
 
 Có một số lỗi ngớ ngẩn đã xảy ra với tôi. Điều tồi tệ nhất là để sót các tệp tin bởi vì
-quên lệnh *git add*. Ít tệ hại hơn là các ký tự khoảng trắng đã gây nên xung đột khi trộn are trailing whitespace and
-unresolved merge conflicts: mặc dù cũng chẳng tệ hại lắm, Tôi mong rằng những điều này sẽ không xảy ra
+quên lệnh *git add*. Ít tệ hại hơn là các ký tự khoảng trắng và
+những xung đột không cần phải trộn: mặc dù cũng chẳng tệ hại lắm, tôi mong rằng những điều này sẽ không xảy ra
 với mọi người.
 
 If only I had bought idiot insurance bằng cách sử dụng một _hook_ để cảnh báo người dùng khi có những vấn đề:
@@ -216,7 +216,7 @@ If only I had bought idiot insurance bằng cách sử dụng một _hook_ để
  $ cp pre-commit.sample pre-commit  # Older Git versions: chmod +x pre-commit
 
 Ngày nay Git sẽ không commit nếu khi nó trộn nó chỉ tìm thấy những khoảng trắng vô ích hay
-những or unresolved merge conflicts.
+những xung đột không cần giải trộn.
 
 Với bản hướng dẫn này, Tôi cuối cùng đã thêm vào dòng đầu của
 hook *pre-commit* để đề phòng khi ta lơ đãng:
@@ -229,4 +229,4 @@ hook *pre-commit* để đề phòng khi ta lơ đãng:
 Nhiều hoạt động của Git hỗ trợ hooks; hãy xem *git help hooks*. Chúng tôi đã kích hoạt
 một hook mẫu là *post-update* trước earlier khi nói đến Git thông qua HTTP. Cái này chạy
 mỗi khi head di chuyển. Đoạn script ví dụ post-update cập nhật các tệp tin Git cần
-cho việc truyền thông thông qua Git-agnostic transports giống như là HTTP.
+cho việc truyền thông thông qua Git-agnostic chuyên chở bằng giao thức giống như là HTTP.
