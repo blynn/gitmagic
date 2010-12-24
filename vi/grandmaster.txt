@@ -29,7 +29,7 @@ Bạn có thể thi hành những điều trên chỉ cần một dòng lệnh:
 
  $ git ls-files -d -m -o -z | xargs -0 git update-index --add --remove
 
-Tùy chọn *-z* và *-0*  prevent ill side-effects từ những tệp tin có chứa
+Tùy chọn *-z* và *-0* dùng để ngăn ngừa sai hỏng không mong muốn từ những tệp tin có chứa
 các ký tự đặc biệt. As this command adds ignored files, bạn có thể muốn sử dụng
 tùy chọn `-x` hay `-X`.
 
@@ -55,18 +55,18 @@ Khi nào bạn thỏa mãn thì gõ
 bạn đã không dùng tùy chọn *-a*, nếu không thì Git sẽ commit tất cả.
 
 Nhưng bạn lại có những tài liệu đã được chỉnh sửa đặt tại nhiều chỗ khác nhau? Duyệt từng cái một
-becomes frustratingly mind-numbing. Trong trường hợp này, sử dụng lệnh *git add -i*, whose
+trở nên frustratingly mind-numbing. Trong trường hợp này, sử dụng lệnh *git add -i*, whose
 interface is less straightforward, nhưng uyển chuyển hơn. With a few keystrokes,
 you can stage or unstage several files at a time, or review and select changes
 chỉ trong các tệp tin riêng biệt. Có một sự lựa chọn khác, chạy lệnh *git commit \--interactive* which
-automatically commits after you're done.
+automatically commit sau khi bạn làm xong.
 
 === The Index: Git's Staging Area ===
 
 So far we have avoided Git's famous 'index', nhưng chúng ta phải đối mặt it to
-explain the above. The index is a temporary staging area. Git seldom shuttles
+explain the above. Chỉ mục là vùng trạng thái tạm thời. Git ít khi shuttles
 data directly between your project and its history. Đúng hơn là Git đầu tiên ghi
-dữ liệu vào chỉ mục, và sau đó sao chép dữ liệu trong chỉ mục vào chỗ ghi
+dữ liệu vào chỉ mục, và sau đó sao chép dữ liệu trong chỉ mục vào chỗ cần ghi
 cuối.
 
 Ví dụ, lệnh *commit -a* thực sự bao gồm hai quá trình. Bước thứ nhất là đặt
@@ -83,7 +83,7 @@ Thẻ HEAD giống như một con trỏ, nó trỏ đến lần commit cuối c�
 
  $ git reset HEAD~3
 
-sẽ chuyển HEAD lên vị trí lần commit cách đây ba lần. Thus all Git commands now act as if you hadn't made those last three commits, while your files remain in the present. Xem thêm phần trợ giúp cho một số ứng dụng.
+sẽ chuyển HEAD lên vị trí lần commit cách đây ba lần. Thế thì tất cả các lệnh Git thi hành như khi bạn ở vị trí commit này, trong khi các tệp tin của bạn vẫn nằm ở hiện tại. Xem thêm phần trợ giúp cho một số ứng dụng.
 
 Nhưng ta lại muốn quay trở lại phần sau này? Lần commit cũ không biết gì về phần sau này cả.
 
@@ -99,12 +99,12 @@ Nhưng giả sử bạn không có được nó? Đừng lo: với những lện
 
 Có thể ORIG_HEAD là chưa đủ. Có lẽ you've just realized you made a monumental mistake and you need to go back to an ancient commit in a long-forgotten branch.
 
-Theo mặc định, Git giữ một lần commit ít nhất là hai tuần lễ, even if you ordered
-Git to destroy the branch containing it. Sự trục trặc là việc tìm giá trị băm
-thích hợp. Bạn có thể tìm kiếm tất cả các giá trị băm trong `.git/objects` and use trial
-and error để tìm thứ mình muốn. But there's a much easier way.
+Theo mặc định, Git giữ một lần commit ít nhất là hai tuần lễ, ngay cả khi bạn đã ra lệnh
+cho Git phá hủy nhánh chứa nó. Sự trục trặc là việc tìm giá trị băm
+thích hợp. Bạn có thể tìm kiếm tất cả các giá trị băm trong `.git/objects` và sử dụng cách thử tất cả các giá trị
+để có được thứ mình muốn. Nhưng còn có cách dễ dàng hơn.
 
-Git ghi lại mọi giá trị băm của mọi lần commit trong máy tính tại thư mục `.git/logs`. Thư mục con `refs` chứa lịch sử của tất cả các hoạt động trên tất cả cách nhánh, trong khi tệp tin `HEAD` giữ tất cả các giá trị băm mà nó từng có được. The latter can be used to find hashes of commits on branches that have been accidentally lopped off.
+Git ghi lại mọi giá trị băm của mọi lần commit trong máy tính tại thư mục `.git/logs`. Thư mục con `refs` chứa lịch sử của tất cả các hoạt động trên tất cả cách nhánh, trong khi tệp tin `HEAD` giữ tất cả các giá trị băm mà nó từng có được. Phần sau có thể được sử dụng để tìm kiếm giá trị băm của các lần commits trên các nhánh cái mà đã bị cắt đi một cách tình cờ.
 
 Lệnh reflog cung cấp cho chúng ta một giao diện thân thiện dành cho các tệp tin log. Bạn có thể thử bằng lệnh:
 
@@ -114,18 +114,18 @@ Thay vì phải cắt và dán giá trị băm từ reflog, hãy thử:
 
  $ git checkout "@{10 minutes ago}"
 
-Hay checkout lần thứ 5th-last visited commit via:
+Hay checkout lần thứ 5th-last visited commit thông qua lệnh:
 
  $ git checkout "@{5}"
 
 Xem chương ``Specifying Revisions'' từ lệnh *git help rev-parse* để biết thêm chi tiết.
 
-Bạn muốn cấu hình You may wish to configure a longer grace period for doomed commits. Ví
+Bạn muốn cấu hình thời gian gia hạn lâu hơn việc xóa bỏ những lần commit. Ví
 dụ:
 
   $ git config gc.pruneexpire "30 days"
 
-có nghĩa là việc xóa một lần commit sẽ thực sự xảy ra khi 30 ngày đã qua và
+có nghĩa là việc xóa một lần commit sẽ chỉ thực sự xảy ra khi 30 ngày đã qua và
 lệnh *git gc* được gọi.
 
 Bạn cũng có thể không cho phép chạy lệnh *git gc* một cách tự động:
@@ -136,7 +136,7 @@ trong trường hợp này những lần commit sẽ chỉ bị xóa bỏ khi b�
 
 === Building On Git ===
 
-In true UNIX fashion, Git được thiết kế cho phép nó dễ dàng được sử dụng như là một thành phần bên dưới của các chương trình khác, như là cho giao diện đồ họa GUI và giao diện Web, thay thế cho giao diện dòng lệnh, công cụ quản lý các miếng vá, các công cụ nhập và chuyển đổi, và những thứ tương tự như thế. Trên thực tế, một số lệnh Git bản chất nó cũng là các kịch bản (scripts) đứng trên vai của những người khổng lồ, chính là hệ điều hành. Chỉ cần sửa đổi một chút, bạn có thể bắt Git làm việc phù hợp với sở thích của mình.
+In true UNIX fashion, Git được thiết kế cho phép nó dễ dàng được sử dụng như là một thành phần bên dưới của các chương trình khác, như là cho giao diện đồ họa GUI và giao diện Web để thay thế cho giao diện dòng lệnh, công cụ quản lý các miếng vá, các công cụ nhập và chuyển đổi, và những thứ tương tự như thế. Trên thực tế, một số lệnh Git bản chất nó cũng là các kịch bản (scripts) đứng trên vai của những người khổng lồ, chính là hệ điều hành. Chỉ cần sửa đổi một chút, bạn có thể bắt Git làm việc phù hợp với sở thích của mình.
 
 Một mẹo nhỏ là sử dụng một built-in của Git là gán bí danh cho các lệnh để nó trở nên ngắn gọn hơn
 sử dụng lệnh:
@@ -151,32 +151,32 @@ Gọi lệnh
 
   $ git symbolic-ref HEAD
 
-sẽ hiển thị tên của nhánh hiện hành. Trong thực tiễn, you most likely want to remove
-the "refs/heads/" and ignore errors:
+sẽ hiển thị tên của nhánh hiện hành. Trong thực tiễn, you thích hợp nhất mốn gỡ bỏ want to remove
+the "refs/heads/" và tránh errors:
 
   $ git symbolic-ref HEAD 2> /dev/null | cut -b 12-
 
-Thư mục con +contrib+ là kho báu is a treasure trove of tools built on Git.
-In time, some of them may be promoted to official commands. Trên hệ thống Debian và
+Thư mục con +contrib+ là một kho báu được tìm thấy trong số các công cụ được xây dựng dành cho Git.
+Đúng lúc, một số trong số chúng có thể được xúc tiến thành lệnh chính thức. Trên hệ thống Debian và
 Ubuntu, thư mục này ở tại +/usr/share/doc/git-core/contrib+.
 
 One popular resident is +workdir/git-new-workdir+. Via clever symlinking, this script creates a new working directory whose history is shared with the original repository:
 
   $ git-new-workdir an/existing/repo new/directory
 
-Thư mục mới và các tệp tin trong nó có thể can be thought of như một bản sao, except since the history is shared, the two trees automatically stay in sync. Ở đây không cần có sự trộn, push, hay pull.
+Thư mục mới và các tệp tin trong nó có thể được coi như một bản sao, except since the history is shared, the two trees automatically ở tại sync. Ở đây không cần có sự trộn, push, hay pull.
 
 === Daring Stunts ===
 
 These days, Git makes it difficult for the user to accidentally phá hủy dữ liệu.
-But if you know what you are doing, you can override safeguards for các lệnh
+Nhưng nếu như bạn biết mình đang làm gì, you can override safeguards for các lệnh
 thông thường.
 
 *Checkout*: Uncommitted changes cause checkout to fail. Để phá hủy sự thay đổi của mình, và dẫu sao cũng checkout commit đã cho, sử dụng cờ bắt buộc (force):
 
   $ git checkout -f HEAD^
 
-On the other hand, if you specify particular paths for checkout, then there are no safety checks. The supplied paths are quietly overwritten. Hãy cẩn thận nếu bạn sử dụng lệnh checkout theo cách này.
+Mặt khác, nếu bạn chỉ định rõ một đường dẫn chi tiết cho lệnh, thế thì ở đây không có sự kiểm tra an toàn nào cả. The supplied paths are quietly overwritten. Hãy cẩn thận nếu bạn sử dụng lệnh checkout theo cách này.
 
 *Reset*: Reset also fails in the presence of uncommitted changes. To force it through, run:
 
@@ -192,7 +192,7 @@ Cũng tương tự như thế, attempting to overwrite a branch via a move fails
 
 Không giống như checkout và reset, hai lệnh trên trì hoãn việc phá hủy dữ liệu. Các
 thay đổi vẫn còn lưu giữ trong thư mục con .git, và có thể lấy lại được bằng cách
-lấy giá trị băm `.git/logs` thích hợp (xem "Săn tìm - HEAD" ở phía trên).
+lấy giá trị băm `.git/logs` thích hợp (xem phần "Săn tìm - HEAD" ở phía trên).
 Theo mặc định, chúng sẽ giữ ít nhất là hai tuần lễ.
 
 *Clean*: Một số lệnh Git từ chối thi hành bởi vì chúng lo lắng về việc làm như thế
@@ -203,7 +203,7 @@ theo dõi nữa và muốn phá hủy chúng đi, thế thì xóa chúng triệt
 
 Sau này, lệnh rầy rà đó sẽ hoạt động!
 
-=== Preventing Bad Commits ===
+=== Ngăn Ngừa Commit Sai ===
 
 Có một số lỗi ngớ ngẩn đã xảy ra với tôi. Điều tồi tệ nhất là để sót các tệp tin bởi vì
 quên lệnh *git add*. Ít tệ hại hơn là các ký tự khoảng trắng đã gây nên xung đột khi trộn are trailing whitespace and
@@ -227,6 +227,6 @@ hook *pre-commit* để đề phòng khi ta lơ đãng:
  fi
 
 Nhiều hoạt động của Git hỗ trợ hooks; hãy xem *git help hooks*. Chúng tôi đã kích hoạt
-một hook mẫu là *post-update* trước earlier when discussing Git thông qua HTTP. This runs
+một hook mẫu là *post-update* trước earlier khi nói đến Git thông qua HTTP. Cái này chạy
 mỗi khi head di chuyển. Đoạn script ví dụ post-update cập nhật các tệp tin Git cần
 cho việc truyền thông thông qua Git-agnostic transports giống như là HTTP.
