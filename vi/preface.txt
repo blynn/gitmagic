@@ -4,7 +4,7 @@ Tháng Tám 2007
 
 == Lời nói đầu ==
 
-http://git.or.cz/[Git] là công cụ quản lý mã nguồn đa năng. Một công cụ quản lý mã nguồn tin cậy, chắc chắn, đa dụng và sự cực kỳ mềm dẻo của Git làm cho việc học nó trở nên khó khăn, tất nhiên là không nói đến chủ nhân của nó.
+http://git.or.cz/[Git] là công cụ quản lý mã nguồn đa năng. Một công cụ quản lý mã nguồn tin cậy, chắc chắn, đa dụng và sự cực kỳ mềm dẻo của Git làm cho việc học nó trở nên khó khăn, tất nhiên là không nói đến người tạo ra nó.
 
 Theo quan sát của Arthur C. Clarke, bất kể công nghệ tiên tiến nào cũng không thể phân biệt được nó có kỳ diệu hay không. Đây cũng là cách hay đề đề cập đến Git: những người mới sử dụng không cần quan tâm đến bên trong nó làm việc như thế nào và xem Git như là một điệu gizmo có thể làm những người coi nó là bạn sửng sốt và làm điên đầu các những người đối lập bằng khả năng thần kỳ của mình.
 
