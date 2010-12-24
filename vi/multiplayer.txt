@@ -1,33 +1,33 @@
 ﻿== Multiplayer Git ==
 
 Lúc đầu tôi sử dụng Git cho dự án riêng mà tôi là người duy nhất phát triển nó.
-Amongst the commands related to Git's distributed nature, Tôi chỉ cần lệnh *pull*
-và *clone* so could I keep the same project in different places.
+Trong số những lệnh liên quan đến bản chất phân tán của Git, tôi chỉ cần lệnh *pull*
+và *clone* để giữ cùng một dự án nhưng ở những chỗ khác nhau.
 
 Sau đó tôi muốn mã nguồn của mình được phổ biến trên mạng bằng việc sử dụng Git, và bao gồm cả những thay đổi từ
 những người đóng góp. Tôi đã phải học cách làm thế nào để quản lý các dự án có nhiều người phát triển phần mềm
 ở khắp nơi trên toàn thế giới. May mắn thay, đây là sở trường của Git, và người ta có thể nói đây là
-điều sống còn
+điều sống còn của một hệ thống quản lý mã nguồn.
 
 
 === Tôi Là Ai? ===
 
-Mỗi lần commit sẽ có tên và địa chỉ thư điện tử, điều này có thể nhìn thấy bằng lệnh *git log*.
-Theo mặc định, Git uses system settings to populate these fields.
+Mỗi lần commit sẽ lưu giữ tên và địa chỉ thư điện tử, điều này có thể nhìn thấy bằng lệnh *git log*.
+Theo mặc định, Git sử dụng các trường để lưu giữ các cài đặt trong hệ thống của mình.
 Để chỉ định chúng một cách rõ ràng, hãy gõ:
 
   $ git config --global user.name "John Doe"
   $ git config --global user.email johndoe@example.com
 
-Omit the global flag to set these options only for the current repository.
+Bỏ qua cờ global để đặt những thông tin này chỉ sử dụng cho kho chứa hiện tại.
 
 === Git Thông Qua SSH, HTTP ===
 
 Giả sử bạn có thể truy cập vào một máy chủ web qua SSH, nhưng Git lại chưa được cài đặt ở đây. Mặc dù
 không hiệu quả như giao thức nguyên bản của nó, nhưng Git vẫn có thể truyền thông thông qua HTTP.
 
-Download, compile and install Git in your account, and create a repository in
-your web directory:
+Tải về, dịch và cài Git bằng tài khoản của bạn, và tạo kho chứa tại
+thư mục chứa trang web của bạn:
 
  $ GIT_DIR=proj.git git init
  $ cd proj.git
@@ -38,7 +38,7 @@ Với các phiên bản Git cũ, lệnh copy không thực hiện được và b
 
  $ chmod a+x hooks/post-update
 
-Now you can publish your latest edits thông qua SSH từ một bản sao bất kỳ:
+Từ giờ bạn có thể xuất bản mới nhất của mình thông qua SSH từ một bản sao bất kỳ:
 
  $ git push web.server:/path/to/proj.git master
 
@@ -46,7 +46,7 @@ và mọi người có thể lấy dự án của bạn với lệnh:
 
  $ git clone http://web.server/proj.git
 
-=== Git Over Anything ===
+=== Git Thông Qua Mọi Thứ ===
 
 Want to synchronize repositories without servers, or even a network connection?
 Need to improvise during an emergency? We've seen <<makinghistory, *git
@@ -59,7 +59,7 @@ The sender creates a 'bundle':
  $ git bundle create somefile HEAD
 
 then transports the bundle, +somefile+, to the other party somehow: thư điện tử,
-ổ đĩa USB, an *xxd* printout and an OCR scanner, reading bits over the phone,
+ổ đĩa USB, và *xxd* printout and an OCR scanner, reading bits over the phone,
 smoke signals, v.v.. The receiver retrieves commits from the bundle by typing:
 
  $ git pull somefile
@@ -86,28 +86,28 @@ and create new refresher bundles with:
 === Patches: The Global Currency ===
 
 Patches are text representations of your changes that can be easily understood
-by computers and humans alike. This gives them universal appeal. You can email a
-patch to developers no matter what version control system they're using. As long
-as your audience can read their email, they can see your edits. Similarly, on
-your side, all you require is an email account: there's no need to setup an online Git repository.
+by computers and humans alike. This gives them universal appeal. Bạn có thể gửi miếng vá qua
+thư điện tử cho những nhà phát triển phần mềm khác mà chẳng cần lo họ đang sử dụng hệ thống mã nguồn nào. As long
+as your audience can read their email, they can see your edits. Tương tự thế, về phía mình,
+những thứ bạn cần là có một địa chỉ thư điện tử: ở đây chẳng cần cài đặt kho chứa Git trên mạng.
 
 Recall from the first chapter:
 
  $ git diff 1b6d > my.patch
 
-outputs a patch which can be pasted into an email for discussion. In a Git
-repository, type:
+outputs a patch which can be pasted into an email for discussion. Ở kho Git,
+gõ:
 
  $ git apply < my.patch
 
-to apply the patch.
+để áp dụng miếng vá.
 
 In more formal settings, when author names and perhaps signatures should be
 recorded, generate the corresponding patches past a certain point by typing:
 
  $ git format-patch 1b6d
 
-The resulting files can be given to *git-send-email*, or sent by hand. You can also specify a range of commits:
+The resulting files can be given to *git-send-email*, hay có thể gửi thủ công. Bạn cũng có thể chỉ định rõ một vùng commit:
 
  $ git format-patch 1b6d..HEAD^^
 
@@ -115,12 +115,12 @@ On the receiving end, save an email to a file, then type:
 
  $ git am < email.txt
 
-This applies the incoming patch and also creates a commit, including information such as the author.
+This applies the incoming patch and also creates a commit, bao gồm các thông tin như là tác giả.
 
-With a browser email client, you may need to click a button to see the email in its raw original form before saving the patch to a file.
+Với một chương trình đọc thư điện tử, bạn có thể sử dụng con chuột để to see the email in its raw original form trước khi ghi miếng vá thành một tệp tin.
 
-There are slight differences for mbox-based email clients, but if you use one
-of these, you're probably the sort of person who can figure them out easily
+There are slight differences for mbox-based email clients, nhưng nếu bạn sử dụng một trong
+số chúng, you're probably the sort of person who can figure them out easily
 without reading tutorials!
 
 === Rất tiếc! Tôi đã chuyển đi ===
@@ -151,8 +151,8 @@ repositories we must explicitly state which branch we want:
 
  $ git pull git://example.com/other.git master
 
-The above explains why some of our earlier push and pull examples had no
-arguments.
+Phần phía trên giải thích tại sao một số lệnh push và pull ví dụ của chúng ta lại không có
+tham số.
 
 === Remote Branches ===
 
@@ -190,14 +190,14 @@ keep tabs on both. Chúng ta theo dõi hơn một kho chứa tại một thời 
  $ git remote add other git://example.com/some_repo.git
  $ git pull other some_branch
 
-Bây giờ chúng ta có thể trộn in a branch from the second repository, and we have
+Bây giờ chúng ta có thể trộn với nhánh của kho chứa thứ hai, and we have
 easy access to all branches of all repositories:
 
  $ git diff origin/experimental^ other/some_branch~5
 
 But what if we just want to compare their changes without affecting our own
 work? Nói cách khác, we want to examine their branches without having
-their changes invade our working directory. Then rather than pull, run:
+their changes invade our working directory. Thế thì thay vì pull, hãy chạy:
 
  $ git fetch        # Fetch from origin, the default.
  $ git fetch other  # Fetch from the second programmer.
@@ -210,24 +210,24 @@ Recall that behind the scenes, lệnh pull đơn giản là *fetch* sau đó *me
 Thông thường chúng ta *pull* bởi vì chúng ta muốn trộn với lần commit cuối cùng sau khi fetch;
 việc làm này this situation is a notable exception.
 
-Xem *git help remote* for how to remove remote repositories, ignore certain
+Xem *git help remote* để biết cách làm thế nào để gỡ bỏ kho chứa trên mạng, bỏ qua certain
 branches, và những thứ khác nữa.
 
-=== My Preferences ===
+=== Sở Thích Riêng Của Tôi ===
 
 Với dự án của mình, tôi thích những người cộng tác tạo các kho chứa ở nơi mà tôi có thể
-pull. Some Git hosting services let you host your own fork of a project with
+pull. Một số dịch vụ Git cho phép bạn host your own fork of a project with
 chỉ cần sử dụng chuột.
 
-After I fetch a tree, I run Git commands to navigate and examine the changes,
+Sau khi tôi fetch a tree, I run Git commands to navigate và xem xét các thay đổi,
 which ideally are well-organized and well-described. I merge my own changes,
-and perhaps make further edits. Once satisfied, I push to the main repository.
+và có thể sẽ sửa thêm chút nữa. Khi đã hài lòng, tôi push tới kho chứa chính.
 
 Mặc dù tôi ít nhận được sự cộng tác, nhưng tôi tin rằng việc này sẽ thay đổi theo chiều hướng
 tốt lên. Hãy đọc
 http://torvalds-family.blogspot.com/2009/06/happiness-is-warm-scm.html[blog của Linus Torvalds].
 
-Staying in the Git world is slightly more convenient than patch files, as it
+Trong thế giới Git world is slightly more convenient than patch files, as it
 saves me from converting them to Git commits. Hơn thế nữa, Git giữ các thông tin rất chi tiết
 như là ghi lại tên và địa chỉ thư điện tử của tác giả, cũng như là ngày tháng và
 thời gian, và nó cũng đòi hỏi tác giả phải mô tả về những thay đổi của họ.
