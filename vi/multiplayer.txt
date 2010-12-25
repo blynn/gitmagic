@@ -226,6 +226,6 @@ tốt lên. Hãy đọc
 http://torvalds-family.blogspot.com/2009/06/happiness-is-warm-scm.html[blog của Linus Torvalds].
 
 Trong thế giới Git world is slightly thuận lợi hơn việc vá các tệp tin, cũng như là nó
-tiết kiệm công sức cho việc chuyển đổi chúng thành những lần commit dành cho Git. Hơn thế nữa, Git giữ các thông tin rất chi tiết
+tiết kiệm công sức cho việc chuyển đổi chúng thành những lần commit dành cho Git. Hơn thế nữa, Git lưu giữ các thông tin rất chi tiết
 như là ghi lại tên và địa chỉ thư điện tử của tác giả, cũng như là ngày tháng và
-thời gian, và nó cũng đòi hỏi tác giả phải mô tả về những thay đổi của họ.
+thời gian, và nó cũng đòi hỏi tác giả phải mô tả về những thay đổi mà họ đã tạo ra.
