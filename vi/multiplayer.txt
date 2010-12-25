@@ -48,7 +48,7 @@ và mọi người có thể lấy dự án của bạn với lệnh:
 
 === Git Thông Qua Mọi Thứ ===
 
-Bạn muốn đồng bộ hóa kho chứa nhưng lại không có máy chủ hay là mạng?
+Bạn muốn đồng bộ hóa kho chứa nhưng lại không có máy chủ và cũng không có mạng?
 Need to improvise during an emergency? We've seen <<makinghistory, *git
 fast-export* và *git fast-import* có thể chuyển đổi một kho chứa thành một tệp tin đơn
 và ngược lại>>. We could shuttle such files back and forth to transport git
@@ -59,13 +59,13 @@ Người gửi tạo một 'bundle':
  $ git bundle create somefile HEAD
 
 sau đó gửi bundle, +somefile+, tới người cần bằng cách nào đó: thư điện tử,
-ổ đĩa USB, và *xxd* printout and an OCR scanner, reading bits over the phone,
-tín hiệu khói, v.v.. Người nhận khôi phục lại các lần commit từ bundle bằng cách gõ:
+ổ đĩa USB, và bản in *xxd* và một bộ quét nhận dạng chữ OCR, đọc các bit thông qua điện thoại,
+tín hiệu khói, v.v.. Người nhận khôi phục lại các lần commit từ bundle nhận được bằng cách gõ:
 
  $ git pull somefile
 
-The receiver can even do this from an empty repository. Despite its
-size, +somefile+ contains the entire original git repository.
+Bộ nhận thậm chí có thể làm được việc này từ một kho chứa rỗng. Mặc dù kích
+thước của nó, +somefile+ chứa các mục kho Git nguyên thủy.
 
 Trong các dự án lớn hơn, việc triệt tiêu lãng phí bằng bundling only changes the other
 repository lacks. Ví dụ, giả sử lần commit ``1b6d...'' là lần commit gần nhất
@@ -83,15 +83,15 @@ và tạo một bản bundles mới với:
 
  $ git bundle create newbundle HEAD ^lastbundle
 
-=== Vá: The Global Currency ===
+=== Vá: Sự Thịnh Hành Toàn Cầu ===
 
 Miếng vá được trình bày ở dạng văn bản các thay đổi của bạn, nó dễ dàng được đọc hiểu bởi
-con người cũng như là máy tính. Điều này mang lại cho chúng universal appeal. Bạn có thể gửi miếng vá qua
-thư điện tử cho những nhà phát triển phần mềm khác mà chẳng cần lo họ đang sử dụng hệ thống mã nguồn nào. As long
-as your audience can read their email, they can see your edits. Tương tự thế, về phía mình,
+con người cũng như là máy tính. Điều này mang lại cho chúng sức lôi cuốn toàn cầu. Bạn có thể gửi miếng vá qua
+thư điện tử cho những nhà phát triển phần mềm khác mà chẳng cần lo họ đang sử dụng hệ thống mã nguồn nào. Chừng nào
+độc giả của bạn có thể đọc được thư điện tử của họ, họ có thể thấy được phần chỉnh sửa của bạn. Tương tự thế, về phía mình,
 những thứ bạn cần là có một địa chỉ thư điện tử: ở đây chẳng cần cài đặt kho chứa Git trên mạng.
 
-Recall from the first chapter:
+Sử dụng lại ví dụ từ chương đầu tiên:
 
  $ git diff 1b6d > my.patch
 
@@ -103,15 +103,15 @@ gõ:
 để áp dụng miếng vá.
 
 In more formal settings, when author names and perhaps signatures should be
-recorded, generate the corresponding patches past a certain point by typing:
+recorded, generate the corresponding patches past tại một thời điểm chính xác trong quá khứ bằng cách gõ:
 
  $ git format-patch 1b6d
 
-The resulting files can be given to *git-send-email*, hay có thể gửi thủ công. Bạn cũng có thể chỉ định rõ một vùng commit:
+Tệp tin lưu kết quả có thể chuyển cho lệnh *git-send-email*, hay có thể làm thủ công. Bạn cũng có thể chỉ định rõ một vùng commit:
 
  $ git format-patch 1b6d..HEAD^^
 
-Ở phía người nhận cuối, ghi lại thư điện tử thành tệp tin, sau đó gõ:
+Ở phía người nhận cuối, ghi lại thư điện tử thành tệp tin, sau đó chạy lệnh:
 
  $ git am < email.txt
 
@@ -120,8 +120,8 @@ Lệnh này sẽ áp dụng cho miếng vá nhận được, đồng thời tạ
 Với một chương trình đọc thư điện tử, bạn có thể sử dụng con chuột để to see the email in its raw original form trước khi ghi miếng vá thành một tệp tin.
 
 There are slight differences for mbox-based email clients, nhưng nếu bạn sử dụng một trong
-số chúng, you're probably the sort of person who can figure them out easily
-without reading tutorials!
+số chúng, you're probably the sort of person who có thể cấu hình chúng một cách dễ dàng
+mà chẳng cần phải đọc hướng dẫn sử dụng!
 
 === Rất tiếc! Tôi đã chuyển đi ===
 
@@ -139,13 +139,13 @@ Nếu kho chứa nguyên bản đã chuyển chỗ, chúng ta có thể cập nh
 
  $ git config remote.origin.url git://new.url/proj.git
 
-The +branch.master.merge+ option specifies the default remote branch in
-a *git pull*. Trong suốt quá trình During the initial clone, nó được đặt cho nhánh hiện hành của kho chứa
+Tùy chọn +branch.master.merge+ chỉ ra nhánh remote mặc định trong
+lệnh *git pull*. Trong suốt quá trình nhân bản, nó được đặt cho nhánh hiện hành của kho chứa
 mã nguồn, so even if the HEAD of the source repository subsequently
 moves to a different branch, a later pull will faithfully follow the
 original branch.
 
-This option only applies to the repository we first cloned from, which is
+Tùy chọn này chỉ áp dụng cho kho chứa chúng ta lần đầu tiên nhân bản từ, which is
 recorded in the option +branch.master.remote+. Nếu chúng ta pull từ kho
 chứa khác chúng ta phải chỉ đích xác nhánh mà chúng ta muốn:
 
@@ -158,8 +158,8 @@ tham số.
 
 Khi bạn nhân bản một kho chứa, bạn cũng đồng thời nhân bản tất cả các nhánh của nó. Bạn sẽ không nhận
 được cảnh báo này bởi vì Git giấu chúng đi: bạn phải hỏi mới có thể biết chính xác.
-This prevents branches in the remote repository from interfering with
-your branches, và cũng làm cho Git dễ dàng hơn với người mới dùng.
+This prevents branches in the từ kho chứa remote từ phiền phức với
+các nhánh của bạn, và cũng làm cho Git dễ dàng hơn với người mới dùng.
 
 Ta liệt kê các nhánh bằng lệnh:
 
@@ -171,10 +171,10 @@ Bạn nhận được kết quả trông giống như thế này:
  origin/master
  origin/experimental
 
-These represent branches and the HEAD of the remote repository, and can be used
-trong các lệnh Git thông thường. Ví dụ như là, suppose you have made many commits, and
-wish to compare against the last fetched version. You could search through the
-logs for the appropriate SHA1 hash, but it's much easier to type:
+Những nhánh tương ứng và HEAD của kho chứa remote, và bạn có thể sử dụng
+trong các lệnh Git thông thường. Ví dụ như là, giả sử bạn làm nhiều lần commit, và
+muốn so sánh chúng với bản đã fetch cuối cùng. Bạn cũng có thể tìm kiếm trong tệp tin
+log để có được giá trị băm SHA1 thích hợp, nhưng dễ dàng hơn việc gõ:
 
  $ git diff origin/HEAD
 
@@ -185,7 +185,7 @@ Hay bạn có thể xem nhánh ``experimental'' đang làm gì:
 === Multiple Remotes ===
 
 Giả sử hai người cùng phát triển trên một sự án của chúng ta, và họ muốn
-keep tabs on both. Chúng ta theo dõi hơn một kho chứa tại một thời điểm với lệnh:
+giữ lại sự khác biệt trên cả hai. Chúng ta theo dõi hơn một kho chứa tại một thời điểm với lệnh:
 
  $ git remote add other git://example.com/some_repo.git
  $ git pull other some_branch
@@ -201,12 +201,12 @@ Nhưng chúng ta chỉ muốn so sánh sự khác nhau giữ chúng nhưng khôn
  $ git fetch other  # Lấy về từ lập trình viên thứ hai.
 
 Lệnh này chỉ mang về phần lịch sử. Mặc dù thư mục làm việc vẫn còn nguyên chưa bị động đến,
-we can refer to any branch of any repository in a Git command because we now
-possess a local copy.
+we can refer to bất kỳ nhánh nào của bất kỳ kho chứa nào trong một lệnh Git bởi vì chúng ta bây giờ
+đang làm việc trên bản sao trên máy của mình.
 
 Recall that behind the scenes, lệnh pull đơn giản là *fetch* sau đó *merge*.
 Thông thường chúng ta *pull* bởi vì chúng ta muốn trộn với lần commit cuối cùng sau khi fetch;
-việc làm này this situation is a notable exception.
+việc làm này this situation is là một ngoại lệ đáng chú ý.
 
 Xem *git help remote* để biết cách làm thế nào để gỡ bỏ kho chứa trên mạng, bỏ qua các nhánh
 xác định, và những thứ khác nữa.
@@ -217,9 +217,9 @@ Với dự án của mình, tôi thích những người cộng tác tạo các 
 pull. Một số dịch vụ Git cho phép bạn đặt nhánh riêng của mình từ một dự án trên đó
 chỉ cần sử dụng chuột.
 
-Sau khi tôi fetch một cây (tree), I run Git commands to navigate và xem xét các thay đổi,
-which ideally are well-organized and well-described. Tôi trộn với các thay đổi của chính mình,
-và có thể sẽ sửa thêm chút nữa. Khi đã hài lòng, tôi push tới kho chứa chính.
+Sau khi tôi fetch một cây (tree), tôi chạy lệnh Git để di chuyển và xem xét các thay đổi,
+với ý tưởng là để tổ chức và mô tả tốt hơn. Tôi trộn với các thay đổi của chính mình,
+và có thể sẽ sửa thêm chút it. Sau khi đã hài lòng, tôi push nó lên kho chứa chính.
 
 Mặc dù tôi ít nhận được sự cộng tác, nhưng tôi tin rằng việc này sẽ thay đổi theo chiều hướng
 tốt lên. Hãy đọc
