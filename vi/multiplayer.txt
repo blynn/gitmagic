@@ -132,7 +132,7 @@ các tùy chọn config đã được tạo ra cùng với bản sao. Hãy xem t
  $ git config --list
 
 Tùy chọn +remote.origin.url+ sẽ lưu giữ URL; ``origin'' là cái tên
-được đặt cho kho nguồn. Với nhánh ``master'' như thường lệ, chúng ta có thể
+được đặt cho kho nguồn. Với nhánh ``master'' theo như thường lệ, chúng ta có thể
 thay đổi hay xóa các tên này nhưng chẳng có lý do gì để phải làm như thế cả.
 
 Nếu kho chứa nguyên bản đã chuyển chỗ, chúng ta có thể cập nhật URL thông qua:
@@ -140,14 +140,14 @@ Nếu kho chứa nguyên bản đã chuyển chỗ, chúng ta có thể cập nh
  $ git config remote.origin.url git://new.url/proj.git
 
 The +branch.master.merge+ option specifies the default remote branch in
-a *git pull*. During the initial clone, nó được đặt cho nhánh hiện hành của kho chứa
+a *git pull*. Trong suốt quá trình During the initial clone, nó được đặt cho nhánh hiện hành của kho chứa
 mã nguồn, so even if the HEAD of the source repository subsequently
 moves to a different branch, a later pull will faithfully follow the
 original branch.
 
 This option only applies to the repository we first cloned from, which is
 recorded in the option +branch.master.remote+. Nếu chúng ta pull từ kho
-chứa khác chúng ta phải explicitly state which branch we want:
+chứa khác chúng ta phải chỉ đích xác nhánh mà chúng ta muốn:
 
  $ git pull git://example.com/other.git master
 
@@ -156,8 +156,8 @@ tham số.
 
 === Remote Branches ===
 
-Khi bạn nhân bản một kho chứa, bạn cũng đồng thời nhân bản tất cả các nhánh của nó. You may not have
-noticed this bởi vì Git hides them away: you must ask for them specifically.
+Khi bạn nhân bản một kho chứa, bạn cũng đồng thời nhân bản tất cả các nhánh của nó. Bạn sẽ không nhận
+được cảnh báo này bởi vì Git giấu chúng đi: bạn phải hỏi mới có thể biết chính xác.
 This prevents branches in the remote repository from interfering with
 your branches, và cũng làm cho Git dễ dàng hơn với người mới dùng.
 
@@ -178,7 +178,7 @@ logs for the appropriate SHA1 hash, but it's much easier to type:
 
  $ git diff origin/HEAD
 
-Or you can see what the ``experimental'' branch has been up to:
+Hay bạn có thể xem nhánh ``experimental'' đang làm gì:
 
  $ git log origin/experimental
 
@@ -197,10 +197,10 @@ dễ dàng truy cập tất cả các nhánh của tất cả các kho chứa:
 
 Nhưng chúng ta chỉ muốn so sánh sự khác nhau giữ chúng nhưng không áp dụng các thay đổi này với chúng ta? Nói cách khác, chúng ta khảo sát các nhánh của họ nhưng không thay đổi những gì đang có trong thư mục làm việc của mình. Thế thì thay vì pull, ta dùng lệnh:
 
- $ git fetch        # Fetch from origin, the default.
- $ git fetch other  # Fetch from the second programmer.
+ $ git fetch        # Lấy về từ nguyên gốc, theo mặc định.
+ $ git fetch other  # Lấy về từ lập trình viên thứ hai.
 
-Lệnh này chỉ mang về phần lịch sử. Although the working directory remains untouched,
+Lệnh này chỉ mang về phần lịch sử. Mặc dù thư mục làm việc vẫn còn nguyên chưa bị động đến,
 we can refer to any branch of any repository in a Git command because we now
 possess a local copy.
 
@@ -214,7 +214,7 @@ xác định, và những thứ khác nữa.
 === Sở Thích Riêng Của Tôi ===
 
 Với dự án của mình, tôi thích những người cộng tác tạo các kho chứa ở nơi mà tôi có thể
-pull. Một số dịch vụ Git cho phép bạn host your own fork of a project with
+pull. Một số dịch vụ Git cho phép bạn đặt nhánh riêng của mình từ một dự án trên đó
 chỉ cần sử dụng chuột.
 
 Sau khi tôi fetch một cây (tree), I run Git commands to navigate và xem xét các thay đổi,
