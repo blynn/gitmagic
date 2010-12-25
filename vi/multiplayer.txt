@@ -2,7 +2,7 @@
 
 Lúc đầu tôi sử dụng Git cho dự án riêng mà tôi là người duy nhất phát triển nó.
 Trong số những lệnh liên quan đến bản chất phân tán của Git, tôi chỉ cần lệnh *pull*
-và *clone* để giữ cùng một dự án nhưng ở những chỗ khác nhau.
+và *clone* để giữ cùng một dự án nhưng ở những địa điểm khác nhau.
 
 Sau đó tôi muốn mã nguồn của mình được phổ biến trên mạng bằng việc sử dụng Git, và bao gồm cả những thay đổi từ
 những người đóng góp. Tôi đã phải học cách làm thế nào để quản lý các dự án có nhiều người phát triển phần mềm
@@ -48,45 +48,45 @@ và mọi người có thể lấy dự án của bạn với lệnh:
 
 === Git Thông Qua Mọi Thứ ===
 
-Want to synchronize repositories without servers, or even a network connection?
+Bạn muốn đồng bộ hóa kho chứa nhưng lại không có máy chủ hay là mạng?
 Need to improvise during an emergency? We've seen <<makinghistory, *git
 fast-export* và *git fast-import* có thể chuyển đổi một kho chứa thành một tệp tin đơn
 và ngược lại>>. We could shuttle such files back and forth to transport git
-repositories over any medium, nhưng có một công cụ hiệu quả hơn đó chính là *git bundle*.
+repositories thông qua bất kỳ phương tiện nào, nhưng có một công cụ hiệu quả hơn đó chính là *git bundle*.
 
-The sender creates a 'bundle':
+Người gửi tạo một 'bundle':
 
  $ git bundle create somefile HEAD
 
-then transports the bundle, +somefile+, to the other party somehow: thư điện tử,
+sau đó gửi bundle, +somefile+, tới người cần bằng cách nào đó: thư điện tử,
 ổ đĩa USB, và *xxd* printout and an OCR scanner, reading bits over the phone,
-smoke signals, v.v.. The receiver retrieves commits from the bundle by typing:
+tín hiệu khói, v.v.. Người nhận khôi phục lại các lần commit từ bundle bằng cách gõ:
 
  $ git pull somefile
 
 The receiver can even do this from an empty repository. Despite its
 size, +somefile+ contains the entire original git repository.
 
-In larger projects, eliminate waste by bundling only changes the other
-repository lacks. For example, suppose the commit ``1b6d...'' is the most
-recent commit shared by both parties:
+Trong các dự án lớn hơn, việc triệt tiêu lãng phí bằng bundling only changes the other
+repository lacks. Ví dụ, giả sử lần commit ``1b6d...'' là lần commit gần nhất
+đã được chia sẻ giữa cả hai thành viên:
 
  $ git bundle create somefile HEAD ^1b6d
 
-If done frequently, one could easily forget which commit was last sent. The
-help page suggests using tags to solve this. Namely, after you send a bundle,
-type:
+Nếu làm thường xuyên, one could easily forget which commit was last sent. The
+help page suggests using tags to solve this. Ấy là, sau khi bạn gửi một bundle,
+gõ:
 
  $ git tag -f lastbundle HEAD
 
-and create new refresher bundles with:
+và tạo một bản bundles mới với:
 
  $ git bundle create newbundle HEAD ^lastbundle
 
-=== Patches: The Global Currency ===
+=== Vá: The Global Currency ===
 
-Patches are text representations of your changes that can be easily understood
-by computers and humans alike. This gives them universal appeal. Bạn có thể gửi miếng vá qua
+Miếng vá được trình bày ở dạng văn bản các thay đổi của bạn, nó dễ dàng được đọc hiểu bởi
+con người cũng như là máy tính. Điều này mang lại cho chúng universal appeal. Bạn có thể gửi miếng vá qua
 thư điện tử cho những nhà phát triển phần mềm khác mà chẳng cần lo họ đang sử dụng hệ thống mã nguồn nào. As long
 as your audience can read their email, they can see your edits. Tương tự thế, về phía mình,
 những thứ bạn cần là có một địa chỉ thư điện tử: ở đây chẳng cần cài đặt kho chứa Git trên mạng.
@@ -95,7 +95,7 @@ Recall from the first chapter:
 
  $ git diff 1b6d > my.patch
 
-outputs a patch which can be pasted into an email for discussion. Ở kho Git,
+đầu ra là một miếng vá mà bạn có thể dán vào một thư điện tử để thảo luận. Ở kho Git,
 gõ:
 
  $ git apply < my.patch
@@ -111,11 +111,11 @@ The resulting files can be given to *git-send-email*, hay có thể gửi thủ 
 
  $ git format-patch 1b6d..HEAD^^
 
-On the receiving end, save an email to a file, then type:
+Ở phía người nhận cuối, ghi lại thư điện tử thành tệp tin, sau đó gõ:
 
  $ git am < email.txt
 
-This applies the incoming patch and also creates a commit, bao gồm các thông tin như là tác giả.
+Lệnh này sẽ áp dụng cho miếng vá nhận được, đồng thời tạo ra một lần commit, bao gồm các thông tin như là tác giả.
 
 Với một chương trình đọc thư điện tử, bạn có thể sử dụng con chuột để to see the email in its raw original form trước khi ghi miếng vá thành một tệp tin.
 
@@ -132,7 +132,7 @@ các tùy chọn config đã được tạo ra cùng với bản sao. Hãy xem t
  $ git config --list
 
 Tùy chọn +remote.origin.url+ sẽ lưu giữ URL; ``origin'' là cái tên
-được đặt cho kho nguồn. As with the ``master'' branch convention, chúng ta có thể
+được đặt cho kho nguồn. Với nhánh ``master'' như thường lệ, chúng ta có thể
 thay đổi hay xóa các tên này nhưng chẳng có lý do gì để phải làm như thế cả.
 
 Nếu kho chứa nguyên bản đã chuyển chỗ, chúng ta có thể cập nhật URL thông qua:
@@ -140,14 +140,14 @@ Nếu kho chứa nguyên bản đã chuyển chỗ, chúng ta có thể cập nh
  $ git config remote.origin.url git://new.url/proj.git
 
 The +branch.master.merge+ option specifies the default remote branch in
-a *git pull*. During the initial clone, it is set to the current branch of the
-source repository, so even if the HEAD of the source repository subsequently
+a *git pull*. During the initial clone, nó được đặt cho nhánh hiện hành của kho chứa
+mã nguồn, so even if the HEAD of the source repository subsequently
 moves to a different branch, a later pull will faithfully follow the
 original branch.
 
 This option only applies to the repository we first cloned from, which is
-recorded in the option +branch.master.remote+. If we pull in from other
-repositories we must explicitly state which branch we want:
+recorded in the option +branch.master.remote+. Nếu chúng ta pull từ kho
+chứa khác chúng ta phải explicitly state which branch we want:
 
  $ git pull git://example.com/other.git master
 
@@ -157,7 +157,7 @@ tham số.
 === Remote Branches ===
 
 Khi bạn nhân bản một kho chứa, bạn cũng đồng thời nhân bản tất cả các nhánh của nó. You may not have
-noticed this because Git hides them away: you must ask for them specifically.
+noticed this bởi vì Git hides them away: you must ask for them specifically.
 This prevents branches in the remote repository from interfering with
 your branches, và cũng làm cho Git dễ dàng hơn với người mới dùng.
 
@@ -190,19 +190,17 @@ keep tabs on both. Chúng ta theo dõi hơn một kho chứa tại một thời 
  $ git remote add other git://example.com/some_repo.git
  $ git pull other some_branch
 
-Bây giờ chúng ta có thể trộn với nhánh của kho chứa thứ hai, and we have
-easy access to all branches of all repositories:
+Bây giờ chúng ta có thể trộn với nhánh của kho chứa thứ hai, và chúng ta
+dễ dàng truy cập tất cả các nhánh của tất cả các kho chứa:
 
  $ git diff origin/experimental^ other/some_branch~5
 
-But what if we just want to compare their changes without affecting our own
-work? Nói cách khác, we want to examine their branches without having
-their changes invade our working directory. Thế thì thay vì pull, hãy chạy:
+Nhưng chúng ta chỉ muốn so sánh sự khác nhau giữ chúng nhưng không áp dụng các thay đổi này với chúng ta? Nói cách khác, chúng ta khảo sát các nhánh của họ nhưng không thay đổi những gì đang có trong thư mục làm việc của mình. Thế thì thay vì pull, ta dùng lệnh:
 
  $ git fetch        # Fetch from origin, the default.
  $ git fetch other  # Fetch from the second programmer.
 
-This just fetches histories. Although the working directory remains untouched,
+Lệnh này chỉ mang về phần lịch sử. Although the working directory remains untouched,
 we can refer to any branch of any repository in a Git command because we now
 possess a local copy.
 
@@ -210,8 +208,8 @@ Recall that behind the scenes, lệnh pull đơn giản là *fetch* sau đó *me
 Thông thường chúng ta *pull* bởi vì chúng ta muốn trộn với lần commit cuối cùng sau khi fetch;
 việc làm này this situation is a notable exception.
 
-Xem *git help remote* để biết cách làm thế nào để gỡ bỏ kho chứa trên mạng, bỏ qua certain
-branches, và những thứ khác nữa.
+Xem *git help remote* để biết cách làm thế nào để gỡ bỏ kho chứa trên mạng, bỏ qua các nhánh
+xác định, và những thứ khác nữa.
 
 === Sở Thích Riêng Của Tôi ===
 
@@ -219,15 +217,15 @@ Với dự án của mình, tôi thích những người cộng tác tạo các 
 pull. Một số dịch vụ Git cho phép bạn host your own fork of a project with
 chỉ cần sử dụng chuột.
 
-Sau khi tôi fetch a tree, I run Git commands to navigate và xem xét các thay đổi,
-which ideally are well-organized and well-described. I merge my own changes,
+Sau khi tôi fetch một cây (tree), I run Git commands to navigate và xem xét các thay đổi,
+which ideally are well-organized and well-described. Tôi trộn với các thay đổi của chính mình,
 và có thể sẽ sửa thêm chút nữa. Khi đã hài lòng, tôi push tới kho chứa chính.
 
 Mặc dù tôi ít nhận được sự cộng tác, nhưng tôi tin rằng việc này sẽ thay đổi theo chiều hướng
 tốt lên. Hãy đọc
 http://torvalds-family.blogspot.com/2009/06/happiness-is-warm-scm.html[blog của Linus Torvalds].
 
-Trong thế giới Git world is slightly more convenient than patch files, as it
-saves me from converting them to Git commits. Hơn thế nữa, Git giữ các thông tin rất chi tiết
+Trong thế giới Git world is slightly thuận lợi hơn việc vá các tệp tin, cũng như là nó
+tiết kiệm công sức cho việc chuyển đổi chúng thành những lần commit dành cho Git. Hơn thế nữa, Git giữ các thông tin rất chi tiết
 như là ghi lại tên và địa chỉ thư điện tử của tác giả, cũng như là ngày tháng và
 thời gian, và nó cũng đòi hỏi tác giả phải mô tả về những thay đổi của họ.

@@ -30,7 +30,7 @@ Bạn có thể thi hành những điều trên chỉ cần một dòng lệnh:
  $ git ls-files -d -m -o -z | xargs -0 git update-index --add --remove
 
 Tùy chọn *-z* và *-0* dùng để ngăn ngừa sai hỏng không mong muốn từ những tệp tin có chứa
-các ký tự đặc biệt. As this command adds ignored files, bạn có thể muốn sử dụng
+các ký tự đặc biệt. Bởi vì lệnh này bổ xung những tệp tin As this command adds ignored files, bạn có thể muốn sử dụng
 tùy chọn `-x` hay `-X`.
 
 === Lần commit này Nhiều Quá! ===
@@ -51,31 +51,31 @@ Khi nào bạn thỏa mãn thì gõ
 
  $ git commit
 
-để commit chính xác các thay đổi mà bạn đã chọn lựa (the 'staged' changes). Hãy chắc chắn là
+để commit chính xác các thay đổi mà bạn đã chọn lựa (các thay đổi về 'staged'). Hãy chắc chắn là
 bạn đã không dùng tùy chọn *-a*, nếu không thì Git sẽ commit tất cả.
 
 Nhưng bạn lại có những tài liệu đã được chỉnh sửa đặt tại nhiều chỗ khác nhau? Duyệt từng cái một
-trở nên frustratingly mind-numbing. Trong trường hợp này, sử dụng lệnh *git add -i*, whose
-interface is less straightforward, nhưng uyển chuyển hơn. With a few keystrokes,
+sẽ làm nản lòng mind-numbing. Trong trường hợp này, sử dụng lệnh *git add -i*, whose
+interface is less straightforward, nhưng uyển chuyển hơn. Chỉ cần gõ vài cái,
 you can stage or unstage several files at a time, or review and select changes
 chỉ trong các tệp tin riêng biệt. Có một sự lựa chọn khác, chạy lệnh *git commit \--interactive* which
 automatically commit sau khi bạn làm xong.
 
-=== The Index: Git's Staging Area ===
+=== Mục Lục: Git's Staging Area ===
 
 So far we have avoided Git's famous 'index', nhưng chúng ta phải đối mặt it to
-explain the above. Chỉ mục là vùng trạng thái tạm thời. Git ít khi shuttles
-data directly between your project and its history. Đúng hơn là Git đầu tiên ghi
+explain the above. Chỉ mục là vùng trạng thái tạm thời. Git ít khi di chuyển
+dữ liệu qua lại một cách trực tiếp giữa dự án của bạn và lịch sử của nó. Đúng hơn là Git đầu tiên ghi
 dữ liệu vào chỉ mục, và sau đó sao chép dữ liệu trong chỉ mục vào chỗ cần ghi
 cuối.
 
 Ví dụ, lệnh *commit -a* thực sự bao gồm hai quá trình. Bước thứ nhất là đặt
-snapshot of the current state of every tracked file vào chỉ mục (index). Bước thứ
-hai là permanently records the snapshot now in the index. Việc commit không sử dụng tùy chọn
+snapshot of the current state of every tracked file vào bảng mục lục (index). Bước thứ
+hai là permanently records the snapshot now bảng mục lục. Việc commit không sử dụng tùy chọn
 *-a* chỉ thi hành bước thứ hai, and only makes sense after running
-commands that somehow change the index, như là lệnh *git add*.
+commands that bằng cách này hay cách khác thay đổi bảng chỉ mục, như là lệnh *git add*.
 
-Usually we can ignore the index and pretend we are reading straight from and ghi thẳng vào trong lịch sử. On this occasion, we want finer control, so we manipulate the index. We place a snapshot of some, không phải tất cả, các thay đổi của chúng ta vào chỉ mục, and then permanently record this carefully rigged snapshot.
+Usually we can ignore the index and pretend we are reading straight from and ghi thẳng vào trong lịch sử. On this occasion, we want finer control, so we manipulate the index. We place a snapshot của một số, không phải tất cả, các thay đổi của chúng ta vào bảng mục lục, and then permanently record this carefully rigged snapshot.
 
 === Đừng Quên HEAD của Mình ===
 
@@ -97,11 +97,11 @@ Nhưng giả sử bạn không có được nó? Đừng lo: với những lện
 
 === Săn tìm-HEAD ===
 
-Có thể ORIG_HEAD là chưa đủ. Có lẽ you've just realized you made a monumental mistake and you need to go back to an ancient commit in a long-forgotten branch.
+Có thể ORIG_HEAD là chưa đủ. Có lẽ bạn vừa nhận thấy mình vừa tạo ra một sai sót có quy mô lớn và bạn cần phải quay lại một lần commit cách đây lâu lắm rồi  trong một nhánh mà bạn đã quên rồi vì nó đã quá lâu.
 
 Theo mặc định, Git giữ một lần commit ít nhất là hai tuần lễ, ngay cả khi bạn đã ra lệnh
 cho Git phá hủy nhánh chứa nó. Sự trục trặc là việc tìm giá trị băm
-thích hợp. Bạn có thể tìm kiếm tất cả các giá trị băm trong `.git/objects` và sử dụng cách thử tất cả các giá trị
+thích hợp. Bạn có thể tìm kiếm tất cả các giá trị băm trong `.git/objects` và sử dụng cách thử sai tất cả các giá trị
 để có được thứ mình muốn. Nhưng còn có cách dễ dàng hơn.
 
 Git ghi lại mọi giá trị băm của mọi lần commit trong máy tính tại thư mục `.git/logs`. Thư mục con `refs` chứa lịch sử của tất cả các hoạt động trên tất cả cách nhánh, trong khi tệp tin `HEAD` giữ tất cả các giá trị băm mà nó từng có được. Phần sau có thể được sử dụng để tìm kiếm giá trị băm của các lần commits trên các nhánh cái mà đã bị cắt đi một cách tình cờ.
@@ -126,7 +126,7 @@ dụ:
   $ git config gc.pruneexpire "30 days"
 
 có nghĩa là việc xóa một lần commit sẽ chỉ thực sự xảy ra khi 30 ngày đã qua và
-lệnh *git gc* được gọi.
+lệnh *git gc* được triệu gọi.
 
 Bạn cũng có thể không cho phép chạy lệnh *git gc* một cách tự động:
 
@@ -138,7 +138,7 @@ trong trường hợp này những lần commit sẽ chỉ bị xóa bỏ khi b�
 
 In true UNIX fashion, Git được thiết kế cho phép nó dễ dàng được sử dụng như là một thành phần bên dưới của các chương trình khác, như là cho giao diện đồ họa GUI và giao diện Web để thay thế cho giao diện dòng lệnh, công cụ quản lý các miếng vá, các công cụ nhập và chuyển đổi, và những thứ tương tự như thế. Trên thực tế, một số lệnh Git bản chất nó cũng là các kịch bản (scripts) đứng trên vai của những người khổng lồ, chính là hệ điều hành. Chỉ cần sửa đổi một chút, bạn có thể bắt Git làm việc phù hợp với sở thích của mình.
 
-Một mẹo nhỏ là sử dụng một built-in của Git là gán bí danh cho các lệnh để nó trở nên ngắn gọn hơn
+Một mẹo nhỏ là sử dụng một tính năng dựng sẵn trong Git là gán bí danh cho các lệnh để nó trở nên ngắn gọn hơn
 sử dụng lệnh:
 
   $ git config --global alias.co checkout  #gán bí danh cho lệnh checkout là co
@@ -151,7 +151,7 @@ Gọi lệnh
 
   $ git symbolic-ref HEAD
 
-sẽ hiển thị tên của nhánh hiện hành. Trong thực tiễn, you thích hợp nhất mốn gỡ bỏ want to remove
+sẽ hiển thị tên của nhánh hiện hành. Trong thực tiễn, you thích hợp nhất muốn gỡ bỏ want to remove
 the "refs/heads/" và tránh errors:
 
   $ git symbolic-ref HEAD 2> /dev/null | cut -b 12-
@@ -160,7 +160,7 @@ Thư mục con +contrib+ là một kho báu được tìm thấy trong số các
 Đúng lúc, một số trong số chúng có thể được xúc tiến thành lệnh chính thức. Trên hệ thống Debian và
 Ubuntu, thư mục này ở tại +/usr/share/doc/git-core/contrib+.
 
-One popular resident is +workdir/git-new-workdir+. Via clever symlinking, this script creates a new working directory whose history is shared with the original repository:
+Một thư mục phổ biến khác là +workdir/git-new-workdir+. Thông qua các liên kết tài tình, đoạn script này tạo ra một thư mục làm việc mới khi phần lịch sử thì chia sẻ với kho chứa nguyên gốc:
 
   $ git-new-workdir an/existing/repo new/directory
 
@@ -169,7 +169,7 @@ Thư mục mới và các tệp tin trong nó có thể được coi như một 
 === Daring Stunts ===
 
 These days, Git makes it difficult for the user to accidentally phá hủy dữ liệu.
-Nhưng nếu như bạn biết mình đang làm gì, you can override safeguards for các lệnh
+Nhưng nếu như bạn biết mình đang làm gì, bạn có thể vượt qua sự bảo vệ dành cho các lệnh
 thông thường.
 
 *Checkout*: Uncommitted changes cause checkout to fail. Để phá hủy sự thay đổi của mình, và dẫu sao cũng checkout commit đã cho, sử dụng cờ bắt buộc (force):
@@ -178,15 +178,15 @@ thông thường.
 
 Mặt khác, nếu bạn chỉ định rõ một đường dẫn chi tiết cho lệnh, thế thì ở đây không có sự kiểm tra an toàn nào cả. Đường dẫn được áp dụng sẽ bị âm thầm ghi đè lên. Hãy cẩn thận nếu bạn sử dụng lệnh checkout theo cách này.
 
-*Reset*: Reset also fails in the presence of uncommitted changes. To force it through, run:
+*Reset*: Lệnh reset cũng xảy ra lỗi also fails in the presence of uncommitted changes. Để bắt buộc nó, chạy:
 
   $ git reset --hard 1b6d
 
-*Branch*: Việc xóa các nhánh Deleting branches fails if this causes changes to be lost. Để ép buộc việc xóa, hãy gõ:
+*Branch*: Việc xóa các nhánh cũng gặp lỗi nếu đó là nguyên nhân khiến các thay đổi bị mất. Để ép buộc việc này, hãy gõ:
 
   $ git branch -D dead_branch  #thay vì sử dụng tùy chọn -d
 
-Cũng tương tự như thế, việc cố gắng ghi đè lên một nhánh bằng cách a move fails if data loss would ensue. To force a branch move, type:
+Cũng tương tự như thế, việc cố gắng ghi đè lên một nhánh bằng cách a move fails if data loss would ensue. Để ép buộc sự di chuyển nhánh, gõ:
 
   $ git branch -M source target  # thay vì sử dụng tùy chọn -m
 
@@ -218,7 +218,7 @@ If only I had bought idiot insurance bằng cách sử dụng một _hook_ để
 Ngày nay Git sẽ không commit nếu khi nó trộn nó chỉ tìm thấy những khoảng trắng vô ích hay
 những xung đột không cần giải trộn.
 
-Với bản hướng dẫn này, Tôi cuối cùng đã thêm vào dòng đầu của
+Với bản hướng dẫn này, tôi cuối cùng đã thêm vào dòng đầu của
 hook *pre-commit* để đề phòng khi ta lơ đãng:
 
  if git ls-files -o | grep '\.txt$'; then
@@ -227,6 +227,6 @@ hook *pre-commit* để đề phòng khi ta lơ đãng:
  fi
 
 Nhiều hoạt động của Git hỗ trợ hooks; hãy xem *git help hooks*. Chúng tôi đã kích hoạt
-một hook mẫu là *post-update* trước earlier khi nói đến Git thông qua HTTP. Cái này chạy
+một hook mẫu là *post-update* trước khi nói đến Git thông qua HTTP. Cái này chạy
 mỗi khi head di chuyển. Đoạn script ví dụ post-update cập nhật các tệp tin Git cần
 cho việc truyền thông thông qua Git-agnostic chuyên chở bằng giao thức giống như là HTTP.
