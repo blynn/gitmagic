@@ -56,7 +56,7 @@ bạn đã không dùng tùy chọn *-a*, nếu không thì Git sẽ commit tấ
 
 Nhưng bạn lại có những tài liệu đã được chỉnh sửa đặt tại nhiều chỗ khác nhau? Duyệt từng cái một
 sẽ làm nản lòng mind-numbing. Trong trường hợp này, sử dụng lệnh *git add -i*, với giao diện
-ít rắc rối hơn  less straightforward, nhưng uyển chuyển hơn. Chỉ cần gõ vài cái,
+không ít rắc rối hơn, nhưng uyển chuyển hơn. Chỉ cần gõ vài cái,
 you can stage or unstage several files cùng một lúc, hay xem xét và chọn các thay đổi
 chỉ trong các tệp tin riêng biệt. Có một sự lựa chọn khác, chạy lệnh *git commit \--interactive* mà nó
 sẽ tự động commit sau khi bạn làm xong.
@@ -75,9 +75,9 @@ hai là permanently records the snapshot now bảng mục lục. Việc commit k
 *-a* chỉ thi hành bước thứ hai, and only makes sense after running
 commands that bằng cách này hay cách khác thay đổi bảng chỉ mục, như là lệnh *git add*.
 
-Usually we can ignore the index and pretend we are reading straight from and ghi thẳng vào trong lịch sử. On this occasion, we want finer control, so we manipulate the index. We place a snapshot của một số, không phải tất cả, các thay đổi của chúng ta vào bảng mục lục, and then permanently record this carefully rigged snapshot.
+Usually we can ignore the index and pretend we are reading straight from and ghi thẳng vào trong lịch sử. Vì lý do này, we want finer control, so we manipulate the index. Chúng ta đặt một snapshot của một số, không phải tất cả, các thay đổi của chúng ta vào bảng mục lục, and then permanently record this carefully rigged snapshot.
 
-=== Đừng Quên HEAD của Mình ===
+=== Đừng Quên HEAD Của Mình ===
 
 Thẻ HEAD giống như một con trỏ, nó trỏ đến lần commit cuối cùng, tự động di chuyển theo mỗi lần commit mới. Một số lệnh của Git giúp bạn di chuyển nó. Ví dụ như:
 
@@ -226,7 +226,7 @@ hook *pre-commit* để đề phòng khi ta lơ đãng:
    exit 1
  fi
 
-Nhiều hoạt động của Git hỗ trợ hooks; hãy xem *git help hooks*. Chúng tôi đã kích hoạt
+Nhiều hoạt động của Git hỗ trợ hook; hãy xem *git help hooks*. Chúng tôi đã kích hoạt
 một hook mẫu là *post-update* trước khi nói đến Git thông qua HTTP. Cái này chạy
 mỗi khi head di chuyển. Đoạn script ví dụ post-update cập nhật các tệp tin Git cần
 cho việc truyền thông thông qua Git-agnostic chuyên chở bằng giao thức giống như là HTTP.
