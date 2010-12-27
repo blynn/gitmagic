@@ -219,7 +219,7 @@ fix a high-priority bug or something.
 Điều này cũng tương tự như việc chuyển kênh trên TV một cách tạm thời để thấy chương trình khác đang chiếu.
 Nhưng thay vì chỉ cần nhấn vài cái nút, bạn phải tạo, check out,
 trộn và xóa nhánh tạm đó. May mắn thay, Git có cách ngắn gọn tiện lợi
-chẳng kém gì chiếc điều khiển từ xa của một chiếc TV:
+chẳng thua kém gì chiếc điều khiển từ xa của một chiếc TV:
 
  $ git stash
 
@@ -228,22 +228,22 @@ restores the previous state. Your working directory appears exactly as it was
 before you started editing, and you can fix bugs, pull in upstream changes, and
 so on. When you want to go back to the stashed state, type:
 
- $ git stash apply  # You may need to resolve some conflicts.
+ $ git stash apply  # Bạn có thể phải giải quyết các xung đột.
 
 You can have multiple stashes, and manipulate them in various ways. See
 *git help stash*. As you may have guessed, Git maintains branches behind the scenes to perform this magic trick.
 
-=== Work How You Want ===
+=== Làm Theo Cách Của Mình ===
 
 You might wonder if branches are worth the bother. After all, clones are almost
 as fast, and you can switch between them with *cd* instead of esoteric Git
 commands.
 
-Consider web browsers. Why support multiple tabs as well as multiple windows?
-Because allowing both accommodates a wide variety of styles. Some users like to
-keep only one browser window open, and use tabs for multiple webpages. Others
-might insist on the other extreme: multiple windows with no tabs anywhere.
-Others still prefer something in between.
+Consider web browsers. Tại sao hỗ trợ mở nhiều tab thì cũng tốt như mở trên nhiều cửa sổ khác nhau?
+Bởi vì cả hai điều này thể hiện tính đa dạng của quan điểm, phong cách sống. Một số người sử dụng lại thích
+chỉ giữ một cửa sổ trình duyệt được mở, và sử dụng các tab để hiển thị nhiều trang web một lúc. Những người khác
+có lẽ lại khăng khăng cực đoan cho rằng: mở trên nhiều cửa sổ khác nhau và chẳng cần tab nữa.
+Một nhóm khác lại thích cả hai một lúc.
 
 Việc tạo nhánh thì cũng giống như các tab cho thư mục làm việc của bạn, việc nhân bản thì giống như việc mở một cửa sổ duyệt mới. Những việc này nhanh chóng và nội bộ, thế thì sao lại không
 thử nghiệm để tìm thấy cách thực hiện thích hợp nhất cho mình? Git giúp bạn làm việc chính xác
