@@ -1,4 +1,4 @@
-﻿== Git Grandmastery ==
+﻿== Trở Thành Kiện Tướng ==
 
 Bây giờ, bạn có thể thông qua lệnh *git help* để bật trang trợ giúp lên và có thể hiểu
 gần như tất cả mọi thứ. Tuy nhiên, việc xác định chính xác lệnh cần sử dụng để giải quyết
@@ -12,7 +12,7 @@ người dùng. Để tạo gói tarball cho mã nguồn, tôi chạy:
 
  $ git archive --format=tar --prefix=proj-1.2.3/ HEAD
 
-=== Commit What Changed ===
+=== Chỉ Commit Những Gì Thay Đổi ===
 
 Việc phải thông báo với Git khi bạn thêm, xóa hay đổi tên các tệp tin là việc rầy rà với
 các dự án nào đó. Thay vào đó, bạn có thể gõ:
@@ -55,11 +55,11 @@ Khi nào bạn thỏa mãn thì gõ
 bạn đã không dùng tùy chọn *-a*, nếu không thì Git sẽ commit tất cả.
 
 Nhưng bạn lại có những tài liệu đã được chỉnh sửa đặt tại nhiều chỗ khác nhau? Duyệt từng cái một
-sẽ làm nản lòng mind-numbing. Trong trường hợp này, sử dụng lệnh *git add -i*, whose
-interface is less straightforward, nhưng uyển chuyển hơn. Chỉ cần gõ vài cái,
-you can stage or unstage several files at a time, or review and select changes
-chỉ trong các tệp tin riêng biệt. Có một sự lựa chọn khác, chạy lệnh *git commit \--interactive* which
-automatically commit sau khi bạn làm xong.
+sẽ làm nản lòng mind-numbing. Trong trường hợp này, sử dụng lệnh *git add -i*, với giao diện
+ít rắc rối hơn  less straightforward, nhưng uyển chuyển hơn. Chỉ cần gõ vài cái,
+you can stage or unstage several files cùng một lúc, hay xem xét và chọn các thay đổi
+chỉ trong các tệp tin riêng biệt. Có một sự lựa chọn khác, chạy lệnh *git commit \--interactive* mà nó
+sẽ tự động commit sau khi bạn làm xong.
 
 === Mục Lục: Git's Staging Area ===
 
@@ -164,21 +164,21 @@ Một thư mục phổ biến khác là +workdir/git-new-workdir+. Thông qua c�
 
   $ git-new-workdir an/existing/repo new/directory
 
-Thư mục mới và các tệp tin trong nó có thể được coi như một bản sao, except since the history is shared, the two trees automatically ở tại sync. Ở đây không cần có sự trộn, push, hay pull.
+Thư mục mới và các tệp tin trong nó có thể được coi như một bản sao, ngoại trừ phần lịch sử được chia sẻ dùng chung, the two trees automatically ở tại sync. Ở đây không cần có sự trộn, push, hay pull.
 
 === Daring Stunts ===
 
-These days, Git makes it difficult for the user to accidentally phá hủy dữ liệu.
+Ngày nay, người sử dụng Git rất khó phá hủy dữ liệu.
 Nhưng nếu như bạn biết mình đang làm gì, bạn có thể vượt qua sự bảo vệ dành cho các lệnh
-thông thường.
+thông thường đó.
 
-*Checkout*: Uncommitted changes cause checkout to fail. Để phá hủy sự thay đổi của mình, và dẫu sao cũng checkout commit đã cho, sử dụng cờ bắt buộc (force):
+*Checkout*: Không commit các thay đổi là nguyên nhân của việc checkout gặp lỗi. Để phá hủy sự thay đổi của mình, và dẫu sao cũng checkout commit đã cho, sử dụng cờ bắt buộc (force):
 
   $ git checkout -f HEAD^
 
 Mặt khác, nếu bạn chỉ định rõ một đường dẫn chi tiết cho lệnh, thế thì ở đây không có sự kiểm tra an toàn nào cả. Đường dẫn được áp dụng sẽ bị âm thầm ghi đè lên. Hãy cẩn thận nếu bạn sử dụng lệnh checkout theo cách này.
 
-*Reset*: Lệnh reset cũng xảy ra lỗi also fails in the presence of uncommitted changes. Để bắt buộc nó, chạy:
+*Reset*: Lệnh reset cũng xảy ra lỗi khi không commit các thay đổi. Để bắt buộc nó, chạy:
 
   $ git reset --hard 1b6d
 
