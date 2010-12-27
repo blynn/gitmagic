@@ -1,4 +1,4 @@
-﻿== Multiplayer Git ==
+﻿== Đa Người Dùng ==
 
 Lúc đầu tôi sử dụng Git cho dự án riêng mà tôi là người duy nhất phát triển nó.
 Trong số những lệnh liên quan đến bản chất phân tán của Git, tôi chỉ cần lệnh *pull*
@@ -49,10 +49,10 @@ và mọi người có thể lấy dự án của bạn với lệnh:
 === Git Thông Qua Mọi Thứ ===
 
 Bạn muốn đồng bộ hóa kho chứa nhưng lại không có máy chủ và cũng không có mạng?
-Need to improvise during an emergency? We've seen <<makinghistory, *git
+Bạn cần trong những trường hợp khẩn cấp? Chúng ta đã biết lệnh <<makinghistory, *git
 fast-export* và *git fast-import* có thể chuyển đổi một kho chứa thành một tệp tin đơn
-và ngược lại>>. We could shuttle such files back and forth to transport git
-repositories thông qua bất kỳ phương tiện nào, nhưng có một công cụ hiệu quả hơn đó chính là *git bundle*.
+và ngược lại>>. Chúng ta có thể chuyển qua chuyển lại như vậy để truyền kho Git
+đi thông qua bất kỳ phương tiện nào, nhưng có một công cụ hiệu quả hơn đó chính là *git bundle*.
 
 Người gửi tạo một 'bundle':
 
@@ -67,14 +67,14 @@ tín hiệu khói, v.v.. Người nhận khôi phục lại các lần commit t�
 Bộ nhận thậm chí có thể làm được việc này từ một kho chứa rỗng. Mặc dù kích
 thước của nó, +somefile+ chứa các mục kho Git nguyên thủy.
 
-Trong các dự án lớn hơn, việc triệt tiêu lãng phí bằng bundling only changes the other
+Trong các dự án lớn hơn, việc triệt tiêu lãng phí bằng bundling chỉ thay đổi  kho chứa the other
 repository lacks. Ví dụ, giả sử lần commit ``1b6d...'' là lần commit gần nhất
 đã được chia sẻ giữa cả hai thành viên:
 
  $ git bundle create somefile HEAD ^1b6d
 
-Nếu làm thường xuyên, one could easily forget which commit was last sent. The
-help page suggests using tags to solve this. Ấy là, sau khi bạn gửi một bundle,
+Nếu làm thường xuyên, one could easily forget which commit was last sent. Trang
+trợ giúp sẽ gợi ý cho bạn cách sử dụng các thẻ (tag) để giải quyết vấn đề này. Ấy là, sau khi bạn gửi một bundle,
 gõ:
 
  $ git tag -f lastbundle HEAD
@@ -88,8 +88,8 @@ và tạo một bản bundles mới với:
 Miếng vá được trình bày ở dạng văn bản các thay đổi của bạn, nó dễ dàng được đọc hiểu bởi
 con người cũng như là máy tính. Điều này mang lại cho chúng sức lôi cuốn toàn cầu. Bạn có thể gửi miếng vá qua
 thư điện tử cho những nhà phát triển phần mềm khác mà chẳng cần lo họ đang sử dụng hệ thống mã nguồn nào. Chừng nào
-độc giả của bạn có thể đọc được thư điện tử của họ, họ có thể thấy được phần chỉnh sửa của bạn. Tương tự thế, về phía mình,
-những thứ bạn cần là có một địa chỉ thư điện tử: ở đây chẳng cần cài đặt kho chứa Git trên mạng.
+độc giả của bạn có thể đọc được thư điện tử của họ, họ còn có thể thấy được phần chỉnh sửa của bạn. Tương tự thế, về phía mình,
+những thứ bạn cần là có một địa chỉ thư điện tử: ở đây chẳng cần cài đặt kho chứa Git nào trên mạng.
 
 Sử dụng lại ví dụ từ chương đầu tiên:
 
@@ -141,20 +141,20 @@ Nếu kho chứa nguyên bản đã chuyển chỗ, chúng ta có thể cập nh
 
 Tùy chọn +branch.master.merge+ chỉ ra nhánh remote mặc định trong
 lệnh *git pull*. Trong suốt quá trình nhân bản, nó được đặt cho nhánh hiện hành của kho chứa
-mã nguồn, so even if the HEAD of the source repository subsequently
-moves to a different branch, a later pull will faithfully follow the
-original branch.
+mã nguồn, như thế cho dù HEAD của kho nguồn về sau có
+di chuyển đến một nhánh khác, lệnh pull sau này sẽ trung thành với
+nhánh nguyên gốc.
 
-Tùy chọn này chỉ áp dụng cho kho chứa chúng ta lần đầu tiên nhân bản từ, which is
-recorded in the option +branch.master.remote+. Nếu chúng ta pull từ kho
-chứa khác chúng ta phải chỉ đích xác nhánh mà chúng ta muốn:
+Tùy chọn này chỉ áp dụng cho kho chứa chúng ta lần đầu tiên nhân bản từ, nó
+được ghi trong tùy chọn +branch.master.remote+. Nếu chúng ta pull từ kho
+chứa khác chúng ta phải chỉ đích xác tên nhánh mà chúng ta muốn:
 
  $ git pull git://example.com/other.git master
 
 Phần phía trên giải thích tại sao một số lệnh push và pull ví dụ của chúng ta lại không có
 tham số.
 
-=== Remote Branches ===
+=== Nhánh Trên Mạng ===
 
 Khi bạn nhân bản một kho chứa, bạn cũng đồng thời nhân bản tất cả các nhánh của nó. Bạn sẽ không nhận
 được cảnh báo này bởi vì Git giấu chúng đi: bạn phải hỏi mới có thể biết chính xác.
@@ -206,7 +206,7 @@ we can refer to bất kỳ nhánh nào của bất kỳ kho chứa nào trong m�
 
 Recall that behind the scenes, lệnh pull đơn giản là *fetch* sau đó *merge*.
 Thông thường chúng ta *pull* bởi vì chúng ta muốn trộn với lần commit cuối cùng sau khi fetch;
-việc làm này this situation is là một ngoại lệ đáng chú ý.
+việc làm này là một ngoại lệ đáng chú ý.
 
 Xem *git help remote* để biết cách làm thế nào để gỡ bỏ kho chứa trên mạng, bỏ qua các nhánh
 xác định, và những thứ khác nữa.
