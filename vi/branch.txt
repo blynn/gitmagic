@@ -25,35 +25,36 @@ Ever played one of those games where at the push of a button (``the boss key''),
  $ git add .
  $ git commit -m "Lần commit bắt đầu"
 
-We have created a Git repository that tracks one text file containing a certain message. Giờ hãy gõ:
+Chúng ta đã tạo ra kho chứa Git mà nó theo dõi một tệp tin văn bản có chứa một thông điệp đã biết trước. Giờ hãy gõ:
 
  $ git checkout -b boss  # nothing seems to change after this
  $ echo "My boss is smarter than me" > myfile.txt
  $ git commit -a -m "Another commit"
 
-It looks like we've just overwritten our file and committed it. But it's an illusion. Gõ:
+It looks like we've just overwritten our file and committed it. Nhưng đó chỉ là ảo tưởng. Gõ:
 
  $ git checkout master  # switch to original version of the file
 
-and hey presto! The text file is restored. And if the boss decides to snoop around this directory, gõ:
+Ối trời ơi! Tệp tin văn bản lại trở về như cũ mất rồi. And if the boss decides to snoop around this directory, gõ:
 
  $ git checkout boss  # switch to version suitable for boss' eyes
 
-You can switch between the two versions of the file as much as you like, and commit to each independently.
+Bạn có thể hoán chuyển giữa hai phiên bản của tệp tin tùy thích, và commit to each independently.
 
 === Dirty Work ===
 
 [[branch]]
-Say you're working on some feature, and for some reason, you need to go back three versions and temporarily put in a few print statements to see how something works. Then:
+Say you're working on some feature, và vì lý do nào đó, bạn muốn quay trở lại bản cách đây ba bản và tạm thời đặt vài dòng lệnh
+in print để có thể thấy được một số thứ hoạt động như thế nào. Thế thì:
 
  $ git commit -a
  $ git checkout HEAD~3
 
-Now you can add ugly temporary code all over the place. You can even commit these changes. When you're done,
+Giờ thì bạn có thể thêm những dòng code tạm thờiNow you can add ugly temporary code all over the place. You can even commit these changes. Khi bạn đã làm xong,
 
  $ git checkout master
 
-to return to your original work. Observe that any uncommitted changes are carried over.
+để quay lại công việc chính. Observe that any uncommitted changes are carried over.
 
 What if you wanted to save the temporary changes after all? Rất dễ:
 
@@ -82,7 +83,7 @@ Then once you've fixed the bug:
 
 and resume work on your original task.
 
-You can even 'merge' in the bugfix you just made, either by typing:
+You can even 'merge' in the bugfix you just made, dùng một trong hai lệnh sau:
 
  $ git merge fixes
 
@@ -94,8 +95,8 @@ since you have already pushed the bugfix to the main repository.
 
 === Merging ===
 
-With some version control systems, creating branches is easy but merging them
-back together is tough. With Git, merging is so trivial that you might be
+Với một số hệ thống quản lý mã nguồn, việc tạo các nhánh rất dễ dàng nhưng trộn chúng
+trở lại là một bài toán hóc búa. Với Git, việc trộn là dễ dàng that you might be
 unaware of it happening.
 
 We actually encountered merging long ago. The *pull* command in fact 'fetches'
@@ -114,17 +115,17 @@ desirable because the current branch becomes the first parent during a merge;
 frequently you're only concerned with the changes you made in the current
 branch, as opposed to changes merged in from other branches.
 
-You can refer to a specific parent with a caret. For example, to show
+You can refer to a specific parent with a caret. Ví dụ, để hiển thị
 the logs from the second parent:
 
  $ git log HEAD^2
 
-You may omit the number for the first parent. For example, to show the
-differences with the first parent:
+You may omit the number for the first parent. Ví dụ, để hiển thị
+sự khác nhau với differences with the first parent:
 
  $ git diff HEAD^
 
-You can combine this notation with other types. For example:
+You can combine this notation with other types. Ví dụ:
 
  $ git checkout 1b6d^^2~10 -b ancient
 
@@ -149,7 +150,7 @@ off:
 
 Next, work on Part II, committing your changes along the way. To err is human,
 and often you'll want to go back and fix something in Part I.
-If you're lucky, or very good, you can skip these lines.
+Nếu may mắn,If you're lucky, or very good, you can skip these lines.
 
  $ git checkout master  # Go back to Part I.
  $ fix_problem
@@ -157,7 +158,7 @@ If you're lucky, or very good, you can skip these lines.
  $ git checkout part2   # Go back to Part II.
  $ git merge master     # Merge in those fixes.
 
-Eventually, Part I is approved:
+Cuối cùng, Part I is approved:
 
  $ git checkout master  # Go back to Part I.
  $ submit files         # Release to the world!
@@ -184,7 +185,7 @@ Perhaps you like to work on all aspects of a project in the same branch. You wan
   $ git checkout -b sanitized
   $ git checkout -b medley
 
-Next, work on anything: fix bugs, add features, add temporary code, and so forth, committing often along the way. Then:
+Next, work on anything: sửa lỗi, thêm các đặc tính kỹ thuật, thêm mã lệnh tạm thời, vân vân, committing often along the way. Then:
 
   $ git checkout sanitized
   $ git cherry-pick medley^^
@@ -193,17 +194,17 @@ applies the grandparent of the head commit of the ``medley'' branch to the ``san
 
 === Managing Branches ===
 
-List all branches by typing:
+Liệt kê tất cả các nhánh bằng cách gõ:
 
  $ git branch
 
-By default, you start in a branch named ``master''. Some advocate leaving the
-``master'' branch untouched and creating new branches for your own edits.
+Theo mặc định, bạn bắt đầu tại nhánh có tên ``master''. Some advocate leaving the
+``master'' branch untouched và tạo các nhánh mới cho các chỉnh sửa của riêng mình.
 
-The *-d* and *-m* options allow you to delete and move (rename) branches.
-See *git help branch*.
+Các tùy chọn *-d* and *-m* cho phép bạn xóa hay di chuyểm (đổi tên) các nhánh.
+Xem thêm *git help branch*.
 
-The ``master'' branch is a useful custom. Others may assume that your
+Nhánh ``master'' branch is a useful custom. Others may assume that your
 repository has a branch with this name, and that it contains the official
 version of your project. Although you can rename or obliterate the ``master''
 branch, you might as well respect this convention.
@@ -215,14 +216,14 @@ frequently for similar reasons: every other branch merely serves to
 save the current state so you can briefly hop back to an older state to
 fix a high-priority bug or something.
 
-It's analogous to changing the TV channel temporarily to see what else is on.
-But instead of pushing a couple of buttons, you have to create, check out,
-merge, and delete temporary branches. Luckily, Git has a shortcut that is as
-convenient as a TV remote control:
+Điều này cũng tương tự như việc chuyển kênh trên TV một cách tạm thời để thấy chương trình khác đang chiếu.
+Nhưng thay vì chỉ cần nhấn vài cái nút, bạn phải tạo, check out,
+trộn và xóa nhánh tạm đó. May mắn thay, Git có cách ngắn gọn tiện lợi
+chẳng kém gì chiếc điều khiển từ xa của một chiếc TV:
 
  $ git stash
 
-This saves the current state in a temporary location (a 'stash') and
+This saves the current state in a temporary location (một 'stash') and
 restores the previous state. Your working directory appears exactly as it was
 before you started editing, and you can fix bugs, pull in upstream changes, and
 so on. When you want to go back to the stashed state, type:
@@ -244,7 +245,6 @@ keep only one browser window open, and use tabs for multiple webpages. Others
 might insist on the other extreme: multiple windows with no tabs anywhere.
 Others still prefer something in between.
 
-Branching is like tabs for your working directory, and cloning is like opening
-a new browser window. These operations are fast and local, so why not
-experiment to find the combination that best suits you? Git lets you work
-exactly how you want.
+Việc tạo nhánh thì cũng giống như các tab cho thư mục làm việc của bạn, việc nhân bản thì giống như việc mở một cửa sổ duyệt mới. Những việc này nhanh chóng và nội bộ, thế thì sao lại không
+thử nghiệm để tìm thấy cách thực hiện thích hợp nhất cho mình? Git giúp bạn làm việc chính xác
+như bạn muốn.
