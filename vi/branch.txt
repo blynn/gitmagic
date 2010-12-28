@@ -1,6 +1,6 @@
 ﻿== Branch Wizardry ==
 
-Instant branching and merging are the most lethal of Git's killer features.
+Tạo nhánh và trộn là các đặc tính sát thủ của Git.
 
 *Problem*: External factors inevitably necessitate context switching. A severe
 bug manifests in the released version without warning. The deadline for a
@@ -10,13 +10,13 @@ Interrupting your train of thought can be detrimental to your productivity, and 
 
 But cloning still entails copying the whole working directory as well as the entire history up to the given point. Dù là Git reduces the cost of this with file sharing and hard links, the project files themselves must be recreated in their entirety in the new working directory.
 
-*Solution*: Git có một công cụ tốt hơn để sử lý tình huống này that is much faster and more space-efficient hơn là cloning: *git branch*.
+*Solution*: Git có một công cụ tốt hơn để sử lý tình huống này, nó nhanh và tiết kiệm không gian lưu trữ hơn lệnh cloning: *git branch*.
 
 With this magic word, the files in your directory suddenly shapeshift from one version to another. This transformation can do more than merely go back or forward in history. Your files can morph from the last release to the experimental version to the current development version to your friend's version and so on.
 
 === The Boss Key ===
 
-Ever played one of those games where at the push of a button (``the boss key''), the screen would instantly display a spreadsheet or something? So if the boss walked in the office while you were playing the game you could quickly hide it away?
+Ever played one of those games where at the push of a button (``the boss key''), màn hình có lẽ hiển thị ngay một cái bảng hay một thứ gì đó? Thế thì nhỡ ông chủ của bạn đang đi lại trong văn phòng nơi bạn đang chơi trò chơi thì làm cách nào để nhanh chóng giấu chúng đi?
 
 Ở thư mục nào đó:
 
@@ -31,36 +31,36 @@ Chúng ta đã tạo ra kho chứa Git mà nó theo dõi một tệp tin văn b�
  $ echo "My boss is smarter than me" > myfile.txt
  $ git commit -a -m "Another commit"
 
-It looks like we've just overwritten our file and committed it. Nhưng đó chỉ là ảo tưởng. Gõ:
+Điều này cũng giống như việc chúng ta ghi đè lên tệp tin của mình sau đó commit nó. Nhưng đó chỉ là ảo tưởng. Gõ:
 
- $ git checkout master  # switch to original version of the file
+ $ git checkout master  # quay trở lại phiên bản nguyên gốc của tệp tin
 
-Ối trời ơi! Tệp tin văn bản lại trở về như cũ mất rồi. And if the boss decides to snoop around this directory, gõ:
+Ối trời ơi! Tệp tin văn bản lại trở về như cũ mất rồi. Và nếu ông chủ có ý định ngó qua thư mục của bạn thì hãy gõ:
 
- $ git checkout boss  # switch to version suitable for boss' eyes
+ $ git checkout boss  # chuyển trở lại phiên bạn vừa mắt ông chủ
 
-Bạn có thể hoán chuyển giữa hai phiên bản của tệp tin tùy thích, và commit to each independently.
+Bạn có thể hoán chuyển giữa hai phiên bản của tệp tin tùy thích, và commit từng cái trong số chúng một cách độc lập.
 
 === Dirty Work ===
 
 [[branch]]
-Say you're working on some feature, và vì lý do nào đó, bạn muốn quay trở lại bản cách đây ba bản và tạm thời đặt vài dòng lệnh
-in print để có thể thấy được một số thứ hoạt động như thế nào. Thế thì:
+Bạn nói mình đang làm việc với một số đặc tính kỹ thuật, và vì lý do nào đó, bạn muốn quay trở lại bản cách đây ba bản và tạm thời đặt vài dòng lệnh
+in ra màn hình để có thể thấy được một số chức năng hoạt động như thế nào. Thế thì:
 
  $ git commit -a
  $ git checkout HEAD~3
 
-Giờ thì bạn có thể thêm những dòng code tạm thờiNow you can add ugly temporary code all over the place. You can even commit these changes. Khi bạn đã làm xong,
+Giờ thì bạn có thể thêm những dòng code tạm thời ở đâu mình muốn. Bạn còn có thể commit những thay đổi đó. Khi bạn đã làm xong,
 
  $ git checkout master
 
 để quay lại công việc chính. Observe that any uncommitted changes are carried over.
 
-What if you wanted to save the temporary changes after all? Rất dễ:
+Nhưng bạn lại muốn ghi lại các thay đổi tạm thời đó sau khi làm xong? Rất dễ:
 
  $ git checkout -b dirty
 
-and commit before switching back to the master branch. Whenever you want to return to the dirty changes, simply type:
+và commit trước khi quay trở lại nhánh master. Khi nào đó bạn muốn quay trở lại các thay đổi ở trên, đơn giản, chỉ cần gõ:
 
  $ git checkout dirty
 
@@ -70,7 +70,7 @@ In other words, after checking out an old state, Git automatically puts you in a
 
 === Quick Fixes ===
 
-You're in the middle of something when you are told to drop everything and fix a newly discovered bug in commit `1b6d...`:
+Bạn đang phân vân giữa ngã ba đường khi bạn are told to drop everything and fix a newly discovered lỗi trong lần commit `1b6d...`:
 
  $ git commit -a
  $ git checkout -b fixes 1b6d
@@ -78,12 +78,12 @@ You're in the middle of something when you are told to drop everything and fix a
 Then once you've fixed the bug:
 
  $ git commit -a -m "Bug fixed"
- $ git push  # to the central repository
+ $ git push  # tới kho chứa trung tâm
  $ git checkout master
 
-and resume work on your original task.
+và phục hồi lại cong việc trên and resume work on your original task.
 
-You can even 'merge' in the bugfix you just made, dùng một trong hai lệnh sau:
+Bạn thậm chí có thể 'merge' in the bugfix you just made, dùng một trong hai lệnh sau:
 
  $ git merge fixes
 
@@ -91,7 +91,7 @@ hay là:
 
  $ git pull
 
-since you have already pushed the bugfix to the main repository.
+since you have already pushed the bugfix tới kho chứa chính.
 
 === Merging ===
 
@@ -99,11 +99,11 @@ Với một số hệ thống quản lý mã nguồn, việc tạo các nhánh r
 trở lại là một bài toán hóc búa. Với Git, việc trộn là dễ dàng that you might be
 unaware of it happening.
 
-We actually encountered merging long ago. The *pull* command in fact 'fetches'
-commits and then merges them into your current branch. If you have no local
+Chúng ta đã sử dụng việc trộn từ lâu rồi. Lệnh *pull* trên thực tế đã 'fetches'
+các lần commit và sau đó trộng chúng vào trong nhánh hiện hành của bạn. If you have no local
 changes, then the merge is a 'fast forward', a degenerate case akin to fetching
 the latest version in a centralized version control system. But if you do have
-local changes, Git will automatically merge, and report any conflicts.
+local changes, Git sẽ tự động merge, và báo cáo cho bạn nếu có lỗi xảy ra.
 
 Ordinarily, a commit has exactly one 'parent commit', namely, the previous
 commit. Merging branches together produces a commit with at least two parents.
@@ -125,21 +125,21 @@ sự khác nhau với differences with the first parent:
 
  $ git diff HEAD^
 
-You can combine this notation with other types. Ví dụ:
+Bạn có thể tổ hợp các dấu mũ này với các kiểu khác. Ví dụ:
 
  $ git checkout 1b6d^^2~10 -b ancient
 
-starts a new branch ``ancient'' representing the state 10 commits back from the
-second parent of the first parent of the commit starting with 1b6d.
+bắt đầu một nhánh mới ``ancient'' tương ứng với trạng thái (state) lần commit thứ 10 back from the
+second parent of the first parent of the của lần commit bắt đầu với 1b6d.
 
 === Uninterrupted Workflow ===
 
-Often in hardware projects, the second step of a plan must await the completion of the first step. A car undergoing repairs might sit idly in a garage until a particular part arrives from the factory. A prototype might wait for a chip to be fabricated before construction can continue.
+Thường trong các dự án phần cứng, bước thứ hai của kế hoạch phải chờ bước thứ nhất hoàn thành. A car undergoing repairs might sit idly in a garage cho đến khi các chi tiết phụ tùng đặc biệt được chuyển đến từ nhà máy. Một mẫu có thể phải chờ một con chip được làm ra trước khi quá trình chế tác có thể tiếp tục.
 
-Software projects can be similar. The second part of a new feature may have to
-wait until the first part has been released and tested. Some projects require
-your code to be reviewed before accepting it, so you might wait until the first
-part is approved before starting the second part.
+Dự án phần mềm cũng có thể tương tự như thế. Bộ phận thứ hai có một số tính năng có thể phải
+chờ cho đến khi phần thứ nhất đã được phát hành và kiểm tra. Một số dự án yêu cầu
+mã nguồn của bạn phải được xem xét lại trước khi chấp nhận nó, vì vậy bạn có thể phải chờ cho đến khi bộ phận
+thứ nhất đã được chấp thuận trước khi bắt đầu phần thứ hai.
 
 Thanks to painless branching and merging, we can bend the rules and work on
 Part II before Part I is officially ready. Suppose you have committed Part I
@@ -158,7 +158,7 @@ Nếu may mắn,If you're lucky, or very good, you can skip these lines.
  $ git checkout part2   # Go back to Part II.
  $ git merge master     # Merge in those fixes.
 
-Cuối cùng, Part I is approved:
+Cuối cùng, Part I được chấp thuận:
 
  $ git checkout master  # Go back to Part I.
  $ submit files         # Release to the world!
@@ -169,7 +169,7 @@ Now you're in the `master` branch again, with Part II in the working directory.
 
 It's easy to extend this trick for any number of parts. It's also easy to
 branch off retroactively: suppose you belatedly realize you should have created
-a branch 7 commits ago. Then type:
+a branch 7 commits ago. Thế thì gõ:
 
  $ git branch -m master part2
  $  # Rename "master" branch to "part2".
@@ -192,22 +192,22 @@ Next, work on anything: sửa lỗi, thêm các đặc tính kỹ thuật, thêm
 
 applies the grandparent of the head commit of the ``medley'' branch to the ``sanitized'' branch. With appropriate cherry-picks you can construct a branch that contains only permanent code, and has related commits grouped together.
 
-=== Managing Branches ===
+=== Quản Lý Các Nhánh ===
 
 Liệt kê tất cả các nhánh bằng cách gõ:
 
  $ git branch
 
-Theo mặc định, bạn bắt đầu tại nhánh có tên ``master''. Some advocate leaving the
-``master'' branch untouched và tạo các nhánh mới cho các chỉnh sửa của riêng mình.
+Theo mặc định, bạn bắt đầu tại nhánh có tên ``master''. Một số người chủ trương rời bỏ
+nhánh ``master'' mà không động chạm gì đến nó và tạo các nhánh mới cho các chỉnh sửa của riêng mình.
 
-Các tùy chọn *-d* and *-m* cho phép bạn xóa hay di chuyểm (đổi tên) các nhánh.
+Các tùy chọn *-d* and *-m* cho phép bạn xóa hay di chuyển (đổi tên) các nhánh.
 Xem thêm *git help branch*.
 
-Nhánh ``master'' branch is a useful custom. Others may assume that your
+Nhánh ``master'' thông thường rất hữu dụng. Others may assume that your
 repository has a branch with this name, and that it contains the official
-version of your project. Although you can rename or obliterate the ``master''
-branch, you might as well respect this convention.
+version of your project. Mặc dù bạn có thể đổi tên hay xóa bỏ nhánh ``master'',
+Bạn nên lưu tâm đến you might as well respect this convention.
 
 === Nhánh Tạm ===
 
@@ -223,10 +223,10 @@ chẳng thua kém gì chiếc điều khiển từ xa của một chiếc TV:
 
  $ git stash
 
-This saves the current state in a temporary location (một 'stash') and
-restores the previous state. Your working directory appears exactly as it was
-before you started editing, and you can fix bugs, pull in upstream changes, and
-so on. When you want to go back to the stashed state, type:
+Lệnh này ghi lại trạng thái hiện hành vào một vị trí tạm thời (một 'stash') và
+phục hồi lại trạng thái trước đó. Thư mục bạn đang làm việc xuất hiện chính xác
+như trước khi bạn chỉnh sửa, và bạn có thể sửa lỗi, pull in upstream changes, và
+cứ như thế. When you want to go back to the stashed state, gõ:
 
  $ git stash apply  # Bạn có thể phải giải quyết các xung đột.
 
@@ -235,11 +235,11 @@ You can have multiple stashes, and manipulate them in various ways. See
 
 === Làm Theo Cách Của Mình ===
 
-You might wonder if branches are worth the bother. After all, clones are almost
-as fast, and you can switch between them with *cd* instead of esoteric Git
-commands.
+You might wonder if branches are worth the bother. Cuối cùng, clones are almost
+as fast, và bạn có thể hoán chuyển giữa chúng với lệnh *cd* thay vì sử dụng
+lệnh riêng của Git.
 
-Consider web browsers. Tại sao hỗ trợ mở nhiều tab thì cũng tốt như mở trên nhiều cửa sổ khác nhau?
+Ta thử xét đến các trình duyệt web. Tại sao việc hỗ trợ mở nhiều tab thì cũng tốt như mở trên nhiều cửa sổ khác nhau?
 Bởi vì cả hai điều này thể hiện tính đa dạng của quan điểm, phong cách sống. Một số người sử dụng lại thích
 chỉ giữ một cửa sổ trình duyệt được mở, và sử dụng các tab để hiển thị nhiều trang web một lúc. Những người khác
 có lẽ lại khăng khăng cực đoan cho rằng: mở trên nhiều cửa sổ khác nhau và chẳng cần tab nữa.
