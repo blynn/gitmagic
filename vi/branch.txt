@@ -4,15 +4,15 @@ Tạo nhánh và trộn là các đặc tính sát thủ của Git.
 
 *Vấn đề*: Những nhân tố bên ngoài chắc hẳn có đòi hỏi việc hoán chuyển nội dung. Một lỗi severe
 bug manifests trong phiên bản đã được phát hành mà không được cảnh báo gì. The deadline for a
-certain feature is moved closer. A developer whose help you need for a key section of the project is about to leave. trong tất cả các trường hợp, bạn phải abruptly xóa bỏ cái mà bạn đang làm và nhắm vào on a completely different task.
+certain feature is moved closer. Những nhà phát triển phần mềm A developer whose help you need for a key section of the project is about to leave. trong tất cả các trường hợp, bạn phải abruptly xóa bỏ cái mà bạn đang làm và nhắm vào on a completely different task.
 
-Interrupting your train of thought có thể làm thiệt hại đến hiệu suất làm việc của bạn, and the more cumbersome it is to switch contexts, the greater the loss. Đối với các hệ thống quản lý mã nguồn tập trung chúng ta phải tải về một bản sao công việc mới từ máy chủ trung tâm. Các hệ thống phân tán Distributed systems fare better, as we can clone the desired version locally.
+Việc gán đoạn suy nghĩ có thể làm giảm hiệu suất làm việc của bạn, and the more cumbersome it is to switch contexts, the greater the loss. Đối với các hệ thống quản lý mã nguồn tập trung chúng ta phải tải về một bản sao công việc mới từ máy chủ trung tâm. Các hệ thống phân tán Distributed systems fare better, as we can clone the desired version locally.
 
-Nhưng việc nhân bản bắt buộc phải sao chép toàn bộ thư mục làm việc cũng như là toàn bộ các mục trong lịch sử cho đến thời điểm đã được chỉ ra. Dù là Git reduces the cost of this with file sharing and hard links, chính bản thân các tệp tin dự án cũng phải được tạo ra trong các đề mục của chúng trong thư mục làm việc.
+Nhưng việc nhân bản bắt buộc phải sao chép toàn bộ thư mục làm việc cũng như là toàn bộ các mục trong lịch sử cho đến thời điểm đã được chỉ ra. Dù là Git giảm bớt reduces the cost of this việc này bằng cách chia sẻ và tạo ra các liên kết tệp tin cứng, chính bản thân các tệp tin dự án cũng phải được tạo ra trong các đề mục của chúng trong thư mục làm việc.
 
 *Giải pháp*: Git có một công cụ tốt hơn để sử lý tình huống này, nó nhanh và tiết kiệm không gian lưu trữ hơn lệnh nhân bản: *git branch*.
 
-Với những khả năng tuyệt diệu của mình With this magic word, the files in your directory suddenly shapeshift từ phiên bản này sang phiên bản khác. Sự chuyển đổi này có thể  làm nhiều hơn việc quay lại hay chuyển tiếp trong lịch sử một các đơn thuần. Các tệp tin của bạn có thể Your files can morph from the last release to the experimental version to the current development version to your friend's version và những thứ tương tự như thế.
+Với những khả năng tuyệt diệu của mình With this magic word, the files in your directory suddenly shapeshift từ phiên bản này sang phiên bản khác. Sự chuyển đổi này có thể  làm nhiều hơn việc quay lại hay chuyển tiếp trong lịch sử một các đơn thuần. Các tệp tin của bạn có thể Your files can morph từ bản phát hành cuối đến phiên bản thử nghiệm to the current development version to your friend's version và những thứ tương tự như thế.
 
 === The Boss Key ===
 
@@ -54,7 +54,7 @@ Giờ thì bạn có thể thêm những dòng code tạm thời ở đâu mình
 
  $ git checkout master
 
-để quay lại công việc chính. Observe that any uncommitted changes are carried over.
+để quay lại công việc chính. Chú ý là bất kỳ các thay đổi không Observe that any uncommitted changes are carried over.
 
 Nhưng bạn lại muốn ghi lại các thay đổi tạm thời đó sau khi làm xong? Rất dễ:
 
@@ -70,7 +70,7 @@ Mặt khác, sau khi checking out một trạng thái cũ, Git tự động đ�
 
 === Quick Fixes ===
 
-Bạn đang phân vân giữa ngã ba đường khi bạn phải xác định là xóa tất cả mọi thứ hoặc làare told to drop everything and fix a newly discovered lỗi trong lần commit `1b6d...`:
+Bạn đang phân vân giữa ngã ba đường khi bạn phải xác định là xóa tất cả mọi thứ hoặc là are told to drop everything and fix a newly discovered lỗi trong lần commit `1b6d...`:
 
  $ git commit -a
  $ git checkout -b fixes 1b6d
@@ -103,15 +103,15 @@ Chúng ta đã sử dụng việc trộn từ lâu rồi. Lệnh *pull* trên th
 các lần commit và sau đó trộng chúng vào trong nhánh hiện hành của bạn. Nếu trên máy của mình bạn không có
 thay đổi gì cả, then the merge is a 'fast forward', a degenerate case akin to fetching
 phiên bản cuối cùng trong hệ thống quản lý mã nguồn tập trung. Nhưng nếu bạn đã có thay đổi
-trên máy của mình, Git sẽ tự động merge, và báo cáo cho bạn nếu có lỗi xảy ra.
+trên máy của mình, Git sẽ tự động trộn, và báo cáo cho bạn nếu có xung đột xảy ra.
 
 Ordinarily, a commit has exactly one 'parent commit', namely, the previous
 commit. Merging branches together produces a commit with at least two parents.
-This begs the question: what commit does `HEAD~10` really refer to? Một lần commit
+Điều này đặt ra câu hỏi: lần commit mà `HEAD~10` thực sự ám chỉ đến là lần nào? Một lần commit
 có thể có nhiều cha, thế thì chúng ta phải theo cái nào?
 
-It turns out this notation chooses the first parent every time. This is
-desirable because the current branch becomes the first parent during a merge;
+It turns out this notation chooses the first parent every time. Đây là
+desirable bởi vì nhánh hiện hành trở thành cha đầu tiên trong suốt quá trình trộn;
 frequently you're only concerned with the changes you made in the current
 branch, as opposed to changes merged in từ các nhánh khác.
 
@@ -132,7 +132,7 @@ Bạn có thể tổ hợp các dấu mũ này với các kiểu khác. Ví dụ
 bắt đầu một nhánh mới ``ancient'' tương ứng với trạng thái (state) lần commit thứ 10 trở về trước từ
 cha thứ hai của cha thứ nhất của lần commit bắt đầu với 1b6d.
 
-=== Uninterrupted Workflow ===
+=== Làm Việc Liên Tục ===
 
 Thường trong các dự án phần cứng, bước thứ hai của kế hoạch phải chờ bước thứ nhất hoàn thành. Một chiếc xe hơi cần sửa chữa có thể phải nằm chờ trong xưởng sửa chữa cho đến khi các chi tiết phụ tùng đặc biệt được chuyển đến từ nhà máy. Một mẫu có thể phải chờ một con chip được làm ra trước khi quá trình chế tác có thể tiếp tục.
 
@@ -143,7 +143,7 @@ thứ nhất đã được chấp thuận trước khi bắt đầu phần thứ
 
 Nhờ có việc tạo nhánh và trộn dễ dàng và cũng chẳng mất mát gì, chúng ta có thể phá vỡ quy tắc và làm việc trên
 Part II trước khi Part I chính thức sẵn sàng. Gải sử bạn đã commit Part I
-và gửi náo đi để xem xét. Let's say you're in the `master` branch. Thế thì hãy phân nhánh
+và gửi náo đi để xem xét. Giả sử bạn đang ở nhánh `master`. Thế thì hãy phân nhánh
 ra:
 
  $ git checkout -b part2
@@ -168,7 +168,7 @@ Cuối cùng, Part I được chấp thuận:
 Bây giờ chúng ta lại ở trong nhánh `master`, với Part II trong thư mục làm việc.
 
 Thủ thuật này rất dễ dàng để mở rộng ra dành cho nhiều phần hơn. Nó cũng đễ dàng để
-phân nhánh ra từ branch off retroactively: suppose you belatedly realize you should have created
+phân nhánh ra từ branch off retroactively: giả sử bạn you belatedly realize you should have created
 a branch 7 commits ago. Thế thì gõ:
 
  $ git branch -m master part2
@@ -178,7 +178,7 @@ a branch 7 commits ago. Thế thì gõ:
 Nhánh `master` bây giờ chỉ chứa Part I, và nhánh the `part2` branch contains
 the rest.
 
-=== Reorganizing a Medley ===
+=== Cải Tổ Lại Sự Pha Trộn ===
 
 Có lẽ bạn thích làm việc trên mọi khía cạnh của một dự án trên cùng một nhánh. You want to keep works-in-progress to yourself and và muốn những người khác chỉ thấy được các lần commit của bạn không họ have been neatly organized. Hãy chuẩn bị một cặp nhánh:
 
@@ -190,7 +190,7 @@ Tiếp theo, làm việc gì đó: sửa lỗi, thêm các đặc tính kỹ thu
   $ git checkout sanitized
   $ git cherry-pick medley^^
 
-áp dụng applies the grandparent of the head commit of the nhánh ``medley'' to nhánh ``sanitized''. Với lệnh thích hợp là cherry-picks you can construct a branch that contains only permanent code, and has related commits grouped together.
+áp dụng applies the grandparent of the head commit of the nhánh ``medley'' to nhánh ``sanitized''. Với lệnh thích hợp là cherry-picks bạn có thể cấu trúc một nhánh mà nó chỉ chứa mã nguồn không thay đổi, và and has related commits grouped together.
 
 === Quản Lý Các Nhánh ===
 
@@ -212,7 +212,7 @@ Bạn nên tôn trọng thỏa thuận ngầm này.
 === Nhánh Tạm ===
 
 After a while you may realize you are creating short-lived branches
-frequently for similar reasons: every other branch merely serves to
+frequently for các lý do như: every other branch merely serves to
 save the current state so you can briefly hop back to an older state to
 fix a high-priority bug hay thứ gì đó.
 
@@ -230,7 +230,7 @@ cứ như thế. Khi bạn muốn qua trở lại trạng thái đã được t�
 
  $ git stash apply  # Bạn có thể phải giải quyết các xung đột có thể xảy ra.
 
-Bạn có thể có nhiều trạng thái được tạm giấu đi, và manipulate them in various ways. Xem
+Bạn có thể có nhiều trạng thái được tạm giấu đi, và vận dụng chúng theo nhiều cách khác nhau. Xem
 *git help stash*. As you may have guessed, Git duy trì các nhánh ở behind the scenes to perform this magic trick.
 
 === Làm Theo Cách Của Mình ===

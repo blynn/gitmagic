@@ -1,4 +1,4 @@
-﻿== Các Lệnh Cơ bản ==
+﻿== Các Thủ Thuật Cơ Bản ==
 
 Thay vì lao vào cả một biển lệnh với Git, bạn hãy sử dụng các ví dụ cơ bản để bắt đầu.
 Mặc dù chúng rất đơn giản, nhưng tất cả chúng đều rất hữu dụng.
@@ -38,7 +38,7 @@ Git xóa bỏ những tệp tin nếu như bạn chưa làm.
 
  $ git mv bug.c feature.c
 
-===  Chức năng Undo/Redo  ===
+===  Chức Năng Undo/Redo  ===
 
 Đôi khi bạn chỉ muốn quay trở lại và bỏ đi những thay đổi trong quá khứ tại một thời điểm nào đó bởi vì chúng tất cả đã sai. Thì lệnh:
 
@@ -115,7 +115,7 @@ commit mới, bạn có thể xác nhận lại điều này bằng lệnh *git 
 
 === Tạo Changelog ===
 
-Một số dự án yêu cầu có http://en.wikipedia.org/wiki/Changelog[changelog].
+Một số dự án yêu cầu có một http://en.wikipedia.org/wiki/Changelog[changelog].
 Tạo một cái bằng cách gõ:
 
  $ git log > ChangeLog
@@ -191,7 +191,7 @@ http://jonas.nitro.dk/tig/[tig], có giao diện dòng lệnh làm việc rất 
 các máy có kết nối chậm. Một lựa chọn khác là cài đặt máy chủ web, chạy lệnh *git instaweb*
 và sử dụng bất kỳ trình duyệt web nào.
 
-=== Bài tập===
+=== Bài Tập===
 
 Coi A, B, C, D là 4 lần commit thành công, nơi mà B giống A ngoại trừ một số tệp tin bị xóa bỏ. Chúng ta muốn thêm các tệp tin đó trở lại D. Chúng ta thực hiện điều này bằng cách nào?
 
