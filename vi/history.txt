@@ -1,27 +1,27 @@
-== Lessons of History ==
+﻿== Lessons of History ==
 
 A consequence of Git's distributed nature is that history can be edited
-easily. But if you tamper with the past, take care: only rewrite that part of
+easily. Nhưng nếu bạn xáo trộn quá khứ, hãy cẩn thận: only rewrite that part of
 history which you alone possess. Just as nations forever argue over who
 committed what atrocity, if someone else has a clone whose version of history
 differs to yours, you will have trouble reconciling when your trees interact.
 
-Some developers strongly feel history should be immutable, warts and all.
+Một số nhà phát triển phần mềm quả quyết rằng lịch sử có thể be immutable, warts and all.
 Others feel trees should be made presentable before they are unleashed in
-public. Git accommodates both viewpoints. Like cloning, branching, and merging,
-rewriting history is simply another power Git gives you. It is up to you
+public. Git accommodates both viewpoints. Giống như việc nhân bản, tạo nhánh và hòa trộn,
+viết lại lịch sử đơn giản chỉ là một quyền mà Git trao cho bạn. It is up to you
 to use it wisely.
 
 === I Stand Corrected ===
 
-Did you just commit, but wish you had typed a different message? Then run:
+Bạn vừa mới commit, nhưng lại ước mình đã gõ những dòng chú thích có nội dung khác phải không? Thế thì hãy chạy:
 
  $ git commit --amend
 
-to change the last message. Realized you forgot to add a file? Run *git add* to
-add it, and then run the above command.
+để thay đổi chú thích cuối cùng. Bạn giật mình vì quên thêm các tệp tin vào? Chạy lệnh *git add* để
+thêm nó vào, và sau đó lại chạy lệnh ở trên.
 
-Want to include a few more edits in that last commit? Then make those edits and run:
+Bạn muốn thêm vài chỉnh sửa vào lần cuối mình đã commit ư? Thế thì cứ sửa chúng đi và sau đó chạy lệnh:
 
  $ git commit --amend -a
 
@@ -31,7 +31,7 @@ Let's suppose the previous problem is ten times worse. After a lengthy session y
 
  $ git rebase -i HEAD~10
 
-and the last 10 commits will appear in your favourite $EDITOR. A sample excerpt:
+và and the last 10 commits will appear in your favourite $EDITOR. Một đoạn trích ví dụ:
 
     pick 5c6eb73 Added repo.or.cz link
     pick a311a64 Reordered analogies in "Work How You Want"
@@ -43,16 +43,16 @@ Then:
 - Reorder commits by reordering lines.
 - Replace `pick` with:
    * `edit` to mark a commit for amending.
-   * `reword` to change the log message.
+   * `reword` để thay đổi nhật ký message.
    * `squash` to merge a commit with the previous one.
    * `fixup` to merge a commit with the previous one and discard the log message.
 
-Save and quit. If you marked a commit for editing, then
-run:
+Ghi lại và thoát ra. Nếu bạn đánh dấu một lần commit dành cho việc sửa đổi, thế thì
+chạy:
 
  $ git commit --amend
 
-Otherwise, run:
+Cách khác, chạy:
 
  $ git rebase --continue
 
@@ -65,30 +65,30 @@ then you sync with the official tree with a merge. This cycle repeats itself a f
 
 But now the history in your local Git clone is a messy jumble of your changes and the official changes. You'd prefer to see all your changes in one contiguous section, and after all the official changes.
 
-This is a job for *git rebase* as described above. In many cases you can use
-the *--onto* flag and avoid interaction.
+Đây chính là công việc dành cho lệnh *git rebase* đã được miêu tả ở trên. Trong nhiều trường hợp bạn có thể sử dụng
+cờ *--onto* và and avoid interaction.
 
 Also see *git help rebase* for detailed examples of this amazing command. You can split commits. You can even rearrange branches of a tree.
 
-=== Rewriting History ===
+=== Viết Lại Lịch Sử ===
 
-Occasionally, you need the source control equivalent of airbrushing people out
-of official photos, erasing them from history in a Stalinesque fashion. For
-example, suppose we intend to release a project, but it involves a file that
-should be kept private for some reason. Perhaps I left my credit card number in
-a text file and accidentally added it to the project. Deleting the file is
-insufficient, for the file can be accessed from older commits. We must remove
-the file from all commits:
+Occasionally, bạn muốn việc quản lý mã nguồn giống việc người ta vẽ quivalent of airbrushing people out
+of official photos, erasing them from history in a Stalinesque fashion. Ví
+dụ, giả sử chúng ta có ý định phát hành dự án, nhưng lại dibut it involves a file that
+phải được giữ bí mật vì lý do nào đó. Có lẽ tôi đã quên khi ghi lại số thẻ tín dụng vào trong một tệp tin
+văn bản và ngẫu nhiên nó được thêm vào trong dự án. Việc xóa tệp tin này là
+chưa đủ, bởi vì ta có thể đọc nó từ lần commit cũ. Chúng ta phải gỡ bỏ
+tệp tin này từ tất cả các lần đã commit:
 
  $ git filter-branch --tree-filter 'rm top/secret/file' HEAD
 
-See *git help filter-branch*, which discusses this example and gives a faster
-method. In general, *filter-branch* lets you alter large sections of history
-with a single command.
+Xem *git help filter-branch*, nội dung của nó sẽ thảo luận về ví dụ này và đưa ra
+một cách thức nhanh hơn. Đại thể, lệnh *filter-branch* lets you alter large sections of history
+chỉ bằng một lệnh đơn.
 
 Afterwards, the +.git/refs/original+ directory describes the state of affairs before the operation. Check the filter-branch command did what you wanted, then delete this directory if you wish to run more filter-branch commands.
 
-Lastly, replace clones of your project with your revised version if you want to interact with them later.
+Cuối cùng, replace clones of your project with your revised version if you want to interact with them later.
 
 === Making History ===
 
@@ -100,7 +100,7 @@ format to create Git history from scratch. Typically a script using this
 command is hastily cobbled together and run once, migrating the project in a
 single shot.
 
-As an example, paste the following listing into temporary file, such as `/tmp/history`:
+Dưới đây là một ví dụ, dán danh sách theo sau đâu vào một tệp tin tạm thời nào đó, chẳng hạn như là `/tmp/history`:
 ----------------------------------
 commit refs/heads/master
 committer Alice <alice@example.com> Thu, 01 Jan 1970 00:00:00 +0000
@@ -137,17 +137,17 @@ EOT
 
 ----------------------------------
 
-Then create a Git repository from this temporary file by typing:
+Thế thì tạo một kho Git từ thư mục chứa các tệp tin tạm thời này bằng cách gõ:
 
  $ mkdir project; cd project; git init
  $ git fast-import --date-format=rfc2822 < /tmp/history
 
-You can checkout the latest version of the project with:
+Bạn có thể checkout phiên bản cuối của dự án với:
 
  $ git checkout master .
 
-The *git fast-export* command converts any repository to the
-*git fast-import* format, whose output you can study for writing exporters,
+Lệnh *git fast-export* chuyển đổi bất kỳ một kho chứa nào thành định dạng
+phù hợp với lệnh *git fast-import*, whose output you can study for writing exporters,
 and also to transport repositories in a human-readable format. Indeed,
 these commands can send repositories of text files over text-only channels.
 
@@ -195,21 +195,21 @@ Like many other version control systems, Git has a blame command:
 
 which annotates every line in the given file showing who last changed it, and when. Unlike many other version control systems, this operation works offline, reading only from local disk.
 
-=== Personal Experience ===
+=== Kinh Nghiệm Riêng ===
 
-In a centralized version control system, history modification is a difficult
-operation, and only available to administrators. Cloning, branching, and
-merging are impossible without network communication. So are basic operations
-such as browsing history, or committing a change. In some systems, users
-require network connectivity just to view their own changes or open a file for
-editing.
+Trong một hệ thống quản lý mã nguồn tập trung, thay đổi lịch sử là một việc làm
+khó khăn, và chỉ thi hành được nếu là người quản trị. Việc nhân bản, tạo nhánh và
+trộn không thể thiếu việc truyền thông qua mạng. So are basic operations
+such as browsing history, or committing a change. Trong một số hệ thống khác, người dùng
+yêu cầu có kết nối mạng chỉ để xem các thay đổi của họ hay mở một tệp tin
+để biên tập.
 
-Centralized systems preclude working offline, and need more expensive network
-infrastructure, especially as the number of developers grows. Most
+Hệ thống tập trung không cho phép làm việc mà không có mạng, và đòi hỏi cơ sở hạ tầng mạng máy tính
+đắt đỏ tốn kém, đặc biệt là khi số nhà phát triển phần mềm tăng lên. Điều quan trọng
 importantly, all operations are slower to some degree, usually to the point
 where users shun advanced commands unless absolutely necessary. In extreme
-cases this is true of even the most basic commands. When users must run slow
-commands, productivity suffers because of an interrupted work flow.
+cases this is true of even the most basic commands. Khi những người dùng phải chạy các lệnh chạy chậm
+commands, hiệu suất bị giảm bởi vì sự gián đoạn trong dây truyền làm việc.
 
 I experienced these phenomena first-hand. Git was the first version control
 system I used. I quickly grew accustomed to it, taking many features for
@@ -219,19 +219,19 @@ browser.
 
 I was shocked when later forced to use a centralized system. A flaky internet
 connection matters little with Git, but makes development unbearable when it
-needs to be as reliable as local disk. Additionally, I found myself conditioned
+needs to be as reliable as local disk. Thêm nữa, I found myself conditioned
 to avoid certain commands because of the latencies involved, which ultimately
 prevented me from following my desired work flow.
 
-When I had to run a slow command, the interruption to my train of thought
-dealt a disproportionate amount of damage. While waiting for server
-communication to complete, I'd do something else to pass the time, such as
-check email or write documentation. By the time I returned to the original
-task, the command had finished long ago, and I would waste more time trying to
-remember what I was doing. Humans are bad at context switching.
+Khi tôi phải chạy những lệnh chậm chạp, việc làm ngắt quãng việc suy nghĩ
+dealt a disproportionate amount of damage. Trong khi chờ cho việc truyền thông
+với máy chủ hoàn tất, tôi sẽ phải làm một vài thứ gì đó khác để lấp chỗ trống, chẳng hạn như
+lấy thư điện tử hay viết tài liệu. Sau một khoảng thời gian tôi quay trở lại nhiệm vụ
+chính của mình, lệnh đã hoàn tất từ lâu rồi, và tôi phải lãng phí thêm nhiều thời gian nữa
+để nhớ lại xem mình đang làm gì. Con người thường dở khi phải  Humans are bad at context switching.
 
 There was also an interesting tragedy-of-the-commons effect: anticipating
-network congestion, individuals would consume more bandwidth than necessary on
-various operations in an attempt to reduce future delays. The combined efforts
+network congestion, nhiều cá nhân riêng lẻ có thể chiếm dụng nhiều lưu lượng mạng hơn cần thiết
+trên các tác vụ khác nhau various operations in an attempt to reduce future delays. The combined efforts
 intensified congestion, encouraging individuals to consume even more bandwidth
 next time to avoid even longer delays.
