@@ -1,15 +1,15 @@
 ﻿== Lessons of History ==
 
 A consequence of Git's distributed nature is việc lịch sử có thể biên soạn lại
-dễ dàng. Nhưng nếu bạn xáo trộn quá khứ, hãy cẩn thận: only rewrite that part of
-history which you alone possess. Just as nations forever argue over who
-committed what atrocity, if someone else has a clone whose version of history
+dễ dàng. Nhưng nếu bạn xáo trộn quá khứ, hãy cẩn thận: chỉ biên soạn lại quá khứ trong lịch sử
+chỉ khi bạn history which you alone possess. Just as nations forever argue over who
+committed what atrocity, nếu một người khác có một bản sao mà nó lại có lịch sử khác với cái của bạn
 differs to yours, you will have trouble reconciling when your trees interact.
 
 Một số nhà phát triển phần mềm quả quyết rằng lịch sử không thể thay đổi, warts and all.
 Others feel trees should be made presentable before they are unleashed in
 public. Git chấp nhận cả hai quan điểm. Giống như việc nhân bản, tạo nhánh và hòa trộn,
-viết lại lịch sử đơn giản chỉ là một quyền mà Git trao cho bạn. It is up to you
+viết lại lịch sử đơn giản chỉ là một quyền lực mà Git trao cho bạn. It is up to you
 to use it wisely.
 
 === Dừng Lại Sửa Chữa ===
@@ -27,11 +27,11 @@ Bạn muốn thêm vài chỉnh sửa vào lần cuối mình đã commit ư? Th
 
 === ... And Then Some ===
 
-Let's suppose the previous problem is ten times worse. After a lengthy session you've made a bunch of commits. Nhưng bạn không hoàn toàn hài lòng với cách mà chúng được tổ chức, và một số lần commit cần được soạn lại phần mô tả. Thế thì hãy gõ:
+Hãy giả sử the previous problem is ten times worse. Trong một buổi làm việc dài, bạn đã tạo ra hàng đống các lần commit. Nhưng bạn không hoàn toàn hài lòng với cách mà chúng được tổ chức, và một số lần commit cần được soạn lại phần mô tả. Thế thì hãy gõ:
 
  $ git rebase -i HEAD~10
 
-và 10 commit cuối sẽ xuất hiện trong $EDITOR yêu thích của bạn. Dưới đây là một đoạn trích ví dụ:
+và 10 lần commit cuối sẽ xuất hiện trong $EDITOR yêu thích của bạn. Dưới đây là một đoạn trích ví dụ:
 
     pick 5c6eb73 Added repo.or.cz link
     pick a311a64 Reordered analogies in "Work How You Want"
@@ -39,15 +39,15 @@ và 10 commit cuối sẽ xuất hiện trong $EDITOR yêu thích của bạn. D
 
 Thế thì:
 
-- Xóa bỏ các lần commit bằng cách xóa các dòng tương ứng.
+-Xóa bỏ các lần commit bằng cách xóa các dòng tương ứng.
 -Đặt lại các lần commit bằng các đặt lại các dòng.
 - Thay thế `pick` với:
    * `edit` để đánh dấu lần commit đó là dành cho việc tu bổ.
    * `reword` để thay đổi phần chú giải.
    * `squash` để hòa trộn với lần commit trước.
-   * `fixup` để hòa trộn với lần commit trướcvà bỏ qua việc ghi lại phần chú giải.
+   * `fixup` để hòa trộn với lần commit trước và bỏ qua việc ghi lại phần chú giải.
 
-Ghi lại và thoát ra. Nếu bạn đánh dấu một lần commit dành cho việc sửa đổi, thế thì
+Ghi lại và thoát ra. Nếu bạn đánh dấu một lần commit dành cho việc 'edit', thế thì
 chạy:
 
  $ git commit --amend
@@ -56,7 +56,7 @@ Cách khác, chạy:
 
  $ git rebase --continue
 
-Do vậy cứ commit thoải mái và thường xuyên bởi vì bạn có thể dọn dẹp cho gọn gàng sau bằng lệnh rebase.
+Do vậy cứ commit thoải mái và thường xuyên bởi vì bạn có thể dọn dẹp cho gọn gàng sau này bằng lệnh rebase.
 
 === Local Changes Last ===
 
@@ -86,14 +86,14 @@ Xem *git help filter-branch*, nội dung của nó sẽ thảo luận về ví d
 một cách thức nhanh hơn. Đại thể, lệnh *filter-branch* lets you alter large sections of history
 chỉ bằng một lệnh đơn.
 
-Afterwards, the +.git/refs/original+ directory describes the state of affairs before the operation. Check the filter-branch command did what you wanted, then delete this directory if you wish to run more filter-branch commands.
+Sau này, thư mục +.git/refs/original+ mô tả the state of affairs before the operation. Check the filter-branch command did what you wanted, then delete this directory if you wish to run more filter-branch commands.
 
 Cuối cùng, thay thế bản sao của dự án của bạn bằng phiên bản bạn đã sửa lại nếu bạn muốn to interact with them later.
 
 === Tự Tạo Lịch Sử ===
 
 [[makinghistory]]
-Bạn muốn chuyển đổi dự án của mình sang sử dụng Git? If it's managed with one of the more well-known systems, then chances are someone has already written a script to export the whole history to Git.
+Bạn muốn chuyển đổi dự án của mình sang sử dụng Git? Nếu nó được quản lý bởi một hệ thống nổi tiếng hơn, thế thì nếu may mắn sẽ có người nào đó đã viết sẵn một đoạn kịch bản để xuất chúng ra en chances are someone has already written a script to export the whole history to Git.
 
 Nếu không, thì xét đến lệnh *git fast-import*, lệnh này đọc văn bản đầu vào ở một định dạng
 đặc thù để mà tạo ra một lịch sử cho Git từ ban đầu. Thông thường một script sử dụng
@@ -166,10 +166,10 @@ Git checks out một trạng thái nằm giữa chúng. Kiểm tra đặc tính 
 
  $ git bisect bad
 
-Nếu không thì thay "bad" bằng "good". Git sẽ chuyên chở bạn qua lại nửa bước giữa
-hai trạng thái là phiên bản "tốt" và "xấu", thu hẹp khả năng lại.
-Sau khi lặp đi lặp lại một số lần, this binary search will lead you to the commit that
-caused the trouble. Một khi bạn đã hoàn tất việc điều tra, trở lại trạng thái nguyên bản
+Nếu không thì thay "bad" bằng "good". Git sẽ chuyên chở bạn qua lại nửa bước giữa hai trạng
+thái là phiên bản "tốt" và "xấu", thu hẹp khả năng lại. Sau khi lặp đi lặp lại một số lần,
+việc tìm kiếm nhị phân này sẽ dẫn bạn đến lần commit mà nó làm nguyên nhân dẫn đễ hỏng hóc.
+Một khi bạn đã hoàn tất việc điều tra, trở lại trạng thái nguyên bản
 của bạn bằng cách gõ:
 
  $ git bisect reset
@@ -178,16 +178,16 @@ Thay vì thử nghiệm mọi thay đổi một cách thủ công, hãy tự đ�
 
  $ git bisect run my_script
 
-Git sử dụng giá trị trả về của lệnh đã cho, thông thường là các đoạn script, để
-quyết định là lệnh đã thực hiện tốt hay gặp lỗi: lệnh sẽ trả về giá trị 0
+Git sử dụng giá trị trả về của lệnh đã cho, thông thường là từ các đoạn script, để
+quyết định là lệnh đã thực hiện tốt hay không: lệnh sẽ trả về giá trị 0
 khi tốt, 125 khi sự thay đổi bị bỏ qua, và bất kỳ giá trị nào khác nằm giữa 1
 và 127 nếu gặp lỗi. Một giá trị âm sẽ bãi bỏ lệnh bisect.
 
-Bạn có thể làm nhiều hơn thế: trang trợ giúp giảng giải cho bạn làm thế nào visualize bisects, examine
-hay xem lại nhật ký lệnh bisect, and eliminate known innocent changes for a speedier
-search.
+Bạn có thể làm nhiều hơn thế: trang trợ giúp giảng giải cho bạn làm thế nào để hiểu
+được lệnh bisect làm việc như thế nào, xem xét hay xem lại nhật ký lệnh bisect,
+và loại trừ các thay đổi ngớ ngẩn để tăng tốc độ tìm kiếm.
 
-=== Who Made It All Go Wrong? ===
+=== Ai Đã Làm Nó Sai? ===
 
 Giống như các hệ thống quản lý mã nguồn khác, Git cũng có lệnh blame:
 
@@ -198,7 +198,7 @@ lệnh này chú thích tất cả các dòng có trong tệp tin được chỉ
 === Kinh Nghiệm Riêng ===
 
 Trong một hệ thống quản lý mã nguồn tập trung, thay đổi lịch sử là một việc làm
-khó khăn, và chỉ thi hành được nếu đó là người quản trị. Việc nhân bản, tạo nhánh và
+khó khăn, và chỉ làm được thế nếu đó là người quản trị. Việc nhân bản, tạo nhánh và
 trộn không thể thiếu việc truyền thông qua mạng. Cũng như thế với các tác vụ cơ bản khác
 như là duyệt lịch sử, hay là commit một thay đổi. Trong một số hệ thống khác, người dùng
 yêu cầu có kết nối mạng chỉ để xem các thay đổi của họ hay mở một tệp tin
@@ -211,27 +211,27 @@ where những người sử dụng sẽ lảng tránh việc sử dụng các l�
 đặc biệt cases this is true of even the most lệnh cơ bản. Khi những người dùng phải chạy
 các lệnh chạy chậm, hiệu suất bị giảm bởi vì nó làm gián đoạn công việc của cả một dây truyền.
 
-Tôi trực tiếp đã trải qua những hiện tượng đó. Git là hệ thống quản lý mã nguồn
-đầu tiên tôi sử dụng. Tôi nhanh chóng làm quen với nó, taking many features for
-granted. Tôi đơn giản cho rằng các hệ thống khác thì cũng tương tự: việc chọn lựa một
+Tôi trực tiếp đã trải qua những hiện tượng đó. Git là hệ thống quản lý mã nguồn đầu tiên tôi sử dụng. 
+Tôi nhanh chóng làm quen với nó, bị quyến rũ bởi những đặc tính kỹ thuật mà nó đã cung cấp.
+Tôi đơn giản cho rằng các hệ thống khác thì cũng tương tự: việc chọn lựa một
 hệ thống quản lý mã nguồn thì cũng chẳng khác việc chọn một trình biên soạn hay một
 trình duyệt web.
 
 Tôi sẽ sốc nếu như sau này bị bắt buộc sử dụng hệ thống quản lý mã nguồn tập trung. Một kết nối
-Internet chậm chạp cũng chẳng phải là vấn đề lớn đối với Git, nhưng nó sẽ làm cho các nhà phát triển phần mềm không thể chịu nổi khi
-nó cần sự tin cậy như ổ đĩa nội bộ. Thêm nữa, tôi đã tìm thấy chính mình conditioned
+Internet chậm chạp cũng chẳng phải là vấn đề lớn đối với Git, nhưng nó sẽ làm cho các
+nhà phát triển phần mềm không thể chịu nổi khi nó cần sự tin cậy như ổ đĩa nội bộ. Thêm nữa, tôi đã tìm thấy chính mình conditioned
 to avoid certain commands because of the latencies involved, which ultimately
 prevented me from following my desired work flow.
 
-Khi tôi phải chạy những lệnh chậm chạp, việc làm ngắt quãng việc suy nghĩ
-dealt a disproportionate amount of damage. Trong khi chờ cho việc truyền thông
+Khi tôi phải chạy những lệnh cần nhiều thời gian, việc làm ngắt quãng việc suy nghĩ
+sẽ gây nên thiệt hại rất to lớn. Trong khi chờ cho việc truyền thông
 với máy chủ hoàn tất, tôi sẽ phải làm một vài thứ gì đó khác để lấp chỗ trống, chẳng hạn như
 lấy thư điện tử hay viết tài liệu. Sau một khoảng thời gian tôi quay trở lại nhiệm vụ
 chính của mình, lệnh đã hoàn tất từ lâu rồi, và tôi phải lãng phí thêm nhiều thời gian nữa
 để nhớ lại xem mình đang làm gì. Con người thường dở khi phải thay đổi mạch văn.
 
-Ở đây còn có một hậu quả rất đáng quan tâm nữa: đoán trước được việc tắc nghẽn
-của mạng máy tính, nhiều cá nhân riêng lẻ có thể chiếm dụng nhiều lưu lượng mạng hơn cần thiết
-trên các tác vụ khác nhau để cố gắng giảm thiểu sự chậm trễ có thể xảy ra trong tương lai. Hậu quả cuối cùng là
+Ở đây còn có một hậu quả rất đáng quan tâm nữa: đoán trước được việc tắc nghẽn của mạng máy tính,
+nhiều cá nhân riêng lẻ có thể chiếm dụng nhiều lưu lượng mạng hơn cần thiết trên các tác vụ
+khác nhau để cố gắng giảm thiểu sự chậm trễ có thể xảy ra trong tương lai. Hậu quả cuối cùng là
 sự quá tải quá mức, việc ủng hộ việc tiêu dùng cá nhân to consume even more lưu lượng mạng
 next time to avoid even longer delays.
