@@ -1,14 +1,14 @@
-﻿== Lessons of History ==
+﻿== Bài Học về Lịch Sử ==
 
 A consequence of Git's distributed nature is việc lịch sử có thể biên soạn lại
 dễ dàng. Nhưng nếu bạn xáo trộn quá khứ, hãy cẩn thận: chỉ biên soạn lại quá khứ trong lịch sử
 chỉ khi bạn history which you alone possess. Just as nations forever argue over who
-committed what atrocity, nếu một người khác có một bản sao mà nó lại có lịch sử khác với cái của bạn
-differs to yours, you will have trouble reconciling when your trees interact.
+committed what atrocity, nếu một người khác có một bản sao mà nó lại có lịch sử khác với
+cái của bạn, you will have trouble reconciling when your trees interact.
 
-Một số nhà phát triển phần mềm quả quyết rằng lịch sử không thể thay đổi, warts and all.
-Others feel trees should be made presentable before they are unleashed in
-public. Git chấp nhận cả hai quan điểm. Giống như việc nhân bản, tạo nhánh và hòa trộn,
+Một số nhà phát triển phần mềm quả quyết rằng lịch sử không thể thay đổi, tất cả mọi thứ.
+Others feel trees should be made presentable trước khi chúng được phát hành ra
+đại chúng. Git chấp nhận cả hai quan điểm. Giống như việc nhân bản, tạo nhánh và hòa trộn,
 viết lại lịch sử đơn giản chỉ là một quyền lực mà Git trao cho bạn. It is up to you
 to use it wisely.
 
@@ -58,12 +58,12 @@ Cách khác, chạy:
 
 Do vậy cứ commit thoải mái và thường xuyên bởi vì bạn có thể dọn dẹp cho gọn gàng sau này bằng lệnh rebase.
 
-=== Local Changes Last ===
+=== Các Thay Đổi Riêng Xếp Sau ===
 
-You're working on an active project. You make some local commits over time, and
-then you sync with the official tree with a merge. This cycle repeats itself a few times before you're ready to push to the central tree.
+Bạn đang làm việc trên một dự án đang hoạt động. Bạn đã tạo ra một số lần commit tại máy tính của mình, và
+sau đó bạn đồng bộ hóa với cây chính thức bằng cách hòa trộn. Chu kỳ này tự lặp chính nó một số lần trước khi bạn thực sự push tới cây trên máy chủ trung tâm.
 
-But now the history in your local Git clone is a messy jumble of your changes and the official changes. You'd prefer to see all your changes in one contiguous section, and after all the official changes.
+Nhưng hiện tại lịch sử bản sao Git trên máy tính của bạn là một mớ hỗn độn của những lần thay đổi trên máy tính riêng và máy chính thức. Bạn muốn thấy tất cả các thay đôi của riêng mình trong một đoạn liên tục không ngắt quãng, và sau tất cả các thay đổi từ văn phòng.
 
 Đây chính là công việc dành cho lệnh *git rebase* đã được miêu tả ở trên. Trong nhiều trường hợp bạn có thể sử dụng
 cờ *--onto* và tránh xa sự tương tác.
@@ -72,9 +72,9 @@ Xem thêm trong *git help rebase* để thấy được chi tiết các ví dụ
 
 === Viết Lại Lịch Sử ===
 
-Occasionally, bạn muốn việc quản lý mã nguồn giống việc người ta vẽ quivalent of airbrushing people out
-of official photos, erasing them from history in a Stalinesque fashion. Ví
-dụ, giả sử chúng ta có ý định phát hành dự án, nhưng lại dibut it involves a file that
+Thỉnh thoảng, bạn muốn việc quản lý mã nguồn giống việc người ta vẽ quivalent of airbrushing people out
+of official photos, việc tẩy xóa chúng từ lịch sử in a Stalinesque fashion. Ví
+dụ, giả sử chúng ta có ý định phát hành dự án, nhưng lại liên đới đến một tệp tin mà nó
 phải được giữ bí mật vì lý do nào đó. Có lẽ tôi đã quên khi ghi lại số thẻ tín dụng vào trong một tệp tin
 văn bản và ngẫu nhiên nó được thêm vào trong dự án. Việc xóa tệp tin này là
 chưa đủ, bởi vì ta có thể đọc nó từ lần commit cũ. Chúng ta phải gỡ bỏ
@@ -82,22 +82,22 @@ tệp tin này từ tất cả các lần đã commit:
 
  $ git filter-branch --tree-filter 'rm top/secret/file' HEAD
 
-Xem *git help filter-branch*, nội dung của nó sẽ thảo luận về ví dụ này và đưa ra
-một cách thức nhanh hơn. Đại thể, lệnh *filter-branch* lets you alter large sections of history
+Xem *git help filter-branch*, nội dung của nó sẽ thảo luận về ví dụ này và đưa ra một cách thức
+nhanh hơn. Đại thể, lệnh *filter-branch* giúp bạn thay đổi cả một chương lớn của lịch sử chỉ
 chỉ bằng một lệnh đơn.
 
-Sau này, thư mục +.git/refs/original+ mô tả the state of affairs before the operation. Check the filter-branch command did what you wanted, then delete this directory if you wish to run more filter-branch commands.
+Sau này, thư mục +.git/refs/original+ mô tả trạng thái của công việc trước khi thực hiện. Check the filter-branch command did what you wanted, sau đó xóa thư mục này đi nếu bạn muốn chạy lệnh filter-branch lần nữa.
 
 Cuối cùng, thay thế bản sao của dự án của bạn bằng phiên bản bạn đã sửa lại nếu bạn muốn to interact with them later.
 
 === Tự Tạo Lịch Sử ===
 
 [[makinghistory]]
-Bạn muốn chuyển đổi dự án của mình sang sử dụng Git? Nếu nó được quản lý bởi một hệ thống nổi tiếng hơn, thế thì nếu may mắn sẽ có người nào đó đã viết sẵn một đoạn kịch bản để xuất chúng ra en chances are someone has already written a script to export the whole history to Git.
+Bạn muốn chuyển đổi dự án của mình sang sử dụng Git? Nếu nó được quản lý bởi một hệ thống nổi tiếng hơn, thế thì nếu may mắn sẽ có người nào đó đã viết sẵn một đoạn kịch bản để xuất toàn bộ lịch sử ra thành Git.
 
-Nếu không, thì xét đến lệnh *git fast-import*, lệnh này đọc văn bản đầu vào ở một định dạng
-đặc thù để mà tạo ra một lịch sử cho Git từ ban đầu. Thông thường một script sử dụng
-lệnh này is hastily cobbled together and run once, di chuyển một dự án chỉ bằng
+Nếu không, thì nên xem xét đến việc sử dụng lệnh *git fast-import*, lệnh này đọc văn bản đầu vào ở một định dạng
+riêng để mà tạo ra một lịch sử cho Git từ ban đầu. Thông thường một script sử dụng
+lệnh này là một nhóm lệnh tổ hợp với nhau và chỉ chạy một lần, di chuyển một dự án chỉ bằng
 một lệnh đơn.
 
 Dưới đây là một ví dụ, dán danh sách theo sau đâu vào một tệp tin tạm thời nào đó, chẳng hạn như là `/tmp/history`:
@@ -147,15 +147,15 @@ Bạn có thể checkout phiên bản cuối của dự án với:
  $ git checkout master .
 
 Lệnh *git fast-export* chuyển đổi bất kỳ một kho chứa nào thành định dạng
-phù hợp với lệnh *git fast-import*, whose output you can study for writing exporters,
-and also to transport repositories ở định dạng con người có thể đọc được. Thực vậy,
-những lệnh này có thể gửi một kho chứa ở dạng văn bản thông qua một kênh chỉ cho phép văn bản.
+phù hợp với lệnh *git fast-import*, và bạn có thể nghiên cứu nó để tạo riêng cho mình một chương trình xuất,
+và cũng làm như thế để tạo thành kho chuyên chở ở định dạng con người có thể đọc được. Thực vậy,
+những lệnh này có thể gửi một kho chứa ở dạng văn bản thông qua một kênh chỉ cho phép văn bản truyền đi.
 
 === Vị Trí Nào Phát Sinh Lỗi? ===
 
 Bạn vừa mới phát hiện ra một đặc tính không hoạt động trong chương trình mà bạn chắc chắn là nó đã hoạt động vài tháng trước. Tệ quá! Lỗi đến từ đâu nhỉ? If only you had been testing the feature as you developed.
 
-Lúc này thì đã quá muộn rồi. Tuy nhiên, provided you've been committing often, Git
+Lúc này thì đã quá muộn rồi. Tuy nhiên, chỉ cần bạn commit thường xuyên, Git
 có thể xác định vị trí của trục trặc:
 
  $ git bisect start
@@ -233,5 +233,5 @@ chính của mình, lệnh đã hoàn tất từ lâu rồi, và tôi phải lã
 Ở đây còn có một hậu quả rất đáng quan tâm nữa: đoán trước được việc tắc nghẽn của mạng máy tính,
 nhiều cá nhân riêng lẻ có thể chiếm dụng nhiều lưu lượng mạng hơn cần thiết trên các tác vụ
 khác nhau để cố gắng giảm thiểu sự chậm trễ có thể xảy ra trong tương lai. Hậu quả cuối cùng là
-sự quá tải quá mức, việc ủng hộ việc tiêu dùng cá nhân to consume even more lưu lượng mạng
-next time to avoid even longer delays.
+sự quá tải quá mức, việc ủng hộ việc tiêu dùng cá nhân như thế làm đốt cháy nhiều lưu lượng mạng hơn
+và sau đó nó làm cho việc chậm trễ càng trở nên tệ hơn.
