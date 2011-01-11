@@ -139,49 +139,47 @@ Puis allez dans le nouveau dossier et lancez :
 
 La procédure pour partager vos modifications aux autres dépend de l'autre système de gestion de versiors. Le nouveau dossier contient les fichiers avec vos modifications. Lancez toute commande de l'autre système de gestion de versions nécessaire pour les envoyer au dépôt central.
 
-
-Subversion, perhaps the best centralized version control system, is used by countless projects. The *git svn* command automates the above for Subversion repositories, and can also be used to http://google-opensource.blogspot.com/2008/05/export-git-project-to-google-code.html[export a Git project to a Subversion repository].
+Subversion, qui est peut être le meilleur système de gestion de version centralisé est utilisé par d'innombrables projets. La commande *git svn* automatise la procédure ci-dessus pour les dépôts Subversion, et peut aussi être utilisée pour exporter un projet Git vers un dépôt Subversion.
 
 === Mercurial ===
 
-Mercurial is a similar version control system that can almost seamlessly work in tandem with Git. With the `hg-git` plugin, a Mercurial user can losslessly push to and pull from a Git repository.
+Mercurial est un systéme de gestion de version similaire qui peut travailler quasiment sans heurt avec Git. Avec le plugin `hg-git` un utilisateur de Mercurial peut, sans rien perdre, envoyer ( push ) et rappatrier ( pull ) avec un dossier Git.
 
-Obtain the `hg-git` plugin with Git:
+Téléchargez le plugin `hg-git` avec Git :
 
  $ git clone git://github.com/schacon/hg-git.git
 
-or Mercurial:
+ou Mercurial:
 
  $ hg clone http://bitbucket.org/durin42/hg-git/
 
-Sadly, I am unaware of an analogous plugin for Git. For this reason, I advocate Git over Mercurial for the main repository, even if you prefer Mercurial. With a Mercurial project, usually a volunteer maintains a parallel Git repository to accommodate Git users, whereas thanks to the `hg-git` plugin, a Git project automatically accommodates Mercurial users.
+Malheureusement, il ne semble pas y avoir un plugin analogue pour Git. Pour cette raison, il semble préférable d'utiliser Git plutôt que Mercurial pour le dépôt principal. Avec ur projet Mercurial, il faut généralement un volontaire qui maintienne un dépôt Git en paralléle alors que, grâce au plugin `hg-git`, un projet Git fait l'affaire même pour les utilisateurs de Mercurial.
 
-Although the plugin can convert a Mercurial repository to a Git repository by pushing to an empty repository, this job is easier with the `hg-fast-export.sh` script, available from:
+Bien que ce plugin puisse convertir un dépôt Mercurial en un dépôt Git en le poussant dans un dépôt vide, cette tâche est plus simple avec le script `hg-fast-export-git`, disponible via :
 
  $ git clone git://repo.or.cz/fast-export.git
 
-To convert, in an empty directory:
+Pour faire une conversion, dans un nouveau dossier :
 
  $ git init
- $ hg-fast-export.sh -r /hg/repo
+ $ hg-fast-export.sh -r /depot/hg
 
-after adding the script to your `$PATH`.
+ceci après avoir ajouté le script à votre `$PATH`.
 
 === Bazaar ===
 
-We briefly mention Bazaar because it is the most popular free distributed
-version control system after Git and Mercurial.
+Nous allons rapidement évoquer Bazaar parce que c'est le système de gestion de versions distribué libre le plus populaire aprèu Git et Mercurial.
 
-Bazaar has the advantage of hindsight, as it is relatively young; its designers could learn from mistakes of the past, and sidestep minor historical warts. Additionally, its developers are mindful of portability and interoperation with other version control systems.
+Bazaar à l'avantage d'avoir plus de recul, étant donné qu'il est relativement jeune ; ses concepteurs ont pu tirer les leçons du passé et éviter des petits écueils historiques. De plus ses développeurs ont le souci de la portabilité et de l'interropérabilité avec les autres systèmes de gestion de versions.
 
-A `bzr-git` plugin lets Bazaar users work with Git repositories to some extent. The `tailor` program converts Bazaar repositories to Git repositories, and can do so incrementally, while `bzr-fast-export` is well-suited for one-shot conversions.
+Un plugin `bzr-git` permette aux utilisateurs de Bazaar de travailler avec les dépôts Git dans une certaine mesure, et permet de le faire de manière incrémentale, tandis que `bzr-fast-export` est fait pous les conversions unique.
 
-=== Why I use Git ===
+=== Pourquoi j'utilise Git ===
 
-I originally chose Git because I heard it could manage the unimaginably unmanageable Linux kernel source. I've never felt a need to switch. Git has served admirably, and I've yet to be bitten by its flaws. As I primarily use Linux, issues on other platforms are of no concern.
+Au départ j'ai choisi Git parce que j'ai entendu qu'il gérait l'inimaginablement ingérable source du noyaux Linux. Je n'ai jamais ressenti le besoin d'en changer. Git m'a rendu de fiers services et je ne me suis pour le moment pas heurté à ses limites. Comme j'utilise surtout Linux, les éventuels problèmes sur d'autres plateformes n'entre pas en ligne de compte.
 
-Also, I prefer C programs and bash scripts to executables such as Python scripts: there are fewer dependencies, and I'm addicted to fast running times.
+De plus je préfère les program C et les scripts bash au executables comme les scripts Pythons : il y a moins de dépendances et je suis accro aux temps d'execution rapides.
 
-I did think about how Git could be improved, going so far as to write my own Git-like tool, but only as an academic exercise. Had I completed my project, I would have stayed with Git anyway, as the gains are too slight to justify using an oddball system.
+J'ai réfléchis à la manière d'améliorer Git, allant suffisament loin pour écrire mes propres outils de type Git, mais uniquement à des fins de recherche. Même si j'avais terminé ce projet j'aurais tout de même continué avec Git vu que les avantages sont trop peu signifiants pour justifier l'utilisation d'un système farfelu.
 
-Naturally, your needs and wants likely differ, and you may be better off with another system. Nonetheless, you can't go far wrong with Git.
+Bien sur, vos besoins et envies diffèrent surement, et vous pouvez très bien vous trouver mieux avec un autre système. Quoiqu'il en soit vous ne pouvez pas faire une grosse erreur en choisissant Git.
