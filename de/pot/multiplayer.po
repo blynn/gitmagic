@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Git Magic deutsch\n"
 "Report-Msgid-Bugs-To: bennlynn@gmail.com\n"
 "POT-Creation-Date: 2010-11-05 17:51+0100\n"
-"PO-Revision-Date: 2011-01-03 19:55+0100\n"
+"PO-Revision-Date: 2011-01-05 08:43+0100\n"
 "Last-Translator: Armin Stebich <armin@lordofbikes.de>\n"
 "Language-Team: DE <gitmagic@lordofbikes.de>\n"
 "Language: de\n"
@@ -183,7 +183,7 @@ msgstr ""
 #. type: Plain text
 #: ../en/multiplayer.txt:57
 msgid "The sender creates a 'bundle':"
-msgstr "Der Absender erstellt ein 'bundle':"
+msgstr "Der Absender erstellt ein 'Bundle':"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:59
@@ -258,7 +258,7 @@ msgstr " $ git tag -f letztesbundle HEAD\n"
 #. type: Plain text
 #: ../en/multiplayer.txt:82
 msgid "and create new refresher bundles with:"
-msgstr "und erstelle neue Aktuelisierungsbundles mit:"
+msgstr "und erstelle neue Aktualisierungsbundles mit:"
 
 #. type: Plain text
 #: ../en/multiplayer.txt:84
