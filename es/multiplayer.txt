@@ -45,7 +45,7 @@ y cualquiera puede obtener tu proyecto con:
 
  $ git clone http://web.server/proj.git
 
-=== Git Sobre Cualquier Cosa===
+=== Git Sobre Cualquier Cosa ===
 
 ¿Quieres sincronizar repositorios sin servidores, o incluso sin conexión de red?
 ¿Necesitas improvisar durante una emergencia? Hemos visto cómo <<makinghistory, *git
