@@ -18,7 +18,10 @@ book.xml: $(addprefix $(LANG)/,$(TXTFILES))
 	# then substitute the English version.
 	# Kludge to support any translation of "Preface".
 	echo '[specialsections]' > conf ; \
+	if [ $(LANG) != ru ]; then \
 	sed -n '/^== .* ==$$/p' $(LANG)/preface.txt | sed 's/^== \(.*\) ==$$/^\1$$=preface/' >> conf ; \
+	else \
+	cp lang-ru.conf conf ; fi ; \
 	( for FILE in $^ ; do if [ -f $$FILE ]; then cat $$FILE; else \
 	cat en/$$(basename $$FILE); fi; echo ; done ) | \
 	asciidoc -a lang=$(LANG) -d book -b docbook -f conf - > $@
