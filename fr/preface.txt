@@ -2,8 +2,6 @@
 Ben Lynn
 Aout 2010
 
-traduction Française : Alexandre Garel
-
 == Préface ==
 
 http://git.or.cz/[Git] est un couteau suisse de la gestion de version. Un outil de gestion des revision multi-usage, XXX pratique et fiable, dont la flexibilité rend l'apprentissage XXX pas si simple, sans parler de le maîtriser !
@@ -17,6 +15,7 @@ Plutôt que de rentrer dans le détails, nous donnons des instructions pour tel 
  - http://docs.google.com/View?id=dfwthj68_675gz3bw8kj[Chinois ( Simplifié )]: par JunJie, Meng et JiangWei.
  - link:/~blynn/gitmagic/intl/es/[Espagnol]: par Rodrigo Toledo.
  - link:/~blynn/gitmagic/intl/de/[Allemand]: par Benjamin Bellee.
+ - link:/~blynn/gitmagic/intl/fr/[Française]: par Alexandre Garel.
  - http://www.slideshare.net/slide_user/magia-git[Potugais]: par Leonardo Siqueira Rodrigues [http://www.slideshare.net/slide_user/magia-git-verso-odt[version ODT]].
 
 .Autres Édition

@@ -16,6 +16,7 @@ Rather than go into details, we provide rough instructions for particular effect
  - link:/~blynn/gitmagic/intl/es/[Spanish]: by Rodrigo Toledo and Ariset Llerena Tapia.
  - link:/~blynn/gitmagic/intl/de/[German]: by Benjamin Bellee and Armin Stebich. Armin also hosts http://gitmagic.lordofbikes.de/[the German translation on his website].
  - link:/~blynn/gitmagic/intl/ru/[Russian]: by Tikhon Tarnavsky, Mikhail Dymskov, and others.
+ - link:/~blynn/gitmagic/intl/fr/[French]: by Alexandre Garel. Also hosted at http://tutoriels.itaapy.com/[itaapy].
  - http://www.slideshare.net/slide_user/magia-git[Portuguese]: by Leonardo Siqueira Rodrigues [http://www.slideshare.net/slide_user/magia-git-verso-odt[ODT version]].
 
 .Other Editions
