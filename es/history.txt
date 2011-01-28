@@ -59,7 +59,7 @@ En caso contrario, corre:
 
 Por lo tanto, es bueno hacer commits temprano y seguido: siempre se puede acomodar después usando rebase.
 
-=== Los Cambios Locales Al Final===
+=== Los Cambios Locales Al Final ===
 
 Estás trabajando en un proyecto activo. Haces algunos commits locales por un tiempo, y
 entonces sincronizas con el árbol oficial usando un merge. Este ciclo se repite unas
@@ -98,7 +98,7 @@ ejecutar más comandos filter-branch.
 Por último, reemplaza los clones de tu proyecto con tu versión
 revisada si pretendes interactuar con ellos en un futuro.
 
-=== Haciendo Historia===
+=== Haciendo Historia ===
 
 [[makinghistory]]
 ¿Quieres migrar un proyecto a Git? Si está siendo administrado con alguno de los sistemas más conocidos,

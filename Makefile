@@ -16,12 +16,15 @@ book.xml: $(addprefix $(LANG)/,$(TXTFILES))
 	# Concatenate the text files and feed to AsciiDoc.
 	# If a file has not yet been translated for the target language,
 	# then substitute the English version.
-	# Kludge to make preface sections work for languages besides English
-	# for older AsciiDoc versions.
-	CONF=lang-$(LANG).conf; [ -f $$CONF ] || CONF=lang-en.conf; \
+	# Kludge to support any translation of "Preface".
+	echo '[specialsections]' > conf ; \
+	if [ $(LANG) != ru ]; then \
+	sed -n '/^== .* ==$$/p' $(LANG)/preface.txt | sed 's/^== \(.*\) ==$$/^\1$$=preface/' >> conf ; \
+	else \
+	cp lang-ru.conf conf ; fi ; \
 	( for FILE in $^ ; do if [ -f $$FILE ]; then cat $$FILE; else \
 	cat en/$$(basename $$FILE); fi; echo ; done ) | \
-	asciidoc -a lang=$(LANG) -d book -b docbook -f $$CONF - > $@
+	asciidoc -a lang=$(LANG) -d book -b docbook -f conf - > $@
 
 # This rule allows unfinished translations to build.
 # Report an error if the English version of the text file is missing.

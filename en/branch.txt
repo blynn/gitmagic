@@ -59,7 +59,7 @@ What if you wanted to save the temporary changes after all? Easy:
 
  $ git checkout -b dirty
 
-and commit before switching back to the master branch. Whenever you want to return to the dirty changes, simply type
+and commit before switching back to the master branch. Whenever you want to return to the dirty changes, simply type:
 
  $ git checkout dirty
 
@@ -77,20 +77,12 @@ You're in the middle of something when you are told to drop everything and fix a
 Then once you've fixed the bug:
 
  $ git commit -a -m "Bug fixed"
- $ git push  # to the central repository
  $ git checkout master
 
-and resume work on your original task.
-
-You can even 'merge' in the bugfix you just made, either by typing:
+and resume work on your original task. You can even 'merge' in the freshly
+baked bugfix:
 
  $ git merge fixes
-
-or:
-
- $ git pull
-
-since you have already pushed the bugfix to the main repository.
 
 === Merging ===
 
@@ -98,7 +90,11 @@ With some version control systems, creating branches is easy but merging them
 back together is tough. With Git, merging is so trivial that you might be
 unaware of it happening.
 
-Indeed, though we have just introduced *git merge*, we encountered merging long ago. The *pull* command in fact fetches commits and then merges them into your current branch. If you have no local changes, then the merge is a 'fast forward', a degenerate case akin to fetching the latest version in a centralized version control system. But if you do have local changes, Git will automatically merge, and report any conflicts.
+We actually encountered merging long ago. The *pull* command in fact 'fetches'
+commits and then merges them into your current branch. If you have no local
+changes, then the merge is a 'fast forward', a degenerate case akin to fetching
+the latest version in a centralized version control system. But if you do have
+local changes, Git will automatically merge, and report any conflicts.
 
 Ordinarily, a commit has exactly one 'parent commit', namely, the previous
 commit. Merging branches together produces a commit with at least two parents.
@@ -106,9 +102,9 @@ This begs the question: what commit does `HEAD~10` really refer to? A commit
 could have multiple parents, so which one do we follow?
 
 It turns out this notation chooses the first parent every time. This is
-desirable because commits in the current branch become the first parents during
-a merge; frequently you're only concerned with the changes you made in the
-current branch, as opposed to changes merged in from other branches.
+desirable because the current branch becomes the first parent during a merge;
+frequently you're only concerned with the changes you made in the current
+branch, as opposed to changes merged in from other branches.
 
 You can refer to a specific parent with a caret. For example, to show
 the logs from the second parent:
@@ -148,17 +144,17 @@ and often you'll want to go back and fix something in Part I.
 If you're lucky, or very good, you can skip these lines.
 
  $ git checkout master  # Go back to Part I.
- $ edit files           # Fix Part I.
+ $ fix_problem
+ $ git commit -a        # Commit the fixes.
  $ git checkout part2   # Go back to Part II.
  $ git merge master     # Merge in those fixes.
 
 Eventually, Part I is approved:
 
  $ git checkout master  # Go back to Part I.
- $ some_command         # Some command you're supposed to run when the
-                        # current working directory is officially ready.
+ $ submit files         # Release to the world!
  $ git merge part2      # Merge in Part II.
- $ git branch -d part2
+ $ git branch -d part2  # Delete "part2" branch.
 
 Now you're in the `master` branch again, with Part II in the working directory.
 
@@ -166,19 +162,22 @@ It's easy to extend this trick for any number of parts. It's also easy to
 branch off retroactively: suppose you belatedly realize you should have created
 a branch 7 commits ago. Then type:
 
- $ git branch -m master part2
- $  # Rename "master" branch to "part2".
- $ git checkout HEAD~7 -b master
+ $ git branch -m master part2  # Rename "master" branch to "part2".
+ $ git branch master HEAD~7    # Create new "master", 7 commits upstream.
 
 The `master` branch now contains just Part I, and the `part2` branch contains
-the rest.
+the rest. We are in the latter branch; we created `master` without switching to
+it, because we want to continue work on `part2`. This is unusual. Until now,
+we've been switching to branches immediately after creation, as in:
+
+ $ git checkout HEAD~7 -b master  # Create a branch, and switch to it.
 
 === Reorganizing a Medley ===
 
 Perhaps you like to work on all aspects of a project in the same branch. You want to keep works-in-progress to yourself and want others to see your commits only when they have been neatly organized. Start a couple of branches:
 
-  $ git checkout -b sanitized
-  $ git checkout -b medley
+  $ git branch sanitized    # Create a branch for sanitized commits.
+  $ git checkout -b medley  # Create and switch to a branch to work in.
 
 Next, work on anything: fix bugs, add features, add temporary code, and so forth, committing often along the way. Then:
 
@@ -237,7 +236,7 @@ commands.
 Consider web browsers. Why support multiple tabs as well as multiple windows?
 Because allowing both accommodates a wide variety of styles. Some users like to
 keep only one browser window open, and use tabs for multiple webpages. Others
-might insist on the other extreme: multiple windows with no extra tabs anywhere.
+might insist on the other extreme: multiple windows with no tabs anywhere.
 Others still prefer something in between.
 
 Branching is like tabs for your working directory, and cloning is like opening

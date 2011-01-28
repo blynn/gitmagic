@@ -8,7 +8,7 @@ differs to yours, you will have trouble reconciling when your trees interact.
 
 Some developers strongly feel history should be immutable, warts and all.
 Others feel trees should be made presentable before they are unleashed in
-public. Git accommodates both viewpoints. Like cloning, branching and merging,
+public. Git accommodates both viewpoints. Like cloning, branching, and merging,
 rewriting history is simply another power Git gives you. It is up to you
 to use it wisely.
 

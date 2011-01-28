@@ -121,9 +121,12 @@ Say you want to work on several features in parallel. Then commit your project a
 
  $ git clone . /some/new/directory
 
-Git exploits hard links and file sharing as much as safely possible to create this clone, so it will be ready in a flash, and you can now work on two independent features simultaneously. For example, you can edit one clone while the other is compiling.
+Thanks to http://en.wikipedia.org/wiki/Hard_link[hardlinking], local clones
+require less time and space than a plain backup.
 
-At any time, you can commit and pull changes from the other clone.
+You can now work on two independent features simultaneously. For example, you
+can edit one clone while the other is compiling. At any time, you can commit
+and pull changes from the other clone:
 
  $ git pull /the/other/clone HEAD
 

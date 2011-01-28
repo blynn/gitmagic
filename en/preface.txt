@@ -13,7 +13,10 @@ Rather than go into details, we provide rough instructions for particular effect
 .Translations
 
  - http://docs.google.com/View?id=dfwthj68_675gz3bw8kj[Chinese (Simplified)]: by JunJie, Meng and JiangWei.
- - link:/~blynn/gitmagic/intl/es/[Spanish]: by Rodrigo Toledo.
+ - link:/~blynn/gitmagic/intl/es/[Spanish]: by Rodrigo Toledo and Ariset Llerena Tapia.
+ - link:/~blynn/gitmagic/intl/de/[German]: by Benjamin Bellee and Armin Stebich. Armin also hosts http://gitmagic.lordofbikes.de/[the German translation on his website].
+ - link:/~blynn/gitmagic/intl/ru/[Russian]: by Tikhon Tarnavsky, Mikhail Dymskov, and others.
+ - link:/~blynn/gitmagic/intl/fr/[French]: by Alexandre Garel. Also hosted at http://tutoriels.itaapy.com/[itaapy].
  - http://www.slideshare.net/slide_user/magia-git[Portuguese]: by Leonardo Siqueira Rodrigues [http://www.slideshare.net/slide_user/magia-git-verso-odt[ODT version]].
 
 .Other Editions
@@ -25,16 +28,16 @@ Rather than go into details, we provide rough instructions for particular effect
 
 === Thanks! ===
 
-Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael Budde, Richard Albury, Tarmigan, Derek Mahar, Frode Aannevik, Keith Rarick, Andy Somerville, Ralf Recker, Øyvind A. Holm, Miklos Vajna, Sébastien Hinderer, Thomas Miedema, and Joe Malin contributed corrections and improvements.
+Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael Budde, Richard Albury, Tarmigan, Derek Mahar, Frode Aannevik, Keith Rarick, Andy Somerville, Ralf Recker, Øyvind A. Holm, Miklos Vajna, Sébastien Hinderer, Thomas Miedema, Joe Malin, and Tyler Breisacher contributed corrections and improvements.
 
 François Marier maintains the Debian package originally created by Daniel
 Baumann.
 
-JunJie, Meng, JiangWei, Rodrigo Toledo, and Leonardo Siqueira Rodrigues
-worked on translations of this guide.
+JunJie, Meng, JiangWei, Rodrigo Toledo, Leonardo Siqueira Rodrigues,
+Benjamin Bellee, and Armin Stebich worked on translations of this guide.
 
 My gratitude goes to many others for your support and praise. I'm tempted to
-quote you here, but it might raise expectations to ridiculous heights!
+quote you here, but it might raise expectations to ridiculous heights.
 
 If I've left you out by mistake, please tell me or just send me a patch!
 
