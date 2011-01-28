@@ -23,6 +23,8 @@ http://git.or.cz/[Git] это швейцарский нож управления
  - http://docs.google.com/View?id=dfwthj68_675gz3bw8kj[	Китайский (упрощенный)]: JunJie, Meng и JiangWei.
  - link:/~blynn/gitmagic/intl/es/[Испанский]: Rodrigo Toledo.
  - link:/~blynn/gitmagic/intl/de/[Немецкий]: Benjamin Bellee и Armin Stebich. Armin также разместил http://gitmagic.lordofbikes.de/[немецкий перевод  на его сайте].
+ - link:/~blynn/gitmagic/intl/ru/[Русский]: Тихон Тарнавский, Михаил Дымсков и другие.
+ - link:/~blynn/gitmagic/intl/fr/[Французский]: Alexandre Garel. Также размещён на http://tutoriels.itaapy.com/[itaapy].
  - http://www.slideshare.net/slide_user/magia-git[Португальский]: Leonardo Siqueira Rodrigues [http://www.slideshare.net/slide_user/magia-git-verso-odt[в формате ODT]].
 
 .Другие варианты
