@@ -18,7 +18,14 @@ Rendons le problème légèrement plus coriace. Imaginez que vous ayez un ensemb
 
 Dans le cas de certains jeux vidéo, l'enregistrement d'une partie consiste vraiment en un dossier rempli de fichiers. Ces jeux cachent ce détail au joueur et présentent une interface adaptée pour gérer différentes versions de ce dossier.
 
-Les systèmes de gestion de versions ne font pas autre chose. Ils ont tous de belles interfaces pour gérer des dossiers de trucs. Vous pouvez enregistrer l'état du dossier aussi souvent que vous voulez et vous pouvez recharger l'un des états enregistrés plus tard. À la différence de la plupart des jeux vidéo, ils sont généralement forts pour économiser l'espace. Typiquement, seuls quelques fichiers changent entre une version et une autre, et pas de beaucoup. Stocker les differences au lieu de copies entièrement nouvelles économise de l'espace.
+Les systèmes de gestion de versions ne font pas autre chose. Ils ont tous de
+belles interfaces pour gérer des dossiers de trucs. Vous pouvez enregistrer
+l'état du dossier aussi souvent que vous voulez et vous pouvez recharger l'un
+des états enregistrés plus tard. À la différence de la plupart des jeux vidéo,
+ils sont généralement forts pour économiser l'espace. Typiquement, seuls
+quelques fichiers changent d'une version à l'autre, et pas de beaucoup.
+Stocker les differences au lieu de copies entièrement nouvelles économise de
+l'espace.
 
 === Gestion Distribuée ===
 

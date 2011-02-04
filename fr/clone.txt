@@ -109,9 +109,14 @@ Imaginons que vous travailliez sur plusieurs fonctionnalités en parallèle. Dan
 
  $ git clone . /un/nouveau/dossier
 
-Git exploite les http://fr.wikipedia.org/wiki/Lien_mat%C3%A9riel[liens matériels] et le partage des fichiers de la manière la plus sûre possible pour créer ce clone, il est donc très rapidement disponible, et vous pouvez maintenant travailler simultanément sur deux fonctionnalités indépendantes. Par exemple vous pouvez modifier l'un des clones pendant que l'autre est en train de compiler.
+Grâce aux http://fr.wikipedia.org/wiki/Lien_mat%C3%A9riel[liens matériels],
+les clônes locaux nécessitent moins de temps et d'espace qu'une sauvegarde
+complète.
 
-À n'importe quel moment vous pouvez valider ( `commit` ) et rapatrier ( `pull` ) les modifications de l'autre clone.
+Vous pouvez maintenant travailler sur deux fonctionnalités indépendantes
+simultanément. Par exemple, vous pouvez modifier un clône pendant qu'un autre
+compile. À tout moment, vous pouvez valider ( `commit` ) et rapatrier
+( `pull` ) les modifications de l'autre clone:
 
  $ git pull /mon/autre/clone HEAD
 

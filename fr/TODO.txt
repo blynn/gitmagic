@@ -2,6 +2,5 @@
 
 === clone.txt ===
 
-- "Git exploits hard links and file sharing" add http://en.wikipedia.org/wiki/Hard_link link
 - "this clone, so it will be ready in a flash, and you can now work on two"  remove "will" for present (time concystency)
 
