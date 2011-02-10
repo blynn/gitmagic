@@ -1,20 +1,20 @@
 ﻿== Giới thiệu ==
 
-Tôi sử dụng cách ví von để giới thiệu về quản lý mã nguồn. Xem tại http://en.wikipedia.org/wiki/Revision_control[bài viết về quản lý mã nguôn trên Wikipedia] để có được sự giải thích thỏa đáng.
+Tôi sử dụng cách ví von để giới thiệu về hệ thống quản lý mã nguồn. Xem tại http://en.wikipedia.org/wiki/Revision_control[bài viết về quản lý mã nguôn trên Wikipedia] để có được sự giải thích thỏa đáng.
 
 === Làm việc là một Trò chơi ===
 
-Tôi đã chơi trò chơi trên máy tính suốt từ bé đến giờ. Ngược lại, Tôi chỉ bắt đầu sử dụng hệ thống quản lý mã nguồn khi đã trưởng thành. Tôi tin rằng không chỉ có tôi như thế, và việc so sánh giữa hai điều đó sẽ làm có các khái niệm trở nên dễ hiểu, dễ giải thích hơn.
+Tôi đã chơi trò chơi trên máy tính suốt từ bé đến giờ. Ngược lại, tôi chỉ bắt đầu sử dụng hệ thống quản lý mã nguồn khi đã trưởng thành. Tôi tin rằng không chỉ có tôi như thế, và việc so sánh giữa hai điều đó sẽ làm có các khái niệm trở nên dễ hiểu, dễ giải thích hơn.
 
 Hãy nghĩ việc biên soạn mã nguồn, tài liệu cũng giống như việc chúng ta đang chơi game. Một khi bạn đã làm được kha khá, bạn sẽ muốn ghi lại thành quả công việc của mình. Để làm điều đó, bạn chỉ việc bấm vào nút 'Save' trong chương trình biên soạn của mình.
 
-Nhưng việc làm này sẽ ghi đè lên bản cũ. Điều này cũng giống như các trò chơi đã cũ chỉ cho phép ghi trên một tệp tin: bạn phải chắc chắn là mình muốn ghi lại, nếu không thì bạn không bao giờ có thể quay lại trạng thái cũ nữa. Which was a shame, because your previous save might have been right at an exceptionally fun part of the game that you'd like to revisit one day. Tệ hơn nữa, bản ghi lại hiện tại lại không đúng, và thế là bạn sẽ phải bắt đầu lại.
+Nhưng việc làm này sẽ ghi đè lên bản cũ. Điều này cũng giống như các trò chơi đã cũ chỉ cho phép ghi trên một tệp tin: bạn phải chắc chắn là mình muốn ghi lại, nếu không thì bạn không bao giờ có thể quay lại trạng thái cũ nữa. Which was a shame, bởi vì your previous save might have been right at an exceptionally fun part of the game that you'd like to revisit one day. Tệ hơn nữa, bản ghi lại hiện tại lại không đúng, và thế là bạn sẽ phải bắt đầu lại.
 
 === Quản lý Mã nguồn ===
 
 Khi biên soạn, bạn có thể chọn 'Save As...' để tạo tệp tin với tên khác, hay là sao chép tệp tin ra một chỗ khác trước khi bạn ghi lại, nếu như bạn muốn dùng cả các bản cũ. Bạn có thể nén chúng lại để tiết kiệm dung lượng lưu trữ. Đây là dạng thức nguyên thủy và tốn nhiều công sức cho việc quản lý dữ liệu. Trò chơi trên máy tính đã cải tiến cách này từ rất lâu rồi, rất nhiều trong số chúng cung cấp khả năng ghi lại tự động theo thời gian.
 
-Chúng ta sẽ giải quyết một vấn đề hơi hóc búa một chút nhé! Bạn nói rằng bạn có nhiều tệp tin cần làm việc cùng nhau, như mã nguồn cho một dự án chẳng hạn, hay các tệp tin cho một website. Bây giờ bạn muốn giữ một phiên bản cũ bạn phải lưu giữ toàn bộ thư mục. Giữ nhiều phiên bản như thế bằng cách thủ công thật bất tiện, và sẽ nhanh chóng trở nên xa hoa.
+Chúng ta sẽ giải quyết một vấn đề hơi hóc búa một chút nhé! Bạn nói rằng bạn có nhiều tệp tin cần làm việc cùng nhau, như mã nguồn cho một dự án chẳng hạn, hay các tệp tin cho một website. Bây giờ bạn muốn giữ một phiên bản cũ bạn phải lưu giữ toàn bộ thư mục. Giữ nhiều phiên bản như thế bằng cách thủ công thật bất tiện, và sẽ nhanh chóng trở nên tốn kém.
 
 Đối với một số trò chơi, ghi lại một trò chơi thực tế bao gồm toàn bộ thư mục. Những trò chơi này che giấu những chi tiết từ phía người chơi và phơi bày ra một giao diện thích hợp để quản lý các phiên bản của thư mục này.
 
@@ -40,20 +40,20 @@ Việc khởi tạo bản sao như thế có vẻ hơi xa hoa, đặc biệt là
 
 Một quan niệm phổ biến là hệ thống phân tán không thích hợp với các dự án có yêu cầu một kho chứa trung tâm chính thức. Chân lý tồn tại một cách khách quan mà không phụ thuộc vào nhận thức của con người. Chụp ảnh ai đó không có nghĩa là lấy đi linh hồn họ. Cũng như thế, nhân bản kho chính cũng không làm giảm đi sự quan trọng của nó.
 
-A good first approximation is that anything a một hệ thống quản lý mã nguồn tập trung có thể làm, một hệ thống phân tán được thiết kế tốt có thể làm nhiều hơn thế. Tài nguyên mạng thường thì tốn kém hơn các tài nguyên nội bộ. While we shall later see có một số vấn đề hạn chế của hệ thống phân tán, one is less likely to make erroneous comparisons with quy tắc ngón tay cái này.
+A good first approximation is that anything a một hệ thống quản lý mã nguồn tập trung có thể làm, một hệ thống phân tán được thiết kế tốt có thể làm nhiều hơn thế. Tài nguyên mạng thường thì tốn kém hơn các tài nguyên nội bộ. Chúng ta sẽ nói đến các hạn chế của hệ thống phân tán sau, one is less likely to make erroneous comparisons with quy tắc ngón tay cái này.
 
 Một dự án nhỏ có thể chỉ cần dùng một phần nhỏ các đặc tính được đưa ra bởi một
-hệ thống như thế, nhưng sử dụng một hệ thống không có khả năng mở rộng cho một dự án nhỏ thì cũng giống như việc sử dụng 
+hệ thống như thế, nhưng việc sử dụng một hệ thống không có khả năng mở rộng cho một dự án nhỏ thì cũng giống như việc sử dụng 
 hệ thống số La Mã để tính toán các số nhỏ.
 
 Hơn thế nữa, dự án của bạn có thể lớn vượt ra ngoài mong đợi ban đầu. Việc sử dụng Git từ lúc khởi sự thì cũng giống như việc sử dụng một bộ dao vạn năng chỉ để phục vụ cho mỗi việc mở nút chai. Đến một ngày nào đó bạn cấn đến một cái chìa vít bạn sẽ vui sướng vì mình không chỉ có mỗi cái mở nút chai.
 
 === Xung Đột Khi Trộn ===
 
-Với chủ đề này, sự ví von nó với một trò chơi trên máy tính là hơi khó. Thay vì thế, để chúng tôi dùng việc biên soạn một tài liệu để giải thích cho bạn.
+Với chủ đề này, dùng cách ví von nó với một trò chơi trên máy tính là hơi khó. Thay vì thế, để chúng tôi dùng việc biên soạn một tài liệu để giải thích cho bạn.
 
 Giả sử Alice chèn thêm một dòng vào đầu một tệp tin, và Bob nối một dòng vào cuối của bản sao của mình. Cả hai đều tải lên các thay đổi của mình. Phần lớn các hệ thống sẽ tự động tìm ra hành động hợp lý: chấp nhận và trộn các sự thay đổi của họ, do đó cả hai sự thay đổi mà Alice và Bob tạo ra đều được dùng.
 
 Bây giờ giả sử cả Alice và Bob cùng sửa một dòng. Thế thì điều này không thể sử lý được mà không có sự can thiệp của con người. Người thứ hai tải lên sẽ được thông báo có xung đột xảy ra, _merge conflict_, và phải chọn một là sửa thêm nữa, hay sửa lại toàn bộ dòng đó.
 
-Nhiều tình huống phức tạp có thể nảy sinh. Hệ thống quản lý mã nguồn giữ phần dễ cho chúng, và để lại những tình huống khó khăn cho chúng ta. Thông thường cách ứng xử của chúng có thể chỉnh sửa.
+Nhiều tình huống phức tạp có thể nảy sinh. Hệ thống quản lý mã nguồn giữ phần dễ cho chúng, và để lại những tình huống khó khăn cho chúng ta. Thông thường cách ứng xử của chúng có thể điều chỉnh được.
