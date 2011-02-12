@@ -1,12 +1,13 @@
+// -*- mode: doc; mode: visual-line; -*-
 = Git Magique =
 Ben Lynn
-Aout 2010
+Août 2010
 
 == Préface ==
 
-http://git.or.cz/[Git] est un couteau suisse de la gestion de version. Un outil de gestion des revision multi-usage, XXX pratique et fiable, dont la flexibilité rend l'apprentissage XXX pas si simple, sans parler de le maîtriser !
+http://git.or.cz/[Git] est un couteau suisse de la gestion de version. Un outil de gestion de révisions multi-usage, XXX pratique et fiable, dont la flexibilité rend l'apprentissage XXX pas si simple, sans parler de le maîtriser !
 
-Comme Arthur C. Clarke le fait observer, toute technologie suffisament avancée se confond avec la magie. C'est une approche intérressante pour Git : les débutants peuvent ignorer ses mechanismes internes comme une XXX baguette magique qui peut époustoufler les amis et rendre furieux les enemis par ses fabuleuses capacités.
+Comme Arthur C. Clarke le fait observer, toute technologie suffisamment avancée se confond avec la magie. C'est une approche intéressante pour Git : les débutants peuvent ignorer ses mécanismes internes comme une XXX baguette magique qui peut époustoufler les amis et rendre furieux les ennemis par ses fabuleuses capacités.
 
 Plutôt que de rentrer dans le détails, nous donnons des instructions pour tel ou tel effet. À force d'utilisation, petit à petit, vous comprendrez comment fonctionne chaque truc et comment composer des recettes pour répondre à vos besoins.
 
@@ -16,9 +17,9 @@ Plutôt que de rentrer dans le détails, nous donnons des instructions pour tel 
  - link:/~blynn/gitmagic/intl/es/[Espagnol]: par Rodrigo Toledo.
  - link:/~blynn/gitmagic/intl/de/[Allemand]: par Benjamin Bellee.
  - link:/~blynn/gitmagic/intl/fr/[Française]: par Alexandre Garel.
- - http://www.slideshare.net/slide_user/magia-git[Potugais]: par Leonardo Siqueira Rodrigues [http://www.slideshare.net/slide_user/magia-git-verso-odt[version ODT]].
+ - http://www.slideshare.net/slide_user/magia-git[Portugais]: par Leonardo Siqueira Rodrigues [http://www.slideshare.net/slide_user/magia-git-verso-odt[version ODT]].
 
-.Autres Édition
+.Autres éditions
 
  - link:book.html[sur une seule page web]: HTML nu, sans CSS ;
  - link:book.pdf[fichier PDF]: version imorimable.
@@ -32,11 +33,11 @@ François Marier maintiens le paquet Debian, créé à l'origine par Daniel Baum
 JunJie, Meng, JiangWei, Rodrigo Toledo, et Leonardo Siqueira Rodrigues
 ont travaillé sur des traductions de ce guide.
 
-Ma gratitude va également à beaucoup d'autres pour leurs encouragements et compliments. Je suis tenté de vous citer ici, toutefois ceci risquerai de porter vos attentes à des sommets ridicules.
+Ma gratitude va également à beaucoup d'autres pour leurs encouragements et compliments. Je suis tenté de vous citer ici, toutefois ceci risquerait de porter vos attentes à des sommets ridicules.
 
 Si par erreur je vous ai oublié, merci de me le signaler ou, plus simplement, envoyez-moi un patch !  
 
-.Hébergement Git Gratuit
+.Hébergement Git gratuit
 
  - http://repo.or.cz/[http://repo.or.cz/]  héberge des projets libres. C'est le premier hébergement Git, fondé et maintenu par les premiers développeurs Git.
  - http://gitorious.org/[http://gitorious.org/] est un autre site d'hébergement Git fait pour les projets Open-Source.
@@ -46,7 +47,7 @@ Un grand merci à ces sites pour l'hébergement de ce guide.
 
 === Licence ===
 
-Ce guide est publié sous http://www.gnu.org/licenses/gpl-3.0.html[la GNU General Public License version 3]. Bien évidement, les sources sont dans un dépot Git et peuvent être obtenues en saisissant :
+Ce guide est publié sous http://www.gnu.org/licenses/gpl-3.0.html[la GNU General Public License version 3]. Bien évidement, les sources sont dans un dépôt Git et peuvent être obtenues en saisissant :
 
  $ git clone git://repo.or.cz/gitmagic.git  # Ceci crée le dossier gitmagic
 
@@ -54,3 +55,14 @@ ou à partir d'un des mirroirs :
 
  $ git clone git://github.com/blynn/gitmagic.git
  $ git clone git://gitorious.org/gitmagic/mainline.git
+
+////
+ LocalWords:  Git multi-usage XXX Arthur Clarke JunJie Meng JiangWei Rodrigo
+ LocalWords:  Toledo Bellee Alexandre Garel Potugais Leonardo Siqueira ODT web
+ LocalWords:  Rodrigues CSS PDF imorimable Dustin Sallings Alberto Bertogli Joe
+ LocalWords:  James Cameron Douglas Livingstone Michael Budde Albury Tarmigan
+ LocalWords:  Derek Mahar Frode Aannevik Keith Rarick Andy Somerville Ralf Holm
+ LocalWords:  Recker Øyvind Miklos Vajna Sébastien Hinderer Thomas Miedema git
+ LocalWords:  Debian Baumarr envoyez-moi patch Open-Source General License Lynn
+ LocalWords:  gitmagic mirroirs doc visual-line
+////
