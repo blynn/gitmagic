@@ -185,11 +185,7 @@ Try also:
 
  $ git whatchanged --since="2 weeks ago"
 
-Thường thường, tôi sẽ dùng http://sourceforge.net/projects/qgit[qgit]
-để thay thế cách ở trên, bởi vì nó có giao diện đồ họa bóng bẩy, hay
-http://jonas.nitro.dk/tig/[tig], có giao diện dòng lệnh làm việc rất tốt với
-các máy có kết nối chậm. Một lựa chọn khác là cài đặt máy chủ web, chạy lệnh *git instaweb*
-và sử dụng bất kỳ trình duyệt web nào.
+Thường thường, tôi duyệt lịch sử bằng http://sourceforge.net/projects/qgit[qgit] để thay thế cách ở trên, bởi vì nó có giao diện đồ họa bóng bẩy, hay http://jonas.nitro.dk/tig/[tig], có giao diện dòng lệnh làm việc rất tốt với các máy có kết nối chậm. Một lựa chọn khác là cài đặt máy chủ web, chạy lệnh *git instaweb* và sử dụng bất kỳ trình duyệt web nào.
 
 === Bài Tập===
 

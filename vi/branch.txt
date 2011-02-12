@@ -78,20 +78,12 @@ Bạn đang phân vân giữa ngã ba đường khi bạn phải xác định l�
 Một khi bạn đã sửa lỗi:
 
  $ git commit -a -m "Sửa lỗi"
- $ git push  # tới kho chứa trung tâm
  $ git checkout master
 
-và phục hồi lại công việc theo phận sự của mình.
-
-Bạn thậm chí có thể 'merge' in the bugfix you just made, dùng một trong hai lệnh sau:
+và phục hồi lại công việc theo phận sự của mình. Bạn thậm chí có thể 'merge' in the freshly
+baked bugfix:
 
  $ git merge fixes
-
-hay là:
-
- $ git pull
-
-kể từ đây bạn đã có thể sẵn sàng push việc sửa lỗi lên kho chứa chính.
 
 === Trộn ===
 
@@ -162,8 +154,8 @@ Cuối cùng, Part I được chấp thuận:
 
  $ git checkout master  # Quay trở lại Part I.
  $ submit files         # Xuất bản ra!
- $ git merge part2      # Merge in Part II.
- $ git branch -d part2
+ $ git merge part2      # Trộn vào Part II.
+ $ git branch -d part2	# Xóa nhánh "part2".
 
 Bây giờ chúng ta lại ở trong nhánh `master`, với Part II trong thư mục làm việc.
 
@@ -171,19 +163,17 @@ Thủ thuật này rất dễ dàng để mở rộng ra dành cho nhiều phầ
 phân nhánh ra từ quá khứ: giả sử muộn bạn mới nhận ra là mình phải tạo
 một nhánh từ trước đây 7 lần commit. Thế thì gõ:
 
- $ git branch -m master part2
- $  # Rename "master" branch to "part2".
- $ git checkout HEAD~7 -b master
+ $ git branch -m master part2  # Đổi tên nhánh "master" thành "part2".
+ $ git checkout HEAD~7 -b master # Tạo nhánh "master" mới 7 lần commit ngược từ trước.
 
-Nhánh `master` bây giờ chỉ chứa Part I, và nhánh `part2` trở thành contains
-phần ngừng lại.
+Nhánh `master` bây giờ chỉ chứa Part I, và nhánh `part2` trở thành contains phần ngừng lại.
 
 === Cải Tổ Lại Sự Pha Trộn ===
 
 Có lẽ bạn thích làm việc trên mọi khía cạnh của một dự án trên cùng một nhánh. You want to keep works-in-progress to yourself and và muốn những người khác chỉ thấy được các lần commit của bạn không họ have been neatly organized. Hãy chuẩn bị một cặp nhánh:
 
-  $ git checkout -b sanitized
-  $ git checkout -b medley
+  $ git branch -b sanitized # Tạo một nhánh dùng cho việc dọn.
+  $ git checkout -b medley # Tạo và chuyển nhánh thành nơi làm việc.
 
 Tiếp theo, làm việc gì đó: sửa lỗi, thêm các đặc tính kỹ thuật, thêm mã lệnh tạm thời, vân vân, commit thường xuyên. Sau đó:
 
