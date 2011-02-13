@@ -31,10 +31,10 @@ besoins.
 
  - link:/~blynn/gitmagic/intl/de/[Allemand]: par Benjamin Bellee et Armin
    Stebich. Armin héberge http://gitmagic.lordofbikes.de/[la traduction
-   allemande sur son site web]..
+   allemande sur son site web].
 
- - link:/~blynn/gitmagic/intl/fr/[Française]: par Alexandre Garel. Hébergez
-   aussi chez  http://tutoriels.itaapy.com/[itaapy].
+ - link:/~blynn/gitmagic/intl/fr/[Française]: par Alexandre Garel, Paul Gaborit
+   et Nicolas Deram. Hébergez aussi chez http://tutoriels.itaapy.com/[itaapy].
 
  - http://www.slideshare.net/slide_user/magia-git[Portugais]: par Leonardo
    Siqueira Rodrigues
@@ -64,14 +64,9 @@ Thomas Miedema, et Joe Malin pour les corrections et améliorations.
 
 François Marier maintiens le paquet Debian, créé à l'origine par Daniel Baumarr.
 
-<<<<<<< HEAD
-JunJie, Meng, JiangWei, Rodrigo Toledo, et Leonardo Siqueira Rodrigues
-ont travaillé sur des traductions de ce guide.
-=======
->>>>>>> 41a91b0... passage en 79 colonnes
-
-JunJie, Meng, JiangWei, Rodrigo Toledo, Leonardo Siqueira Rodrigues, Benjamin
-Bellee, et Armin Stebich ont travaillé sur des traductions de ce guide.
+JunJie, Meng, JiangWei, Rodrigo Toledo, Ariset Llerena Tapia, Benjamin Bellee,
+Armin Stebich, Alexandre Garel, Paul Gaborit, Nicolas Deram et Leonardo
+Siqueira Rodrigues ont travaillé sur des traductions de ce guide.
 
 Ma gratitude va également à beaucoup d'autres pour leurs encouragements et
 compliments. Je suis tenté de vous citer ici, toutefois ceci risquerait de
@@ -114,4 +109,5 @@ ou à partir d'un des mirroirs :
 // LocalWords:  Derek Mahar Frode Aannevik Keith Rarick Andy Somerville Ralf Holm
 // LocalWords:  Recker Øyvind Miklos Vajna Sébastien Hinderer Thomas Miedema git
 // LocalWords:  Debian Baumarr envoyez-moi patch Open-Source General License Lynn
-// LocalWords:  gitmagic mirroirs doc visual-line
+// LocalWords:  gitmagic mirroirs doc visual-line Ariset Llerena Tapia Armin
+// LocalWords:  Stebich itaapy package Ubuntu Amazon.com
