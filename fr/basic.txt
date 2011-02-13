@@ -158,7 +158,7 @@ et vos utilisateurs peuvent mettre à jour leur version en allant dans leur doss
 
 Vos utilisateurs ne se retrouveront jamais avec une version de votre script que vous ne vouliez pas leur montrer.
 
-=== Qu'ai-je fais ? ===
+=== Qu'ai-je fait ? ===
 
 Retrouvez les modifications faites depuis le dernier commit avec :
 
