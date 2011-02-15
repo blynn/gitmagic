@@ -68,7 +68,7 @@ Chúng ta đã đụng chạm đến lệnh như trên ở những chương trư
 
 Mặt khác, sau khi 'check out' một trạng thái cũ, Git tự động đặt bạn vào một trạng thái mới, một nhánh chưa có tên, và nhánh này có thể đặt tên và ghi lại với lệnh *git checkout -b*.
 
-=== Quick Fixes ===
+=== Sửa Nhanh ===
 
 Bạn đang phân vân giữa ngã ba đường khi bạn phải xác định là xóa tất cả mọi thứ hoặc là are told to drop everything and fix a newly discovered lỗi trong lần commit `1b6d...`:
 
@@ -166,7 +166,12 @@ một nhánh từ trước đây 7 lần commit. Thế thì gõ:
  $ git branch -m master part2  # Đổi tên nhánh "master" thành "part2".
  $ git checkout HEAD~7 -b master # Tạo nhánh "master" mới 7 lần commit ngược từ trước.
 
-Nhánh `master` bây giờ chỉ chứa Part I, và nhánh `part2` trở thành contains phần ngừng lại.
+Nhánh `master` bây giờ chỉ chứa Part I, và nhánh `part2` trở thành contains
+phần ngừng lại. We are in the latter branch; we created `master` without switching to
+it, because we want to continue work on `part2`. This is unusual. Until now,
+we've been switching to branches immediately after creation, as in:
+
+ $ git checkout HEAD~7 -b master  # Tạo một nhánh và chuyển tới nó.
 
 === Cải Tổ Lại Sự Pha Trộn ===
 

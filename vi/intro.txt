@@ -18,7 +18,7 @@ Chúng ta sẽ giải quyết một vấn đề hơi hóc búa một chút nhé!
 
 Đối với một số trò chơi, ghi lại một trò chơi thực tế bao gồm toàn bộ thư mục. Những trò chơi này che giấu những chi tiết từ phía người chơi và phơi bày ra một giao diện thích hợp để quản lý các phiên bản của thư mục này.
 
-Hệ thống quản lý mã nguồn không có sự khác biệt nào. Chúng có một giao diện tinh tế để quản lý một nhóm các thứ trong thư mục. Bạn có thể ghi lại trạng thái của thư mục một cách thường xuyên, và bạn có thể tải lên bất kỳ một trạng thái nào đã được ghi lại trước đó. Không giống như các trò chơi trên máy tính, chúng thường khôn khéo hơn về việc tiết kiệm không gian lưu trữ. Thông thường, chỉ có một số ít tài liệu được sửa đổi giữa các lần, và cũng không nhiều. Chỉ lưu giữ những cái có thay đổi thay vì toàn bộ tất cả.
+Hệ thống quản lý mã nguồn không có sự khác biệt nào. Chúng có một giao diện tinh tế để quản lý một nhóm các thứ trong thư mục. Bạn có thể ghi lại trạng thái của thư mục một cách thường xuyên, và bạn có thể tải lên bất kỳ một trạng thái nào đã được ghi lại trước đó. Không giống như các trò chơi trên máy tính, chúng thường khôn khéo hơn về việc tiết kiệm không gian lưu trữ. Thông thường, chỉ có một số ít tài liệu được sửa đổi giữa các phiên bản, và cũng không nhiều. Chỉ lưu giữ những cái có thay đổi thay vì toàn bộ tất cả.
 
 === Hệ Thống Phân Tán ===
 

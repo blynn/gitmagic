@@ -13,11 +13,12 @@ Thay vì đi sâu vào chi tiết, chúng tôi đưa ra phác thảo cách làm 
 .Bản dịch
 
  - http://docs.google.com/View?id=dfwthj68_675gz3bw8kj[Tiếng Trung Quốc (Giản thể)]: dịch bởi JunJie, Meng and JiangWei.
- - link:/~blynn/gitmagic/intl/es/[tiếng Tây Ban Nha]: dịch bởi Rodrigo Toledo.
- - link:/~blynn/gitmagic/intl/de/[tiếng Đức]: dịch bởi Benjamin Bellee and Armin Stebich. Armin xuất bản
-http://gitmagic.lordofbikes.de/[bản dịch tiếng Đức trên website của chính mình].
- - http://www.slideshare.net/slide_user/magia-git[Bồ Đào Nha]: dịch bởi Leonardo Siqueira Rodrigues [http://www.slideshare.net/slide_user/magia-git-verso-odt[định dạng ODT]].
- - link:/~blynn/gitmagic/intl/vi/[tiếng Việt]: dịch bởi Trần Ngọc Quân.
+ - link:/~blynn/gitmagic/intl/es/[Tiếng Tây Ban Nha]: dịch bởi Rodrigo Toledo và Ariset Llerena Tapia.
+ - link:/~blynn/gitmagic/intl/de/[Tiếng Đức]: dịch bởi Benjamin Bellee and Armin Stebich. Armin xuất bản http://gitmagic.lordofbikes.de/[bản dịch tiếng Đức trên website của chính mình].
+ - link:/~blynn/gitmagic/intl/ru/[Tiếng Nga]: dịch bởi Tikhon Tarnavsky, Mikhail Dymskov, và một số người khác.
+ - link:/~blynn/gitmagic/intl/fr/[Tiếng Pháp]: dịch bởi Alexandre Garel. Và đồng thời được xuất bản tại  http://tutoriels.itaapy.com/[itaapy].
+ - http://www.slideshare.net/slide_user/magia-git[Tiếng Bồ Đào Nha]: dịch bởi Leonardo Siqueira Rodrigues [http://www.slideshare.net/slide_user/magia-git-verso-odt[định dạng ODT]].
+ - link:/~blynn/gitmagic/intl/vi/[Tiếng Việt]: dịch bởi Trần Ngọc Quân.
 
 .Các định dạng khác
 
@@ -28,7 +29,7 @@ http://gitmagic.lordofbikes.de/[bản dịch tiếng Đức trên website của 
 
 === Lời cảm ơn! ===
 
-Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael Budde, Richard Albury, Tarmigan, Derek Mahar, Frode Aannevik, Keith Rarick, Andy Somerville, Ralf Recker, Øyvind A. Holm, Miklos Vajna, Sébastien Hinderer, Thomas Miedema, và Joe Malin đã đóng góp trong việc sửa chữa và cải tiến.
+Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael Budde, Richard Albury, Tarmigan, Derek Mahar, Frode Aannevik, Keith Rarick, Andy Somerville, Ralf Recker, Øyvind A. Holm, Miklos Vajna, Sébastien Hinderer, Thomas Miedema, Joe Malin, và Tyler Breisacher đã đóng góp trong việc sửa chữa và cải tiến.
 
 François Marier đã bảo trì gói Debian do Daniel
 Baumann khởi xướng.
