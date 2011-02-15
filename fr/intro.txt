@@ -7,13 +7,13 @@ Je vais me servir d'une analogie pour présenter la gestion de versions. Référ
 
 J'ai joué à des jeux vidéos presque toute ma vie. Par contre, je n'ai commencé à utiliser des systèmes de gestion de versions qu'à l'âge adulte. Je pense ne pas être le seul dans ce cas et la comparaison entre les deux peut rendre les concepts plus simples à expliquer et à comprendre.
 
-Pensez à l'édition de votre code, ou de votre document, comme s'il s'agissait de jouer à un jeux. Quand vous avez bien progressé, vous aimeriez faire une sauvegarde. Pour cela vous cliquez sur le bouton 'enregistrer' de votre éditeur de confiance.
+Pensez à l'édition de votre code, ou de votre document, comme s'il s'agissait de jouer à un jeu. Quand vous avez bien progressé, vous aimeriez faire une sauvegarde. Pour cela vous cliquez sur le bouton 'enregistrer' de votre éditeur de confiance.
 
 Mais ceci va écraser l'ancienne version. C'est comme ces anciens jeux qui n'avaient qu'un emplacement : oui vous pouviez faire une sauvegarde mais vous ne pouviez pas revenir dans un état précédent. Quel dépit, vu que votre sauvegarde précédente pouvait éventuellement être située à un passage du jeu particulièrement amusant sur lequel vous seriez bien revenu un de ces jours. Ou, encore pire, votre sauvegarde était dans un état qui ne permettait pas de gagner et vous deviez tout recommencer à zéro.
 
 === Gestion de versions ===
 
-Lorsque vous modifiez un document vous pouvez l'"Enregistrer Sous …" un nom de fichier différent, ou copier le fichier quelque part avant de l'enregistrer si vous voulez pouvoir savourez les anciennes versions. Vous pouvez même les compresser pour gagner de l'espace. C'est une forme primitive et laborieuse de gestion de versions. Les jeux vidéo se sont améliorés sur ce point depuis longtemps pusique la plupart proposent différents emplacements de sauvegarde automatiquement horodatés.
+Lorsque vous modifiez un document vous pouvez l'"Enregistrer Sous …" un nom de fichier différent, ou copier le fichier quelque part avant de l'enregistrer si vous voulez pouvoir profitez des anciennes versions. Vous pouvez même les compresser pour gagner de l'espace. C'est une forme primitive et laborieuse de gestion de versions. Les jeux vidéo se sont améliorés sur ce point depuis longtemps pusique la plupart proposent différents emplacements de sauvegarde automatiquement horodatés.
 
 Rendons le problème légèrement plus coriace. Imaginez que vous ayez un ensemble de fichier qui vont ensemble comme le code source d'un projet ou les fichiers d'un site web. Dans ce cas si vous voulez conserver une ancienne version, vous devez archiver le dossier en entier. Conserver un grand nombre de versions à la main n'est pas pratique.
 
@@ -27,7 +27,7 @@ Imaginez maintenant un jeu vidéo très difficile. Si difficile à terminer que 
 
 Comment mettriez-vous en place un système pour qu'ils puissent accéder facilement aux sauvegardes les uns des autres ? Et puissent en téléverser de nouvelles ?
 
-Dans le passé, tout les projets utilisaient une gestion de version centralisée. Quelque part un serveur contenait l'ensemble des sauvegardes du jeux et personne d'autre. Chaque joueur conservait au plus quelques sauvegardes de parties sur leur machine. Quand un joueur voulait progresser, il téléchargeait les dernières sauvegardes du serveur, jouait un moment, sauvegardait et téléversait à nouveau sur le serveur pour mettre à disposition de tous les autres.
+Dans le passé, tout les projets utilisaient une gestion de version centralisée. Quelque part un serveur contenait l'ensemble des sauvegardes du jeu et personne d'autre. Chaque joueur conservait au plus quelques sauvegardes de parties sur leur machine. Quand un joueur voulait progresser, il téléchargeait les dernières sauvegardes du serveur, jouait un moment, sauvegardait et téléversait à nouveau sur le serveur pour mettre à disposition de tous les autres.
 
 Qu'en était-il si pour une raison quelconque, un joueur voulait obtenir une partie enregistrée antérieurement ? Peut-être la sauvegarde actuelle de la partie est-elle dans un état sans possibilité de victoire parce que quelqu'un a oublié de prendre un objet au niveau trois, et ils voudraient retrouver la dernière partie enregistrée au moment où la partie pouvait encore être gagnée. Ou peut-être veulent-ils comparer deux parties enregistrées précédemment pour voir le travail réalisé par un joueur précis.
 
@@ -49,7 +49,7 @@ De plus, votre projet peut grossir au delà de vos prévisions de départ. Utili
 
 === Conflits fusionnels ===
 
-Pour aborder ce sujet, notre analogie avec le jeux vidéo serait trop tirée par les cheveux. En revanche, revenons au cas de l'édition d'un document.
+Pour aborder ce sujet, notre analogie avec le jeu vidéo serait trop tirée par les cheveux. En revanche, revenons au cas de l'édition d'un document.
 
 Imaginons que Alice insère une ligne au début d'un fichier, et Bob en ajoute une à la fin de sa propre copie. Ils envoient tout les deux leurs modifications. La plupart des systèmes vont automatiquement déduire un traitement raisonnable des actions : accepter et fusionner leur modifications, ainsi les modifications de Alice et de Bob sont appliquées.
 
