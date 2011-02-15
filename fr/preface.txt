@@ -5,7 +5,7 @@ Août 2010
 
 == Préface ==
 
-http://git.or.cz/[Git] est un couteau suisse de la gestion de version. Un outil de gestion de révisions multi-usage, XXX pratique et fiable, dont la flexibilité rend l'apprentissage XXX pas si simple, sans parler de le maîtriser !
+http://git.or.cz/[Git] est un couteau suisse de la gestion de versions. Un outil de gestion de révisions multi-usage, pratique et fiable, dont la flexibilité en rend l'apprentissage pas si simple, sans parler de le maîtriser !
 
 Comme Arthur C. Clarke le fait observer, toute technologie suffisamment avancée se confond avec la magie. C'est une approche intéressante pour Git : les débutants peuvent ignorer ses mécanismes internes comme une XXX baguette magique qui peut époustoufler les amis et rendre furieux les ennemis par ses fabuleuses capacités.
 
@@ -22,7 +22,9 @@ Plutôt que de rentrer dans le détails, nous donnons des instructions pour tel 
 .Autres éditions
 
  - link:book.html[sur une seule page web]: HTML nu, sans CSS ;
- - link:book.pdf[fichier PDF]: version imorimable.
+ - link:book.pdf[fichier PDF]: version imprimable.
+ - http://packages.debian.org/gitmagic[package Debian], http:://packages.ubuntu.com/gitmagic[package Ubuntu]: obtenez rapidement une copie locale de ce site. Pratique lorsque http://csdcf.stanford.edu/status/[ce serveur] est arrêté.
+ - http://www.amazon.com/Git-Magic-Ben-Lynn/dp/1451523343/[un vrai livre [Amazon.com]]: 64 pages, 15.24cm x 22.86cm, noir et blanc, en anglais. Pratique en cas de panne courant.
 
 === Merci ! ===
 
