@@ -109,15 +109,15 @@ démarre la nouvelle branche ``ancien'' dans l'état correspondant à 10 version
 
 === Workflow sans interruption ===
 
-La plupart du temps dans un projet de réalisation matérielle, la seconde étape du plan ne peut commencer que lorsque la première étape est terminée. Une voiture en réparation peut rester bloqué au garage jusqu'à la livraison d'une pièce. Un prototype peut attendre la fabrication d'une puce avant que le montage continue.
+La plupart du temps dans un projet de réalisation matérielle, la seconde étape du plan ne peut commencer que lorsque la première étape est terminée. Une voiture en réparation doit rester bloquée au garage jusqu'à la livraison d'une pièce. Un prototype doit attendre la fabrication d'une puce avant que le montage continue.
 
 Les projets logiciels peuvent être similaires. La deuxième partie d'une nouvelle fonctionnalité doit attendre que la première partie soit sortie et testée. Certains projets exigent que votre code ait été relu avant d'être accepté, vous êtes donc obligé d'attendre que la première partie soit validée avant de commence la seconde.
 
-Grâce aux branches et aux fusions faciles, vous pouvez contourner les règles et travailler sur la partie 2 avant que la partie 1 soit officiellement prête. Supposons que vous avez terminé la version correspondant à la partie 1 et que vous l'avez envoyée pour validation. Supposons aussi que vous êtes dans la branche `master`. Alors, branchez-vous :
+Grâce aux branches et aux fusions faciles, vous pouvez contourner les règles et travailler sur la partie 2 avant que la partie 1 soit officiellement prête. Supposons que vous ayez terminé la version correspondant à la partie 1 et que vous l'ayez envoyée pour validation. Supposons aussi que vous soyez dans la branche `master`. Alors, branchez-vous :
 
  $ git checkout -b part2
 
-Ensuite, travaillez sur la partie 2 et intégrez (via `commit`) vos changements autant nécessaire. L'erreur étant humaine, vous voudrez parfois revenir en arrière pour effectuer des corrections dans la partie 1. Évidemment, si vous êtes chanceux ou très bon, vous pouvez sauter ce passage.
+Ensuite, travaillez sur la partie 2 et intégrez (via `commit`) vos changements autant que nécessaire. L'erreur étant humaine, vous voudrez parfois revenir en arrière pour effectuer des corrections dans la partie 1. Évidemment, si vous êtes chanceux ou très bon, vous pouvez sauter ce passage.
 
  $ git checkout master  # Retour à la partie 1
  $ correction_des_bugs
@@ -130,24 +130,18 @@ Finalement, la partie 1 est validée.
  $ git checkout master    # Retour à la partie 1
  $ diffusion des fichiers # Diffusion au reste du monde !
  $ git merge part2        # Fusion de la partie 2
- $ git branch -d part2    # Suppresion de la branche 'part2'.
+ $ git branch -d part2    # Suppression de la branche 'part2'.
 
 À cet instant vous êtes à nouveau dans la branche `master` avec la partie 2 dans votre répertoire de travail.
 
+Il est facile d'étendre cette astuce à de nombreuses branches. Il est aussi facile de créer une branche rétroactivement : imaginons qu'après 7 commits, vous vous rendiez compte que vous auriez dû créer une branche. Tapez alors :
 
-It's easy to extend this trick for any number of parts. It's also easy to
-branch off retroactively: suppose you belatedly realize you should have created
-a branch 7 commits ago. Then type:
+ $ git branch -m master part2  # Renommer la branche "master" en "part2".
+ $ git branch master HEAD~7    # Recréer une branche "master" 7 commits en arrière.
 
- $ git branch -m master part2  # Rename "master" branch to "part2".
- $ git branch master HEAD~7    # Create new "master", 7 commits upstream.
+La branche `master` contient alors uniquement la partie 1 et la branche `part2` contient le reste ; nous avons créé `master` sans basculer vers elle car nous souhaitons continuer à travailler sur `part2`. Ce n'est pas très courant. Jusqu'à présent nous avions toujours basculé vers une branche dès sa création, comme dans :
 
-The `master` branch now contains just Part I, and the `part2` branch contains
-the rest. We are in the latter branch; we created `master` without switching to
-it, because we want to continue work on `part2`. This is unusual. Until now,
-we've been switching to branches immediately after creation, as in:
-
- $ git checkout HEAD~7 -b master  # Create a branch, and switch to it.
+ $ git checkout HEAD~7 -b master  # Créér une branche et basculer vers elle.
 
 === Reorganizing a Medley ===
 
@@ -221,6 +215,6 @@ a new browser window. These operations are fast and local, so why not
 experiment to find the combination that best suits you? Git lets you work
 exactly how you want.
 
- LocalWords:  doc visual-line quasi-instantanés Git bug télécharger echo git
- LocalWords:  myfile.txt init add checkout master branch HEAD NdT SHA fetch
- LocalWords:  rebasculer commits merge fast forward
+// LocalWords:  doc visual-line quasi-instantanés Git bug télécharger echo git
+// LocalWords:  myfile.txt init add checkout master branch HEAD NdT SHA fetch
+// LocalWords:  rebasculer commits merge fast forward bugs remonterons-nous
