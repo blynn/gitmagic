@@ -5,7 +5,7 @@ Avec les anciens systèmes de gestion de version, l'opération standard pour obt
 
 Avec Git et d'autres systèmes distribués de gestion de version, le clonage est l'opération standard. Pour obtenir des fichiers, on crée un 'clone' du dépôt entier. En d'autres termes, il s'agit de faire un http://fr.wikipedia.org/wiki/Site_miroir[miroir] du serveur central. Tout ce qui peut se faire sur le dépôt central peut être fait sur le vôtre.
 
-=== Machines synchros ===
+=== Synchronisation entre machines ===
 
 Je peux imaginer faire des archives *tar* ou utiliser *rsync* pour des sauvegardes ou une synchronisation simple. Mais parfois j'édite sur mon portable, d'autres fois sur mon fixe, et les deux peuvent ne pas avoir communiqué entre temps.
 
