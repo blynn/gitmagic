@@ -11,7 +11,7 @@ trong thư mục hiện hành chứa các mã nguồn hay văn bản mà bạn m
 
  $ git init
  $ git add .
- $ git commit -m "My first backup"
+ $ git commit -m "Bản sao lưu đầu tiên"
 
 Bây giờ nếu như các sửa đổi của bạn không như mong đợi, hãy phục hồi lại bản cũ (bản cuối cùng bạn commit):
 
@@ -19,7 +19,7 @@ Bây giờ nếu như các sửa đổi của bạn không như mong đợi, hã
 
 Lưu lại state lần nữa:
 
- $ git commit -a -m "Another backup"
+ $ git commit -a -m "Bản sao lưu khác"
 
 === Thêm, Xóa, Đổi tên ===
 
@@ -71,7 +71,7 @@ Một lúc nào đó bạn lại muốn nhảy tới một bản cũ hơn. Trong
 
  $ git checkout 82f5
 
-Nó giúp bạn quay lại đúng thời điểm đó, trong khi vẫn giữ lại những lần commit mới hơn. Tuy nhiên, giống như cỗ máy thời gian trong các bộ phim khoa học viễn tưởng, nếu bây giờ bạn sửa sau đó commit, bạn sẽ ở trong một thực tại khác, bởi vì hành động của bạn bây giờ đã khác với chúng trong lần đầu tiên ở tại đây.
+Nó giúp bạn quay lại đúng thời điểm đó, trong khi vẫn giữ lại những lần commit mới hơn. Tuy nhiên, giống như cỗ máy thời gian trong các bộ phim khoa học viễn tưởng, nếu bây giờ bạn sửa sau đó commit, bạn sẽ ở trong một thực tại khác, bởi vì hành động của bạn bây giờ đã khác với lúc chúng trong lần đầu tiên ở tại đây.
 
 Có cách thực tế hơn là sử dụng 'branch', và <<branch, chúng ta có nhiều điều để nói về nó sau này>>. Bây giờ, chỉ cần nhớ là
 
@@ -99,7 +99,7 @@ Bạn không thích việc cắt dán ư? Hãy sử dụng:
  $ git checkout :/"My first b"
 
 để nhảy tới lần commit mà phần chú thích của nó bắt đầu với chuỗi bạn đã cho.
-Bạn cũng có thể yêu cầu state thứ 5 kể từ cuối:
+Bạn cũng có thể yêu cầu state thứ 5 kể từ lần cuối:
 
  $ git checkout master~5
 
@@ -126,7 +126,7 @@ Lấy về một bản sao của một dự án quản lý bằng Git bằng cá
 
  $ git clone git://server/path/to/files
 
-Ví dụ, để lấy tất cả các tệp tin mà tôi đã dùng để tạo ra cho trang mạng này là:
+Ví dụ, để lấy tất cả các tệp tin mà tôi đã dùng để tạo ra cho trang này là:
 
  $ git clone git://git.or.cz/gitmagic.git
 
@@ -134,7 +134,7 @@ Chúng ta sẽ có nhiều điều để nói về lệnh *clone* sớm thôi.
 
 === Thử Nghiệm ===
 
-Nếu bạn đã tải về một bản sao của một dự án sử dụng *git clone*, bạn có thể nâng cấp lên phiên bản cuối cùng với lệnh:
+Nếu bạn đã tải về một bản sao của một dự án bằng lệnh *git clone*, bạn có thể lấy về phiên bản cuối cùng với lệnh:
 
  $ git pull
 
@@ -146,7 +146,7 @@ Thực hiện điều này với Git, trong thư mục làm việc của Git:
 
  $ git init
  $ git add .
- $ git commit -m "First release"
+ $ git commit -m "Bản phát hành đầu tiên"
 
 Sau đó nói với những người cùng sử dụng hãy chạy:
 
@@ -158,7 +158,7 @@ Sau đó nói với những người cùng sử dụng hãy chạy:
 
 Kể từ lúc này, bất cứ khi nào mã nguồn của bạn đã có thể sử dụng được, chỉ việc thực hiện:
 
- $ git commit -a -m "Next release"
+ $ git commit -a -m "Bản phát hành tiếp"
 
 và những người sử dụng có thể cập nhật dữ liệu của họ bằng cách chuyển tới thư mục làm việc tương ứng và gõ:
 
@@ -185,7 +185,7 @@ Try also:
 
  $ git whatchanged --since="2 weeks ago"
 
-Thường thường, tôi duyệt lịch sử bằng http://sourceforge.net/projects/qgit[qgit] để thay thế cách ở trên, bởi vì nó có giao diện đồ họa bóng bẩy, hay http://jonas.nitro.dk/tig/[tig], có giao diện dòng lệnh làm việc rất tốt với các máy có kết nối chậm. Một lựa chọn khác là cài đặt máy chủ web, chạy lệnh *git instaweb* và sử dụng bất kỳ trình duyệt web nào.
+Thường thường, tôi duyệt lịch sử bằng http://sourceforge.net/projects/qgit[qgit] để thay thế cách ở trên, bởi vì nó có giao diện đồ họa bóng bẩy, hay http://jonas.nitro.dk/tig/[tig], có giao diện dòng lệnh làm việc rất tốt với các máy có kết nối mạng chậm. Một lựa chọn khác là cài đặt máy chủ web, chạy lệnh *git instaweb* và sử dụng bất kỳ trình duyệt web nào.
 
 === Bài Tập===
 
@@ -205,4 +205,4 @@ Coi A, B, C, D là 4 lần commit thành công, nơi mà B giống A ngoại tr�
 
    $ git revert B
 
-Lựa chọn nào là tốt nhất? Cách nào bạn thích nhất. Thật dễ dàng để có được thứ mà bạn muốn với Git, và thường là có nhiều cách để thực hiện được một thứ bạn muốn.
+Lựa chọn nào là tốt nhất? Cách nào bạn thích nhất. Thật dễ dàng để có được thứ mà bạn muốn với Git, và thường là có nhiều hơn một cách để thực hiện được một thứ bạn muốn.

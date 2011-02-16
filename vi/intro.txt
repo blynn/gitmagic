@@ -1,16 +1,16 @@
 ﻿== Giới thiệu ==
 
-Tôi sử dụng cách ví von để giới thiệu về hệ thống quản lý mã nguồn. Xem tại http://en.wikipedia.org/wiki/Revision_control[bài viết về quản lý mã nguôn trên Wikipedia] để có được sự giải thích thỏa đáng.
+Tôi sử dụng cách ví von để giới thiệu về hệ thống quản lý mã nguồn. Xem http://en.wikipedia.org/wiki/Revision_control[bài viết về quản lý mã nguồn trên Wikipedia] để có được sự giải thích thỏa đáng.
 
-=== Làm việc là một Trò chơi ===
+=== Công Việc giống như Trò Chơi ===
 
 Tôi đã chơi trò chơi trên máy tính suốt từ bé đến giờ. Ngược lại, tôi chỉ bắt đầu sử dụng hệ thống quản lý mã nguồn khi đã trưởng thành. Tôi tin rằng không chỉ có tôi như thế, và việc so sánh giữa hai điều đó sẽ làm có các khái niệm trở nên dễ hiểu, dễ giải thích hơn.
 
-Hãy nghĩ việc biên soạn mã nguồn, tài liệu cũng giống như việc chúng ta đang chơi game. Một khi bạn đã làm được kha khá, bạn sẽ muốn ghi lại thành quả công việc của mình. Để làm điều đó, bạn chỉ việc bấm vào nút 'Save' trong chương trình biên soạn của mình.
+Hãy nghĩ việc biên soạn mã nguồn, tài liệu cũng giống như việc chúng ta đang chơi trò chơi trên máy tính. Một khi bạn đã làm được kha khá, bạn sẽ muốn ghi lại thành quả công việc của mình. Để làm điều đó, bạn chỉ việc bấm vào nút 'Save' trong chương trình biên soạn của mình.
 
-Nhưng việc làm này sẽ ghi đè lên bản cũ. Điều này cũng giống như các trò chơi đã cũ chỉ cho phép ghi trên một tệp tin: bạn phải chắc chắn là mình muốn ghi lại, nếu không thì bạn không bao giờ có thể quay lại trạng thái cũ nữa. Which was a shame, bởi vì your previous save might have been right at an exceptionally fun part of the game that you'd like to revisit one day. Tệ hơn nữa, bản ghi lại hiện tại lại không đúng, và thế là bạn sẽ phải bắt đầu lại.
+Nhưng việc làm này sẽ ghi đè lên bản cũ. Điều này cũng giống như các trò chơi đã cũ chỉ cho phép ghi trên một tệp tin: bạn phải chắc chắn là mình muốn ghi lại, nếu không thì bạn không bao giờ có thể quay lại trạng thái cũ nữa. Và thật không may vì lần lưu trước đó có thể là đúng tại một điểm rất hay trong lượt chơi và bạn muốn thăm lại về sau. Tệ hơn nữa, bản ghi lại hiện tại lại không đúng, và thế là bạn sẽ phải bắt đầu lại.
 
-=== Quản lý Mã nguồn ===
+=== Quản Lý Mã Nguồn ===
 
 Khi biên soạn, bạn có thể chọn 'Save As...' để tạo tệp tin với tên khác, hay là sao chép tệp tin ra một chỗ khác trước khi bạn ghi lại, nếu như bạn muốn dùng cả các bản cũ. Bạn có thể nén chúng lại để tiết kiệm dung lượng lưu trữ. Đây là dạng thức nguyên thủy và tốn nhiều công sức cho việc quản lý dữ liệu. Trò chơi trên máy tính đã cải tiến cách này từ rất lâu rồi, rất nhiều trong số chúng cung cấp khả năng ghi lại tự động theo thời gian.
 
@@ -18,7 +18,7 @@ Chúng ta sẽ giải quyết một vấn đề hơi hóc búa một chút nhé!
 
 Đối với một số trò chơi, ghi lại một trò chơi thực tế bao gồm toàn bộ thư mục. Những trò chơi này che giấu những chi tiết từ phía người chơi và phơi bày ra một giao diện thích hợp để quản lý các phiên bản của thư mục này.
 
-Hệ thống quản lý mã nguồn không có sự khác biệt nào. Chúng có một giao diện tinh tế để quản lý một nhóm các thứ trong thư mục. Bạn có thể ghi lại trạng thái của thư mục một cách thường xuyên, và bạn có thể tải lên bất kỳ một trạng thái nào đã được ghi lại trước đó. Không giống như các trò chơi trên máy tính, chúng thường khôn khéo hơn về việc tiết kiệm không gian lưu trữ. Thông thường, chỉ có một số ít tài liệu được sửa đổi giữa các phiên bản, và cũng không nhiều. Chỉ lưu giữ những cái có thay đổi thay vì toàn bộ tất cả.
+Hệ thống quản lý mã nguồn không có sự khác biệt nào. Chúng có một giao diện tinh tế để quản lý một nhóm các thứ trong thư mục. Bạn có thể ghi lại trạng thái của thư mục một cách thường xuyên, và bạn có thể tải lên bất kỳ một trạng thái nào đã được ghi lại trước đó. Không giống như các trò chơi trên máy tính, chúng thường khôn khéo hơn về việc tiết kiệm không gian lưu trữ. Thông thường, chỉ có một số ít tài liệu được sửa đổi giữa các phiên bản, và cũng không nhiều. Nó chỉ lưu giữ những cái có thay đổi thay vì toàn bộ tất cả.
 
 === Hệ Thống Phân Tán ===
 
@@ -40,7 +40,7 @@ Việc khởi tạo bản sao như thế có vẻ hơi xa hoa, đặc biệt là
 
 Một quan niệm phổ biến là hệ thống phân tán không thích hợp với các dự án có yêu cầu một kho chứa trung tâm chính thức. Chân lý tồn tại một cách khách quan mà không phụ thuộc vào nhận thức của con người. Chụp ảnh ai đó không có nghĩa là lấy đi linh hồn họ. Cũng như thế, nhân bản kho chính cũng không làm giảm đi sự quan trọng của nó.
 
-A good first approximation is that anything a một hệ thống quản lý mã nguồn tập trung có thể làm, một hệ thống phân tán được thiết kế tốt có thể làm nhiều hơn thế. Tài nguyên mạng thường thì tốn kém hơn các tài nguyên nội bộ. Chúng ta sẽ nói đến các hạn chế của hệ thống phân tán sau, one is less likely to make erroneous comparisons with quy tắc ngón tay cái này.
+Tóm lại, một hệ thống phân tán đã thiết kế tốt thì làm bất cứ công việc nào cũng khá hơn một hệ thống quản lý mã nguồn tập trung. Tài nguyên mạng thường thì tốn kém hơn các tài nguyên nội bộ. Chúng ta sẽ nói đến các hạn chế của hệ thống phân tán sau, sự so sánh này thường đúng: hệ thống phân tán là hữu hiệu hơn.
 
 Một dự án nhỏ có thể chỉ cần dùng một phần nhỏ các đặc tính được đưa ra bởi một
 hệ thống như thế, nhưng việc sử dụng một hệ thống không có khả năng mở rộng cho một dự án nhỏ thì cũng giống như việc sử dụng 
@@ -56,4 +56,4 @@ Giả sử Alice chèn thêm một dòng vào đầu một tệp tin, và Bob n�
 
 Bây giờ giả sử cả Alice và Bob cùng sửa một dòng. Thế thì điều này không thể sử lý được mà không có sự can thiệp của con người. Người thứ hai tải lên sẽ được thông báo có xung đột xảy ra, _merge conflict_, và phải chọn một là sửa thêm nữa, hay sửa lại toàn bộ dòng đó.
 
-Nhiều tình huống phức tạp có thể nảy sinh. Hệ thống quản lý mã nguồn giữ phần dễ cho chúng, và để lại những tình huống khó khăn cho chúng ta. Thông thường cách ứng xử của chúng có thể điều chỉnh được.
+Nhiều tình huống phức tạp có thể nảy sinh. Hệ thống quản lý mã nguồn giữ phần dễ dàng cho chúng, và để lại những tình huống khó khăn cho chúng ta. Thông thường cách ứng xử của chúng có thể điều chỉnh được.

@@ -22,8 +22,8 @@ Thay vì đi sâu vào chi tiết, chúng tôi đưa ra phác thảo cách làm 
 
 .Các định dạng khác
 
- - link:book.html[Single webpage]: HTML đơn giản, không định dạng bằng CSS.
- - link:book.pdf[PDF file]: thuận tiện cho việc in ấn.
+ - link:book.html[Trang web đơn]: định dạng HTML đơn giản, không định dạng bằng CSS.
+ - link:book.pdf[Định dạng PDF]: thuận tiện cho việc in ấn.
  - http://packages.debian.org/gitmagic[gói dành cho Debian], http:://packages.ubuntu.com/gitmagic[gói dành cho Ubuntu]: cài tự động tại địa chỉ này. Làm thủ công tại http://csdcf.stanford.edu/status/[khi bạn không có kết nối mạng].
  - http://www.amazon.com/Git-Magic-Ben-Lynn/dp/1451523343/[Sách giấy [Amazon.com]]: 64 trang, 15.24cm x 22.86cm, đen trắng. Rất tiện sử dụng vì chẳng cần đến điện.
 
@@ -35,7 +35,7 @@ François Marier đã bảo trì gói Debian do Daniel
 Baumann khởi xướng.
 
 JunJie, Meng, JiangWei, Rodrigo Toledo, Leonardo Siqueira Rodrigues,
-Benjamin Bellee, Armin Stebich, và Trần Ngọc Quân đã dịch bản hướng dẫn này.
+Benjamin Bellee, Armin Stebich và Trần Ngọc Quân đã dịch bản hướng dẫn này.
 
 Tôi cũng gửi lời cảm ơn tới sự giúp đỡ và sự tán dương của các bạn. Tôi muốn 
 trích dẫn lời các bạn ra ở đây, nhưng làm như thế có vẻ hơi lố bịch.
@@ -52,7 +52,7 @@ Trân thành cảm ơn các địa chỉ đã lưu giữ bản hướng dẫn n�
 
 === Giấy phép sử dụng ===
 
-Hướng dẫn này được phát hành dựa trên giấy phép http://www.gnu.org/licenses/gpl-3.0.html[the GNU General Public License version 3]. Đương nhiên, mã nguồn được lưu giữ trong kho Git,
+Hướng dẫn này được phát hành dựa trên giấy phép http://www.gnu.org/licenses/gpl-3.0.html[the GNU General Public License version 3]. Đương nhiên, nội dung của cuốn sách được lưu giữ trong kho Git,
 và bạn có thể dễ dàng có được nó bằng cách gõ:
 
  $ git clone git://repo.or.cz/gitmagic.git  # Tạo thư mục "gitmagic".
