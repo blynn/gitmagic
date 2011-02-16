@@ -1,4 +1,4 @@
-// -*- mode: doc; mode: visual-line; -*-
+// -*- mode: doc; mode: visual-line; mode: flyspell; coding: utf-8; -*-
 = Git Magique =
 Ben Lynn
 Août 2010

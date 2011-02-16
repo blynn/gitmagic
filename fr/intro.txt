@@ -1,4 +1,4 @@
-// -*- mode: doc; mode: visual-line; -*-
+// -*- mode: doc; mode: visual-line; mode: flyspell; coding: utf-8; -*-
 == Introduction ==
 
 Je vais me servir d'une analogie pour présenter la gestion de versions. Référez-vous à http://fr.wikipedia.org/wiki/Gestion_de_versions[la page de wikipedia sur la gestion de versions] pour une explication plus censée.

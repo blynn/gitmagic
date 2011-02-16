@@ -1,4 +1,4 @@
-// -*- mode: doc; mode: visual-line; -*-
+// -*- mode: doc; mode: visual-line; mode: flyspell; coding: utf-8; -*-
 == La sorcellerie des branches ==
 
 Des branchements et des fusions quasi-instantanés sont les fonctionnalités les plus puissantes qui font de Git un vrai tueur.
