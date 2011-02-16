@@ -1,16 +1,16 @@
 ﻿== Bài Học về Lịch Sử ==
 
-A consequence of Git's distributed nature is việc lịch sử có thể biên soạn lại
+Một hệ quả tất yếu của đặc tính phân tán của Git là việc lịch sử có thể biên soạn lại một cách
 dễ dàng. Nhưng nếu bạn xáo trộn quá khứ, hãy cẩn thận: chỉ biên soạn lại quá khứ trong lịch sử
-chỉ khi bạn history which you alone possess. Just as nations forever argue over who
+chỉ khi bạn sở hữu nó một mình. Just as nations forever argue over who
 committed what atrocity, nếu một người khác có một bản sao mà nó lại có lịch sử khác với
-cái của bạn, you will have trouble reconciling when your trees interact.
+cái của bạn, bạn sẽ gặp rắc rối reconciling when your trees interact.
 
 Một số nhà phát triển phần mềm quả quyết rằng lịch sử không thể thay đổi, tất cả mọi thứ.
 Others feel trees should be made presentable trước khi chúng được phát hành ra
 đại chúng. Git chấp nhận cả hai quan điểm. Giống như việc nhân bản, tạo nhánh và hòa trộn,
-viết lại lịch sử đơn giản chỉ là một quyền lực mà Git trao cho bạn. It is up to you
-to use it wisely.
+viết lại lịch sử đơn giản chỉ là một quyền lực mà Git trao cho bạn. Nó It is up to you
+để sử dụng nó một cách bạo dạn.
 
 === Dừng Lại Sửa Chữa ===
 
@@ -27,7 +27,7 @@ Bạn muốn thêm vài chỉnh sửa vào lần cuối mình đã commit ư? Th
 
 === ... And Then Some ===
 
-Hãy giả sử the previous problem is ten times worse. Trong một buổi làm việc dài, bạn đã tạo ra hàng đống các lần commit. Nhưng bạn không hoàn toàn hài lòng với cách mà chúng được tổ chức, và một số lần commit cần được soạn lại phần mô tả. Thế thì hãy gõ:
+Hãy giả sử vấn đề trục trặc ở lần commit cách đây mười lần. Trong một buổi làm việc dài, bạn đã tạo ra hàng tá các lần commit. Nhưng bạn không hoàn toàn hài lòng với cách mà chúng được tổ chức, và một số lần commit cần được soạn lại phần mô tả. Thế thì hãy gõ:
 
  $ git rebase -i HEAD~10
 
@@ -42,7 +42,7 @@ Thế thì:
 -Xóa bỏ các lần commit bằng cách xóa các dòng tương ứng.
 -Đặt lại các lần commit bằng các đặt lại các dòng.
 - Thay thế `pick` với:
-   * `edit` để đánh dấu lần commit đó là dành cho việc tu bổ.
+   * `edit` để đánh dấu lần commit đó là dành cho việc tu bổ (amend).
    * `reword` để thay đổi phần chú giải.
    * `squash` để hòa trộn với lần commit trước.
    * `fixup` để hòa trộn với lần commit trước và bỏ qua việc ghi lại phần chú giải.
@@ -75,7 +75,7 @@ Xem thêm trong *git help rebase* để thấy được chi tiết các ví dụ
 Thỉnh thoảng, bạn muốn việc quản lý mã nguồn giống việc người ta vẽ quivalent of airbrushing people out
 of official photos, việc tẩy xóa chúng từ lịch sử in a Stalinesque fashion. Ví
 dụ, giả sử chúng ta có ý định phát hành dự án, nhưng lại liên đới đến một tệp tin mà nó
-phải được giữ bí mật vì lý do nào đó. Có lẽ tôi đã quên khi ghi lại số thẻ tín dụng vào trong một tệp tin
+phải được giữ bí mật vì lý do nào đó. Chẳng hạn như tôi đã quên khi ghi lại số thẻ tín dụng vào trong một tệp tin
 văn bản và ngẫu nhiên nó được thêm vào trong dự án. Việc xóa tệp tin này là
 chưa đủ, bởi vì ta có thể đọc nó từ lần commit cũ. Chúng ta phải gỡ bỏ
 tệp tin này từ tất cả các lần đã commit:
@@ -88,7 +88,7 @@ chỉ bằng một lệnh đơn.
 
 Sau này, thư mục +.git/refs/original+ mô tả trạng thái của công việc trước khi thực hiện. Check the filter-branch command did what you wanted, sau đó xóa thư mục này đi nếu bạn muốn chạy lệnh filter-branch lần nữa.
 
-Cuối cùng, thay thế bản sao của dự án của bạn bằng phiên bản bạn đã sửa lại nếu bạn muốn to interact with them later.
+Cuối cùng, thay thế bản sao của dự án của bạn bằng phiên bản bạn đã sửa lại nếu bạn muốn tương thích với chúng sau này.
 
 === Tự Tạo Lịch Sử ===
 
