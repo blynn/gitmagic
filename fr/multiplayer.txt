@@ -165,7 +165,7 @@ Voir *get help remote* pour savoir comment supprimer des dépôts distants, igno
 
 Pour mes projets, j'aime que mes contributeurs se confectionnent un dépôt depuis lequel je peux effectuer des pull. Certains services d'hébergement Git vous permettent de créer votre propre dépôt clone d'un projet en cliquant simplement sur un bouton.
 
-Après avoir rapatrier (fetch) un arbre de modifications, j'utilise les commandes Git pour parcourir et examiner ces modifications qui, idéalement, sont bien organisées et bien décrites. Je fusionne mes propres modifications et effectue parfois quelques modifications supplémentaires. Une fois satisfait, je les envoie (push) vers le dépôt principal.
+Après avoir rapatrié (fetch) un arbre de modifications, j'utilise les commandes Git pour parcourir et examiner ces modifications qui, idéalement, sont bien organisées et bien décrites. Je fusionne mes propres modifications et effectue parfois quelques modifications supplémentaires. Une fois satisfait, je les envoie (push) vers le dépôt principal.
 
 Bien que recevant rarement des contributions, je pense que mon approche s'étend parfaitement à grande échelle. Voir
 http://torvalds-family.blogspot.com/2009/06/happiness-is-warm-scm.html[ce billet par Linus Torvalds].
