@@ -67,15 +67,15 @@ tín hiệu khói, v.v.. Người nhận khôi phục lại các lần commit t�
 Bộ nhận thậm chí có thể làm được việc này từ một kho chứa rỗng. Mặc dù kích
 thước của nó, +somefile+ chứa các mục kho Git nguyên thủy.
 
-Trong các dự án lớn hơn, việc triệt tiêu lãng phí bằng bundling chỉ thay đổi  kho chứa the other
-repository lacks. Ví dụ, giả sử lần commit ``1b6d...'' là lần commit gần nhất
+Trong các dự án lớn hơn, việc triệt tiêu lãng phí bằng lệnh bundle chỉ thay đổi phần thiếu
+kho chứa khác. Ví dụ, giả sử lần commit ``1b6d...'' là lần commit gần nhất
 đã được chia sẻ giữa cả hai thành viên:
 
  $ git bundle create somefile HEAD ^1b6d
 
-Nếu làm thường xuyên, one could easily forget which commit was last sent. Trang
+Nếu phải làm việc này thường xuyên, một khó khăn là bạn không thể nhớ được chính xác lần commit tương ứng với lần gửi cuối. Trang
 trợ giúp sẽ gợi ý cho bạn cách sử dụng các thẻ (tag) để giải quyết vấn đề này. Ấy là, sau khi bạn gửi một bundle,
-gõ:
+thì hãy gõ:
 
  $ git tag -f lastbundle HEAD
 
@@ -88,7 +88,7 @@ và tạo một bản bundles mới với:
 Miếng vá được trình bày ở dạng văn bản các thay đổi của bạn, nó dễ dàng được đọc hiểu bởi
 con người cũng như là máy tính. Điều này mang lại cho chúng sức lôi cuốn toàn cầu. Bạn có thể gửi miếng vá qua
 thư điện tử cho những nhà phát triển phần mềm khác mà chẳng cần lo họ đang sử dụng hệ thống mã nguồn nào. Chừng nào
-độc giả của bạn có thể đọc được thư điện tử của họ, họ còn có thể thấy được phần chỉnh sửa của bạn. Tương tự thế, về phía mình,
+mà độc giả của bạn có thể đọc được thư điện tử của mình thì họ còn có thể thấy được phần chỉnh sửa của bạn. Tương tự thế, về phía mình,
 những thứ bạn cần là có một địa chỉ thư điện tử: ở đây chẳng cần cài đặt kho chứa Git nào trên mạng.
 
 Sử dụng lại ví dụ từ chương đầu tiên:
@@ -102,8 +102,8 @@ gõ:
 
 để áp dụng miếng vá.
 
-In more formal settings, when author names and perhaps signatures should be
-recorded, generate the corresponding patches past tại một thời điểm chính xác trong quá khứ bằng cách gõ:
+Còn một hình thức định dạng khác nữa, tên và có lẽ cả chữ ký của tác giả cũng được
+ghi lại, tạo miếng vá tương ứng với một thời điểm chính xác trong quá khứ bằng cách gõ:
 
  $ git format-patch 1b6d
 
@@ -117,10 +117,10 @@ Tệp tin lưu kết quả có thể chuyển cho lệnh *git-send-email*, hay c
 
 Lệnh này sẽ áp dụng cho miếng vá nhận được, đồng thời tạo ra một lần commit, bao gồm các thông tin như là tác giả.
 
-Với một chương trình đọc thư điện tử, bạn có thể sử dụng con chuột để to see the email in its raw original form trước khi ghi miếng vá thành một tệp tin.
+Với một chương trình đọc thư điện tử, bạn có thể sử dụng con chuột để chuyển định dạng thư về dạng văn bản thuần  trước khi ghi miếng vá thành một tệp tin.
 
-There are slight differences for mbox-based email clients, nhưng nếu bạn sử dụng một trong
-số chúng, you're probably the sort of person who có thể cấu hình chúng một cách dễ dàng
+Có một số khác biệt nhỏ giữa các trình đọc email, nhưng nếu bạn sử dụng một trong
+số chúng, bạn hầu như chắc chắn là người mà có thể cấu hình chúng một cách dễ dàng
 mà chẳng cần phải đọc hướng dẫn sử dụng!
 
 === Rất tiếc! Tôi đã chuyển đi ===
@@ -157,8 +157,8 @@ tham số.
 === Nhánh Trên Mạng ===
 
 Khi bạn nhân bản một kho chứa, bạn cũng đồng thời nhân bản tất cả các nhánh của nó. Bạn sẽ không nhận
-được cảnh báo này bởi vì Git giấu chúng đi: bạn phải hỏi mới có thể biết chính xác.
-This prevents branches in the từ kho chứa remote từ phiền phức với
+được cảnh báo này bởi vì Git không thông báo cho bạn: bạn phải hỏi mới có thể biết chính xác.
+Việc làm này giúp ngăn ngừa phiền phức do nhánh mạng gây ra cho
 các nhánh của bạn, và cũng làm cho Git dễ dàng hơn với người mới dùng.
 
 Ta liệt kê các nhánh bằng lệnh:
@@ -201,10 +201,10 @@ Nhưng chúng ta chỉ muốn so sánh sự khác nhau giữ chúng nhưng khôn
  $ git fetch other  # Lấy về từ lập trình viên thứ hai.
 
 Lệnh này chỉ mang về phần lịch sử. Mặc dù thư mục làm việc vẫn còn nguyên chưa bị động đến,
-we can refer to bất kỳ nhánh nào của bất kỳ kho chứa nào trong một lệnh Git bởi vì chúng ta bây giờ
+chúng ta có thể xét bất kỳ nhánh nào của bất kỳ kho chứa nào trong một lệnh Git bởi vì chúng ta bây giờ
 đang làm việc trên bản sao trên máy của mình.
 
-Recall that behind the scenes, lệnh pull đơn giản là *fetch* sau đó *merge*.
+Giờ ta xét đến phần hậu trường, lệnh pull đơn giản là *fetch* sau đó *merge*.
 Thông thường chúng ta *pull* bởi vì chúng ta muốn trộn với lần commit cuối cùng sau khi fetch;
 việc làm này là một ngoại lệ đáng chú ý.
 
@@ -219,13 +219,13 @@ chỉ cần sử dụng chuột.
 
 Sau khi tôi fetch một cây (tree), tôi chạy lệnh Git để di chuyển và xem xét các thay đổi,
 với ý tưởng là để tổ chức và mô tả tốt hơn. Tôi trộn với các thay đổi của chính mình,
-và có thể sẽ sửa thêm chút it. Sau khi đã hài lòng, tôi push nó lên kho chứa chính.
+và có thể sẽ sửa thêm chút ít. Sau khi đã hài lòng, tôi push nó lên kho chứa chính.
 
 Mặc dù tôi ít nhận được sự cộng tác, nhưng tôi tin rằng việc này sẽ thay đổi theo chiều hướng
 tốt lên. Hãy đọc
 http://torvalds-family.blogspot.com/2009/06/happiness-is-warm-scm.html[blog của Linus Torvalds].
 
-Trong thế giới Git world is slightly thuận lợi hơn việc vá các tệp tin, cũng như là nó
+Git thuận lợi hơn việc vá các tệp tin, cũng như là nó
 tiết kiệm công sức cho việc chuyển đổi chúng thành những lần commit dành cho Git. Hơn thế nữa, Git lưu giữ các thông tin rất chi tiết
 như là ghi lại tên và địa chỉ thư điện tử của tác giả, cũng như là ngày tháng và
 thời gian, và nó cũng đòi hỏi tác giả phải mô tả về những thay đổi mà họ đã tạo ra.

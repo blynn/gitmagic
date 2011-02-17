@@ -3,14 +3,14 @@
 Một hệ quả tất yếu của đặc tính phân tán của Git là việc lịch sử có thể biên soạn lại một cách
 dễ dàng. Nhưng nếu bạn xáo trộn quá khứ, hãy cẩn thận: chỉ biên soạn lại quá khứ trong lịch sử
 chỉ khi bạn sở hữu nó một mình. Just as nations forever argue over who
-committed what atrocity, nếu một người khác có một bản sao mà nó lại có lịch sử khác với
-cái của bạn, bạn sẽ gặp rắc rối reconciling when your trees interact.
+committed what atrocity, nếu một người khác có một bản sao mà lịch sử của nó lại khác với
+cái của bạn, bạn sẽ gặp rắc rối ngay.
 
 Một số nhà phát triển phần mềm quả quyết rằng lịch sử không thể thay đổi, tất cả mọi thứ.
-Others feel trees should be made presentable trước khi chúng được phát hành ra
+Một số khác lại cho rằng chỉnh sửa lại cấu trúc trước khi phát hành nó ra
 đại chúng. Git chấp nhận cả hai quan điểm. Giống như việc nhân bản, tạo nhánh và hòa trộn,
-viết lại lịch sử đơn giản chỉ là một quyền lực mà Git trao cho bạn. Nó It is up to you
-để sử dụng nó một cách bạo dạn.
+viết lại lịch sử đơn giản chỉ là một quyền lực mà Git trao cho bạn. Bạn có thể làm thế
+nếu muốn.
 
 === Dừng Lại Sửa Chữa ===
 
@@ -72,7 +72,7 @@ Xem thêm trong *git help rebase* để thấy được chi tiết các ví dụ
 
 === Viết Lại Lịch Sử ===
 
-Thỉnh thoảng, bạn muốn việc quản lý mã nguồn giống việc người ta vẽ quivalent of airbrushing people out
+Thỉnh thoảng, bạn muốn việc quản lý mã nguồn giống việc người ta sơn vẽ quivalent of airbrushing people out
 of official photos, việc tẩy xóa chúng từ lịch sử in a Stalinesque fashion. Ví
 dụ, giả sử chúng ta có ý định phát hành dự án, nhưng lại liên đới đến một tệp tin mà nó
 phải được giữ bí mật vì lý do nào đó. Chẳng hạn như tôi đã quên khi ghi lại số thẻ tín dụng vào trong một tệp tin
@@ -153,7 +153,7 @@ những lệnh này có thể gửi một kho chứa ở dạng văn bản thôn
 
 === Vị Trí Nào Phát Sinh Lỗi? ===
 
-Bạn vừa mới phát hiện ra một đặc tính không hoạt động trong chương trình mà bạn chắc chắn là nó đã hoạt động vài tháng trước. Tệ quá! Lỗi đến từ đâu nhỉ? If only you had been testing the feature as you developed.
+Bạn vừa mới phát hiện ra một đặc tính không hoạt động trong chương trình mà bạn chắc chắn là nó đã hoạt động vài tháng trước. Tệ quá! Lỗi đến từ đâu nhỉ? Nếu như chỉ có mình bạn kiểm tra cũng như phát triển đặc tính này.
 
 Lúc này thì đã quá muộn rồi. Tuy nhiên, chỉ cần bạn commit thường xuyên, Git
 có thể xác định vị trí của trục trặc:
@@ -206,9 +206,9 @@ yêu cầu có kết nối mạng chỉ để xem các thay đổi của họ ha
 
 Hệ thống tập trung không cho phép làm việc mà không có mạng, và đòi hỏi cơ sở hạ tầng mạng máy tính
 đắt đỏ tốn kém, đặc biệt là khi số nhà phát triển phần mềm tăng lên. Điều quan trọng,
-tất cả mọi tác vụ sẽ chậm hơn ở mức độ nào đó, thường thường to the point
-where những người sử dụng sẽ lảng tránh việc sử dụng các lệnh cao cấp trừ phi nó thực sự cần thiết. Trong những trường hợp
-đặc biệt cases this is true of even the most lệnh cơ bản. Khi những người dùng phải chạy
+tất cả mọi tác vụ sẽ chậm hơn ở mức độ nào đó, thường thường
+những người sử dụng sẽ lảng tránh việc sử dụng các lệnh cao cấp trừ phi nó thực sự cần thiết. Trừ những trường hợp
+đặc biệt là các lệnh cơ bản. Khi những người dùng phải chạy
 các lệnh chạy chậm, hiệu suất bị giảm bởi vì nó làm gián đoạn công việc của cả một dây truyền.
 
 Tôi trực tiếp đã trải qua những hiện tượng đó. Git là hệ thống quản lý mã nguồn đầu tiên tôi sử dụng. 
@@ -233,5 +233,5 @@ chính của mình, lệnh đã hoàn tất từ lâu rồi, và tôi phải lã
 Ở đây còn có một hậu quả rất đáng quan tâm nữa: đoán trước được việc tắc nghẽn của mạng máy tính,
 nhiều cá nhân riêng lẻ có thể chiếm dụng nhiều lưu lượng mạng hơn cần thiết trên các tác vụ
 khác nhau để cố gắng giảm thiểu sự chậm trễ có thể xảy ra trong tương lai. Hậu quả cuối cùng là
-sự quá tải quá mức, việc ủng hộ việc tiêu dùng cá nhân như thế làm đốt cháy nhiều lưu lượng mạng hơn
-và sau đó nó làm cho việc chậm trễ càng trở nên tệ hơn.
+sự quá tải quá mức, vô tình việc ủng hộ việc tiêu dùng cá nhân như thế làm đốt cháy nhiều lưu lượng mạng hơn
+và sau đó nó làm cho việc tắc nghẽn càng lúc càng trở nên tồi tệ hơn.
