@@ -63,148 +63,111 @@ et pour créer un nouveau bundle faites :
 
  $ git bundle create nouveaubundle HEAD ^dernierbundle
 
-=== Patches: The Global Currency ===
+=== Les patches : la monnaie d'échange globale ===
 
-Patches are text representations of your changes that can be easily understood by computers and humans alike. This gives them universal appeal. You can email a patch to developers no matter what version control system they're using. As long as your audience can read their email, they can see your edits. Similarly, on your side, all you require is an email account: there's no need to setup an online Git repository.
+Les patches sont des représentations textuelles de vos modifications qui peuvent être facilement compris par les ordinateurs comme les humains. C'est ce qui leur donne leur charme. Vous pouvez envoyer un patch par mail à un développeur sans savoir quel système de gestion de versions il utilise. À partir du moment où on peut lire les mails que vous envoyez, on peut voir vos modifications. De votre côté, vous n'avez besoin que d'un compte mail : aucune nécessité de mettre en œuvre un dépôt Git en ligne.
 
-Recall from the first chapter:
+Souvenez-vous du premier chapitre. La commande :
 
- $ git diff 1b6d > my.patch
+ $ git diff 1b6d > mon.patch
 
-outputs a patch which can be pasted into an email for discussion. In a Git
-repository, type:
+produit un patch qui peut être collé dans un mail. Dans un dépôt Git, tapez :
 
- $ git apply < my.patch
+ $ git apply < mon.patch
 
-to apply the patch.
+pour appliquer le patch.
 
-In more formal settings, when author names and perhaps signatures should be
-recorded, generate the corresponding patches past a certain point by typing:
+D'une manière plus formelle, lorsque le nom des auteurs et peut-être leur signature doit apparaître, générer tous les patches depuis un certain point en tapant :
 
  $ git format-patch 1b6d
 
-The resulting files can be given to *git-send-email*, or sent by hand. You can also specify a range of commits:
+Les fichiers résultants peuvent être fournis à *git send-email* ou envoyez à la main. Vous pouvez aussi spécifier un intervalle entre deux commits :
 
  $ git format-patch 1b6d..HEAD^^
 
-On the receiving end, save an email to a file, then type:
+Du côté du destinataire, enregistrez un mail dans un fichier puis tapez :
 
- $ git am < email.txt
+ $ git am < mail.txt
 
-This applies the incoming patch and also creates a commit, including information such as the author.
+Ça appliquera le patch reçu mais créera aussi un commit en y incluant toutes les informations telles que le nom des auteurs.
 
-With a browser email client, you may need to click a button to see the email in its raw original form before saving the patch to a file.
+Si vous utilisez un client de messagerie dans un navigateur, il vous faudra sans doute appuyer sur un bouton afin de voir le mail dans son format brut avant de l'enregistrer dans un fichier.
 
-There are slight differences for mbox-based email clients, but if you use one
-of these, you're probably the sort of person who can figure them out easily
-without reading tutorials!
+Il y a de légères différences dans le cas des clients de messagerie se basant sur le format mbox, mais si vous utilisez l'un d'entre eux, vous êtes sans aucun doute capable de vous en débrouiller facilement sans lire des tutoriels !
 
-=== Sorry, We've Moved ===
+(NdT: si votre dépôt contient des fichiers binaires, n'oubliez-pas d'ajouter l'option +--binary+ aux commandes de création de patches ci-dessus.)
 
-After cloning a repository, running *git push* or *git pull* will automatically
-push to or pull from the original URL. How does Git do this? The secret lies in
-config options created with the clone. Let's take a peek:
+=== Le numéro de votre correspondant a changé ===
+
+Après la création d'un clone d'un dépôt, l'utilisation de *git push* ou de *git pull* se référera automatiquement à l'URL du dépôt d'origine. Comment Git fait-il ? Le secret réside dans des options de configuration ajoutées dans le clone. Jetons-y un œil :
 
  $ git config --list
 
-The +remote.origin.url+ option controls the source URL; ``origin'' is a nickname
-given to the source repository. As with the ``master'' branch convention, we may
-change or delete this nickname but there is usually no reason for doing so.
+L'option +remote.origin.url+ détermine l'URL de la source ; ``origin'' est un surnom donné au dépôt d'origine. Comme dans le cas de la branche principale qui nomme ``master'' par convention, on peut changer ou supprimer ce surnom mais il n'y a habituellement aucune raison de le faire.
 
-If the original repository moves, we can update the URL via:
+Si le dépôt original change, vous pouvez modifier son URL via :
 
- $ git config remote.origin.url git://new.url/proj.git
+ $ git config remote.origin.url git://nouvel.url/proj.git
 
-The +branch.master.merge+ option specifies the default remote branch in
-a *git pull*. During the initial clone, it is set to the current branch of the
-source repository, so even if the HEAD of the source repository subsequently
-moves to a different branch, a later pull will faithfully follow the
-original branch.
+L'option +branch.master.merge+ spécifie le nom de la branche distante utilisée par défaut par la commande *git pull*. Lors du clonage initial, le nom choisi est celui de la branche courant du dépôt d'origine. Même si le HEAD du dépôt d'origine est déplacé vers une autre branche, la commande pull continuera à suivre fidêlement la branche initiale.
 
-This option only applies to the repository we first cloned from, which is
-recorded in the option +branch.master.remote+. If we pull in from other
-repositories we must explicitly state which branch we want:
+Cette option ne s'applique qu'au dépôt ayant servi au clonage initial, celui enregistré dans l'option +branch.master.remote+. Si nous effectuons un pull depuis un autre dépôt, nous devrons indiquer explicitement la branche voulue :
 
  $ git pull git://example.com/other.git master
 
-The above explains why some of our earlier push and pull examples had no
-arguments.
+Les détails ci-dessus expliquent pourquoi nos appels à push et pull dans nos précédents exemples n'avaient pas besoin d'arguments.
 
-=== Remote Branches ===
+=== Les branches distantes ===
 
-When you clone a repository, you also clone all its branches. You may not have
-noticed this because Git hides them away: you must ask for them specifically.
-This prevents branches in the remote repository from interfering with
-your branches, and also makes Git easier for beginners.
+Lorsque nous clonons un dépôt, nous clonons aussi toutes ses branches. Vous ne les avez sans doute pas remarquées car Git les cache : vous devez les demander explicitement. Cela empêche les branches du dépôt distant d'interférer avec vos propres branches et cela rend aussi Git plus simple pour les débutants.
 
-List the remote branches with:
+Listons les branches distantes :
 
  $ git branch -r
 
-You should see something like:
+Vous devriez voir quelque chose comme :
 
  origin/HEAD
  origin/master
  origin/experimental
 
-These represent branches and the HEAD of the remote repository, and can be used
-in regular Git commands. For example, suppose you have made many commits, and
-wish to compare against the last fetched version. You could search through the
-logs for the appropriate SHA1 hash, but it's much easier to type:
+Ces noms sont ceux des branches et du HEAD du dépôt distant et ils peuvent être utilisés dans les commandes Git normales. Supposez par exemple que vous avez réalisé de nombreux commits et que vous vouliez voir la différence avec la dernière version ramenée par fetch. Vous pourriez rechercher dans le log pour retrouver l'empreinte SHA1 appropriée mais il est beaucoup plus simple de tapez :
 
  $ git diff origin/HEAD
 
-Or you can see what the ``experimental'' branch has been up to:
+Vous pouvez aussi voir jusqu'où en est la branche ``experimental'' :
 
  $ git log origin/experimental
 
-=== Multiple Remotes ===
+=== Dépôts distants multiples ===
 
-Suppose two other developers are working on our project, and we want to
-keep tabs on both. We can follow more than one repository at a time with:
+Supposez que deux autres développeurs travaillent sur notre projet et que nous souhaitons garder un œil sur les deux. Nous pouvons suivre plus d'un dépôt à la fois grâce à :
 
- $ git remote add other git://example.com/some_repo.git
- $ git pull other some_branch
+ $ git remote add un_autre git://example.com/un_depot.git
+ $ git pull un_autre une_branche
 
-Now we have merged in a branch from the second repository, and we have
-easy access to all branches of all repositories:
+Maintenant nous avons fusionné avec une branche d'un second dépôt et nous avons accès facilement à toutes les branches de tous les dépôts :
 
- $ git diff origin/experimental^ other/some_branch~5
+ $ git diff origin/experimental^ un_autre/une_branche~5
 
-But what if we just want to compare their changes without affecting our own
-work? In other words, we want to examine their branches without having
-their changes invade our working directory. Then rather than pull, run:
+Mais comment faire si nous souhaitons juste comparer leurs modifications sans affecter notre travail ? En d'autres termes, nous voulons examiner leurs branches sans que leurs modifications envahissent notre répertoire de travail. À la place d'un pull, faisons :
 
- $ git fetch        # Fetch from origin, the default.
- $ git fetch other  # Fetch from the second programmer.
+ $ git fetch          # Rapatrier depuis le dépôt d'origin, par défaut
+ $ git fetch un_autre # Rapatrier depuis le dépôt d'un_autre
 
-This just fetches histories. Although the working directory remains untouched,
-we can refer to any branch of any repository in a Git command because we now
-possess a local copy.
+Cela rapatrie (fetch) juste les historiques. Bien que notre répertoire de travail reste inchangé, nous pouvons faire référence à n'importe quelle branche de n'importe quel dépôt dans nos commandes Git puisque nous en possédons maintenant une copie locale.
 
-Recall that behind the scenes, a pull is simply a *fetch* then *merge*.
-Usually we *pull* because we want to merge the latest commit after a fetch;
-this situation is a notable exception.
+Rappelez-vous qu'en coulisse, un *pull* est simplement un *fetch* suivi d'un *merge*. Habituellement nous faisons appel à *pull* car nous voulons fusionner (merge) les dernières modifications distantes après les avoir rapatriées (fetch). La situation ci-dessus est une exception notable.
 
-See *git help remote* for how to remove remote repositories, ignore certain
-branches, and more.
+Voir *get help remote* pour savoir comment supprimer des dépôts distants, ignorer certaines branches et bien plus encore.
 
-=== My Preferences ===
+=== Mes préférences ===
 
-For my projects, I like contributors to prepare repositories from which I can
-pull. Some Git hosting services let you host your own fork of a project with
-the click of a button.
+Pour mes projets, j'aime que mes contributeurs se confectionnent un dépôt depuis lequel je peux effectuer des pull. Certains services d'hébergement Git vous permettent de créer votre propre dépôt clone d'un projet en cliquant simplement sur un bouton.
 
-After I fetch a tree, I run Git commands to navigate and examine the changes,
-which ideally are well-organized and well-described. I merge my own changes,
-and perhaps make further edits. Once satisfied, I push to the main repository.
+Après avoir rapatrier (fetch) un arbre de modifications, j'utilise les commandes Git pour parcourir et examiner ces modifications qui, idéalement, sont bien organisées et bien décrites. Je fusionne mes propres modifications et effectue parfois quelques modifications supplémentaires. Une fois satisfait, je les envoie (push) vers le dépôt principal.
 
-Though I infrequently receive contributions, I believe this approach scales
-well. See
-http://torvalds-family.blogspot.com/2009/06/happiness-is-warm-scm.html[this
-blog post by Linus Torvalds].
+Bien que recevant rarement des contributions, je pense que mon approche s'étend parfaitement à grande échelle. Voir
+http://torvalds-family.blogspot.com/2009/06/happiness-is-warm-scm.html[ce billet par Linus Torvalds].
 
-Staying in the Git world is slightly more convenient than patch files, as it
-saves me from converting them to Git commits. Furthermore, Git handles details
-such as recording the author's name and email address, as well as the time and
-date, and asks the author to describe their own change.
+Rester dans le monde Git est un peu plus pratique que de passer par des fichiers de patch puisque cela m'évite d'avoir à les convertir en commits Git. De plus, Git gère les détails tels qu'enregistrer le nom de l'auteur, son adresse mail ainsi que la date et l'heure et il demande à l'auteur de décrire ses propres modifications.
