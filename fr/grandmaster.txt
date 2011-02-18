@@ -42,15 +42,14 @@ pour faire un commit incluant exactement les modifications qui vous avez sélect
 
 Que faire si vous avez modifié de nombreux fichiers contiennent de nombreuses modifications ? Vérifier chaque modification individuellement devient alors rapidement frustrant et abrutissant. Dans ce cas, utilisez la commande *git add -i* dont l'interface est moins facile mais beaucoup plus souple. En quelques touches vous pouvez ajouter ou retirer de votre index (voir ci-dessous) plusieurs fichiers d'un seul coup mais aussi valider ou non chacune des modifications individuellement pour certains fichiers. Vous pouvez aussi utilisez en remplacement la commande *git commit \--interactive* qui effectuera un commit automatiquement quand vous aurez terminé.
 
-=== L'index : l'aire de rassemblement (_stage_) de Git ===
-
+=== L'index : l'aire de rassemblement ===
 Jusqu'ici nous avons réussi à éviter de parler du fameux 'index' de Git mais nous devons maintenant le présenter pour mieux comprendre ce qui précède. L'index est une aire de rassemblement temporaire. Git ne transfert que très rarement de données depuis votre répertoire de travail directement vers votre historique. En fait, Git copie d'abord ces données dans l'index puis il copie toutes ces données depuis l'index vers leur destination finale.
 
 Un *commit -a*, par exemple, est en fait un processus en deux temps. La première étape consiste à construire dans l'index un instantané de l'état actuel de tous les fichiers suivis par Git. La seconde étape enregistre cet instantané de manière permanente dans l'historique. Effectuer un commit sans l'option *-a* réalise uniquement cette deuxième étape et cela n'a de sens qu'après avoir effectuer des commandes qui change l'index, telle que *git add*.
 
 Habituellement nous pouvons ignorer l'index et faire comme si nous échangions directement avec l'historique. Dans certaines occasions, nous voulons un contrôle fin et nous gérons donc l'index. Nous plaçons dans l'index un instantané de certaines modifications (mais pas toutes) et enregistrons de manière permanente cet instantané soigneusement construit.
 
-=== Ne perdez pas la tête (_HEAD_) ===
+=== Ne perdez pas la tête ===
 
 Le tag HEAD est comme un curseur qui pointe habituellement vers le tout dernier commit et qui avance à chaque commit. Certaines commandes Git vous permettent de le déplacer. Par exemple :
 
@@ -135,61 +134,48 @@ Le nouveau répertoire et ses fichiers peut être vu comme un clone, sauf que l'
 À ce jour, Git fait tout son possible pour que l'utilisateur ne puisse pas effacer accidentellement des données. Mais si vous savez ce que vous faites, vous pouvez passer outre les garde-fous des principales commandes.
 
 
-*Checkout*: Uncommitted changes cause checkout to fail. To destroy your changes, and checkout a given commit anyway, use the force flag:
+*Checkout*: des modifications non intégrées (via commit) peuvent causer l'échec d'un checkout. Pour détruire vos modifications et réussir quoiqu'il arrive un checkout d'un commit donné, utilisez l'option d'obligation :
 
   $ git checkout -f HEAD^
 
-On the other hand, if you specify particular paths for checkout, then there are no safety checks. The supplied paths are quietly overwritten. Take care if you use checkout in this manner.
+Inversement, si vous spécifier des chemins particuliers pour un checkout alors il n'y a pas de garde-fous. Le contenu des chemins est silencieusement réécrit. Faites attention lorsque vous utilisez un checkout de cette manière.
 
-*Reset*: Reset also fails in the presence of uncommitted changes. To force it through, run:
+*Reset*: Un reset échoue aussi en présence de modifications non intégrées. Pour passer outre, faites :
 
   $ git reset --hard 1b6d
 
-*Branch*: Deleting branches fails if this causes changes to be lost. To force a deletion, type:
+*Branch*: La suppression de branches échoue si cela implique la perte de versions. Par forcer la suppression, tapez :
 
-  $ git branch -D dead_branch  # instead of -d
+  $ git branch -D branche_morte  # à la place de -d
 
-Similarly, attempting to overwrite a branch via a move fails if data loss would ensue. To force a branch move, type:
+De manière similaire, une tentative de réécriture d'une branche existante via un changement nom d'une autre branche échoue si cela amène la perte de versions. Pour forcer le changement de nom, tapez :
 
-  $ git branch -M source target  # instead of -m
+  $ git branch -M source target  # à la place de -m
 
-Unlike checkout and reset, these two commands defer data destruction. The
-changes are still stored in the .git subdirectory, and can be retrieved by
-recovering the appropriate hash from `.git/logs` (see "HEAD-hunting" above).
-By default, they will be kept for at least two weeks.
+Contrairement à checkout et reset, ces deux dernières commandes n'effectuent pas la suppression des informations immédiatement. Les versions destinées à disparaître sont encore disponibles dans le sous-répertoire .git et peuvent encore être retrouvées grâce aux hash appropriés tel que retrouvés dans `.git/logs` (voir "Chasseur de tête" ci-dessus). Par défaut, elles sont conservées au moins deux semaines.
 
-*Clean*: Some git commands refuse to proceed because they're worried about
-clobbering untracked files. If you're certain that all untracked files and
-directories are expendable, then delete them mercilessly with:
+*Clean*: certaines commandes Git refusent de s'exécuter pour ne pas écraser des fichiers non suivis. Si vous êtes certain que tous ces fichiers et répertoires peuvent être sacrifiés alors effacez-les sans pitié via :
 
   $ git clean -f -d
 
-Next time, that pesky command will work!
+Ensuite, la commande trop prudente fonctionnera !
 
-=== Preventing Bad Commits ===
+=== Se prémunir des commits erronés ===
 
-Stupid mistakes pollute my repositories. Most frightening are missing files due
-to a forgotten *git add*. Lesser transgressions are trailing whitespace and
-unresolved merge conflicts: though harmless, I wish these never appeared on the
-public record.
+Des erreurs stupides polluent mes dépôts. Les plus effrayantes sont dues à des fichiers manquants car oubliés lors des *git add*. D'autres erreurs moins graves concernent les espaces blancs inutiles ou les conflits de fusion non résolus : bien qu'inoffensives, j'aimerais qu'elles n'apparaissent pas dans les versions publiques.
 
-If only I had bought idiot insurance by using a _hook_ to alert me about these problems:
+Si seulement je m'en étais prémuni en utilisant un _hook_ (un crochet) pour m'alerter de ces problèmes :
 
  $ cd .git/hooks
- $ cp pre-commit.sample pre-commit  # Older Git versions: chmod +x pre-commit
+ $ cp pre-commit.sample pre-commit  # Vieilles versions de Git : chmod +x pre-commit
 
-Now Git aborts a commit if useless whitespace or unresolved merge conflicts are
-detected.
+Maintenant Git empêchera un commit s'il détecte des espace inutiles ou s'il reste des conflits de fusion non résolus.
 
-For this guide, I eventually added the following to the beginning of the
-*pre-commit* hook to guard against absent-mindedness:
+Pour gérer ce guide, j'ai aussi ajouté les lignes ci-dessous au début de mon hook *pre-commit* pour me prémunir de mes inattentions :
 
  if git ls-files -o | grep '\.txt$'; then
    echo FAIL! Untracked .txt files.
    exit 1
  fi
 
-Several git operations support hooks; see *git help hooks*. We activated the
-sample *post-update* hook earlier when discussing Git over HTTP. This runs
-whenever the head moves. The sample post-update script updates files Git needs
-for communication over Git-agnostic transports such as HTTP.
+Plusieurs opération de Git acceptent les hooks ; voir *git help hooks*. Nous avons déjà utilisé le  hook *post-update* lorsque nous avons parlé de Git au-dessus de HTTP. Celui-ci se déclenche à mouvement de HEAD. Le script d'exemple post-update met à jour les fichiers Git nécessaire à une communication au-dessus de transports agnostique tels que HTTP.
