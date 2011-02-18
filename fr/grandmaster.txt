@@ -70,80 +70,70 @@ Mais que faire si vous ne l'avez pas regardé ? Pas de panique : pour des comman
 
 === Chasseur de tête ===
 
-Perhaps ORIG_HEAD isn't enough. Perhaps you've just realized you made a monumental mistake and you need to go back to an ancient commit in a long-forgotten branch.
+Peut-être que ORIG_HEAD ne vous suffit pas. Peut-être venez-vous de vous apercevoir que vous avez fait une monumentale erreur et que vous devez revenir à une ancienne version d'une branche oubliée depuis longtemps.
 
-By default, Git keeps a commit for at least two weeks, even if you ordered
-Git to destroy the branch containing it. The trouble is finding the appropriate
-hash. You could look at all the hash values in `.git/objects` and use trial
-and error to find the one you want. But there's a much easier way.
+Par défaut, Git conserve un commit au moins deux semaine même si vous avez demandé à Git de détruire la branche qui le contient. La difficulté consiste à retrouver le hash approprié. Vous pouvez toujours explorer les différentes valeurs de hash trouvées dans `.git/objects` et retrouver celle que vous cherchez par essai et erreur. Mais il existe un moyen plus simple.
 
-Git records every hash of a commit it computes in `.git/logs`. The subdirectory `refs` contains the history of all activity on all branches, while the file `HEAD` shows every hash value it has ever taken. The latter can be used to find hashes of commits on branches that have been accidentally lopped off.
+Git enregistre le hash de chaque commit qu'il traite dans `.git/logs`. La sous-répertoire `refs` contient l'historique de toute l'activité de chaque branche alors que le fichier `HEAD` montre chaque valeur de hash que HEAD a pu prendre. Ce dernier peut donc servir à retrouver les commits d'une branche qui a été accidentellement élaguée.
 
-The reflog command provides a friendly interface to these log files. Try
+La commande reflog propose une interface sympa vers ces fichiers de log. Essayez: 
 
   $ git reflog
 
-Instead of cutting and pasting hashes from the reflog, try:
+Au lieu de copier/coller un hash listé par reflog, essayez :
 
  $ git checkout "@{10 minutes ago}"
 
-Or checkout the 5th-last visited commit via:
+Ou basculez vers le cinquième précédent commit visité via :
 
  $ git checkout "@{5}"
 
-See the ``Specifying Revisions'' section of *git help rev-parse* for more.
+Voir la section ``Specifying Revisions'' de *git help rev-parse* pour en savoir plus.
 
-You may wish to configure a longer grace period for doomed commits. For
-example:
+Vous pouvez configurer une plus longue période de grâce pour les commits condamnés. Par exemple :
 
   $ git config gc.pruneexpire "30 days"
 
-means a deleted commit will only be permanently lost once 30 days have passed
-and *git gc* is run.
+signifie qu'un commit effacé ne le sera véritablement qu'après 30 jours et lorsque $git gc* tournera.
 
-You may also wish to disable automatic invocations of *git gc*:
+Vous pouvez aussi désactiver le déclenchement automatique de *git gc* :
 
   $ git config gc.auto 0
 
-in which case commits will only be deleted when you run *git gc* manually.
+auquel cas les commits ne seront véritablement effacés que lorsque vous lancerez *git run* manuellement.
 
-=== Building On Git ===
+=== Construire au-dessus de Git ===
 
-In true UNIX fashion, Git's design allows it to be easily used as a low-level component of other programs, such as GUI and web interfaces, alternative command-line interfaces, patch managements tools, importing and conversion tools and so on. In fact, some Git commands are themselves scripts standing on the shoulders of giants. With a little tinkering, you can customize Git to suit your preferences.
+À la manière d'UNIX, la conception de Git permet son utilisation comme un composant de bas niveau d'autres programmes tels que des interfaces graphiques ou web, des interfaces en ligne de commandes alternatives, des outils de gestion de patch, des outils d'importation et de conversion, etc. En fait, certaines commandes Git sont de simples scripts s'appuyant sur les commandes de base, comme des nains sur des épaules de géants. Avec un peu de bricolage, vous pouvez adapter Git à vos préférences.
 
-One easy trick is to use built-in Git aliases to shorten your most frequently
-used commands:
+Une astuce facile consiste à créer des alias Git pour raccourcir les commandes que vous utilisez le plus fréquemment :
 
   $ git config --global alias.co checkout
-  $ git config --global --get-regexp alias  # display current aliases
+  $ git config --global --get-regexp alias  # affiche les alias connus
   alias.co checkout
-  $ git co foo                              # same as 'git checkout foo'
+  $ git co foo                              # identique à 'git checkout foo'
 
-Another is to print the current branch in the prompt, or window title.
-Invoking
+Une autre astuce consiste à intégrer le nom de la branche courant dans votre prompt ou dans le titre de la fenêtre. L'invocation de :
 
   $ git symbolic-ref HEAD
 
-shows the current branch name. In practice, you most likely want to remove
-the "refs/heads/" and ignore errors:
+montre le nom complet de la branche courante. En pratique, vous souhaiterez probablement enlever "refs/heads/" et ignorer les erreurs :
 
   $ git symbolic-ref HEAD 2> /dev/null | cut -b 12-
 
-The +contrib+ subdirectory is a treasure trove of tools built on Git.
-In time, some of them may be promoted to official commands. On Debian and
-Ubuntu, this directory lives at +/usr/share/doc/git-core/contrib+.
+Le sous-répertoire +contrib+ est une mine d'outils construits par dessus Git. Un jour, certains d'entre eux pourraient être promus au rang de commandes officielles. Dans Debian et Ubuntu, ce répertoire est  +/usr/share/doc/git-core/contrib+.
 
-One popular resident is +workdir/git-new-workdir+. Via clever symlinking, this script creates a new working directory whose history is shared with the original repository:
+L'un des plus populaires de ces scripts est +workdir/git-new-workdir+. Grâce 
+à des liens symboliques intelligents, ce script crée un nouveau dépôt dont l'historique est partagé avec le dépôt original.
 
-  $ git-new-workdir an/existing/repo new/directory
+  $ git-new-workdir un/existant/depot nouveau/repertoire
 
-The new directory and the files within can be thought of as a clone, except since the history is shared, the two trees automatically stay in sync. There's no need to merge, push, or pull.
+Le nouveau répertoire et ses fichiers peut être vu comme un clone, sauf que l'historique est partagé et que les deux arbres des versions reste automatiquement synchrones. Nul besoin de merge, push ou pull.
 
-=== Daring Stunts ===
+=== Audacieuses acrobaties  ===
 
-These days, Git makes it difficult for the user to accidentally destroy data.
-But if you know what you are doing, you can override safeguards for common
-commands.
+À ce jour, Git fait tout son possible pour que l'utilisateur ne puisse pas effacer accidentellement des données. Mais si vous savez ce que vous faites, vous pouvez passer outre les garde-fous des principales commandes.
+
 
 *Checkout*: Uncommitted changes cause checkout to fail. To destroy your changes, and checkout a given commit anyway, use the force flag:
 
