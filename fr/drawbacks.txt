@@ -1,3 +1,4 @@
+// -*- mode: doc; mode: flyspell; coding: utf-8; fill-column: 79; -*-
 == Appendix A: Les lacunes de Git ==
 
 Git présente quelques problèmes que j'ai soigneusement cachés. Certains peuvent
