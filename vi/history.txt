@@ -2,9 +2,9 @@
 
 Một hệ quả tất yếu của đặc tính phân tán của Git là việc lịch sử có thể biên soạn lại một cách
 dễ dàng. Nhưng nếu bạn xáo trộn quá khứ, hãy cẩn thận: chỉ biên soạn lại quá khứ trong lịch sử
-chỉ khi bạn sở hữu nó một mình. Just as nations forever argue over who
-committed what atrocity, nếu một người khác có một bản sao mà lịch sử của nó lại khác với
-cái của bạn, bạn sẽ gặp rắc rối ngay.
+chỉ khi bạn sở hữu nó một mình. Cũng giống như việc các quốc gia tranh cãi không kết thúc xem ai là người
+tận tâm hành động nào là tàn ác, nếu một người khác có một bản sao mà lịch sử của nó lại khác với
+cái của bạn, bạn sẽ gặp rắc rối ngay khi cần tương tác với họ.
 
 Một số nhà phát triển phần mềm quả quyết rằng lịch sử không thể thay đổi, tất cả mọi thứ.
 Một số khác lại cho rằng chỉnh sửa lại cấu trúc trước khi phát hành nó ra
@@ -72,10 +72,10 @@ Xem thêm trong *git help rebase* để thấy được chi tiết các ví dụ
 
 === Viết Lại Lịch Sử ===
 
-Thỉnh thoảng, bạn muốn việc quản lý mã nguồn giống việc người ta sơn vẽ quivalent of airbrushing people out
-of official photos, việc tẩy xóa chúng từ lịch sử in a Stalinesque fashion. Ví
-dụ, giả sử chúng ta có ý định phát hành dự án, nhưng lại liên đới đến một tệp tin mà nó
-phải được giữ bí mật vì lý do nào đó. Chẳng hạn như tôi đã quên khi ghi lại số thẻ tín dụng vào trong một tệp tin
+Thỉnh thoảng, bạn muốn việc quản lý mã nguồn giống việc người ta sơn vẽ chân dung một
+con người, tẩy xóa chúng từ lịch sử như theo ý của Stalinesque. Ví dụ,
+giả sử chúng ta có ý định phát hành dự án, nhưng lại liên đới đến một tệp tin mà nóphải được giữ bí mật
+vì lý do nào đó. Chẳng hạn như tôi đã quên khi ghi lại số thẻ tín dụng vào trong một tệp tin
 văn bản và ngẫu nhiên nó được thêm vào trong dự án. Việc xóa tệp tin này là
 chưa đủ, bởi vì ta có thể đọc nó từ lần commit cũ. Chúng ta phải gỡ bỏ
 tệp tin này từ tất cả các lần đã commit:
@@ -86,7 +86,7 @@ Xem *git help filter-branch*, nội dung của nó sẽ thảo luận về ví d
 nhanh hơn. Đại thể, lệnh *filter-branch* giúp bạn thay đổi cả một chương lớn của lịch sử chỉ
 chỉ bằng một lệnh đơn.
 
-Sau này, thư mục +.git/refs/original+ mô tả trạng thái của công việc trước khi thực hiện. Check the filter-branch command did what you wanted, sau đó xóa thư mục này đi nếu bạn muốn chạy lệnh filter-branch lần nữa.
+Sau này, thư mục +.git/refs/original+ mô tả trạng thái của công việc trước khi thực hiện. Kiểm tra lệnh filter-branch đã làm những thứ bạn muốn chưa, sau đó xóa thư mục này đi nếu bạn muốn chạy lệnh filter-branch lần nữa.
 
 Cuối cùng, thay thế bản sao của dự án của bạn bằng phiên bản bạn đã sửa lại nếu bạn muốn tương thích với chúng sau này.
 
@@ -219,9 +219,9 @@ trình duyệt web.
 
 Tôi sẽ sốc nếu như sau này bị bắt buộc sử dụng hệ thống quản lý mã nguồn tập trung. Một kết nối
 Internet chậm chạp cũng chẳng phải là vấn đề lớn đối với Git, nhưng nó sẽ làm cho các
-nhà phát triển phần mềm không thể chịu nổi khi nó cần sự tin cậy như ổ đĩa nội bộ. Thêm nữa, tôi đã tìm thấy chính mình conditioned
-to avoid certain commands because of the latencies involved, which ultimately
-prevented me from following my desired work flow.
+nhà phát triển phần mềm không thể chịu nổi khi nó cần sự tin cậy như ổ đĩa nội bộ. Thêm nữa,
+tôi đã gặp một số mắc mớ với một số lệnh, mà chính nó
+đã ngăn cản tôi làm việc một cách trôi chảy.
 
 Khi tôi phải chạy những lệnh cần nhiều thời gian, việc làm ngắt quãng việc suy nghĩ
 sẽ gây nên thiệt hại rất to lớn. Trong khi chờ cho việc truyền thông
@@ -233,5 +233,5 @@ chính của mình, lệnh đã hoàn tất từ lâu rồi, và tôi phải lã
 Ở đây còn có một hậu quả rất đáng quan tâm nữa: đoán trước được việc tắc nghẽn của mạng máy tính,
 nhiều cá nhân riêng lẻ có thể chiếm dụng nhiều lưu lượng mạng hơn cần thiết trên các tác vụ
 khác nhau để cố gắng giảm thiểu sự chậm trễ có thể xảy ra trong tương lai. Hậu quả cuối cùng là
-sự quá tải quá mức, vô tình việc ủng hộ việc tiêu dùng cá nhân như thế làm đốt cháy nhiều lưu lượng mạng hơn
+sự quá tải quá mức, việc vô tình việc ủng hộ việc tiêu dùng cá nhân như thế làm đốt cháy nhiều lưu lượng mạng hơn
 và sau đó nó làm cho việc tắc nghẽn càng lúc càng trở nên tồi tệ hơn.
