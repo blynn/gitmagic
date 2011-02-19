@@ -1,43 +1,71 @@
-// -*- mode: doc; mode: visual-line; mode: flyspell; coding: utf-8; -*-
+// -*- mode: doc; mode: flyspell; coding: utf-8; fill-column: 79; -*-
 == Annexe A : les lacunes de Git ==
 
-Git présente quelques problèmes que j'ai soigneusement cachés. Certains peuvent être résolus par des scripts et des hooks, d'autres nécessitent une réorganisation ou une redéfinition du projet et pour les quelques rares ennuis restants, il vous suffit d'attendre. Ou mieux encore, de donner un coup de main.
+Git présente quelques problèmes que j'ai soigneusement cachés. Certains peuvent
+être résolus par des scripts et des hooks, d'autres nécessitent une
+réorganisation ou une redéfinition du projet et pour les quelques rares ennuis
+restants, il vous suffit d'attendre. Ou mieux encore, de donner un coup de
+main.
 
 === Les faiblesses de SHA1 ===
 
-Avec le temps, les spécialistes de cryptographie découvrent de plus en plus de faiblesses de SHA1. À ce jour, la découverte de collisions de hashs semble à la portée d'organisations bien dotée. Et d'ici quelques années, peut-être que même un simple PC aura assez de puissance de calcul pour corrompre de manière indétectable un dépôt Git.
+Avec le temps, les spécialistes de cryptographie découvrent de plus en plus de
+faiblesses de SHA1. À ce jour, la découverte de collisions de hashs semble à la
+portée d'organisations bien dotée. Et d'ici quelques années, peut-être que même
+un simple PC aura assez de puissance de calcul pour corrompre de manière
+indétectable un dépôt Git.
 
-Heureusement Git aura migrer vers une fonction de hachage de meilleure qualité avant que de futures recherches détruisent SHA1.
+Heureusement Git aura migrer vers une fonction de hachage de meilleure qualité
+avant que de futures recherches détruisent SHA1.
 
 === Microsoft Windows ===
 
 Git sur Microsoft Windows peut être jugé encombrant :
 
-- http://cygwin.com/[Cygwin] est un environnement à-la-Linux pour Windows proposant http://cygwin.com/packages/git/[un portage de Git].
+- http://cygwin.com/[Cygwin] est un environnement à-la-Linux pour Windows
+  proposant http://cygwin.com/packages/git/[un portage de Git].
 
-- http://code.google.com/p/msysgit/[Git on MSys] est un autre choix nécessitant beaucoup moins de place. Néanmoins quelques commandes doivent encore être améliorées.
+- http://code.google.com/p/msysgit/[Git on MSys] est un autre choix nécessitant
+  beaucoup moins de place. Néanmoins quelques commandes doivent encore être
+  améliorées.
 
 === Des fichiers sans relation  ===
 
-Si votre projet est très gros et contient de nombreux fichiers sans relation entre eux et changeant constamment, Git peut être plus défavorisé que d'autres systèmes puisque les fichiers pris séparément ne sont pas pistés. Git piste les changement de l'ensemble du projet, ce qui est habituellement bénéfique.
+Si votre projet est très gros et contient de nombreux fichiers sans relation
+entre eux et changeant constamment, Git peut être plus défavorisé que d'autres
+systèmes puisque les fichiers pris séparément ne sont pas pistés. Git piste les
+changement de l'ensemble du projet, ce qui est habituellement bénéfique.
 
-Une solution consiste à découper votre projet en plusieurs parties, chacune réunissant des fichiers en relation entre eux. Utilisez *git submodule* si vous souhaitez conserver tout cela dans un seul répertoire.
+Une solution consiste à découper votre projet en plusieurs parties, chacune
+réunissant des fichiers en relation entre eux. Utilisez *git submodule* si vous
+souhaitez conserver tout cela dans un seul répertoire.
 
 === Qui modifie quoi ? ===
 
-Certains systèmes de gestion de versions vous oblige à marquer explicitement un fichier avant de pouvoir le modifier. Bien que particulièrement ennuyeux puisque pouvant impliquer une communication avec un serveur central, cela présente deux avantages :
+Certains systèmes de gestion de versions vous oblige à marquer explicitement un
+fichier avant de pouvoir le modifier. Bien que particulièrement ennuyeux
+puisque pouvant impliquer une communication avec un serveur central, cela
+présente deux avantages :
 
-  1. Les diffs sont plus rapides puisque seuls les fichiers marqués doivent être examinés.
+  1. Les diffs sont plus rapides puisque seuls les fichiers marqués doivent
+  être examinés.
 
-  2. Quelqu'un peut savoir qui travaille sur un fichier en demandant au serveur central qui l'a marqué pour modification.
+  2. Quelqu'un peut savoir qui travaille sur un fichier en demandant au serveur
+  central qui l'a marqué pour modification.
 
-Avec quelques scripts appropriés, vous pouvez obtenir la même chose avec Git. Cela nécessite la coopération du développeur qui doit exécuter un script particulier avant toute modification d'un fichier.
+Avec quelques scripts appropriés, vous pouvez obtenir la même chose avec
+Git. Cela nécessite la coopération du développeur qui doit exécuter un script
+particulier avant toute modification d'un fichier.
 
 === File History ===
 
-Since Git records project-wide changes, reconstructing the history of a single file requires more work than in version control systems that track individual files.
+Since Git records project-wide changes, reconstructing the history of a single
+file requires more work than in version control systems that track individual
+files.
 
-The penalty is typically slight, and well worth having as other operations are incredibly efficient. For example, `git checkout` is faster than `cp -a`, and project-wide deltas compress better than collections of file-based deltas.
+The penalty is typically slight, and well worth having as other operations are
+incredibly efficient. For example, `git checkout` is faster than `cp -a`, and
+project-wide deltas compress better than collections of file-based deltas.
 
 === Initial Clone ===
 

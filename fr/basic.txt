@@ -1,17 +1,22 @@
-// -*- mode: doc; mode: visual-line; -*-
+// -*- mode: doc; mode: visual-line; mode: flyspell; coding: utf-8; fill-column: 79; -*-
 == Astuces de base  ==
 
-Plutôt que de plonger dans l'océan des commandes Git, utilisez ces commandes élémentaires pour vous tremper les pieds. Malgré leur simplicité, chacune d'elles est utile.  En effet, lors de mon premier mois d'utilisation de Git, je ne me suis jamais aventuré au delà de ce qui est exposé dans ce chapitre.
+Plutôt que de plonger dans l'océan des commandes Git, utilisez ces commandes
+élémentaires pour vous tremper les pieds. Malgré leur simplicité, chacune
+d'elles est utile.  En effet, lors de mon premier mois d'utilisation de Git, je
+ne me suis jamais aventuré au delà de ce qui est exposé dans ce chapitre.
 
 === Enregistrer l'état courant ===
 
-Vous êtes sur le point d'effectuer une opération drastique ? Avant de le faire, réalisez une capture de tous les fichiers dans le dossier courant :
+Vous êtes sur le point d'effectuer une opération drastique ? Avant de le faire,
+réalisez une capture de tous les fichiers dans le dossier courant :
 
  $ git init
  $ git add .
  $ git commit -m "Ma première sauvegarde"
 
-Si jamais votre opération tourne mal, vous pouvez retrouver votre version initiale, immaculée :
+Si jamais votre opération tourne mal, vous pouvez retrouver votre version
+initiale, immaculée :
 
  $ git reset --hard
 
@@ -21,7 +26,9 @@ Pour enregistrer à nouveau l'état :
 
 === Ajouter, supprimer, renommer ===
 
-Les commandes ci-dessus ne font que garder trace des fichiers qui étaient présents lorsque vous avez exécuté *git add* pour la première fois. Si vous ajoutez de nouveaux fichiers ou sous-dossiers, il faut le signaler à Git :
+Les commandes ci-dessus ne font que garder trace des fichiers qui étaient
+présents lorsque vous avez exécuté *git add* pour la première fois. Si vous
+ajoutez de nouveaux fichiers ou sous-dossiers, il faut le signaler à Git :
 
  $ git add readme.txt Documentation
 
@@ -32,17 +39,21 @@ De même, si vous voulez que Git oublie certains fichiers :
 
 Git supprime les fichiers pour vous si vous ne l'avez pas encore fait.
 
-Renommer un fichier revient à supprimer l'ancien nom et ajouter le nouveau. Il y a également le raccourci *git mv* qui à la même syntaxe que la commande mv. Par exemple :
+Renommer un fichier revient à supprimer l'ancien nom et ajouter le nouveau. Il
+y a également le raccourci *git mv* qui à la même syntaxe que la commande
+mv. Par exemple :
 
  $ git mv bug.c feature.c
 
 === Annuler/Reprendre avancé ===
 
-Parfois vous voulez seulement revenir en arrière et oublier les modifications depuis un certain moment parce qu'elles sont toutes fausses. Dans ce cas :
+Parfois vous voulez seulement revenir en arrière et oublier les modifications
+depuis un certain moment parce qu'elles sont toutes fausses. Dans ce cas :
 
  $ git log
 
-vous montre une liste des commits récents, accompagnés de leur clé de hachage (_hash_) SHA1 :
+vous montre une liste des commits récents, accompagnés de leur clé de hachage
+(_hash_) SHA1 :
 
 ----------------------------------
 commit 766f9881690d240ba334153047649b8b8f11c664
@@ -58,57 +69,81 @@ Date:   Thu Jan 1 00:00:00 1970 +0000
     Commit initial
 ----------------------------------
 
-Les premiers charactères du hash sont suffisants pour spécifier un commit ; ou alors, copiez et collez le hash en entier. Saisissez :
+Les premiers caractères du hash sont suffisants pour spécifier un commit ; ou
+alors, copiez et collez le hash en entier. Saisissez :
 
  $ git reset --hard 766f
 
-pour restaurer l'état correspondant au commit donné et supprimer de manière permanente tout les commit plus récents de l'enregistrement.
+pour restaurer l'état correspondant au commit donné et supprimer de manière
+permanente tout les commit plus récents de l'enregistrement.
 
-D'autres fois vous voulez faire un saut rapide dans un état précédent. Dans ce cas, saisissez :
+D'autres fois vous voulez faire un saut rapide dans un état précédent. Dans ce
+cas, saisissez :
 
  $ git checkout 82f5
 
-Ceci vous ramène en arrière dans le temps, tout en conservant les commit récents. Toutefois, comme pour le voyage dans le temps de la science-fiction, si vous modifiez et faites un commit, vous serez dans une réalité alternative, parce que vos actions sont différentes de ce qu'elles étaient la première fois.
+Ceci vous ramène en arrière dans le temps, tout en conservant les commit
+récents. Toutefois, comme pour le voyage dans le temps de la science-fiction,
+si vous modifiez et faites un commit, vous serez dans une réalité alternative,
+parce que vos actions sont différentes de ce qu'elles étaient la première fois.
 
-Cette réalité alternative est appelée une 'branche' ('branch'), et <<branch,nous en dirons plus après>>. Pour le moment rapellez vous simplement que :
+Cette réalité alternative est appelée une 'branche' ('branch'), et
+<<branch,nous en dirons plus après>>. Pour le moment rappelez vous simplement
+que :
 
  $ git checkout master
 
-vous ramènera dans le présent. De plus, pour éviter que Git se plaigne, réalisez toujours un commit ou un reset de vos modifications avant de faire un checkout.
+vous ramènera dans le présent. De plus, pour éviter que Git se plaigne,
+réalisez toujours un commit ou un reset de vos modifications avant de faire un
+checkout.
 
 Pour reprendre l'analogie du jeux vidéo :
 
-- *`git reset --hard`* : recharger une ancienne sauvegarde et supprimer toutes les sauvegardes plus récentes.
+- *`git reset --hard`* : recharger une ancienne sauvegarde et supprimer toutes
+   les sauvegardes plus récentes.
 
-- *`git checkout`* : recharger une ancienne partie, mais si vous jouez avec, l'état de la partie va différer des enregistrement suivants que vous aviez réalisés la première fois. Chaque nouvelle sauvegarde sera sur une branche séparée représentant la réalité alternative dans laquelle vous êtes entré. <<branch,On s'en occupe plus loin>>.
+- *`git checkout`* : recharger une ancienne partie, mais si vous jouez avec,
+   l'état de la partie va différer des enregistrement suivants que vous aviez
+   réalisés la première fois. Chaque nouvelle sauvegarde sera sur une branche
+   séparée représentant la réalité alternative dans laquelle vous êtes
+   entré. <<branch,On s'en occupe plus loin>>.
 
 
-Vous pouvez choisir de ne restaurer que certains fichiers et sous-dossiers en les nommant à la suite de la commande :
+Vous pouvez choisir de ne restaurer que certains fichiers et sous-dossiers en
+les nommant à la suite de la commande :
 
  $ git checkout 82f5 un.fichier un-autre.fichier
 
-Faites attention car cette forme de *checkout* peut écraser vos fichiers sans crier gare. Pour éviter les accidents, faites un commit avant toute commande checkout, surtout quand vous débutez avec Git. En général, quand vous n'êtes pas sûr de vous sur une opération, et pas seulement pour une commande Git, faites d'abord un *git commit -a*.
+Faites attention car cette forme de *checkout* peut écraser vos fichiers sans
+crier gare. Pour éviter les accidents, faites un commit avant toute commande
+checkout, surtout quand vous débutez avec Git. En général, quand vous n'êtes
+pas sûr de vous sur une opération, et pas seulement pour une commande Git,
+faites d'abord un *git commit -a*.
 
-Vous n'aimez pas copier et coller les clés de hashages ? Alors utilisez :
+Vous n'aimez pas copier et coller les clés de hachages ? Alors utilisez :
 
  $ git checkout :/"Mon premier b"
 
-pour arriver sur le commit qui commence avec ce message.  Vous pouvez aussi demander la cinquième sauvegarde en arrière :
+pour arriver sur le commit qui commence avec ce message.  Vous pouvez aussi
+demander la cinquième sauvegarde en arrière :
 
  $ git checkout master~5
 
 === Reprise (revert) ===
 
-Dans une cours de justice, certains évènements peuvent être effacés du procès verbal. De même vous pouvez sélectionner des commits spécifiques à défaire :
+Dans une cours de justice, certains évènements peuvent être effacés du procès
+verbal. De même vous pouvez sélectionner des commits spécifiques à défaire :
 
  $ git commit -a
  $ git revert 1b6d
 
-défera le dernier commit ayant cette clé de hashage. La reprise est enregistrée comme un nouveau commit, ce que vous pourrez constater en lançant un *git log*.
+défera le dernier commit ayant cette clé de hachage. La reprise est enregistrée
+comme un nouveau commit, ce que vous pourrez constater en lançant un *git log*.
 
 === Génération du journal des modifications (changelog) ===
 
-Certains projets demandent un http://en.wikipedia.org/wiki/Changelog[changelog].  Générez-le en tapant :
+Certains projets demandent un
+http://en.wikipedia.org/wiki/Changelog[changelog].  Créez-le en tapant :
 
  $ git log > ChangeLog
 
@@ -122,17 +157,24 @@ Par exemple, pour avoir les fichiers qui ont été utilisés pour créer ce site
 
  $ git clone git://git.or.cz/gitmagic.git
 
-Nous aurons beaucoup à dire sur la command *clone* d'ici peu.
+Nous aurons beaucoup à dire sur la commande *clone* d'ici peu.
 
 === Le dernier cri ===
 
-Si vous avez déjà téléchargé une copie d'un projet en utilisant *git clone*, vous pouvez la mettre à jour vers la dernière version avec :
+Si vous avez déjà téléchargé une copie d'un projet en utilisant *git clone*,
+vous pouvez la mettre à jour vers la dernière version avec :
 
  $ git pull
 
 === Publication instantanée ===
 
-Imaginez que vous avec écrit un script que vous voudriez partager avec d'autres. Vous pourriez leur dire de le télécharger de votre ordinateur, mais s'ils le font au moment où vous êtes en train d'améliorer le script ou d'y effectuer des modifications expérimentales, ils peuvent se retrouver dans la panade. Bien sûr, c'est pour cela qu'on a créé la publication de versions successives. Les développeurs peuvent travailler sur un projet fréquement, mais ils ne rendent le code disponible quand lorsqu'ils le trouvent présentable.
+Imaginez que vous avec écrit un script que vous voudriez partager avec
+d'autres. Vous pourriez leur dire de le télécharger de votre ordinateur, mais
+s'ils le font au moment où vous êtes en train d'améliorer le script ou d'y
+effectuer des modifications expérimentales, ils peuvent se retrouver dans la
+panade. Bien sûr, c'est pour cela qu'on a créé la publication de versions
+successives. Les développeurs peuvent travailler sur un projet fréquemment, mais
+ils ne rendent le code disponible quand lorsqu'ils le trouvent présentable.
 
 Pour faire ça avec Git, dans le dossier qui contient votre script :
 
@@ -144,19 +186,23 @@ Ensuite vous pouvez dire à vos utilisateurs de lancer :
 
  $ git clone votre.ordinateur:/chemin/vers/le/script
 
-pour télécharger votre script. En considérant qu'ils ont un accès ssh. Sinon, lancez *git daemon* et dites plutôt à vos utilisateur de lancer :
+pour télécharger votre script. En considérant qu'ils ont un accès ssh. Sinon,
+lancez *git daemon* et dites plutôt à vos utilisateur de lancer :
 
  $ git clone git://votre.ordinateur/chemin/vers/le/script
 
-À partir de maintenant, chaque fois que votre script est prêt à être publié, exécutez :
+À partir de maintenant, chaque fois que votre script est prêt à être publié,
+exécutez :
 
  $ git commit -a -m "Nouvelle version"
 
-et vos utilisateurs peuvent mettre à jour leur version en allant dans leur dossier contenant votre script et en saisissant :
+et vos utilisateurs peuvent mettre à jour leur version en allant dans leur
+dossier contenant votre script et en saisissant :
 
  $ git pull
 
-Vos utilisateurs ne se retrouveront jamais avec une version de votre script que vous ne vouliez pas leur montrer.
+Vos utilisateurs ne se retrouveront jamais avec une version de votre script que
+vous ne vouliez pas leur montrer.
 
 === Qu'ai-je fait ? ===
 
@@ -172,34 +218,49 @@ Ou entre une version spécifique et la version deux commits en arrière :
 
  $ git diff 1b6d "master~2"
 
-Dans chacun de ces cas, la sortie est un *patch* (rustine) qui peut être appliqué en utilisant *git apply*.  Vous pouvez aussi essayer :
+Dans chacun de ces cas, la sortie est un *patch* (rustine) qui peut être
+appliqué en utilisant *git apply*.  Vous pouvez aussi essayer :
 
  $ git whatchanged --since="2 weeks ago"
 
-Souvent je parcours plutôt l'historique avec http://sourceforge.net/projects/qgit[qgit], pour sa pimpante interface photogénique, ou http://jonas.nitro.dk/tig/[tig], une interface en mode texte qui fonctionne même sur les connexions lentes. Autrement, installez un serveur web, lancez *git instaweb* et dégainez n'importe quel navigateur internet.
+Souvent je parcours plutôt l'historique avec
+http://sourceforge.net/projects/qgit[qgit], pour sa pimpante interface
+photogénique, ou http://jonas.nitro.dk/tig/[tig], une interface en mode texte
+qui fonctionne même sur les connexions lentes. Autrement, installez un serveur
+web, lancez *git instaweb* et dégainez n'importe quel navigateur internet.
 
 
 === Exercice ===
 
-Soit A, B, C, D quatre commits successifs où B est identique à A à l'exception de quelques fichiers qui ont été supprimés. Nous voudrions remettre les fichiers en D. Comment faire ?
+Soit A, B, C, D quatre commits successifs où B est identique à A à l'exception
+de quelques fichiers qui ont été supprimés. Nous voudrions remettre les
+fichiers en D. Comment faire ?
 
 Il y a au moins trois solutions. En considérant que nous sommes à D :
 
-  1. La différence entre A et B sont les fichiers supprimés. Nous pouvons créer un patch représentant cette différence et l'appliquer :
+  1. La différence entre A et B sont les fichiers supprimés. Nous pouvons créer
+  un patch représentant cette différence et l'appliquer :
 
    $ git diff B A | git apply
 
-  2. Vu que nous avions enregistré les fichiers en A, nous pouvons les reprendre :
+  2. Vu que nous avions enregistré les fichiers en A, nous pouvons les
+  reprendre :
 
    $ git checkout A foo.c bar.h
 
-  3. Nous pouvons aussi voir le chemin de A à B comme une modification à défaire :
+  3. Nous pouvons aussi voir le chemin de A à B comme une modification à
+  défaire :
 
    $ git revert B
 
-Quel est le meilleur choix ? Celui que vous préférez. C'est facile d'obtenir ce que vous voulez avec Git, et souvent il y a plein de manières de le faire.
+Quel est le meilleur choix ? Celui que vous préférez. C'est facile d'obtenir ce
+que vous voulez avec Git, et souvent il y a plein de manières de le faire.
 
-////
- LocalWords:  doc visual-line Git git init add reset hard readme.txt rm mv log
- LocalWords:  kludge.h obsolete.c incriminating evidence bug.c feature.c
-////
+// LocalWords:  doc visual-line Git git init add reset hard readme.txt rm mv log
+// LocalWords:  kludge.h obsolete.c incriminating evidence bug.c feature.c utf
+// LocalWords:  flyspell coding fill-column sous-dossiers commits hash SHA ba
+// LocalWords:  Author Mar prinf write ea dc Alice Thu checkout branch master
+// LocalWords:  un.fichier un-autre.fichier revert changelog Créez-le ChangeLog
+// LocalWords:  Télécharger téléchargé télécharger ssh daemon diff yesterday
+// LocalWords:  patch apply whatchanged since weeks ago qgit tig web instaweb
+// LocalWords:  foo.c bar.h
