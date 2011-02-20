@@ -23,36 +23,37 @@ besoins.
 
 .Traductions
 
- - http://docs.google.com/View?id=dfwthj68_675gz3bw8kj[Chinois ( Simplifié )]:
-   par JunJie, Meng et JiangWei.
+ - http://docs.google.com/View?id=dfwthj68_675gz3bw8kj[Chinois
+   (Simplifié)]&#160;: par JunJie, Meng et JiangWei.
 
- - link:/~blynn/gitmagic/intl/es/[Espagnol]: par Rodrigo Toledo et Ariset
+ - link:/~blynn/gitmagic/intl/es/[Espagnol]&#160;: par Rodrigo Toledo et Ariset
    Llerena Tapia.
 
- - link:/~blynn/gitmagic/intl/de/[Allemand]: par Benjamin Bellee et Armin
+ - link:/~blynn/gitmagic/intl/de/[Allemand]&#160;: par Benjamin Bellee et Armin
    Stebich. Armin héberge http://gitmagic.lordofbikes.de/[la traduction
    allemande sur son site web].
 
- - link:/~blynn/gitmagic/intl/fr/[Française]: par Alexandre Garel, Paul Gaborit
-   et Nicolas Deram. Hébergé aussi chez http://tutoriels.itaapy.com/[itaapy].
+ - link:/~blynn/gitmagic/intl/fr/[Française]&#160;: par Alexandre Garel, Paul
+   Gaborit et Nicolas Deram. Hébergé aussi chez
+   http://tutoriels.itaapy.com/[itaapy].
 
- - http://www.slideshare.net/slide_user/magia-git[Portugais]: par Leonardo
-   Siqueira Rodrigues
+ - http://www.slideshare.net/slide_user/magia-git[Portugais]&#160;: par
+   Leonardo Siqueira Rodrigues
    [http://www.slideshare.net/slide_user/magia-git-verso-odt[version ODT]].
 
 .Autres éditions
 
- - link:book.html[sur une seule page web]: HTML nu, sans CSS ;
+ - link:book.html[sur une seule page web]&#160;: HTML nu, sans CSS ;
 
- - link:book.pdf[fichier PDF]: version imprimable.
+ - link:book.pdf[fichier PDF]&#160;: version imprimable.
 
  - http://packages.debian.org/gitmagic[package Debian],
-   http:://packages.ubuntu.com/gitmagic[package Ubuntu]: obtenez rapidement
-   une copie locale de ce site. Pratique lorsque
+   http:://packages.ubuntu.com/gitmagic[package Ubuntu]&#160;: obtenez
+   rapidement une copie locale de ce site. Pratique lorsque
    http://csdcf.stanford.edu/status/[ce serveur] est arrêté.
 
  - http://www.amazon.com/Git-Magic-Ben-Lynn/dp/1451523343/[un vrai livre
-   [Amazon.com]]: 64 pages, 15.24cm x 22.86cm, noir et blanc, en
+   [Amazon.com]]&#160;: 64 pages, 15.24cm x 22.86cm, noir et blanc, en
    anglais. Pratique en cas de panne courant.
 
 === Merci ! ===

@@ -2,7 +2,7 @@
 == Astuces de base  ==
 
 Plutôt que de plonger dans l'océan des commandes Git, utilisez ces commandes
-élémentaires pour vous commencer en vous trempant les pieds. Malgré leur
+élémentaires pour commencer en vous trempant les pieds. Malgré leur
 simplicité, chacune d'elles est utile.  En effet, lors de mon premier mois
 d'utilisation de Git, je ne me suis jamais aventuré au-delà de ce qui est
 exposé dans ce chapitre.
@@ -53,8 +53,7 @@ depuis un certain moment parce qu'elles sont toutes fausses. Dans ce cas :
 
  $ git log
 
-vous montre une liste des commits récents, accompagnés de leur clé de hachage
-(_hash_) SHA1 :
+vous montre une liste des commits récents, accompagnés de leur empreinte SHA1 :
 
 ----------------------------------
 commit 766f9881690d240ba334153047649b8b8f11c664
@@ -70,8 +69,8 @@ Date:   Thu Jan 1 00:00:00 1970 +0000
     Commit initial
 ----------------------------------
 
-Les premiers caractères du hash sont suffisants pour spécifier un commit ; ou
-alors, copiez et collez le hash en entier. Saisissez :
+Les premiers caractères de l'empreinte sont suffisants pour spécifier un
+commit ; ou alors, copiez et collez l'empreinte en entier. Saisissez :
 
  $ git reset --hard 766f
 
@@ -83,15 +82,13 @@ cas, saisissez :
 
  $ git checkout 82f5
 
-<<<<<<< HEAD
 Ceci vous ramène en arrière dans le temps, tout en conservant les commits
 récents. Toutefois, comme pour le voyage dans le temps de la science-fiction,
-si vous modifiez et faites un commit, vous serez dans une réalité alternative,
+si vous modifiez et faites un commit, vous serez dans une réalité parallèle,
 parce que vos actions sont différentes de ce qu'elles étaient la première fois.
 
-Cette réalité alternative est appelée une 'branche' ('branch'), et
-<<branch,nous en dirons plus après>>. Pour le moment rappelez vous simplement
-que :
+Cette réalité parallèle est appelée une 'branche' ('branch'), et <<branch,nous
+en dirons plus après>>. Pour le moment rappelez vous simplement que :
 
  $ git checkout master
 
@@ -107,7 +104,7 @@ Pour reprendre l'analogie du jeu vidéo :
 - *`git checkout`* : recharger une ancienne partie, mais si vous jouez avec,
    l'état de la partie va différer des enregistrement suivants que vous aviez
    réalisés la première fois. Chaque nouvelle sauvegarde sera sur une branche
-   séparée représentant la réalité alternative dans laquelle vous êtes
+   séparée représentant la réalité parallèle dans laquelle vous êtes
    entré. <<branch,On s'en occupe plus loin>>.
 
 Vous pouvez choisir de ne restaurer que certains fichiers et sous-dossiers en
@@ -121,7 +118,7 @@ checkout, surtout quand vous débutez avec Git. En général, quand vous n'êtes
 pas sûr de vous sur une opération, et pas seulement pour une commande Git,
 faites d'abord un *git commit -a*.
 
-Vous n'aimez pas copier et coller les clés de hachages ? Alors utilisez :
+Vous n'aimez pas copier et coller les empreintes ? Alors utilisez :
 
  $ git checkout :/"Mon premier b"
 
@@ -138,7 +135,7 @@ verbal. De même vous pouvez sélectionner des commits spécifiques à défaire�
  $ git commit -a
  $ git revert 1b6d
 
-défera le dernier commit ayant cette clé de hachage. La reprise est enregistrée
+défera le dernier commit ayant cette empreinte. La reprise est enregistrée
 comme un nouveau commit, ce que vous pourrez constater en lançant un *git log*.
 
 === Génération du journal des modifications (changelog) ===
@@ -260,7 +257,7 @@ que vous voulez avec Git, et souvent il y a plein de manières de le faire.
 
 // LocalWords:  doc visual-line Git git init add reset hard readme.txt rm mv log
 // LocalWords:  kludge.h obsolete.c incriminating evidence bug.c feature.c utf
-// LocalWords:  flyspell coding fill-column sous-dossiers commits hash SHA ba
+// LocalWords:  flyspell coding fill-column sous-dossiers commits SHA ba
 // LocalWords:  Author Mar prinf write ea dc Alice Thu checkout branch master
 // LocalWords:  un.fichier un-autre.fichier revert changelog Créez-le ChangeLog
 // LocalWords:  Télécharger téléchargé télécharger ssh daemon diff yesterday

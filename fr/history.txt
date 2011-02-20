@@ -2,7 +2,7 @@
 == Les leçons de l'histoire ==
 
 L'une des conséquences de la nature distribuée de Git est qu'il est facile de
-modifier l'historique. Mais si vous réécrivez le passé, faites attention : ne
+modifier l'historique. Mais si vous réécrivez le passé, faites attention : ne
 modifiez que la partie de l'historique que vous êtes le seul à posséder. Sinon,
 comme des nations qui se battent éternellement pour savoir qui a commis telle
 ou telle atrocité, si quelqu'un d'autre possède un clone dont l'historique
@@ -19,15 +19,15 @@ vous de l'utiliser à bon escient.
 === Je me corrige... ===
 
 Que faire si vous avez fait un 'commit' mais que vous souhaitez y attacher un
-message différent ? Pour modifier le dernier message, tapez :
+message différent ? Pour modifier le dernier message, tapez :
 
  $ git commit --amend
 
-Vous apercevez-vous que vous avez oublié un fichier ? Faites *git add* pour
+Vous apercevez-vous que vous avez oublié un fichier ? Faites *git add* pour
 l'ajouter puis exécutez le commande ci-dessus.
 
 Voulez-vous ajouter quelques modifications supplémentaires au dernier 'commit'
-? Faites ces modifications puis exécutez :
+? Faites ces modifications puis exécutez :
 
  $ git commit --amend -a
 
@@ -36,24 +36,24 @@ Voulez-vous ajouter quelques modifications supplémentaires au dernier 'commit'
 Supposons que le problème précédent est dix fois pire. Après une longue séance,
 vous avez effectué une série de 'commits'. Mais vous n'êtes pas satisfait de la
 manière dont ils sont organisés et certains des messages associés doivent être
-revus. Tapez alors :
+revus. Tapez alors :
 
  $ git rebase -i HEAD~10
 
 et les dix derniers 'commits' apparaissent dans votre $EDITOR favoris. Voici un
-petit extrait :
+petit extrait :
 
     pick 5c6eb73 Added repo.or.cz link
     pick a311a64 Reordered analogies in "Work How You Want"
     pick 100834f Added push target to Makefile
 
-Ensuite :
+Ensuite :
 
 - Supprimer un commit en supprimant sa ligne.
 
 - Réordonner des commits en réordonnant leurs lignes.
 
-- Remplacer `pick` par :
+- Remplacer `pick` par :
 
    * `edit` pour marquer ce commit pour amendement.
 
@@ -65,16 +65,16 @@ Ensuite :
      message associé.
 
 Sauvegardez et quittez. Si vous avez marqué un commit pour amendement alors
-tapez :
+tapez :
 
  $ git commit --amend
 
-Sinon, tapez :
+Sinon, tapez :
 
  $ git rebase --continue
 
 
-Donc faites des commits très tôt et faites-en souvent : vous pourrez tout
+Donc faites des commits très tôt et faites-en souvent : vous pourrez tout
 ranger plus tard grâce à 'rebase'.
 
 === Les changements locaux en dernier ===
@@ -105,7 +105,7 @@ projet mais en y intégrant un fichier que vous auriez dû conserver secret. Par
 exemple, vous avez accidentellement ajouté un fichier texte contenant votre
 numéro de carte de crédit. Supprimer ce fichier n'est pas suffisant puisqu'il
 pourra encore être retrouvé via d'anciennes versions du projet. Vous devez
-supprimer ce fichier dans toutes les versions :
+supprimer ce fichier dans toutes les versions :
 
  $ git filter-branch --tree-filter 'rm top/secret/fichier' HEAD
 
@@ -123,7 +123,7 @@ si vous voulez pouvoir interagir avec eux plus tard.
 
 === Faire l'histoire ===
 
-[[makinghistory]] Voulez-vous faire migrer un projet vers Git ? S'il est géré
+[[makinghistory]] Voulez-vous faire migrer un projet vers Git ? S'il est géré
 par l'un des systèmes bien connus alors il y a de grandes chances que quelqu'un
 ait déjà écrit un script afin d'importer l'ensemble de l'historique dans Git.
 
@@ -133,7 +133,7 @@ un script utilisant cette commande est un script jetable qui ne servira qu'une
 seule fois pour migrer le projet d'un seul coup.
 
 À titre d'exemple, collez le texte suivant dans un fichier temporaire
-(`/tmp/historique`) :
+(`/tmp/historique`) :
 
 ----------------------------------
 commit refs/heads/master
@@ -170,12 +170,12 @@ int main() {
 EOT
 ----------------------------------
 
-Puis créez un dépôt Git à partir de ce fichier temporaire en tapant :
+Puis créez un dépôt Git à partir de ce fichier temporaire en tapant :
 
  $ mkdir projet; cd projet; git init
  $ git fast-import --date-format=rfc2822 < /tmp/historique
 
-Vous pouvez extraire la dernière version de ce projet avec :
+Vous pouvez extraire la dernière version de ce projet avec :
 
  $ git checkout master .
 
@@ -185,11 +185,11 @@ des scripts d'exportation mais vous permet aussi de transporter un dépôt dans
 un format lisible. Ces commandes permettent aussi d'envoyer un dépôt via un
 canal qui n'accepte que du texte pur.
 
-=== Qu'est-ce qui a tout cassé ? ===
+=== Qu'est-ce qui a tout cassé ? ===
 
 Vous venez tout juste de découvrir un bug dans une fonctionnalité de votre
 programme et pourtant vous êtes sûr qu'elle fonctionnait encore parfaitement il
-y a quelques mois. Zut ! D'où provient ce bug ? Si seulement vous aviez testé
+y a quelques mois. Zut ! D'où provient ce bug ? Si seulement vous aviez testé
 cette fonctionnalité pendant vos développements.
 
 Mais il est trop tard. En revanche, en supposant que vous avez fait des commits
@@ -200,7 +200,7 @@ suffisamment souvent, Git peut cerner le problème.
  $ git bisect good 1b6d
 
 Git extrait un état à mi-chemin entre ces deux versions (HEAD et 1b6d). Testez
-la fonctionnalité et si le bug se manifeste :
+la fonctionnalité et si le bug se manifeste :
 
  $ git bisect bad
 
@@ -209,26 +209,26 @@ vous transporte à nouveau dans un état à mi-chemin entre la bonne et la
 mauvaise version, en réduisant ainsi les possibilités. Après quelques
 itérations, cette recherche dichotomique vous amènera au commit où le bug est
 survenu. Une fois vos investigations terminées, retourner à votre état original
-en tapant :
+en tapant :
 
  $ git bisect reset
 
-Au lieu de tester chaque état à la main, automatisez la recherche en tapant :
+Au lieu de tester chaque état à la main, automatisez la recherche en tapant :
 
  $ git bisect run mon_script
 
 Git utilise la valeur de retour du script fourni pour décider si un état est
-bon ou mauvais : mon_script doit retourner 0 si l'état courant est ok, 125 si
+bon ou mauvais : mon_script doit retourner 0 si l'état courant est ok, 125 si
 cet état doit être sauté et n'importe quelle valeur entre 1 et 127 si l'état
 est mauvais. Une valeur négative abandonne la commande bisect.
 
-Vous pouvez faire bien plus : la page d'aide explique comment visualiser les
+Vous pouvez faire bien plus : la page d'aide explique comment visualiser les
 bisects, comment examiner ou rejouer le log d'un bisect et comment éliminer des
 changements que vous savez sans conséquence afin d'accélérer la recherche.
 
-=== Qui a tout cassé ? ===
+=== Qui a tout cassé ? ===
 
-Comme de nombreux systèmes de gestion de versions, Git a sa commande blame :
+Comme de nombreux systèmes de gestion de versions, Git a sa commande blame :
 
  $ git blame bug.c
 
@@ -258,7 +258,7 @@ opérations lentes, la productivité souffre des interruptions répétées.
 J'ai moi-même vécu ce phénomène. Git a été le premier système de gestion de
 versions que j'ai utilisé. Je me suis vite accoutumé à lui, tenant la plupart
 de ses fonctionnalités pour acquises. Je pensais que les autres systèmes
-étaient similaires : le choix d'un système de gestion de versions ne devait pas
+étaient similaires : le choix d'un système de gestion de versions ne devait pas
 être bien différent du choix d'un éditeur de texte ou d'un navigateur web.
 
 J'ai été choqué lorsque, plus tard, il m'a fallu utilisé un système
@@ -276,7 +276,7 @@ initial, la commande s'était terminée depuis longtemps et je perdais du temps 
 retrouver le fil de mes pensées. Les être humains ne sont pas bons pour changer
 de contexte.
 
-Il y a aussi un effet intéressant du type « tragédie des biens communs » : afin
+Il y a aussi un effet intéressant du type « tragédie des biens communs » : afin
 d'anticiper la congestion du réseau, certains vont consommer plus de bandes
 passantes que nécessaire pour effectuer des opérations visant à réduire leurs
 attentes futures. Ces efforts combinés vont encore augmenter la congestion,

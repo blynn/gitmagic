@@ -10,17 +10,17 @@ main.
 === Les faiblesses de SHA1 ===
 
 Avec le temps, les spécialistes de cryptographie découvrent de plus en plus de
-faiblesses de SHA1. À ce jour, la découverte de collisions de hashs semble à la
+faiblesses de SHA1. À ce jour, la découverte de collisions d'empreintes semble à la
 portée d'organisations bien dotée. Et d'ici quelques années, peut-être que même
 un simple PC aura assez de puissance de calcul pour corrompre de manière
 indétectable un dépôt Git.
 
-Heureusement Git aura migrer vers une fonction de hachage de meilleure qualité
-avant que de futures recherches détruisent SHA1.
+Heureusement Git aura migrer vers une fonction de calcul d'empreintes de
+meilleure qualité avant que de futures recherches détruisent SHA1.
 
 === Microsoft Windows ===
 
-Git sur Microsoft Windows peut être jugé encombrant :
+Git sur Microsoft Windows peut être jugé encombrant :
 
 - http://cygwin.com/[Cygwin] est un environnement de type Linux dans Windows
   proposant http://cygwin.com/packages/git/[un portage de Git].
@@ -40,12 +40,12 @@ Une solution consiste à découper votre projet en plusieurs parties, chacune
 réunissant des fichiers en relation entre eux. Utilisez *git submodule* si vous
 souhaitez conserver tout cela dans un seul répertoire.
 
-=== Qui modifie quoi ? ===
+=== Qui modifie quoi ? ===
 
 Certains systèmes de gestion de versions vous oblige à marquer explicitement un
 fichier avant de pouvoir le modifier. Bien que particulièrement ennuyeux
 puisque pouvant impliquer une communication avec un serveur central, cela
-présente deux avantages :
+présente deux avantages :
 
   1. Les diffs sont plus rapides puisque seuls les fichiers marqués doivent
   être examinés.
@@ -124,12 +124,12 @@ et rsync ou un clone Git superficiel pour le firmware.
 
 Certains systèmes de gestion de versions centralisés gère un entier positif qui
 augmente à chaque commit accepté. Git fait référence à un changement par son
-hash ce qui est mieux pour de nombreuses raisons.
+empreinte ce qui est mieux pour de nombreuses raisons.
 
 Mais certains aiment voir ce compteur. Par chance, il est très facile d'écrire
 un script qui se déclenchera à chaque mise à jour du dépôt Git central et
-incrémentera un compteur, peut-être dans un tag, qu'il associera au hash du
-dernier commit.
+incrémentera un compteur, peut-être dans un tag, qu'il associera à l'empreinte
+du dernier commit.
 
 Chaque clone peut gérer un tel compteur mais c'est probablement sans intérêt
 puisque seul les compteurs de dépôt central comptent.
@@ -148,10 +148,10 @@ utilisateurs le demandent, cette fonctionnalité pourrait être ajoutée.
 Un informaticien typique compte à partir de 0 plutôt que de 1. Malheureusement,
 concernant les commits, Git n'adhère pas à cette convention. Plusieurs
 commandes ne fonctionnent pas avant le tout premier commit. De plus, certains
-cas limites doivent être gérés spécifiquement : par exemple, un rebasage vers
+cas limites doivent être gérés spécifiquement : par exemple, un rebasage vers
 une branche avec un commit initial différent.
 
-Git bénéficierait à définir le commit zéro : dès la création d'un dépôt, HEAD
+Git bénéficierait à définir le commit zéro : dès la création d'un dépôt, HEAD
 serait défini comme la chaîne contenant 20 octets nuls. Ce commit spécial
 représenterait un arbre vide, sans parent, qui serait présent dans tous les
 dépôts Git.
@@ -172,7 +172,7 @@ le rebasage du résultat requiert de nombreuses interventions manuelles.
 diffère selon que la commande attend deux extrémités ou un intervalle. Voir
 *git help diff* et *git help rev-parse*.
 
-// LocalWords:  Appendix Git hooks SHA hashs PC indétectable Microsoft Windows
+// LocalWords:  Appendix Git hooks SHA PC indétectable Microsoft Windows
 // LocalWords:  Cygwin à-la-Linux MSys git submodule diffs checkout cp depth
-// LocalWords:  bug faut-il webcam patches firmware rsync hash tag Placez-y log
+// LocalWords:  bug faut-il webcam patches firmware rsync tag Placez-y log
 // LocalWords:  l'implémentation commits rebasage HEAD help diff rev-parse
