@@ -2,9 +2,10 @@
 == Astuces de base  ==
 
 Plutôt que de plonger dans l'océan des commandes Git, utilisez ces commandes
-élémentaires pour vous tremper les pieds. Malgré leur simplicité, chacune
-d'elles est utile.  En effet, lors de mon premier mois d'utilisation de Git, je
-ne me suis jamais aventuré au delà de ce qui est exposé dans ce chapitre.
+élémentaires pour vous commencer en vous trempant les pieds. Malgré leur
+simplicité, chacune d'elles est utile.  En effet, lors de mon premier mois
+d'utilisation de Git, je ne me suis jamais aventuré au-delà de ce qui est
+exposé dans ce chapitre.
 
 === Enregistrer l'état courant ===
 
@@ -26,8 +27,8 @@ Pour enregistrer à nouveau l'état :
 
 === Ajouter, supprimer, renommer ===
 
-Les commandes ci-dessus ne font que garder trace des fichiers qui étaient
-présents lorsque vous avez exécuté *git add* pour la première fois. Si vous
+Les commandes ci-dessus ne font que garder traces des fichiers qui étaient
+présents lorsque vous avez executé *git add* pour la première fois. Si vous
 ajoutez de nouveaux fichiers ou sous-dossiers, il faut le signaler à Git :
 
  $ git add readme.txt Documentation
@@ -40,8 +41,8 @@ De même, si vous voulez que Git oublie certains fichiers :
 Git supprime les fichiers pour vous si vous ne l'avez pas encore fait.
 
 Renommer un fichier revient à supprimer l'ancien nom et ajouter le nouveau. Il
-y a également le raccourci *git mv* qui à la même syntaxe que la commande
-mv. Par exemple :
+y a également le raccourci *git mv* qui a la même syntaxe que la commande mv.
+Par exemple :
 
  $ git mv bug.c feature.c
 
@@ -75,14 +76,15 @@ alors, copiez et collez le hash en entier. Saisissez :
  $ git reset --hard 766f
 
 pour restaurer l'état correspondant au commit donné et supprimer de manière
-permanente tout les commit plus récents de l'enregistrement.
+permanente tous les commits plus récents de l'enregistrement.
 
 D'autres fois vous voulez faire un saut rapide dans un état précédent. Dans ce
 cas, saisissez :
 
  $ git checkout 82f5
 
-Ceci vous ramène en arrière dans le temps, tout en conservant les commit
+<<<<<<< HEAD
+Ceci vous ramène en arrière dans le temps, tout en conservant les commits
 récents. Toutefois, comme pour le voyage dans le temps de la science-fiction,
 si vous modifiez et faites un commit, vous serez dans une réalité alternative,
 parce que vos actions sont différentes de ce qu'elles étaient la première fois.
@@ -97,7 +99,7 @@ vous ramènera dans le présent. De plus, pour éviter que Git se plaigne,
 réalisez toujours un commit ou un reset de vos modifications avant de faire un
 checkout.
 
-Pour reprendre l'analogie du jeux vidéo :
+Pour reprendre l'analogie du jeu vidéo :
 
 - *`git reset --hard`* : recharger une ancienne sauvegarde et supprimer toutes
    les sauvegardes plus récentes.
@@ -108,14 +110,13 @@ Pour reprendre l'analogie du jeux vidéo :
    séparée représentant la réalité alternative dans laquelle vous êtes
    entré. <<branch,On s'en occupe plus loin>>.
 
-
 Vous pouvez choisir de ne restaurer que certains fichiers et sous-dossiers en
 les nommant à la suite de la commande :
 
  $ git checkout 82f5 un.fichier un-autre.fichier
 
 Faites attention car cette forme de *checkout* peut écraser vos fichiers sans
-crier gare. Pour éviter les accidents, faites un commit avant toute commande
+avertissement. Pour éviter les accidents, faites un commit avant toute commande
 checkout, surtout quand vous débutez avec Git. En général, quand vous n'êtes
 pas sûr de vous sur une opération, et pas seulement pour une commande Git,
 faites d'abord un *git commit -a*.
@@ -131,7 +132,7 @@ demander la cinquième sauvegarde en arrière :
 
 === Reprise (revert) ===
 
-Dans une cours de justice, certains évènements peuvent être effacés du procès
+Dans une cour de justice, certains évènements peuvent être effacés du procès
 verbal. De même vous pouvez sélectionner des commits spécifiques à défaire :
 
  $ git commit -a
@@ -168,13 +169,14 @@ vous pouvez la mettre à jour vers la dernière version avec :
 
 === Publication instantanée ===
 
-Imaginez que vous avec écrit un script que vous voudriez partager avec
+Imaginez que vous avez écrit un script que vous voudriez partager avec
 d'autres. Vous pourriez leur dire de le télécharger de votre ordinateur, mais
 s'ils le font au moment où vous êtes en train d'améliorer le script ou d'y
 effectuer des modifications expérimentales, ils peuvent se retrouver dans la
 panade. Bien sûr, c'est pour cela qu'on a créé la publication de versions
-successives. Les développeurs peuvent travailler sur un projet fréquemment, mais
-ils ne rendent le code disponible quand lorsqu'ils le trouvent présentable.
+successives. Les développeurs peuvent travailler sur un projet fréquemment,
+mais ils ne rendent le code disponible quand lorsqu'ils le trouvent
+présentable.
 
 Pour faire ça avec Git, dans le dossier qui contient votre script :
 
@@ -187,7 +189,7 @@ Ensuite vous pouvez dire à vos utilisateurs de lancer :
  $ git clone votre.ordinateur:/chemin/vers/le/script
 
 pour télécharger votre script. En considérant qu'ils ont un accès ssh. Sinon,
-lancez *git daemon* et dites plutôt à vos utilisateur de lancer :
+lancez *git daemon* et dites plutôt à vos utilisateurs de lancer :
 
  $ git clone git://votre.ordinateur/chemin/vers/le/script
 

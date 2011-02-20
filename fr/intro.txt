@@ -150,4 +150,3 @@ difficiles aux humains. En général leur comportement est configurable.
 // LocalWords:  doc visual-line Référez-vous wikipedia cliquez web Speedruns Git
 // LocalWords:  mettriez-vous téléverser téléchargeait téléversait veulent-ils
 // LocalWords:  téléchargent clonage fusionnels Alice merge conflict configurable
-

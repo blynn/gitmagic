@@ -171,7 +171,7 @@ simples copies.
 
 Vous pouvez maintenant travailler simultanément sur deux fonctionnalités
 indépendantes. Par exemple vous pouvez modifier l'un des clones pendant que
-l'autre est en train de compiler.  À n'importe quel moment vous pouvez valider
+l'autre est en cours de compilation.  À tout moment vous pouvez valider
 (`commit`) vos modifications puis rapatrier (`pull`) les modifications depuis
 l'autre clone.
 
