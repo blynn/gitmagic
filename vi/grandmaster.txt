@@ -30,7 +30,7 @@ Bạn có thể thi hành những điều trên chỉ cần một dòng lệnh:
  $ git ls-files -d -m -o -z | xargs -0 git update-index --add --remove
 
 Tùy chọn *-z* và *-0* dùng để ngăn ngừa sai hỏng không mong muốn từ những tệp tin có chứa
-các ký tự đặc biệt. Bởi vì lệnh này bổ xung những tệp tin As this command adds ignored files, bạn có thể muốn sử dụng
+các ký tự đặc biệt. Bởi vì lệnh này bổ xung những tệp tin đã bị bỏ qua, bạn có thể muốn sử dụng
 tùy chọn `-x` hay `-X`.
 
 === Lần commit này Nhiều Quá! ===
@@ -54,28 +54,28 @@ Khi nào bạn thỏa mãn thì gõ
 để commit chính xác các thay đổi mà bạn đã chọn lựa (các thay đổi về 'staged'). Hãy chắc chắn là
 bạn đã không dùng tùy chọn *-a*, nếu không thì Git sẽ commit tất cả.
 
-Nhưng bạn lại có những tài liệu đã được chỉnh sửa đặt tại nhiều chỗ khác nhau? Duyệt từng cái một
-sẽ làm nản lòng mind-numbing. Trong trường hợp này, sử dụng lệnh *git add -i*, với giao diện
+Nhưng bạn lại có những tài liệu đã được chỉnh sửa đặt tại nhiều chỗ khác nhau? Việc duyệt từng cái một
+sẽ làm bạn nản lòng. Trong trường hợp này, sử dụng lệnh *git add -i*, với giao diện
 không ít rắc rối hơn, nhưng uyển chuyển hơn. Chỉ cần gõ vài cái,
-you can stage or unstage several files cùng một lúc, hay xem xét và chọn các thay đổi
+bạn có thể đưa vào hay gỡ bỏ nhiều tệp tin vào một trạng thái cùng một lúc, hay xem xét và chọn các thay đổi
 chỉ trong các tệp tin riêng biệt. Có một sự lựa chọn khác, chạy lệnh *git commit \--interactive* mà nó
 sẽ tự động commit sau khi bạn làm xong.
 
 === Mục Lục: Git's Staging Area ===
 
-So far we have avoided Git's famous 'index', nhưng chúng ta phải đối mặt it to
-explain the above. Chỉ mục là vùng trạng thái tạm thời. Git ít khi di chuyển
+Chúng ta trốn tránh chưa muốn nói đến một thứ nổi tiếng của Git đó là 'index' (mục lục), nhưng chúng ta phải đối mặt với nó để mà
+giảng giải những điều ở trên. Chỉ mục là vùng trạng thái tạm thời. Git ít khi di chuyển
 dữ liệu qua lại một cách trực tiếp giữa dự án của bạn và lịch sử của nó. Đúng hơn là Git đầu tiên ghi
-dữ liệu vào chỉ mục, và sau đó sao chép dữ liệu trong chỉ mục vào chỗ cần ghi
+dữ liệu vào mục lục, và sau đó sao chép dữ liệu trong chỉ mục vào chỗ cần ghi
 cuối.
 
 Ví dụ, lệnh *commit -a* thực sự bao gồm hai quá trình. Bước thứ nhất là đặt
-snapshot of the current state of every tracked file vào bảng mục lục (index). Bước thứ
-hai là permanently records the snapshot now bảng mục lục. Việc commit không sử dụng tùy chọn
-*-a* chỉ thi hành bước thứ hai, and only makes sense after running
-commands that bằng cách này hay cách khác thay đổi bảng chỉ mục, như là lệnh *git add*.
+toàn bộ dữ liệu hiện tại của mọi tệp tin cần theo dõi vào bảng mục lục (index). Bước thứ
+hai là ghi vào bảng mục lục. Việc commit không sử dụng tùy chọn
+*-a* chỉ thi hành bước thứ hai, và nó chỉ có ý nghĩa sau khi chạy lệnh
+mà lệnh này bằng cách này hay cách khác thay đổi bảng chỉ mục, như là lệnh *git add* chẳng hạn.
 
-Usually we can ignore the index and pretend we are reading straight from and ghi thẳng vào trong lịch sử. Vì lý do này, we want finer control, so we manipulate the index. Chúng ta đặt một snapshot của một số, không phải tất cả, các thay đổi của chúng ta vào bảng mục lục, and then permanently record this carefully rigged snapshot.
+Thường thường chúng ta bỏ qua index và lấy cớ là chúng ta đang đọc trực tiếp và ghi thẳng vào trong lịch sử. Vì lý do này, chúng ta muốn việc điều khiển chính xác, như vậy chúng ta chỉnh sửa index bằng cách thủ công. Chúng ta đặt một snapshot của một số, không phải tất cả, các thay đổi của chúng ta vào bảng mục lục, và sau đó ghi những cái này vào lịch sử.
 
 === Đừng Quên HEAD Của Mình ===
 
@@ -97,7 +97,7 @@ Nhưng giả sử bạn không có được nó? Đừng lo: với những lện
 
 === Săn tìm-HEAD ===
 
-Có thể ORIG_HEAD là chưa đủ. Có lẽ bạn vừa nhận thấy mình vừa tạo ra một sai sót có quy mô lớn và bạn cần phải quay lại một lần commit cách đây lâu lắm rồi  trong một nhánh mà bạn đã quên rồi vì nó đã quá lâu.
+Có thể ORIG_HEAD là chưa đủ. Có lẽ bạn vừa nhận thấy mình vừa tạo ra một sai sót có quy mô lớn và bạn cần phải quay lại một lần commit cách đây lâu lắm rồi trong một nhánh mà bạn đã quên rồi vì nó đã quá lâu.
 
 Theo mặc định, Git giữ một lần commit ít nhất là hai tuần lễ, ngay cả khi bạn đã ra lệnh
 cho Git phá hủy nhánh chứa nó. Sự trục trặc là việc tìm giá trị băm
@@ -134,7 +134,7 @@ Bạn cũng có thể không cho phép chạy lệnh *git gc* một cách tự �
 
 trong trường hợp này những lần commit sẽ chỉ bị xóa bỏ khi bạn chạy lệnh *git gc*.
 
-=== Building On Git ===
+=== Xây Dựng trên Git ===
 
 In true UNIX fashion, Git được thiết kế cho phép nó dễ dàng được sử dụng như là một thành phần bên dưới của các chương trình khác, như là cho giao diện đồ họa GUI và giao diện Web để thay thế cho giao diện dòng lệnh, công cụ quản lý các miếng vá, các công cụ nhập và chuyển đổi, và những thứ tương tự như thế. Trên thực tế, một số lệnh Git bản chất nó cũng là các kịch bản (scripts) đứng trên vai của những người khổng lồ, chính là hệ điều hành. Chỉ cần sửa đổi một chút, bạn có thể bắt Git làm việc phù hợp với sở thích của mình.
 
@@ -151,8 +151,8 @@ Gọi lệnh
 
   $ git symbolic-ref HEAD
 
-sẽ hiển thị tên của nhánh hiện hành. Trong thực tiễn, you thích hợp nhất muốn gỡ bỏ want to remove
-the "refs/heads/" và tránh errors:
+sẽ hiển thị tên của nhánh hiện hành. Trong thực tiễn, bạn thích hợp nhất muốn gỡ bỏ
+"refs/heads/" và tránh các lỗi:
 
   $ git symbolic-ref HEAD 2> /dev/null | cut -b 12-
 
@@ -164,9 +164,9 @@ Một thư mục phổ biến khác là +workdir/git-new-workdir+. Thông qua c�
 
   $ git-new-workdir an/existing/repo new/directory
 
-Thư mục mới và các tệp tin trong nó có thể được coi như một bản sao, ngoại trừ phần lịch sử được chia sẻ dùng chung, the two trees automatically ở tại sync. Ở đây không cần có sự trộn, push, hay pull.
+Thư mục mới và các tệp tin trong nó có thể được coi như một bản sao, ngoại trừ phần lịch sử được chia sẻ dùng chung, hai cây được tự động đồng bộ hóa. Ở đây không cần có sự trộn, push, hay pull.
 
-=== Daring Stunts ===
+=== Cứ Phiêu Lưu ===
 
 Ngày nay, người sử dụng Git rất khó phá hủy dữ liệu.
 Nhưng nếu như bạn biết mình đang làm gì, bạn có thể vượt qua sự bảo vệ dành cho các lệnh
@@ -186,7 +186,7 @@ Mặt khác, nếu bạn chỉ định rõ một đường dẫn chi tiết cho 
 
   $ git branch -D dead_branch  #thay vì sử dụng tùy chọn -d
 
-Cũng tương tự như thế, việc cố gắng ghi đè lên một nhánh bằng cách a move fails if data loss would ensue. Để ép buộc sự di chuyển nhánh, gõ:
+Cũng tương tự như thế, việc cố gắng ghi đè lên một nhánh bằng cách di chuyển nhánh khác đến nó cũng gây ra lỗi. Để ép buộc sự di chuyển nhánh, gõ:
 
   $ git branch -M source target  # thay vì sử dụng tùy chọn -m
 
@@ -210,10 +210,10 @@ quên lệnh *git add*. Ít tệ hại hơn là các ký tự khoảng trắng v
 những xung đột không cần phải trộn: mặc dù cũng chẳng tệ hại lắm, tôi mong rằng những điều này sẽ không xảy ra
 với mọi người.
 
-If only I had bought idiot insurance bằng cách sử dụng một _hook_ để cảnh báo người dùng khi có những vấn đề:
+Tôi đã tránh được các lỗi ngu ngốc đó bằng cách sử dụng một _hook_ để nó cảnh báo người dùng khi có những vấn đề:
 
  $ cd .git/hooks
- $ cp pre-commit.sample pre-commit  # Older Git versions: chmod +x pre-commit
+ $ cp pre-commit.sample pre-commit  # Với phiên bản Git cũ cần chạy lệnh: chmod +x pre-commit
 
 Ngày nay Git sẽ không commit nếu khi nó trộn nó chỉ tìm thấy những khoảng trắng vô ích hay
 những xung đột không cần giải trộn.
