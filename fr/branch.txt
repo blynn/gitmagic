@@ -83,8 +83,8 @@ avez terminé, tapez :
 
 pour retourner à votre travail d'origine. Notez que tout changement non intégré
 est définitivement perdu (NdT : et que les changements intégrés via commit ne
-sont accessibles qu'en connaissant leur clé SHA-1 puisqu'aucune branche nommée
-ne pointe vers eux).
+sont accessibles qu'en connaissant leur empreintes SHA-1 puisqu'aucune branche
+nommée ne pointe vers eux).
 
 Que faire si vous voulez nommer ces changements temporaires ? Rien de plus
 simple :
