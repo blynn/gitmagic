@@ -10,9 +10,9 @@ main.
 === Les faiblesses de SHA1 ===
 
 Avec le temps, les spécialistes de cryptographie découvrent de plus en plus de
-faiblesses de SHA1. À ce jour, la découverte de collisions d'empreintes semble à la
-portée d'organisations bien dotée. Et d'ici quelques années, peut-être que même
-un simple PC aura assez de puissance de calcul pour corrompre de manière
+faiblesses de SHA1. À ce jour, la découverte de collisions d'empreintes semble
+à la portée d'organisations bien dotée. Et d'ici quelques années, peut-être que
+même un simple PC aura assez de puissance de calcul pour corrompre de manière
 indétectable un dépôt Git.
 
 Heureusement Git aura migrer vers une fonction de calcul d'empreintes de
