@@ -26,20 +26,27 @@ besoins.
  - http://docs.google.com/View?id=dfwthj68_675gz3bw8kj[Chinois
    (Simplifié)]&#160;: par JunJie, Meng et JiangWei.
 
- - link:/~blynn/gitmagic/intl/es/[Espagnol]&#160;: par Rodrigo Toledo et Ariset
-   Llerena Tapia.
-
- - link:/~blynn/gitmagic/intl/de/[Allemand]&#160;: par Benjamin Bellee et Armin
-   Stebich. Armin héberge http://gitmagic.lordofbikes.de/[la traduction
-   allemande sur son site web].
-
  - link:/~blynn/gitmagic/intl/fr/[Française]&#160;: par Alexandre Garel, Paul
    Gaborit et Nicolas Deram. Hébergé aussi chez
    http://tutoriels.itaapy.com/[itaapy].
 
+ - link:/~blynn/gitmagic/intl/de/[Allemand]&#160;: par Benjamin Bellee et Armin
+   Stebich. Hébergé aussi sur http://gitmagic.lordofbikes.de/[le site web
+   d'Armin].
+
  - http://www.slideshare.net/slide_user/magia-git[Portugais]&#160;: par
    Leonardo Siqueira Rodrigues
    [http://www.slideshare.net/slide_user/magia-git-verso-odt[version ODT]].
+
+ - link:/~blynn/gitmagic/intl/ru/[Russian]: par Tikhon Tarnavsky, Mikhail
+   Dymskov et d'autres.
+
+ - link:/~blynn/gitmagic/intl/es/[Espagnol]&#160;: par Rodrigo Toledo et Ariset
+   Llerena Tapia.
+
+ - link:/~blynn/gitmagic/intl/vi/[Vietnamien]: par Trần Ngọc Quân. Hébergé
+   aussi sur http://vnwildman.users.sourceforge.net/gitmagic.html[son site
+   Web].
 
 .Autres éditions
 
@@ -64,11 +71,8 @@ Andy Somerville, Ralf Recker, Øyvind A. Holm, Miklos Vajna, Sébastien
 Hinderer, Thomas Miedema, Joe Malin et Tyler Breisacher pour les corrections
 et améliorations.
 
-François Marier maintient le paquet Debian, créé à l'origine par Daniel Baumarr.
-
-JunJie, Meng, JiangWei, Rodrigo Toledo, Ariset Llerena Tapia, Benjamin Bellee,
-Armin Stebich, Alexandre Garel, Paul Gaborit, Nicolas Deram et Leonardo
-Siqueira Rodrigues ont travaillé sur des traductions de ce guide.
+François Marier maintient le paquet Debian, créé à l'origine par Daniel
+Baumarr.
 
 Ma gratitude va également à beaucoup d'autres pour leurs encouragements et
 compliments. Je suis tenté de vous citer ici, toutefois ceci risquerait de
