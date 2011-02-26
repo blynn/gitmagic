@@ -1,4 +1,4 @@
-﻿== Nhân Bản ==
+== Nhân Bản ==
 
 Trong các hệ thống quản lý mã nguồn trước đây, checkout là tác vụ cơ bản để lấy các tệp tin về. Bạn lấy về toàn bộ các tập tin được lưu giữ trong từng phiên bản riêng biệt.
 

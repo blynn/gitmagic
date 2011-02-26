@@ -1,4 +1,4 @@
-﻿== Bài Học về Lịch Sử ==
+== Bài Học về Lịch Sử ==
 
 Một hệ quả tất yếu của đặc tính phân tán của Git là việc lịch sử có thể biên soạn lại một cách
 dễ dàng. Nhưng nếu bạn xáo trộn quá khứ, hãy cẩn thận: chỉ biên soạn lại quá khứ trong lịch sử

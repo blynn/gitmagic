@@ -1,4 +1,4 @@
-﻿== Phụ lục A: Hạn chế của Git ==
+== Phụ lục A: Hạn chế của Git ==
 
 Git bộc lộ một số nhược điểm mà tôi đã gặp qua. Một số có thể xử lý thủ công một cách dễ dàng bằng các script và hook, một số yêu cầu phải tổ chức lại hay xác lập lại dự án, một số ít rắc rối còn lại, chỉ còn cách là ngồi đợi. Hay tốt hơn cả là bắt tay vào và giúp đỡ!
 

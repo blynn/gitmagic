@@ -1,4 +1,4 @@
-﻿== Đa Người Dùng ==
+== Đa Người Dùng ==
 
 Lúc đầu tôi sử dụng Git cho dự án riêng mà tôi là người duy nhất phát triển nó.
 Trong số những lệnh liên quan đến bản chất phân tán của Git, tôi chỉ cần lệnh *pull*

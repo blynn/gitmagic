@@ -1,4 +1,4 @@
-﻿== Giới thiệu ==
+== Giới thiệu ==
 
 Tôi sử dụng cách ví von để giới thiệu về hệ thống quản lý mã nguồn. Xem http://en.wikipedia.org/wiki/Revision_control[bài viết về quản lý mã nguồn trên Wikipedia] để có được sự giải thích thỏa đáng.
 

@@ -1,4 +1,4 @@
-﻿= Git Magic =
+= Git Magic =
 Ben Lynn
 Tháng Tám 2007
 

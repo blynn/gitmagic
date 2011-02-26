@@ -1,4 +1,4 @@
-﻿== Thủ Thuật Tạo Nhánh ==
+== Thủ Thuật Tạo Nhánh ==
 
 Tạo Nhánh và Trộn là các đặc tính sát thủ của Git.
 

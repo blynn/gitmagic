@@ -1,4 +1,4 @@
-﻿== Trở Thành Kiện Tướng ==
+== Trở Thành Kiện Tướng ==
 
 Bây giờ, bạn có thể thông qua lệnh *git help* để bật trang trợ giúp lên và có thể hiểu
 gần như tất cả mọi thứ. Tuy nhiên, việc xác định chính xác lệnh cần sử dụng để giải quyết
