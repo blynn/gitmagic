@@ -1,0 +1,28 @@
+﻿== Phụ lục B: Dịch Bản Hướng Dẫn Này ==
+
+Lấy một bản sao của mã nguồn, sau đó tạo một thư mục tương ứng với ngôn ngữ bạn dịch http://www.iana.org/assignments/language-subtag-registry[language's IETF tag]: xem tại
+http://www.w3.org/International/articles/language-tags/Overview.en.php[the W3C article on internationalization]. Ví dụ, tiếng Anh là "en", Nhật là "ja", tiếng Trung Quốc Phồn thể là "zh-Hant". Trong thư mục mới đó, và dịch tệp tin +txt+ từ thư mục con "en".
+
+Một ví dụ cụ thể là để dịch phần hướng dẫn này thành ngôn ngữ http://en.wikipedia.org/wiki/Klingon_language[Klingon], bạn hãy gõ vào:
+
+ $ git clone git://repo.or.cz/gitmagic.git
+ $ cd gitmagic
+ $ mkdir tlh  # "tlh" là mã ngôn ngữ IETF dành cho Klingon.
+ $ cd tlh
+ $ cp ../en/intro.txt .
+ $ edit intro.txt  # Dịch tệp tin này.
+
+và cứ như thế cho những tệp tin còn lại. Bạn có thể xem thử kết quả công việc của mình như sau:
+
+ $ make LANG=tlh
+ $ firefox book.html
+
+Hãy commit công việc của bạn thường xuyên, và cho tôi biết khi nào thì chúng sẵn sàng để sử dụng.
+GitHub.com có giao diện thuận lợi như sau: tạo nhánh cho dự án "gitmagic",
+push các thay đổi của bạn lên, sau đó thông báo với tôi để tôi trộn.
+
+Tôi thích các bản dịch làm theo cách trên bởi vì các đoạn script của tôi có thể tạo
+các văn bản với định dạng HTML và PDF. Hơn nữa, nó còn tiện lợi cho việc giữ các bản dịch được tập trung
+trong kho của dự án này. Nhưng cũng có thể chọn một cách mà bạn cho là tiện lợi nhất: ví dụ như là
+người dịch sang tiếng Trung Quốc sử dụng Google Docs. Tôi cảm thấy rất hạnh phúc vì việc làm của bạn
+giúp cho nhiều người có thể có được thành quả lao động của tôi.
