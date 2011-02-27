@@ -10,15 +10,15 @@ diffère du vôtre, vous aurez des difficultés à vous réconcilier lorsque vou
 interagirez.
 
 Certains développeurs insistent très fortement pour que l'historique soit
-immuable. D'autres pensent au contraire que les historiques doivent être rendus
-présentables avant d'être présentés publiquement. Git s'accommode des deux
-points de vue. Comme les clones, les branches et les fusions, la réécriture de
-l'historique est juste un pouvoir supplémentaire que vous donne Git. C'est à
-vous de l'utiliser à bon escient.
+considérer comme immuable. D'autres pensent au contraire que les historiques
+doivent être rendus présentables avant d'être présentés publiquement. Git
+s'accommode des deux points de vue. Comme les clones, les branches et les
+fusions, la réécriture de l'historique est juste un pouvoir supplémentaire que
+vous donne Git. C'est à vous de l'utiliser à bon escient.
 
 === Je me corrige... ===
 
-Que faire si vous avez fait un 'commit' mais que vous souhaitez y attacher un
+Que faire si vous avez fait un commit mais que vous souhaitez y attacher un
 message différent ? Pour modifier le dernier message, tapez :
 
  $ git commit --amend
@@ -26,21 +26,21 @@ message différent ? Pour modifier le dernier message, tapez :
 Vous apercevez-vous que vous avez oublié un fichier ? Faites *git add* pour
 l'ajouter puis exécutez le commande ci-dessus.
 
-Voulez-vous ajouter quelques modifications supplémentaires au dernier 'commit'
-? Faites ces modifications puis exécutez :
+Voulez-vous ajouter quelques modifications supplémentaires au dernier commit ?
+Faites ces modifications puis exécutez :
 
  $ git commit --amend -a
 
 === ... et bien plus ===
 
 Supposons que le problème précédent est dix fois pire. Après une longue séance,
-vous avez effectué une série de 'commits'. Mais vous n'êtes pas satisfait de la
+vous avez effectué une série de commits. Mais vous n'êtes pas satisfait de la
 manière dont ils sont organisés et certains des messages associés doivent être
 revus. Tapez alors :
 
  $ git rebase -i HEAD~10
 
-et les dix derniers 'commits' apparaissent dans votre $EDITOR favoris. Voici un
+et les dix derniers commits apparaissent dans votre $EDITOR favori. Voici un
 petit extrait :
 
     pick 5c6eb73 Added repo.or.cz link
@@ -49,11 +49,11 @@ petit extrait :
 
 Ensuite :
 
-- Supprimer un commit en supprimant sa ligne.
+- Supprimez un commit en supprimant sa ligne.
 
-- Réordonner des commits en réordonnant leurs lignes.
+- Réordonnez des commits en réordonnant leurs lignes.
 
-- Remplacer `pick` par :
+- Remplacez `pick` par :
 
    * `edit` pour marquer ce commit pour amendement.
 
@@ -245,15 +245,15 @@ sont des opérations impossibles à réaliser sans communication réseau. Il en 
 de même pour certains opérations basiques telles que parcourir l'historique ou
 intégrer une modification. Avec certains systèmes, des communications réseaux
 sont même nécessaires juste pour voir ses propres modifications ou pour ouvrir
-un fichier avec possibilité de modification.
+un fichier avec le droit de modification.
 
 Ces systèmes centralisés empêchent le travail hors-ligne et nécessitent une
 infrastructure réseau d'autant plus lourde que le nombre de développeurs
-augmentent. Plus important encore, certaines opérations deviennent plus lentes
-à un point tel que les utilisateurs les évitent à moins qu'elles soient
-absolument indispensables. Dans les cas extrêmes cela devient vrai même pour
-les commandes les plus basiques. Lorsque les utilisateurs doivent effectuer des
-opérations lentes, la productivité souffre des interruptions répétées.
+augmentent. Plus important encore, certaines opérations deviennent si lentes
+que les utilisateurs les évitent à moins qu'elles soient absolument
+indispensables. Dans les cas extrêmes cela devient vrai même pour les commandes
+les plus basiques. Lorsque les utilisateurs doivent effectuer des opérations
+lentes, la productivité souffre des interruptions répétées.
 
 J'ai moi-même vécu ce phénomène. Git a été le premier système de gestion de
 versions que j'ai utilisé. Je me suis vite accoutumé à lui, tenant la plupart
@@ -261,7 +261,7 @@ de ses fonctionnalités pour acquises. Je pensais que les autres systèmes
 étaient similaires : le choix d'un système de gestion de versions ne devait pas
 être bien différent du choix d'un éditeur de texte ou d'un navigateur web.
 
-J'ai été choqué lorsque, plus tard, il m'a fallu utilisé un système
+J'ai été très surpris lorsque, plus tard, il m'a fallu utilisé un système
 centralisé. Une liaison internet épisodique importe peu avec Git mais rend le
 développement quasi impossible lorsque le système exige qu'elle soit aussi
 fiable que les accès au disque local. De plus, je me restreignais afin d'éviter
