@@ -10,7 +10,7 @@ exposé dans ce chapitre.
 === Enregistrer l'état courant ===
 
 Vous êtes sur le point d'effectuer une opération drastique ? Avant de le faire,
-réalisez une capture de tous les fichiers dans le dossier courant :
+réalisez une capture de tous les fichiers du dossier courant :
 
  $ git init
  $ git add .
@@ -21,7 +21,7 @@ initiale, immaculée :
 
  $ git reset --hard
 
-Pour enregistrer à nouveau l'état :
+Pour enregistrer un nouvel état :
 
  $ git commit -a -m "Une autre sauvegarde"
 
@@ -49,7 +49,8 @@ Par exemple :
 === Annuler/Reprendre avancé ===
 
 Parfois vous voulez seulement revenir en arrière et oublier les modifications
-depuis un certain moment parce qu'elles sont toutes fausses. Dans ce cas :
+effectuées depuis un certain temps parce qu'elles sont toutes fausses. Dans ce
+cas :
 
  $ git log
 
@@ -77,18 +78,19 @@ commit ; ou alors, copiez et collez l'empreinte en entier. Saisissez :
 pour restaurer l'état correspondant au commit donné et supprimer de manière
 permanente tous les commits plus récents de l'enregistrement.
 
-D'autres fois vous voulez faire un saut rapide dans un état précédent. Dans ce
+Parfois vous ne voulez faire qu'un bref saut dans un état précédent. Dans ce
 cas, saisissez :
 
  $ git checkout 82f5
 
 Ceci vous ramène en arrière dans le temps, tout en conservant les commits
-récents. Toutefois, comme pour le voyage dans le temps de la science-fiction,
-si vous modifiez et faites un commit, vous serez dans une réalité parallèle,
-parce que vos actions sont différentes de ce qu'elles étaient la première fois.
+récents. Toutefois, comme pour le voyage temporel de la science-fiction, si
+vous faites des modifications suivies d'un commit, vous entrerez dans une
+réalité parallèle puisque vos actions sont différentes de ce qu'elles étaient
+la première fois.
 
 Cette réalité parallèle est appelée une 'branche' ('branch'), et <<branch,nous
-en dirons plus après>>. Pour le moment rappelez vous simplement que :
+en dirons plus après>>. Pour le moment rappelez-vous simplement que :
 
  $ git checkout master
 
@@ -98,10 +100,10 @@ checkout.
 
 Pour reprendre l'analogie du jeu vidéo :
 
-- *`git reset --hard`* : recharger une ancienne sauvegarde et supprimer toutes
+- *`git reset --hard`* : recharge une ancienne sauvegarde et supprime toutes
    les sauvegardes plus récentes.
 
-- *`git checkout`* : recharger une ancienne partie, mais si vous jouez avec,
+- *`git checkout`* : recharge une ancienne partie, mais si vous jouez avec,
    l'état de la partie va différer des enregistrement suivants que vous aviez
    réalisés la première fois. Chaque nouvelle sauvegarde sera sur une branche
    séparée représentant la réalité parallèle dans laquelle vous êtes
@@ -115,12 +117,12 @@ les nommant à la suite de la commande :
 Faites attention car cette forme de *checkout* peut écraser vos fichiers sans
 avertissement. Pour éviter les accidents, faites un commit avant toute commande
 checkout, surtout quand vous débutez avec Git. En général, quand vous n'êtes
-pas sûr de vous sur une opération, et pas seulement pour une commande Git,
+pas sûr des conséquences d'une opération, et pas seulement des commandes Git,
 faites d'abord un *git commit -a*.
 
 Vous n'aimez pas copier et coller les empreintes ? Alors utilisez :
 
- $ git checkout :/"Mon premier b"
+ $ git checkout :/"Ma première s"
 
 pour arriver sur le commit qui commence avec ce message.  Vous pouvez aussi
 demander la cinquième sauvegarde en arrière :
@@ -151,7 +153,7 @@ Faites une copie d'un projet géré par Git en saisissant :
 
  $ git clone git://serveur/chemin/vers/les/fichiers
 
-Par exemple, pour avoir les fichiers qui ont été utilisés pour créer ce site :
+Par exemple, pour récupérer les fichiers utilisés pour créer ce site :
 
  $ git clone git://git.or.cz/gitmagic.git
 
@@ -185,8 +187,9 @@ Ensuite vous pouvez dire à vos utilisateurs de lancer :
 
  $ git clone votre.ordinateur:/chemin/vers/le/script
 
-pour télécharger votre script. En considérant qu'ils ont un accès ssh. Sinon,
-lancez *git daemon* et dites plutôt à vos utilisateurs de lancer :
+pour télécharger votre script. En considérant qu'ils ont accès à votre
+ordinateur via ssh. Sinon, lancez *git daemon* et dites plutôt à vos
+utilisateurs de lancer :
 
  $ git clone git://votre.ordinateur/chemin/vers/le/script
 
