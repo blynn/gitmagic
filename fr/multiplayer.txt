@@ -28,18 +28,21 @@ Supposez que vous ayez un accès SSH à un serveur Web sur lequel Git n'est pas
 installé. Bien que ce soit moins efficace que le protocole natif, Git sait
 communiquer par dessus HTTP.
 
-Télécharger, compiler et installer Git sur votre compte et créer un dépôt dans votre répertoire web :
+Télécharger, compiler et installer Git sur votre compte et créer un dépôt dans
+votre dossier web :
 
  $ GIT_DIR=proj.git git init
  $ cd proj.git
  $ git --bare update-server-info
  $ cp hooks/post-update.sample hooks/post-update
 
-Avec les vieilles versions de Git, la commande de copie échoue et vous devez faire :
+Avec les vieilles versions de Git, la commande de copie échoue et vous devez
+faire :
 
  $ chmod a+x hooks/post-update
 
-Maintenant vous pouvez transmettre vos modifications via SSH depuis n'importe lequel de vos clones :
+Maintenant vous pouvez transmettre vos modifications via SSH depuis n'importe
+lequel de vos clones :
 
  $ git push web.server:/path/to/proj.git master
 
@@ -90,8 +93,8 @@ et pour créer un nouveau bundle faites :
 === Les patches : la monnaie d'échange globale ===
 
 Les patches sont des représentations textuelles de vos modifications qui
-peuvent être facilement compris par les ordinateurs comme les humains. C'est ce
-qui leur donne leur charme. Vous pouvez envoyer un patch par mail à un
+peuvent être facilement compris par les ordinateurs comme par les humains.
+C'est ce qui leur donne leur charme. Vous pouvez envoyer un patch par mail à un
 développeur sans savoir quel système de gestion de versions il utilise. À
 partir du moment où on peut lire les mails que vous envoyez, on peut voir vos
 modifications. De votre côté, vous n'avez besoin que d'un compte mail : aucune
@@ -133,7 +136,7 @@ Il y a de légères différences dans le cas des clients de messagerie se basant
 sur le format mbox, mais si vous utilisez l'un d'entre eux, vous êtes sans
 aucun doute capable de vous en débrouiller facilement sans lire des tutoriels !
 
-(NdT: si votre dépôt contient des fichiers binaires, n'oubliez-pas d'ajouter
+(NdT : si votre dépôt contient des fichiers binaires, n'oubliez-pas d'ajouter
 l'option +--binary+ aux commandes de création de patches ci-dessus.)
 
 === Le numéro de votre correspondant a changé ===
@@ -146,9 +149,9 @@ clone. Jetons-y un œil :
  $ git config --list
 
 L'option +remote.origin.url+ détermine l'URL de la source ; ``origin'' est un
-surnom donné au dépôt d'origine. Comme dans le cas de la branche principale qui
-nomme ``master'' par convention, on peut changer ou supprimer ce surnom mais il
-n'y a habituellement aucune raison de le faire.
+alias donné au dépôt d'origine. Comme dans le cas de la branche principale qui
+se nomme ``master'' par convention, on peut changer ou supprimer cet alias mais
+il n'y a habituellement aucune raison de le faire.
 
 Si le dépôt original change, vous pouvez modifier son URL via :
 
@@ -172,9 +175,10 @@ précédents exemples n'avaient pas besoin d'arguments.
 === Les branches distantes ===
 
 Lorsque nous clonons un dépôt, nous clonons aussi toutes ses branches. Vous ne
-les avez sans doute pas remarquées car Git les cache : vous devez les demander
-explicitement. Cela empêche les branches du dépôt distant d'interférer avec vos
-propres branches et cela rend aussi Git plus simple pour les débutants.
+les avez sans doute pas remarquées car Git les cache : vous devez explicitement
+demander à les voir. Cela empêche les branches du dépôt distant d'interférer
+avec vos propres branches et cela rend aussi Git plus simple pour les
+débutants.
 
 Listons les branches distantes :
 
@@ -195,7 +199,7 @@ tapez :
 
  $ git diff origin/HEAD
 
-Vous pouvez aussi voir jusqu'où en est la branche ``experimental'' :
+Vous pouvez aussi voir où en est rendu la branche ``experimental'' :
 
  $ git log origin/experimental
 
@@ -215,15 +219,15 @@ accès facilement à toutes les branches de tous les dépôts :
 
 Mais comment faire si nous souhaitons juste comparer leurs modifications sans
 affecter notre travail ? En d'autres termes, nous voulons examiner leurs
-branches sans que leurs modifications envahissent notre répertoire de
-travail. À la place d'un pull, faisons :
+branches sans que leurs modifications envahissent notre dossier de travail. À
+la place d'un pull, faisons :
 
  $ git fetch          # Rapatrier depuis le dépôt d'origin, par défaut
  $ git fetch un_autre # Rapatrier depuis le dépôt d'un_autre
 
-Cela rapatrie (fetch) juste les historiques. Bien que notre répertoire de
-travail reste inchangé, nous pouvons faire référence à n'importe quelle branche
-de n'importe quel dépôt dans nos commandes Git puisque nous en possédons
+Cela ne rapatrie (fetch) que les historiques. Bien que notre dossier de travail
+reste inchangé, nous pouvons faire référence à n'importe quelle branche de
+n'importe quel dépôt dans nos commandes Git puisque nous en possédons
 maintenant une copie locale.
 
 Rappelez-vous qu'en coulisse, un *pull* est simplement un *fetch* suivi d'un
@@ -247,8 +251,8 @@ organisées et bien décrites. Je fusionne mes propres modifications et effectue
 parfois quelques modifications supplémentaires. Une fois satisfait, je les
 envoie (push) vers le dépôt principal.
 
-Bien que recevant rarement des contributions, je pense que mon approche s'étend
-parfaitement à grande échelle. Voir
+Bien que recevant rarement des contributions, je pense que mon approche est
+parfaitement adaptable à grande échelle. Voir
 http://torvalds-family.blogspot.com/2009/06/happiness-is-warm-scm.html[ce
 billet par Linus Torvalds].
 
