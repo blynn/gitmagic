@@ -1,7 +1,7 @@
 // -*- mode: doc; mode: visual-line; mode: flyspell; coding: utf-8; fill-column: 79; -*-
 = Git Magique =
 Ben Lynn
-Août 2010
+Août 2007
 
 == Préface ==
 
@@ -12,14 +12,14 @@ maîtriser !
 
 Comme Arthur C. Clarke le fait observer, toute technologie suffisamment avancée
 se confond avec la magie. C'est une approche intéressante pour Git : les
-débutants peuvent ignorer ses mécanismes internes comme une XXX baguette
-magique qui peut époustoufler les amis et rendre furieux les ennemis par ses
-fabuleuses capacités.
+débutants peuvent ignorer ses mécanismes internes et l'utiliser comme une
+baguette magique afin d'époustoufler les amis et rendre furieux les ennemis par
+ses fabuleuses capacités.
 
-Plutôt que de rentrer dans le détails, nous donnons des instructions pour tel
-ou tel effet. À force d'utilisation, petit à petit, vous comprendrez comment
-fonctionne chaque truc et comment composer des recettes pour répondre à vos
-besoins.
+Plutôt que de rentrer dans le détails, nous donnons des instructions pour
+obtenir tel ou tel effet. À force d'utilisation, petit à petit, vous
+comprendrez comment fonctionne chaque truc et comment composer vos propres
+recettes pour répondre à vos besoins.
 
 .Traductions
 
@@ -65,11 +65,15 @@ besoins.
 
 === Merci ! ===
 
+Je reste modeste devant le travail fourni par tant de monde pour traduire ces
+pages. J'apprécie beaucoup d'élargir mon audience grâce aux efforts des
+personnes déjà citées.
+
 Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael
 Budde, Richard Albury, Tarmigan, Derek Mahar, Frode Aannevik, Keith Rarick,
-Andy Somerville, Ralf Recker, Øyvind A. Holm, Miklos Vajna, Sébastien
-Hinderer, Thomas Miedema, Joe Malin et Tyler Breisacher pour les corrections
-et améliorations.
+Andy Somerville, Ralf Recker, Øyvind A. Holm, Miklos Vajna, Sébastien Hinderer,
+Thomas Miedema, Joe Malin et Tyler Breisacher ont contribué aux corrections et
+aux améliorations.
 
 François Marier maintient le paquet Debian, créé à l'origine par Daniel
 Baumarr.
@@ -101,9 +105,9 @@ Ce guide est publié sous http://www.gnu.org/licenses/gpl-3.0.html[la GNU
 General Public License version 3]. Bien évidement, les sources sont dans un
 dépôt Git et peuvent être obtenues en saisissant :
 
- $ git clone git://repo.or.cz/gitmagic.git  # Ceci crée le dossier gitmagic
+ $ git clone git://repo.or.cz/gitmagic.git  # Pour créer le dossier gitmagic
 
-ou à partir d'un des mirroirs :
+ou à partir d'un des miroirs :
 
  $ git clone git://github.com/blynn/gitmagic.git
  $ git clone git://gitorious.org/gitmagic/mainline.git
