@@ -17,16 +17,15 @@ de versions centralisé, il faudrait télécharger une nouvelle copie de travail
 depuis le serveur central. Un système de gestion de versions décentralisé est
 bien meilleur puisqu'il peut cloner localement la version voulue.
 
-Mais un clone implique encore la copie de tout le répertoire de travail ainsi
-que de l'historique complet jusqu'au point voulu. Même si Git réduit ce coût
-grâce aux fichiers partagés et au liens matériels, les fichiers du projet
-doivent tout de même être entièrement recréés dans le nouveau répertoire de
-travail.
+Mais un clone implique encore la copie de tout le dossier de travail ainsi que
+de l'historique complet jusqu'au point voulu. Même si Git réduit ce coût grâce
+aux fichiers partagés et au liens matériels, les fichiers du projet doivent
+tout de même être entièrement recréés dans le nouveau dossier de travail.
 
 *Solution*&#160;: dans ce genre de situations, Git offre un outil bien meilleur
 puisque plus rapide et moins consommateur d'espace disque : les branches.
 
-Grâce à un mot magique, les fichiers de votre répertoire se transforment d'une
+Grâce à un mot magique, les fichiers de votre dossier se transforment d'une
 version à une autre. Cette transformation peut être bien plus qu'un simple
 voyage dans l'historique. Vos fichiers peuvent se transformer de la dernière
 version stable vers une version expérimentale, vers la version courante de
@@ -58,7 +57,7 @@ ce changement. Mais ce n'est qu'une illusion. Tapez :
  $ git checkout master  # bascule vers la version originale du fichier
 
 et ça y est ! Le fichier texte est restauré. Et si le chef repasse pour
-regarder votre répertoire, tapez :
+regarder votre dossier, tapez :
 
  $ git checkout boss  # bascule vers la version visible par le chef
 
@@ -81,10 +80,10 @@ avez terminé, tapez :
 
  $ git checkout master
 
-pour retourner à votre travail d'origine. Notez que tout changement non intégré
-est définitivement perdu (NdT : et que les changements intégrés via commit ne
-sont accessibles qu'en connaissant leur empreintes SHA-1 puisqu'aucune branche
-nommée ne pointe vers eux).
+pour retourner à votre travail d'origine. Notez que tous les changement non
+intégrés sont définitivement perdus (NdT : les changements intégrés via commit
+sont conservés quelques jours et sont accessibles en connaissant leur empreinte
+SHA1).
 
 Que faire si vous voulez nommer ces changements temporaires ? Rien de plus
 simple :
@@ -103,7 +102,7 @@ branche master. À ce moment, tout commit poussera nos fichiers sur une route
 différente, qui pourra être nommée plus tard.
 
 En d'autres termes, après un checkout vers un état ancien, Git nous place
-automatiquement dans une nouvelle branche sans nom qui pourra être nommée et
+automatiquement dans une nouvelle branche anonyme qui pourra être nommée et
 enregistrée grâce à *git checkout -b*.
 
 === Corrections rapides ===
@@ -127,22 +126,21 @@ avec la correction de bug toute fraîche :
 === Fusionner ===
 
 Dans certains systèmes de gestion de versions, la création de branches est
-facile mais en fusionner est difficile. Avec Git, la fusion est si simple que
+facile mais les fusionner est difficile. Avec Git, la fusion est si simple que
 vous n'y prêterez plus attention.
 
 En fait, nous avons déjà rencontré la fusion. La commande *pull* ramène
 ('fetch') une série de versions puis les fusionne ('merge') dans votre branche
 courante. Si vous n'avez effectué aucun changement local alors la fusion est un
 simple bon en avant (un _fast forward_), un cas dégénéré qui s'apparente au
-rapatriement de la dernière version dans un système de version centralisé. Mais
-si vous avez effectué des changements locaux, Git les fusionnera
-automatiquement et préviendra s'il y a des conflits.
-
+rapatriement de la dernière version dans un système de gestion de versions
+centralisé. Si vous avez effectué des changements locaux, Git les
+fusionnera automatiquement et préviendra s'il y a des conflits.
 
 Habituellement, une version à une seule 'version parente', qu'on appelle la
-version précédente. Fusionner des branches entre elles produit une version avec
-au moins deux parents. Ce qui pose la question suivante : à quelle version se
-réfère `HEAD~10` ? Comme une version peut avoir plusieurs parents, par quel
+version précédente. Une fusion de branches entre elles produit une version avec
+plusieurs parents. Ce qui pose la question suivante : à quelle version se
+réfère `HEAD~10` ? Puisqu'une version peut avoir plusieurs parents, par quel
 parent remonterons-nous ?
 
 Il s'avère que cette notation choisit toujours le premier parent. C'est
@@ -171,15 +169,15 @@ en arrière du deuxième parent du premier parent de la version 1b6d.
 
 La plupart du temps dans un projet de réalisation matérielle, la seconde étape
 du plan ne peut commencer que lorsque la première étape est terminée. Une
-voiture en réparation doit rester bloquée au garage jusqu'à la livraison d'une
-pièce. Un prototype doit attendre la fabrication d'une puce avant que le
-montage continue.
+voiture en réparation reste bloquée au garage jusqu'à la livraison d'une
+pièce. Le montage d'un prototype est suspendu en attendant la fabrication d'une
+puce.
 
 Les projets logiciels peuvent être similaires. La deuxième partie d'une
 nouvelle fonctionnalité doit attendre que la première partie soit sortie et
-testée. Certains projets exigent que votre code ait été relu avant d'être
-accepté, vous êtes donc obligé d'attendre que la première partie soit validée
-avant de commence la seconde.
+testée. Certains projets exigent une validation de votre code avant son
+acceptation, vous êtes donc obligé d'attendre que la première partie soit
+validée avant de commencer la seconde.
 
 Grâce aux branches et aux fusions faciles, vous pouvez contourner les règles et
 travailler sur la partie 2 avant que la partie 1 soit officiellement
@@ -208,7 +206,7 @@ Finalement, la partie 1 est validée.
  $ git branch -d part2    # Suppression de la branche 'part2'.
 
 À cet instant vous êtes à nouveau dans la branche `master` avec la partie 2
-dans votre répertoire de travail.
+dans votre dossier de travail.
 
 Il est facile d'étendre cette astuce à de nombreuses branches. Il est aussi
 facile de créer une branche rétroactivement : imaginons qu'après 7 commits,
@@ -232,8 +230,8 @@ branche. Vous souhaitez que votre travail en cours ne soit accessible qu'à
 vous-même et donc que les autres ne puissent voir vos versions que lorsqu'elles
 sont proprement organisées. Commencez par créer deux branches :
 
-  $ git branch propre       # Créer une branch pour les versions propres
-  $ git checkout -b foutoir # Créer et basculer vers une branche pour foutoir
+  $ git branch propre       # Créer une branche pour les versions propres
+  $ git checkout -b foutoir # Créer et basculer vers une branche pour le foutoir
 
 Ensuite, faites tout ce que vous voulez : corriger des bugs, ajouter des
 fonctionnalités, ajouter du code temporaire et faites-en des versions autant
@@ -280,7 +278,7 @@ est aussi pratique que la télécommande de votre télévision :
  $ git stash
 
 Cela mémorise l'état courant dans un emplacement temporaire (un 'stash') et
-restaure l'état précédent. Votre répertoire courant apparaît alors exactement
+restaure l'état précédent. Votre dossier courant apparaît alors exactement
 comme il était avant que vous ne commenciez à faire des modifications et vous
 pouvez corriger des bugs, aller rechercher (pull) une modification de dépôt
 central ou toute autre chose. Lorsque vous souhaitez revenir à l'état mémorisé
@@ -300,11 +298,11 @@ l'autre par un simple *cd* au lieu de commandes Git ésotériques.
 
 Considérez les navigateurs Web. Pourquoi proposer plusieurs onglets ainsi que
 plusieurs fenêtres ? Parce proposer les deux permet de s'adapter à une large
-gamme d'utilisation. Certains préfèrent n'avoir qu'une seule fenêtre avec plein
+gamme d'utilisations. Certains préfèrent n'avoir qu'une seule fenêtre avec plein
 d'onglets. D'autres font tout le contraire : plein de fenêtres avec un seul
 onglet. D'autres encore mélangent un peu des deux.
 
-Les branches ressemblent à des onglets de votre répertoire de travail et les
+Les branches ressemblent à des onglets de votre dossier de travail et les
 clones ressemblent aux différents fenêtres de votre navigateur. Ces opérations
 sont toutes rapides et locales. Alors expérimentez pour trouver la combinaison
 qui vous convient. Git vous laisse travailler exactement comme vous le
