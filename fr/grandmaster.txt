@@ -2,16 +2,15 @@
 == La maîtrise de Git ==
 
 À ce stade, vous devez être capable de parcourir les pages de *git help* et
-comprendre presque tout. En revanche, retrouver la commande exacte qui résoudra
-un problème précise peut être fastidieux. Je peux sans doute vous aider à
-gagner un peu de temps : vous trouverez ci-dessous quelques-unes des recettes
-dont j'ai déjà eu besoin.
+comprendre presque tout (en supposant que vous lisez l'anglais). En revanche,
+retrouver la commande exacte qui résoudra un problème précis peut être
+fastidieux. Je peux sans doute vous aider à gagner un peu de temps : vous
+trouverez ci-dessous quelques-unes des recettes dont j'ai déjà eu besoin.
 
 === Publication de sources ===
 
 Dans mes projets, Git gère exactement tous les fichiers que je veux placer dans
-une archive afin de la publier. Pour créer une telle archive de codes source,
-j'utilise :
+une archive afin de la publier. Pour créer une telle archive, j'utilise :
 
  $ git archive --format=tar --prefix=proj-1.2.3/ HEAD
 
@@ -23,9 +22,9 @@ parfois pénible pour certains projets. À la place, vous pouvez faire :
  $ git add .
  $ git add -u
 
-Git cherchera les fichiers du répertoire courant et gérera tous les détails
-tout seul. À la place de deuxième commande 'add', vous pouvez utiliser `git
-commit -a` créer une nouvelle version automatiquement. Lisez *git help ignore*
+Git cherchera les fichiers du dossier courant et gérera tous les détails tout
+seul. En remplacement de la deuxième commande 'add', vous pouvez utiliser `git
+commit -a` pour créer un nouveau commit directement. Lisez *git help ignore*
 pour savoir comment spécifier les fichiers qui doivent être ignorés.
 
 Vous pouvez effectuer tout cela en une seule passe grâce à :
@@ -34,13 +33,13 @@ Vous pouvez effectuer tout cela en une seule passe grâce à :
 
 Les options *-z* et *-0* empêchent les effets secondaires imprévus dûs au noms
 de fichiers contenant des caractères étranges.  Comme cette commande ajoutent
-aussi les fichiers ignorés, vous voudrez sûrement utiliser les options `-x` ou
-`-X`.
+aussi les fichiers habituellement ignorés, vous voudrez sûrement utiliser les
+options `-x` ou `-X`.
 
 === Mon commit est trop gros ! ===
 
 Avez-vous négligé depuis longtemps de faire un commit ? Avez-vous codé
-furieusement et tout oublié de la gestion de version jusqu'à présent ?
+furieusement et tout oublié de la gestion de versions jusqu'à présent ?
 Faites-vous plein de petits changements sans rapport entre eux parce que c'est
 votre manière de travailler ?
 
@@ -59,34 +58,34 @@ Une fois satisfait, tapez :
  $ git commit
 
 pour faire un commit incluant exactement les modifications qui vous avez
-sélectionnées (les modifications 'staged'). Soyez bien sûr de ne pas mettre
+sélectionnées (les modifications indexées). Soyez certain de ne pas utiliser
 l'option *-a* sinon Git fera un commit incluant toutes vos modifications.
 
-Que faire si vous avez modifié de nombreux fichiers contiennent de nombreuses
-modifications ? Vérifier chaque modification individuellement devient alors
-rapidement frustrant et abrutissant. Dans ce cas, utilisez la commande *git add
--i* dont l'interface est moins facile mais beaucoup plus souple. En quelques
-touches vous pouvez ajouter ou retirer de votre index (voir ci-dessous)
-plusieurs fichiers d'un seul coup mais aussi valider ou non chacune des
-modifications individuellement pour certains fichiers. Vous pouvez aussi
-utilisez en remplacement la commande *git commit \--interactive* qui effectuera
-un commit automatiquement quand vous aurez terminé.
+Que faire si vous avez modifié de nombreux fichiers en de nombreux endroits ?
+Vérifier chaque modification individuellement devient alors rapidement
+frustrant et abrutissant. Dans ce cas, utilisez la commande *git add -i* dont
+l'interface est moins facile mais beaucoup plus souple. En quelques touches
+vous pouvez ajouter ou retirer de votre index (voir ci-dessous) plusieurs
+fichiers d'un seul coup mais aussi valider ou non chacune des modifications
+individuellement pour certains fichiers. Vous pouvez aussi utiliser en
+remplacement la commande *git commit \--interactive* qui effectuera un commit
+automatiquement quand vous aurez terminé.
 
-=== L'index : l'aire de rassemblement ===
+=== L'index : l'aire d'assemblage ===
 
 Jusqu'ici nous avons réussi à éviter de parler du fameux 'index' de Git mais
 nous devons maintenant le présenter pour mieux comprendre ce qui
-précède. L'index est une aire de rassemblement temporaire. Git ne transfert que
-très rarement de données depuis votre répertoire de travail directement vers
-votre historique. En fait, Git copie d'abord ces données dans l'index puis il
-copie toutes ces données depuis l'index vers leur destination finale.
+précède. L'index est une aire d'assemblage temporaire. Git ne transfert que
+très rarement de données depuis votre dossier de travail directement vers votre
+historique. En fait, Git copie d'abord ces données dans l'index puis il copie
+toutes ces données depuis l'index vers leur destination finale.
 
 Un *commit -a*, par exemple, est en fait un processus en deux temps. La
 première étape consiste à construire dans l'index un instantané de l'état
 actuel de tous les fichiers suivis par Git. La seconde étape enregistre cet
 instantané de manière permanente dans l'historique. Effectuer un commit sans
 l'option *-a* réalise uniquement cette deuxième étape et cela n'a de sens
-qu'après avoir effectuer des commandes qui change l'index, telle que *git add*.
+qu'après avoir effectué des commandes qui change l'index, telle que *git add*.
 
 Habituellement nous pouvons ignorer l'index et faire comme si nous échangions
 directement avec l'historique. Dans certaines occasions, nous voulons un
@@ -110,7 +109,7 @@ usages intéressants.
 Mais comment faire pour revenir vers le futur ? Les commits passés ne savent
 rien du futur.
 
-Si vous connaissez le SHA1 du HEAD original, faites alors :
+Si vous connaissez l'empreinte SHA1 du HEAD original, faites alors :
 
  $ git reset 1b6d
 
@@ -130,10 +129,10 @@ Par défaut, Git conserve un commit au moins deux semaine même si vous avez
 demandé à Git de détruire la branche qui le contient. La difficulté consiste à
 retrouver l'empreinte appropriée. Vous pouvez toujours explorer les différentes
 valeurs d'empreinte trouvées dans `.git/objects` et retrouver celle que vous
-cherchez par essai et erreur. Mais il existe un moyen plus simple.
+cherchez par essais et erreurs. Mais il existe un moyen plus simple.
 
 Git enregistre l'empreinte de chaque commit qu'il traite dans `.git/logs`. La
-sous-répertoire `refs` contient l'historique de toute l'activité de chaque
+sous-dossier `refs` contient l'historique de toute l'activité de chaque
 branche alors que le fichier `HEAD` montre chaque valeur d'empreinte que HEAD a
 pu prendre. Ce dernier peut donc servir à retrouver les commits d'une branche
 qui a été accidentellement élaguée.
@@ -147,14 +146,14 @@ Au lieu de copier/coller une empreinte listée par reflog, essayez :
 
  $ git checkout "@{10 minutes ago}"
 
-Ou basculez vers le cinquième précédent commit visité via :
+Ou basculez vers le cinquième commit précédemment visité via :
 
  $ git checkout "@{5}"
 
 Voir la section ``Specifying Revisions'' de *git help rev-parse* pour en savoir
 plus.
 
-Vous pouvez configurer une plus longue période de grâce pour les commits
+Vous pouvez configurer une plus longue période de rétention pour les commits
 condamnés. Par exemple :
 
   $ git config gc.pruneexpire "30 days"
@@ -167,11 +166,11 @@ Vous pouvez aussi désactiver le déclenchement automatique de *git gc*&#160;:
   $ git config gc.auto 0
 
 auquel cas les commits ne seront véritablement effacés que lorsque vous
-lancerez *git run* manuellement.
+lancerez *git gc* manuellement.
 
 === Construire au-dessus de Git ===
 
-À la manière d'UNIX, la conception de Git permet son utilisation comme un
+À la manière UNIX, la conception de Git permet son utilisation comme un
 composant de bas niveau d'autres programmes tels que des interfaces graphiques
 ou web, des interfaces en ligne de commandes alternatives, des outils de
 gestion de patch, des outils d'importation et de conversion, etc. En fait,
@@ -197,9 +196,9 @@ probablement enlever "refs/heads/" et ignorer les erreurs :
 
   $ git symbolic-ref HEAD 2> /dev/null | cut -b 12-
 
-Le sous-répertoire +contrib+ est une mine d'outils construits par dessus
+Le sous-dossier +contrib+ de Git est une mine d'outils construits au-dessus de
 Git. Un jour, certains d'entre eux pourraient être promus au rang de commandes
-officielles. Dans Debian et Ubuntu, ce répertoire est
+officielles. Dans Debian et Ubuntu, ce dossier est
 +/usr/share/doc/git-core/contrib+.
 
 L'un des plus populaires de ces scripts est +workdir/git-new-workdir+. Grâce à
@@ -208,8 +207,8 @@ l'historique est partagé avec le dépôt original.
 
   $ git-new-workdir un/existant/depot nouveau/repertoire
 
-Le nouveau répertoire et ses fichiers peut être vu comme un clone, sauf que
-l'historique est partagé et que les deux arbres des versions reste
+Le nouveau dossier et ses fichiers peuvent être vus comme un clone, sauf que
+l'historique est partagé et que les deux arbres des versions restent
 automatiquement synchrones. Nul besoin de merge, push ou pull.
 
 === Audacieuses acrobaties  ===
@@ -219,42 +218,42 @@ effacer accidentellement des données. Mais si vous savez ce que vous faites,
 vous pouvez passer outre les garde-fous des principales commandes.
 
 
-*Checkout*: des modifications non intégrées (via commit) peuvent causer l'échec
-d'un checkout. Pour détruire vos modifications et réussir quoiqu'il arrive un
-checkout d'un commit donné, utilisez l'option d'obligation :
+*Checkout*&#160;: des modifications non intégrées (via commit) peuvent causer
+l'échec d'un checkout. Pour détruire vos modifications et réussir quoi qu'il
+arrive un checkout d'un commit donné, utilisez l'option d'obligation :
 
   $ git checkout -f HEAD^
 
-Inversement, si vous spécifier des chemins particuliers pour un checkout alors
+Inversement, si vous spécifiez des chemins particuliers pour un checkout alors
 il n'y a pas de garde-fous. Le contenu des chemins est silencieusement
 réécrit. Faites attention lorsque vous utilisez un checkout de cette manière.
 
-*Reset*: Un reset échoue aussi en présence de modifications non intégrées. Pour
-passer outre, faites :
+*Reset*&#160;: un reset échoue aussi en présence de modifications non
+intégrées. Pour passer outre, faites :
 
   $ git reset --hard 1b6d
 
-*Branch*: La suppression de branches échoue si cela implique la perte de
-versions. Par forcer la suppression, tapez :
+*Branch*&#160;: la suppression de branches échoue si cela implique la perte de
+certains commits. Par forcer la suppression, tapez :
 
   $ git branch -D branche_morte  # à la place de -d
 
-De manière similaire, une tentative de réécriture d'une branche existante via
-un changement nom d'une autre branche échoue si cela amène la perte de
-versions. Pour forcer le changement de nom, tapez :
+De manière similaire, une tentative visant à renommer une branche existante
+vers le nom d'une autre branche échoue si cela amène la perte de commits. Pour
+forcer le changement de nom, tapez :
 
   $ git branch -M source target  # à la place de -m
 
 Contrairement à checkout et reset, ces deux dernières commandes n'effectuent
-pas la suppression des informations immédiatement. Les versions destinées à
-disparaître sont encore disponibles dans le sous-répertoire .git et peuvent
-encore être retrouvées grâce aux empreintes appropriées tel que retrouvées dans
-`.git/logs` (voir "Chasseur de tête" ci-dessus). Par défaut, elles sont
-conservées au moins deux semaines.
+pas la suppression des informations immédiatement. Les commits destinés à
+disparaître sont encore disponibles dans le sous-dossier .git et peuvent encore
+être retrouvés grâce aux empreintes appropriées tel que retrouvées dans
+`.git/logs` (voir "Chasseur de tête" ci-dessus). Par défaut, ils sont conservés
+au moins deux semaines.
 
-*Clean*: certaines commandes Git refusent de s'exécuter pour ne pas écraser des
-fichiers non suivis. Si vous êtes certain que tous ces fichiers et répertoires
-peuvent être sacrifiés alors effacez-les sans pitié via :
+*Clean*&#160;: certaines commandes Git refusent de s'exécuter pour ne pas
+écraser des fichiers non suivis. Si vous êtes certain que tous ces fichiers et
+dossiers peuvent être sacrifiés alors effacez-les sans pitié via :
 
   $ git clean -f -d
 
@@ -287,9 +286,9 @@ hook *pre-commit* pour me prémunir de mes inattentions :
 
 Plusieurs opération de Git acceptent les hooks ; voir *git help hooks*. Nous
 avons déjà utilisé le hook *post-update* lorsque nous avons parlé de Git
-au-dessus de HTTP. Celui-ci se déclenche à mouvement de HEAD. Le script
-d'exemple post-update met à jour les fichiers Git nécessaire à une
-communication au-dessus de transports agnostique tels que HTTP.
+au-dessus de HTTP. Celui-ci se déclenche à chaque mouvement de HEAD. Le script
+d'exemple post-update met à jour les fichiers Git nécessaires à une
+communication au-dessus de transports agnostiques tels que HTTP.
 
 // LocalWords:  doc flyspell coding utf fill-column Git git help tar prefix add
 // LocalWords:  HEAD ls-files xargs update-index remove Faites-vous staged tag
