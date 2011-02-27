@@ -38,7 +38,7 @@ changement de l'ensemble du projet, ce qui est habituellement bénéfique.
 
 Une solution consiste à découper votre projet en plusieurs parties, chacune
 réunissant des fichiers en relation entre eux. Utilisez *git submodule* si vous
-souhaitez conserver tout cela dans un seul répertoire.
+souhaitez conserver tout cela dans un seul dossier.
 
 === Qui modifie quoi ? ===
 
@@ -71,7 +71,7 @@ se compresse mieux qu'une collection de delta fichier par fichier.
 
 === Le clone initial ===
 
-La création d'un clone est plus coûteuse qu'une extraction de code des autres
+La création d'un clone est plus coûteuse que l'extraction de code des autres
 systèmes quand il y a un historique conséquent.
 
 Ce coût initial s'avère payant dans le temps puisque la plupart des opérations
@@ -108,7 +108,8 @@ centralisée d'un dépôt Git. Chacun ne crée qu'un clone superficiel ne conten
 qu'un historique récent voire inexistant du projet. Évidemment de nombreux
 outils Git ne seront plus utilisables et les corrections devront être fournies
 sous forme de patches. C'est sans doute acceptable sans en savoir plus sur les
-raisons de la conservation de l'historique de nombreux fichiers instables.
+raisons réelles de la conservation de l'historique de nombreux fichiers
+instables.
 
 Un autre exemple serait un projet dépendant d'un firmware qui prend la forme
 d'un énorme fichier binaire. L'historique de ce firmware n'intéresse pas les
@@ -116,9 +117,9 @@ utilisateur et les mises à jour se compressent difficilement et donc les
 révisions de ce firmware vont faire grossir inutilement le dépôt.
 
 Dans ce cas, le code source devrait être stocké dans le dépôt Git et les
-fichiers binaires doivent être conservés séparément. Pour rendre la vie
-meilleure, on peut distribuer un script qui utilisera un clone Git pour le code
-et rsync ou un clone Git superficiel pour le firmware.
+fichiers binaires conservés séparément. Pour rendre la vie meilleure, on peut
+distribuer un script qui utilisera un clone Git pour le code et rsync ou un
+clone Git superficiel pour le firmware.
 
 === Compteur global ===
 
@@ -132,11 +133,11 @@ incrémentera un compteur, peut-être dans un tag, qu'il associera à l'empreint
 du dernier commit.
 
 Chaque clone peut gérer un tel compteur mais c'est probablement sans intérêt
-puisque seul les compteurs de dépôt central comptent.
+puisque seul le compteur du dépôt central compte.
 
-=== Les répertoires vides ===
+=== Les dossiers vides ===
 
-Les sous-répertoires vides ne peuvent pas être suivis. Placez-y des fichiers
+Les sous-dossiers vides ne peuvent pas être suivis. Placez-y des fichiers
 sans intérêt pour remédier à ce problème.
 
 Cette limitation n'est pas une fatalité due à la conception de Git mais un
