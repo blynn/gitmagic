@@ -95,7 +95,7 @@ envoyez-moi un patch !
    Git fait pour les projets Open-Source.
 
  - http://github.com/[http://github.com/] héberge des projets Open-Source
-   gratuitement et des projets privés contre payement.
+   gratuitement et des projets privés contre paiement.
 
 Un grand merci à ces sites pour l'hébergement de ce guide.
 
