@@ -4,48 +4,65 @@ Ben Lynn
 
 == 前言 ==
 
-http://git.or.cz/[Git] 是一个版本控制瑞士军刀，一个可靠的、多功能、多用途的校订工具，其异常灵活，不易掌握。
+http://git.or.cz/[Git] 是一个版本控制瑞士军刀，一个可靠的、多功能、多用途的校
+订工具，其异常灵活，不易掌握。
 
-正如Arthur C. Clarke所洞察，足够先进的技术和魔法无二。一个接近Git的绝妙办法：新手们可以忽略Git的内部机理，只当个小把戏玩，炫耀其功能，让朋友羡慕，让敌人暴怒。
+正如Arthur C. Clarke所洞察，足够先进的技术和魔法无二。一个接近Git的绝妙办法：
+新手们可以忽略Git的内部机理，只当个小把戏玩，炫耀其功能，让朋友羡慕，让敌人暴
+怒。
 
-Rather than go into details, we provide rough instructions for particular effects. After repeated use, gradually you will understand how each trick works, and how to tailor the recipes for your needs.
-为了不陷入细节，我们对特定功能提供大略的指导。在重复使用之后，慢慢地你会理解每个小技巧如何工作，以及如何组合这些技巧以满足你的需求。
+为了不陷入细节，我们对特定功能提供大略的指导。在重复使用之后，慢慢地你会理解
+每个小技巧如何工作，以及如何组合这些技巧以满足你的需求。
 
 .翻译
 
  - link:/~blynn/gitmagic/intl/zh/[简体中文]: 俊杰，萌和江薇。
- - link:/~blynn/gitmagic/intl/fr/[法文]: Alexandre Garel。也在http://tutoriels.itaapy.com/[itaapy]。
- - link:/~blynn/gitmagic/intl/de/[德文]: Benjamin Bellee和Armin Stebich；也在http://gitmagic.lordofbikes.de/[Armin的网站]。
- - http://www.slideshare.net/slide_user/magia-git[葡萄牙文]: Leonardo Siqueira Rodrigues [http://www.slideshare.net/slide_user/magia-git-verso-odt[ODT版]]。
- - link:/~blynn/gitmagic/intl/ru/[俄文]: Tikhon Tarnavsky, Mikhail Dymskov, 和其他人。
- - link:/~blynn/gitmagic/intl/es/[西班牙]: Rodrigo Toledo和Ariset Llerena Tapia。
- - link:/~blynn/gitmagic/intl/vi/[越南文]: Trần Ngọc Quân; 也在http://vnwildman.users.sourceforge.net/gitmagic.html[他的网站].
+ - link:/~blynn/gitmagic/intl/fr/[法文]: Alexandre Garel。也在
+   http://tutoriels.itaapy.com/[itaapy]。
+ - link:/~blynn/gitmagic/intl/de/[德文]: Benjamin Bellee和Armin Stebich；也在
+   http://gitmagic.lordofbikes.de/[Armin的网站]。
+ - http://www.slideshare.net/slide_user/magia-git[葡萄牙文]: Leonardo
+   Siqueira Rodrigues
+   [http://www.slideshare.net/slide_user/magia-git-verso-odt[ODT版]]。
+ - link:/~blynn/gitmagic/intl/ru/[俄文]: Tikhon Tarnavsky, Mikhail Dymskov,
+   和其他人。
+ - link:/~blynn/gitmagic/intl/es/[西班牙]: Rodrigo Toledo和Ariset Llerena
+   Tapia。
+ - link:/~blynn/gitmagic/intl/vi/[越南文]: Trần Ngọc Quân; 也在
+   http://vnwildman.users.sourceforge.net/gitmagic.html[他的网站].
 
 .其它版本
 
  - link:/~blynn/gitmagic/intl/zh/book.html[单一文件]: 纯HTML，无CSS。
  - link:/~blynn/gitmagic/intl/zh/book.pdf[PDF文件]: 打印效果好.
- - http://packages.debian.org/gitmagic[Debian包]，http:://packages.ubuntu.com/gitmagic[Ubuntu包]: 本站快速本地拷贝。如果 http://csdcf.stanford.edu/status/[下线了]会方便些。
- - http://www.amazon.com/Git-Magic-Ben-Lynn/dp/1451523343/[纸质书[Amazon.com]]: 64 页, 15.24cm x 22.86cm, 黑白. 没有电子设备的时候会方便些。
+ - http://packages.debian.org/gitmagic[Debian包]，
+   http:://packages.ubuntu.com/gitmagic[Ubuntu包]: 本站快速本地拷贝。如果
+   http://csdcf.stanford.edu/status/[下线了]会方便些。
+ - http://www.amazon.com/Git-Magic-Ben-Lynn/dp/1451523343/[纸质书
+   [Amazon.com]]: 64 页, 15.24cm x 22.86cm, 黑白。 没有电子设备的时候会方便些。
 
 === 致谢！ ===
-感谢Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael Budde, Richard Albury, Tarmigan，Derek Mahar，Frode Aannevik，和Keith Rarick提出的建议和改进。
+
+感谢Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone,
+Michael Budde, Richard Albury, Tarmigan，Derek Mahar，Frode Aannevik，和
+Keith Rarick提出的建议和改进。
 
 Daniel Baumann维护Debian包。
 
-JunJie, Meng, JiangWei, Rodrigo Toledo，和Leonardo Rodrigues致力于本文档翻译。
+俊杰, 萌, 江薇, Rodrigo Toledo，和Leonardo Rodrigues致力于本文档翻译。
 
-感谢其他拥护者和赞美者。如果这是本纸质书，我会在封面上引用你们慷慨的赞美以提高销量。
+感谢其他拥护者和赞美者。如果这是本纸质书，我会在封面上引用你们慷慨的赞美以提
+高销量。
 
 如果我不小心忘记了感谢谁，请告诉我或者发一个补丁（Patch）给我。
 
-I'm humbled that so many people have worked on translations of these pages. I
-greatly appreciate having a wider audience because of the efforts of those
-named above.
-
 那么多人对本文档的翻译让我受宠若惊。他们的付出拓宽了读者群，我非常感激。
 
-Dustin Sallings、Alberto Bertogli、James Cameron、Douglas Livingstone、Michael Budde、Richard Albury、Tarmigan、 Derek Mahar、Frode Aannevik、 Keith Rarick、 Andy Somerville、 Ralf Recker、 Øyvind A. Holm、 Miklos Vajna、 Sébastien Hinderer、 Thomas Miedema、 Joe Malin、 和Tyler Breisacher对本文档正确性和优化做出了贡献。
+Dustin Sallings、Alberto Bertogli、James Cameron、Douglas Livingstone、
+Michael Budde、Richard Albury、Tarmigan、 Derek Mahar、Frode Aannevik、
+Keith Rarick、 Andy Somerville、 Ralf Recker、 Øyvind A. Holm、 Miklos Vajna、
+Sébastien Hinderer、 Thomas Miedema、 Joe Malin、 和Tyler Breisacher对本文档
+正确性和优化做出了贡献。
 
 François Marier维护Debian包，该Debian包起初由Daniel
 Baumann创建。
@@ -56,15 +73,18 @@ Baumann创建。
 
 .免费Git伺服
 
- - http://repo.or.cz/[http://repo.or.cz/] 为自由项目提供服务。第一个Git服务器。由最早的Git开发人员创建和维护。
- - http://gitorious.org/[http://gitorious.org/] 是另一个Git服务站点，为开源项目提供服务。
+ - http://repo.or.cz/[http://repo.or.cz/] 为自由项目提供服务。第一个Git服务器。
+   由最早的Git开发人员创建和维护。
+ - http://gitorious.org/[http://gitorious.org/] 是另一个Git服务站点，为开源项
+   目提供服务。
  - http://github.com/[http://github.com/] 开源项目免费，私有项目收钱。
 
 感谢以上站点为本文档提供伺服服务。
 
 === 许可 ===
 
-本指南在http://www.gnu.org/licenses/gpl-3.0.html[ GNU通用公共许可协议版本3 ]之下发布。很自然，源码保存在一个Git仓库里，可以通过以下命令获得源码：
+本指南在http://www.gnu.org/licenses/gpl-3.0.html[ GNU通用公共许可协议版本3 ]
+之下发布。很自然，源码保存在一个Git仓库里，可以通过以下命令获得源码：
 
  $ git clone git://repo.or.cz/gitmagic.git  # 创建“gitmagic”目录.
 
