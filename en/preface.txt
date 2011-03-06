@@ -12,7 +12,8 @@ Rather than go into details, we provide rough instructions for particular effect
 
 .Translations
 
- - http://docs.google.com/View?id=dfwthj68_675gz3bw8kj[Chinese (Simplified)]: by JunJie, Meng and JiangWei.
+ - link:/~/blynn/gitmagic/intl/zh_cn/[Simplified Chinese]: by JunJie, Meng and JiangWei.
+ - link:/~/blynn/gitmagic/intl/zh_tw/[Traditional Chinese]: converted with command *cconv -f UTF8-CN -t UTF8-TW*.
  - link:/~blynn/gitmagic/intl/fr/[French]: by Alexandre Garel, Paul Gaborit, and Nicolas Deram. Also hosted at http://tutoriels.itaapy.com/[itaapy].
  - link:/~blynn/gitmagic/intl/de/[German]: by Benjamin Bellee and Armin Stebich; also http://gitmagic.lordofbikes.de/[hosted on Armin's website].
  - http://www.slideshare.net/slide_user/magia-git[Portuguese]: by Leonardo Siqueira Rodrigues [http://www.slideshare.net/slide_user/magia-git-verso-odt[ODT version]].
