@@ -65,7 +65,8 @@ Baumann创建。
 === 许可 ===
 
 本指南在http://www.gnu.org/licenses/gpl-3.0.html[ GNU通用公共许可协议版本3 ]之下发布。很自然，源码保存在一个Git仓库里，可以通过以下命令获得源码：
- $ git clone git://repo.or.cz/gitmagic.git  # Creates "gitmagic" directory.
+
+ $ git clone git://repo.or.cz/gitmagic.git  # 创建“gitmagic”目录.
 
 或从以下镜像得到：
 
