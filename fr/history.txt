@@ -1,0 +1,294 @@
+// -*- mode: doc; mode: flyspell; coding: utf-8; fill-column: 79; -*-
+== Les leçons de l'histoire ==
+
+L'une des conséquences de la nature distribuée de Git est qu'il est facile de
+modifier l'historique. Mais si vous réécrivez le passé, faites attention : ne
+modifiez que la partie de l'historique que vous êtes le seul à posséder. Sinon,
+comme des nations qui se battent éternellement pour savoir qui a commis telle
+ou telle atrocité, si quelqu'un d'autre possède un clone dont l'historique
+diffère du vôtre, vous aurez des difficultés à vous réconcilier lorsque vous
+interagirez.
+
+Certains développeurs insistent très fortement pour que l'historique soit
+considérer comme immuable. D'autres pensent au contraire que les historiques
+doivent être rendus présentables avant d'être présentés publiquement. Git
+s'accommode des deux points de vue. Comme les clones, les branches et les
+fusions, la réécriture de l'historique est juste un pouvoir supplémentaire que
+vous donne Git. C'est à vous de l'utiliser à bon escient.
+
+=== Je me corrige... ===
+
+Que faire si vous avez fait un commit mais que vous souhaitez y attacher un
+message différent ? Pour modifier le dernier message, tapez :
+
+ $ git commit --amend
+
+Vous apercevez-vous que vous avez oublié un fichier ? Faites *git add* pour
+l'ajouter puis exécutez le commande ci-dessus.
+
+Voulez-vous ajouter quelques modifications supplémentaires au dernier commit ?
+Faites ces modifications puis exécutez :
+
+ $ git commit --amend -a
+
+=== ... et bien plus ===
+
+Supposons que le problème précédent est dix fois pire. Après une longue séance,
+vous avez effectué une série de commits. Mais vous n'êtes pas satisfait de la
+manière dont ils sont organisés et certains des messages associés doivent être
+revus. Tapez alors :
+
+ $ git rebase -i HEAD~10
+
+et les dix derniers commits apparaissent dans votre $EDITOR favori. Voici un
+petit extrait :
+
+    pick 5c6eb73 Added repo.or.cz link
+    pick a311a64 Reordered analogies in "Work How You Want"
+    pick 100834f Added push target to Makefile
+
+Ensuite :
+
+- Supprimez un commit en supprimant sa ligne.
+
+- Réordonnez des commits en réordonnant leurs lignes.
+
+- Remplacez `pick` par :
+
+   * `edit` pour marquer ce commit pour amendement.
+
+   * `reword` pour modifier le message associé.
+
+   * `squash` pour fusionner ce commit avec le précédent.
+
+   * `fixup` pour fusionner ce commit avec le précédent en supprimant le
+     message associé.
+
+Sauvegardez et quittez. Si vous avez marqué un commit pour amendement alors
+tapez :
+
+ $ git commit --amend
+
+Sinon, tapez :
+
+ $ git rebase --continue
+
+
+Donc faites des commits très tôt et faites-en souvent : vous pourrez tout
+ranger plus tard grâce à 'rebase'.
+
+=== Les changements locaux en dernier ===
+
+Vous travaillez sur un projet actif. Vous faites quelques commits locaux puis
+vous vous resynchronisez avec le dépôt officiel grâce à une fusion (merge). Ce
+cycle se répète jusqu'au moment où vous êtes prêt à pousser vos contributions
+vers le dépôt central.
+
+Mais à cet instant l'historique de votre clone Git local est un fouillis infâme
+mélangeant les modifications officielles et les vôtres. Vous préféreriez que
+toutes vos modifications soient contiguës et se situent après toutes les
+modifications officielles.
+
+C'est un boulot pour *git rebase* comme décrit ci-dessus. Dans la plupart des
+cas, vous pouvez utilisez l'option *--onto* et éviter les interactions.
+
+Lisez *git help rebase* pour des exemples détaillés sur cette merveilleuse
+commande. Vous pouvez scinder des commits. Vous pouvez même réarranger des
+branches de l'arbre.
+
+=== Réécriture de l'histoire ===
+
+De temps en temps, vous avez besoin de faire des modifications équivalentes à
+la suppression d'une personne d'une photo officielle, la gommant ainsi de
+l'histoire d'une manière quasi Stalinienne. Supposons que vous ayez publié un
+projet mais en y intégrant un fichier que vous auriez dû conserver secret. Par
+exemple, vous avez accidentellement ajouté un fichier texte contenant votre
+numéro de carte de crédit. Supprimer ce fichier n'est pas suffisant puisqu'il
+pourra encore être retrouvé via d'anciennes versions du projet. Vous devez
+supprimer ce fichier dans toutes les versions :
+
+ $ git filter-branch --tree-filter 'rm top/secret/fichier' HEAD
+
+La documentation *git help filter-branch* explique cette exemple et donne une
+méthode plus rapide. De manière générale, *filter-branch* vous permet de
+modifier des pans entiers de votre historique grâce à une seule commande.
+
+Après cela, le dossier +.git/refs/original+ contiendra l'état de votre dépôt
+avant l'opération. Vérifiez que la commande filter-branch a bien fait ce que
+vous souhaitiez puis effacer ce dossier si vous voulez appliquer d'autres
+commandes filter-branch.
+
+Finalement, remplacez tous les clones de votre projet par votre version révisée
+si vous voulez pouvoir interagir avec eux plus tard.
+
+=== Faire l'histoire ===
+
+[[makinghistory]] Voulez-vous faire migrer un projet vers Git ? S'il est géré
+par l'un des systèmes bien connus alors il y a de grandes chances que quelqu'un
+ait déjà écrit un script afin d'importer l'ensemble de l'historique dans Git.
+
+Sinon, regarder du côté de *git fast-import* qui lit un fichier texte dans un
+format spécifique pour créer un historique Git à partir de rien.  Typiquement
+un script utilisant cette commande est un script jetable qui ne servira qu'une
+seule fois pour migrer le projet d'un seul coup.
+
+À titre d'exemple, collez le texte suivant dans un fichier temporaire
+(`/tmp/historique`) :
+
+----------------------------------
+commit refs/heads/master
+committer Alice <alice@example.com> Thu, 01 Jan 1970 00:00:00 +0000
+data <<EOT
+Commit initial
+EOT
+
+M 100644 inline hello.c
+data <<EOT
+#include <stdio.h>
+
+int main() {
+  printf("Hello, world!\n");
+  return 0;
+}
+EOT
+
+
+commit refs/heads/master
+committer Bob <bob@example.com> Tue, 14 Mar 2000 01:59:26 -0800
+data <<EOT
+Remplacement de printf() par write().
+EOT
+
+M 100644 inline hello.c
+data <<EOT
+#include <unistd.h>
+
+int main() {
+  write(1, "Hello, world!\n", 14);
+  return 0;
+}
+EOT
+----------------------------------
+
+Puis créez un dépôt Git à partir de ce fichier temporaire en tapant :
+
+ $ mkdir projet; cd projet; git init
+ $ git fast-import --date-format=rfc2822 < /tmp/historique
+
+Vous pouvez extraire la dernière version de ce projet avec :
+
+ $ git checkout master .
+
+La commande *git fast-export* peut convertir n'importe quel dépôt Git en un
+fichier au format *git fast-import* ce qui vous permet de l'étudier pour écrire
+des scripts d'exportation mais vous permet aussi de transporter un dépôt dans
+un format lisible. Ces commandes permettent aussi d'envoyer un dépôt via un
+canal qui n'accepte que du texte pur.
+
+=== Qu'est-ce qui a tout cassé ? ===
+
+Vous venez tout juste de découvrir un bug dans une fonctionnalité de votre
+programme et pourtant vous êtes sûr qu'elle fonctionnait encore parfaitement il
+y a quelques mois. Zut ! D'où provient ce bug ? Si seulement vous aviez testé
+cette fonctionnalité pendant vos développements.
+
+Mais il est trop tard. En revanche, en supposant que vous avez fait des commits
+suffisamment souvent, Git peut cerner le problème.
+
+ $ git bisect start
+ $ git bisect bad HEAD
+ $ git bisect good 1b6d
+
+Git extrait un état à mi-chemin entre ces deux versions (HEAD et 1b6d). Testez
+la fonctionnalité et si le bug se manifeste :
+
+ $ git bisect bad
+
+Si elle ne se manifeste pas, remplacer "bad" (mauvais) par "good" (bon). Git
+vous transporte à nouveau dans un état à mi-chemin entre la bonne et la
+mauvaise version, en réduisant ainsi les possibilités. Après quelques
+itérations, cette recherche dichotomique vous amènera au commit où le bug est
+survenu. Une fois vos investigations terminées, retourner à votre état original
+en tapant :
+
+ $ git bisect reset
+
+Au lieu de tester chaque état à la main, automatisez la recherche en tapant :
+
+ $ git bisect run mon_script
+
+Git utilise la valeur de retour du script fourni pour décider si un état est
+bon ou mauvais : mon_script doit retourner 0 si l'état courant est ok, 125 si
+cet état doit être sauté et n'importe quelle valeur entre 1 et 127 si l'état
+est mauvais. Une valeur négative abandonne la commande bisect.
+
+Vous pouvez faire bien plus : la page d'aide explique comment visualiser les
+bisects, comment examiner ou rejouer le log d'un bisect et comment éliminer des
+changements que vous savez sans conséquence afin d'accélérer la recherche.
+
+=== Qui a tout cassé ? ===
+
+Comme de nombreux systèmes de gestion de versions, Git a sa commande blame :
+
+ $ git blame bug.c
+
+Cette commande annote chaque ligne du fichier afin de montrer par qui et quand
+elle a été modifiée la dernière fois. À l'inverse de la plupart des autres
+systèmes, cette commande marche hors-ligne et ne lit que le disque local.
+
+=== Expérience personnelle ===
+
+Avec un système de gestion de versions centralisé, la modification de
+l'historique est une opération difficile et faisable uniquement par les
+administrateurs. Créer un clone, créer une branche ou en fusionner plusieurs
+sont des opérations impossibles à réaliser sans communication réseau. Il en est
+de même pour certains opérations basiques telles que parcourir l'historique ou
+intégrer une modification. Avec certains systèmes, des communications réseaux
+sont même nécessaires juste pour voir ses propres modifications ou pour ouvrir
+un fichier avec le droit de modification.
+
+Ces systèmes centralisés empêchent le travail hors-ligne et nécessitent une
+infrastructure réseau d'autant plus lourde que le nombre de développeurs
+augmentent. Plus important encore, certaines opérations deviennent si lentes
+que les utilisateurs les évitent à moins qu'elles soient absolument
+indispensables. Dans les cas extrêmes cela devient vrai même pour les commandes
+les plus basiques. Lorsque les utilisateurs doivent effectuer des opérations
+lentes, la productivité souffre des interruptions répétées.
+
+J'ai moi-même vécu ce phénomène. Git a été le premier système de gestion de
+versions que j'ai utilisé. Je me suis vite accoutumé à lui, tenant la plupart
+de ses fonctionnalités pour acquises. Je pensais que les autres systèmes
+étaient similaires : le choix d'un système de gestion de versions ne devait pas
+être bien différent du choix d'un éditeur de texte ou d'un navigateur web.
+
+J'ai été très surpris lorsque, plus tard, il m'a fallu utilisé un système
+centralisé. Une liaison internet épisodique importe peu avec Git mais rend le
+développement quasi impossible lorsque le système exige qu'elle soit aussi
+fiable que les accès au disque local. De plus, je me restreignais afin d'éviter
+certaines commandes trop longues, ce qui m'empêchait de suivre ma méthode de
+travail habituelle.
+
+Lorsqu'il me fallait utiliser ces commandes lentes, cela interrompait mes
+réflexions et avait des effets pervers. En attendant la fin des communications
+avec le serveur, je me lançais dans autre chose pour passer le temps comme lire
+mes mails ou écrire de la documentation. Lorsque je revenais à mon travail
+initial, la commande s'était terminée depuis longtemps et je perdais du temps à
+retrouver le fil de mes pensées. Les être humains ne sont pas bons pour changer
+de contexte.
+
+Il y a aussi un effet intéressant du type « tragédie des biens communs » : afin
+d'anticiper la congestion du réseau, certains vont consommer plus de bandes
+passantes que nécessaire pour effectuer des opérations visant à réduire leurs
+attentes futures. Ces efforts combinés vont encore augmenter la congestion,
+incitant ces personnes à consommer encore plus de bande passante pour éviter
+ces délais toujours plus longs.
+
+// LocalWords:  Git doc visual-line flyspell coding utf git amend add commits
+// LocalWords:  apercevez-vous Voulez-vous rebase HEAD EDITOR pick eb Added How
+// LocalWords:  link Reordered Work You Want push target to Makefile edit fixup
+// LocalWords:  reword faites-en merge onto help filter-branch tree-filter rm
+// LocalWords:  filter-banch makinghistory fast-import refs committer Alice Thu
+// LocalWords:  EOT inline hello.c include stdio.h int printf world return Mar
+// LocalWords:  write unistd.h mkdir cd init date-format rfc checkout master ok
+// LocalWords:  fast-export bug bisect start bad good reset run bisects log web
+// LocalWords:  blame bug.c
