@@ -1,6 +1,6 @@
 # The availaible translation languages.
 # When starting a new translation, add a language code here.
-TRANSLATIONS = de es fr ru
+TRANSLATIONS = de es fr ru zh_cn zh_tw
 LANGS = en $(TRANSLATIONS)
 SHELL := /bin/bash
 

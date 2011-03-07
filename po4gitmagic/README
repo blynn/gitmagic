@@ -20,9 +20,9 @@ You need to have 80% of a .po file translated, then you can run:
 
 This will create a translated .txt file in your language folder for each .po file that is more than 80% translated.
 
-To proof your work change in the gitmagic root folder an run:
-	make LANG=xx
-Where xx is your subfolder name  and language tag
+To proof your work change in the gitmagic root folder, run:
+	make xx
+where xx is the subdirectory name.
 
 If something in the original .txt files changed, goto your language folder and run:
 	make update
