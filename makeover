@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Extract table of contents from index.html and delete preface link.
-BOOKDIR=book
+BOOKDIR=book-$1
 TITLE="Git Magic"
-case $LANG in
+case $1 in
     ru)
         TITLE="Магия Git"
         ;;
