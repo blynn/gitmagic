@@ -28,7 +28,7 @@
  $ git --bare update-server-info
  $ cp hooks/post-update.sample hooks/post-update
 
-对较老版本的Git，拷贝命令会失败，你应运行：
+对较老版本的Git，只拷贝还不够，你应运行：
 
  $ chmod a+x hooks/post-update
 
