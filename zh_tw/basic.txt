@@ -1,0 +1,224 @@
+== 基本技巧 ==
+
+與其一頭紮進Git命令的海洋中，不如來點基本的例子試試手。它們簡單而且實用。實際
+上，在開始使用Git的頭幾個月，我所用的從來沒超出本章介紹的內容。
+
+=== 保存狀態 ===
+
+要不來點猛的？在做之前，先為當前目錄所有檔案做個快照，使用：
+
+ $ git init
+ $ git add .
+ $ git commit -m "My first backup"
+
+現在如果你的編輯亂了套，恢復之前的版本：
+
+ $ git reset --hard
+
+再次保存狀態：
+
+ $ git commit -a -m "Another backup"
+
+=== 添加、刪除、重命名 ===
+
+以上命令將只跟蹤你第一次運行 *git add* 命令時就已經存在的檔案。如果要添加新文
+件或子目錄，你需要告訴Git：
+
+ $ git add readme.txt Documentation
+
+類似，如果你想讓Git忘記某些檔案：
+
+ $ git rm kludge.h obsolete.c
+ $ git rm -r incriminating/evidence/
+
+這些檔案如果還沒刪除，Git刪除它們。
+
+重命名檔案和先刪除舊檔案，再添加新檔案的一樣。也有一個快捷方式 *git mv* ，和
+*mv* 命令的用法一樣。例如：
+
+ $ git mv bug.c feature.c
+
+=== 進階撤銷/重做 ===
+
+有時候你只想把某個時間點之後的所有改動都回滾掉，因為這些的改動是不正確的。那
+麼：
+
+ $ git log
+
+來顯示最近提交列表，以及他們的SHA1哈希值:
+
+----------------------------------
+commit 766f9881690d240ba334153047649b8b8f11c664
+Author: Bob <bob@example.com>
+Date:   Tue Mar 14 01:59:26 2000 -0800
+
+    Replace printf() with write().
+
+commit 82f5ea346a2e651544956a8653c0f58dc151275c
+Author: Alice <alice@example.com>
+Date:   Thu Jan 1 00:00:00 1970 +0000
+
+    Initial commit.
+----------------------------------
+
+哈希值的前幾個字元足夠確定一個提交；也可以拷貝粘貼完整的哈希值，鍵入：
+
+ $ git reset --hard 766f
+
+來恢復到一個指定的提交狀態，並從記錄裡永久抹掉所有比該記錄新一些的提交。
+
+另一些時候你想簡單地跳到一個舊狀態。這種情況，鍵入：
+
+ $ git checkout 82f5
+
+這個操作將把你帶回過去，同時也保留較新提交。然而，像科幻電影裡時光旅行一樣，
+如果你這時編輯並提交的話，你將身處另一個現實裡，因為你的動作與開始時相比是不
+同的。
+
+這另一個現實叫作“分支”（branch），之後 <<branch,我們會對這點多討論一些>>。
+至于現在，只要記住：
+
+ $ git checkout master
+
+會把你帶到當下來就可以了。另外，為避免Git的抱怨，應該在每次運行checkout之前提
+交（commit）或重置（reset）你的改動。
+
+還以電腦遊戲作為類比：
+
+- *`git reset --hard`*: 加載一個舊記錄並刪除所有比之新的記錄。
+
+- *`git checkout`*: 加載一個舊記錄，但如果你在這個記錄上玩，遊戲狀態將偏離第
+  一輪的較新狀態。你現在打的所有遊戲記錄會在你剛進入的、代表另一個真實的分支
+  裡。<<branch,我們稍後論述>>。
+
+你可以選擇只恢復特定檔案和目錄，通過將其加在命令之後：
+
+ $ git checkout 82f5 some.file another.file
+
+小心，這種形式的 *checkout* 會不聲不響地覆蓋檔案。為阻止意外發生，在運行任何
+checkout命令之前做提交，尤其在初學Git的時候。通常，任何時候你覺得對運行某個命
+令不放心，無論Git命令還是不是Git命令，就先運行一下 *git commit -a* 。
+
+不喜歡拷貝站題哈希值？那就用：
+
+ $ git checkout :/"My first b"
+
+來跳到以特定字元串開頭的提交。你也可以回到倒數第五個保存狀態：
+
+ $ git checkout master~5
+
+=== 撤銷 ===
+
+在法庭上，事件可以從法庭記錄裡敲出來。同樣，你可以檢出特定提交以撤銷。
+
+ $ git commit -a
+ $ git revert 1b6d
+
+講撤銷給定哈希值的提交。本撤銷被記錄為一個新的提交，你可以通過運行 *git log*
+來確認這一點。
+
+=== 變更日誌生成 ===
+
+一些項目要求生成變更日誌http://en.wikipedia.org/wiki/Changelog[changelog]. 生
+成一個，通過鍵入：
+
+ $ git log > ChangeLog
+
+=== 下載檔案 ===
+
+得到一個由Git管理的項目的拷貝，通過鍵入：
+
+ $ git clone git://server/path/to/files
+
+例如，得到我用來創建該站的所有檔案：
+
+ $ git clone git://git.or.cz/gitmagic.git
+
+我們很快會對 *clone* 命令談的很多。
+
+=== 到最新 ===
+
+如果你已經使用 *git clone* 命令得到了一個項目的一份拷貝，你可以更新到最新版，
+通過：
+
+ $ git pull
+
+ 
+=== 快速發佈 ===
+
+假設你寫了一個腳本，想和他人分享。你可以只告訴他們從你的計算機下載，但如果此
+時你正在改進你的腳本，或加入試驗性質的改動，他們下載了你的腳本，他們可能由此
+陷入困境。當然，這就是發佈周期存在的原因。開發人員可能頻繁進行項目修改，但他
+們只在他們覺得代碼可以見人的時候才擇時發佈。
+
+用Git來完成這項，需要進入你的腳本所在目錄：
+
+ $ git init
+ $ git add .
+ $ git commit -m "First release"
+
+然後告訴你的用戶去運行：
+
+ $ git clone your.computer:/path/to/script
+
+來下載你的腳本。這要假定他們有ssh訪問權限。如果沒有，需要運行 *git daemon* 並
+告訴你的用戶去運行：
+
+ $ git clone git://your.computer/path/to/script
+
+從現在開始，每次你的腳本準備好發佈時，就運行：
+
+ $ git commit -a -m "Next release"
+
+並且你的用戶可以通過進入包含你腳本的目錄，並鍵入下列命令，來更新他們的版本：
+
+ $ git pull
+
+你的用戶永遠也不會取到你不想讓他們看到的腳本版本。顯然這個技巧對所有的東西都
+是可以，不僅是對腳本。
+
+
+=== 我們已經做了什麼？ ===
+
+找出自從上次提交之後你已經做了什麼改變：
+
+ $ git diff
+
+或者自昨天的改變：
+
+ $ git diff "@{yesterday}"
+
+或者一個特定版本與倒數第二個變更之間：
+
+ $ git diff 1b6d "master~2"
+
+輸出結果都是補丁格式，可以用 *git apply* 來把補丁打上。也可以試一下：
+
+ $ git whatchanged --since="2 weeks ago"
+
+我也經常用http://sourceforge.net/projects/qgit[qgit] 瀏覽歷史, 因為他的圖形界
+面很養眼，或者 http://jonas.nitro.dk/tig/[tig] ，一個文本界面的東西，很慢的網
+絡狀況下也工作的很好。也可以安裝web 伺服器，運行 *git instaweb* ，就可以用任
+何瀏覽器瀏覽了。
+
+=== 練習 ===
+
+比方A，B，C，D是四個連續的提交，其中B與A一樣，除了一些檔案刪除了。我們想把這
+些刪除的檔案加回D。我們如何做到這個呢？
+
+至少有三個解決方案。假設我們在D：
+
+  1. A與B的差別是那些刪除的檔案。我們可以創建一個補丁代表這些差別，然後吧補丁
+     打上：
+
+   $ git diff B A | git apply
+
+  2. 既然這些檔案存在A，我們可以把它們拿出來：
+
+   $ git checkout A foo.c bar.h
+
+  3. 我們可以把從A到B的變化視為可撤銷的變更：
+
+   $ git revert B
+
+哪個選擇最好？這取決於你的喜好。利用Git滿足自己需求是容易，經常還有多個方法。
