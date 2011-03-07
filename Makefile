@@ -65,11 +65,3 @@ $(foreach l,$(LANGS),book-$(l).pdf): book-%.pdf: book-%.xml
 
 clean:
 	-rm -rf $(foreach l,$(LANGS),book-$(l).pdf book-$(l).xml book-$(l).html book-$(l))
-
-sync: target
-	rsync -r book.html book.pdf book/* blynn@xenon.stanford.edu:www/gitmagic/intl/$(LANG)/
-
-public:
-	git push blynn@git.or.cz:srv/git/gitmagic.git
-	git push git@github.com:blynn/gitmagic.git
-	git push git@gitorious.org:gitmagic/mainline.git
