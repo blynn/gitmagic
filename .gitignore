@@ -1,6 +1,3 @@
-/book-??.html
-/book-??.pdf
-/book-??.xml
-/book-??/
+/book*
 /conf
 *.svn/*
