@@ -34,8 +34,8 @@ http://git.or.cz/[Git] 是一个版本控制瑞士军刀，一个可靠的、多
 
 .其它版本
 
- - link:/~blynn/gitmagic/intl/zh/book.html[单一文件]: 纯HTML，无CSS。
- - link:/~blynn/gitmagic/intl/zh/book.pdf[PDF文件]: 打印效果好.
+ - link:book.html[单一文件]: 纯HTML，无CSS。
+ - link:book.pdf[PDF文件]: 打印效果好.
  - http://packages.debian.org/gitmagic[Debian包]，
    http:://packages.ubuntu.com/gitmagic[Ubuntu包]: 本站快速本地拷贝。如果
    http://csdcf.stanford.edu/status/[下线了]会方便些。
