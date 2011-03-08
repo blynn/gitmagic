@@ -16,8 +16,8 @@ http://git.or.cz/[Git] 是一个版本控制瑞士军刀，一个可靠的、多
 
 .翻译
 
- - link:/\~blynn/gitmagic/intl/zh_cn/[简体中文]: 俊杰，萌和江薇。使用+cconv
-   -f UTF8-CN -t UTF8-TW+转换为 link:/~blynn/gitmagic/intl/zh_tw/[正体中文l
+ - link:/\~blynn/gitmagic/intl/zh_cn/[简体中文]: 俊杰，萌和江薇。使用 +cconv
+   -f UTF8-CN -t UTF8-TW+ 转换为 link:/~blynn/gitmagic/intl/zh_tw/[正体中文l
    Chinese]。
  - link:/~blynn/gitmagic/intl/fr/[法文]: Alexandre Garel。也在
    http://tutoriels.itaapy.com/[itaapy]。
