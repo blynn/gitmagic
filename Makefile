@@ -1,6 +1,13 @@
 # The availaible translation languages.
 # When starting a new translation, add a language code here.
-TRANSLATIONS = de es fr ru zh_cn zh_tw
+#
+# Vietnamese PDF generation fails, since DocBook lacks Vietnamese support.
+# I hope to work around this, or use another tool to generate a PDF from
+# AsciiDoc.
+#
+# For now, I've uploaded a PDF to the website; it was supplied by
+# Trần Ngọc Quân who used OpenOffice to convert HTML to PDF.
+TRANSLATIONS = de es fr ru vi zh_cn zh_tw
 LANGS = en $(TRANSLATIONS)
 SHELL := /bin/bash
 
