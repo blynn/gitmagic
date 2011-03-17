@@ -51,7 +51,7 @@ $(foreach l,$(LANGS),book-$(l)): book-%: book-%.xml
 	./makeover $*
 
 $(foreach l,$(LANGS),book-$(l)/default.css): book-%/default.css: book.css
-	-mkdir book-$*
+	-mkdir -p book-$*
 	rsync book.css book-$*/default.css
 
 $(foreach l,$(LANGS),book-$(l).html): book-%.html: book-%.xml
