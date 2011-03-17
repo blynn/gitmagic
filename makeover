@@ -5,7 +5,7 @@ BOOKDIR=book-$1
 TITLE="Git Magic"
 case $1 in
     ru)
-        TITLE="Магия Git"
+        TITLE="Волшебство Git"
         ;;
 esac
 
