@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Git Magic deutsch\n"
 "Report-Msgid-Bugs-To: bennlynn@gmail.com\n"
-"POT-Creation-Date: 2010-10-26 18:38+0300\n"
+"POT-Creation-Date: 2010-11-05 17:51+0100\n"
 "PO-Revision-Date: 2010-10-26 20:30+0200\n"
 "Last-Translator: Armin Stebich <gitmagic@lordofbikes.de>\n"
 "Language-Team: DE <info@lordofbikes.de>\n"
@@ -73,7 +73,10 @@ msgstr ""
 
 #. type: Bullet: ' - '
 #: ../en/preface.txt:19
-msgid "link:/~blynn/gitmagic/intl/de/[German]: by Benjamin Bellee."
+msgid ""
+"link:/~blynn/gitmagic/intl/de/[German]: by Benjamin Bellee and Armin "
+"Stebich. Armin also hosts http://gitmagic.lordofbikes.de/[the German "
+"translation on his website]."
 msgstr ""
 
 #. type: Bullet: ' - '
@@ -140,8 +143,8 @@ msgstr ""
 #. type: Plain text
 #: ../en/preface.txt:36
 msgid ""
-"JunJie, Meng, JiangWei, Rodrigo Toledo, Leonardo Siqueira Rodrigues, and "
-"Benjamin Bellee worked on translations of this guide."
+"JunJie, Meng, JiangWei, Rodrigo Toledo, Leonardo Siqueira Rodrigues, "
+"Benjamin Bellee, and Armin Stebich worked on translations of this guide."
 msgstr ""
 
 #. type: Plain text

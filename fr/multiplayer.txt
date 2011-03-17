@@ -1,0 +1,263 @@
+// -*- mode: doc; mode: visual-line; mode: flyspell; coding: utf-8; -*-
+== Git multijoueur ==
+
+Au départ, j'utilisais Git pour un projet privé où j'étais le seul
+développeur. Parmi toutes les commandes liées à la nature distribuée de Git, je
+n'avais besoin que de *pull* et *clone* afin de disposer de mon projet en
+différents lieux.
+
+Plus tard, j'ai voulu publier mon code via Git et inclure des modifications de
+plusieurs contributeurs. J'ai dû apprendre à gérer des projets avec de nombreux
+développeurs à travers le monde. Heureusement c'est l'un des points forts de
+Git et peut-être même sa _raison d'être_ (en français dans le texte).
+
+=== Qui suis-je ? ===
+
+À chaque commit sont associés le nom et le mail de l'auteur, ceux qui sont
+montrés par *git log*. Par défaut, Git utilise les valeurs fournies par le
+système pour remplir ces champs. Pour les configurer explicitement, tapez :
+
+  $ git config --global user.name "John Doe"
+  $ git config --global user.email johndoe@example.com
+
+Supprimer l'option `--global` pour que ces valeurs soient locales au dépôt courant.
+
+=== Git via SSH et HTTP ===
+
+Supposez que vous ayez un accès SSH à un serveur Web sur lequel Git n'est pas
+installé. Bien que ce soit moins efficace que le protocole natif, Git sait
+communiquer par dessus HTTP.
+
+Télécharger, compiler et installer Git sur votre compte et créer un dépôt dans
+votre dossier web :
+
+ $ GIT_DIR=proj.git git init
+ $ cd proj.git
+ $ git --bare update-server-info
+ $ cp hooks/post-update.sample hooks/post-update
+
+Avec les vieilles versions de Git, la commande de copie échoue et vous devez
+faire :
+
+ $ chmod a+x hooks/post-update
+
+Maintenant vous pouvez transmettre vos modifications via SSH depuis n'importe
+lequel de vos clones :
+
+ $ git push web.server:/path/to/proj.git master
+
+et n'importe qui peut récupérer votre projet grâce à :
+
+ $ git clone http://web.server/proj.git
+
+=== Git via n'importe quoi ===
+
+Besoin de synchroniser des dépôts sans passer par un serveur ni même une
+connexion réseau ? Besoin d'improviser dans l'urgence ? Nous avons déjà vu que
+<<makinghistory, *git fast-export* et *git fast-import* savent convertir et
+recréer un dépôt via un simple fichier>>. Nous pourrions utiliser des fichiers
+de ce type pour assurer le transport entre des dépôts Git via n'importe quel
+canal. Mais un outil plus puissant existe : *git bundle*.
+
+L'émetteur crée un 'bundle' :
+
+ $ git bundle create monbundle HEAD
+
+puis il transmet ce bundle, +monbundle+, à l'autre partie par n'importe quel
+moyen : email, clé USB, impression puis reconnaissance de caractères, lecture
+des bits au téléphone, signaux de fumée, etc. Le récepteur retrouve les mises à
+jour du bundle en tapant :
+
+ $ git pull monbundle
+
+Le récepteur peut même faire cela dans un dépôt entièrement vide. Malgré sa
+petite taille +monbundle+ contient l'ensemble du dépôt Git d'origine.
+
+Pour des projets plus gros, on peut réduire le gaspillage en incluant dans le
+bundle uniquement les changements manquants dans l'autre dépôt. En supposant
+par exemple que le commit ``1b6d...'' est le commit le plus récent partagé par
+les deux dépôts, on peut faire :
+
+ $ git bundle create monbundle HEAD ^1b6d
+
+Si on fait cela souvent, il se peut qu'on ne sache plus quel est le dernier
+commit partagé. La page d'aide suggère d'utiliser des tags pour résoudre ce
+problème. En pratique, juste après l'envoi d'un bundle, tapez :
+
+ $ git tag -f dernierbundle HEAD
+
+et pour créer un nouveau bundle faites :
+
+ $ git bundle create nouveaubundle HEAD ^dernierbundle
+
+=== Les patches : la monnaie d'échange globale ===
+
+Les patches sont des représentations textuelles de vos modifications qui
+peuvent être facilement compris par les ordinateurs comme par les humains.
+C'est ce qui leur donne leur charme. Vous pouvez envoyer un patch par mail à un
+développeur sans savoir quel système de gestion de versions il utilise. À
+partir du moment où on peut lire les mails que vous envoyez, on peut voir vos
+modifications. De votre côté, vous n'avez besoin que d'un compte mail : aucune
+nécessité de mettre en œuvre un dépôt Git en ligne.
+
+Souvenez-vous du premier chapitre. La commande :
+
+ $ git diff 1b6d > mon.patch
+
+produit un patch qui peut être collé dans un mail. Dans un dépôt Git, tapez :
+
+ $ git apply < mon.patch
+
+pour appliquer le patch.
+
+D'une manière plus formelle, lorsque le nom des auteurs et peut-être leur
+signature doit apparaître, générer tous les patches depuis un certain point en
+tapant :
+
+ $ git format-patch 1b6d
+
+Les fichiers résultants peuvent être fournis à *git send-email* ou envoyez à la
+main. Vous pouvez aussi spécifier un intervalle entre deux commits :
+
+ $ git format-patch 1b6d..HEAD^^
+
+Du côté du destinataire, enregistrez un mail dans un fichier puis tapez :
+
+ $ git am < mail.txt
+
+Ça appliquera le patch reçu mais créera aussi un commit en y incluant toutes
+les informations telles que le nom des auteurs.
+
+Si vous utilisez un client de messagerie dans un navigateur, il vous faudra
+sans doute appuyer sur un bouton afin de voir le mail dans son format brut
+avant de l'enregistrer dans un fichier.
+
+Il y a de légères différences dans le cas des clients de messagerie se basant
+sur le format mbox, mais si vous utilisez l'un d'entre eux, vous êtes sans
+aucun doute capable de vous en débrouiller facilement sans lire des tutoriels !
+
+(NdT : si votre dépôt contient des fichiers binaires, n'oubliez-pas d'ajouter
+l'option +--binary+ aux commandes de création de patches ci-dessus.)
+
+=== Le numéro de votre correspondant a changé ===
+
+Après la création d'un clone d'un dépôt, l'utilisation de *git push* ou de *git
+pull* se référera automatiquement à l'URL du dépôt d'origine. Comment Git
+fait-il ? Le secret réside dans des options de configuration ajoutées dans le
+clone. Jetons-y un œil :
+
+ $ git config --list
+
+L'option +remote.origin.url+ détermine l'URL de la source ; ``origin'' est un
+alias donné au dépôt d'origine. Comme dans le cas de la branche principale qui
+se nomme ``master'' par convention, on peut changer ou supprimer cet alias mais
+il n'y a habituellement aucune raison de le faire.
+
+Si le dépôt original change, vous pouvez modifier son URL via :
+
+ $ git config remote.origin.url git://nouvel.url/proj.git
+
+L'option +branch.master.merge+ spécifie le nom de la branche distante utilisée
+par défaut par la commande *git pull*. Lors du clonage initial, le nom choisi
+est celui de la branche courant du dépôt d'origine. Même si le HEAD du dépôt
+d'origine est déplacé vers une autre branche, la commande pull continuera à
+suivre fidêlement la branche initiale.
+
+Cette option ne s'applique qu'au dépôt ayant servi au clonage initial, celui
+enregistré dans l'option +branch.master.remote+. Si nous effectuons un pull
+depuis un autre dépôt, nous devrons indiquer explicitement la branche voulue :
+
+ $ git pull git://example.com/other.git master
+
+Les détails ci-dessus expliquent pourquoi nos appels à push et pull dans nos
+précédents exemples n'avaient pas besoin d'arguments.
+
+=== Les branches distantes ===
+
+Lorsque nous clonons un dépôt, nous clonons aussi toutes ses branches. Vous ne
+les avez sans doute pas remarquées car Git les cache : vous devez explicitement
+demander à les voir. Cela empêche les branches du dépôt distant d'interférer
+avec vos propres branches et cela rend aussi Git plus simple pour les
+débutants.
+
+Listons les branches distantes :
+
+ $ git branch -r
+
+Vous devriez voir quelque chose comme :
+
+ origin/HEAD
+ origin/master
+ origin/experimental
+
+Ces noms sont ceux des branches et du HEAD du dépôt distant et ils peuvent être
+utilisés dans les commandes Git normales. Supposez par exemple que vous avez
+réalisé de nombreux commits et que vous vouliez voir la différence avec la
+dernière version ramenée par fetch. Vous pourriez rechercher dans le log pour
+retrouver l'empreinte SHA1 appropriée mais il est beaucoup plus simple de
+tapez :
+
+ $ git diff origin/HEAD
+
+Vous pouvez aussi voir où en est rendu la branche ``experimental'' :
+
+ $ git log origin/experimental
+
+=== Dépôts distants multiples ===
+
+Supposez que deux autres développeurs travaillent sur notre projet et que nous
+souhaitons garder un œil sur les deux. Nous pouvons suivre plus d'un dépôt à la
+fois grâce à :
+
+ $ git remote add un_autre git://example.com/un_depot.git
+ $ git pull un_autre une_branche
+
+Maintenant nous avons fusionné avec une branche d'un second dépôt et nous avons
+accès facilement à toutes les branches de tous les dépôts :
+
+ $ git diff origin/experimental^ un_autre/une_branche~5
+
+Mais comment faire si nous souhaitons juste comparer leurs modifications sans
+affecter notre travail ? En d'autres termes, nous voulons examiner leurs
+branches sans que leurs modifications envahissent notre dossier de travail. À
+la place d'un pull, faisons :
+
+ $ git fetch          # Rapatrier depuis le dépôt d'origin, par défaut
+ $ git fetch un_autre # Rapatrier depuis le dépôt d'un_autre
+
+Cela ne rapatrie (fetch) que les historiques. Bien que notre dossier de travail
+reste inchangé, nous pouvons faire référence à n'importe quelle branche de
+n'importe quel dépôt dans nos commandes Git puisque nous en possédons
+maintenant une copie locale.
+
+Rappelez-vous qu'en coulisse, un *pull* est simplement un *fetch* suivi d'un
+*merge*. Habituellement nous faisons appel à *pull* car nous voulons fusionner
+(merge) les dernières modifications distantes après les avoir rapatriées
+(fetch). La situation ci-dessus est une exception notable.
+
+Voir *get help remote* pour savoir comment supprimer des dépôts distants,
+ignorer certaines branches et bien plus encore.
+
+=== Mes préférences ===
+
+Pour mes projets, j'aime que mes contributeurs se confectionnent un dépôt
+depuis lequel je peux effectuer des pull. Certains services d'hébergement Git
+vous permettent de créer votre propre dépôt clone d'un projet en cliquant
+simplement sur un bouton.
+
+Après avoir rapatrié (fetch) un arbre de modifications, j'utilise les commandes
+Git pour parcourir et examiner ces modifications qui, idéalement, sont bien
+organisées et bien décrites. Je fusionne mes propres modifications et effectue
+parfois quelques modifications supplémentaires. Une fois satisfait, je les
+envoie (push) vers le dépôt principal.
+
+Bien que recevant rarement des contributions, je pense que mon approche est
+parfaitement adaptable à grande échelle. Voir
+http://torvalds-family.blogspot.com/2009/06/happiness-is-warm-scm.html[ce
+billet par Linus Torvalds].
+
+Rester dans le monde Git est un peu plus pratique que de passer par des
+fichiers de patch puisque cela m'évite d'avoir à les convertir en commits
+Git. De plus, Git gère les détails tels qu'enregistrer le nom de l'auteur, son
+adresse mail ainsi que la date et l'heure et il demande à l'auteur de décrire
+ses propres modifications.

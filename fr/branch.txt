@@ -1,0 +1,315 @@
+// -*- mode: doc; mode: flyspell; coding: utf-8; fill-column: 79; -*-
+== La sorcellerie des branches ==
+
+Des branchements et des fusions quasi-instantanés sont les fonctionnalités les
+plus puissantes qui font de Git un vrai tueur.
+
+*Problème*&#160;: des facteurs externes amènent nécessairement à des changements de
+contexte. Un gros bug se manifeste sans avertissement dans la version
+déployée. La date limite pour une fonctionnalité particulière est avancée. Un
+développeur qui vous aidait pour une partie clé du projet n'est plus
+disponible. Bref, en tous cas, vous devez brusquement arrêter la tâche en cours
+pour vous focaliser sur une tâche tout autre.
+
+Interrompre votre réflexion peut être nuisible à votre productivité et le
+changement de contexte amène encore plus de perte. Avec un système de gestion
+de versions centralisé, il faudrait télécharger une nouvelle copie de travail
+depuis le serveur central. Un système de gestion de versions décentralisé est
+bien meilleur puisqu'il peut cloner localement la version voulue.
+
+Mais un clone implique encore la copie de tout le dossier de travail ainsi que
+de l'historique complet jusqu'au point voulu. Même si Git réduit ce coût grâce
+aux fichiers partagés et au liens matériels, les fichiers du projet doivent
+tout de même être entièrement recréés dans le nouveau dossier de travail.
+
+*Solution*&#160;: dans ce genre de situations, Git offre un outil bien meilleur
+puisque plus rapide et moins consommateur d'espace disque : les branches.
+
+Grâce à un mot magique, les fichiers de votre dossier se transforment d'une
+version à une autre. Cette transformation peut être bien plus qu'un simple
+voyage dans l'historique. Vos fichiers peuvent se transformer de la dernière
+version stable vers une version expérimentale, vers la version courante de
+développement, vers la version d'un collègue, etc.
+
+=== La touche du chef ===
+
+N'avez-vous jamais joué à l'un de ces jeux qui, à l'appui d'une touche
+particulière (la ``touche du chef''), affiche instantanément une feuille de
+calcul ? Ceci vous permet de cacher votre écran de jeu dès que le chef arrive.
+
+Dans un dossier vide : 
+
+ $ echo "Je suis plus intelligent que mon chef." > myfile.txt
+ $ git init
+ $ git add .
+ $ git commit -m "Commit initial"
+
+Vous venez de créer un dépôt Git qui gère un fichier contenant un
+message. Maintenant tapez :
+
+ $ git checkout -b chef  # rien ne semble avoir changé
+ $ echo "Mon chef est plus intelligent que moi." > myfile.txt
+ $ git commit -a -m "Un autre commit"
+
+Tout se présente comme si vous aviez réécrit votre fichier et intégrer (commit)
+ce changement. Mais ce n'est qu'une illusion. Tapez :
+
+ $ git checkout master  # bascule vers la version originale du fichier
+
+et ça y est ! Le fichier texte est restauré. Et si le chef repasse pour
+regarder votre dossier, tapez :
+
+ $ git checkout boss  # bascule vers la version visible par le chef
+
+Vous pouvez basculer entre ces deux versions autant de fois que voulu, et
+intégrer (commit) vos changements à chacune d'elles indépendamment.
+
+=== Travail temporaire ===
+
+[[branch]] Supposons que vous travailliez sur une fonctionnalité et que, pour
+une raison quelconque, vous ayez besoin de revenir trois versions en arrière
+afin d'ajouter temporairement quelques instructions d'affichage pour voir
+comment quelque chose fonctionne. Faites :
+
+ $ git commit -a
+ $ git checkout HEAD~3
+
+Maintenant vous pouvez ajouter votre code temporaire là où vous le
+souhaitez. Vous pouvez même intégrer (commit) vos changements. Lorsque vous
+avez terminé, tapez :
+
+ $ git checkout master
+
+pour retourner à votre travail d'origine. Notez que tous les changement non
+intégrés sont définitivement perdus (NdT : les changements intégrés via commit
+sont conservés quelques jours et sont accessibles en connaissant leur empreinte
+SHA1).
+
+Que faire si vous voulez nommer ces changements temporaires ? Rien de plus
+simple :
+
+ $ git checkout -b temporaire
+
+et faites un commit avant de rebasculer vers la branche master. Lorsque vous
+souhaitez revenir à vos changements temporaires, tapez simplement :
+
+ $ git checkout temporaire
+
+Nous aborderons la commande _checkout_ plus en détail lorsque nous parlerons du
+chargement d'anciens états. Mais nous pouvons tout de même en dire quelques
+mots : les fichiers sont bien amenés dans l'état demandé mais en quittant la
+branche master. À ce moment, tout commit poussera nos fichiers sur une route
+différente, qui pourra être nommée plus tard.
+
+En d'autres termes, après un checkout vers un état ancien, Git nous place
+automatiquement dans une nouvelle branche anonyme qui pourra être nommée et
+enregistrée grâce à *git checkout -b*.
+
+=== Corrections rapides ===
+
+Vous travaillez sur une tâche particulière et on vous demande de tout laisser
+tomber pour corriger un nouveau bug découvert dans la version `1b6d...` :
+
+ $ git commit -a
+ $ git checkout -b correction 1b6d
+
+Puis quand vous avez corrigé le bug, saisissez :
+
+ $ git commit -a -m "Bug corrigé"
+ $ git checkout master
+
+pour vous ramener à votre tâche originale. Vous pouvez même fusionner ('merge')
+avec la correction de bug toute fraîche :
+
+ $ git merge correction
+
+=== Fusionner ===
+
+Dans certains systèmes de gestion de versions, la création de branches est
+facile mais les fusionner est difficile. Avec Git, la fusion est si simple que
+vous n'y prêterez plus attention.
+
+En fait, nous avons déjà rencontré la fusion. La commande *pull* ramène
+('fetch') une série de versions puis les fusionne ('merge') dans votre branche
+courante. Si vous n'avez effectué aucun changement local alors la fusion est un
+simple bon en avant (un _fast forward_), un cas dégénéré qui s'apparente au
+rapatriement de la dernière version dans un système de gestion de versions
+centralisé. Si vous avez effectué des changements locaux, Git les
+fusionnera automatiquement et préviendra s'il y a des conflits.
+
+Habituellement, une version à une seule 'version parente', qu'on appelle la
+version précédente. Une fusion de branches entre elles produit une version avec
+plusieurs parents. Ce qui pose la question suivante : à quelle version se
+réfère `HEAD~10` ? Puisqu'une version peut avoir plusieurs parents, par quel
+parent remonterons-nous ?
+
+Il s'avère que cette notation choisit toujours le premier parent. C'est
+souhaitable puisque la branche courante devient le premier parent lors d'une
+fusion. Nous nous intéressons plus fréquemment aux changements que nous avons
+faits dans la branche courante qu'à ceux fusionnés depuis d'autres branches.
+
+Vous pouvez choisir un parent spécifique grâce à l'accent circonflexe. Voici,
+par exemple, comment voir le log depuis le deuxième parent :
+
+ $ git log HEAD^2
+
+Vous pouvez omettre le numéro pour le premier parent. Voici, par exemple,
+comment voir les différences avec le premier parent ;
+
+ $ git diff HEAD^
+
+Vous pouvez combiner cette notation avec les autres. Par exemple :
+
+ $ git checkout 1b6d^^2~10 -b ancien
+
+démarre la nouvelle branche ``ancien'' dans l'état correspondant à 10 versions
+en arrière du deuxième parent du premier parent de la version 1b6d.
+
+=== Workflow sans interruption ===
+
+La plupart du temps dans un projet de réalisation matérielle, la seconde étape
+du plan ne peut commencer que lorsque la première étape est terminée. Une
+voiture en réparation reste bloquée au garage jusqu'à la livraison d'une
+pièce. Le montage d'un prototype est suspendu en attendant la fabrication d'une
+puce.
+
+Les projets logiciels peuvent être similaires. La deuxième partie d'une
+nouvelle fonctionnalité doit attendre que la première partie soit sortie et
+testée. Certains projets exigent une validation de votre code avant son
+acceptation, vous êtes donc obligé d'attendre que la première partie soit
+validée avant de commencer la seconde.
+
+Grâce aux branches et aux fusions faciles, vous pouvez contourner les règles et
+travailler sur la partie 2 avant que la partie 1 soit officiellement
+prête. Supposons que vous ayez terminé la version correspondant à la partie 1
+et que vous l'ayez envoyée pour validation. Supposons aussi que vous soyez dans
+la branche `master`. Alors, branchez-vous :
+
+ $ git checkout -b part2
+
+Ensuite, travaillez sur la partie 2 et intégrez (via `commit`) vos changements
+autant que nécessaire. L'erreur étant humaine, vous voudrez parfois revenir en
+arrière pour effectuer des corrections dans la partie 1. Évidemment, si vous
+êtes chanceux ou très bon, vous pouvez sauter ce passage.
+
+ $ git checkout master  # Retour à la partie 1
+ $ correction_des_bugs
+ $ git commit -a        # Intégration de la correction
+ $ git checkout part2   # Retour à la partie 2
+ $ git merge master     # Fusion de la correction.
+
+Finalement, la partie 1 est validée.
+
+ $ git checkout master    # Retour à la partie 1
+ $ diffusion des fichiers # Diffusion au reste du monde !
+ $ git merge part2        # Fusion de la partie 2
+ $ git branch -d part2    # Suppression de la branche 'part2'.
+
+À cet instant vous êtes à nouveau dans la branche `master` avec la partie 2
+dans votre dossier de travail.
+
+Il est facile d'étendre cette astuce à de nombreuses branches. Il est aussi
+facile de créer une branche rétroactivement : imaginons qu'après 7 commits,
+vous vous rendiez compte que vous auriez dû créer une branche. Tapez alors :
+
+ $ git branch -m master part2  # Renommer la branche "master" en "part2".
+ $ git branch master HEAD~7    # Recréer une branche "master" 7 commits en arrière.
+
+La branche `master` contient alors uniquement la partie 1 et la branche `part2`
+contient le reste ; nous avons créé `master` sans basculer vers elle car nous
+souhaitons continuer à travailler sur `part2`. Ce n'est pas très
+courant. Jusqu'à présent nous avions toujours basculé vers une branche dès sa
+création, comme dans :
+
+ $ git checkout HEAD~7 -b master  # Créer une branche et basculer vers elle.
+
+=== Réorganiser le foutoir ===
+
+Peut-être aimez-vous travailler sur tous les aspects d'un projet dans la même
+branche. Vous souhaitez que votre travail en cours ne soit accessible qu'à
+vous-même et donc que les autres ne puissent voir vos versions que lorsqu'elles
+sont proprement organisées. Commencez par créer deux branches :
+
+  $ git branch propre       # Créer une branche pour les versions propres
+  $ git checkout -b foutoir # Créer et basculer vers une branche pour le foutoir
+
+Ensuite, faites tout ce que vous voulez : corriger des bugs, ajouter des
+fonctionnalités, ajouter du code temporaire et faites-en des versions autant
+que voulu. Puis :
+
+  $ git checkout propre
+  $ git cherry-pick foutoir^^
+
+applique les modifications de la version grand-mère de la version courante du
+``foutoir'' à la branche ``propre''. Avec les cherry-picks appropriés vous
+pouvez construire une branche qui ne contient que le code permanent et où
+toutes les modifications qui marchent ensemble sont regroupées.
+
+=== Gestion des branches ===
+
+Pour lister toutes les branches, tapez :
+
+ $ git branch
+
+Par défaut, vous commencez sur la branche nommée ``master''. Certains
+préconisent de laisser la branche ``master'' telle quelle et de créer de
+nouvelles branches pour vos propres modifications.
+
+Les options *-d* et *-m* vous permettent de supprimer et renommer les
+branches. Voir *git help branch*.
+
+La branche ``master'' est une convention utile. Les autres supposent que votre
+dépôt possède une telle branche et qu'elle contient la version officielle de
+votre projet. Bien qu'il soit possible de renommer ou d'effacer cette branche
+``master'', il peut-être utile de respecter les traditions.
+
+=== Les branches temporaires ===
+
+Après un certain temps d'utilisation, vous vous apercevrez que vous créez
+fréquemment des branches éphémères toujours pour les mêmes raisons : elles vous
+servent juste à sauvegarder l'état courant, vous permettant ainsi de revenir
+momentanément à état précédent pour corriger un bug.
+
+C'est exactement comme si vous zappiez entre deux chaînes de télévision. Mais
+au lieu de presser deux boutons, il vous faut créer, basculer, fusionner et
+supprimer des branches temporaires. Par chance, Git propose un raccourci qui
+est aussi pratique que la télécommande de votre télévision :
+
+ $ git stash
+
+Cela mémorise l'état courant dans un emplacement temporaire (un 'stash') et
+restaure l'état précédent. Votre dossier courant apparaît alors exactement
+comme il était avant que vous ne commenciez à faire des modifications et vous
+pouvez corriger des bugs, aller rechercher (pull) une modification de dépôt
+central ou toute autre chose. Lorsque vous souhaitez revenir à l'état mémorisé
+dans votre 'stash', tapez :
+
+ $ git stash apply  # Peut-être faudra-t-il résoudre quelques conflits.
+
+Vous pouvez avoir plusieurs 'stash' et les manipuler de différents
+manières. Voir *git help stash*. Comme vous l'aurez deviné, pour faire ces
+tours de magie, dans les coulisses Git gère des branches.
+
+=== Travailler comme il vous chante ===
+
+Vous vous demandez sans doute si l'usage des branches en vaut la peine. Après
+tout, des clones sont tout aussi rapides et vous pouvez basculer de l'un à
+l'autre par un simple *cd* au lieu de commandes Git ésotériques.
+
+Considérez les navigateurs Web. Pourquoi proposer plusieurs onglets ainsi que
+plusieurs fenêtres ? Parce proposer les deux permet de s'adapter à une large
+gamme d'utilisations. Certains préfèrent n'avoir qu'une seule fenêtre avec plein
+d'onglets. D'autres font tout le contraire : plein de fenêtres avec un seul
+onglet. D'autres encore mélangent un peu des deux.
+
+Les branches ressemblent à des onglets de votre dossier de travail et les
+clones ressemblent aux différents fenêtres de votre navigateur. Ces opérations
+sont toutes rapides et locales. Alors expérimentez pour trouver la combinaison
+qui vous convient. Git vous laisse travailler exactement comme vous le
+souhaitez.
+
+// LocalWords:  doc visual-line quasi-instantanés Git bug télécharger echo git
+// LocalWords:  myfile.txt init add checkout master branch HEAD NdT SHA fetch
+// LocalWords:  rebasculer commits merge fast forward bugs remonterons-nous log
+// LocalWords:  diff Workflow branchez-vous aimez-vous faites-en cherry-pick cd
+// LocalWords:  cherry-picks help zappiez stash apply faudra-t-il Web
