@@ -35,11 +35,11 @@ http://git.or.cz/[Git] это швейцарский нож управления
 
 === Благодарности ===
 
+Я очень ценю, что столь многие люди работали над переводами этих строк. Я благодарен названным выше людям за их усилия, расширившие мою аудиторию.
+
 Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael Budde, Richard Albury, Tarmigan, Derek Mahar, Frode Aannevik, Keith Rarick, Andy Somerville, Ralf Recker, Øyvind A. Holm, Miklos Vajna, Sébastien Hinderer, Thomas Miedema, Joe Malin и Tyler Breisacher содействовали в правках и доработках.
 
 François Marier сопровождает пакет Debian, изначально созданный Daniel Baumann.
-
-JunJie, Meng, JiangWei, Rodrigo Toledo, Leonardo Siqueira Rodrigues, Benjamin Bellee и Armin Stebich работали над переводами этого руководства.
 
 Мои благодарности остальным за вашу поддержку и похвалы. Мне очень хотелось процитировать вас здесь, но это могло бы возвысить ваше тщеславие до невообразимых высот.
 
