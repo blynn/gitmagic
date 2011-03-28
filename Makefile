@@ -68,7 +68,13 @@ $(foreach l,$(LANGS),book-$(l).html): book-%.html: book-%.xml
 # Set SP_ENCODING to avoid "non SGML character" errors.
 # Can also do SP_ENCODING="UTF-8".
 $(foreach l,$(LANGS),book-$(l).pdf): book-%.pdf: book-%.xml
-	SP_ENCODING="XML" docbook2pdf book-$*.xml
+	if [ $* = zh_cn -o $* = zh_tw ]; then \
+	if ! [ -f fop-$*.xsl ]; then wget -q http://bestrecords.net/fop/fop-$*.xsl; fi; \
+	if ! [ -f fop-$*.xconf ]; then wget -q http://bestrecords.net/fop/fop-$*.xconf; fi; \
+	xmlto -m fop-$*.xsl --with-fop -p "-c `pwd`/fop-$*.xconf" pdf book-$*.xml ;\
+	else \
+	SP_ENCODING="XML" docbook2pdf book-$*.xml; \
+	fi
 
 clean:
 	-rm -rf $(foreach l,$(LANGS),book-$(l).pdf book-$(l).xml book-$(l).html book-$(l))
