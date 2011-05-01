@@ -2,11 +2,11 @@
 
 Trong các hệ thống quản lý mã nguồn trước đây, checkout là tác vụ cơ bản để lấy các tệp tin về. Bạn lấy về toàn bộ các tập tin được lưu giữ trong từng phiên bản riêng biệt.
 
-Với Git và các hệ thống quản lý mã nguồn phân tán, clone là tác vụ cơ bản. Để lấy các tệp tin, bạn tạo một 'clone' (bản sao) của toàn bộ kho chứa. Nói cách khác, bạn thực tế là một bản sao của máy chủ trung tâm. Bất kỳ cái gì bạn thể làm được với kho chứa chính thì cũng làm được ở đây.
+Với Git và các hệ thống quản lý mã nguồn phân tán, clone là tác vụ cơ bản. Để lấy các tệp tin, bạn tạo một của toàn bộ kho chứa. Nói cách khác, bạn thực tế là một bản sao của máy chủ trung tâm. Bất kỳ cái gì bạn thể làm được với kho chứa chính thì cũng làm được ở đây.
 
 === Đồng bộ hóa Các Máy tính ===
 
-Tôi có thể tạo gói tarball hay sử dụng lệnh *rsync* để sao lưu (backup) và đồng bộ hóa dữ liệu. Nhưng thỉnh thoảng, tôi biên tập trên laptop của mình, nhưng lúc khác lại trên máy tính để bàn, và chúng có thể không có sự trao đổi được với nhau.
+Tôi có thể tạo gói tarball hay sử dụng lệnh *rsync* để sao lưu dự phòng và đồng bộ hóa dữ liệu. Nhưng thỉnh thoảng, tôi biên tập trên máy tính xách tay của mình, nhưng lúc khác lại trên máy tính để bàn, và chúng có thể không có sự trao đổi được với nhau.
 
 Khởi tạo kho chứa Git và commit các tệp tin trên một máy tính. Sau đó trên máy tính kia chạy lệnh:
 
@@ -17,8 +17,8 @@ Khởi tạo kho chứa Git và commit các tệp tin trên một máy tính. Sa
  $ git commit -a
  $ git pull other.computer:/path/to/files HEAD
 
-sẽ lấy (pull) một state của các tệp tin trên máy tính khác về máy bạn đang làm việc. Nếu bạn vừa tạo ra một sự chỉnh sửa
-xung đột trong cùng một tệp tin , Git sẽ cho bạn biết và bạn có thể commit lại sau khi sửa chữa chúng.
+sẽ lấy về một trạng thái của các tệp tin trên máy tính khác về máy bạn đang làm việc. Nếu bạn vừa tạo ra một sự chỉnh sửa
+xung đột trong cùng một tệp tin , Git sẽ cho bạn biết và bạn có thể commit lại sau khi đã sửa chữa chúng.
 
 === Quản lý theo cách Cũ ===
 
@@ -40,7 +40,7 @@ Khởi động dịch vụ Git daemon nếu cần:
  $ git daemon --detach  # nó có thể đã hoạt động rồi
 
 Để làm một máy chủ chạy dịch vụ Git, làm theo các chỉ dẫn sau để cài đặt
-và khởi tạo kho Git. Cách thường thấy nhất là điền vào form trên trang web.
+và khởi tạo kho Git. Cách thường thấy nhất là điền vào mẫu có sẵn trên trang web.
 
 'Push' dự án của bạn lên máy chủ trung tâm bằng lệnh:
 
@@ -69,23 +69,23 @@ Gửi thay đổi của mình lên máy chủ trung tâm:
 Nếu máy chủ trung tâm có thay đổi bởi hành động của một người phát triển phần mềm khác, quá trình
 push sẽ bị lỗi, và anh ta phải pull về bản mới nhất, xử lý các xung đột khi trộn, sau đó thử lại.
 
-=== Kho Bare ===
+=== Kho Thuần ===
 
-Kho bare (kho trần) được đặt tên như vậy vì nó không chứa thư mục làm việc; nó chỉ chứa các tệp tin thường là ẩn trong thư mục phụ `.git`. Hay nói cách khác, nó chứa lịch sử mã nguồn của một dự án, và không bao giờ giữ snapshot của bất kỳ phiên bản nào.
+Kho thuần (bare) được đặt tên như vậy vì nó không chứa thư mục làm việc; nó chỉ chứa các tệp tin thường là ẩn trong thư mục phụ `.git`. Hay nói cách khác, nó chứa lịch sử mã nguồn của một dự án, và không bao giờ giữ dữ liệu còn đang dang dở của bất kỳ phiên bản nào.
 
-Kho bare có vai trò hoạt động giống như máy chủ trung tâm trong các hệ thống
-quản lý mã nguồn tập trung: thư mục chủ dự án của bạn. Các nhà phát triển phần mềm clone
+Kho thuần có vai trò hoạt động giống như máy chủ trung tâm trong các hệ thống
+quản lý mã nguồn tập trung: thư mục chủ dự án của bạn. Các nhà phát triển phần mềm nhân bản
 dữ liệu dự án của bạn ở đây, và push các thay đổi chính thức lên đó. Thông thường nó
-đặt tại máy chủ mà máy này đôi khi còn làm một số việc khác nữa. Sự phát triển
+đặt tại máy chủ mà máy này đôi khi còn làm một số việc khác nữa. Sự biên soạn mã nguồn
 xảy ra trên bản sao, vì vậy thư mục chủ của kho chứa có thể hoạt động mà không cần
 thư mục làm việc.
 
-Nhiều lệnh Git gặp lỗi trên kho bare trừ phi biến môi trường `GIT_DIR` được đặt với giá trị là đường dẫn đến kho chứa, hay tùy chọn `--bare` được áp dụng.
+Nhiều lệnh Git gặp lỗi trên kho thuần trừ phi biến môi trường `GIT_DIR` được đặt với giá trị là đường dẫn đến kho chứa, hay tùy chọn `--bare` được áp dụng.
 
 === Push đối lập với pull ===
 
 Tại sao chúng tôi lại giới thiệu lệnh push, thay vì trông cậy vào lệnh pull
-quen thuộc? Trước hết, việc pull gặp lỗi trên kho trần: thay vào đó bạn phải dùng lệnh 'fetch',
+quen thuộc? Trước hết, việc pull gặp lỗi trên kho thuần: thay vào đó bạn phải dùng lệnh 'fetch',
 lệnh này chúng ta sẽ nói sau. Nhưng dù là chúng ta giữ kho chứa thông thường trên
 máy chủ trung tâm, việc pull lên nó hơi cồng kềnh. Chúng ta phải
 đăng nhập vào máy chủ trước, và cung cấp cho lệnh pull địa chỉ mạng
@@ -94,7 +94,7 @@ có khả năng truy cập shell máy chủ trong chỗ đầu tiên đó?
 
 Tuy nhiên, ngoài trường hợp này ra, chúng ta còn nản lòng với việc push lên kho chứa, bởi vì tình trạng hỗn loạn có thể xảy khi thư mục đích có chứa thư mục làm việc.
 
-Tóm lại, khi bạn học Git, chỉ push khi đích là kho bare; nếu không thì dùng pull.
+Tóm lại, khi bạn học Git, chỉ push khi đích là kho thuần; nếu không thì dùng pull.
 
 === Rẽ Nhánh Dự Án ===
 
@@ -110,7 +110,7 @@ Từ bây giờ trở đi, bạn có thể trộn các sự thay đổi từ d�
 
 === Sao Lưu Không Giới Hạn ===
 
-Bạn muốn lưu trữ dự án của mình ở nhiều nơi khác nhau ư? Nếu dự án của bạn có nhiều người cùng phát triển, bạn không cần phải làm gì cả! Mỗi một bản sao đều đồng thời có tác dụng như một bản sao lưu dự phòng. Không chỉ mỗi trạng thái hiện hành mà cả các mục lịch sử trong dự án của mình. Nhờ có giá trị băm bằng mật mã, nếu bản sao của người nào đó bị hỏng, nó sẽ được phát hiện ngay sau khi họ liên lạc với những người khác.
+Bạn muốn lưu trữ dự án của mình ở nhiều nơi khác nhau ư? Nếu dự án của bạn có nhiều người cùng phát triển, bạn không cần phải làm gì cả! Mỗi một bản sao đều đồng thời có tác dụng như một bản sao lưu dự phòng. Mỗi bản sao không chỉ lưu trạng thái hiện hành mà toàn bộ lịch sử trong dự án. Nhờ có giá trị băm bằng mật mã, nếu bản sao của người nào đó bị hỏng, nó sẽ được phát hiện ngay sau khi họ liên lạc với những người khác.
 
 Nếu dự án của bạn không phổ biến, hãy tìm máy chủ lưu giữ bản sao của mình càng nhiều càng tốt.
 
@@ -131,7 +131,7 @@ và pull các thay đỏi từ một bản sao khác:
 
  $ git pull /the/other/clone HEAD
 
-=== Guerilla  ===
+=== Song Hành cùng các hệ thống SCM khác  ===
 
 Bạn đang làm việc cho một dự án có sử dụng hệ thống quản lý mã nguồn cũ, và bạn lại muốn sử dụng Git? Thế thì hãy khởi tạo kho chứa Git trong thư mục bạn đang làm việc:
 
@@ -143,7 +143,7 @@ sau đó clone nó:
 
  $ git clone . /some/new/directory
 
-Bây giờ hãy chuyển đến thư mục mới đó và làm việc ở đây thay vì chỗ cũ, sử dụng Git để thỏa mãn tình yêu của mình. Đôi khi, bạn sẽ muốn đồng bộ hóa với những người khác nữa, trong trường hợp đó hãy chuyển tới thư mục nguyên bản (original), đồng bộ hóa bằng cách sử dụng một hệ thống quản lý mã nguồn khác, và gõ:
+Bây giờ hãy chuyển đến thư mục mới đó và làm việc ở đây thay vì chỗ cũ, sử dụng Git để thỏa mãn tình yêu của mình. Đôi khi, bạn sẽ muốn đồng bộ hóa với những người khác nữa, trong trường hợp đó hãy chuyển tới thư mục nguyên gốc, đồng bộ hóa bằng cách sử dụng một hệ thống quản lý mã nguồn khác, và gõ:
 
  $ git add .
  $ git commit -m "Đồng bộ hóa với những người khác"
@@ -169,7 +169,7 @@ hay là sử dụng Mercurial:
 
  $ hg clone http://bitbucket.org/durin42/hg-git/
 
-Thật buồn là tôi không biết rằng có một plugin tương tự dành cho Git. Vì vậy, tôi ủng hộ Git hơn Mercurial khi dùng cho kho chứa chính, dù là bạn thích Mercurial hơn. Với một dự án Mercurial, thường thường một người tình nguyện duy trì  kho Git song song cho tương thích với người sử dụng Git, cũng phải cảm ơn plugin `hg-git`, một dự án Git tự động tiếp nhận người sử dụng Mercurial.
+Thật buồn là tôi không biết rằng có một plugin tương tự dành cho Git. Vì vậy, tôi ủng hộ Git hơn Mercurial khi dùng cho kho chứa chính, dù là bạn thích Mercurial hơn. Với một dự án Mercurial, thường thường một người tình nguyện duy trì kho Git song song cho tương thích với người sử dụng Git, cũng phải cảm ơn plugin `hg-git`, một dự án Git tự động tiếp nhận người sử dụng Mercurial.
 
 Mặc dù plugin có thể chuyển đổi Mercurial sang Git bằng cách push tới một kho rỗng, công việc này là dễ dàng với script `hg-fast-export.sh`, đã sẵn dùng từ:
 
@@ -193,7 +193,7 @@ Plugin `bzr-git` giúp người dùng Bazaar làm việc với kho Git trong ch�
 
 === Tại sao Tôi sử dụng Git ===
 
-Trước tiên, tôi chọn Git bởi tôi nghe nói nó làm được việc phi thường là có thể quản lý mã nguồn cho một thứ khó quản lý như kernel của hệ điều hành Linux. Tôi chưa bao giờ nghĩ đến việc chuyển sang cái khác. Git làm được những việc thật đáng ngưỡng mộ, và tôi chưa từng bao giờ gặp các vấn đề với sai sót của nó. Do tôi hoạt động chủ yếu trên Linux, phát hành trên các nền tảng khác không phải là điều mà tôi quan tâm.
+Trước tiên, tôi chọn Git bởi tôi nghe nói nó làm được việc phi thường là có thể quản lý mã nguồn cho một thứ khó quản lý như hạt nhân của hệ điều hành Linux. Tôi chưa bao giờ nghĩ đến việc chuyển sang cái khác. Git làm được những việc thật đáng ngưỡng mộ, và tôi chưa từng bao giờ gặp các vấn đề với sai sót của nó. Do tôi hoạt động chủ yếu trên Linux, phát hành trên các nền tảng khác không phải là điều mà tôi quan tâm.
 
 Ngoài ra, tôi thích lập trình bằng ngôn ngữ C và bash scripts để thực thi như là Python script: ở đây có rất ít sự phụ thuộc, và tôi đam mê với những hệ thống thi hành nhanh chóng.
 

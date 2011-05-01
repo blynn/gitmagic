@@ -1,8 +1,8 @@
 == Đa Người Dùng ==
 
-Lúc đầu tôi sử dụng Git cho dự án riêng mà tôi là người duy nhất phát triển nó.
+Lúc đầu tôi sử dụng Git cho dự án riêng của mình mà tôi cũng là người duy nhất phát triển nó.
 Trong số những lệnh liên quan đến bản chất phân tán của Git, tôi chỉ cần lệnh *pull*
-và *clone* để giữ cùng một dự án nhưng ở những địa điểm khác nhau.
+và *clone* để giữ cùng một dự án nhưng ở những chỗ khác nhau.
 
 Sau đó tôi muốn mã nguồn của mình được phổ biến trên mạng bằng việc sử dụng Git, và bao gồm cả những thay đổi từ
 những người đóng góp. Tôi đã phải học cách làm thế nào để quản lý các dự án có nhiều người phát triển phần mềm
@@ -67,7 +67,7 @@ tín hiệu khói, v.v.. Người nhận khôi phục lại các lần commit t�
 Bộ nhận thậm chí có thể làm được việc này từ một kho chứa rỗng. Mặc dù kích
 thước của nó, +somefile+ chứa các mục kho Git nguyên thủy.
 
-Trong các dự án lớn hơn, việc triệt tiêu lãng phí bằng lệnh bundle chỉ thay đổi phần thiếu
+Trong các dự án lớn hơn, việc triệt tiêu lãng phí bằng cách chỉ bundle những thay đổi còn thiếu
 kho chứa khác. Ví dụ, giả sử lần commit ``1b6d...'' là lần commit gần nhất
 đã được chia sẻ giữa cả hai thành viên:
 
@@ -87,7 +87,7 @@ và tạo một bản bundles mới với:
 
 Miếng vá được trình bày ở dạng văn bản các thay đổi của bạn, nó dễ dàng được đọc hiểu bởi
 con người cũng như là máy tính. Điều này mang lại cho chúng sức lôi cuốn toàn cầu. Bạn có thể gửi miếng vá qua
-thư điện tử cho những nhà phát triển phần mềm khác mà chẳng cần lo họ đang sử dụng hệ thống mã nguồn nào. Chừng nào
+thư điện tử cho những nhà phát triển phần mềm khác mà chẳng cần lo họ đang sử dụng hệ thống quản lý mã nguồn nào. Chừng nào
 mà độc giả của bạn có thể đọc được thư điện tử của mình thì họ còn có thể thấy được phần chỉnh sửa của bạn. Tương tự thế, về phía mình,
 những thứ bạn cần là có một địa chỉ thư điện tử: ở đây chẳng cần cài đặt kho chứa Git nào trên mạng.
 
@@ -95,7 +95,7 @@ Sử dụng lại ví dụ từ chương đầu tiên:
 
  $ git diff 1b6d > my.patch
 
-đầu ra là một miếng vá mà bạn có thể dán vào một thư điện tử để thảo luận. Ở kho Git,
+đầu ra là một miếng vá mà bạn có thể dán vào một thư điện tử để trao đổi với người khác. Ở kho Git,
 gõ:
 
  $ git apply < my.patch
@@ -119,7 +119,7 @@ Lệnh này sẽ áp dụng cho miếng vá nhận được, đồng thời tạ
 
 Với một chương trình đọc thư điện tử, bạn có thể sử dụng con chuột để chuyển định dạng thư về dạng văn bản thuần  trước khi ghi miếng vá thành một tệp tin.
 
-Có một số khác biệt nhỏ giữa các trình đọc email, nhưng nếu bạn sử dụng một trong
+Có một số khác biệt nhỏ giữa các trình đọc đọc thư điện tử, nhưng nếu bạn sử dụng một trong
 số chúng, bạn hầu như chắc chắn là người mà có thể cấu hình chúng một cách dễ dàng
 mà chẳng cần phải đọc hướng dẫn sử dụng!
 
@@ -182,7 +182,7 @@ Hay bạn có thể xem nhánh ``experimental'' đang làm gì:
 
  $ git log origin/experimental
 
-=== Multiple Remotes ===
+=== Đa Máy chủ ===
 
 Giả sử hai người cùng phát triển trên một sự án của chúng ta, và họ muốn
 giữ lại sự khác biệt trên cả hai. Chúng ta theo dõi hơn một kho chứa tại một thời điểm với lệnh:
@@ -225,7 +225,7 @@ Mặc dù tôi ít nhận được sự cộng tác, nhưng tôi tin rằng vi�
 tốt lên. Hãy đọc
 http://torvalds-family.blogspot.com/2009/06/happiness-is-warm-scm.html[blog của Linus Torvalds].
 
-Git thuận lợi hơn việc vá các tệp tin, cũng như là nó
-tiết kiệm công sức cho việc chuyển đổi chúng thành những lần commit dành cho Git. Hơn thế nữa, Git lưu giữ các thông tin rất chi tiết
+Git thuận lợi trong việc tạo các miếng vá, cũng như là nó
+tiết kiệm công sức cho chúng ta trong việc chuyển đổi chúng thành những lần commit dành cho Git. Hơn thế nữa, Git lưu giữ các thông tin rất chi tiết
 như là ghi lại tên và địa chỉ thư điện tử của tác giả, cũng như là ngày tháng và
 thời gian, và nó cũng đòi hỏi tác giả phải mô tả về những thay đổi mà họ đã tạo ra.

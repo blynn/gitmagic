@@ -2,7 +2,7 @@
 
 Bây giờ, bạn có thể thông qua lệnh *git help* để bật trang trợ giúp lên và có thể hiểu
 gần như tất cả mọi thứ. Tuy nhiên, việc xác định chính xác lệnh cần sử dụng để giải quyết
-các vấn đề đặt ra có lẽ chẳng dễ dàng gì. Có thể tôi có thể giúp bạn tiết kiệm được thời gian: bên dưới là một vài
+các vấn đề thực tế đặt ra có lẽ chẳng dễ dàng gì. Có thể tôi có thể giúp bạn tiết kiệm được thời gian: bên dưới là một vài
 cách giải quyết các vấn đề thực tế đặt ra mà tôi đã từng sử dụng trong quá khứ.
 
 === Phát hành Mã Nguồn ===
@@ -61,7 +61,7 @@ bạn có thể đưa vào hay gỡ bỏ nhiều tệp tin vào một trạng th
 chỉ trong các tệp tin riêng biệt. Có một sự lựa chọn khác, chạy lệnh *git commit \--interactive* mà nó
 sẽ tự động commit sau khi bạn làm xong.
 
-=== Mục Lục: Git's Staging Area ===
+=== Mục Lục: Vùng trạng thái của Git ===
 
 Chúng ta trốn tránh chưa muốn nói đến một thứ nổi tiếng của Git đó là 'index' (mục lục), nhưng chúng ta phải đối mặt với nó để mà
 giảng giải những điều ở trên. Chỉ mục là vùng trạng thái tạm thời. Git ít khi di chuyển
@@ -70,12 +70,12 @@ dữ liệu vào mục lục, và sau đó sao chép dữ liệu trong chỉ m�
 cuối.
 
 Ví dụ, lệnh *commit -a* thực sự bao gồm hai quá trình. Bước thứ nhất là đặt
-toàn bộ dữ liệu hiện tại của mọi tệp tin cần theo dõi vào bảng mục lục (index). Bước thứ
+toàn bộ dữ liệu hiện tại của mọi tệp tin cần theo dõi vào bảng mục lục. Bước thứ
 hai là ghi vào bảng mục lục. Việc commit không sử dụng tùy chọn
 *-a* chỉ thi hành bước thứ hai, và nó chỉ có ý nghĩa sau khi chạy lệnh
 mà lệnh này bằng cách này hay cách khác thay đổi bảng chỉ mục, như là lệnh *git add* chẳng hạn.
 
-Thường thường chúng ta bỏ qua index và lấy cớ là chúng ta đang đọc trực tiếp và ghi thẳng vào trong lịch sử. Vì lý do này, chúng ta muốn việc điều khiển chính xác, như vậy chúng ta chỉnh sửa index bằng cách thủ công. Chúng ta đặt một snapshot của một số, không phải tất cả, các thay đổi của chúng ta vào bảng mục lục, và sau đó ghi những cái này vào lịch sử.
+Thường thường chúng ta bỏ qua mục lục và lấy cớ là chúng ta đang đọc trực tiếp và ghi thẳng vào trong lịch sử. Vì lý do này, chúng ta muốn việc điều khiển chính xác, như vậy chúng ta chỉnh sửa mục lục bằng cách thủ công. Chúng ta đặt một dữ liệu hiện hành của một số, không phải tất cả, các thay đổi của chúng ta vào bảng mục lục, và sau đó ghi những cái này vào lịch sử.
 
 === Đừng Quên HEAD Của Mình ===
 
@@ -100,8 +100,8 @@ Nhưng giả sử bạn không có được nó? Đừng lo: với những lện
 Có thể ORIG_HEAD là chưa đủ. Có lẽ bạn vừa nhận thấy mình vừa tạo ra một sai sót có quy mô lớn và bạn cần phải quay lại một lần commit cách đây lâu lắm rồi trong một nhánh mà bạn đã quên rồi vì nó đã quá lâu.
 
 Theo mặc định, Git giữ một lần commit ít nhất là hai tuần lễ, ngay cả khi bạn đã ra lệnh
-cho Git phá hủy nhánh chứa nó. Sự trục trặc là việc tìm giá trị băm
-thích hợp. Bạn có thể tìm kiếm tất cả các giá trị băm trong `.git/objects` và sử dụng cách thử sai tất cả các giá trị
+cho Git phá hủy nhánh chứa nó. Sự khó khăn là ở chỗ làm thế nào để tìm được giá trị băm
+thích hợp. Bạn có thể tìm kiếm tất cả các giá trị băm trong `.git/objects` và sử dụng phương pháp thử sai tất cả các giá trị
 để có được thứ mình muốn. Nhưng còn có cách dễ dàng hơn.
 
 Git ghi lại mọi giá trị băm của mọi lần commit trong máy tính tại thư mục `.git/logs`. Thư mục con `refs` chứa lịch sử của tất cả các hoạt động trên tất cả cách nhánh, trong khi tệp tin `HEAD` giữ tất cả các giá trị băm mà nó từng có được. Phần sau có thể được sử dụng để tìm kiếm giá trị băm của các lần commits trên các nhánh cái mà đã bị cắt đi một cách tình cờ.
@@ -114,7 +114,7 @@ Thay vì phải cắt và dán giá trị băm từ reflog, hãy thử:
 
  $ git checkout "@{10 minutes ago}"
 
-Hay checkout lần thứ 5th-last visited commit thông qua lệnh:
+Hay checkout lần thứ 5 kể từ lần commit cuối viếng thăm thông qua lệnh:
 
  $ git checkout "@{5}"
 
@@ -136,7 +136,7 @@ trong trường hợp này những lần commit sẽ chỉ bị xóa bỏ khi b�
 
 === Xây Dựng trên Git ===
 
-In true UNIX fashion, Git được thiết kế cho phép nó dễ dàng được sử dụng như là một thành phần bên dưới của các chương trình khác, như là cho giao diện đồ họa GUI và giao diện Web để thay thế cho giao diện dòng lệnh, công cụ quản lý các miếng vá, các công cụ nhập và chuyển đổi, và những thứ tương tự như thế. Trên thực tế, một số lệnh Git bản chất nó cũng là các kịch bản (scripts) đứng trên vai của những người khổng lồ, chính là hệ điều hành. Chỉ cần sửa đổi một chút, bạn có thể bắt Git làm việc phù hợp với sở thích của mình.
+Tuân thủ theo phong thái UNIX, Git được thiết kế cho phép nó dễ dàng được sử dụng như là một thành phần bên dưới của các chương trình khác, như là cho giao diện đồ họa GUI và giao diện Web để thay thế cho giao diện dòng lệnh, công cụ quản lý các miếng vá, các công cụ nhập và chuyển đổi, và những thứ tương tự như thế. Trên thực tế, một số lệnh Git bản chất nó cũng là các kịch bản đứng trên vai của những người khổng lồ, chính là hệ điều hành. Chỉ cần sửa đổi một chút, bạn có thể bắt Git làm việc phù hợp với sở thích của mình.
 
 Một mẹo nhỏ là sử dụng một tính năng dựng sẵn trong Git là gán bí danh cho các lệnh để nó trở nên ngắn gọn hơn
 sử dụng lệnh:
@@ -160,7 +160,7 @@ Thư mục con +contrib+ là một kho báu được tìm thấy trong số các
 Đúng lúc, một số trong số chúng có thể được xúc tiến thành lệnh chính thức. Trên hệ thống Debian và
 Ubuntu, thư mục này ở tại +/usr/share/doc/git-core/contrib+.
 
-Một thư mục phổ biến khác là +workdir/git-new-workdir+. Thông qua các liên kết tài tình, đoạn script này tạo ra một thư mục làm việc mới khi phần lịch sử thì chia sẻ với kho chứa nguyên gốc:
+Một thư mục phổ biến khác là +workdir/git-new-workdir+. Thông qua các liên kết tài tình, đoạn kịch bản này tạo ra một thư mục làm việc mới trong khi phần lịch sử thì chia sẻ với kho chứa nguyên gốc:
 
   $ git-new-workdir an/existing/repo new/directory
 
