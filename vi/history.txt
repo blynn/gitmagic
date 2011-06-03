@@ -25,7 +25,7 @@ Bạn muốn thêm vài chỉnh sửa vào lần cuối mình đã commit ư? Th
 
  $ git commit --amend -a
 
-=== ... And Then Some ===
+=== ... Và Nhiều Lần mộtlúc ===
 
 Hãy giả sử vấn đề trục trặc ở lần commit cách đây mười lần. Trong một buổi làm việc dài, bạn đã tạo ra hàng tá các lần commit. Nhưng bạn không hoàn toàn hài lòng với cách mà chúng được tổ chức, và một số lần commit cần được soạn lại phần mô tả. Thế thì hãy gõ:
 
@@ -42,7 +42,7 @@ Thế thì:
 -Xóa bỏ các lần commit bằng cách xóa các dòng tương ứng.
 -Đặt lại các lần commit bằng các đặt lại các dòng.
 - Thay thế `pick` với:
-   * `edit` để đánh dấu lần commit đó là dành cho việc tu bổ (amend).
+   * `edit` để đánh dấu lần commit đó là dành cho việc tu bổ.
    * `reword` để thay đổi phần chú giải.
    * `squash` để hòa trộn với lần commit trước.
    * `fixup` để hòa trộn với lần commit trước và bỏ qua việc ghi lại phần chú giải.
@@ -58,7 +58,7 @@ Cách khác, chạy:
 
 Do vậy cứ commit thoải mái và thường xuyên bởi vì bạn có thể dọn dẹp cho gọn gàng sau này bằng lệnh rebase.
 
-=== Các Thay Đổi Riêng Xếp Sau ===
+=== Thay Đổi Riêng Sắp Xếp Sau ===
 
 Bạn đang làm việc trên một dự án đang hoạt động. Bạn đã tạo ra một số lần commit tại máy tính của mình, và
 sau đó bạn đồng bộ hóa với cây chính thức bằng cách hòa trộn. Chu kỳ này tự lặp chính nó một số lần trước khi bạn thực sự push tới cây trên máy chủ trung tâm.
@@ -66,15 +66,15 @@ sau đó bạn đồng bộ hóa với cây chính thức bằng cách hòa tr�
 Nhưng hiện tại lịch sử bản sao Git trên máy tính của bạn là một mớ hỗn độn của những lần thay đổi trên máy tính riêng và máy chính thức. Bạn muốn thấy tất cả các thay đôi của riêng mình trong một đoạn liên tục không ngắt quãng, và sau tất cả các thay đổi từ văn phòng.
 
 Đây chính là công việc dành cho lệnh *git rebase* đã được miêu tả ở trên. Trong nhiều trường hợp bạn có thể sử dụng
-cờ *--onto* và tránh xa sự tương tác.
+cờ *--onto* và tránh xa sự tương tác với các máy tính khác.
 
-Xem thêm trong *git help rebase* để thấy được chi tiết các ví dụ dành cho lệnh đáng kinh ngạc này. Bạn có thể chia cắt các lần  commit. Bạn còn có thể xắp xếp lại các nhánh của một cấu trúc cây.
+Xem thêm trong *git help rebase* để thấy được chi tiết các ví dụ dành cho lệnh đáng kinh ngạc này. Bạn có thể chia cắt các lần commit. Bạn còn có thể xắp xếp lại các nhánh của một cấu trúc cây.
 
 === Viết Lại Lịch Sử ===
 
 Thỉnh thoảng, bạn muốn việc quản lý mã nguồn giống việc người ta sơn vẽ chân dung một
 con người, tẩy xóa chúng từ lịch sử như theo ý của Stalinesque. Ví dụ,
-giả sử chúng ta có ý định phát hành dự án, nhưng lại liên đới đến một tệp tin mà nóphải được giữ bí mật
+giả sử chúng ta có ý định phát hành dự án, nhưng lại liên đới đến một tệp tin mà nó phải được giữ bí mật
 vì lý do nào đó. Chẳng hạn như tôi đã quên khi ghi lại số thẻ tín dụng vào trong một tệp tin
 văn bản và ngẫu nhiên nó được thêm vào trong dự án. Việc xóa tệp tin này là
 chưa đủ, bởi vì ta có thể đọc nó từ lần commit cũ. Chúng ta phải gỡ bỏ
@@ -153,7 +153,7 @@ những lệnh này có thể gửi một kho chứa ở dạng văn bản thôn
 
 === Vị Trí Nào Phát Sinh Lỗi? ===
 
-Bạn vừa mới phát hiện ra một đặc tính không hoạt động trong chương trình mà bạn chắc chắn là nó đã hoạt động vài tháng trước. Tệ quá! Lỗi đến từ đâu nhỉ? Nếu như chỉ có mình bạn kiểm tra cũng như phát triển đặc tính này.
+Bạn vừa mới phát hiện ra một đặc tính không hoạt động trong chương trình mà bạn chắc chắn là nó đã hoạt động vài tháng trước. Tệ quá! Lỗi bắt đầu từ chỗ nào nhỉ? Nếu như chỉ có mình bạn kiểm tra cũng như phát triển đặc tính này.
 
 Lúc này thì đã quá muộn rồi. Tuy nhiên, chỉ cần bạn commit thường xuyên, Git
 có thể xác định vị trí của trục trặc:
@@ -178,7 +178,7 @@ Thay vì thử nghiệm mọi thay đổi một cách thủ công, hãy tự đ�
 
  $ git bisect run my_script
 
-Git sử dụng giá trị trả về của lệnh đã cho, thông thường là từ các đoạn script, để
+Git sử dụng giá trị trả về của lệnh đã cho, thông thường là từ các đoạn kịch bản, để
 quyết định là lệnh đã thực hiện tốt hay không: lệnh sẽ trả về giá trị 0
 khi tốt, 125 khi sự thay đổi bị bỏ qua, và bất kỳ giá trị nào khác nằm giữa 1
 và 127 nếu gặp lỗi. Một giá trị âm sẽ bãi bỏ lệnh bisect.
@@ -211,7 +211,7 @@ những người sử dụng sẽ lảng tránh việc sử dụng các lệnh c
 đặc biệt là các lệnh cơ bản. Khi những người dùng phải chạy
 các lệnh chạy chậm, hiệu suất bị giảm bởi vì nó làm gián đoạn công việc của cả một dây truyền.
 
-Tôi trực tiếp đã trải qua những hiện tượng đó. Git là hệ thống quản lý mã nguồn đầu tiên tôi sử dụng.
+Tôi trực tiếp đã trải qua những hiện tượng đó. Git là hệ thống quản lý mã nguồn đầu tiên tôi sử dụng. 
 Tôi nhanh chóng làm quen với nó, bị quyến rũ bởi những đặc tính kỹ thuật mà nó đã cung cấp.
 Tôi đơn giản cho rằng các hệ thống khác thì cũng tương tự: việc chọn lựa một
 hệ thống quản lý mã nguồn thì cũng chẳng khác việc chọn một trình biên soạn hay một
@@ -233,5 +233,5 @@ chính của mình, lệnh đã hoàn tất từ lâu rồi, và tôi phải lã
 Ở đây còn có một hậu quả rất đáng quan tâm nữa: đoán trước được việc tắc nghẽn của mạng máy tính,
 nhiều cá nhân riêng lẻ có thể chiếm dụng nhiều lưu lượng mạng hơn cần thiết trên các tác vụ
 khác nhau để cố gắng giảm thiểu sự chậm trễ có thể xảy ra trong tương lai. Hậu quả cuối cùng là
-sự quá tải quá mức, việc vô tình việc ủng hộ việc tiêu dùng cá nhân như thế làm đốt cháy nhiều lưu lượng mạng hơn
+sự quá tải quá mức, việc vô tình ủng hộ việc tiêu dùng cá nhân như thế làm đốt cháy nhiều lưu lượng mạng hơn
 và sau đó nó làm cho việc tắc nghẽn càng lúc càng trở nên tồi tệ hơn.
