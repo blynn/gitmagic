@@ -25,7 +25,7 @@ Bạn muốn thêm vài chỉnh sửa vào lần cuối mình đã commit ư? Th
 
  $ git commit --amend -a
 
-=== ... Và Nhiều Lần mộtlúc ===
+=== ... Và Nhiều Lần một lúc ===
 
 Hãy giả sử vấn đề trục trặc ở lần commit cách đây mười lần. Trong một buổi làm việc dài, bạn đã tạo ra hàng tá các lần commit. Nhưng bạn không hoàn toàn hài lòng với cách mà chúng được tổ chức, và một số lần commit cần được soạn lại phần mô tả. Thế thì hãy gõ:
 
