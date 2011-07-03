@@ -32,7 +32,7 @@ On the central server, initialize a 'bare repository' in some directory:
  $ mkdir proj.git
  $ cd proj.git
  $ git init --bare
- $  # one-line variant: GIT_DIR=proj.git git init
+ $ touch proj.git/git-daemon-export-ok
 
 Start the Git daemon if necessary:
 
@@ -43,11 +43,11 @@ empty Git repository. Typically one fills in a form on a webpage.
 
 'Push' your project to the central server with:
 
- $ git push git://central.server/path/to/proj.git HEAD
+ $ git push central.server/path/to/proj.git HEAD
 
 To check out the source, a developer types:
 
- $ git clone git://central.server/path/to/proj.git
+ $ git clone central.server/path/to/proj.git
 
 After making changes, the developer saves changes locally:
 
@@ -66,8 +66,24 @@ To check in local changes into the central repository:
  $ git push
 
 If the main server has new changes due to activity by other developers, the
-push fails, and the developer should pull the latest version, resolve any merge
-conflicts, then try again.
+push fails, and the developer should pull the latest version, resolve any merge conflicts, then try again.
+
+Developers must have SSH access for the above pull and push commands.
+However, anyone can see the source by typing:
+
+ $ git clone git://central.server/path/to/proj.git
+
+The native git protocol is like HTTP: there is no authentication, so anyone can
+retrieve the project. Accordingly, by default, pushing is forbidden via the git
+protocol.
+
+=== Secret Source ===
+
+For a closed-source project, omit the touch command, and ensure you never
+create a file named `git-daemon-export-ok`. The repository can no longer be
+retrieved via the git protocol; only those with SSH access can see it. If all
+your repos are closed, running the git daemon is unnecessary because all
+communication occurs via SSH.
 
 === Bare repositories ===
 
@@ -122,9 +138,12 @@ Say you want to work on several features in parallel. Then commit your project a
 
  $ git clone . /some/new/directory
 
-Git exploits hard links and file sharing as much as safely possible to create this clone, so it will be ready in a flash, and you can now work on two independent features simultaneously. For example, you can edit one clone while the other is compiling.
+Thanks to http://en.wikipedia.org/wiki/Hard_link[hardlinking], local clones
+require less time and space than a plain backup.
 
-At any time, you can commit and pull changes from the other clone.
+You can now work on two independent features simultaneously. For example, you
+can edit one clone while the other is compiling. At any time, you can commit
+and pull changes from the other clone:
 
  $ git pull /the/other/clone HEAD
 

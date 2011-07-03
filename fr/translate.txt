@@ -1,0 +1,40 @@
+// -*- mode: doc; mode: flyspell; coding: utf-8; fill-column: 79; -*-
+== Appendix B: Traduire ce guide ==
+
+Faites un clone du source puis créer un répertoire correspondant au
+http://www.iana.org/assignments/language-subtag-registry[code IETF de la langue
+souhaitée] : voir
+http://www.w3.org/International/articles/language-tags/Overview.en.php[l'article
+du W3C concernant l'internationalisation]. Par exemple pour l'anglais c'est
+"en", pour le japonais c'est "ja" et pour le chinois traditionnel c'est
+"zh-Hant". Dans ce nouveau répertoire, traduisez chacun des fichiers +txt+ du
+répertoire "en" original.
+
+Par exemple, pour créer ce guide en
+http://fr.wikipedia.org/wiki/Klingon%20(langue)[Klingon], vous devriez faire :
+
+ $ git clone git://repo.or.cz/gitmagic.git
+ $ cd gitmagic
+ $ mkdir tlh  # "tlh" et le code IETF de la langue Klingon.
+ $ cd tlh
+ $ cp ../en/intro.txt .
+ $ edit intro.txt  # Traduire le fichier.
+
+et ainsi de suite pour tous les fichiers. Vous pouvez relire votre travail
+incrémentalement :
+
+ $ make LANG=tlh
+ $ firefox book.html
+
+Faites souvent des commits pour vos modifications puis faites-le moi savoir dès
+que c'est prêt. GitHub.com propose une interface qui facilite les choses :
+faites un fork du projet "gitmagic", poussez-y vos modifications et
+demandez-moi de les fusionner.
+
+J'aime avoir des traductions qui suivent le schéma ci-dessus car mes scripts
+peuvent alors produire les versions HTML et PDF. Et puis c'est pratique de
+conserver toutes les traductions dans le dépôt officiel. Mais que cela ne vous
+empêche pas de faire ce qui vous convient le mieux : par exemple, les
+traducteurs chinois préfèrent utiliser Google Docs. Je suis content tant que
+votre travail permet à d'autres de profiter de mon travail.
+

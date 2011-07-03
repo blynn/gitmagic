@@ -1,6 +1,4 @@
-
-book.html
-book.pdf
-book.xml
-book/
-conf
+/book*
+/conf
+/fop*
+*.svn/*

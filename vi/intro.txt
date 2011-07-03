@@ -1,0 +1,59 @@
+== Giới thiệu ==
+
+Tôi sử dụng cách ví von để giới thiệu về hệ thống quản lý mã nguồn. Xem http://en.wikipedia.org/wiki/Revision_control[bài viết về quản lý mã nguồn trên Wikipedia] để có được sự giải thích thỏa đáng.
+
+=== Công Việc giống như Trò Chơi ===
+
+Tôi đã chơi trò chơi trên máy tính suốt từ bé đến giờ. Ngược lại, tôi chỉ bắt đầu sử dụng hệ thống quản lý mã nguồn khi đã trưởng thành. Tôi tin rằng không chỉ có tôi như thế, và việc so sánh giữa hai điều đó sẽ làm có các khái niệm trở nên dễ hiểu, dễ giải thích hơn.
+
+Hãy nghĩ việc biên soạn mã nguồn, tài liệu cũng giống như việc chúng ta đang chơi trò chơi trên máy tính. Một khi bạn đã làm được kha khá, bạn sẽ muốn ghi lại thành quả công việc của mình. Để làm điều đó, bạn chỉ việc bấm vào nút 'Save' trong chương trình biên soạn của mình.
+
+Nhưng việc làm này sẽ ghi đè lên bản cũ. Điều này cũng giống như các trò chơi đã cũ chỉ cho phép ghi trên một tệp tin: bạn phải chắc chắn là mình muốn ghi lại, nếu không thì bạn không bao giờ có thể quay lại trạng thái cũ nữa. Và thật không may vì lần lưu trước đó có thể là đúng tại một điểm rất hay trong lượt chơi và bạn muốn thăm lại về sau. Tệ hơn nữa là khi bản ghi lại hiện tại lại không đúng, và thế là bạn sẽ phải bắt đầu lại từ đầu.
+
+=== Quản Lý Mã Nguồn ===
+
+Khi biên soạn, bạn có thể chọn 'Save As...' để ghi lại tệp tin hiện tại nhưng với một cái tên khác, hay là sao chép tệp tin ra một chỗ khác trước khi bạn ghi lại, nếu như bạn muốn dùng cả các bản cũ. Bạn có thể nén chúng lại để tiết kiệm dung lượng lưu trữ. Đây là dạng thức nguyên thủy và tốn nhiều công sức cho việc quản lý dữ liệu. Trò chơi trên máy tính đã cải tiến cách trên từ rất lâu rồi, rất nhiều trong số chúng cung cấp cho bạn khả năng tự động ghi lại sau từng khoảng thời gian nhất định.
+
+Chúng ta sẽ giải quyết một vấn đề hơi hóc búa một chút nhé! Bạn nói rằng bạn có nhiều tệp tin có liên quan mật thiết với nhau, như mã nguồn cho một dự án chẳng hạn, hay các tệp tin cho một website. Bây giờ nếu bạn muốn giữ một phiên bản cũ bạn phải lưu giữ toàn bộ thư mục. Giữ nhiều phiên bản như thế bằng cách thủ công thật bất tiện, và sẽ nhanh chóng trở nên tốn kém.
+
+Đối với một số trò chơi, ghi lại một trò chơi thực tế là bao gồm toàn bộ thư mục. Những trò chơi này thực thi việc này tự động và chỉ đưa ra một giao diện thích hợp cho người chơi để quản lý các phiên bản của thư mục này.
+
+Các hệ thống quản lý mã nguồn cũng hoạt động theo cách ấy. Chúng có một giao diện tinh tế để quản lý một nhóm các thứ trong thư mục. Bạn có thể ghi lại trạng thái của thư mục một cách thường xuyên, và bạn có thể tải lên bất kỳ một trạng thái nào đã được ghi lại trước đó. Không giống như các trò chơi trên máy tính, chúng thường khôn khéo hơn về việc tiết kiệm không gian lưu trữ. Thông thường, chỉ có một số ít tài liệu được sửa đổi giữa các phiên bản, và cũng không nhiều. Nó chỉ lưu giữ những cái có thay đổi thay vì toàn bộ tất cả.
+
+=== Hệ Thống Phân Tán ===
+
+Bây giờ hãy tưởng tượng có một trò chơi rất khó. Khó để hoàn thành đến mức là có nhiều game thủ lão luyện trên toàn thế giới quyết định lập thành đội và chia sẻ những trò chơi mà họ đã lưu lại với mục đích là để tất cả mọi người có thể theo dõi được nhau. Speedruns là những ví dụ trong đời sống thực: các đấu thủ được phân hóa theo các mức của cùng một trò chơi hợp tác với nhau để đạt được các kết quả đáng kinh ngạc.
+
+Làm thế nào bạn có thể cài đặt một hệ thống mà chúng có thể lấy được từng bản ghi của mỗi người một cách dễ dàng? Và tải lên cái mới hơn?
+
+Ngày xưa, mọi dự án đều sử dụng hệ thống quản lý tập trung. Máy chủ ở một chỗ đâu đó và giữ tất cả các trò chơi đã được ghi lại. Không còn ai khác làm điều đó nữa. Mọi người giữ phần lớn các trò chơi được ghi lại trong máy của họ. Khi một đấu thủ muốn chơi, họ có thể tải về bản ghi lại cuối cùng đã lưu lại ở máy chủ, chơi một lúc, ghi lại và tải trở lại máy chủ để mọi người có thể sử dụng.
+
+Điều gì xảy ra khi một người chơi, vì một lý do nào đó, muốn có được lần chơi cũ hơn? Lý do có thể là lần chơi hiện tại không ổn định hay có sai sót bởi vì một người chơi nào đó quên không chỉnh lại trò chơi về mức 3, và họ muốn tìm lần chơi đã ghi lại cuối cùng mà họ vẫn chưa hoàn thành. Hay có thể là họ muốn so sánh sự  khác nhau giữa các lần chơi để thấy được thành quả của từng người chơi.
+
+Có rất nhiều lý do vì sao cần đến bản cũ hơn, nhưng kết cục là giống nhau. Họ phải hỏi máy chủ trung tâm để lấy về trò chơi cũ đã được lưu lại. Càng ghi lại nhiều trò chơi, họ càng cần phải liên lạc nhiều với nhau.
+
+Những hệ thống quản lý mã nguồn thế hệ mới, Git cũng nằm trong số đó, được biết đến như một hệ thống phân tán, và có thể coi nó là một hệ thống tập trung có mở rộng. Khi người chơi tải về từ máy chủ chính, họ lấy toàn bộ tất cả các lần đã ghi lại, không chỉ mỗi bản cuối cùng. Điều đó có nghĩa là họ trở thành bản sao của máy chủ trung tâm.
+
+Việc khởi tạo bản sao như thế có vẻ hơi xa hoa, đặc biệt là nếu nó có lịch sử phát triển lâu dài, nhưng cái giá phải trả cũng chỉ là việc cần nhiều thời gian để lấy về. Một lợi ích trực tiếp của việc này là khi các tài liệu cũ cần đến, việc liên lạc với máy chủ trung tâm là không cần thiết nữa.
+
+=== Quan Niệm Cổ Hủ ===
+
+Một quan niệm phổ biến là hệ thống phân tán không thích hợp với các dự án có yêu cầu một kho chứa trung tâm chính thức. Không điều gì có thể chà đạp lên sự thật. Chụp ảnh ai đó không có nghĩa là lấy đi linh hồn họ. Cũng như thế, nhân bản kho chính cũng không làm giảm đi sự quan trọng của nó.
+
+Tóm lại, một hệ thống phân tán đã thiết kế tốt thì làm bất cứ công việc nào cũng khá hơn một hệ thống quản lý mã nguồn tập trung. Tài nguyên mạng thường thì tốn kém hơn các tài nguyên nội bộ. Chúng ta sẽ nói đến các hạn chế của hệ thống phân tán sau, sự so sánh như sau thường đúng: hệ thống phân tán tốt hơn.
+
+Một dự án nhỏ có thể chỉ cần dùng một phần nhỏ các đặc tính được đưa ra bởi một
+hệ thống như thế, nhưng việc sử dụng một hệ thống không có khả năng mở rộng cho một dự án nhỏ thì cũng giống như việc sử dụng 
+hệ thống số La Mã để tính toán các số nhỏ.
+
+Hơn thế nữa, dự án của bạn có thể lớn vượt ra ngoài dự kiến ban đầu. Việc sử dụng Git từ lúc khởi sự thì cũng giống như việc sử dụng một bộ dao vạn năng chỉ để phục vụ cho mỗi việc mở nút chai. Đến một ngày nào đó bạn cấn đến một cái chìa vít bạn sẽ vui sướng vì mình không chỉ có mỗi cái mở nút chai.
+
+=== Xung Đột Khi Trộn ===
+
+Với chủ đề này, dùng cách ví von nó với một trò chơi trên máy tính là hơi khó. Thay vì thế, để chúng tôi dùng việc biên soạn một tài liệu để giải thích cho bạn.
+
+Giả sử Alice chèn thêm một dòng vào đầu một tệp tin, và Bob nối một dòng vào cuối của bản sao của mình. Cả hai đều tải lên các thay đổi của mình. Phần lớn các hệ thống sẽ tự động tìm ra hành động hợp lý: chấp nhận và trộn các sự thay đổi của họ, do đó cả hai sự thay đổi mà Alice và Bob tạo ra đều được dùng.
+
+Bây giờ giả sử cả Alice và Bob cùng sửa một dòng. Thế thì mâu thuẫn này không thể sử lý được mà không có sự can thiệp của con người. Người thứ hai tải lên sẽ được thông báo có xung đột xảy ra, _merge conflict_, và phải chọn một là sửa thêm nữa, hay sửa lại toàn bộ dòng đó.
+
+Nhiều tình huống phức tạp có thể nảy sinh. Hệ thống quản lý mã nguồn giữ phần dễ dàng cho chúng, và để lại những tình huống khó khăn cho chúng ta. Nhưng thông thường cách ứng xử của chúng có thể điều chỉnh được.

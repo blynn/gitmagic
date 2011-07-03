@@ -1,0 +1,6 @@
+== Differences with EN ==
+
+=== clone.txt ===
+
+- "this clone, so it will be ready in a flash, and you can now work on two"  remove "will" for present (time concystency)
+

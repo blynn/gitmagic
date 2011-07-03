@@ -1,0 +1,208 @@
+== Các Thủ Thuật Cơ Bản ==
+
+Thay vì lao vào cả một biển lệnh với Git, bạn hãy sử dụng các ví dụ cơ bản để bắt đầu.
+Mặc dù chúng rất đơn giản, nhưng tất cả chúng đều rất hữu dụng.
+Quả thực là vậy, trong tháng đầu tiên sử dụng Git tôi chưa bao giờ vượt qua những gì nói trong chương này.
+
+=== Ghi lại Trạng thái ===
+
+Bạn muốn thử thực hiện một số lệnh gì đó với Git? Trước khi làm điều đó, thực hiện các lệnh sau 
+trong thư mục hiện hành chứa các mã nguồn hay văn bản mà bạn muốn quản lý:
+
+ $ git init
+ $ git add .
+ $ git commit -m "Bản sao lưu đầu tiên"
+
+Bây giờ nếu như các sửa đổi vừa xong của bạn không như mong đợi, hãy phục hồi lại bản cũ:
+
+ $ git reset --hard # Đặt lại trạng thái và dữ liệu như lần commit cuối
+
+Sau đó sửa nội dung cho đúng ý bạn rồi ghi lại thành một trạng thái mới:
+
+ $ git commit -a -m "Bản sao lưu khác"
+
+=== Thêm, Xóa, Đổi Tên ===
+
+Lệnh ở trên chỉ giữ dấu vết các tệp tin hiện diện tại thời điểm bạn chạy lệnh *git add*. Nếu bạn thêm các tệp tin hay thư mục, thì bạn sẽ phải thông báo với Git:
+
+ $ git add readme.txt Documentation
+
+Tương tự như vậy, nếu bạn muốn Git bỏ đi các tệp tin nào đó:
+
+ $ git rm kludge.h obsolete.c
+ $ git rm -r incriminating/evidence/ #gỡ bỏ một cách đệ qui
+
+Git xóa bỏ những tệp tin nếu như bạn chưa làm.
+
+Đổi tên tệp tin thì cũng giống như là việc bạn gỡ bỏ tên cũ và đặt vào nó cái tên mới. Sử dụng lệnh *git mv* có cú pháp rất giống lệnh *mv* của hệ thống Linux. Ví dụ:
+
+ $ git mv bug.c feature.c
+
+=== Chức Năng Undo/Redo ===
+
+Đôi khi bạn chỉ muốn quay trở lại và bỏ đi những thay đổi trong quá khứ tại một thời điểm nào đó bởi vì chúng tất cả đã sai. Thì lệnh:
+
+ $ git log
+
+sẽ hiển thị cho bạn danh sách các lần commit gần đây cùng với giá trị băm SHA1:
+
+----------------------------------
+commit 766f9881690d240ba334153047649b8b8f11c664
+Author: Bob <bob@example.com>
+Date:   Tue Mar 14 01:59:26 2000 -0800
+
+    Replace printf() with write().
+
+commit 82f5ea346a2e651544956a8653c0f58dc151275c
+Author: Alice <alice@example.com>
+Date:   Thu Jan 1 00:00:00 1970 +0000
+
+    Initial commit.
+----------------------------------
+
+Chỉ vài ký tự của giá trị băm là đủ để chỉ ra một commit cụ thể;
+một cách khác là chép và dán giá trị băm. Gõ:
+
+ $ git reset --hard 766f
+
+để phục hồi lại trạng thái đã được chỉ ra và xóa bỏ tất cả các lần commit mới hơn kể từ đó.
+
+Một lúc nào đó bạn lại muốn nhảy tới một bản cũ hơn. Trong trường hợp này thì gõ:
+
+ $ git checkout 82f5
+
+Nó giúp bạn quay lại đúng thời điểm đó, trong khi vẫn giữ lại những lần commit mới hơn. Tuy nhiên, giống như cỗ máy thời gian trong các bộ phim khoa học viễn tưởng, nếu bây giờ bạn sửa sau đó commit, bạn sẽ ở trong một thực tại khác, bởi vì hành động của bạn bây giờ đã khác với khi chúng ta lần đầu tiên ở tại đây.
+
+Có cách thực tế hơn là sử dụng 'branch', và <<branch, chúng ta có nhiều điều để nói về nó sau này>>. Bây giờ, chỉ cần nhớ là:
+
+ $ git checkout master
+
+sẽ mang chúng ta trở về hiện tại. Ngoài ra, để tránh rủi ro khi sử dụng Git, thì luôn luôn
+commit hay reset các thay đổi của bạn trước khi chạy lệnh checkout.
+
+Sự tương đồng với game trên máy tính:
+
+- *`git reset --hard`*: lấy cái cũ đã được lưu lại và xóa tất cả các games mới hơn cái vừa lấy.
+
+- *`git checkout`*: lấy một cái cũ, nhưng chỉ chơi với nó, trạng thái của game sẽ tách riêng về phía mới hơn chỗ mà bạn đã ghi lại lần đầu tiên. Bất kỳ game nào bạn tạo từ bây giờ sẽ là bản cuối cùng trong nhánh riêng rẽ tương ứng với một thực tại khác mà bạn đã gia nhập vào. <<branch, chúng tôi sẽ nói sau>>.
+
+Bạn có thể chọn chỉ phục hồi lại các tệp tin hay thư mục bạn muốn bằng cách thêm vào chúng vào phần sau của câu lệnh:
+
+ $ git checkout 82f5 some.file another.file
+
+Bạn phải cẩn thận khi sử dụng các lệnh, như là lệnh *checkout* có thể âm thầm ghi đè lên các tệp tin. Để
+ngăn ngừa rủi ro như thế, hãy commit trước khi chạy lệnh checkout, nhất là khi
+mới học sử dụng Git. Tóm lại, bất kỳ khi nào bạn không chắc chắn về một lệnh nào đó, dù có là lệnh của Git hay không, đầu tiên hãy chạy lệnh *git commit -a*.
+
+Bạn không thích việc cắt dán ư? Hãy sử dụng:
+
+ $ git checkout :/"My first b"
+
+để nhảy tới lần commit mà phần chú thích của nó bắt đầu với chuỗi bạn đã cho.
+Bạn cũng có thể yêu cầu trạng thái thứ 5 kể từ cái cuối cùng:
+
+ $ git checkout master~5
+
+=== Sự quay lại ===
+
+Trong một phiên tòa, mỗi sự kiện được gắn với một bản ghi. Cũng giống thế, bạn có thể chọn lệnh commit để undo.
+
+ $ git commit -a
+ $ git revert 1b6d
+
+sẽ chỉ undo lần commit với giá trị băm đã chỉ ra. Sự quay trở lại được ghi nhận như là một lần
+commit mới, bạn có thể xác nhận lại điều này bằng lệnh *git log*.
+
+=== Tạo Nhật Ký các thay đổi ===
+
+Một số dự án yêu cầu có một http://en.wikipedia.org/wiki/Changelog[changelog].
+Tạo một cái bằng cách gõ:
+
+ $ git log > ThayĐổi
+
+=== Tải về các Tệp tin ===
+
+Lấy về một bản sao của một dự án quản lý bằng Git bằng cách gõ:
+
+ $ git clone git://server/path/to/files
+
+Ví dụ, để lấy tất cả các tệp tin mà tôi đã dùng để tạo ra cho quyển sách này là:
+
+ $ git clone git://git.or.cz/gitmagic.git
+
+Chúng ta sẽ có nhiều điều để nói về lệnh *clone* sớm thôi.
+
+=== Thử Nghiệm ===
+
+Nếu bạn đã tải về một bản sao của một dự án bằng lệnh *git clone*, bạn có thể lấy về phiên bản cuối cùng với lệnh:
+
+ $ git pull
+
+=== Xuất Bản ===
+
+Giả sử bạn đã tạo được một kho Git và bạn muốn chia sẻ nó với người khác. Bạn có thể bảo họ tải về từ máy tính của mình, nhưng nếu họ làm như thế trong khi bạn đang cải tiến nó hay có những thay đổi mang tính thử nghiệm, họ có thể gặp trục trặc. Dĩ nhiên, đây là lý do tại sao mà chu kỳ phát hành phần mềm lại tồn tại phải không nào. Những người phát triển có thể làm việc thường xuyên trên một dự án, nhưng họ chỉ xuất bản những đoạn mã mà họ cảm thấy nó có thể dùng được để tránh ảnh hưởng đến người khác.
+
+Thực hiện điều này với Git, trong thư mục làm việc của Git:
+
+ $ git init
+ $ git add .
+ $ git commit -m "Bản phát hành đầu tiên"
+
+Sau đó nói với những người cùng sử dụng hãy chạy:
+
+ $ git clone your.computer:/path/to/script
+
+để tải dữ liệu về. Giả định là họ truy cập thông qua ssh. Nếu không, chạy *git daemon* và nói với người sử dụng là chạy lệnh sau để thay thế:
+
+ $ git clone git://your.computer/path/to/script
+
+Kể từ lúc này, bất cứ khi nào mã nguồn của bạn đã có thể sử dụng được, chỉ việc thực hiện:
+
+ $ git commit -a -m "Bản phát hành tiếp"
+
+và những người sử dụng có thể cập nhật dữ liệu của họ bằng cách chuyển tới thư mục làm việc tương ứng và gõ:
+
+ $ git pull
+
+Những người sử dụng sẽ không bao giờ thấy được dữ liệu cuối cùng của bạn mà bạn không muốn họ thấy.
+
+=== Tôi Đã Làm Được Gì? ===
+
+Tìm tất cả các thay đổi kề từ lần bạn commit lần cuối bằng lệnh:
+
+ $ git diff
+
+Hay từ hôm qua:
+
+ $ git diff "@{yesterday}"
+
+Hay giữa một bản nào đó và bản trước đây 2 bản:
+
+ $ git diff 1b6d "master~2"
+
+Trong từng trường hợp, đầu ra là một miếng vá mà nó có thể được sử dụng với lệnh *git apply*.
+Cũng có thể dùng lệnh:
+
+ $ git whatchanged --since="2 weeks ago"
+
+Thường thường, tôi duyệt lịch sử bằng http://sourceforge.net/projects/qgit[qgit] để thay thế cách ở trên, bởi vì nó có giao diện đồ họa bóng bẩy, hay http://jonas.nitro.dk/tig/[tig], có giao diện dòng lệnh làm việc rất tốt với các máy có kết nối mạng chậm. Một lựa chọn khác là cài đặt máy chủ web, chạy lệnh *git instaweb* và sử dụng bất kỳ trình duyệt web nào.
+
+=== Bài Tập===
+
+Coi A, B, C, D là 4 lần commit thành công, nơi mà B giống A ngoại trừ một số tệp tin bị xóa bỏ. Chúng ta muốn thêm các tệp tin đó trở lại D. Chúng ta thực hiện điều này bằng cách nào?
+
+Ở đây chúng ta có ít nhất 3 giải pháp. Giả thiết chúng ta đang ở D:
+
+  1. Sự khác nhau giữa A và B là việc các tệp tin đã bị gỡ bỏ. Chúng ta có thể tạo miếng vá tương ứng với sự khác biệt này và apply nó:
+
+   $ git diff B A | git apply
+
+  2. Kể từ sau khi chúng ta ghi lại các tệp tin tại A trở đi, chúng ta có thể lấy lại:
+
+   $ git checkout A foo.c bar.h
+
+  3. Chúng ta có thể xem sự di chuyển từ A tới B giống như là một thay đổi mà chúng ta muốn undo:
+
+   $ git revert B
+
+Lựa chọn nào là tốt nhất? Cách nào bạn thích nhất. Thật dễ dàng để có được thứ mà bạn muốn với Git, và thường là có nhiều hơn một cách để thực hiện được một thứ bạn muốn.

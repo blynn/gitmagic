@@ -1,7 +1,15 @@
 == Appendix B: Translating This Guide ==
 
-Clone the source, then create a directory corresponding to the target http://www.iana.org/assignments/language-subtag-registry[language's IETF tag]: see
-http://www.w3.org/International/articles/language-tags/Overview.en.php[the W3C article on internationalization]. For example, English is "en", Japanese is "ja", and Traditional Chinese is "zh-Hant". In the new directory, and translate the +txt+ files from the "en" subdirectory. 
+I recommend the following steps for translating this guide, so my scripts can
+quickly produce HTML and PDF versions, and all translations can live in the
+same repository.
+
+Clone the source, then create a directory corresponding to the target
+language's IETF tag: see
+http://www.w3.org/International/articles/language-tags/Overview.en.php[the W3C
+article on internationalization]. For example, English is "en" and Japanese is
+"ja". In the new directory, and translate the +txt+ files from the "en"
+subdirectory.
 
 For instance, to translate the guide into http://en.wikipedia.org/wiki/Klingon_language[Klingon], you might type:
 
@@ -12,17 +20,14 @@ For instance, to translate the guide into http://en.wikipedia.org/wiki/Klingon_l
  $ cp ../en/intro.txt .
  $ edit intro.txt  # Translate the file.
 
-and so on for each text file. You can review your work incrementally:
+and so on for each text file.
 
- $ make LANG=tlh
- $ firefox book.html
+Edit the Makefile and add the language code to the `TRANSLATIONS` variable.
+You can now review your work incrementally:
+
+ $ make tlh
+ $ firefox book-tlh/index.html
 
 Commit your changes often, then let me know when they're ready.
-GitHub.com has an interface that facilitates this: fork the "gitmagic" project,
+GitHub has an interface that facilitates this: fork the "gitmagic" project,
 push your changes, then ask me to merge.
-
-I like to have translations follow the above scheme so my scripts can produce
-HTML and PDF versions. Also, it conveniently keeps all the translations in the
-official repository. But please do whatever suits you best: for example, the
-Chinese translators used Google Docs. I'm happy as long as your work
-enables more people to access my work.

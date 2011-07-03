@@ -1,0 +1,237 @@
+== Bài Học về Lịch Sử ==
+
+Một hệ quả tất yếu của đặc tính phân tán của Git là việc lịch sử có thể biên soạn lại một cách
+dễ dàng. Nhưng nếu bạn xáo trộn quá khứ, hãy cẩn thận: chỉ biên soạn lại quá khứ trong lịch sử
+chỉ khi bạn sở hữu nó một mình. Cũng giống như việc các quốc gia tranh cãi không kết thúc xem ai là người
+tận tâm hành động nào là tàn ác, nếu một người khác có một bản sao mà lịch sử của nó lại khác với
+cái của bạn, bạn sẽ gặp rắc rối ngay khi cần tương tác với họ.
+
+Một số nhà phát triển phần mềm quả quyết rằng lịch sử không thể thay đổi, tất cả mọi thứ.
+Một số khác lại cho rằng chỉnh sửa lại cấu trúc trước khi phát hành nó ra
+đại chúng. Git chấp nhận cả hai quan điểm. Giống như việc nhân bản, tạo nhánh và hòa trộn,
+viết lại lịch sử đơn giản chỉ là một quyền lực mà Git trao cho bạn. Bạn có thể làm thế
+nếu muốn.
+
+=== Dừng Lại Sửa Chữa ===
+
+Bạn vừa mới commit, nhưng lại ước mình đã gõ những dòng chú thích có nội dung khác phải không? Thế thì hãy chạy:
+
+ $ git commit --amend
+
+để thay đổi chú thích cuối cùng. Bạn giật mình vì quên thêm các tệp tin vào? Chạy lệnh *git add* để
+thêm nó vào, và sau đó lại chạy lệnh ở trên.
+
+Bạn muốn thêm vài chỉnh sửa vào lần cuối mình đã commit ư? Thế thì cứ sửa chúng đi và sau đó chạy lệnh:
+
+ $ git commit --amend -a
+
+=== ... Và Nhiều Lần mộtlúc ===
+
+Hãy giả sử vấn đề trục trặc ở lần commit cách đây mười lần. Trong một buổi làm việc dài, bạn đã tạo ra hàng tá các lần commit. Nhưng bạn không hoàn toàn hài lòng với cách mà chúng được tổ chức, và một số lần commit cần được soạn lại phần mô tả. Thế thì hãy gõ:
+
+ $ git rebase -i HEAD~10
+
+và 10 lần commit cuối sẽ xuất hiện trong $EDITOR yêu thích của bạn. Dưới đây là một đoạn trích ví dụ:
+
+    pick 5c6eb73 Added repo.or.cz link
+    pick a311a64 Reordered analogies in "Work How You Want"
+    pick 100834f Added push target to Makefile
+
+Thế thì:
+
+-Xóa bỏ các lần commit bằng cách xóa các dòng tương ứng.
+-Đặt lại các lần commit bằng các đặt lại các dòng.
+- Thay thế `pick` với:
+   * `edit` để đánh dấu lần commit đó là dành cho việc tu bổ.
+   * `reword` để thay đổi phần chú giải.
+   * `squash` để hòa trộn với lần commit trước.
+   * `fixup` để hòa trộn với lần commit trước và bỏ qua việc ghi lại phần chú giải.
+
+Ghi lại và thoát ra. Nếu bạn đánh dấu một lần commit dành cho việc 'edit', thế thì
+chạy:
+
+ $ git commit --amend
+
+Cách khác, chạy:
+
+ $ git rebase --continue
+
+Do vậy cứ commit thoải mái và thường xuyên bởi vì bạn có thể dọn dẹp cho gọn gàng sau này bằng lệnh rebase.
+
+=== Thay Đổi Riêng Sắp Xếp Sau ===
+
+Bạn đang làm việc trên một dự án đang hoạt động. Bạn đã tạo ra một số lần commit tại máy tính của mình, và
+sau đó bạn đồng bộ hóa với cây chính thức bằng cách hòa trộn. Chu kỳ này tự lặp chính nó một số lần trước khi bạn thực sự push tới cây trên máy chủ trung tâm.
+
+Nhưng hiện tại lịch sử bản sao Git trên máy tính của bạn là một mớ hỗn độn của những lần thay đổi trên máy tính riêng và máy chính thức. Bạn muốn thấy tất cả các thay đôi của riêng mình trong một đoạn liên tục không ngắt quãng, và sau tất cả các thay đổi từ văn phòng.
+
+Đây chính là công việc dành cho lệnh *git rebase* đã được miêu tả ở trên. Trong nhiều trường hợp bạn có thể sử dụng
+cờ *--onto* và tránh xa sự tương tác với các máy tính khác.
+
+Xem thêm trong *git help rebase* để thấy được chi tiết các ví dụ dành cho lệnh đáng kinh ngạc này. Bạn có thể chia cắt các lần commit. Bạn còn có thể xắp xếp lại các nhánh của một cấu trúc cây.
+
+=== Viết Lại Lịch Sử ===
+
+Thỉnh thoảng, bạn muốn việc quản lý mã nguồn giống việc người ta sơn vẽ chân dung một
+con người, tẩy xóa chúng từ lịch sử như theo ý của Stalinesque. Ví dụ,
+giả sử chúng ta có ý định phát hành dự án, nhưng lại liên đới đến một tệp tin mà nó phải được giữ bí mật
+vì lý do nào đó. Chẳng hạn như tôi đã quên khi ghi lại số thẻ tín dụng vào trong một tệp tin
+văn bản và ngẫu nhiên nó được thêm vào trong dự án. Việc xóa tệp tin này là
+chưa đủ, bởi vì ta có thể đọc nó từ lần commit cũ. Chúng ta phải gỡ bỏ
+tệp tin này từ tất cả các lần đã commit:
+
+ $ git filter-branch --tree-filter 'rm top/secret/file' HEAD
+
+Xem *git help filter-branch*, nội dung của nó sẽ thảo luận về ví dụ này và đưa ra một cách thức
+nhanh hơn. Đại thể, lệnh *filter-branch* giúp bạn thay đổi cả một chương lớn của lịch sử chỉ
+chỉ bằng một lệnh đơn.
+
+Sau này, thư mục +.git/refs/original+ mô tả trạng thái của công việc trước khi thực hiện. Kiểm tra lệnh filter-branch đã làm những thứ bạn muốn chưa, sau đó xóa thư mục này đi nếu bạn muốn chạy lệnh filter-branch lần nữa.
+
+Cuối cùng, thay thế bản sao của dự án của bạn bằng phiên bản bạn đã sửa lại nếu bạn muốn tương thích với chúng sau này.
+
+=== Tự Tạo Lịch Sử ===
+
+[[makinghistory]]
+Bạn muốn chuyển đổi dự án của mình sang sử dụng Git? Nếu nó được quản lý bởi một hệ thống nổi tiếng hơn, thế thì nếu may mắn sẽ có người nào đó đã viết sẵn một đoạn kịch bản để xuất toàn bộ lịch sử ra thành Git.
+
+Nếu không, thì nên xem xét đến việc sử dụng lệnh *git fast-import*, lệnh này đọc văn bản đầu vào ở một định dạng
+riêng để mà tạo ra một lịch sử cho Git từ ban đầu. Thông thường một script sử dụng
+lệnh này là một nhóm lệnh tổ hợp với nhau và chỉ chạy một lần, di chuyển một dự án chỉ bằng
+một lệnh đơn.
+
+Dưới đây là một ví dụ, dán danh sách theo sau đâu vào một tệp tin tạm thời nào đó, chẳng hạn như là `/tmp/history`:
+----------------------------------
+commit refs/heads/master
+committer Alice <alice@example.com> Thu, 01 Jan 1970 00:00:00 +0000
+data <<EOT
+Initial commit.
+EOT
+
+M 100644 inline hello.c
+data <<EOT
+#include <stdio.h>
+
+int main() {
+  printf("Hello, world!\n");
+  return 0;
+}
+EOT
+
+
+commit refs/heads/master
+committer Bob <bob@example.com> Tue, 14 Mar 2000 01:59:26 -0800
+data <<EOT
+Replace printf() with write().
+EOT
+
+M 100644 inline hello.c
+data <<EOT
+#include <unistd.h>
+
+int main() {
+  write(1, "Hello, world!\n", 14);
+  return 0;
+}
+EOT
+
+----------------------------------
+
+Thế thì tạo một kho Git từ thư mục chứa các tệp tin tạm thời này bằng cách gõ:
+
+ $ mkdir project; cd project; git init
+ $ git fast-import --date-format=rfc2822 < /tmp/history
+
+Bạn có thể checkout phiên bản cuối của dự án với:
+
+ $ git checkout master .
+
+Lệnh *git fast-export* chuyển đổi bất kỳ một kho chứa nào thành định dạng
+phù hợp với lệnh *git fast-import*, và bạn có thể nghiên cứu nó để tạo riêng cho mình một chương trình xuất,
+và cũng làm như thế để tạo thành kho chuyên chở ở định dạng con người có thể đọc được. Thực vậy,
+những lệnh này có thể gửi một kho chứa ở dạng văn bản thông qua một kênh chỉ cho phép văn bản truyền đi.
+
+=== Vị Trí Nào Phát Sinh Lỗi? ===
+
+Bạn vừa mới phát hiện ra một đặc tính không hoạt động trong chương trình mà bạn chắc chắn là nó đã hoạt động vài tháng trước. Tệ quá! Lỗi bắt đầu từ chỗ nào nhỉ? Nếu như chỉ có mình bạn kiểm tra cũng như phát triển đặc tính này.
+
+Lúc này thì đã quá muộn rồi. Tuy nhiên, chỉ cần bạn commit thường xuyên, Git
+có thể xác định vị trí của trục trặc:
+
+ $ git bisect start
+ $ git bisect bad HEAD
+ $ git bisect good 1b6d
+
+Git checks out một trạng thái nằm giữa chúng. Kiểm tra đặc tính kỹ thuật, và nếu nó vẫn hỏng:
+
+ $ git bisect bad
+
+Nếu không thì thay "bad" bằng "good". Git sẽ chuyên chở bạn qua lại nửa bước giữa hai trạng
+thái là phiên bản "tốt" và "xấu", thu hẹp khả năng lại. Sau khi lặp đi lặp lại một số lần,
+việc tìm kiếm nhị phân này sẽ dẫn bạn đến lần commit mà nó làm nguyên nhân dẫn đễ hỏng hóc.
+Một khi bạn đã hoàn tất việc điều tra, trở lại trạng thái nguyên bản
+của bạn bằng cách gõ:
+
+ $ git bisect reset
+
+Thay vì thử nghiệm mọi thay đổi một cách thủ công, hãy tự động hóa sự tìm kiếm này bằng cách chạy:
+
+ $ git bisect run my_script
+
+Git sử dụng giá trị trả về của lệnh đã cho, thông thường là từ các đoạn kịch bản, để
+quyết định là lệnh đã thực hiện tốt hay không: lệnh sẽ trả về giá trị 0
+khi tốt, 125 khi sự thay đổi bị bỏ qua, và bất kỳ giá trị nào khác nằm giữa 1
+và 127 nếu gặp lỗi. Một giá trị âm sẽ bãi bỏ lệnh bisect.
+
+Bạn có thể làm nhiều hơn thế: trang trợ giúp giảng giải cho bạn làm thế nào để hiểu
+được lệnh bisect làm việc như thế nào, xem xét hay xem lại nhật ký lệnh bisect,
+và loại trừ các thay đổi ngớ ngẩn để tăng tốc độ tìm kiếm.
+
+=== Ai Đã Làm Nó Sai? ===
+
+Giống như các hệ thống quản lý mã nguồn khác, Git cũng có lệnh blame:
+
+ $ git blame bug.c
+
+lệnh này chú thích tất cả các dòng có trong tệp tin được chỉ ra cho thấy ai là người cuối cùng sửa nó, và là khi nào. Không giống các hệ thống quản lý mã nguồn khác, hành động này hoạt động không cần có mạng, việc đọc chỉ đơn thuần từ ổ đĩa của máy tính cá nhân.
+
+=== Kinh Nghiệm Riêng ===
+
+Trong một hệ thống quản lý mã nguồn tập trung, thay đổi lịch sử là một việc làm
+khó khăn, và chỉ làm được thế nếu đó là người quản trị. Việc nhân bản, tạo nhánh và
+trộn không thể thiếu việc truyền thông qua mạng. Cũng như thế với các tác vụ cơ bản khác
+như là duyệt lịch sử, hay là commit một thay đổi. Trong một số hệ thống khác, người dùng
+yêu cầu có kết nối mạng chỉ để xem các thay đổi của họ hay mở một tệp tin
+để biên tập.
+
+Hệ thống tập trung không cho phép làm việc mà không có mạng, và đòi hỏi cơ sở hạ tầng mạng máy tính
+đắt đỏ tốn kém, đặc biệt là khi số nhà phát triển phần mềm tăng lên. Điều quan trọng,
+tất cả mọi tác vụ sẽ chậm hơn ở mức độ nào đó, thường thường
+những người sử dụng sẽ lảng tránh việc sử dụng các lệnh cao cấp trừ phi nó thực sự cần thiết. Trừ những trường hợp
+đặc biệt là các lệnh cơ bản. Khi những người dùng phải chạy
+các lệnh chạy chậm, hiệu suất bị giảm bởi vì nó làm gián đoạn công việc của cả một dây truyền.
+
+Tôi trực tiếp đã trải qua những hiện tượng đó. Git là hệ thống quản lý mã nguồn đầu tiên tôi sử dụng. 
+Tôi nhanh chóng làm quen với nó, bị quyến rũ bởi những đặc tính kỹ thuật mà nó đã cung cấp.
+Tôi đơn giản cho rằng các hệ thống khác thì cũng tương tự: việc chọn lựa một
+hệ thống quản lý mã nguồn thì cũng chẳng khác việc chọn một trình biên soạn hay một
+trình duyệt web.
+
+Tôi sẽ sốc nếu như sau này bị bắt buộc sử dụng hệ thống quản lý mã nguồn tập trung. Một kết nối
+Internet chậm chạp cũng chẳng phải là vấn đề lớn đối với Git, nhưng nó sẽ làm cho các
+nhà phát triển phần mềm không thể chịu nổi khi nó cần sự tin cậy như ổ đĩa nội bộ. Thêm nữa,
+tôi đã gặp một số mắc mớ với một số lệnh, mà chính nó
+đã ngăn cản tôi làm việc một cách trôi chảy.
+
+Khi tôi phải chạy những lệnh cần nhiều thời gian, việc làm ngắt quãng việc suy nghĩ
+sẽ gây nên thiệt hại rất to lớn. Trong khi chờ cho việc truyền thông
+với máy chủ hoàn tất, tôi sẽ phải làm một vài thứ gì đó khác để lấp chỗ trống, chẳng hạn như
+lấy thư điện tử hay viết tài liệu. Sau một khoảng thời gian tôi quay trở lại nhiệm vụ
+chính của mình, lệnh đã hoàn tất từ lâu rồi, và tôi phải lãng phí thêm nhiều thời gian nữa
+để nhớ lại xem mình đang làm gì. Con người thường dở khi phải thay đổi mạch văn.
+
+Ở đây còn có một hậu quả rất đáng quan tâm nữa: đoán trước được việc tắc nghẽn của mạng máy tính,
+nhiều cá nhân riêng lẻ có thể chiếm dụng nhiều lưu lượng mạng hơn cần thiết trên các tác vụ
+khác nhau để cố gắng giảm thiểu sự chậm trễ có thể xảy ra trong tương lai. Hậu quả cuối cùng là
+sự quá tải quá mức, việc vô tình ủng hộ việc tiêu dùng cá nhân như thế làm đốt cháy nhiều lưu lượng mạng hơn
+và sau đó nó làm cho việc tắc nghẽn càng lúc càng trở nên tồi tệ hơn.

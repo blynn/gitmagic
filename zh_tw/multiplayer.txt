@@ -1,0 +1,208 @@
+== 多人Git ==
+
+我最初在一個私人項目上使用Git，那裡我是唯一的開發。在與Git分散式本性有關的命
+令中，我只用到了 *pull* 和 *clone*，用以在不同地方保持同一個項目。
+
+後來我想用Git發佈我的代碼，並且包括其他貢獻者的變更。我不得不學習如何管理有來
+自世界各地的多個開發的項目，幸運的是，這是Git的長處，也可以說是其存在的理由。
+
+=== 我是誰？ ===
+
+每個提交都有一個作者姓名和電子信箱，這顯示在 *git log* 裡。預設， Git使用系統
+設定來填充這些域。要顯示地設定，鍵入：
+
+  $ git config --global user.name "John Doe"
+  $ git config --global user.email johndoe@example.com
+
+去掉global選項設定只對當前倉庫生效。
+
+=== Git在SSH, HTTP上 ===
+
+假設你有ssh訪問權限，以訪問一個網頁伺服器，但上面並沒有安裝Git。儘管比着它的
+原生協議效率低，Git也是可以通過HTTP來進行通信的。
+
+那麼在你的帳戶下，下載，編譯並安裝Git。在你的網頁目錄裡創建一個Git倉庫：
+
+ $ GIT_DIR=proj.git git init
+ $ cd proj.git
+ $ git --bare update-server-info
+ $ cp hooks/post-update.sample hooks/post-update
+
+對較老版本的Git，只拷貝還不夠，你應運行：
+
+ $ chmod a+x hooks/post-update
+
+現在你可以通過SSH從隨便哪個克隆發佈你的最新版本：
+
+ $ git push web.server:/path/to/proj.git master
+
+那隨便誰都可以通過如下命令得到你的項目：
+
+ $ git clone http://web.server/proj.git
+
+=== Git在隨便什麼上 ===
+
+想無需伺服器，甚至無需網絡連接的時候同步倉庫？需要在緊急時期湊合一下？我們
+已經看過<<makinghistory, *git fast-export* 和 *git fast-import* 可以轉換資源
+庫到一個單一檔案以及轉回來>>。 我們可以來來會會傳送這些檔案以傳輸git倉庫，
+通過任何媒介，但一個更有效率的工具是 *git bundle* 。
+
+發送者創建一個“檔案包”：
+
+ $ git bundle create somefile HEAD
+
+然後傳輸這個檔案包， +somefile+ ，給某個其他參與者：電子郵件，優盤，一個
+*xxd* 打印品和一個OCR掃描器，通過電話讀位元組，狼煙，等等。接收者通過鍵入如下命
+令從檔案包獲取提交：
+
+ $ git pull somefile
+
+接收者甚至可以在一個空倉庫做這個。不考慮大小， +somefile+ 可以包含整個原先
+git倉庫。
+
+在較大的項目裡，可以通過只打包其他倉庫缺少的變更消除浪費。例如，假設提交
+``1b6d...''是兩個參與者共享的最近提交：
+
+ $ git bundle create somefile HEAD ^1b6d
+
+如果做的頻繁，人可能容易忘記剛發了哪個提交。幫助頁面建議使用標籤解決這個問題。
+即，在你發了一個檔案包後，鍵入：
+
+ $ git tag -f lastbundle HEAD
+
+並創建較新檔案包，使用：
+
+ $ git bundle create newbundle HEAD ^lastbundle
+
+=== 補丁：全球貨幣 ===
+
+補丁是變更的文本形式，易於計算機理解，人也類似。補丁可以通吃。你可以給開發電
+郵一個補丁，不用管他們用的什麼版本控制系統。只要你的觀眾可以讀電子郵件，他們
+就能看到你的修改。類似，在你這邊，你只需要一個電子郵件帳號：不必搭建一個在綫
+的Git倉庫。
+
+回想一下第一章：
+
+ $ git diff 1b6d > my.patch
+
+輸出是一個補丁，可以粘貼到電子郵件裡用以討論。在一個Git倉庫，鍵入：
+
+ $ git apply < my.patch
+
+來打這個補丁。
+
+在更正式些的設置裡，當作者名字以及或許簽名應該記錄下的時候，為過去某一刻生成
+補丁，鍵入：
+
+ $ git format-patch 1b6d
+
+結果檔案可以給 *git-send-email* 發送，或者手工發送。你也可以指定一個提交範圍：
+
+ $ git format-patch 1b6d..HEAD^^
+
+在接收一端，保存郵件到一個檔案，然後鍵入：
+
+ $ git am < email.txt
+
+這就打了補丁並創建了一個提交，包含諸如作者之類的信息。
+
+使用瀏覽器郵件客戶端，在保存補丁為檔案之前，你可能需要建一個按鈕，看看郵件內
+容原來的原始形式。
+
+對基于mbox的郵件客戶端有些微不同，但如果你在使用的話，你可能是那種能輕易找出
+答案的那種人，不用讀教程。
+
+=== 對不起，移走了 ===
+
+克隆一個倉庫後，運行 *git push* 或 *git pull* 講自動推到或從原先URL拉。Git
+如何做這個呢？秘密在和克隆一起創建的配置選項。讓我們看一下：
+
+ $ git config --list
+
+選項 +remote.origin.url+ 控制URL源；``origin'' 是給源倉庫的暱稱。和
+``master'' 分支的慣例一樣，我們可以改變或刪除這個暱稱，但通常沒有理由這麼做。
+
+如果原先倉庫移走，我們可以更新URL，通過：
+
+ $ git config remote.origin.url git://new.url/proj.git
+
+選項 +branch.master.merge+ 指定 *git pull* 裡的預設遠端分支。在初始克隆的時候，
+它被設為原倉庫的當前分支，因此即使原倉庫之後挪到一個不同的分支，後來的
+pull也將忠實地跟着原來的分支。
+
+這個選項只使用我們初次克隆的倉庫，它的值記錄在選項 +branch.master.remote+
+。如果我們從其他倉庫拉入，我們必須顯示指定我們想要哪個分支：
+
+ $ git pull git://example.com/other.git master
+
+以上也解釋了為什麼我們較早一些push和pull的例子沒有參數。
+
+=== 遠端分支 ===
+
+當你克隆一個倉庫，你也克隆了它的所有分支。你或許沒有注意到因為Git將它們隱藏
+起來了：你必須明確地要求。這使得遠端倉庫裡的分支不至于干擾你的分支，也使
+Git對初學者稍稍容易些。
+
+列出遠端分支，使用：
+
+ $ git branch -r
+
+你應該看到類似：
+
+ origin/HEAD
+ origin/master
+ origin/experimental
+
+這顯示了遠端倉庫的分支和HEAD，可以用在常用的Git命令裡。例如，假設你已經做了
+很多提交，並希望和最後取到的版本比較一下。你可以搜索適當的SHA1哈希值，但使用
+下面命令更容易些：
+
+ $ git diff origin/HEAD
+
+或你可以看看``experimental''分支都有啥：
+
+ $ git log origin/experimental
+
+=== 多遠端 ===
+
+假設另兩個開發在同一個項目上工作，我們希望保持兩個標籤。我們可以同事跟多個倉庫：
+
+ $ git remote add other git://example.com/some_repo.git
+ $ git pull other some_branch
+
+現在我們已經從第二個倉庫合併到一個分支，並且我們已容易訪問所有倉庫的所有
+分支。
+
+ $ git diff origin/experimental^ other/some_branch~5
+
+但如果為了不影響自己的工作，我們只想比較他們的變更怎麼辦呢？換句話說，我們想
+檢查一下他們的分支，又不使他們的變更入侵我們的工作目錄。那不是運行pull命令，
+而是運行：
+
+ $ git fetch        # Fetch from origin, the default.
+ $ git fetch other  # Fetch from the second programmer.
+
+這只是獲取歷史。儘管工作目錄維持不變，我們可以參考任何倉庫的任何分支，使用
+一個Git命令，因為我們現在有一個本地拷貝。
+
+回想一下，在幕後，一個pull是簡單地一個 *fetch* 然後 *merge* 。通常，我們
+*pull* 因為我們想在獲取後合併最近提交；這個情況是一個值得注意的例外。
+
+關於如何去除遠端倉庫，如何忽略特定分支等更多，參見 *git help remote* 。
+
+=== 我的喜好 ===
+
+對我手頭的項目，我喜歡貢獻者去準備倉庫，這樣我可以從其中拉。一些Git伺服讓你
+點一個按鈕，擁有自己的分叉項目。
+
+在我獲取一個樹之後，我運行Git命令去瀏覽並檢查這些變更，理想情況下這些變更組織
+良好，描述良好。我合併這些變更，也或許做些編輯。直到滿意，我才把變更推入主資
+源庫。
+
+儘管我不經常收到貢獻，我相信這個方法擴展性良好。參見
+http://torvalds-family.blogspot.com/2009/06/happiness-is-warm-scm.html[ 這篇
+來自Linus Torvalds的博客 ]
+
+獃在Git的世界裡比補丁檔案稍更方便，因為不用我將補丁轉換到Git提交。更進一步，
+Git處理諸如作者姓名和信箱地址的細節，還有時間和日期，以及要求作者描述他們的提
+交。

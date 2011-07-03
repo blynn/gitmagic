@@ -1,0 +1,231 @@
+== Đa Người Dùng ==
+
+Lúc đầu tôi sử dụng Git cho dự án riêng của mình mà tôi cũng là người duy nhất phát triển nó.
+Trong số những lệnh liên quan đến bản chất phân tán của Git, tôi chỉ cần lệnh *pull*
+và *clone* để giữ cùng một dự án nhưng ở những chỗ khác nhau.
+
+Sau đó tôi muốn mã nguồn của mình được phổ biến trên mạng bằng việc sử dụng Git, và bao gồm cả những thay đổi từ
+những người đóng góp. Tôi đã phải học cách làm thế nào để quản lý các dự án có nhiều người phát triển phần mềm
+ở khắp nơi trên toàn thế giới. May mắn thay, đây là sở trường của Git, và người ta có thể nói đây là
+điều sống còn của một hệ thống quản lý mã nguồn.
+
+
+=== Tôi Là Ai? ===
+
+Mỗi lần commit sẽ lưu giữ tên và địa chỉ thư điện tử, điều này có thể nhìn thấy bằng lệnh *git log*.
+Theo mặc định, Git sử dụng các trường để lưu giữ các cài đặt trong hệ thống của mình.
+Để chỉ định chúng một cách rõ ràng, hãy gõ:
+
+  $ git config --global user.name "John Doe"
+  $ git config --global user.email johndoe@example.com
+
+Bỏ qua cờ global để đặt những thông tin này chỉ sử dụng cho kho chứa hiện tại.
+
+=== Git Thông Qua SSH, HTTP ===
+
+Giả sử bạn có thể truy cập vào một máy chủ web qua SSH, nhưng Git lại chưa được cài đặt ở đây. Mặc dù
+không hiệu quả như giao thức nguyên bản của nó, nhưng Git vẫn có thể truyền thông thông qua HTTP.
+
+Tải về, dịch và cài Git bằng tài khoản của bạn, và tạo kho chứa tại
+thư mục chứa trang web của bạn:
+
+ $ GIT_DIR=proj.git git init
+ $ cd proj.git
+ $ git --bare update-server-info
+ $ cp hooks/post-update.sample hooks/post-update
+
+Với các phiên bản Git cũ, lệnh copy không thực hiện được và bạn phải chạy:
+
+ $ chmod a+x hooks/post-update
+
+Từ giờ bạn có thể xuất bản mới nhất của mình thông qua SSH từ một bản sao bất kỳ:
+
+ $ git push web.server:/path/to/proj.git master
+
+và mọi người có thể lấy dự án của bạn với lệnh:
+
+ $ git clone http://web.server/proj.git
+
+=== Git Thông Qua Mọi Thứ ===
+
+Bạn muốn đồng bộ hóa kho chứa nhưng lại không có máy chủ và cũng không có mạng?
+Bạn cần trong những trường hợp khẩn cấp? Chúng ta đã biết lệnh <<makinghistory, *git
+fast-export* và *git fast-import* có thể chuyển đổi một kho chứa thành một tệp tin đơn
+và ngược lại>>. Chúng ta có thể chuyển qua chuyển lại như vậy để truyền kho Git
+đi thông qua bất kỳ phương tiện nào, nhưng có một công cụ hiệu quả hơn đó chính là *git bundle*.
+
+Người gửi tạo một 'bundle':
+
+ $ git bundle create somefile HEAD
+
+sau đó gửi bundle, +somefile+, tới người cần bằng cách nào đó: thư điện tử,
+ổ đĩa USB, và bản in *xxd* và một bộ quét nhận dạng chữ OCR, đọc các bit thông qua điện thoại,
+tín hiệu khói, v.v.. Người nhận khôi phục lại các lần commit từ bundle nhận được bằng cách gõ:
+
+ $ git pull somefile
+
+Bộ nhận thậm chí có thể làm được việc này từ một kho chứa rỗng. Mặc dù kích
+thước của nó, +somefile+ chứa các mục kho Git nguyên thủy.
+
+Trong các dự án lớn hơn, việc triệt tiêu lãng phí bằng cách chỉ bundle những thay đổi còn thiếu
+kho chứa khác. Ví dụ, giả sử lần commit ``1b6d...'' là lần commit gần nhất
+đã được chia sẻ giữa cả hai thành viên:
+
+ $ git bundle create somefile HEAD ^1b6d
+
+Nếu phải làm việc này thường xuyên, một khó khăn là bạn không thể nhớ được chính xác lần commit tương ứng với lần gửi cuối. Trang
+trợ giúp sẽ gợi ý cho bạn cách sử dụng các thẻ (tag) để giải quyết vấn đề này. Ấy là, sau khi bạn gửi một bundle,
+thì hãy gõ:
+
+ $ git tag -f lastbundle HEAD
+
+và tạo một bản bundles mới với:
+
+ $ git bundle create newbundle HEAD ^lastbundle
+
+=== Vá: Sự Thịnh Hành Toàn Cầu ===
+
+Miếng vá được trình bày ở dạng văn bản các thay đổi của bạn, nó dễ dàng được đọc hiểu bởi
+con người cũng như là máy tính. Điều này mang lại cho chúng sức lôi cuốn toàn cầu. Bạn có thể gửi miếng vá qua
+thư điện tử cho những nhà phát triển phần mềm khác mà chẳng cần lo họ đang sử dụng hệ thống quản lý mã nguồn nào. Chừng nào
+mà độc giả của bạn có thể đọc được thư điện tử của mình thì họ còn có thể thấy được phần chỉnh sửa của bạn. Tương tự thế, về phía mình,
+những thứ bạn cần là có một địa chỉ thư điện tử: ở đây chẳng cần cài đặt kho chứa Git nào trên mạng.
+
+Sử dụng lại ví dụ từ chương đầu tiên:
+
+ $ git diff 1b6d > my.patch
+
+đầu ra là một miếng vá mà bạn có thể dán vào một thư điện tử để trao đổi với người khác. Ở kho Git,
+gõ:
+
+ $ git apply < my.patch
+
+để áp dụng miếng vá.
+
+Còn một hình thức định dạng khác nữa, tên và có lẽ cả chữ ký của tác giả cũng được
+ghi lại, tạo miếng vá tương ứng với một thời điểm chính xác trong quá khứ bằng cách gõ:
+
+ $ git format-patch 1b6d
+
+Tệp tin lưu kết quả có thể chuyển cho lệnh *git-send-email*, hay có thể làm thủ công. Bạn cũng có thể chỉ định rõ một vùng commit:
+
+ $ git format-patch 1b6d..HEAD^^
+
+Ở phía người nhận cuối, ghi lại thư điện tử thành tệp tin, sau đó chạy lệnh:
+
+ $ git am < email.txt
+
+Lệnh này sẽ áp dụng cho miếng vá nhận được, đồng thời tạo ra một lần commit, bao gồm các thông tin như là tác giả.
+
+Với một chương trình đọc thư điện tử, bạn có thể sử dụng con chuột để chuyển định dạng thư về dạng văn bản thuần  trước khi ghi miếng vá thành một tệp tin.
+
+Có một số khác biệt nhỏ giữa các trình đọc đọc thư điện tử, nhưng nếu bạn sử dụng một trong
+số chúng, bạn hầu như chắc chắn là người mà có thể cấu hình chúng một cách dễ dàng
+mà chẳng cần phải đọc hướng dẫn sử dụng!
+
+=== Rất tiếc! Tôi đã chuyển đi ===
+
+Sau khi nhân bản kho chứa, việc chạy lệnh *git push* hay *git pull* sẽ tự động
+push tới hay pull từ URL gốc. Git đã làm điều này như thế nào? Bí mật nằm ở chỗ
+các tùy chọn config đã được tạo ra cùng với bản sao. Hãy xem thử:
+
+ $ git config --list
+
+Tùy chọn +remote.origin.url+ sẽ lưu giữ URL; ``origin'' là cái tên
+được đặt cho kho nguồn. Với nhánh ``master'' theo như thường lệ, chúng ta có thể
+thay đổi hay xóa các tên này nhưng chẳng có lý do gì để phải làm như thế cả.
+
+Nếu kho chứa nguyên bản đã chuyển chỗ, chúng ta có thể cập nhật URL thông qua:
+
+ $ git config remote.origin.url git://new.url/proj.git
+
+Tùy chọn +branch.master.merge+ chỉ ra nhánh remote mặc định trong
+lệnh *git pull*. Trong suốt quá trình nhân bản, nó được đặt cho nhánh hiện hành của kho chứa
+mã nguồn, như thế cho dù HEAD của kho nguồn về sau có
+di chuyển đến một nhánh khác, lệnh pull sau này sẽ trung thành với
+nhánh nguyên gốc.
+
+Tùy chọn này chỉ áp dụng cho kho chứa chúng ta lần đầu tiên nhân bản từ, nó
+được ghi trong tùy chọn +branch.master.remote+. Nếu chúng ta pull từ kho
+chứa khác chúng ta phải chỉ đích xác tên nhánh mà chúng ta muốn:
+
+ $ git pull git://example.com/other.git master
+
+Phần phía trên giải thích tại sao một số lệnh push và pull ví dụ của chúng ta lại không có
+tham số.
+
+=== Nhánh Trên Mạng ===
+
+Khi bạn nhân bản một kho chứa, bạn cũng đồng thời nhân bản tất cả các nhánh của nó. Bạn sẽ không nhận
+được cảnh báo này bởi vì Git không thông báo cho bạn: bạn phải hỏi mới có thể biết chính xác.
+Việc làm này giúp ngăn ngừa phiền phức do nhánh mạng gây ra cho
+các nhánh của bạn, và cũng làm cho Git dễ dàng hơn với người mới dùng.
+
+Ta liệt kê các nhánh bằng lệnh:
+
+ $ git branch -r
+
+Bạn nhận được kết quả trông giống như thế này:
+
+ origin/HEAD
+ origin/master
+ origin/experimental
+
+Những nhánh tương ứng và HEAD của kho chứa remote, và bạn có thể sử dụng
+trong các lệnh Git thông thường. Ví dụ như là, giả sử bạn làm nhiều lần commit, và
+muốn so sánh chúng với bản đã fetch cuối cùng. Bạn cũng có thể tìm kiếm trong tệp tin
+log để có được giá trị băm SHA1 thích hợp, nhưng dễ dàng hơn việc gõ:
+
+ $ git diff origin/HEAD
+
+Hay bạn có thể xem nhánh ``experimental'' đang làm gì:
+
+ $ git log origin/experimental
+
+=== Đa Máy chủ ===
+
+Giả sử hai người cùng phát triển trên một sự án của chúng ta, và họ muốn
+giữ lại sự khác biệt trên cả hai. Chúng ta theo dõi hơn một kho chứa tại một thời điểm với lệnh:
+
+ $ git remote add other git://example.com/some_repo.git
+ $ git pull other some_branch
+
+Bây giờ chúng ta có thể trộn với nhánh của kho chứa thứ hai, và chúng ta
+dễ dàng truy cập tất cả các nhánh của tất cả các kho chứa:
+
+ $ git diff origin/experimental^ other/some_branch~5
+
+Nhưng chúng ta chỉ muốn so sánh sự khác nhau giữ chúng nhưng không áp dụng các thay đổi này với chúng ta? Nói cách khác, chúng ta khảo sát các nhánh của họ nhưng không thay đổi những gì đang có trong thư mục làm việc của mình. Thế thì thay vì pull, ta dùng lệnh:
+
+ $ git fetch        # Lấy về từ nguyên gốc, theo mặc định.
+ $ git fetch other  # Lấy về từ lập trình viên thứ hai.
+
+Lệnh này chỉ mang về phần lịch sử. Mặc dù thư mục làm việc vẫn còn nguyên chưa bị động đến,
+chúng ta có thể xét bất kỳ nhánh nào của bất kỳ kho chứa nào trong một lệnh Git bởi vì chúng ta bây giờ
+đang làm việc trên bản sao trên máy của mình.
+
+Giờ ta xét đến phần hậu trường, lệnh pull đơn giản là *fetch* sau đó *merge*.
+Thông thường chúng ta *pull* bởi vì chúng ta muốn trộn với lần commit cuối cùng sau khi fetch;
+việc làm này là một ngoại lệ đáng chú ý.
+
+Xem *git help remote* để biết cách làm thế nào để gỡ bỏ kho chứa trên mạng, bỏ qua các nhánh
+xác định, và những thứ khác nữa.
+
+=== Sở Thích Riêng Của Tôi ===
+
+Với dự án của mình, tôi thích những người cộng tác tạo các kho chứa ở nơi mà tôi có thể
+pull. Một số dịch vụ Git cho phép bạn đặt nhánh riêng của mình từ một dự án trên đó
+chỉ cần sử dụng chuột.
+
+Sau khi tôi fetch một cây (tree), tôi chạy lệnh Git để di chuyển và xem xét các thay đổi,
+với ý tưởng là để tổ chức và mô tả tốt hơn. Tôi trộn với các thay đổi của chính mình,
+và có thể sẽ sửa thêm chút ít. Sau khi đã hài lòng, tôi push nó lên kho chứa chính.
+
+Mặc dù tôi ít nhận được sự cộng tác, nhưng tôi tin rằng việc này sẽ thay đổi theo chiều hướng
+tốt lên. Hãy đọc
+http://torvalds-family.blogspot.com/2009/06/happiness-is-warm-scm.html[blog của Linus Torvalds].
+
+Git thuận lợi trong việc tạo các miếng vá, cũng như là nó
+tiết kiệm công sức cho chúng ta trong việc chuyển đổi chúng thành những lần commit dành cho Git. Hơn thế nữa, Git lưu giữ các thông tin rất chi tiết
+như là ghi lại tên và địa chỉ thư điện tử của tác giả, cũng như là ngày tháng và
+thời gian, và nó cũng đòi hỏi tác giả phải mô tả về những thay đổi mà họ đã tạo ra.

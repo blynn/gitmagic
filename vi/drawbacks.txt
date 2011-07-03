@@ -1,0 +1,96 @@
+== Phụ lục A: Hạn chế của Git ==
+
+Git bộc lộ một số nhược điểm mà tôi đã gặp qua. Một số có thể xử lý thủ công một cách dễ dàng bằng các đoạn kịch bản và hook, một số yêu cầu phải tổ chức lại hay xác lập lại dự án, một số ít rắc rối còn lại, chỉ còn cách là ngồi đợi. Hay tốt hơn cả là bắt tay vào và giúp đỡ họ viết!
+
+=== Điểm Yếu SHA1 ===
+
+Thời gian trôi đi, những nhà mật mã đã phát hiện ra ngày càng nhiều điểm yếu của thuật toán SHA1. Thực tế
+người ta đã đã phát hiện thấy sự va chạm giá trị băm. Trong khoảng
+vài năm, có lẽ những chiếc PC thông thường cũng đủ sức để âm thầm
+làm hư hỏng một kho Git.
+
+Hy vọng là Git sẽ chuyển sang sử dụng hàm băm tốt hơn trước khi có người tìm ra cách phá mã SHA1.
+
+=== Microsoft Windows ===
+
+Sử dụng Git trên hệ điều hành Microsoft Windows có vẻ hơi cồng kềnh một chút:
+
+- http://cygwin.com/[Cygwin], mô phỏng Linux dành cho Windows, có chứa  http://cygwin.com/packages/git/[Git đã chuyển đổi để chạy trên Windows].
+
+- http://code.google.com/p/msysgit/[Git chạy trên MSys] là một thay thế với các hỗ trợ tối thiểu nhất, bởi vì chỉ cần một ít lệnh để thực hiện một số việc mà thôi.
+
+=== Các Tệp tin Không liên quan ===
+
+Nếu dự án của bạn rất lớn và chứa rất nhiều tệp tin không có liên quan mà luôn luôn bị thay đổi, Git có thể chịu thiệt thòi hơn các hệ thống khác bởi vì các tệp tin không được giữ dấu viết từng cái riêng lẻ. Git giữ các dấu vết thay đổi cho toàn bộ dự án, điều này thường là có lợi.
+
+Giải pháp là chia nhỏ dự án của bạn ra, mỗi một phần bao gồm các tệp tin liên quan đến nhau. Hãy sử dụng *git submodule* nếu bạn vẫn muốn giữ mọi thứ trong một kho chung.
+
+=== Ai Sửa và Sửa gì? ===
+
+Một số hệ thống quản lý mã nguồn bắt buộc bạn đánh dấu rõ ràng vào tệp tin theo một cách nào đó trước khi biên soạn. Trong khi mà điều này đặc biệt phiền toái vì nó lại dính líu đến việc phải liên lạc với máy chủ trung tâm, việc làm này có hai lợi ích:
+
+  1. Thực hiện lệnh 'diff' diễn ra nhanh bởi vì nó chỉ kiểm tra các tệp tin đã đánh dấu.
+
+  2. Một người có thể biết được khác đang làm việc trên một tệp tin bằng cách hỏi máy chủ trung tâm ai đã đánh dấu là đang sửa.
+
+Với một đoạn kịch bản thích hợp, bạn có thể lưu giữ theo cách này với. Điều này yêu cầu sự hợp tác từ người lập trình, người có thể chạy các kịch bản chuyên biệt khi biên soạn một tệp tin.
+
+=== Lịch Sử Tệp Tin  ===
+
+Sau khi Git ghi lại các thay đổi cho các dự án lớn, việc cấu trúc lại lịch sử của một tệp tin đơn lẻ yêu cầu phải làm việc nhiều hơn các chương trình quản lý mã nguồn giữ dấu vết theo các tệp tin riêng lẻ.
+
+Hình phạt thường là không đáng kể, và thứ đáng giá mà nó nhận được là các tác vụ khác hoạt động hiệu quả đến không ngờ. Ví dụ, `git checkout` nhanh hơn `cp -a`, và dữ liệu trong dự án lớn nén tốt hơn việc gom lại từ tệp tin cơ bản.
+
+=== Khởi tạo Bản Sao ===
+
+Việc tạo một bản sao có vẻ hơi xa xỉ hơn là việc 'checkout' trong các hệ thống quản lý mã nguồn khác khi phần mềm có lịch sử phát triển lâu dài.
+
+Cái giá phải trả ban đầu là cần nhiều thời gian để lấy về, nhưng nếu đã làm như thế, các tác vụ cần làm sau này sẽ nhanh chóng và không cần có mạng. Tuy nhiên, trong một số hoàn cảnh, cách làm phù hợp hơn là tạo một bản sao không đầy đủ bằng tùy chọn `--depth`. Điều này giúp ta tạo bản sao nhanh hơn, nhưng bản sao nhận được sẽ thiếu đi một số chức năng do đó bạn sẽ không thể thực thi được một số lệnh.
+
+=== Các Dự Án Hay Thay Đổi ===
+
+Git được viết ra với mục đích chú tâm đến kích thước tạo ra bởi các thay đổi. Con người chỉ tạo ra sự thay đổi rất nhỏ giữa các phiên bản. Như là bổ xung lời nhận xét là có sửa lỗi ở đây, có đặc tính mới ở đây, sửa lỗi chú thích, v.v.. Nhưng nếu các tệp tin của bạn căn bản khác nhau, thì trong mỗi lần commit, nó sẽ ghi lại toàn bộ các thay đổi vào lịch sử và làm cho dự án của bạn tất yếu sẽ tăng kích cỡ.
+
+Không có bất kỳ một hệ thống quản lý mã nguồn nào có thể làm được điều này, nhưng những người sử dụng Git theo tiêu chuẩn sẽ còn phải chịu tổn thất hơn khi lịch sử của nó được nhân bản.
+
+Đây là lý do tại sao các thay đổi quá lớn cần được xem xét. Định dạng các tệp tin có thể bị thay đổi. Các thay đổi nhỏ chỉ xảy ra phần lớn tại một số ít tệp tin.
+
+Việc xét đến việc sử dụng cơ sở dữ liệu hay các giải pháp sao-lưu/lưu-trữ có lẽ là thứ có vẻ thực tế hơn, không nên dùng hệ thống quản lý mã nguồn. Ví dụ, quản lý mã nguồn không thích hợp cho việc quản lý các ảnh được chụp một cách định kỳ từ webcam.
+
+Nếu các tệp tin thực sự thay đổi thường xuyên và chúng cần phải quản lý, việc xem xét khả năng sử dụng Git hoạt động như một hệ thống quản lý tập trung là có thể chấp nhận được. Một người có thể tải về một bản sao không đầy đủ, nó chỉ lấy về một ít hay không lấy về lịch sử của dự án. Dĩ nhiên, nhiều công cụ dành cho Git sẽ không thể hoạt động được, và sự sửa chữa phải được chuyển lên như là các miếng vá. Điều này chắc chắn là tốt và nó giống như là ta không thể hiểu nổi tại sao một số người lại muốn có được lịch sử của rất nhiều các tệp tin chẳng hoạt động ổn định.
+
+Một ví dụ khác là dự án phụ thuộc vào firmware, cái này có dạng thức là tệp tin nhị phân có kích thước rất lớn. Người sử dụng không quan tâm tới lịch sử của firmware, vả lại khả năng nén của nó lại cũng rất ít, vì vậy quản lý firmware có lẽ là không cần thiết vì nó làm phình to kích thước kho chứa.
+
+Trong trường hợp này, mã nguồn có thể lưu giữ trong kho Git, và tệp tin nhị phân được giữ ở nơi khác. Để cho công việc trở nên dễ dàng hơn, một người có thể tạo ra một đoạn kịch bản mà nó sử dụng Git để nhân bản mã nguồn, và dùng lệnh rsync hay Git lấy về firmware.
+
+=== Bộ Đếm ===
+
+Một số hệ quản trị mã nguồn tập trung duy trì một số nguyên dương tự động tăng lên khi có lần commit mới được chấp nhận. Git quy các thay đổi này bởi giá trị băm của chúng, điều này là tốt trong phần lớn hoàn cảnh.
+
+Nhưng một số người thích có nó ở dạng số nguyên. May mắn thay, rất dễ dàng để viết các đoạn kịch bản làm được như thế với mỗi lần cập nhật, kho Git trung tâm Git gia một số nguyên, có thể là trong một thẻ (tag), và kết hợp nó với giá trị băm của lần commit cuối.
+
+Mỗi bản sao có thể có một bộ đếm riêng, nhưng điều này chẳng ích lợi gì, chỉ có kho chứa trung tâm và bộ đếm của nó là có ý nghĩa với mọi người.
+
+=== Với Thư Mục Rỗng ===
+
+Các thư mục rỗng không được theo dõi. Tạo ra các thư mục giả để thử trục trặc này.
+
+Xét về mặt thi hành của Git, thay vì thiết kế của nó, điều hạn chế này này là đáng trách. Với một chút may mắn, một khi Git thấy có thêm lợi ích từ việc này, thêm nhiều người đòi hỏi tính năng này và nó sẽ được thực hiện.
+
+=== Lần Commit Khởi tạo ===
+
+Hệ thống số đếm khoa học của máy tính đếm từ 0, thay vì 1. Thật không may, có liên quan đến các lần commit, Git không tôn trọng quy ước này. Rất nhiều lệnh bất lợi trước lần commit khởi tạo. Thêm nữa, các trường hợp ngoại lệ phải được xử lý theo một cách đặc biệt, như là việc rebasing một nhánh với lần commit khởi tạo khác.
+
+Git có thể có được lợi ích từ việc định nghĩa lần commit zero: ngay khi kho chứa được tạo ra, HEAD được đặt cho một chuỗi ký tự bao gồm 20 byte rỗng. Lần commit đặc biệt này tương ứng với một cây (tree) rỗng, không có gốc, tại một thời điểm được đề lùi về trước.
+
+Sau đó chạy lệnh git log, ví dụ thế, thì Git nên báo cho người dùng biết chưa có lần commit nào, thay vì phát ra một lỗi nghiêm trọng. Điều tương tự xảy ra với các công cụ khác.
+
+Tất cả các bản commit đầu tiên hoàn toàn là con cháu của bản 0 (zero).
+
+Tuy nhiên, ở đây có một số vấn đề xảy ra trong một số trường hợp đặc biệt. Nếu nhiều nhánh với các lần khởi tạo commit khác nhau được trộn với nhau, sau đó rebase kết quả đòi hỏi thực chất có sự can thiệp bằng tay.
+
+=== Giao diện Lập lờ ===
+
+Để commit A và B, nghĩa của biểu thức "A..B" và "A...B" tùy thuộc vào
+việc lệnh mong đó là hai đầu mút hay là một vùng. Xem *git help diff*
+và *git help rev-parse*.

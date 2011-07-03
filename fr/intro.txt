@@ -1,0 +1,152 @@
+// -*- mode: doc; mode: visual-line; mode: flyspell; coding: utf-8; fill-column: 79; -*-
+== Introduction ==
+
+Je vais me servir d'une analogie pour présenter la gestion de versions.
+Référez-vous à http://fr.wikipedia.org/wiki/Gestion_de_versions[la page de
+wikipedia sur la gestion de versions] pour une explication plus censée.
+
+=== Le travail comme un jeu ===
+
+J'ai joué à des jeux vidéos presque toute ma vie. Par contre, je n'ai commencé
+à utiliser des systèmes de gestion de versions qu'à l'âge adulte. Je pense ne
+pas être le seul dans ce cas et la comparaison entre les deux peut rendre les
+concepts plus simples à expliquer et à comprendre.
+
+Pensez à l'édition de votre code, ou de votre document, comme s'il s'agissait
+de jouer à un jeu. Quand vous avez bien progressé, vous aimeriez faire une
+sauvegarde. Pour cela vous cliquez sur le bouton 'enregistrer' de votre fidèle
+éditeur.
+
+Mais ceci va écraser l'ancienne version. C'est comme ces anciens jeux qui
+n'avaient qu'un emplacement : oui vous pouviez faire une sauvegarde mais vous
+ne pouviez pas revenir dans un état précédent. Quel dommage, vu que votre
+sauvegarde précédente pouvait éventuellement être située à un passage du jeu
+particulièrement amusant sur lequel vous seriez bien revenu un de ces
+jours. Ou, encore pire, votre seule sauvegarde était dans un état qui ne
+permettait pas de gagner et vous deviez tout recommencer à zéro.
+
+=== Gestion de versions ===
+
+Lorsque vous modifiez un document, dans le but de conserver les anciennes
+versions, vous pouvez l'"Enregistrer Sous..." un nom de fichier différent ou le
+recopier ailleurs avant de l'enregistrer. Vous pouvez même compresser ces
+copies pour gagner de l'espace. C'est une forme primitive et laborieuse de
+gestion de versions. Les jeux vidéo se sont améliorés sur ce point depuis
+longtemps pusique la plupart proposent différents emplacements de sauvegarde
+automatiquement horodatés.
+
+Rendons le problème légèrement plus coriace. Imaginez que vous ayez un ensemble
+de fichiers qui vont ensemble comme le code source d'un projet ou les fichiers
+d'un site web. Dans ce cas si vous voulez conserver une ancienne version, vous
+devez archiver le dossier en entier. Conserver un grand nombre de versions à la
+main n'est pas pratique et devient rapidement fastidieux.
+
+Dans le cas de certains jeux vidéo, l'enregistrement d'une partie est
+réellement constitué d'un dossier rempli de fichiers. Ces jeux cachent ce
+détail au joueur et présentent une interface adaptée pour gérer différentes
+versions de ce dossier.
+
+Les systèmes de gestion de versions ne font pas autre chose. Ils offrent tous
+une belle interface pour gérer un dossier rempli de plein de choses. Vous
+pouvez enregistrer l'état du dossier aussi souvent que vous voulez et, plus
+tard, vous pouvez recharger l'un des états enregistrés. À la différence de la
+plupart des jeux vidéos, ils sont généralement habiles pour économiser l'espace
+nécessaire. Typiquement, seuls quelques fichiers changent d'une version à une
+autre, et pas de beaucoup. Stocker ces différences au lieu des nouvelles copies
+complètes économise de l'espace.
+
+=== Gestion distribuée ===
+
+Imaginez maintenant un jeu vidéo très difficile. Si difficile à terminer que
+plein de joueurs expérimentés de toute la planète décident de faire équipe et
+de partager leurs parties enregistrées pour essayer d'en venir à
+bout. http://fr.wikipedia.org/wiki/Speedrun[Les Speedruns] en sont un exemple
+concret : des joueurs qui se spécialisent dans différents niveaux du même jeu
+collaborent pour produire des résultats surprenants.
+
+Quel système mettriez-vous en place pour qu'ils puissent accéder facilement aux
+sauvegardes des uns et des autres ? Et pour qu'ils puissent en téléverser de
+nouvelles ?
+
+Dans le passé, tous les projets utilisaient une gestion de versions
+centralisée. Quelque part un serveur contenait l'ensemble des sauvegardes du
+jeu et personne d'autre. Chaque joueur conservait au plus quelques sauvegardes
+de parties sur leur machine. Quand un joueur voulait progresser, il
+téléchargeait les dernières sauvegardes du serveur, jouait un moment, puis
+sauvegardait et téléversait ses nouvelles sauvegardes vers le serveur pour les
+mettre à disposition de tous les autres.
+
+Qu'en était-il si pour une raison quelconque, des joueurs voulaient obtenir une
+partie enregistrée antérieurement ? Peut-être la sauvegarde actuelle de la
+partie était-elle dans un état sans possibilité de victoire parce que quelqu'un
+avait oublié de prendre un objet au niveau trois, et voulaient-ils retrouver la
+dernière partie enregistrée au moment où la partie pouvait encore être
+gagnée. Ou peut-être souhaitaient-ils comparer deux parties enregistrées
+précédemment pour voir le travail réalisé par un joueur précis.
+
+Il peut y avoir de nombreuses raisons de vouloir récupérer une ancienne
+version, mais le résultat est le même : ils devaient demander au serveur
+central cette partie précédemment sauvegardée. Et plus ils voulaient de parties
+sauvegardées, plus ils devaient communiquer.
+
+La nouvelle génération des systèmes de gestion de versions, dont Git fait
+partie, sont dits systèmes distribués et peuvent être vus comme une
+généralisation des systèmes centralisés. Quand les joueurs téléchargent du
+serveur principal ils obtiennent toutes les parties sauvegardées, pas
+uniquement la dernière. C'est comme s'ils faisaient un
+http://fr.wikipedia.org/wiki/Site_miroir[miroir] du serveur central.
+
+Cette opération initiale de clonage peut être coûteuse, surtout s'il y a un
+long historique, mais ça paie sur le long terme. Un avantage immédiat est que
+lorsqu'on désire une partie enregistrée, quelle qu'en soit la raison, aucune
+communication avec le serveur central n'est nécessaire.
+
+=== Une superstition idiote ===
+
+Un croyance populaire veut que les systèmes distribués ne soient pas adaptés
+aux projets qui ont besoin d'un dépôt central officiel. Rien n'est moins
+vrai. Photographier quelqu'un n'a jamais eu pour effet de voler son âme. De
+même, cloner le dépôt principal ne diminue pas son importance.
+
+Une première approximation assez bonne est que tout ce qu'un système centralisé
+de gestion de versions peut faire, un système distribué bien conçu peut le
+faire en mieux. Les ressources réseau sont simplement plus coûteuses que les
+ressources locales. Bien que nous verrons plus loin qu'il peut y avoir quelques
+inconvénients à l'approche distribuée, il y a moins de risques de faire des
+comparaisons erronées en utilisant cette approximation.
+
+Un petit projet peut ne nécessiter qu'une fraction des fonctionnalités offertes
+par un tel système, mais utiliser un système qui n'autorise pas les changements
+d'échelle pour les petits projets c'est comme utiliser les chiffres romains
+pour les calculs sur des petits nombres.
+
+De plus, votre projet peut grossir au-delà de vos prévisions initiales.
+Utiliser Git même pour les cas simples est comparable au fait d'avoir sur soi
+un couteau Suisse que vous utilisez surtout pour déboucher des bouteilles. Le
+jour où vous avez besoin d'un tournevis vous êtes content d'avoir plus qu'un
+simple tire-bouchon.
+
+=== Conflits fusionnels ===
+
+Pour aborder ce sujet, notre analogie avec le jeu vidéo serait trop tirée par
+les cheveux. En revanche, revenons au cas de l'édition d'un document.
+
+Imaginons que Alice insère une ligne au début d'un fichier, et que Bob en
+ajoute une à la fin de sa propre copie. Ils envoient tout les deux leurs
+modifications. La plupart des systèmes vont automatiquement déduire un
+traitement raisonnable des actions : accepter et fusionner leur modifications,
+ainsi les modifications de Alice et de Bob sont appliquées.
+
+Maintenant imaginez que Alice et Bob ont fait des modifications différentes sur
+la même ligne. Il devient alors impossible de procéder sans intervention
+humaine. Celui qui envoie ses modifications en second est informé d'un _conflit
+de fusion_ (_merge conflict_), et doit choisir l'une des deux versions de la
+ligne, ou revoir complètement cette ligne.
+
+Des situations plus complexes peuvent se présenter. Les systèmes de gestion de
+versions s'occupent eux même des cas les plus simples, et laissent les cas
+difficiles aux humains. Généralement leur comportement est configurable.
+
+// LocalWords:  doc visual-line Référez-vous wikipedia cliquez web Speedruns Git
+// LocalWords:  mettriez-vous téléverser téléchargeait téléversait veulent-ils
+// LocalWords:  téléchargent clonage fusionnels Alice merge conflict configurable

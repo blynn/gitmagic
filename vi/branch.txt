@@ -1,0 +1,245 @@
+== Thủ Thuật Tạo Nhánh ==
+
+Tạo Nhánh và Trộn là các đặc tính sát thủ của Git.
+
+*Vấn đề đặt ra*: Những nhân tố bên ngoài chắc hẳn có đòi hỏi việc hoán chuyển văb cảnh. Một lỗi tồi tệ
+xuất hiện trong phiên bản đã được phát hành mà không được cảnh báo gì. Điều tồi tệ nhất có thể xảy ra
+là phải xóa bỏ hẳn đặc tính kỹ thuật đó. Người phát triển phần mềm, người mà đã giúp bạn viết nó, cần biết lý do về việc bãi bỏ. Trong tất cả các trường hợp, bạn buộc phải xóa bỏ cái mà bạn đang làm và làm một cái hoàn toàn mới.
+
+Việc gán đoạn suy nghĩ có thể làm giảm hiệu suất làm việc của bạn, và việc hoán chuyển nội dung càng cồng kềnh vướng víu càng gây hậu quả nặng nề. Đối với các hệ thống quản lý mã nguồn tập trung chúng ta phải tải về một bản sao công việc mới từ máy chủ trung tâm. Các hệ thống phân tán hoạt động hiệu quả hơn, như là chúng ta có thể nhân bản một cách cục bộ.
+
+Nhưng việc nhân bản bắt buộc phải sao chép toàn bộ thư mục làm việc cũng như là toàn bộ các mục trong lịch sử cho đến thời điểm đã được chỉ ra. Dù là Git giảm bớt sự lãng phí cho việc này bằng cách chia sẻ và tạo ra các liên kết tệp tin cứng, chính bản thân các tệp tin dự án cũng phải được tạo ra trong các đề mục của chúng trong thư mục làm việc.
+
+*Giải pháp*: Git có một công cụ tốt hơn để sử lý tình huống này, nó nhanh và tiết kiệm không gian lưu trữ hơn lệnh nhân bản đó chính là: *git branch*.
+
+Với vài câu thần chú, các tệp tin trong thư mục của bạn dễ dàng biến đổi từ phiên bản này sang phiên bản khác. Sự chuyển đổi này có thể làm nhiều hơn việc di chuyển trong trong lịch sử một các đơn thuần. Các tệp tin của bạn có thể chuyển hình thái từ bản phát hành cuối thành phiên bản thử nghiệm, thành phiên bản phát triển hiện hành, thành phiên bản của người bạn của bạn, và cứ như thế.
+
+=== Nút Điều Khiển ===
+
+Mỗi khi chơi trò chơi, bạn bấm vào nút (``nút điều khiển''), màn hình có lẽ hiển thị ngay ra một cái bảng hay một thứ gì đó? Thế thì nhỡ ông chủ của bạn đang đi lại trong văn phòng nơi bạn đang chơi trò chơi thì làm cách nào để nhanh chóng giấu chúng đi?
+
+Ở thư mục nào đó:
+
+ $ echo "Tôi thông minh hơn xếp của mình" > myfile.txt
+ $ git init
+ $ git add .
+ $ git commit -m "Lần commit đầu tiên"
+
+Chúng ta đã tạo ra kho chứa Git mà nó theo dõi một tệp tin văn bản có chứa một thông điệp đã biết trước. Giờ hãy gõ:
+
+ $ git checkout -b boss  # dường như chẳng có gì thay đổi sau lệnh này
+ $ echo "Xếp thông minh hơn tôi" > myfile.txt
+ $ git commit -a -m "Lần commit khác"
+
+Điều này cũng giống như việc chúng ta ghi đè lên tệp tin của mình sau đó commit nó. Nhưng không, đó chỉ là ảo tưởng. Gõ:
+
+ $ git checkout master  # quay trở lại phiên bản nguyên gốc của tệp tin
+
+Ối trời ơi! Tệp tin văn bản lại trở về như cũ mất rồi. Và nếu ông chủ có ý định ngó qua thư mục của bạn thì hãy gõ:
+
+ $ git checkout boss  # chuyển trở lại phiên bạn vừa mắt ông chủ
+
+Bạn có thể hoán chuyển giữa hai phiên bản của tệp tin tùy thích, và commit từng cái trong số chúng một cách độc lập.
+
+=== Bản Nháp ===
+
+[[branch]]
+Bạn nói mình đang làm việc với một số đặc tính kỹ thuật, và vì lý do nào đó, bạn muốn quay trở lại bản cách đây ba bản và tạm thời đặt vài dòng lệnh
+in ra màn hình để có thể thấy được một số hàm hoạt động như thế nào. Thế thì:
+
+ $ git commit -a
+ $ git checkout HEAD~3
+
+Giờ thì bạn có thể thêm những dòng mã lệnh tạm thời ở đâu mình muốn. Bạn còn có thể commit những thay đổi đó. Khi bạn đã làm xong, hãy thực hiện lệnh
+
+ $ git checkout master
+
+để quay lại công việc chính. Chú ý là bất kỳ các thay đổi không được commit sẽ đổ xuống sông xuống biển.
+
+Nhưng bạn lại muốn ghi lại các thay đổi tạm thời đó sau khi làm xong? Rất dễ:
+
+ $ git checkout -b dirty
+
+và commit trước khi quay trở lại nhánh master. Khi nào đó bạn muốn quay trở lại các thay đổi ở trên, đơn giản, chỉ cần gõ:
+
+ $ git checkout dirty
+
+Chúng ta đã đụng chạm đến lệnh như trên ở những chương trước rồi, khi thảo luận về việc tải về một trạng thái cũ. Cuối cùng chúng ta có thể thuật lại toàn bộ câu chuyện: các tệp tin đã thay đổi theo trạng thái đã được yêu cầu, nhưng chúng ta phải rời bỏ nhánh master. Tất cả những lần commit được tạo ra từ đây sẽ dẫn bạn đi trên một nhánh khác, nhánh này có thể được đặt tên sau.
+
+Mặt khác, sau khi 'check out' một trạng thái cũ, Git tự động đặt bạn vào một trạng thái mới, một nhánh chưa có tên, và nhánh này có thể đặt tên và ghi lại với lệnh *git checkout -b*.
+
+=== Sửa Nhanh ===
+
+Bạn đang phân vân giữa ngã ba đường khi bạn phải xác định là xóa tất cả mọi thứ hoặc là sửa chữa các lỗi mới phát hiện ra trong lần commit `1b6d...`:
+
+ $ git commit -a
+ $ git checkout -b fixes 1b6d
+
+Một khi bạn đã sửa lỗi:
+
+ $ git commit -a -m "Đã sửa"
+ $ git checkout master
+
+và quay lại công việc theo phận sự của mình. Bạn thậm chí có thể trộn với lần commit đã sửa để
+sửa lỗi:
+
+ $ git merge fixes
+
+=== Trộn ===
+
+Với một số hệ thống quản lý mã nguồn, việc tạo các nhánh rất dễ dàng nhưng trộn chúng
+trở lại là một bài toán hóc búa. Với Git, việc trộn là dễ dàng và bạn có thể
+không hay biết nó hoạt động như thế nào.
+
+Chúng ta đã sử dụng việc trộn từ lâu rồi. Lệnh *pull* trên thực tế đã 'fetch'
+các lần commit và sau đó trộn chúng vào trong nhánh hiện hành của bạn. Nếu trên máy của mình bạn không có
+thay đổi gì cả, thế thì việc trộn sẽ là một 'fast forward', trường hợp này cũng na ná như việc lấy về
+phiên bản cuối cùng trong hệ thống quản lý mã nguồn tập trung. Nhưng nếu bạn đã có thay đổi
+trên máy của mình, Git sẽ tự động trộn, và báo cáo cho bạn nếu có xung đột xảy ra.
+
+Thông thường, mỗi lần commit có một 'commit cha', tạm gọi thế, chính là lần
+commit trước. Việc trộn các nhánh với nhau phát sinh ra một lần commit với ít nhất hai 'cha'.
+Điều này đặt ra câu hỏi: lần commit mà `HEAD~10` thực sự ám chỉ đến là lần nào? Một lần commit
+có thể có nhiều cha, thế thì chúng ta phải theo cái nào?
+
+Nó sẽ gọi ra 'cha' đầu tiên. Đây là
+điều ta mong muốn bởi vì nhánh hiện hành trở thành cha đầu tiên trong suốt quá trình trộn;
+một cách thường xuyên, bạn chỉ liên quan đến những thay đổi mình tạo ra trong nhánh
+hiện hành, cốt để mà đối lập với việc trộn thay đổi từ các nhánh khác.
+
+Bạn hãy nhớ Git quy một cha nào đó với một dấu mũ. Ví dụ, để hiển thị
+nhật ký tính từ 'cha' thứ hai:
+
+ $ git log HEAD^2
+
+Bạn có thể bỏ qua số dành cho cha đầu tiên. Ví dụ, để hiển thị
+sự khác nhau với cha đầu tiên:
+
+ $ git diff HEAD^
+
+Bạn có thể tổ hợp các dấu mũ này với các kiểu khác nhau. Ví dụ:
+
+ $ git checkout 1b6d^^2~10 -b ancient
+
+bắt đầu một nhánh mới ``ancient'' tương ứng với trạng thái lần commit thứ 10 trở về trước từ
+cha thứ hai của cha thứ nhất của lần commit bắt đầu với 1b6d.
+
+=== Làm Việc Liên Tục ===
+
+Thường trong các dự án phần cứng, bước thứ hai của kế hoạch phải chờ bước thứ nhất hoàn thành. Một chiếc xe hơi cần sửa chữa có thể phải nằm chờ trong xưởng sửa chữa cho đến khi các chi tiết phụ tùng đặc biệt được chuyển đến từ nhà máy. Một mẫu có thể phải chờ một con chip được làm ra trước khi quá trình chế tác có thể tiếp tục.
+
+Dự án phần mềm cũng có thể tương tự như thế. Bộ phận thứ hai có một số tính năng có thể phải
+chờ cho đến khi phần thứ nhất đã được phát hành và kiểm tra. Một số dự án yêu cầu
+mã nguồn của bạn phải được xem xét lại trước khi chấp nhận nó, vì vậy bạn có thể phải chờ cho đến khi bộ phận
+thứ nhất đã được chấp thuận trước khi bắt đầu phần thứ hai.
+
+Nhờ có việc tạo nhánh và trộn dễ dàng và cũng chẳng mất mát gì, chúng ta có thể phá vỡ quy tắc và làm việc trên
+Part II trước khi Part I chính thức sẵn sàng. Giả sử bạn đã commit Part I
+và gửi nó đi để xem xét. Giả sử bạn đang ở nhánh `master`. Thế thì hãy phân nhánh
+ra:
+
+ $ git checkout -b part2
+
+Tiếp đến, làm việc trên Part II, commit những thay đổi của bạn bao nhiêu tùy thích. Lỗi là ở con người,
+và bạn sẽ phải thường xuyên quay trở lại để sửa lỗi nào đó trong Part I.
+Nếu may mắn, hay trong trường hợp tốt, bạn có thể bỏ qua những dòng này.
+
+ $ git checkout master  # Quay trở lại Part I.
+ $ sửa_lỗi
+ $ git commit -a        # Commit sau khi sửa lỗi.
+ $ git checkout part2   # Quay trở lại Part II.
+ $ git merge master     # Trộn các thay đổi.
+
+Cuối cùng, Part I được chấp thuận:
+
+ $ git checkout master  # Quay trở lại Part I.
+ $ submit files         # Xuất bản ra!
+ $ git merge part2      # Trộn vào Part II.
+ $ git branch -d part2	# Xóa nhánh "part2".
+
+Bây giờ chúng ta lại ở trong nhánh `master`, với Part II trong thư mục làm việc.
+
+Thủ thuật này rất dễ dàng để mở rộng ra dành cho nhiều phần hơn. Nó cũng đễ dàng để
+phân nhánh ra từ quá khứ: giả sử muộn bạn mới nhận ra là mình phải tạo
+một nhánh từ trước đây 7 lần commit. Thế thì gõ:
+
+ $ git branch -m master part2  # Đổi tên nhánh "master" thành "part2".
+ $ git checkout HEAD~7 -b master # Tạo nhánh "master" mới 7 lần commit ngược từ trước.
+
+Nhánh `master` bây giờ chỉ chứa Part I, và nhánh `part2` trở thành nhánh
+chứa. Chúng ta đang ở nhánh sau; chúng ta đã tạo nhánh `master` mà không chuyển đến
+nó, bởi vì chúng ta muốn tiếp tục làm việc trên `part2`. Điều này hơi bất thường. Cho đến lúc này,
+Chúng ta chuyển đến các nhánh ngay sau khi chúng được tạo ra, như là trong:
+
+ $ git checkout HEAD~7 -b master  # Tạo một nhánh và chuyển tới nó.
+
+=== Cải Tổ Lại Sự Pha Trộn ===
+
+Có lẽ bạn thích làm việc trên mọi khía cạnh của một dự án trên cùng một nhánh. Bạn muốn giữ riêng các thay đổi mình đang làm cho riêng mình và muốn những người khác chỉ thấy được các lần commit của bạn sau khi đã được tổ chức lại. Hãy chuẩn bị một cặp nhánh:
+
+  $ git branch -b sanitized # Tạo một nhánh dùng cho việc dọn.
+  $ git checkout -b medley # Tạo và chuyển nhánh thành nơi làm việc.
+
+Tiếp theo, làm việc gì đó: sửa lỗi, thêm các đặc tính kỹ thuật, thêm mã lệnh tạm thời, vân vân, commit thường xuyên. Sau đó:
+
+  $ git checkout sanitized
+  $ git cherry-pick medley^^
+
+áp dụng nhánh ông-bà của lần commit head của nhánh ``medley'' thành nhánh ``sanitized''. Với lệnh thích hợp là cherry-picks bạn có thể cấu trúc một nhánh mà nó chỉ chứa mã nguồn không thay đổi, và những lần commit có liên quan sẽ được nhóm lại với nhau.
+
+=== Quản Lý Các Nhánh ===
+
+Liệt kê tất cả các nhánh bằng cách gõ:
+
+ $ git branch
+
+Theo mặc định, bạn bắt đầu tại nhánh có tên ``master''. Một số người chủ trương rời bỏ
+nhánh ``master'' mà không động chạm gì đến nó và tạo các nhánh mới dành cho các chỉnh sửa của riêng mình.
+
+Các tùy chọn *-d* and *-m* cho phép bạn xóa hay di chuyển (đổi tên) các nhánh.
+Xem thêm *git help branch*.
+
+Nhánh ``master'' thông thường rất hữu dụng. Những người khác sẽ nghĩ rằng
+kho chứa của bạn có nhánh với tên này, và nhánh đó chứa phiên bản chính thức
+của dự án của bạn. Mặc dù bạn có thể đổi tên hay xóa bỏ nhánh ``master'',
+nhưng bạn không nên làm như thế mà hãy tôn trọng thỏa thuận ngầm này.
+
+=== Nhánh Tạm ===
+
+Một lát sau bạn có lẽ nhận thức được rằng mình cần có các nhánh tạm thời
+vì các lý do như: mọi nhánh khác đơn thuần phục vụ cho
+việc ghi lại trạng thái hiện tại do vậy bạn có thể nhảy trở lại các trạng thái cũ hơn để mà
+sửa chữa các lỗi nghiêm trọng hay thứ gì đó.
+
+Điều này cũng tương tự như việc chuyển kênh trên TV một cách tạm thời để thấy chương trình khác đang chiếu cái gì.
+Nhưng thay vì chỉ cần nhấn vài cái nút, bạn phải tạo, check out,
+trộn và xóa nhánh tạm đó. May mắn thay, Git có cách ngắn gọn tiện lợi
+chẳng thua kém gì chiếc điều khiển từ xa của một chiếc TV:
+
+ $ git stash
+
+Lệnh này ghi lại trạng thái hiện hành vào một vị trí tạm thời (một 'stash') và
+phục hồi lại trạng thái trước đó. Thư mục bạn đang làm việc xuất hiện chính xác
+như trước khi bạn chỉnh sửa, và bạn có thể sửa lỗi, pull về các thay đổi ngược dòng, và
+cứ như thế. Khi bạn muốn qua trở lại trạng thái đã được tạm giấu đi đó, hãy gõ:
+
+ $ git stash apply  # Bạn có thể sẽ phải giải quyết các xung đột có thể nảy sinh.
+
+Bạn có thể có nhiều trạng thái được tạm giấu đi, và vận dụng chúng theo nhiều cách khác nhau. Xem
+*git help stash* để biết thêm chi tiết. Bạn cũng có thể đoán được, Git duy trì các nhánh ở hậu trường để thực hiện việc này.
+
+=== Làm Theo Cách Của Mình ===
+
+Bạn có thể sẽ cảm thấy việc sử dụng nhánh phiền hà quá. Cuối cùng, clones có lẽ là
+lệnh nhanh nhất, và bạn có thể hoán chuyển giữa chúng với lệnh *cd* thay vì sử dụng
+lệnh riêng của Git.
+
+Ta thử xét đến các trình duyệt web. Tại sao việc hỗ trợ mở nhiều tab thì cũng tốt như mở trên nhiều cửa sổ khác nhau?
+Bởi vì cả hai điều này thể hiện tính đa dạng của quan điểm, phong cách sống. Một số người sử dụng lại thích
+chỉ giữ một cửa sổ trình duyệt được mở, và sử dụng các tab để hiển thị nhiều trang web một lúc. Những người khác
+có lẽ lại khăng khăng cực đoan cho rằng: mở trên nhiều cửa sổ khác nhau và chẳng cần tab nữa.
+Một nhóm khác lại thích cả hai một lúc.
+
+Việc tạo nhánh thì cũng giống như tạo các tab cho thư mục làm việc của bạn, còn việc nhân bản thì lại giống như việc mở một cửa sổ duyệt mới. Những việc này nhanh chóng và nội bộ, thế thì sao lại không
+thử nghiệm để tìm thấy cách thực hiện thích hợp nhất cho mình? Git giúp bạn làm việc chính xác
+như bạn muốn.

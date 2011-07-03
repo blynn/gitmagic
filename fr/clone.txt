@@ -1,0 +1,293 @@
+// -*- mode: doc; mode: flyspell; coding: utf-8; fill-column: 79; -*-
+== Clonons gaiement ==
+
+Avec les anciens systèmes de gestion de versions, l'opération standard pour
+obtenir des fichiers est le checkout. Vous obtenez un ensemble de fichiers
+correspondant à un état particulier précédemment enregistré.
+
+Avec Git et d'autres systèmes distribués de gestion de versions, le clonage est
+l'opération standard. Pour obtenir des fichiers, on crée un 'clone' du dépôt
+entier. En d'autres termes, il s'agit de faire un
+http://fr.wikipedia.org/wiki/Site_miroir[miroir] du serveur central. Tout ce
+qui peut se faire sur le dépôt central peut être fait sur le vôtre.
+
+=== Synchronisation entre machines ===
+
+Je peux imaginer faire des archives *tar* ou utiliser *rsync* pour des
+sauvegardes ou une synchronisation simple. Mais parfois j'édite sur mon
+portable, d'autres fois sur mon fixe, et les deux peuvent ne pas avoir
+communiqué entre temps.
+
+Initialisez un dépôt Git et faites un *commit* de vos fichiers depuis une
+machine. Ensuite sur l'autre :
+
+ $ git clone autre.ordinateur:/chemin/vers/les/fichiers
+
+pour créer une deuxième copie de ces fichiers et du dépôt Git.
+
+À partir de ce moment,
+
+ $ git commit -a
+ $ git pull autre.ordinateur:/chemin/vers/les/fichiers HEAD
+
+ira chercher l'état des fichiers sur l'autre ordinateur pour mettre à jour
+celui sur lequel vous travaillez. Si récemment vous avez fait des modifications
+d'un même fichier en conflit entre elles, Git vous le signalera et vous devrez
+répéter à nouveau le commit après avoir résolu ces conflits.
+
+=== Gestion classique des sources ===
+
+Initialisez le dépôt Git de vos fichiers :
+
+ $ git init
+ $ git add .
+ $ git commit -m "Commit initial"
+
+Sur le serveur central, initialisez un 'dépôt nu' (*bare* dans la terminologie
+Git) dans un dossier quelconque :
+
+ $ mkdir proj.git
+ $ cd proj.git
+ $ git init --bare
+ $  # variante en une ligne : GIT_DIR=proj.git git init
+
+Si besoin, démarrez le démon (service) :
+
+ $ git daemon --detach  # peut être tourne-t-il déjà
+
+Pour les services d'hébergement en ligne, suivez les instructions fournies pour
+mettre en place le dépôt Git initialement vide. En général il s'agit de remplir
+un formulaire sur une page web.
+
+'Poussez' votre projet vers le serveur central en utilisant :
+
+ $ git push git://serveur.central/chemin/du/proj.git HEAD
+
+Pour obtenir les sources, un développeur saisit :
+
+ $ git clone git://serveur.central/chemin/du/proj.git
+
+Après avoir fait des modifications, le développeur les enregistre en local :
+
+ $ git commit -a
+
+Pour se mettre à jour par rapport à la dernière version :
+
+ $ git pull
+
+Tout conflit lors de la fusion doit être résolu puis validé :
+
+ $ git commit -a
+
+Pour envoyer les modifications locales vers le dépôt central :
+
+ $ git push
+
+Si le serveur principal a de nouvelles modifications dues à d'autres
+développeurs, l'envoi échoue et le développeur doit se mettre à jour de la
+dernière version, résoudre les éventuels conflits de fusion, puis essayer à
+nouveau.
+
+=== Dépôts nus ===
+
+Un dépôt nu (*bare repository*) est nommé ainsi car il n'a pas de dossier de
+travail : il ne contient que des fichiers qui sont normalement cachés dans le
+sous dossier `.git`. En d'autres termes, il ne conserve que l'historique d'un
+projet et ne contient jamais le rendu d'une version donnée.
+
+Un dépôt nu joue un rôle similaire à celui du serveur principal dans un système
+de gestion de versions centralisé : le réceptacle de vos projets. Les
+développeurs clonent vos projets à partir de celui-ci et y poussent les
+dernières modifications officielles. En général il est placé sur un serveur qui
+ne fait quasiment que ce travail de distribution de l'information. Le
+développement s'opère sur les clones de sorte que le dépôt principal peut se
+passer d'un dossier de travail.
+
+Beaucoup des commandes de Git échouent sur un dépôt nu tant que la variable
+d'environnement `GIT_DIR` n'est pas renseignée avec le chemin vers le dépôt ou
+que l'option `--bare` n'est pas utilisée.
+
+=== Envoi vs rapatriement (push vs pull) ===
+
+Pourquoi a-t-on introduit la commande `push` (_pousser_ ou _envoyer_) au lieu
+de se contenter de la commande `pull` (_tirer_ ou _rapatrier_) plus familière ?
+Premièrement, la commande `pull` échoue sur un dépôt nu : il faut y utiliser la
+commande `fetch` dont nous parlerons plus tard. Mais même si nous conservions
+un dépôt standard sur le serveur central, y rapatrier les modifications serait
+peu pratique. Nous devrions d'abord nous connecter au serveur et donner en
+argument à la commande `pull` l'adresse de la machine depuis laquelle nous
+souhaitons rapatrier des modifications. Des pare-feux peuvent éventuellement
+nous embêter, et comment faire si nous n'avons pas d'accès `shell` au serveur ?
+
+Quoi qu'il en soit, ce cas mis à part, nous décourageons l'envoi ( en
+comparaison du rapatriement ) parce que cela peut entraîner des confusions
+lorsque la destination possède un dossier de travail.
+
+En résumé, pendant votre phase d'apprentissage de Git, n'utilisez l'envoi
+( push ) que lorsque la destination est un dépôt nu ; sinon rapatriez ( pull ).
+
+=== Forker un projet ===
+
+Vous en avez marre de la manière dont est géré un projet ? Vous pensez pouvoir
+faire mieux ? Dans ce cas, sur votre serveur :
+
+ $ git clone git://serveur.principal/chemin/vers/les/fichiers
+
+Ensuite, informez tout le monde du fork de ce projet sur votre serveur.
+
+Par la suite, vous pouvez fusionner les modifications venant du projet originel
+grâce à :
+
+ $ git pull
+
+=== Système ultime de sauvegarde ===
+
+Vous voulez des archives redondantes et géographiquement distribuées,
+permettant de faire face à un désastre ? Si votre projet a beaucoup de
+développeurs, ne faites rien ! Chaque clone de votre code est de fait une
+sauvegarde. Non seulement de l'état actuel, mais de l'historique complet. Grâce
+aux empreintes cryptographiques, si le clone de quelqu'un est corrompu, il sera
+repéré dès qu'il tentera de communiquer avec d'autres.
+
+Si votre projet n'est pas si populaire, trouvez autant de serveurs que possible
+afin d'héberger vos clones.
+
+Le vrai paranoïaque devrait toujours noter la dernière empreinte SHA1 de 20
+octets du HEAD dans un endroit sûr. Ce doit être sûr, pas privé. Par exemple,
+la publier dans un quotidien marcherait bien, parce qu'il est difficile de
+réaliser une attaque modifiant l'ensemble des exemplaires d'un journal.
+
+=== Le multi-tâche à la vitesse de la lumière ===
+
+Imaginons que vous souhaitiez travailler sur plusieurs fonctionnalités en
+parallèle. Dans ce cas validez (`commit`) votre projet et lancez :
+
+ $ git clone . /un/nouveau/dossier
+
+Grâce aux http://fr.wikipedia.org/wiki/Lien_mat%C3%A9riel[liens matériels], les
+clones locaux sont créés plus rapidement et occupent moins de place que de
+simples copies.
+
+Vous pouvez maintenant travailler simultanément sur deux fonctionnalités
+indépendantes. Par exemple vous pouvez modifier l'un des clones pendant que
+l'autre est en cours de compilation.  À tout moment vous pouvez valider
+(`commit`) vos modifications puis rapatrier (`pull`) les modifications depuis
+l'autre clone.
+
+ $ git pull /mon/autre/clone HEAD
+
+=== Guérilla de la gestion de versions ===
+
+Alors que vous travaillez sur un projet qui utilise un autre système de gestion
+de versions, Git vous manque ? Dans ce cas, initialisez un dépôt Git dans votre
+dossier de travail.
+
+ $ git init
+ $ git add .
+ $ git commit -m "Commit initial"
+
+puis clonez-le :
+
+ $ git clone . /un/nouveau/dossier
+
+Allez ensuite dans le nouveau dossier et travaillez plutôt là, utilisant Git
+comme vous le voulez. De temps à autre, quand vous voulez vous synchroniser
+avec les autres, rendez-vous dans le dossier de départ, synchronisez-le en
+utilisant l'autre système de gestion de version, puis saisissez :
+
+ $ git add .
+ $ git commit -m "Synchro avec les autres"
+
+Ensuite allez dans le nouveau dossier et lancez :
+
+ $ git commit -a -m "Description de mes modifications"
+ $ git pull
+
+La procédure pour partager vos modifications avec les autres dépend de l'autre
+système de gestion de versions. Le nouveau dossier contient les fichiers avec
+vos modifications. Lancez toute commande de l'autre système de gestion de
+versions nécessaire pour les envoyer au dépôt central.
+
+Subversion, qui est peut être le meilleur système de gestion de versions
+centralisé est utilisé par d'innombrables projets. La commande *git svn*
+automatise la procédure ci-dessus pour les dépôts Subversion, et peut aussi
+être utilisée pour exporter un projet Git vers un dépôt Subversion.
+
+=== Mercurial ===
+
+Mercurial est un système de gestion de versions similaire qui peut travailler
+quasiment sans heurt avec Git. Avec le plugin `hg-git` un utilisateur de
+Mercurial peut, sans rien perdre, envoyer (push) vers ou rapatrier (pull)
+depuis un dossier Git.
+
+Téléchargez le plugin `hg-git` avec Git :
+
+ $ git clone git://github.com/schacon/hg-git.git
+
+ou Mercurial:
+
+ $ hg clone http://bitbucket.org/durin42/hg-git/
+
+Malheureusement, il ne semble pas y avoir de plugin analogue pour Git. Pour
+cette raison, il semble préférable d'utiliser Git plutôt que Mercurial pour le
+dépôt principal. Avec un dépôt Mercurial, il faut généralement un volontaire
+qui maintienne un dépôt Git en parallèle alors que, grâce au plugin `hg-git`,
+un dépôt Git fait l'affaire même pour les utilisateurs de Mercurial.
+
+Bien que ce plugin puisse convertir un dépôt Mercurial en un dépôt Git en le
+poussant dans un dépôt vide, cette tâche est plus simple avec le script
+`hg-fast-export-git`, disponible via :
+
+ $ git clone git://repo.or.cz/fast-export.git
+
+Pour faire une conversion, dans un nouveau dossier :
+
+ $ git init
+ $ hg-fast-export.sh -r /depot/hg
+
+ceci après avoir ajouté le script à votre `$PATH`.
+
+=== Bazaar ===
+
+Nous allons rapidement évoquer Bazaar parce que c'est le système de gestion de
+versions distribué libre le plus populaire après Git et Mercurial.
+
+Bazaar à l'avantage d'avoir plus de recul, étant donné qu'il est relativement
+jeune ; ses concepteurs ont pu tirer les leçons du passé et éviter des petits
+écueils historiques. De plus ses développeurs ont le souci de la portabilité et
+de l'interopérabilité avec les autres systèmes de gestion de versions.
+
+Un plugin `bzr-git` permet aux utilisateurs de Bazaar de travailler avec les
+dépôts Git dans une certaine mesure, et permet de le faire de manière
+incrémentale, tandis que `bzr-fast-export` est fait pour les conversions
+uniques.
+
+=== Pourquoi j'utilise Git ===
+
+Au départ j'ai choisi Git parce que j'ai entendu qu'il gérait
+l'inimaginablement ingérable source du noyaux Linux. Je n'ai jamais ressenti le
+besoin d'en changer. Git m'a rendu de fiers services et je ne me suis toujours
+pas heurté à ses limites. Comme j'utilise surtout Linux, les éventuels
+problèmes sur d'autres plateformes n'entrent pas en ligne de compte.
+
+De plus je préfère les programmes C et les scripts bash aux exécutables comme
+les scripts Pythons : il y a moins de dépendances et je suis accro aux temps
+d'exécution rapides.
+
+J'ai réfléchi à la manière d'améliorer Git, allant jusqu'à écrire mes propres
+outils de type Git, mais uniquement à des fins de recherche. Même si j'avais
+terminé ce projet j'aurais tout de même continué avec Git vu que les avantages
+sont trop peu significatifs pour justifier l'utilisation d'un système farfelu.
+
+Bien sur, vos besoins et envies diffèrent sûrement et vous pouvez très bien
+vous trouver mieux avec un autre système. Néanmoins vous ne pouvez pas faire
+une grosse erreur en choisissant Git.
+
+// LocalWords:  visual-line checkout Git doc Clonons clonage synchros tar rsync
+// LocalWords:  git HEAD init add bare mkdir proj.git cd DIR daemon detach web
+// LocalWords:  tourne-t-il push repository clonent fetch pare-feux shell Forker
+// LocalWords:  fork cryptographiques SHA multi-tâche clonez-le synchronisez-le
+// LocalWords:  Synchro svn Mercurial plugin hg-git Téléchargez hg-fast-export.sh
+// LocalWords:  hg-fast-export-git PATH Bazaar portabilité l'interopérabilité
+// LocalWords:  bzr-git incrémentale bzr-fast-export l'inimaginablement ingérable
+// LocalWords:  Linux plateformes bash accro

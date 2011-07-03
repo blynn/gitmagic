@@ -1,0 +1,36 @@
+== 附錄 B: 本指南的翻譯 ==
+
+我推薦如下步驟翻譯本指南，這樣我的腳本就可以快速生成HTML和PDF版本，並且所有翻
+譯也可以共存於同一個倉庫。
+
+克隆源碼，然後針對不同目標
+http://www.iana.org/assignments/language-subtag-registry[語言的IETF tag]創建
+一個目錄。參見
+http://www.w3.org/International/articles/language-tags/Overview.en.php[ W3C在
+國際化方面的文章 ]。例如，英語是“en”，日語是“ja”，正體中文是“zh-Hant”。
+然後在新建目錄，翻譯這些來自“en”目錄的 +txt+ 檔案。
+
+例如，將本指南譯為 http://en.wikipedia.org/wiki/Klingon_language[ 克林貢語 ]，
+你也許鍵入：
+
+ $ git clone git://repo.or.cz/gitmagic.git
+ $ cd gitmagic
+ $ mkdir tlh  # "tlh" 是克林貢語的IETF語言碼。
+ $ cd tlh
+ $ cp ../en/intro.txt .
+ $ edit intro.txt  # 翻譯這個檔案
+
+對每個檔案都一樣。
+
+打開Makefile檔案，把語言碼加入`TRANSLATIONS`變數，現在你可以時不時查看你的工
+作：
+
+ $ make tlh
+ $ firefox book-tlh/index.html
+
+經常提交你的變更，然後然我知道他們什麼時候完成。GitHub.com提供一個便于fork
+“gitmatic”項目的界面，提交你的變更，然後告訴我去合併。
+
+但請按照最適合你的方式做：例如，中文譯者就使用
+Google Docs。只要你的工作使更多人看到我的工作，我就高興。
+

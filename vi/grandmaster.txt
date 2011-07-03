@@ -1,0 +1,232 @@
+== Trở Thành Kiện Tướng ==
+
+Bây giờ, bạn có thể thông qua lệnh *git help* để bật trang trợ giúp lên và có thể hiểu
+gần như tất cả mọi thứ. Tuy nhiên, việc xác định chính xác lệnh cần sử dụng để giải quyết
+các vấn đề thực tế đặt ra có lẽ chẳng dễ dàng gì. Có thể tôi có thể giúp bạn tiết kiệm được thời gian: bên dưới là một vài
+cách giải quyết các vấn đề thực tế đặt ra mà tôi đã từng sử dụng trong quá khứ.
+
+=== Phát hành Mã Nguồn ===
+
+Với dự án của tôi, Git giữ theo dõi chính xác các tệp tin tôi muốn lưu trữ và phát hành tới
+người dùng. Để tạo gói tarball cho mã nguồn, tôi chạy:
+
+ $ git archive --format=tar --prefix=proj-1.2.3/ HEAD
+
+=== Chỉ Commit Những Gì Thay Đổi ===
+
+Việc phải thông báo với Git khi bạn thêm, xóa hay đổi tên các tệp tin là việc rầy rà với
+các dự án nào đó. Thay vào đó, bạn có thể gõ:
+
+ $ git add .
+ $ git add -u
+
+Git sẽ xem tất cả các tệp tin trong thư mục hiện tại và làm công việc mà nó phải
+làm. Thay vì chạy lệnh add thứ hai, hãy chạy  `git commit -a` nếu bạn cũng có
+ý định commit vào lúc này. Xem *git help ignore* để biết làm cách nào để chỉ ra
+các tệp tin bỏ qua.
+
+Bạn có thể thi hành những điều trên chỉ cần một dòng lệnh:
+
+ $ git ls-files -d -m -o -z | xargs -0 git update-index --add --remove
+
+Tùy chọn *-z* và *-0* dùng để ngăn ngừa sai hỏng không mong muốn từ những tệp tin có chứa
+các ký tự đặc biệt. Bởi vì lệnh này bổ xung những tệp tin đã bị bỏ qua, bạn có thể muốn sử dụng
+tùy chọn `-x` hay `-X`.
+
+=== Lần commit này Nhiều Quá! ===
+
+Bạn quên việc commit quá lâu? Bạn quá mải mê với việc viết mã nguồn mà quên đi
+việc quản lý nó? Bạn muốn những thay đổi liên quan đến nhau phải được commit riêng từng lần và nối tiếp nhau, bởi vì
+đây là phong cách của bạn?
+
+Đừng lo lắng. Chạy:
+
+ $ git add -p
+
+Với mỗi lần thay đổi mà bạn tạo ra, Git sẽ hiện cho bạn biết từng đoạn mã đã bị thay đổi,
+và hỏi nó có phải là một bộ phận của lần commit tiếp theo. Trả lời là  "y" hay "n". Bạn
+có các sự lựa chọn khác, như là hoãn lại; gõ "?" để biết thêm chi tiết.
+
+Khi nào bạn thỏa mãn thì gõ
+
+ $ git commit
+
+để commit chính xác các thay đổi mà bạn đã chọn lựa (các thay đổi về 'staged'). Hãy chắc chắn là
+bạn đã không dùng tùy chọn *-a*, nếu không thì Git sẽ commit tất cả.
+
+Nhưng bạn lại có những tài liệu đã được chỉnh sửa đặt tại nhiều chỗ khác nhau? Việc duyệt từng cái một
+sẽ làm bạn nản lòng. Trong trường hợp này, sử dụng lệnh *git add -i*, với giao diện
+không ít rắc rối hơn, nhưng uyển chuyển hơn. Chỉ cần gõ vài cái,
+bạn có thể đưa vào hay gỡ bỏ nhiều tệp tin vào một trạng thái cùng một lúc, hay xem xét và chọn các thay đổi
+chỉ trong các tệp tin riêng biệt. Có một sự lựa chọn khác, chạy lệnh *git commit \--interactive* mà nó
+sẽ tự động commit sau khi bạn làm xong.
+
+=== Mục Lục: Vùng trạng thái của Git ===
+
+Chúng ta trốn tránh chưa muốn nói đến một thứ nổi tiếng của Git đó là 'index' (mục lục), nhưng chúng ta phải đối mặt với nó để mà
+giảng giải những điều ở trên. Chỉ mục là vùng trạng thái tạm thời. Git ít khi di chuyển
+dữ liệu qua lại một cách trực tiếp giữa dự án của bạn và lịch sử của nó. Đúng hơn là Git đầu tiên ghi
+dữ liệu vào mục lục, và sau đó sao chép dữ liệu trong chỉ mục vào chỗ cần ghi
+cuối.
+
+Ví dụ, lệnh *commit -a* thực sự bao gồm hai quá trình. Bước thứ nhất là đặt
+toàn bộ dữ liệu hiện tại của mọi tệp tin cần theo dõi vào bảng mục lục. Bước thứ
+hai là ghi vào bảng mục lục. Việc commit không sử dụng tùy chọn
+*-a* chỉ thi hành bước thứ hai, và nó chỉ có ý nghĩa sau khi chạy lệnh
+mà lệnh này bằng cách này hay cách khác thay đổi bảng chỉ mục, như là lệnh *git add* chẳng hạn.
+
+Thường thường chúng ta bỏ qua mục lục và lấy cớ là chúng ta đang đọc trực tiếp và ghi thẳng vào trong lịch sử. Vì lý do này, chúng ta muốn việc điều khiển chính xác, như vậy chúng ta chỉnh sửa mục lục bằng cách thủ công. Chúng ta đặt một dữ liệu hiện hành của một số, không phải tất cả, các thay đổi của chúng ta vào bảng mục lục, và sau đó ghi những cái này vào lịch sử.
+
+=== Đừng Quên HEAD Của Mình ===
+
+Thẻ HEAD giống như một con trỏ, nó trỏ đến lần commit cuối cùng, tự động di chuyển theo mỗi lần commit mới. Một số lệnh của Git giúp bạn di chuyển nó. Ví dụ như:
+
+ $ git reset HEAD~3
+
+sẽ chuyển HEAD lên vị trí lần commit cách đây ba lần. Thế thì tất cả các lệnh Git thi hành như khi bạn ở vị trí commit này, trong khi các tệp tin của bạn vẫn nằm ở hiện tại. Xem thêm phần trợ giúp cho một số ứng dụng.
+
+Nhưng ta lại muốn quay trở lại phần sau này? Lần commit cũ không biết gì về phần sau này cả.
+
+Nếu bạn có giá trị băm SHA1 của HEAD gốc thì:
+
+ $ git reset 1b6d
+
+Nhưng giả sử bạn không có được nó? Đừng lo: với những lệnh như thế, Git ghi lại HEAD gốc với thẻ có tên là ORIG_HEAD, và bạn có thể trở về ngon lành và an toàn với lệnh:
+
+ $ git reset ORIG_HEAD
+
+=== Săn tìm-HEAD ===
+
+Có thể ORIG_HEAD là chưa đủ. Có lẽ bạn vừa nhận thấy mình vừa tạo ra một sai sót có quy mô lớn và bạn cần phải quay lại một lần commit cách đây lâu lắm rồi trong một nhánh mà bạn đã quên rồi vì nó đã quá lâu.
+
+Theo mặc định, Git giữ một lần commit ít nhất là hai tuần lễ, ngay cả khi bạn đã ra lệnh
+cho Git phá hủy nhánh chứa nó. Sự khó khăn là ở chỗ làm thế nào để tìm được giá trị băm
+thích hợp. Bạn có thể tìm kiếm tất cả các giá trị băm trong `.git/objects` và sử dụng phương pháp thử sai tất cả các giá trị
+để có được thứ mình muốn. Nhưng còn có cách dễ dàng hơn.
+
+Git ghi lại mọi giá trị băm của mọi lần commit trong máy tính tại thư mục `.git/logs`. Thư mục con `refs` chứa lịch sử của tất cả các hoạt động trên tất cả cách nhánh, trong khi tệp tin `HEAD` giữ tất cả các giá trị băm mà nó từng có được. Phần sau có thể được sử dụng để tìm kiếm giá trị băm của các lần commits trên các nhánh cái mà đã bị cắt đi một cách tình cờ.
+
+Lệnh reflog cung cấp cho chúng ta một giao diện thân thiện dành cho các tệp tin log. Bạn có thể thử bằng lệnh:
+
+  $ git reflog
+
+Thay vì phải cắt và dán giá trị băm từ reflog, hãy thử:
+
+ $ git checkout "@{10 minutes ago}"
+
+Hay checkout lần thứ 5 kể từ lần commit cuối viếng thăm thông qua lệnh:
+
+ $ git checkout "@{5}"
+
+Xem chương ``Specifying Revisions'' từ lệnh *git help rev-parse* để biết thêm chi tiết.
+
+Bạn muốn cấu hình thời gian gia hạn lâu hơn việc xóa bỏ những lần commit. Ví
+dụ:
+
+  $ git config gc.pruneexpire "30 days"
+
+có nghĩa là việc xóa một lần commit sẽ chỉ thực sự xảy ra khi 30 ngày đã qua và
+lệnh *git gc* được triệu gọi.
+
+Bạn cũng có thể không cho phép chạy lệnh *git gc* một cách tự động:
+
+  $ git config gc.auto 0
+
+trong trường hợp này những lần commit sẽ chỉ bị xóa bỏ khi bạn chạy lệnh *git gc*.
+
+=== Xây Dựng trên Git ===
+
+Tuân thủ theo phong thái UNIX, Git được thiết kế cho phép nó dễ dàng được sử dụng như là một thành phần bên dưới của các chương trình khác, như là cho giao diện đồ họa GUI và giao diện Web để thay thế cho giao diện dòng lệnh, công cụ quản lý các miếng vá, các công cụ nhập và chuyển đổi, và những thứ tương tự như thế. Trên thực tế, một số lệnh Git bản chất nó cũng là các kịch bản đứng trên vai của những người khổng lồ, chính là hệ điều hành. Chỉ cần sửa đổi một chút, bạn có thể bắt Git làm việc phù hợp với sở thích của mình.
+
+Một mẹo nhỏ là sử dụng một tính năng dựng sẵn trong Git là gán bí danh cho các lệnh để nó trở nên ngắn gọn hơn
+sử dụng lệnh:
+
+  $ git config --global alias.co checkout  #gán bí danh cho lệnh checkout là co
+  $ git config --global --get-regexp alias  # hiển thị bí danh hiện hành
+  alias.co checkout
+  $ git co foo                              # có kết quả giống như chạy lệnh 'git checkout foo'
+
+Một thứ khác là hiển thị nhánh hiện hành lên màn hình hay thanh tiêu đề của cửa sổ.
+Gọi lệnh
+
+  $ git symbolic-ref HEAD
+
+sẽ hiển thị tên của nhánh hiện hành. Trong thực tiễn, bạn thích hợp nhất muốn gỡ bỏ
+"refs/heads/" và tránh các lỗi:
+
+  $ git symbolic-ref HEAD 2> /dev/null | cut -b 12-
+
+Thư mục con +contrib+ là một kho báu được tìm thấy trong số các công cụ được xây dựng dành cho Git.
+Đúng lúc, một số trong số chúng có thể được xúc tiến thành lệnh chính thức. Trên hệ thống Debian và
+Ubuntu, thư mục này ở tại +/usr/share/doc/git-core/contrib+.
+
+Một thư mục phổ biến khác là +workdir/git-new-workdir+. Thông qua các liên kết tài tình, đoạn kịch bản này tạo ra một thư mục làm việc mới trong khi phần lịch sử thì chia sẻ với kho chứa nguyên gốc:
+
+  $ git-new-workdir an/existing/repo new/directory
+
+Thư mục mới và các tệp tin trong nó có thể được coi như một bản sao, ngoại trừ phần lịch sử được chia sẻ dùng chung, hai cây được tự động đồng bộ hóa. Ở đây không cần có sự trộn, push, hay pull.
+
+=== Cứ Phiêu Lưu ===
+
+Ngày nay, người sử dụng Git rất khó phá hủy dữ liệu.
+Nhưng nếu như bạn biết mình đang làm gì, bạn có thể vượt qua sự bảo vệ dành cho các lệnh
+thông thường đó.
+
+*Checkout*: Không commit các thay đổi là nguyên nhân của việc checkout gặp lỗi. Để phá hủy sự thay đổi của mình, và dẫu sao cũng checkout commit đã cho, sử dụng cờ bắt buộc (force):
+
+  $ git checkout -f HEAD^
+
+Mặt khác, nếu bạn chỉ định rõ một đường dẫn chi tiết cho lệnh, thế thì ở đây không có sự kiểm tra an toàn nào cả. Đường dẫn được áp dụng sẽ bị âm thầm ghi đè lên. Hãy cẩn thận nếu bạn sử dụng lệnh checkout theo cách này.
+
+*Reset*: Lệnh reset cũng xảy ra lỗi khi không commit các thay đổi. Để bắt buộc nó, chạy:
+
+  $ git reset --hard 1b6d
+
+*Branch*: Việc xóa các nhánh cũng gặp lỗi nếu đó là nguyên nhân khiến các thay đổi bị mất. Để ép buộc việc này, hãy gõ:
+
+  $ git branch -D dead_branch  #thay vì sử dụng tùy chọn -d
+
+Cũng tương tự như thế, việc cố gắng ghi đè lên một nhánh bằng cách di chuyển nhánh khác đến nó cũng gây ra lỗi. Để ép buộc sự di chuyển nhánh, gõ:
+
+  $ git branch -M source target  # thay vì sử dụng tùy chọn -m
+
+Không giống như checkout và reset, hai lệnh trên trì hoãn việc phá hủy dữ liệu. Các
+thay đổi vẫn còn lưu giữ trong thư mục con .git, và có thể lấy lại được bằng cách
+lấy giá trị băm `.git/logs` thích hợp (xem phần "Săn tìm - HEAD" ở phía trên).
+Theo mặc định, chúng sẽ giữ ít nhất là hai tuần lễ.
+
+*Clean*: Một số lệnh Git từ chối thi hành bởi vì chúng lo lắng về việc làm như thế
+làm mất dấu hoàn toàn các tệp tin. Nếu bạn chắc chắn về tất cả các tệp tin và thư mục không cần Git
+theo dõi nữa và muốn phá hủy chúng đi, thế thì xóa chúng triệt để với lệnh:
+
+  $ git clean -f -d
+
+Sau này, lệnh rầy rà đó sẽ hoạt động!
+
+=== Ngăn Ngừa Commit Sai ===
+
+Có một số lỗi ngớ ngẩn đã xảy ra với tôi. Điều tồi tệ nhất là để sót các tệp tin bởi vì
+quên lệnh *git add*. Ít tệ hại hơn là các ký tự khoảng trắng và
+những xung đột không cần phải trộn: mặc dù cũng chẳng tệ hại lắm, tôi mong rằng những điều này sẽ không xảy ra
+với mọi người.
+
+Tôi đã tránh được các lỗi ngu ngốc đó bằng cách sử dụng một _hook_ để nó cảnh báo người dùng khi có những vấn đề:
+
+ $ cd .git/hooks
+ $ cp pre-commit.sample pre-commit  # Với phiên bản Git cũ cần chạy lệnh: chmod +x pre-commit
+
+Ngày nay Git sẽ không commit nếu khi nó trộn nó chỉ tìm thấy những khoảng trắng vô ích hay
+những xung đột không cần giải trộn.
+
+Với bản hướng dẫn này, tôi cuối cùng đã thêm vào dòng đầu của
+hook *pre-commit* để đề phòng khi ta lơ đãng:
+
+ if git ls-files -o | grep '\.txt$'; then
+   echo FAIL! Untracked .txt files.
+   exit 1
+ fi
+
+Nhiều hoạt động của Git hỗ trợ hook; hãy xem *git help hooks*. Chúng tôi đã kích hoạt
+một hook mẫu là *post-update* trước khi nói đến Git thông qua HTTP. Cái này chạy
+mỗi khi head di chuyển. Đoạn script ví dụ post-update cập nhật các tệp tin Git cần
+cho việc truyền thông thông qua Git-agnostic chuyên chở bằng giao thức giống như là HTTP.

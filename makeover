@@ -1,8 +1,14 @@
 #!/bin/bash
 
 # Extract table of contents from index.html and delete preface link.
-BOOKDIR=book
+BOOKDIR=book-$1
 TITLE="Git Magic"
+case $1 in
+    ru)
+        TITLE="Волшебство Git"
+        ;;
+esac
+
 gawk '
 /<div class="toc">/ {
   print $0
@@ -26,7 +32,7 @@ do
   if [ $FILE != "$BOOKDIR/index.html" ]
   then
     # Prepend "Git Magic - " to titles of all pages.
-    sed '/<title>/ s/<title>/&Git Magic - /' -i $FILE
+    sed '/<title>/ s/<title>/&'"$TITLE"' - /' -i $FILE
     sed 's/pr01\.html/index.html/g' -i $FILE
     # Paste ToC into beginning and add div section with class content for CSS.
     sed '/<body/{n; r toc.tmp
