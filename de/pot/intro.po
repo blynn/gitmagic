@@ -1,14 +1,14 @@
 # Git Magic - A guide to using Git
 # This file is distributed under the GNU GENERAL PUBLIC LICENSE Version 3.
 # Benn Lynn <benlynn@gmail.com>, 2007.
-# Armin Stebich <armin@lordofbikes.de>, 2010.
+# Armin Stebich <armin@lordofbikes.de>, 2010, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Git Magic deutsch\n"
 "Report-Msgid-Bugs-To: bennlynn@gmail.com\n"
-"POT-Creation-Date: 2010-10-30 08:41+0300\n"
-"PO-Revision-Date: 2010-10-31 13:54+0100\n"
+"POT-Creation-Date: 2011-07-03 23:06+0300\n"
+"PO-Revision-Date: 2011-07-03 23:28+0200\n"
 "Last-Translator: Armin Stebich <armin@lordofbikes.de>\n"
 "Language-Team: DE <gitmagic@lordofbikes.de>\n"
 "Language: de\n"
@@ -136,7 +136,7 @@ msgid ""
 "manage a directory of stuff. You can save the state of the directory every "
 "so often, and you can load any one of the saved states later on. Unlike most "
 "computer games, they're usually smart about conserving space. Typically, "
-"only a few files change between version to version, and not by much. Storing "
+"only a few files change from version to version, and not by much. Storing "
 "the differences instead of entire new copies saves room."
 msgstr ""
 "Versionsverwaltungen sind nicht anders. Sie alle haben bequeme "

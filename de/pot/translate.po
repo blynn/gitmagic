@@ -1,21 +1,21 @@
 # Git Magic - A guide to using Git
 # This file is distributed under the GNU GENERAL PUBLIC LICENSE Version 3.
 # Benn Lynn <benlynn@gmail.com>, 2007.
-# Armin Stebich <gitmagic@lordofbikes.de>, 2010.
+# Armin Stebich <armin@lordofbikes.de>, 2010, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Git Magic deutsch\n"
 "Report-Msgid-Bugs-To: bennlynn@gmail.com\n"
-"POT-Creation-Date: 2010-10-30 08:21+0300\n"
-"PO-Revision-Date: 2010-10-27 23:00+0200\n"
-"Last-Translator: Armin Stebich <gitmagic@lordofbikes.de>\n"
-"Language-Team: DE <info@lordofbikes.de>\n"
+"POT-Creation-Date: 2011-07-03 23:06+0300\n"
+"PO-Revision-Date: 2011-07-04 18:00+0200\n"
+"Last-Translator: Armin Stebich <armin@lordofbikes.de>\n"
+"Language-Team: DE <gitmagic@lordofbikes.de>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: UTF-8\n"
-"Plural-Forms: Du\n"
+"Plural-Forms: \n"
 
 #. type: Plain text
 #: ../en/translate.txt:2
@@ -23,25 +23,34 @@ msgid "== Appendix B: Translating This Guide =="
 msgstr "== Anhang B: Diese Anleitung übersetzen =="
 
 #. type: Plain text
-#: ../en/translate.txt:5
+#: ../en/translate.txt:6
 msgid ""
-"Clone the source, then create a directory corresponding to the target http://"
-"www.iana.org/assignments/language-subtag-registry[language's IETF tag]: see "
-"http://www.w3.org/International/articles/language-tags/Overview.en.php[the "
-"W3C article on internationalization]. For example, English is \"en\", "
-"Japanese is \"ja\", and Traditional Chinese is \"zh-Hant\". In the new "
-"directory, and translate the +txt+ files from the \"en\" subdirectory."
+"I recommend the following steps for translating this guide, so my scripts "
+"can quickly produce HTML and PDF versions, and all translations can live in "
+"the same repository."
 msgstr ""
-"'Clone' die Quelltexte, dann erstelle ein Verzeichnis mit dem Namen des "
-"http://www.iana.org/assignments/language-subtag-registry[IETF Sprachkürzel] "
-"der übersetzten Sprache: siehe http://www.w3.org/International/articles/"
-"language-tags/Overview.en.php[den W3C Artikel über Internationalisierung]. "
-"Zum Beispiel, Englisch ist \"en\", Japanisch ist \"ja\" und traditionelles "
-"Chinesisch ist \"zh-Hant\". Kopiere alle txt-Dateien aus dem \"en\"-"
-"Verzeichnis in das neue Verzeichnis und übersetze diese."
+"Ich empfehle folgende Schritte um diese Anleitung zu übersetzen, damit meine "
+"Skripte einfach eine HTML- und PDF-Version erstellen können. Außerdem können "
+"so alle Übersetzungen in einem 'Repository' existieren."
 
 #. type: Plain text
-#: ../en/translate.txt:7
+#: ../en/translate.txt:13
+msgid ""
+"Clone the source, then create a directory corresponding to the target "
+"language's IETF tag: see http://www.w3.org/International/articles/language-"
+"tags/Overview.en.php[the W3C article on internationalization]. For example, "
+"English is \"en\" and Japanese is \"ja\". In the new directory, and "
+"translate the +txt+ files from the \"en\" subdirectory."
+msgstr ""
+"'Clone' die Quelltexte, dann erstelle ein Verzeichnis mit dem Namen des IETF "
+"Sprachkürzel der übersetzten Sprache: siehe http://www.w3.org/International/"
+"articles/language-tags/Overview.en.php[den W3C Artikel über "
+"Internationalisierung]. Zum Beispiel, Englisch ist \"en\", Japanisch ist \"ja"
+"\". Kopiere alle +txt+-Dateien aus dem \"en\"-Verzeichnis in das neue "
+"Verzeichnis und übersetze diese."
+
+#. type: Plain text
+#: ../en/translate.txt:15
 msgid ""
 "For instance, to translate the guide into http://en.wikipedia.org/wiki/"
 "Klingon_language[Klingon], you might type:"
@@ -50,7 +59,7 @@ msgstr ""
 "Klingonische_Sprache[Klingonisch] zu übersetzen, mußt du folgendes machen:"
 
 #. type: Plain text
-#: ../en/translate.txt:14
+#: ../en/translate.txt:22
 #, no-wrap
 msgid ""
 " $ git clone git://repo.or.cz/gitmagic.git\n"
@@ -68,46 +77,51 @@ msgstr ""
 " $ edit intro.txt  # Übersetze diese Datei.\n"
 
 #. type: Plain text
-#: ../en/translate.txt:16
-msgid "and so on for each text file. You can review your work incrementally:"
-msgstr ""
-"und das machst du für jede txt-Datei. Du kannst deine Arbeit jederzeit wie "
-"folgt überprüfen:"
+#: ../en/translate.txt:24
+msgid "and so on for each text file."
+msgstr "und das machst du für jede txt-Datei."
 
 #. type: Plain text
-#: ../en/translate.txt:19
+#: ../en/translate.txt:27
+msgid ""
+"Edit the Makefile and add the language code to the `TRANSLATIONS` variable.  "
+"You can now review your work incrementally:"
+msgstr ""
+"Bearbeite das Makefile und füge das Sprachkürzel zur Variable `TRANSLATIONS` "
+"hinzu. Nun kannst Du Deine Arbeit jederzeit wie folgt überprüfen:"
+
+#. type: Plain text
+#: ../en/translate.txt:30
 #, no-wrap
 msgid ""
-" $ make LANG=tlh\n"
-" $ firefox book.html\n"
+" $ make tlh\n"
+" $ firefox book-tlh/index.html\n"
 msgstr ""
-" $ make LANG=tlh\n"
-" $ firefox book.html\n"
+" $ make tlh\n"
+" $ firefox book-tlh/index.html\n"
 
 #. type: Plain text
-#: ../en/translate.txt:23
+#: ../en/translate.txt:33
 msgid ""
-"Commit your changes often, then let me know when they're ready.  GitHub.com "
-"has an interface that facilitates this: fork the \"gitmagic\" project, push "
-"your changes, then ask me to merge."
+"Commit your changes often, then let me know when they're ready.  GitHub has "
+"an interface that facilitates this: fork the \"gitmagic\" project, push your "
+"changes, then ask me to merge."
 msgstr ""
 "'Committe' deine Änderungen oft und wenn du fertig bist, gib bitte Bescheid. "
-"GitHub.com hat eine Schnittstelle, die das erleichtert: Erzeuge deine eigene "
+"GitHub hat eine Schnittstelle, die das erleichtert: Erzeuge deine eigene "
 "'Fork' vom \"gitmagic\" Projekt, 'pushe' deine Änderungen, dann gib mir "
 "Bescheid, deine Änderungen zu 'mergen'."
 
-#. type: Plain text
-#: ../en/translate.txt:28
-msgid ""
-"I like to have translations follow the above scheme so my scripts can "
-"produce HTML and PDF versions. Also, it conveniently keeps all the "
-"translations in the official repository. But please do whatever suits you "
-"best: for example, the Chinese translators used Google Docs. I'm happy as "
-"long as your work enables more people to access my work."
-msgstr ""
-"Ich bevorzuge Übersetzungen nach diesem Schema, denn so können meine Skripte "
-"HTML und PDF Versionen erstellen. Außerdem hält es alle Übersetzungen bequem "
-"im offiziellen 'Repository'. Trotzdem, wähle den Weg, der dir am besten "
-"liegt. Die chinesischen Übersetzer zum Beispiel benutzen Google Docs. Ich "
-"bin glücklich, so lange deine Arbeit mehr Menschen den Zugang zu meiner "
-"Arbeit ermöglicht."
+#~ msgid ""
+#~ "I like to have translations follow the above scheme so my scripts can "
+#~ "produce HTML and PDF versions. Also, it conveniently keeps all the "
+#~ "translations in the official repository. But please do whatever suits you "
+#~ "best: for example, the Chinese translators used Google Docs. I'm happy as "
+#~ "long as your work enables more people to access my work."
+#~ msgstr ""
+#~ "Ich bevorzuge Übersetzungen nach diesem Schema, denn so können meine "
+#~ "Skripte HTML und PDF Versionen erstellen. Außerdem hält es alle "
+#~ "Übersetzungen bequem im offiziellen 'Repository'. Trotzdem, wähle den "
+#~ "Weg, der dir am besten liegt. Die chinesischen Übersetzer zum Beispiel "
+#~ "benutzen Google Docs. Ich bin glücklich, so lange deine Arbeit mehr "
+#~ "Menschen den Zugang zu meiner Arbeit ermöglicht."

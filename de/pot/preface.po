@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Git Magic deutsch\n"
 "Report-Msgid-Bugs-To: bennlynn@gmail.com\n"
-"POT-Creation-Date: 2010-11-05 17:51+0100\n"
+"POT-Creation-Date: 2011-07-03 23:06+0300\n"
 "PO-Revision-Date: 2010-10-26 20:30+0200\n"
 "Last-Translator: Armin Stebich <gitmagic@lordofbikes.de>\n"
 "Language-Team: DE <info@lordofbikes.de>\n"
@@ -60,50 +60,73 @@ msgid ".Translations"
 msgstr ""
 
 #. type: Bullet: ' - '
-#: ../en/preface.txt:19
+#: ../en/preface.txt:22
 msgid ""
-"http://docs.google.com/View?id=dfwthj68_675gz3bw8kj[Chinese (Simplified)]: "
-"by JunJie, Meng and JiangWei."
+"link:/\\~blynn/gitmagic/intl/zh_cn/[Simplified Chinese]: by JunJie, Meng and "
+"JiangWei. Converted to link:/~blynn/gitmagic/intl/zh_tw/[Traditional "
+"Chinese] via +cconv -f UTF8-CN -t UTF8-TW+."
 msgstr ""
 
 #. type: Bullet: ' - '
-#: ../en/preface.txt:19
-msgid "link:/~blynn/gitmagic/intl/es/[Spanish]: by Rodrigo Toledo."
+#: ../en/preface.txt:22
+msgid ""
+"link:/~blynn/gitmagic/intl/fr/[French]: by Alexandre Garel, Paul Gaborit, "
+"and Nicolas Deram. Also hosted at http://tutoriels.itaapy.com/[itaapy]."
 msgstr ""
 
 #. type: Bullet: ' - '
-#: ../en/preface.txt:19
+#: ../en/preface.txt:22
 msgid ""
 "link:/~blynn/gitmagic/intl/de/[German]: by Benjamin Bellee and Armin "
-"Stebich. Armin also hosts http://gitmagic.lordofbikes.de/[the German "
-"translation on his website]."
+"Stebich; also http://gitmagic.lordofbikes.de/[hosted on Armin's website]."
 msgstr ""
 
 #. type: Bullet: ' - '
-#: ../en/preface.txt:19
+#: ../en/preface.txt:22
 msgid ""
 "http://www.slideshare.net/slide_user/magia-git[Portuguese]: by Leonardo "
 "Siqueira Rodrigues [http://www.slideshare.net/slide_user/magia-git-verso-odt"
 "[ODT version]]."
 msgstr ""
 
+#. type: Bullet: ' - '
+#: ../en/preface.txt:22
+msgid ""
+"link:/~blynn/gitmagic/intl/ru/[Russian]: by Tikhon Tarnavsky, Mikhail "
+"Dymskov, and others."
+msgstr ""
+
+#. type: Bullet: ' - '
+#: ../en/preface.txt:22
+msgid ""
+"link:/~blynn/gitmagic/intl/es/[Spanish]: by Rodrigo Toledo and Ariset "
+"Llerena Tapia."
+msgstr ""
+
+#. type: Bullet: ' - '
+#: ../en/preface.txt:22
+msgid ""
+"link:/~blynn/gitmagic/intl/vi/[Vietnamese]: by Trần Ngọc Quân; also http://"
+"vnwildman.users.sourceforge.net/gitmagic.html[hosted on his website]."
+msgstr ""
+
 #. type: Plain text
-#: ../en/preface.txt:21
+#: ../en/preface.txt:24
 msgid ".Other Editions"
 msgstr ""
 
 #. type: Bullet: ' - '
-#: ../en/preface.txt:26
+#: ../en/preface.txt:29
 msgid "link:book.html[Single webpage]: barebones HTML, with no CSS."
 msgstr ""
 
 #. type: Bullet: ' - '
-#: ../en/preface.txt:26
+#: ../en/preface.txt:29
 msgid "link:book.pdf[PDF file]: printer-friendly."
 msgstr ""
 
 #. type: Bullet: ' - '
-#: ../en/preface.txt:26
+#: ../en/preface.txt:29
 msgid ""
 "http://packages.debian.org/gitmagic[Debian package], http:://packages.ubuntu."
 "com/gitmagic[Ubuntu package]: get a fast and local copy of this site. Handy "
@@ -111,7 +134,7 @@ msgid ""
 msgstr ""
 
 #. type: Bullet: ' - '
-#: ../en/preface.txt:26
+#: ../en/preface.txt:29
 msgid ""
 "http://www.amazon.com/Git-Magic-Ben-Lynn/dp/1451523343/[Physical book "
 "[Amazon.com]]: 64 pages, 15.24cm x 22.86cm, black and white. Handy when "
@@ -119,85 +142,86 @@ msgid ""
 msgstr ""
 
 #. type: Plain text
-#: ../en/preface.txt:28
+#: ../en/preface.txt:31
 msgid "=== Thanks! ==="
 msgstr ""
 
 #. type: Plain text
-#: ../en/preface.txt:30
+#: ../en/preface.txt:35
+msgid ""
+"I'm humbled that so many people have worked on translations of these pages. "
+"I greatly appreciate having a wider audience because of the efforts of those "
+"named above."
+msgstr ""
+
+#. type: Plain text
+#: ../en/preface.txt:37
 msgid ""
 "Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, "
 "Michael Budde, Richard Albury, Tarmigan, Derek Mahar, Frode Aannevik, Keith "
 "Rarick, Andy Somerville, Ralf Recker, Øyvind A. Holm, Miklos Vajna, "
-"Sébastien Hinderer, Thomas Miedema, and Joe Malin contributed corrections "
-"and improvements."
+"Sébastien Hinderer, Thomas Miedema, Joe Malin, and Tyler Breisacher "
+"contributed corrections and improvements."
 msgstr ""
 
 #. type: Plain text
-#: ../en/preface.txt:33
+#: ../en/preface.txt:40
 msgid ""
 "François Marier maintains the Debian package originally created by Daniel "
 "Baumann."
 msgstr ""
 
 #. type: Plain text
-#: ../en/preface.txt:36
-msgid ""
-"JunJie, Meng, JiangWei, Rodrigo Toledo, Leonardo Siqueira Rodrigues, "
-"Benjamin Bellee, and Armin Stebich worked on translations of this guide."
-msgstr ""
-
-#. type: Plain text
-#: ../en/preface.txt:39
+#: ../en/preface.txt:43
 msgid ""
 "My gratitude goes to many others for your support and praise. I'm tempted to "
 "quote you here, but it might raise expectations to ridiculous heights."
 msgstr ""
 
 #. type: Plain text
-#: ../en/preface.txt:41
+#: ../en/preface.txt:45
 msgid ""
 "If I've left you out by mistake, please tell me or just send me a patch!"
 msgstr ""
 
 #. type: Plain text
-#: ../en/preface.txt:43
+#: ../en/preface.txt:47
 msgid ".Free Git hosting"
 msgstr ""
 
 #. type: Bullet: ' - '
-#: ../en/preface.txt:47
+#: ../en/preface.txt:51
 msgid ""
 "http://repo.or.cz/[http://repo.or.cz/] hosts free projects. The first Git "
 "hosting site. Founded and maintained by one of the earliest Git developers."
 msgstr ""
 
 #. type: Bullet: ' - '
-#: ../en/preface.txt:47
+#: ../en/preface.txt:51
 msgid ""
 "http://gitorious.org/[http://gitorious.org/] is another Git hosting site "
 "aimed at open-source projects."
 msgstr ""
 
 #. type: Bullet: ' - '
-#: ../en/preface.txt:47
+#: ../en/preface.txt:51
 msgid ""
 "http://github.com/[http://github.com/] hosts open-source projects for free, "
 "and private projects for a fee."
 msgstr ""
 
 #. type: Plain text
-#: ../en/preface.txt:49
+#: ../en/preface.txt:53
 msgid "Many thanks to each of these sites for hosting this guide."
 msgstr ""
 
 #. type: Plain text
-#: ../en/preface.txt:51
+#: ../en/preface.txt:55
 msgid "=== License ==="
 msgstr ""
 
 #. type: Plain text
-#: ../en/preface.txt:54
+#: ../en/preface.txt:58
 msgid ""
 "This guide is released under http://www.gnu.org/licenses/gpl-3.0.html[the "
 "GNU General Public License version 3]. Naturally, the source is kept in a "
@@ -205,18 +229,18 @@ msgid ""
 msgstr ""
 
 #. type: Plain text
-#: ../en/preface.txt:56
+#: ../en/preface.txt:60
 #, no-wrap
 msgid " $ git clone git://repo.or.cz/gitmagic.git  # Creates \"gitmagic\" directory.\n"
 msgstr ""
 
 #. type: Plain text
-#: ../en/preface.txt:58
+#: ../en/preface.txt:62
 msgid "or from one of the mirrors:"
 msgstr ""
 
 #. type: Plain text
-#: ../en/preface.txt:60
+#: ../en/preface.txt:64
 #, no-wrap
 msgid ""
 " $ git clone git://github.com/blynn/gitmagic.git\n"

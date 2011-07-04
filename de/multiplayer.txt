@@ -12,7 +12,7 @@ ist das Git's Stärke und wohl auch seine Daseinsberechtigung.
 
 === Wer bin ich? ===
 
-Jeder 'Commit' enthält Name und Emailadresse des Autors, welche mit *git
+Jeder 'Commit' enthält Name und eMail-Adresse des Autors, welche mit *git
 log* angezeigt werden. Standardmäßig nutzt Git Systemeinstellungen um diese
 Felder auszufüllen. Um diese Angaben explizit zu setzen, gib ein:
 
@@ -60,7 +60,7 @@ zurück>>. Wir können solche Dateien hin und her schicken um Git
 'Repositories' über jedes beliebige Medium zu transportieren, aber ein
 effizienteres Werkzeug ist *git bundle*.
 
-Der Absender erstellt ein 'bundle':
+Der Absender erstellt ein 'Bundle':
 
  $ git bundle create einedatei HEAD
 
@@ -88,7 +88,7 @@ gib ein:
 
  $ git tag -f letztesbundle HEAD
 
-und erstelle neue Aktuelisierungsbundles mit:
+und erstelle neue Aktualisierungsbundles mit:
 
  $ git bundle create neuesbundle HEAD ^letztesbundle
 
@@ -100,7 +100,7 @@ eine universelle Anziehungskraft. Du kannst einen 'Patch' Entwicklern
 schicken, ganz egal, was für ein Versionsverwaltungssystem sie
 benutzen. Solange Deine Mitstreiter ihre eMails lesen können, können sie
 auch Deine Änderungen sehen. Auch auf Deiner Seite ist alles was Du brauchst
-ein eMail Konto: es gibt keine Notwendigkeit ein Online Git 'Repository'
+ein eMail-Konto: es gibt keine Notwendigkeit ein Online Git 'Repository'
 aufzusetzen.
 
 Erinnere Dich an das erste Kapitel:

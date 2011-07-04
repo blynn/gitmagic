@@ -124,7 +124,7 @@ erstellen. Normalerweise wird ein Skript, das diese Anweisung benutzt,
 hastig zusammengeschustert und einmalig ausgeführt um das Projekt in einem
 einzigen Lauf zu migrieren.
 
-As an example, paste the following listing into temporary file, such as `/tmp/history`:
+Erstelle zum Beispiel aus folgendem Listing eine temporäre Datei, z.B. `/tmp/history`:
 ----------------------------------
 commit refs/heads/master committer Alice <alice@example.com> Thu, 01 Jan
 1970 00:00:00 +0000 data <<EOT Initial commit.  EOT
