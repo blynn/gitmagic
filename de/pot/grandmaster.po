@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Git Magic deutsch\n"
 "Report-Msgid-Bugs-To: bennlynn@gmail.com\n"
 "POT-Creation-Date: 2010-10-30 08:21+0300\n"
-"PO-Revision-Date: 2011-07-03 19:51+0200\n"
+"PO-Revision-Date: 2011-07-04 18:51+0200\n"
 "Last-Translator: Armin Stebich <armin@lordofbikes.de>\n"
 "Language-Team: DE <gitmagic@lordofbikes.de>\n"
 "Language: de\n"
@@ -265,7 +265,7 @@ msgid ""
 "example:"
 msgstr ""
 "Der HEAD Bezeichner ist wie ein Cursor, der normalerweise auf den jüngsten "
-"'Commit' zeigt und mit jedem neuer 'Commit' voranschreitet. Einige Git "
+"'Commit' zeigt und mit jedem neuen 'Commit' voranschreitet. Einige Git "
 "Anweisungen lassen Dich ihn manipulieren. Zum Beispiel:"
 
 #. type: Plain text
@@ -715,8 +715,8 @@ msgid ""
 "If only I had bought idiot insurance by using a _hook_ to alert me about "
 "these problems:"
 msgstr ""
-"Wenn ich doch nur eine Trottelversicherung abgeschlossen, durch Verwendung "
-"eines _hook_, der mich bei solchen Problemen alarmiert."
+"Wenn ich doch nur eine Trottelversicherung abgeschlossen hätte, durch "
+"Verwendung eines _hook_, der mich bei solchen Problemen alarmiert."
 
 #. type: Plain text
 #: ../en/grandmaster.txt:217

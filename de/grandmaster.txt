@@ -97,7 +97,7 @@ permanent.
 === Verliere nicht Deinen KOPF ===
 
 Der HEAD Bezeichner ist wie ein Cursor, der normalerweise auf den jüngsten
-'Commit' zeigt und mit jedem neuer 'Commit' voranschreitet. Einige Git
+'Commit' zeigt und mit jedem neuen 'Commit' voranschreitet. Einige Git
 Anweisungen lassen Dich ihn manipulieren. Zum Beispiel:
 
  $ git reset HEAD~3
@@ -263,8 +263,8 @@ fehlende Dateien wegen eines vergessenen *git add*. Kleinere Verfehlungen
 sind Leerzeichen am Zeilenende und ungelöste 'merge'-Konflikte: obwohl sie
 harmlos sind, wünschte ich, sie würden nie in der Öffentlichkeit erscheinen.
 
-Wenn ich doch nur eine Trottelversicherung abgeschlossen, durch Verwendung
-eines _hook_, der mich bei solchen Problemen alarmiert.
+Wenn ich doch nur eine Trottelversicherung abgeschlossen hätte, durch
+Verwendung eines _hook_, der mich bei solchen Problemen alarmiert.
 
  $ cd .git/hooks
  $ cp pre-commit.sample pre-commit  # Older Git versions: chmod +x pre-commit
