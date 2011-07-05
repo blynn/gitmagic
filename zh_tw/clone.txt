@@ -37,20 +37,20 @@
  $ mkdir proj.git
  $ cd proj.git
  $ git init --bare
- $  # 只用一行命令: GIT_DIR=proj.git git init
+ $ touch proj.git/git-daemon-export-ok
 
-如果需要的話，啟動Git守護進程：
+如需要的話，啟動Git守護進程：
 
  $ git daemon --detach  # 它也許已經在運行了
 
 對一些Git伺服服務，按照其指導來初始化空Git倉庫。一般是在網頁上填一個表單。
 
 把你的項目“推”到中心伺服器：
- $ git push git://central.server/path/to/proj.git HEAD
+ $ git push central.server/path/to/proj.git HEAD
 
-撿出源碼，開發鍵入：
+撿出源碼，可以鍵入：
 
- $ git clone git://central.server/path/to/proj.git
+ $ git clone central.server/path/to/proj.git
 
 做了改動之後，開發保存變更到本地：
 
@@ -70,6 +70,20 @@
 
 如果主伺服器由於其他開發的活動，有了新的變更，這個撿入會失敗，該開發應該把最
 新版本拿下來，解決合併衝突，然後重試。
+
+為使用上面pull和push命令，開發必須有SSH訪問權限。不過，通過鍵入以下命令，任何
+人都可以看到源碼：
+
+ $ git clone git://central.server/path/to/proj.git
+
+本地git協議和HTTP類似：並無安全驗證，因此任何人都能拿到項目。因此，預設情況
+git協議禁止推操作。
+
+=== 封閉源碼 ===
+
+閉源項目不要執行touch命令，並確保你從未創建`git-daemon-export-ok`檔案。資源庫
+不再可以通過git協議獲取；只有那些有SSH訪問權限的人才能看到。如果你所有的資源
+庫都是封閉的，那也沒必要運行運行git守護了，因為所有溝通都走SSH。
 
 === 裸倉庫 ===
 

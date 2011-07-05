@@ -4,20 +4,20 @@ Ben Lynn
 
 == 前言 ==
 
-http://git.or.cz/[Git] 是一个版本控制瑞士军刀，一个可靠的、多功能、多用途的校
-订工具，其异常灵活，不易掌握。
+http://git.or.cz/[Git] 堪称版本控制瑞士军刀。这个可靠、多才多艺、用途多样的校
+订工具异常灵活，以致不易掌握，更别说精通了。
 
-正如Arthur C. Clarke所洞察，足够先进的技术和魔法无二。一个接近Git的绝妙办法：
-新手们可以忽略Git的内部机理，只当个小把戏玩，炫耀其功能，让朋友羡慕，让敌人暴
-怒。
+正如Arthur C. Clarke所说，足够先进的技术与魔法无二。这是学习Git的好办法：新手
+不妨忽略Git的内部机理，只当小把戏玩，借助Git其奇妙的能力，逗逗朋友，气气敌人。
 
-为了不陷入细节，我们对特定功能提供大略的指导。在重复使用之后，慢慢地你会理解
-每个小技巧如何工作，以及如何组合这些技巧以满足你的需求。
+为了不陷入细节，我们对特定功能提供大面上的讲解。在反复应用之后，慢慢地你会理
+解每个小技巧如何工作，以及如何组合这些技巧以满足你的需求。
 
 .翻译
 
- - link:/\~blynn/gitmagic/intl/zh_cn/[简体中文]: 俊杰，萌和江薇。link:/~blynn/gitmagic/intl/zh_tw/[正体中文] 由 +cconv
-   -f UTF8-CN -t UTF8-TW+ 转换。
+ - link:/\~blynn/gitmagic/intl/zh_cn/[简体中文]: 俊杰，萌和江薇。
+   link:/~blynn/gitmagic/intl/zh_tw/[正体中文] 由 + cconv -f UTF8-CN -t
+   UTF8-TW + 转换。
  - link:/~blynn/gitmagic/intl/fr/[法文]: Alexandre Garel。也在
    http://tutoriels.itaapy.com/[itaapy]。
  - link:/~blynn/gitmagic/intl/de/[德文]: Benjamin Bellee和Armin Stebich；也在
@@ -44,19 +44,6 @@ http://git.or.cz/[Git] 是一个版本控制瑞士军刀，一个可靠的、多
 
 === 致谢！ ===
 
-感谢Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone,
-Michael Budde, Richard Albury, Tarmigan，Derek Mahar，Frode Aannevik，和
-Keith Rarick提出的建议和改进。
-
-Daniel Baumann维护Debian包。
-
-俊杰, 萌, 江薇, Rodrigo Toledo，和Leonardo Rodrigues致力于本文档翻译。
-
-感谢其他拥护者和赞美者。如果这是本纸质书，我会在封面上引用你们慷慨的赞美以提
-高销量。
-
-如果我不小心忘记了感谢谁，请告诉我或者发一个补丁（Patch）给我。
-
 那么多人对本文档的翻译让我受宠若惊。他们的付出拓宽了读者群，我非常感激。
 
 Dustin Sallings、Alberto Bertogli、James Cameron、Douglas Livingstone、
@@ -65,10 +52,9 @@ Keith Rarick、 Andy Somerville、 Ralf Recker、 Øyvind A. Holm、 Miklos Vajn
 Sébastien Hinderer、 Thomas Miedema、 Joe Malin、 和Tyler Breisacher对本文档
 正确性和优化做出了贡献。
 
-François Marier维护Debian包，该Debian包起初由Daniel
-Baumann创建。
+François Marier维护Debian包，该Debian包起初由Daniel Baumann创建。
 
-感谢其他很多提供帮助和赞扬的人。名单太长了我无法一一写下。
+感谢其他很多提供帮助和鼓励的人。名单太长了我无法一一写下。
 
 如果我不小心把你的名字落下，请告诉我或者发一个补丁。
 
