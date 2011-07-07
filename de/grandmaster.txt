@@ -29,7 +29,7 @@ commit -a` ausführen, falls man an dieser Stelle ohnehin 'comitten'
 möchte. Siehe *git help ignore* um zu sehen, wie man Dateien definiert, die
 ignoriert werden sollen.
 
-Man das aber auch in einem einzigen Schritt ausführen mit:
+Man kann das aber auch in einem einzigen Schritt ausführen mit:
 
  $ git ls-files -d -m -o -z | xargs -0 git update-index --add --remove
 

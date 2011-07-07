@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Git Magic deutsch\n"
 "Report-Msgid-Bugs-To: bennlynn@gmail.com\n"
 "POT-Creation-Date: 2011-07-03 23:06+0300\n"
-"PO-Revision-Date: 2011-07-04 18:00+0200\n"
+"PO-Revision-Date: 2011-07-07 18:41+0200\n"
 "Last-Translator: Armin Stebich <armin@lordofbikes.de>\n"
 "Language-Team: DE <gitmagic@lordofbikes.de>\n"
 "Language: de\n"
@@ -20,7 +20,7 @@ msgstr ""
 #. type: Plain text
 #: ../en/translate.txt:2
 msgid "== Appendix B: Translating This Guide =="
-msgstr "== Anhang B: Diese Anleitung übersetzen =="
+msgstr "== Anhang B: Diese Anleitung übersetzen =="
 
 #. type: Plain text
 #: ../en/translate.txt:6
@@ -43,11 +43,11 @@ msgid ""
 "translate the +txt+ files from the \"en\" subdirectory."
 msgstr ""
 "'Clone' die Quelltexte, dann erstelle ein Verzeichnis mit dem Namen des IETF "
-"Sprachkürzel der übersetzten Sprache: siehe http://www.w3.org/International/"
-"articles/language-tags/Overview.en.php[den W3C Artikel über "
+"Sprachkürzel der übersetzten Sprache: siehe http://www.w3.org/International/"
+"articles/language-tags/Overview.en.php[den W3C Artikel über "
 "Internationalisierung]. Zum Beispiel, Englisch ist \"en\", Japanisch ist \"ja"
 "\". Kopiere alle +txt+-Dateien aus dem \"en\"-Verzeichnis in das neue "
-"Verzeichnis und übersetze diese."
+"Verzeichnis und übersetze diese."
 
 #. type: Plain text
 #: ../en/translate.txt:15
@@ -56,7 +56,7 @@ msgid ""
 "Klingon_language[Klingon], you might type:"
 msgstr ""
 "Um zum Beispiel die Anleitung auf http://de.wikipedia.org/wiki/"
-"Klingonische_Sprache[Klingonisch] zu übersetzen, mußt du folgendes machen:"
+"Klingonische_Sprache[Klingonisch] zu übersetzen, mußt du folgendes machen:"
 
 #. type: Plain text
 #: ../en/translate.txt:22
@@ -71,15 +71,15 @@ msgid ""
 msgstr ""
 " $ git clone git://repo.or.cz/gitmagic.git\n"
 " $ cd gitmagic\n"
-" $ mkdir tlh  # \"tlh\" ist das IETF Sprachkürzel für Klingonisch.\n"
+" $ mkdir tlh  # \"tlh\" ist das IETF Sprachkürzel für Klingonisch.\n"
 " $ cd tlh\n"
 " $ cp ../en/intro.txt .\n"
-" $ edit intro.txt  # Übersetze diese Datei.\n"
+" $ edit intro.txt  # übersetze diese Datei.\n"
 
 #. type: Plain text
 #: ../en/translate.txt:24
 msgid "and so on for each text file."
-msgstr "und das machst du für jede txt-Datei."
+msgstr "und das machst du für jede txt-Datei."
 
 #. type: Plain text
 #: ../en/translate.txt:27
@@ -88,7 +88,7 @@ msgid ""
 "You can now review your work incrementally:"
 msgstr ""
 "Bearbeite das Makefile und füge das Sprachkürzel zur Variable `TRANSLATIONS` "
-"hinzu. Nun kannst Du Deine Arbeit jederzeit wie folgt überprüfen:"
+"hinzu. Nun kannst Du Deine Arbeit jederzeit wie folgt überprüfen:"
 
 #. type: Plain text
 #: ../en/translate.txt:30
@@ -107,10 +107,10 @@ msgid ""
 "an interface that facilitates this: fork the \"gitmagic\" project, push your "
 "changes, then ask me to merge."
 msgstr ""
-"'Committe' deine Änderungen oft und wenn du fertig bist, gib bitte Bescheid. "
+"'Committe' deine Änderungen oft und wenn du fertig bist, gib bitte Bescheid. "
 "GitHub hat eine Schnittstelle, die das erleichtert: Erzeuge deine eigene "
-"'Fork' vom \"gitmagic\" Projekt, 'pushe' deine Änderungen, dann gib mir "
-"Bescheid, deine Änderungen zu 'mergen'."
+"'Fork' vom \"gitmagic\" Projekt, 'pushe' deine Änderungen, dann gib mir "
+"Bescheid, deine Änderungen zu 'mergen'."
 
 #~ msgid ""
 #~ "I like to have translations follow the above scheme so my scripts can "
@@ -119,9 +119,9 @@ msgstr ""
 #~ "best: for example, the Chinese translators used Google Docs. I'm happy as "
 #~ "long as your work enables more people to access my work."
 #~ msgstr ""
-#~ "Ich bevorzuge Übersetzungen nach diesem Schema, denn so können meine "
-#~ "Skripte HTML und PDF Versionen erstellen. Außerdem hält es alle "
-#~ "Übersetzungen bequem im offiziellen 'Repository'. Trotzdem, wähle den "
-#~ "Weg, der dir am besten liegt. Die chinesischen Übersetzer zum Beispiel "
-#~ "benutzen Google Docs. Ich bin glücklich, so lange deine Arbeit mehr "
-#~ "Menschen den Zugang zu meiner Arbeit ermöglicht."
+#~ "Ich bevorzuge Übersetzungen nach diesem Schema, denn so können meine "
+#~ "Skripte HTML und PDF Versionen erstellen. Außerdem hält es alle "
+#~ "Übersetzungen bequem im offiziellen 'Repository'. Trotzdem, wähle den "
+#~ "Weg, der dir am besten liegt. Die chinesischen Übersetzer zum Beispiel "
+#~ "benutzen Google Docs. Ich bin glücklich, so lange deine Arbeit mehr "
+#~ "Menschen den Zugang zu meiner Arbeit ermöglicht."
