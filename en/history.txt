@@ -47,6 +47,21 @@ Then:
    * `squash` to merge a commit with the previous one.
    * `fixup` to merge a commit with the previous one and discard the log message.
 
+Commits are listed with the oldest one at the top of the list, and the newest one
+at the bottom of the list. ie in the previous example, 5c6eb73 is the oldest commit,
+and 5c6eb73 is the newest commit. 
+
+When doing a squash, the marked commit is "squashed" into the commit higher up
+the list (use the mnemonic "squash up" to remember this). For example, this
+would result in a311a64 being "squashed" into 5c6eb73: 
+
+    pick 5c6eb73 Added repo.or.cz link
+    squash a311a64 Reordered analogies in "Work How You Want"
+    pick 100834f Added push target to Makefile
+
+When *squash* is used, both log messages will appear in $EDITOR, allowing you
+to reword/combine the log messages; *fixup* will discard the log message.
+
 Save and quit. If you marked a commit for editing, then
 run:
 
