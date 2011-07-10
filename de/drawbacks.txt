@@ -36,7 +36,7 @@ nachteiliger sein als andere Systeme, weil es keine einzelnen Dateien
 überwacht. Git überwacht immer das ganze Projekt, was normalerweise schon
 von Vorteil ist.
 
-Eine Lösung ist es, Dein Projekt in kleinere Stücke auszuteilen, von denen
+Eine Lösung ist es, Dein Projekt in kleinere Stücke aufzuteilen, von denen
 jedes nur die in Beziehung stehenden Dateien enthält. Benutze *git
 submodule* wenn Du trotzdem alles in einem einzigen 'Repository' halten
 willst.
@@ -44,9 +44,9 @@ willst.
 === Wer macht was? ===
 
 Einige Versionsverwaltungssysteme zwingen Dich explizit eine Datei auf
-irgendeine Weise für die Bearbeitung zu kennzeichnen. Auch wenn es extrem
-Lästig, wenn es die Kommunikation mit einem zentralen Server erfordert, so
-hat es doch zwei Vorteile:
+irgendeine Weise für die Bearbeitung zu kennzeichnen. Obwohl es extrem
+lästig ist, wenn es die Kommunikation mit einem zentralen Server erfordert,
+so hat es doch zwei Vorteile:
 
   1. Unterschiede sind schnell gefunden, weil nur die markierten Dateien
      untersucht werden müssen.
@@ -86,7 +86,7 @@ resultierende Klon hat nur eingeschränkte Funktionalität.
 Git wurde geschrieben um schnell zu sein, im Hinblick auf die Größe der
 Änderungen. Leute machen kleine Änderungen von Version zu Version. Ein
 einzeiliger Bugfix hier, eine neue Funktion da, verbesserte Kommentare und
-so weiter. Aber wenn sich Deine Dateien zwischen aufeinander folgenden
+so weiter. Aber wenn sich Deine Dateien zwischen aufeinanderfolgenden
 Versionen gravierend ändern, dann wird zwangsläufig mit jedem 'Commit' Dein
 Verlauf um die Größe des gesamten Projekts wachsen. 
 
@@ -96,8 +96,8 @@ ganze Verlauf geklont wird.
 
 Die Ursachen für die großen Unterschiede sollten ermittelt
 werden. Vielleicht können Dateiformate geändert werden. Kleinere
-Bearbeitungen sollten auch nur minimale Änderungen an nur wenigen Dateien
-bewirken.
+Bearbeitungen sollten auch nur minimale Änderungen an so wenig Dateien wie
+möglich bewirken.
 
 Vielleicht ist eher eine Datenbank oder Sicherungs-/Archivierungslösung
 gesucht, nicht ein Versionsverwaltungssystem. Ein Versionsverwaltungssystem
@@ -133,7 +133,7 @@ SHA1-Hash, was in vielen Fällen besser ist.
 
 Aber einige Leute sind diesen Zähler gewöhnt. Zum Glück ist es einfach,
 Skripte zu schreiben, sodass  mit jedem Update das zentrale Git 'Repository'
-einen Zähler erhöht. Vielleicht in Form eines Tags, der mit dem SHA1-Hash
+einen Zähler erhöht. Vielleicht in Form eines 'Tags', der mit dem SHA1-Hash
 des letzten 'Commit' verknüpft ist.
 
 Jeder Klon könnte einen solchen Zähler bereitstellen, aber der wäre
@@ -166,7 +166,8 @@ dem Erstellen eines 'Repository' wird der 'HEAD' auf eine Zeichenfolge von
 
 Würde dann zum Beispiel *git log* ausgeführt, würde der Anwender darüber
 informiert, daß noch keine 'Commits' gemacht wurden, anstelle mit einem
-fatalen Fehler zu beenden. Stellvertretenden für andere Anweisungen.
+fatalen Fehler zu beenden. Das gilt stellvertretenden für andere
+Anweisungen.
 
 Jeder initiale 'Commit' ist dann stillschweigend ein Abkömmling dieses
 Null-'Commits'.
