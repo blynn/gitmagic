@@ -1,24 +1,26 @@
 # Git Magic - A guide to using Git
 # This file is distributed under the GNU GENERAL PUBLIC LICENSE Version 3.
 # Benn Lynn <benlynn@gmail.com>, 2007.
-# Armin Stebich <armin@lordofbikes.de>, 2010.
+# Armin Stebich <armin@lordofbikes.de>, 2010, 2011.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Git Magic deutsch\n"
 "Report-Msgid-Bugs-To: bennlynn@gmail.com\n"
 "POT-Creation-Date: 2010-10-30 08:21+0300\n"
-"PO-Revision-Date: 2010-10-26 18:38+0300\n"
+"PO-Revision-Date: 2011-07-07 19:00+0200\n"
 "Last-Translator: Armin Stebich <armin@lordofbikes.de>\n"
-"Language-Team: de <git-magic@lordofbikes.de>\n"
+"Language-Team: DE <gitmagic@lordofbikes.de>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: UTF-8\n"
+"Plural-Forms: \n"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:2
 msgid "== Git Grandmastery =="
-msgstr ""
+msgstr "== Git für Fortgeschrittene =="
 
 #. type: Plain text
 #: ../en/grandmaster.txt:7
@@ -28,11 +30,16 @@ msgid ""
 "a given problem can be tedious. Perhaps I can save you some time: below are "
 "some recipes I have needed in the past."
 msgstr ""
+"Mittlerweile solltest Du Dich in den *git help* Seiten zurechtfinden und das "
+"meiste verstanden haben. Trotzdem kann es langwierig sein, den exakten "
+"Befehl zur Lösung einer bestimmten Aufgabe herauszufinden. Vielleicht kann "
+"ich Dir etwas Zeit sparen: Nachfolgend findest Du ein paar Rezepte, die ich "
+"in der Vergangenheit gebraucht habe."
 
 #. type: Plain text
 #: ../en/grandmaster.txt:9
 msgid "=== Source Releases ==="
-msgstr ""
+msgstr "=== Quellcode veröffentlichen ==="
 
 #. type: Plain text
 #: ../en/grandmaster.txt:12
@@ -40,17 +47,20 @@ msgid ""
 "For my projects, Git tracks exactly the files I'd like to archive and "
 "release to users. To create a tarball of the source code, I run:"
 msgstr ""
+"Bei meinen Projekten verwaltet Git genau die Dateien, die ich archivieren "
+"und für andere Benutzer veröffentlichen will. Um ein tarball-Archiv des "
+"Quellcodes zu erzeugen, verwende ich den Befehl:"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:14
 #, no-wrap
 msgid " $ git archive --format=tar --prefix=proj-1.2.3/ HEAD\n"
-msgstr ""
+msgstr " $ git archive --format=tar --prefix=proj-1.2.3/ HEAD\n"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:16
 msgid "=== Commit What Changed ==="
-msgstr ""
+msgstr "=== 'Commite' Änderungen ==="
 
 #. type: Plain text
 #: ../en/grandmaster.txt:19
@@ -58,6 +68,8 @@ msgid ""
 "Telling Git when you've added, deleted and renamed files is troublesome for "
 "certain projects. Instead, you can type:"
 msgstr ""
+"Git mitzuteilen, welche Dateien man hinzugefügt, gelöscht und umbenannt hat, "
+"ist für manche Projekte sehr mühsam. Stattdessen kann man folgendes eingeben:"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:22
@@ -66,6 +78,8 @@ msgid ""
 " $ git add .\n"
 " $ git add -u\n"
 msgstr ""
+" $ git add .\n"
+" $ git add -u\n"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:27
@@ -75,17 +89,22 @@ msgid ""
 "also intend to commit at this time. See *git help ignore* for how to specify "
 "files that should be ignored."
 msgstr ""
+"Git wird sich die Dateien im aktuellen Verzeichnis ansehen und sich die "
+"Details selbst erarbeiten. Anstelle des zweiten Befehl kann man auch `git "
+"commit -a` ausführen, falls man an dieser Stelle ohnehin 'comitten' möchte. "
+"Siehe *git help ignore* um zu sehen, wie man Dateien definiert, die "
+"ignoriert werden sollen."
 
 #. type: Plain text
 #: ../en/grandmaster.txt:29
 msgid "You can perform the above in a single pass with:"
-msgstr ""
+msgstr "Man kann das aber auch in einem einzigen Schritt ausführen mit:"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:31
 #, no-wrap
 msgid " $ git ls-files -d -m -o -z | xargs -0 git update-index --add --remove\n"
-msgstr ""
+msgstr " $ git ls-files -d -m -o -z | xargs -0 git update-index --add --remove\n"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:35
@@ -94,11 +113,15 @@ msgid ""
 "strange characters. As this command adds ignored files, you may want to use "
 "the `-x` or `-X` option."
 msgstr ""
+"Die *-z* und *-0* Optionen verhindern unerwünschte Nebeneffekte durch "
+"Dateinamen mit ungewöhnlichen Zeichen. Da diese Anweisung aber auch zu "
+"ignorierende Dateien hinzufügt, kann man noch die `-x` oder `-X` Option "
+"hinzufügen."
 
 #. type: Plain text
 #: ../en/grandmaster.txt:37
 msgid "=== My Commit Is Too Big! ==="
-msgstr ""
+msgstr "=== Mein 'Commit' ist zu groß! ==="
 
 #. type: Plain text
 #: ../en/grandmaster.txt:41
@@ -107,17 +130,20 @@ msgid ""
 "forgotten about source control until now? Made a series of unrelated "
 "changes, because that's your style?"
 msgstr ""
+"Hast Du es zu lange versäumt zu 'comitten'? Hast Du so versessen "
+"programmiert, daß Du darüber die Quellcodeverwaltung vergessen hast? Machst "
+"Du eine Serie von unabhängigen Änderungen, weil es Dein Stil ist?"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:43
 msgid "No worries. Run:"
-msgstr ""
+msgstr "Keine Sorge, gib ein:"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:45
 #, no-wrap
 msgid " $ git add -p\n"
-msgstr ""
+msgstr " $ git add -p\n"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:49
@@ -127,17 +153,22 @@ msgid ""
 "You have other options, such as postponing the decision; type \"?\" to learn "
 "more."
 msgstr ""
+"Für jede Änderung, die Du gemacht hast, zeigt Git Dir die Codepassagen, die "
+"sich geändert haben und fragt ob sie Teil des nächsten 'Commit' sein sollen. "
+"Antworte mit \"y\" für Ja oder \"n\" für Nein. Du hast auch noch andere "
+"Optionen, z.B. den Aufschub der Entscheidung; drücke \"?\" um mehr zu "
+"erfahren."
 
 #. type: Plain text
 #: ../en/grandmaster.txt:51
 msgid "Once you're satisfied, type"
-msgstr ""
+msgstr "Wenn Du zufrieden bist, gib"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:53
 #, no-wrap
 msgid " $ git commit\n"
-msgstr ""
+msgstr " $ git commit\n"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:56
@@ -145,6 +176,9 @@ msgid ""
 "to commit precisely the changes you selected (the 'staged' changes). Make "
 "sure you omit the *-a* option, otherwise Git will commit all the edits."
 msgstr ""
+"ein um exakt die ausgewählten Änderungen zu 'comitten' (die \"inszenierten\" "
+"Änderungen). Achte darauf, nicht die Option *-a* einzusetzen, anderenfalls "
+"wird Git alle Änderungen 'comitten'."
 
 #. type: Plain text
 #: ../en/grandmaster.txt:63
@@ -156,11 +190,19 @@ msgid ""
 "select changes in particular files only. Alternatively, run *git commit \\--"
 "interactive* which automatically commits after you're done."
 msgstr ""
+"Was ist, wenn Du viele Dateien an verschiedenen Orten bearbeitet hast? Jede "
+"Datei einzeln nachzuprüfen ist frustrierend und ermüdend. In diesem Fall "
+"verwende *git add -i*, dessen Bedienung ist nicht ganz einfach, dafür aber "
+"sehr flexibel. Mit ein paar Tastendrücken kannst Du mehrere geänderte "
+"Dateien für den 'Commit' hinzufügen ('stage') oder entfernen ('unstage') "
+"oder Änderungen einzelner Dateien nachprüfen und hinzufügen. Alternativ "
+"kannst Du *git commit \\--interactive* verwenden, was dann automatisch die "
+"ausgewählten Änderungen 'commited' nachdem Du fertig bist."
 
 #. type: Plain text
 #: ../en/grandmaster.txt:65
 msgid "=== The Index: Git's Staging Area ==="
-msgstr ""
+msgstr "=== Der Index: Git's Bereitstellungsraum ==="
 
 #. type: Plain text
 #: ../en/grandmaster.txt:71
@@ -171,6 +213,12 @@ msgid ""
 "first writes data to the index, and then copies the data in the index to its "
 "final destination."
 msgstr ""
+"Bis jetzt haben wir Git's berühmten 'Index' gemieden, aber nun müssen wir "
+"uns mit ihm auseinandersetzen um das bisherige zu erklären. Der Index ist "
+"ein temporärer Bereitstellungsraum. Git tauscht selten Daten direkt zwischen "
+"Deinem Projekt und seiner Versionsgeschichte aus. Vielmehr schreibt Git die "
+"Daten zuerst in den Index, danach kopiert es die Daten aus dem Index an "
+"ihren eigentlichen Bestimmungsort."
 
 #. type: Plain text
 #: ../en/grandmaster.txt:77
@@ -181,6 +229,12 @@ msgid ""
 "without the *-a* option only performs the second step, and only makes sense "
 "after running commands that somehow change the index, such as *git add*."
 msgstr ""
+"Zum Beispiel ist *commit -a* eigentlich ein zweistufiger Prozess. Der erste "
+"Schritt erstellt einen Schnappschuß des aktuellen Status jeder überwachten "
+"Datei im Index. Der zweite Schritt speichert dauerhaft den Schnappschuß, der "
+"sich nun im Index befindet. Ein 'Commit' ohne die *-a* Option führt nur den "
+"zweiten Schritt aus und macht nur wirklich Sinn, wenn zuvor eine Anweisung "
+"angewendet wurde, welche den Index verändert, wie zum Beispiel *git add*."
 
 #. type: Plain text
 #: ../en/grandmaster.txt:79
@@ -191,11 +245,17 @@ msgid ""
 "changes into the index, and then permanently record this carefully rigged "
 "snapshot."
 msgstr ""
+"Normalerweise können wir den Index ignorieren und so tun als würden wir "
+"direkt aus der Versionsgeschichte lesen oder in sie schreiben. In diesem "
+"Fall wollen wir aber mehr Kontrolle, also manipulieren wir den Index. Wir "
+"erstellen einen Schnappschuß einiger, aber nicht aller unser Änderungen im "
+"Index und speichern dann diesen sorgfältig zusammengestellten Schnappschuß "
+"permanent."
 
 #. type: Plain text
 #: ../en/grandmaster.txt:81
 msgid "=== Don't Lose Your HEAD ==="
-msgstr ""
+msgstr "=== Verliere nicht Deinen KOPF ==="
 
 #. type: Plain text
 #: ../en/grandmaster.txt:83
@@ -204,12 +264,15 @@ msgid ""
 "advancing with each new commit. Some Git commands let you move it. For "
 "example:"
 msgstr ""
+"Der HEAD Bezeichner ist wie ein Cursor, der normalerweise auf den jüngsten "
+"'Commit' zeigt und mit jedem neuen 'Commit' voranschreitet. Einige Git "
+"Anweisungen lassen Dich ihn manipulieren. Zum Beispiel:"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:85
 #, no-wrap
 msgid " $ git reset HEAD~3\n"
-msgstr ""
+msgstr " $ git reset HEAD~3\n"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:87
@@ -218,6 +281,10 @@ msgid ""
 "you hadn't made those last three commits, while your files remain in the "
 "present. See the help page for some applications."
 msgstr ""
+"bewegt den HEAD Bezeichner drei 'Commits' zurück. Dadurch agieren nun alle "
+"Git Anweisungen als hätte es die drei letzten 'Commits' nicht gegeben, "
+"während deine Dateien unverändert erhalten bleiben. Siehe auf der Git "
+"Hilfeseite für einige Anwendungsbeispiele."
 
 #. type: Plain text
 #: ../en/grandmaster.txt:89
@@ -225,17 +292,19 @@ msgid ""
 "But how can you go back to the future? The past commits know nothing of the "
 "future."
 msgstr ""
+"Aber wie kannst Du zurück in die Zukunft? Die vergangenen 'Commits' wissen "
+"nichts von der Zukunft."
 
 #. type: Plain text
 #: ../en/grandmaster.txt:91
 msgid "If you have the SHA1 of the original HEAD then:"
-msgstr ""
+msgstr "Wenn Du den SHA1 Schlüssel vom originalen HEAD hast, dann:"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:93
 #, no-wrap
 msgid " $ git reset 1b6d\n"
-msgstr ""
+msgstr " $ git reset 1b6d\n"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:95
@@ -244,17 +313,20 @@ msgid ""
 "Git saves the original HEAD as a tag called ORIG_HEAD, and you can return "
 "safe and sound with:"
 msgstr ""
+"Aber stell Dir vor, Du hast ihn niemals notiert? Keine Sorge: Für solche "
+"Anweisungen sichert Git den original HEAD als Bezeichner mit dem Namen "
+"ORIG_HEAD und Du kannst gesund und munter zurückkehren mit:"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:97
 #, no-wrap
 msgid " $ git reset ORIG_HEAD\n"
-msgstr ""
+msgstr " $ git reset ORIG_HEAD\n"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:99
 msgid "=== HEAD-hunting ==="
-msgstr ""
+msgstr "=== KOPF-Jagd ==="
 
 #. type: Plain text
 #: ../en/grandmaster.txt:101
@@ -263,6 +335,9 @@ msgid ""
 "monumental mistake and you need to go back to an ancient commit in a long-"
 "forgotten branch."
 msgstr ""
+"Möglicherweise reicht ORIG_HEAD nicht aus. Vielleicht hast Du gerade "
+"bemerkt, dass Du einen kapitalen Fehler gemacht hast und nun musst Du zu "
+"einem uralten 'Commit' in einem länst vergessenen 'Branch' zurück."
 
 #. type: Plain text
 #: ../en/grandmaster.txt:106
@@ -273,6 +348,11 @@ msgid ""
 "and use trial and error to find the one you want. But there's a much easier "
 "way."
 msgstr ""
+"Standardmäßig behält Git einen 'Commit' für mindesten zwei Wochen, sogar "
+"wenn Du Git anweist den 'Branch' zu zerstören, in dem er enthalten ist. Das "
+"Problem ist, den entsprechenden SHA1-Wert zu finden. Du kannst Dir alle SHA1-"
+"Werte in `.git/objects` vornehmen und ausprobieren ob Du den gesuchten "
+"'Commit' findest. Aber es gibt einen viel einfacheren Weg."
 
 #. type: Plain text
 #: ../en/grandmaster.txt:108
@@ -283,46 +363,57 @@ msgid ""
 "can be used to find hashes of commits on branches that have been "
 "accidentally lopped off."
 msgstr ""
+"Git speichert jeden errechneten SHA1-Wert eines 'Commits' in `.git/logs`. "
+"Das Unterverzeichnis `refs` enthält den Verlauf aller Aktivitäten auf allen "
+"'Branches', während `HEAD` alle SHA1-Werte enthält, die jemals diese "
+"Bezeichnung hatten. Die letztere kann verwendet werden um SHA1-Werte von "
+"'Commits' zu finden, die sich in einem 'Branch' befanden, der versehentlich "
+"gestutzt wurde."
 
 #. type: Plain text
 #: ../en/grandmaster.txt:110
 msgid ""
 "The reflog command provides a friendly interface to these log files. Try"
 msgstr ""
+"Die reflog Anweisung bietet eine benutzerfreundliche Schnittstelle zu diesen "
+"Logdateien. Versuche"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:112
 #, no-wrap
 msgid "  $ git reflog\n"
-msgstr ""
+msgstr "  $ git reflog\n"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:114
 msgid "Instead of cutting and pasting hashes from the reflog, try:"
 msgstr ""
+"Anstatt SHA1-Werte aus dem reflog zu kopieren und einzufügen, versuche:"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:116
 #, no-wrap
 msgid " $ git checkout \"@{10 minutes ago}\"\n"
-msgstr ""
+msgstr " $ git checkout \"@{10 minutes ago}\"\n"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:118
 msgid "Or checkout the 5th-last visited commit via:"
-msgstr ""
+msgstr "Oder rufe den fünftletzten 'Commit' ab, mit:"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:120
 #, no-wrap
 msgid " $ git checkout \"@{5}\"\n"
-msgstr ""
+msgstr " $ git checkout \"@{5}\"\n"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:122
 msgid ""
 "See the ``Specifying Revisions'' section of *git help rev-parse* for more."
 msgstr ""
+"Siehe in der ``Specifying Revisions'' Sektion von *git help rev-parse* für "
+"mehr."
 
 #. type: Plain text
 #: ../en/grandmaster.txt:125
@@ -330,12 +421,14 @@ msgid ""
 "You may wish to configure a longer grace period for doomed commits. For "
 "example:"
 msgstr ""
+"Vielleicht möchtest Du eine längere Gnadenfrist für todgeweihte 'Commits' "
+"konfigurieren. Zum Beispiel:"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:127
 #, no-wrap
 msgid "  $ git config gc.pruneexpire \"30 days\"\n"
-msgstr ""
+msgstr "  $ git config gc.pruneexpire \"30 days\"\n"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:130
@@ -343,28 +436,33 @@ msgid ""
 "means a deleted commit will only be permanently lost once 30 days have "
 "passed and *git gc* is run."
 msgstr ""
+"bedeutet, ein gelöschter 'Commit' wird nur dann endgültig verloren sein, "
+"nachdem 30 Tage vergangen sind und *git gc* ausgeführt wurde."
 
 #. type: Plain text
 #: ../en/grandmaster.txt:132
 msgid "You may also wish to disable automatic invocations of *git gc*:"
 msgstr ""
+"Du magst vielleicht auch das automatische Ausführen von *git gc* abstellen:"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:134
 #, no-wrap
 msgid "  $ git config gc.auto 0\n"
-msgstr ""
+msgstr "  $ git config gc.auto 0\n"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:136
 msgid ""
 "in which case commits will only be deleted when you run *git gc* manually."
 msgstr ""
+"wodurch 'Commits' nur noch gelöscht werden, wenn Du *git gc* manuell "
+"aufrufst."
 
 #. type: Plain text
 #: ../en/grandmaster.txt:138
 msgid "=== Building On Git ==="
-msgstr ""
+msgstr "=== Auf Git bauen ==="
 
 #. type: Plain text
 #: ../en/grandmaster.txt:140
@@ -376,6 +474,14 @@ msgid ""
 "scripts standing on the shoulders of giants. With a little tinkering, you "
 "can customize Git to suit your preferences."
 msgstr ""
+"In echter UNIX Sitte erlaubt es Git's Design, dass es auf einfache Weise als "
+"Low-Level-Komponente von anderen Programmen benutzt werden kann, wie zum "
+"Beispiel grafischen Benutzeroberflächen und Internetanwendungen, alternative "
+"Kommandozeilenanwendungen, Patch-Werkzeugen, Import- und "
+"Konvertierungswerkzeugen und so weiter. Sogar einige Git Anweisungen selbst "
+"sind nur winzige Skripte, wie Zwerge auf den Schultern von Riesen. Mit ein "
+"bisschen Handarbeit kannst Du Git anpassen, damit es Deinen Anforderungen "
+"entspricht."
 
 #. type: Plain text
 #: ../en/grandmaster.txt:143
@@ -383,6 +489,8 @@ msgid ""
 "One easy trick is to use built-in Git aliases to shorten your most "
 "frequently used commands:"
 msgstr ""
+"Ein einfacher Trick ist es die in Git integrierte Aliasfunktion zu verwenden "
+"um die am häufigsten benutzten Anweisungen zu verkürzen:"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:148
@@ -393,6 +501,10 @@ msgid ""
 "  alias.co checkout\n"
 "  $ git co foo                              # same as 'git checkout foo'\n"
 msgstr ""
+"  $ git config --global alias.co checkout\n"
+"  $ git config --global --get-regexp alias  # display current aliases\n"
+"  alias.co checkout\n"
+"  $ git co foo                              # same as 'git checkout foo'\n"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:151
@@ -400,12 +512,14 @@ msgid ""
 "Another is to print the current branch in the prompt, or window title.  "
 "Invoking"
 msgstr ""
+"Etwas anderes ist der aktuelle 'Branch' im Prompt oder Fenstertitel. Die "
+"Anweisung"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:153
 #, no-wrap
 msgid "  $ git symbolic-ref HEAD\n"
-msgstr ""
+msgstr "  $ git symbolic-ref HEAD\n"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:156
@@ -413,12 +527,14 @@ msgid ""
 "shows the current branch name. In practice, you most likely want to remove "
 "the \"refs/heads/\" and ignore errors:"
 msgstr ""
+"zeigt den Namen des aktuellen 'Branch'. In der Praxis möchtest Du aber das "
+"\"refs/heads/\" entfernen und Fehler ignorieren:"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:158
 #, no-wrap
 msgid "  $ git symbolic-ref HEAD 2> /dev/null | cut -b 12-\n"
-msgstr ""
+msgstr "  $ git symbolic-ref HEAD 2> /dev/null | cut -b 12-\n"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:162
@@ -427,6 +543,10 @@ msgid ""
 "time, some of them may be promoted to official commands. On Debian and "
 "Ubuntu, this directory lives at +/usr/share/doc/git-core/contrib+."
 msgstr ""
+"Das +contrib+ Unterverzeichnis ist eine Fundgrube von Werkzeugen, die auf "
+"Git aufbauen. Mit der Zeit können einige davon zu offiziellen Anweisungen "
+"befördert werden. Auf Debian und Ubuntu, findet man dieses Verzeichnis unter "
+"+/usr/share/doc/git-core/contrib+."
 
 #. type: Plain text
 #: ../en/grandmaster.txt:164
@@ -435,12 +555,15 @@ msgid ""
 "this script creates a new working directory whose history is shared with the "
 "original repository:"
 msgstr ""
+"Ein beliebter Vertreter ist +workdir/git-new-workdir+. Durch cleveres "
+"verlinken erzeugt dieses Skript ein neues Arbeitsverzeichis, das seine "
+"Versionsgeschichte mit dem original 'Repository' teilt:"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:166
 #, no-wrap
 msgid "  $ git-new-workdir an/existing/repo new/directory\n"
-msgstr ""
+msgstr "  $ git-new-workdir ein/existierendes/repo neues/verzeichnis\n"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:168
@@ -449,11 +572,15 @@ msgid ""
 "since the history is shared, the two trees automatically stay in sync. "
 "There's no need to merge, push, or pull."
 msgstr ""
+"Das neue Verzeichnis und die Dateien darin kann man sich als 'Clone' "
+"vorstellen, mit dem Unterschied, dass durch die gemeinschaftliche "
+"Versionsgeschichte die beiden Versionen automatisch synchron bleiben. Eine "
+"Synchronisierung mittels 'merge', 'push' oder 'pull' ist nicht notwendig."
 
 #. type: Plain text
 #: ../en/grandmaster.txt:170
 msgid "=== Daring Stunts ==="
-msgstr ""
+msgstr "=== Gewagte Kunststücke ==="
 
 #. type: Plain text
 #: ../en/grandmaster.txt:174
@@ -462,18 +589,21 @@ msgid ""
 "data.  But if you know what you are doing, you can override safeguards for "
 "common commands."
 msgstr ""
+"Heutzutage macht es Git dem Anwender schwer versehentlich Daten zu "
+"zerstören. Aber, wenn man weiß was man tut, kann man die Schutzmaßnahmen der "
+"häufigsten Anweisungen umgehen."
 
 #. type: Plain text
 #: ../en/grandmaster.txt:176
 #, no-wrap
 msgid "*Checkout*: Uncommitted changes cause checkout to fail. To destroy your changes, and checkout a given commit anyway, use the force flag:\n"
-msgstr ""
+msgstr "*Checkout*: Nicht versionierte Änderungen lassen 'checkout' scheitern. Um trotzdem die Änderungen zu zerstören und einen vorhandenen 'Commit' abzurufen, benutzen wir die 'force' Option:\n"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:178
 #, no-wrap
 msgid "  $ git checkout -f HEAD^\n"
-msgstr ""
+msgstr "  $ git checkout -f HEAD^\n"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:180
@@ -482,30 +612,34 @@ msgid ""
 "are no safety checks. The supplied paths are quietly overwritten. Take care "
 "if you use checkout in this manner."
 msgstr ""
+"Auf der anderen Seite, wenn Du einen speziellen Pfad für 'checkout' angibst, "
+"gibt es keinen Sicherheitsüberprüfungen mehr. Der angegebene Pfad wird "
+"stillschweigend überschrieben. Sei vorsichtig, wenn Du 'checkout' auf diese "
+"Weise benutzt."
 
 #. type: Plain text
 #: ../en/grandmaster.txt:182
 #, no-wrap
 msgid "*Reset*: Reset also fails in the presence of uncommitted changes. To force it through, run:\n"
-msgstr ""
+msgstr "*Reset*: Reset versagt auch, wenn unversionierte Änderungen vorliegen. Um es zu erzwingen, verwende:\n"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:184
 #, no-wrap
 msgid "  $ git reset --hard 1b6d\n"
-msgstr ""
+msgstr "  $ git reset --hard 1b6d\n"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:186
 #, no-wrap
 msgid "*Branch*: Deleting branches fails if this causes changes to be lost. To force a deletion, type:\n"
-msgstr ""
+msgstr "*Branch*: 'Branches' zu löschen scheitert ebenfalls, wenn dadurch Änderungen verloren gehen. Um das Löschen zu erzwingen, gib ein:\n"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:188
 #, no-wrap
 msgid "  $ git branch -D dead_branch  # instead of -d\n"
-msgstr ""
+msgstr "  $ git branch -D dead_branch  # instead of -d\n"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:190
@@ -513,12 +647,15 @@ msgid ""
 "Similarly, attempting to overwrite a branch via a move fails if data loss "
 "would ensue. To force a branch move, type:"
 msgstr ""
+"Ebenso scheitert der Versuch einen 'Branch' durch ein 'move' zu "
+"überschreiben, wenn das einen Datenverlust zur Folge hat. Um das Verschieben "
+"zu erzwingen, gib ein:"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:192
 #, no-wrap
 msgid "  $ git branch -M source target  # instead of -m\n"
-msgstr ""
+msgstr "  $ git branch -M source target  # instead of -m\n"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:197
@@ -528,6 +665,11 @@ msgid ""
 "recovering the appropriate hash from `.git/logs` (see \"HEAD-hunting\" "
 "above).  By default, they will be kept for at least two weeks."
 msgstr ""
+"Anders als bei 'checkout' und 'reset' verschieben diese beiden Anweisungen "
+"das Zerstören der Daten. Die Änderungen bleiben im .git Unterverzeichnis "
+"gespeichert und können wieder hergestellt werden, wenn der entsprechende "
+"SHA1-Wert aus `.git/logs` ermittelt wird (siehe \"KOPF-Jagd\" oben). "
+"Standardmäßig bleiben die Daten mindestens zwei Wochen erhalten."
 
 #. type: Plain text
 #: ../en/grandmaster.txt:201
@@ -536,23 +678,23 @@ msgid ""
 "*Clean*: Some git commands refuse to proceed because they're worried about\n"
 "clobbering untracked files. If you're certain that all untracked files and\n"
 "directories are expendable, then delete them mercilessly with:\n"
-msgstr ""
+msgstr "*Clean*: Verschiedene git Anweisungen scheitern, weil sie Konflikte mit unversionierten Dateien vermuten. Wenn Du sicher bist, dass alle unversionierten Dateien und Verzeichnisse entbehrlich sind, dann lösche diese gnadenlos mit:\n"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:203
 #, no-wrap
 msgid "  $ git clean -f -d\n"
-msgstr ""
+msgstr "  $ git clean -f -d\n"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:205
 msgid "Next time, that pesky command will work!"
-msgstr ""
+msgstr "Beim nächsten Mal werden diese lästigen Anweisung gehorchen!"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:207
 msgid "=== Preventing Bad Commits ==="
-msgstr ""
+msgstr "=== Verhindere schlechte 'Commits' ==="
 
 #. type: Plain text
 #: ../en/grandmaster.txt:212
@@ -562,6 +704,10 @@ msgid ""
 "and unresolved merge conflicts: though harmless, I wish these never appeared "
 "on the public record."
 msgstr ""
+"Dumme Fehler verschmutzen meine 'Repositories'. Am schrecklichsten sind "
+"fehlende Dateien wegen eines vergessenen *git add*. Kleinere Verfehlungen "
+"sind Leerzeichen am Zeilenende und ungelöste 'merge'-Konflikte: obwohl sie "
+"harmlos sind, wünschte ich, sie würden nie in der Öffentlichkeit erscheinen."
 
 #. type: Plain text
 #: ../en/grandmaster.txt:214
@@ -569,6 +715,8 @@ msgid ""
 "If only I had bought idiot insurance by using a _hook_ to alert me about "
 "these problems:"
 msgstr ""
+"Wenn ich doch nur eine Trottelversicherung abgeschlossen hätte, durch "
+"Verwendung eines _hook_, der mich bei solchen Problemen alarmiert."
 
 #. type: Plain text
 #: ../en/grandmaster.txt:217
@@ -577,6 +725,8 @@ msgid ""
 " $ cd .git/hooks\n"
 " $ cp pre-commit.sample pre-commit  # Older Git versions: chmod +x pre-commit\n"
 msgstr ""
+" $ cd .git/hooks\n"
+" $ cp pre-commit.sample pre-commit  # Older Git versions: chmod +x pre-commit\n"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:220
@@ -584,6 +734,8 @@ msgid ""
 "Now Git aborts a commit if useless whitespace or unresolved merge conflicts "
 "are detected."
 msgstr ""
+"Nun bricht Git einen 'Commit' ab, wenn es überflüssige Leerzeichen am "
+"Zeilenende oder ungelöste 'merge'-Konflikte entdeckt."
 
 #. type: Plain text
 #: ../en/grandmaster.txt:223
@@ -591,6 +743,8 @@ msgid ""
 "For this guide, I eventually added the following to the beginning of the "
 "*pre-commit* hook to guard against absent-mindedness:"
 msgstr ""
+"Für diese Anleitung hätte ich vielleicht am Anfang des *pre-commit* 'hook' "
+"folgendes hinzugefügt, zum Schutz vor Zerstreutheit:"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:228
@@ -601,6 +755,10 @@ msgid ""
 "   exit 1\n"
 " fi\n"
 msgstr ""
+" if git ls-files -o | grep '\\.txt$'; then\n"
+"   echo FAIL! Untracked .txt files.\n"
+"   exit 1\n"
+" fi\n"
 
 #. type: Plain text
 #: ../en/grandmaster.txt:232
@@ -610,3 +768,8 @@ msgid ""
 "whenever the head moves. The sample post-update script updates files Git "
 "needs for communication over Git-agnostic transports such as HTTP."
 msgstr ""
+"Viele Git Operationen unterstützen 'hooks'; siehe *git help hooks*. Wir "
+"haben den Beispiel 'hook' *post-update* aktiviert, weiter oben im Abschnitt "
+"Git über HTTP. Dieser läuft immer, wenn der 'HEAD' sich bewegt. Das Beispiel "
+"'post-update' Skript aktualisiert Dateien, welche Git für die Kommunikation "
+"über 'Git-agnostic transports' wie z.B. HTTP benötigt."

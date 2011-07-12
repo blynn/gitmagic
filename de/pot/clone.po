@@ -1,14 +1,14 @@
 # Git Magic - A guide to using Git
 # This file is distributed under the GNU GENERAL PUBLIC LICENSE Version 3.
 # Benn Lynn <benlynn@gmail.com>, 2007.
-# Armin Stebich <armin@lordofbikes.de>, 2010.
+# Armin Stebich <armin@lordofbikes.de>, 2010, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Git Magic deutsch\n"
 "Report-Msgid-Bugs-To: bennlynn@gmail.com\n"
-"POT-Creation-Date: 2010-10-30 08:21+0300\n"
-"PO-Revision-Date: 2010-11-03 00:44+0100\n"
+"POT-Creation-Date: 2011-07-03 23:06+0300\n"
+"PO-Revision-Date: 2011-07-04 18:21+0200\n"
 "Last-Translator: Armin Stebich <armin@lordofbikes.de>\n"
 "Language-Team: DE <gitmagic@lordofbikes.de>\n"
 "Language: de\n"
@@ -118,7 +118,7 @@ msgid "Initialize a Git repository for your files:"
 msgstr "Erstelle ein Git 'Repository' für deine Dateien:"
 
 #. type: Plain text
-#: ../en/clone.txt:29 ../en/clone.txt:138
+#: ../en/clone.txt:29 ../en/clone.txt:157
 #, no-wrap
 msgid ""
 " $ git init\n"
@@ -144,12 +144,12 @@ msgid ""
 " $ mkdir proj.git\n"
 " $ cd proj.git\n"
 " $ git init --bare\n"
-" $  # one-line variant: GIT_DIR=proj.git git init\n"
+" $ touch proj.git/git-daemon-export-ok\n"
 msgstr ""
 " $ mkdir proj.git\n"
 " $ cd proj.git\n"
 " $ git init --bare\n"
-" $  # einzeilige Variante: GIT_DIR=proj.git git init\n"
+" $ touch proj.git/git-daemon-export-ok\n"
 
 #. type: Plain text
 #: ../en/clone.txt:38
@@ -180,8 +180,8 @@ msgstr "Übertrage ('push') dein Projekt auf den zentralen Server mit:"
 #. type: Plain text
 #: ../en/clone.txt:47
 #, no-wrap
-msgid " $ git push git://central.server/path/to/proj.git HEAD\n"
-msgstr " $ git push git://zentraler.server/pfad/zu/proj.git HEAD\n"
+msgid " $ git push central.server/path/to/proj.git HEAD\n"
+msgstr " $ git push zentraler.server/pfad/zu/proj.git HEAD\n"
 
 #. type: Plain text
 #: ../en/clone.txt:49
@@ -191,8 +191,8 @@ msgstr "Um die Quellcodes abzurufen gibt ein Entwickler folgendes ein:"
 #. type: Plain text
 #: ../en/clone.txt:51
 #, no-wrap
-msgid " $ git clone git://central.server/path/to/proj.git\n"
-msgstr " $ git clone git://zentraler.server/pfad/zu/proj.git\n"
+msgid " $ git clone central.server/path/to/proj.git\n"
+msgstr " $ git clone zentraler.server/pfad/zu/proj.git\n"
 
 #. type: Plain text
 #: ../en/clone.txt:53
@@ -211,7 +211,7 @@ msgid "To update to the latest version:"
 msgstr "Um auf die aktuelle Server-Version zu aktualisieren:"
 
 #. type: Plain text
-#: ../en/clone.txt:59 ../en/clone.txt:110
+#: ../en/clone.txt:59 ../en/clone.txt:126
 #, no-wrap
 msgid " $ git pull\n"
 msgstr " $ git pull\n"
@@ -235,7 +235,7 @@ msgid " $ git push\n"
 msgstr " $ git push\n"
 
 #. type: Plain text
-#: ../en/clone.txt:71
+#: ../en/clone.txt:70
 msgid ""
 "If the main server has new changes due to activity by other developers, the "
 "push fails, and the developer should pull the latest version, resolve any "
@@ -248,11 +248,59 @@ msgstr ""
 
 #. type: Plain text
 #: ../en/clone.txt:73
+msgid ""
+"Developers must have SSH access for the above pull and push commands.  "
+"However, anyone can see the source by typing:"
+msgstr ""
+"Entwickler brauchen SSH Zugriff für die vorherigen 'pull' und 'push' "
+"Anweisungen. Trotzdem kann jedermann die Quelltexte einsehen, durch Eingabe "
+"von:"
+
+#. type: Plain text
+#: ../en/clone.txt:75
+#, no-wrap
+msgid " $ git clone git://central.server/path/to/proj.git\n"
+msgstr " $ git clone git://zentraler.server/pfad/zu/proj.git\n"
+
+#. type: Plain text
+#: ../en/clone.txt:79
+msgid ""
+"The native git protocol is like HTTP: there is no authentication, so anyone "
+"can retrieve the project. Accordingly, by default, pushing is forbidden via "
+"the git protocol."
+msgstr ""
+"Das ursprüngliche Git-Protokoll ähnelt HTTP: Es gibt keine "
+"Authentifizierung, also kann jeder das Projekt abrufen. Folglich ist "
+"standardmäßig das 'Pushen' per Git-Protokoll verboten."
+
+#. type: Plain text
+#: ../en/clone.txt:81
+msgid "=== Secret Source ==="
+msgstr "=== Geheime Quellen ==="
+
+#. type: Plain text
+#: ../en/clone.txt:87
+msgid ""
+"For a closed-source project, omit the touch command, and ensure you never "
+"create a file named `git-daemon-export-ok`. The repository can no longer be "
+"retrieved via the git protocol; only those with SSH access can see it. If "
+"all your repos are closed, running the git daemon is unnecessary because all "
+"communication occurs via SSH."
+msgstr ""
+"Für ein Closed-Source-Projekt lasse die 'touch' Anweisung weg und stelle "
+"sicher, dass niemals eine Datei namens `git-daemon-export-ok` erstellt wird. "
+"Das 'Repository' kann nun nicht mehr über das Git-Protokol abgerufen werden; "
+"nur diejenigen mit SSH Zugriff können es einsehen. Wenn alle 'Repositories' "
+"geschlossen sind, ist es unnötig den Git Dämon laufen zu lassen, da jegliche "
+"Kommunikation über SSH läuft."
+
+#. type: Plain text
+#: ../en/clone.txt:89
 msgid "=== Bare repositories ==="
 msgstr "=== 'Nackte Repositories' ==="
 
 #. type: Plain text
-#: ../en/clone.txt:75
+#: ../en/clone.txt:91
 msgid ""
 "A bare repository is so named because it has no working directory; it only "
 "contains files that are normally hidden away in the `.git` subdirectory. In "
@@ -266,7 +314,7 @@ msgstr ""
 "beliebigen Version."
 
 #. type: Plain text
-#: ../en/clone.txt:82
+#: ../en/clone.txt:98
 msgid ""
 "A bare repository plays a role similar to that of the main server in a "
 "centralized version control system: the home of your project. Developers "
@@ -283,7 +331,7 @@ msgstr ""
 "statt, so kann das Heim-'Repository' ohne Arbeitsverzeichnis auskommen."
 
 #. type: Plain text
-#: ../en/clone.txt:84
+#: ../en/clone.txt:100
 msgid ""
 "Many Git commands fail on bare repositories unless the `GIT_DIR` environment "
 "variable is set to the repository path, or the `--bare` option is supplied."
@@ -293,12 +341,12 @@ msgstr ""
 "oder die `--bare` Option wird übergeben."
 
 #. type: Plain text
-#: ../en/clone.txt:86
+#: ../en/clone.txt:102
 msgid "=== Push versus pull ==="
 msgstr "=== 'Push' oder 'Pull' ==="
 
 #. type: Plain text
-#: ../en/clone.txt:94
+#: ../en/clone.txt:110
 msgid ""
 "Why did we introduce the push command, rather than rely on the familiar pull "
 "command? Firstly, pulling fails on bare repositories: instead you must "
@@ -319,7 +367,7 @@ msgstr ""
 "wir gar keine Berechtigung für eine Serverkonsole haben."
 
 #. type: Plain text
-#: ../en/clone.txt:96
+#: ../en/clone.txt:112
 msgid ""
 "However, apart from this case, we discourage pushing into a repository, "
 "because confusion can ensue when the destination has a working directory."
@@ -329,7 +377,7 @@ msgstr ""
 "Verwirrungen entstehen."
 
 #. type: Plain text
-#: ../en/clone.txt:98
+#: ../en/clone.txt:114
 msgid ""
 "In short, while learning Git, only push when the target is a bare "
 "repository; otherwise pull."
@@ -338,12 +386,12 @@ msgstr ""
 "'bare Repository' ist; andernfalls benutze 'pull'."
 
 #. type: Plain text
-#: ../en/clone.txt:100
+#: ../en/clone.txt:116
 msgid "=== Forking a Project ==="
 msgstr "=== 'Fork' eines Projekts ==="
 
 #. type: Plain text
-#: ../en/clone.txt:102
+#: ../en/clone.txt:118
 msgid ""
 "Sick of the way a project is being run? Think you could do a better job? "
 "Then on your server:"
@@ -352,18 +400,18 @@ msgstr ""
 "besser? Dann mache folgendes auf deinem Server:"
 
 #. type: Plain text
-#: ../en/clone.txt:104
+#: ../en/clone.txt:120
 #, no-wrap
 msgid " $ git clone git://main.server/path/to/files\n"
 msgstr " $ git clone git://haupt.server/pfad/zu/dateien\n"
 
 #. type: Plain text
-#: ../en/clone.txt:106
+#: ../en/clone.txt:122
 msgid "Next, tell everyone about your fork of the project at your server."
 msgstr "Dann erzähle jedem von deiner 'Fork' des Projekts auf deinem Server."
 
 #. type: Plain text
-#: ../en/clone.txt:108
+#: ../en/clone.txt:124
 msgid ""
 "At any later time, you can merge in the changes from the original project "
 "with:"
@@ -372,12 +420,12 @@ msgstr ""
 "'mergen' mit: "
 
 #. type: Plain text
-#: ../en/clone.txt:112
+#: ../en/clone.txt:128
 msgid "=== Ultimate Backups ==="
 msgstr "=== Ultimative Datensicherung ==="
 
 #. type: Plain text
-#: ../en/clone.txt:114
+#: ../en/clone.txt:130
 msgid ""
 "Want numerous tamper-proof geographically diverse redundant archives? If "
 "your project has many developers, don't do anything! Every clone of your "
@@ -395,7 +443,7 @@ msgstr ""
 "anderen zu kommunizieren."
 
 #. type: Plain text
-#: ../en/clone.txt:116
+#: ../en/clone.txt:132
 msgid ""
 "If your project is not so popular, find as many servers as you can to host "
 "clones."
@@ -404,7 +452,7 @@ msgstr ""
 "um dort einen 'Clone' zu platzieren."
 
 #. type: Plain text
-#: ../en/clone.txt:118
+#: ../en/clone.txt:134
 msgid ""
 "The truly paranoid should always write down the latest 20-byte SHA1 hash of "
 "the HEAD somewhere safe. It has to be safe, not private. For example, "
@@ -418,12 +466,12 @@ msgstr ""
 "Zeitungskopie zu manipulieren."
 
 #. type: Plain text
-#: ../en/clone.txt:120
+#: ../en/clone.txt:136
 msgid "=== Light-Speed Multitask ==="
 msgstr "=== Multitasking mit Lichtgeschwindigkeit ==="
 
 #. type: Plain text
-#: ../en/clone.txt:122
+#: ../en/clone.txt:138
 msgid ""
 "Say you want to work on several features in parallel. Then commit your "
 "project and run:"
@@ -432,44 +480,46 @@ msgstr ""
 "'commite' dein Projekt und gib ein:"
 
 #. type: Plain text
-#: ../en/clone.txt:124 ../en/clone.txt:142
+#: ../en/clone.txt:140 ../en/clone.txt:161
 #, no-wrap
 msgid " $ git clone . /some/new/directory\n"
 msgstr " $ git clone . /irgendein/neuer/ordner\n"
 
 #. type: Plain text
-#: ../en/clone.txt:126
+#: ../en/clone.txt:143
 msgid ""
-"Git exploits hard links and file sharing as much as safely possible to "
-"create this clone, so it will be ready in a flash, and you can now work on "
-"two independent features simultaneously. For example, you can edit one clone "
-"while the other is compiling."
+"Thanks to http://en.wikipedia.org/wiki/Hard_link[hardlinking], local clones "
+"require less time and space than a plain backup."
 msgstr ""
-"Wann immer es sicher ist nutzt Git Verknüpfungen und Dateifreigaben um "
-"diesen 'Clone' zu erzeugen, deshalb wird es blitzartig fertig sein und du "
-"kannst nun an zwei unabhängigen Funktionen arbeiten. Zum Beispiel kannst du "
-"im einen 'Clone' editieren, während der andere übersetzt wird."
+"http://de.wikipedia.org/wiki/Harter_Link[Harten Links] ist es zu verdanken, "
+"dass ein lokaler Klon weniger Zeit und Speicherplatz benötigt als eine "
+"herkömmliche Datensicherung."
 
 #. type: Plain text
-#: ../en/clone.txt:128
-msgid "At any time, you can commit and pull changes from the other clone."
+#: ../en/clone.txt:147
+msgid ""
+"You can now work on two independent features simultaneously. For example, "
+"you can edit one clone while the other is compiling. At any time, you can "
+"commit and pull changes from the other clone:"
 msgstr ""
-"Zu jeder Zeit kannst du 'commiten' und die Änderungen vom anderen 'Clone' "
-"mit 'pull' übernehmen."
+"Du kannst nun an zwei unabhängigen Funktionen gleichzeitig arbeiten. Zum "
+"Beispiel kannst Du einen Klon bearbeiten, während der andere kompiliert "
+"wird. Zu jeder Zeit kannst Du 'comitten' und die Änderungen des anderen Klon "
+"'pullen'."
 
 #. type: Plain text
-#: ../en/clone.txt:130
+#: ../en/clone.txt:149
 #, no-wrap
 msgid " $ git pull /the/other/clone HEAD\n"
 msgstr " $ git pull /der/andere/clone HEAD\n"
 
 #. type: Plain text
-#: ../en/clone.txt:132
+#: ../en/clone.txt:151
 msgid "=== Guerilla Version Control ==="
 msgstr "=== Versionsverwaltung im Untergrund ==="
 
 #. type: Plain text
-#: ../en/clone.txt:134
+#: ../en/clone.txt:153
 msgid ""
 "Are you working on a project that uses some other version control system, "
 "and you sorely miss Git? Then initialize a Git repository in your working "
@@ -480,12 +530,12 @@ msgstr ""
 "Arbeitsverzeichnis:"
 
 #. type: Plain text
-#: ../en/clone.txt:140
+#: ../en/clone.txt:159
 msgid "then clone it:"
 msgstr "dann 'Clone' es:"
 
 #. type: Plain text
-#: ../en/clone.txt:144
+#: ../en/clone.txt:163
 msgid ""
 "Now go to the new directory and work here instead, using Git to your heart's "
 "content. Once in a while, you'll want to sync with everyone else, in which "
@@ -498,7 +548,7 @@ msgstr ""
 "Versionsverwaltungssystem und gib ein:"
 
 #. type: Plain text
-#: ../en/clone.txt:147
+#: ../en/clone.txt:166
 #, no-wrap
 msgid ""
 " $ git add .\n"
@@ -508,12 +558,12 @@ msgstr ""
 " $ git commit -m \"Synchronisation mit den anderen\"\n"
 
 #. type: Plain text
-#: ../en/clone.txt:149
+#: ../en/clone.txt:168
 msgid "Then go to the new directory and run:"
 msgstr "Dann gehe wieder ins neue Verzeichnis und gib ein:"
 
 #. type: Plain text
-#: ../en/clone.txt:152
+#: ../en/clone.txt:171
 #, no-wrap
 msgid ""
 " $ git commit -a -m \"Description of my changes\"\n"
@@ -523,7 +573,7 @@ msgstr ""
 " $ git pull\n"
 
 #. type: Plain text
-#: ../en/clone.txt:154
+#: ../en/clone.txt:173
 msgid ""
 "The procedure for giving your changes to everyone else depends on the other "
 "version control system. The new directory contains the files with your "
@@ -537,7 +587,7 @@ msgstr ""
 "'Repository' zu übertragen."
 
 #. type: Plain text
-#: ../en/clone.txt:156
+#: ../en/clone.txt:175
 msgid ""
 "Subversion, perhaps the best centralized version control system, is used by "
 "countless projects. The *git svn* command automates the above for Subversion "
@@ -553,12 +603,12 @@ msgstr ""
 "zu exportieren]."
 
 #. type: Plain text
-#: ../en/clone.txt:158
+#: ../en/clone.txt:177
 msgid "=== Mercurial ==="
 msgstr "=== Mercurial ==="
 
 #. type: Plain text
-#: ../en/clone.txt:160
+#: ../en/clone.txt:179
 msgid ""
 "Mercurial is a similar version control system that can almost seamlessly "
 "work in tandem with Git. With the `hg-git` plugin, a Mercurial user can "
@@ -570,29 +620,29 @@ msgstr ""
 "'pullen'."
 
 #. type: Plain text
-#: ../en/clone.txt:162
+#: ../en/clone.txt:181
 msgid "Obtain the `hg-git` plugin with Git:"
 msgstr "Beschaffe dir die `hg-git`-Erweiterung mit Git:"
 
 #. type: Plain text
-#: ../en/clone.txt:164
+#: ../en/clone.txt:183
 #, no-wrap
 msgid " $ git clone git://github.com/schacon/hg-git.git\n"
 msgstr " $ git clone git://github.com/schacon/hg-git.git\n"
 
 #. type: Plain text
-#: ../en/clone.txt:166
+#: ../en/clone.txt:185
 msgid "or Mercurial:"
 msgstr "oder Mercurial:"
 
 #. type: Plain text
-#: ../en/clone.txt:168
+#: ../en/clone.txt:187
 #, no-wrap
 msgid " $ hg clone http://bitbucket.org/durin42/hg-git/\n"
 msgstr " $ hg clone http://bitbucket.org/durin42/hg-git/\n"
 
 #. type: Plain text
-#: ../en/clone.txt:170
+#: ../en/clone.txt:189
 msgid ""
 "Sadly, I am unaware of an analogous plugin for Git. For this reason, I "
 "advocate Git over Mercurial for the main repository, even if you prefer "
@@ -608,7 +658,7 @@ msgstr ""
 "automatisch die Benutzer von Mercurial mit einbezieht."
 
 #. type: Plain text
-#: ../en/clone.txt:172
+#: ../en/clone.txt:191
 msgid ""
 "Although the plugin can convert a Mercurial repository to a Git repository "
 "by pushing to an empty repository, this job is easier with the `hg-fast-"
@@ -619,18 +669,18 @@ msgstr ""
 "mit dem `hg-fast-export.sh` Skript, welches es hier gibt:"
 
 #. type: Plain text
-#: ../en/clone.txt:174
+#: ../en/clone.txt:193
 #, no-wrap
 msgid " $ git clone git://repo.or.cz/fast-export.git\n"
 msgstr " $ git clone git://repo.or.cz/fast-export.git\n"
 
 #. type: Plain text
-#: ../en/clone.txt:176
+#: ../en/clone.txt:195
 msgid "To convert, in an empty directory:"
 msgstr "Zum Konvertieren gib in einem leeren Verzeichnis ein:"
 
 #. type: Plain text
-#: ../en/clone.txt:179
+#: ../en/clone.txt:198
 #, no-wrap
 msgid ""
 " $ git init\n"
@@ -640,17 +690,17 @@ msgstr ""
 " $ hg-fast-export.sh -r /hg/repo\n"
 
 #. type: Plain text
-#: ../en/clone.txt:181
+#: ../en/clone.txt:200
 msgid "after adding the script to your `$PATH`."
 msgstr "nachdem du das Skript zu deinem `$PATH` hinzugefügt hast."
 
 #. type: Plain text
-#: ../en/clone.txt:183
+#: ../en/clone.txt:202
 msgid "=== Bazaar ==="
 msgstr "=== Bazaar ==="
 
 #. type: Plain text
-#: ../en/clone.txt:186
+#: ../en/clone.txt:205
 msgid ""
 "We briefly mention Bazaar because it is the most popular free distributed "
 "version control system after Git and Mercurial."
@@ -659,7 +709,7 @@ msgstr ""
 "bekannteste freie verteilte Versionsverwaltungssystem ist."
 
 #. type: Plain text
-#: ../en/clone.txt:188
+#: ../en/clone.txt:207
 msgid ""
 "Bazaar has the advantage of hindsight, as it is relatively young; its "
 "designers could learn from mistakes of the past, and sidestep minor "
@@ -673,7 +723,7 @@ msgstr ""
 "bewusst."
 
 #. type: Plain text
-#: ../en/clone.txt:190
+#: ../en/clone.txt:209
 msgid ""
 "A `bzr-git` plugin lets Bazaar users work with Git repositories to some "
 "extent. The `tailor` program converts Bazaar repositories to Git "
@@ -686,12 +736,12 @@ msgstr ""
 "`bzr-fast-export` für einmalige Konvertierungen besser geeignet ist."
 
 #. type: Plain text
-#: ../en/clone.txt:192
+#: ../en/clone.txt:211
 msgid "=== Why I use Git ==="
 msgstr "=== Warum ich Git benutze ==="
 
 #. type: Plain text
-#: ../en/clone.txt:194
+#: ../en/clone.txt:213
 msgid ""
 "I originally chose Git because I heard it could manage the unimaginably "
 "unmanageable Linux kernel source. I've never felt a need to switch. Git has "
@@ -705,7 +755,7 @@ msgstr ""
 "Linux arbeite, sind Probleme anderer Plattformen bedeutungslos."
 
 #. type: Plain text
-#: ../en/clone.txt:196
+#: ../en/clone.txt:215
 msgid ""
 "Also, I prefer C programs and bash scripts to executables such as Python "
 "scripts: there are fewer dependencies, and I'm addicted to fast running "
@@ -716,7 +766,7 @@ msgstr ""
 "süchtig nach schellen Ausführungszeiten."
 
 #. type: Plain text
-#: ../en/clone.txt:198
+#: ../en/clone.txt:217
 msgid ""
 "I did think about how Git could be improved, going so far as to write my own "
 "Git-like tool, but only as an academic exercise. Had I completed my project, "
@@ -730,7 +780,7 @@ msgstr ""
 "um den Einsatz eines Eigenbrödler-Systems zu rechtfertigen."
 
 #. type: Plain text
-#: ../en/clone.txt:199
+#: ../en/clone.txt:218
 msgid ""
 "Naturally, your needs and wants likely differ, and you may be better off "
 "with another system. Nonetheless, you can't go far wrong with Git."
@@ -738,3 +788,19 @@ msgstr ""
 "Natürlich können deine Bedürfnisse und Wünsche ganz anders sein und "
 "vielleicht bist du mit einem anderen System besser dran. Wie auch immer, mit "
 "Git kannst du nicht viel falsch machen."
+
+#~ msgid ""
+#~ "Git exploits hard links and file sharing as much as safely possible to "
+#~ "create this clone, so it will be ready in a flash, and you can now work "
+#~ "on two independent features simultaneously. For example, you can edit one "
+#~ "clone while the other is compiling."
+#~ msgstr ""
+#~ "Wann immer es sicher ist nutzt Git Verknüpfungen und Dateifreigaben um "
+#~ "diesen 'Clone' zu erzeugen, deshalb wird es blitzartig fertig sein und du "
+#~ "kannst nun an zwei unabhängigen Funktionen arbeiten. Zum Beispiel kannst "
+#~ "du im einen 'Clone' editieren, während der andere übersetzt wird."
+
+#~ msgid "At any time, you can commit and pull changes from the other clone."
+#~ msgstr ""
+#~ "Zu jeder Zeit kannst du 'commiten' und die Änderungen vom anderen 'Clone' "
+#~ "mit 'pull' übernehmen."

@@ -47,7 +47,7 @@ Ordner:
  $ mkdir proj.git
  $ cd proj.git
  $ git init --bare
- $  # einzeilige Variante: GIT_DIR=proj.git git init
+ $ touch proj.git/git-daemon-export-ok
 
 Wenn nötig, starte den Git-Dämon:
 
@@ -59,11 +59,11 @@ Website aus.
 
 Übertrage ('push') dein Projekt auf den zentralen Server mit:
 
- $ git push git://zentraler.server/pfad/zu/proj.git HEAD
+ $ git push zentraler.server/pfad/zu/proj.git HEAD
 
 Um die Quellcodes abzurufen gibt ein Entwickler folgendes ein:
 
- $ git clone git://zentraler.server/pfad/zu/proj.git
+ $ git clone zentraler.server/pfad/zu/proj.git
 
 Nach dem Bearbeiten sichert der Entwickler die Änderungen lokal:
 
@@ -86,6 +86,25 @@ Wenn inzwischen neue Änderungen von anderen Entwicklern beim Hauptserver
 eingegangen sind, schlägt dein 'push' fehl. Aktualisiere das lokale
 'Repository' erneut mit 'pull', löse eventuell aufgetretene
 'Merge'-Konflikte und versuche es nochmal.
+
+Entwickler brauchen SSH Zugriff für die vorherigen 'pull' und 'push'
+Anweisungen. Trotzdem kann jedermann die Quelltexte einsehen, durch Eingabe
+von:
+
+ $ git clone git://zentraler.server/pfad/zu/proj.git
+
+Das ursprüngliche Git-Protokoll ähnelt HTTP: Es gibt keine
+Authentifizierung, also kann jeder das Projekt abrufen. Folglich ist
+standardmäßig das 'Pushen' per Git-Protokoll verboten.
+
+=== Geheime Quellen ===
+
+Für ein Closed-Source-Projekt lasse die 'touch' Anweisung weg und stelle
+sicher, dass niemals eine Datei namens `git-daemon-export-ok` erstellt
+wird. Das 'Repository' kann nun nicht mehr über das Git-Protokol abgerufen
+werden; nur diejenigen mit SSH Zugriff können es einsehen. Wenn alle
+'Repositories' geschlossen sind, ist es unnötig den Git Dämon laufen zu
+lassen, da jegliche Kommunikation über SSH läuft.
 
 === 'Nackte Repositories' ===
 
@@ -166,13 +185,14 @@ Nehmen wir an du willst parallel an mehreren Funktionen arbeiten. Dann
 
  $ git clone . /irgendein/neuer/ordner
 
-Wann immer es sicher ist nutzt Git Verknüpfungen und Dateifreigaben um
-diesen 'Clone' zu erzeugen, deshalb wird es blitzartig fertig sein und du
-kannst nun an zwei unabhängigen Funktionen arbeiten. Zum Beispiel kannst du
-im einen 'Clone' editieren, während der andere übersetzt wird.
+http://de.wikipedia.org/wiki/Harter_Link[Harten Links] ist es zu verdanken,
+dass ein lokaler Klon weniger Zeit und Speicherplatz benötigt als eine
+herkömmliche Datensicherung.
 
-Zu jeder Zeit kannst du 'commiten' und die Änderungen vom anderen 'Clone'
-mit 'pull' übernehmen.
+Du kannst nun an zwei unabhängigen Funktionen gleichzeitig arbeiten. Zum
+Beispiel kannst Du einen Klon bearbeiten, während der andere kompiliert
+wird. Zu jeder Zeit kannst Du 'comitten' und die Änderungen des anderen Klon
+'pullen'.
 
  $ git pull /der/andere/clone HEAD
 

@@ -1,0 +1,287 @@
+== Git für Fortgeschrittene ==
+
+Mittlerweile solltest Du Dich in den *git help* Seiten zurechtfinden und das
+meiste verstanden haben. Trotzdem kann es langwierig sein, den exakten
+Befehl zur Lösung einer bestimmten Aufgabe herauszufinden. Vielleicht kann
+ich Dir etwas Zeit sparen: Nachfolgend findest Du ein paar Rezepte, die ich
+in der Vergangenheit gebraucht habe.
+
+=== Quellcode veröffentlichen ===
+
+Bei meinen Projekten verwaltet Git genau die Dateien, die ich archivieren
+und für andere Benutzer veröffentlichen will. Um ein tarball-Archiv des
+Quellcodes zu erzeugen, verwende ich den Befehl:
+
+ $ git archive --format=tar --prefix=proj-1.2.3/ HEAD
+
+=== 'Commite' Änderungen ===
+
+Git mitzuteilen, welche Dateien man hinzugefügt, gelöscht und umbenannt hat,
+ist für manche Projekte sehr mühsam. Stattdessen kann man folgendes
+eingeben:
+
+ $ git add .
+ $ git add -u
+
+Git wird sich die Dateien im aktuellen Verzeichnis ansehen und sich die
+Details selbst erarbeiten. Anstelle des zweiten Befehl kann man auch `git
+commit -a` ausführen, falls man an dieser Stelle ohnehin 'comitten'
+möchte. Siehe *git help ignore* um zu sehen, wie man Dateien definiert, die
+ignoriert werden sollen.
+
+Man kann das aber auch in einem einzigen Schritt ausführen mit:
+
+ $ git ls-files -d -m -o -z | xargs -0 git update-index --add --remove
+
+Die *-z* und *-0* Optionen verhindern unerwünschte Nebeneffekte durch
+Dateinamen mit ungewöhnlichen Zeichen. Da diese Anweisung aber auch zu
+ignorierende Dateien hinzufügt, kann man noch die `-x` oder `-X` Option
+hinzufügen.
+
+=== Mein 'Commit' ist zu groß! ===
+
+Hast Du es zu lange versäumt zu 'comitten'? Hast Du so versessen
+programmiert, daß Du darüber die Quellcodeverwaltung vergessen hast? Machst
+Du eine Serie von unabhängigen Änderungen, weil es Dein Stil ist?
+
+Keine Sorge, gib ein:
+
+ $ git add -p
+
+Für jede Änderung, die Du gemacht hast, zeigt Git Dir die Codepassagen, die
+sich geändert haben und fragt ob sie Teil des nächsten 'Commit' sein
+sollen. Antworte mit "y" für Ja oder "n" für Nein. Du hast auch noch andere
+Optionen, z.B. den Aufschub der Entscheidung; drücke "?" um mehr zu
+erfahren.
+
+Wenn Du zufrieden bist, gib
+
+ $ git commit
+
+ein um exakt die ausgewählten Änderungen zu 'comitten' (die "inszenierten"
+Änderungen). Achte darauf, nicht die Option *-a* einzusetzen, anderenfalls
+wird Git alle Änderungen 'comitten'.
+
+Was ist, wenn Du viele Dateien an verschiedenen Orten bearbeitet hast? Jede
+Datei einzeln nachzuprüfen ist frustrierend und ermüdend. In diesem Fall
+verwende *git add -i*, dessen Bedienung ist nicht ganz einfach, dafür aber
+sehr flexibel. Mit ein paar Tastendrücken kannst Du mehrere geänderte
+Dateien für den 'Commit' hinzufügen ('stage') oder entfernen ('unstage')
+oder Änderungen einzelner Dateien nachprüfen und hinzufügen. Alternativ
+kannst Du *git commit \--interactive* verwenden, was dann automatisch die
+ausgewählten Änderungen 'commited' nachdem Du fertig bist.
+
+=== Der Index: Git's Bereitstellungsraum ===
+
+Bis jetzt haben wir Git's berühmten 'Index' gemieden, aber nun müssen wir
+uns mit ihm auseinandersetzen um das bisherige zu erklären. Der Index ist
+ein temporärer Bereitstellungsraum. Git tauscht selten Daten direkt zwischen
+Deinem Projekt und seiner Versionsgeschichte aus. Vielmehr schreibt Git die
+Daten zuerst in den Index, danach kopiert es die Daten aus dem Index an
+ihren eigentlichen Bestimmungsort.
+
+Zum Beispiel ist *commit -a* eigentlich ein zweistufiger Prozess. Der erste
+Schritt erstellt einen Schnappschuß des aktuellen Status jeder überwachten
+Datei im Index. Der zweite Schritt speichert dauerhaft den Schnappschuß, der
+sich nun im Index befindet. Ein 'Commit' ohne die *-a* Option führt nur den
+zweiten Schritt aus und macht nur wirklich Sinn, wenn zuvor eine Anweisung
+angewendet wurde, welche den Index verändert, wie zum Beispiel *git add*.
+
+Normalerweise können wir den Index ignorieren und so tun als würden wir
+direkt aus der Versionsgeschichte lesen oder in sie schreiben. In diesem
+Fall wollen wir aber mehr Kontrolle, also manipulieren wir den Index. Wir
+erstellen einen Schnappschuß einiger, aber nicht aller unser Änderungen im
+Index und speichern dann diesen sorgfältig zusammengestellten Schnappschuß
+permanent.
+
+=== Verliere nicht Deinen KOPF ===
+
+Der HEAD Bezeichner ist wie ein Cursor, der normalerweise auf den jüngsten
+'Commit' zeigt und mit jedem neuen 'Commit' voranschreitet. Einige Git
+Anweisungen lassen Dich ihn manipulieren. Zum Beispiel:
+
+ $ git reset HEAD~3
+
+bewegt den HEAD Bezeichner drei 'Commits' zurück. Dadurch agieren nun alle
+Git Anweisungen als hätte es die drei letzten 'Commits' nicht gegeben,
+während deine Dateien unverändert erhalten bleiben. Siehe auf der Git
+Hilfeseite für einige Anwendungsbeispiele.
+
+Aber wie kannst Du zurück in die Zukunft? Die vergangenen 'Commits' wissen
+nichts von der Zukunft.
+
+Wenn Du den SHA1 Schlüssel vom originalen HEAD hast, dann:
+
+ $ git reset 1b6d
+
+Aber stell Dir vor, Du hast ihn niemals notiert? Keine Sorge: Für solche
+Anweisungen sichert Git den original HEAD als Bezeichner mit dem Namen
+ORIG_HEAD und Du kannst gesund und munter zurückkehren mit:
+
+ $ git reset ORIG_HEAD
+
+=== KOPF-Jagd ===
+
+Möglicherweise reicht ORIG_HEAD nicht aus. Vielleicht hast Du gerade
+bemerkt, dass Du einen kapitalen Fehler gemacht hast und nun musst Du zu
+einem uralten 'Commit' in einem länst vergessenen 'Branch' zurück.
+
+Standardmäßig behält Git einen 'Commit' für mindesten zwei Wochen, sogar
+wenn Du Git anweist den 'Branch' zu zerstören, in dem er enthalten ist. Das
+Problem ist, den entsprechenden SHA1-Wert zu finden. Du kannst Dir alle
+SHA1-Werte in `.git/objects` vornehmen und ausprobieren ob Du den gesuchten
+'Commit' findest. Aber es gibt einen viel einfacheren Weg.
+
+Git speichert jeden errechneten SHA1-Wert eines 'Commits' in
+`.git/logs`. Das Unterverzeichnis `refs` enthält den Verlauf aller
+Aktivitäten auf allen 'Branches', während `HEAD` alle SHA1-Werte enthält,
+die jemals diese Bezeichnung hatten. Die letztere kann verwendet werden um
+SHA1-Werte von 'Commits' zu finden, die sich in einem 'Branch' befanden, der
+versehentlich gestutzt wurde.
+
+Die reflog Anweisung bietet eine benutzerfreundliche Schnittstelle zu diesen
+Logdateien. Versuche
+
+  $ git reflog
+
+Anstatt SHA1-Werte aus dem reflog zu kopieren und einzufügen, versuche:
+
+ $ git checkout "@{10 minutes ago}"
+
+Oder rufe den fünftletzten 'Commit' ab, mit:
+
+ $ git checkout "@{5}"
+
+Siehe in der ``Specifying Revisions'' Sektion von *git help rev-parse* für
+mehr.
+
+Vielleicht möchtest Du eine längere Gnadenfrist für todgeweihte 'Commits'
+konfigurieren. Zum Beispiel:
+
+  $ git config gc.pruneexpire "30 days"
+
+bedeutet, ein gelöschter 'Commit' wird nur dann endgültig verloren sein,
+nachdem 30 Tage vergangen sind und *git gc* ausgeführt wurde.
+
+Du magst vielleicht auch das automatische Ausführen von *git gc* abstellen:
+
+  $ git config gc.auto 0
+
+wodurch 'Commits' nur noch gelöscht werden, wenn Du *git gc* manuell
+aufrufst.
+
+=== Auf Git bauen ===
+
+In echter UNIX Sitte erlaubt es Git's Design, dass es auf einfache Weise als
+Low-Level-Komponente von anderen Programmen benutzt werden kann, wie zum
+Beispiel grafischen Benutzeroberflächen und Internetanwendungen, alternative
+Kommandozeilenanwendungen, Patch-Werkzeugen, Import- und
+Konvertierungswerkzeugen und so weiter. Sogar einige Git Anweisungen selbst
+sind nur winzige Skripte, wie Zwerge auf den Schultern von Riesen. Mit ein
+bisschen Handarbeit kannst Du Git anpassen, damit es Deinen Anforderungen
+entspricht.
+
+Ein einfacher Trick ist es die in Git integrierte Aliasfunktion zu verwenden
+um die am häufigsten benutzten Anweisungen zu verkürzen:
+
+  $ git config --global alias.co checkout
+  $ git config --global --get-regexp alias  # display current aliases
+  alias.co checkout
+  $ git co foo                              # same as 'git checkout foo'
+
+Etwas anderes ist der aktuelle 'Branch' im Prompt oder Fenstertitel. Die
+Anweisung
+
+  $ git symbolic-ref HEAD
+
+zeigt den Namen des aktuellen 'Branch'. In der Praxis möchtest Du aber das
+"refs/heads/" entfernen und Fehler ignorieren:
+
+  $ git symbolic-ref HEAD 2> /dev/null | cut -b 12-
+
+Das +contrib+ Unterverzeichnis ist eine Fundgrube von Werkzeugen, die auf
+Git aufbauen. Mit der Zeit können einige davon zu offiziellen Anweisungen
+befördert werden. Auf Debian und Ubuntu, findet man dieses Verzeichnis unter
++/usr/share/doc/git-core/contrib+.
+
+Ein beliebter Vertreter ist +workdir/git-new-workdir+. Durch cleveres
+verlinken erzeugt dieses Skript ein neues Arbeitsverzeichis, das seine
+Versionsgeschichte mit dem original 'Repository' teilt:
+
+  $ git-new-workdir ein/existierendes/repo neues/verzeichnis
+
+Das neue Verzeichnis und die Dateien darin kann man sich als 'Clone'
+vorstellen, mit dem Unterschied, dass durch die gemeinschaftliche
+Versionsgeschichte die beiden Versionen automatisch synchron bleiben. Eine
+Synchronisierung mittels 'merge', 'push' oder 'pull' ist nicht notwendig.
+
+=== Gewagte Kunststücke ===
+
+Heutzutage macht es Git dem Anwender schwer versehentlich Daten zu
+zerstören. Aber, wenn man weiß was man tut, kann man die Schutzmaßnahmen der
+häufigsten Anweisungen umgehen.
+
+*Checkout*: Nicht versionierte Änderungen lassen 'checkout' scheitern. Um trotzdem die Änderungen zu zerstören und einen vorhandenen 'Commit' abzurufen, benutzen wir die 'force' Option:
+
+  $ git checkout -f HEAD^
+
+Auf der anderen Seite, wenn Du einen speziellen Pfad für 'checkout' angibst,
+gibt es keinen Sicherheitsüberprüfungen mehr. Der angegebene Pfad wird
+stillschweigend überschrieben. Sei vorsichtig, wenn Du 'checkout' auf diese
+Weise benutzt.
+
+*Reset*: Reset versagt auch, wenn unversionierte Änderungen vorliegen. Um es zu erzwingen, verwende:
+
+  $ git reset --hard 1b6d
+
+*Branch*: 'Branches' zu löschen scheitert ebenfalls, wenn dadurch Änderungen verloren gehen. Um das Löschen zu erzwingen, gib ein:
+
+  $ git branch -D dead_branch  # instead of -d
+
+Ebenso scheitert der Versuch einen 'Branch' durch ein 'move' zu
+überschreiben, wenn das einen Datenverlust zur Folge hat. Um das Verschieben
+zu erzwingen, gib ein:
+
+  $ git branch -M source target  # instead of -m
+
+Anders als bei 'checkout' und 'reset' verschieben diese beiden Anweisungen
+das Zerstören der Daten. Die Änderungen bleiben im .git Unterverzeichnis
+gespeichert und können wieder hergestellt werden, wenn der entsprechende
+SHA1-Wert aus `.git/logs` ermittelt wird (siehe "KOPF-Jagd"
+oben). Standardmäßig bleiben die Daten mindestens zwei Wochen erhalten.
+
+*Clean*: Verschiedene git Anweisungen scheitern, weil sie Konflikte mit unversionierten Dateien vermuten. Wenn Du sicher bist, dass alle unversionierten Dateien und Verzeichnisse entbehrlich sind, dann lösche diese gnadenlos mit:
+
+  $ git clean -f -d
+
+Beim nächsten Mal werden diese lästigen Anweisung gehorchen!
+
+=== Verhindere schlechte 'Commits' ===
+
+Dumme Fehler verschmutzen meine 'Repositories'. Am schrecklichsten sind
+fehlende Dateien wegen eines vergessenen *git add*. Kleinere Verfehlungen
+sind Leerzeichen am Zeilenende und ungelöste 'merge'-Konflikte: obwohl sie
+harmlos sind, wünschte ich, sie würden nie in der Öffentlichkeit erscheinen.
+
+Wenn ich doch nur eine Trottelversicherung abgeschlossen hätte, durch
+Verwendung eines _hook_, der mich bei solchen Problemen alarmiert.
+
+ $ cd .git/hooks
+ $ cp pre-commit.sample pre-commit  # Older Git versions: chmod +x pre-commit
+
+Nun bricht Git einen 'Commit' ab, wenn es überflüssige Leerzeichen am
+Zeilenende oder ungelöste 'merge'-Konflikte entdeckt.
+
+Für diese Anleitung hätte ich vielleicht am Anfang des *pre-commit* 'hook'
+folgendes hinzugefügt, zum Schutz vor Zerstreutheit:
+
+ if git ls-files -o | grep '\.txt$'; then
+   echo FAIL! Untracked .txt files.
+   exit 1
+ fi
+
+Viele Git Operationen unterstützen 'hooks'; siehe *git help hooks*. Wir
+haben den Beispiel 'hook' *post-update* aktiviert, weiter oben im Abschnitt
+Git über HTTP. Dieser läuft immer, wenn der 'HEAD' sich bewegt. Das Beispiel
+'post-update' Skript aktualisiert Dateien, welche Git für die Kommunikation
+über 'Git-agnostic transports' wie z.B. HTTP benötigt.
