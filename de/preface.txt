@@ -1,0 +1,101 @@
+= Git Magic = Ben Lynn August 2007
+
+== Vorwort ==
+
+http://git.or.cz/[Git] ist wie ein schweizer Taschenmesser für
+Versionsverwaltung. Ein zuverlässiges, vielseitiges
+Mehrzweck-Versionsverwaltungswerkzeug, dessen außergewöhnliche Flexibilität
+es schwierig zu erlernen macht, ganz zu schweigen davon es zu meistern.
+
+Wie Arthur C. Clarke festgestellt hat, ist jede hinreichend fortschrittliche
+Technologie von Magie nicht zu unterscheiden. Das ist ein großartiger Ansatz
+um an Git heranzugehen: Anfänger können seine inneren Mechanismen ignorieren
+und Git als ein Ding ansehen, das mit seinen erstaunlichen Fähigkeiten
+Freunde verzückt und Gegner zur Weißglut bringt.
+
+Anstatt die Details aufzudecken, bieten wir grobe Anweisungen für die
+jeweiligen Funktionen. Bei regelmäßiger Anwendung wirst Du allmählich
+verstehen, wie jeder Trick funktioniert und wie Du die Rezepte auf Deinen
+Bedarf zuschneiden kannst.
+
+.Übersetzungen
+
+ - link:/\~blynn/gitmagic/intl/zh_cn/[Vereinfachtes Chinesisch]: von JunJie,
+   Meng und JiangWei. Zu link:/~blynn/gitmagic/intl/zh_tw/[Traditionellem
+   Chinesisch] konvertiert via +cconv -f UTF8-CN -t UTF8-TW+.
+ - link:/~blynn/gitmagic/intl/fr/[Französich]: von Alexandre Garel, Paul
+   Gaborit, und Nicolas Deram. Auch gehostet unter
+   http://tutoriels.itaapy.com/[itaapy].
+ - link:/~blynn/gitmagic/intl/de/[Deutsch]: von Benjamin Bellee und Armin
+   Stebich; Auch gehostet unter http://gitmagic.lordofbikes.de/[Armin's
+   Website].
+ - http://www.slideshare.net/slide_user/magia-git[Portugiesisch]: von
+   Leonardo Siqueira Rodrigues
+   [http://www.slideshare.net/slide_user/magia-git-verso-odt[ODT-Version]].
+ - link:/~blynn/gitmagic/intl/ru/[Russisch]: von Tikhon Tarnavsky, Mikhail
+   Dymskov, und anderen.
+ - link:/~blynn/gitmagic/intl/es/[Spanisch]: von Rodrigo Toledo und Ariset
+   Llerena Tapia.
+ - link:/~blynn/gitmagic/intl/vi/[Vietnamesisch]: von Trần Ngọc Quân; Auch
+   gehostet unter
+   http://vnwildman.users.sourceforge.net/gitmagic.html[seiner Website].
+
+.Andere Ausgaben
+
+ - link:book.html[Einzelne Webseite]: reines HTML, ohne CSS.
+ - link:book.pdf[PDF Datei]: druckerfreundlich.
+ - http://packages.debian.org/gitmagic[Debian Packet],
+   http:://packages.ubuntu.com/gitmagic[Ubuntu Packet]: Für eine schnelle
+   und lokale Kopie dieser Seite. Praktisch,
+   http://csdcf.stanford.edu/status/[wenn dieser Server offline ist].
+ - http://www.amazon.com/Git-Magic-Ben-Lynn/dp/1451523343/[Gedrucktes Buch
+   [Amazon.com]]: 64 Seiten, 15.24cm x 22.86cm, schwarz/weiß. Praktisch,
+   wenn es keinen Strom gibt.
+
+=== Danke! ===
+
+Ich bin erstaunt, daß so viele Leute an der Übersetzung dieser Seiten
+gearbeitet haben. Ich weiß es zu würdigen, daß ich, dank der Bemühungen der
+oben genannten, einen größeren Leserkreis erreiche.
+
+Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone,
+Michael Budde, Richard Albury, Tarmigan, Derek Mahar, Frode Aannevik, Keith
+Rarick, Andy Somerville, Ralf Recker, Øyvind A. Holm, Miklos Vajna,
+Sébastien Hinderer, Thomas Miedema, Joe Malin, und Tyler Breisacher haben
+Korrekturen und Verbesserungen beigesteuert.
+
+François Marier unterhält das Debian Packet, das ursprünglich von Daniel
+Baumann erstellt wurde.
+
+Meine Dankbarkeit gilt auch vielen anderen für deren Unterstützung und
+Lob. Ich war versucht euch hier alle aufzuzählen, aber das könnte
+Erwartungen in unermesslichem Umfang wecken.
+
+Wenn ich Dich versehentlich vergessen habe, sag mir bitte Bescheid oder
+schicke mir einfach einen Patch!
+
+.Kostenloses Git Hosting
+
+ - http://repo.or.cz/[http://repo.or.cz/] hostet freie Projekte. Die
+   allererste Git Hosting Seite. Gegründet und betrieben von einem der
+   ersten Git Entwickler.
+ - http://gitorious.org/[http://gitorious.org/] ist eine andere Git Hosting
+   Seite, bevorzugt für Open-Source Projekte.
+ - http://github.com/[http://github.com/] hostet Open-Source Projekte
+   kostenlos und geschlossene Projekte gegen Gebühr.
+
+Vielen Dank an jede dieser Seiten für das Hosten dieser Anleitung.
+
+=== Lizenz ===
+
+Diese Anleitung ist veröffnetlicht unter
+http://www.gnu.org/licenses/gpl-3.0.html[der GNU General Public License
+Version 3]. Natürlich wird der Quelltext in einem Git 'Repository' gehalten
+und kann abgerufen werden durch:
+
+ $ git clone git://repo.or.cz/gitmagic.git  # Erstellt "gitmagic" Verzeichnis.
+
+oder von einem der Mirrorserver:
+
+ $ git clone git://github.com/blynn/gitmagic.git
+ $ git clone git://gitorious.org/gitmagic/mainline.git

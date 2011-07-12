@@ -1,14 +1,14 @@
 # Git Magic - A guide to using Git
 # This file is distributed under the GNU GENERAL PUBLIC LICENSE Version 3.
 # Benn Lynn <benlynn@gmail.com>, 2007.
-# Armin Stebich <armin@lordofbikes.de>, 2010.
+# Armin Stebich <armin@lordofbikes.de>, 2010, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Git Magic deutsch\n"
 "Report-Msgid-Bugs-To: bennlynn@gmail.com\n"
-"POT-Creation-Date: 2010-10-30 08:41+0300\n"
-"PO-Revision-Date: 2010-10-31 13:54+0100\n"
+"POT-Creation-Date: 2011-07-03 23:06+0300\n"
+"PO-Revision-Date: 2011-07-03 23:28+0200\n"
 "Last-Translator: Armin Stebich <armin@lordofbikes.de>\n"
 "Language-Team: DE <gitmagic@lordofbikes.de>\n"
 "Language: de\n"
@@ -29,8 +29,8 @@ msgid ""
 "org/wiki/Revision_control[the Wikipedia entry on revision control] for a "
 "saner explanation."
 msgstr ""
-"Ich benutze eine Analogie um in die Versionsverwaltung einzuführen. Für eine "
-"vernünftigere Erklärung siehe http://de.wikipedia.org/wiki/Versionsverwaltung"
+"Ich benutze eine Analogie um in die Versionsverwaltung einzuführen. Für eine "
+"vernünftigere Erklärung siehe http://de.wikipedia.org/wiki/Versionsverwaltung"
 "[den Wikipedia Artikel zur Versionsverwaltung]."
 
 #. type: Plain text
@@ -48,7 +48,7 @@ msgstr ""
 "Ich spiele Computerspiele schon fast mein ganzes Leben. Im Gegensatz dazu "
 "habe ich erst als Erwachsener damit begonnen Versionsverwaltungssysteme zu "
 "benutzen. Ich vermute, dass ich damit nicht alleine bin und der Vergleich "
-"hilft vielleicht dabei die Konzepte einfacher zu erklären und zu verstehen."
+"hilft vielleicht dabei die Konzepte einfacher zu erklären und zu verstehen."
 
 #. type: Plain text
 #: ../en/intro.txt:10
@@ -72,13 +72,13 @@ msgid ""
 "revisit one day. Or worse still, your current save is in an unwinnable "
 "state, and you have to start again."
 msgstr ""
-"Aber, das überschreibt die vorherige Version. Das ist wie bei den Spielen "
-"der alten Schule, die nur Speicherplatz für eine Sicherung hatten: "
-"sicherlich konntest du speichern, aber du konntest nie zu einem älteren "
-"Stand zurück. Das war eine Schande, denn vielleicht war deine vorherige "
-"Sicherung an einer außergewöhnlich spannenden Stelle des Spiels, zu der du "
-"später gerne noch einmal zurückkehren möchtest. Oder noch schlimmer, deine "
-"aktuelle Sicherung ist in einem nicht lösbaren Stand, dann musst du von ganz "
+"Aber, das überschreibt die vorherige Version. Das ist wie bei den Spielen "
+"der alten Schule, die nur Speicherplatz für eine Sicherung hatten: "
+"sicherlich konntest du speichern, aber du konntest nie zu einem älteren "
+"Stand zurück. Das war eine Schande, denn vielleicht war deine vorherige "
+"Sicherung an einer außergewöhnlich spannenden Stelle des Spiels, zu der du "
+"später gerne noch einmal zurückkehren möchtest. Oder noch schlimmer, deine "
+"aktuelle Sicherung ist in einem nicht lösbaren Stand, dann musst du von ganz "
 "vorne beginnen."
 
 #. type: Plain text
@@ -136,7 +136,7 @@ msgid ""
 "manage a directory of stuff. You can save the state of the directory every "
 "so often, and you can load any one of the saved states later on. Unlike most "
 "computer games, they're usually smart about conserving space. Typically, "
-"only a few files change between version to version, and not by much. Storing "
+"only a few files change from version to version, and not by much. Storing "
 "the differences instead of entire new copies saves room."
 msgstr ""
 "Versionsverwaltungen sind nicht anders. Sie alle haben bequeme "
