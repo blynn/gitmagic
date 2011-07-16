@@ -37,20 +37,20 @@
  $ mkdir proj.git
  $ cd proj.git
  $ git init --bare
- $  # 只用一行命令: GIT_DIR=proj.git git init
+ $ touch proj.git/git-daemon-export-ok
 
-如果需要的话，启动Git守护进程：
+如需要的话，启动Git守护进程：
 
  $ git daemon --detach  # 它也许已经在运行了
 
 对一些Git伺服服务，按照其指导来初始化空Git仓库。一般是在网页上填一个表单。
 
 把你的项目“推”到中心服务器：
- $ git push git://central.server/path/to/proj.git HEAD
+ $ git push central.server/path/to/proj.git HEAD
 
-捡出源码，开发键入：
+捡出源码，可以键入：
 
- $ git clone git://central.server/path/to/proj.git
+ $ git clone central.server/path/to/proj.git
 
 做了改动之后，开发保存变更到本地：
 
@@ -70,6 +70,20 @@
 
 如果主服务器由于其他开发的活动，有了新的变更，这个捡入会失败，该开发应该把最
 新版本拿下来，解决合并冲突，然后重试。
+
+为使用上面pull和push命令，开发必须有SSH访问权限。不过，通过键入以下命令，任何
+人都可以看到源码：
+
+ $ git clone git://central.server/path/to/proj.git
+
+本地git协议和HTTP类似：并无安全验证，因此任何人都能拿到项目。因此，默认情况
+git协议禁止推操作。
+
+=== 封闭源码 ===
+
+闭源项目不要执行touch命令，并确保你从未创建`git-daemon-export-ok`文件。资源库
+不再可以通过git协议获取；只有那些有SSH访问权限的人才能看到。如果你所有的资源
+库都是封闭的，那也没必要运行运行git守护了，因为所有沟通都走SSH。
 
 === 裸仓库 ===
 

@@ -27,7 +27,9 @@ Want to include a few more edits in that last commit? Then make those edits and 
 
 === ... And Then Some ===
 
-Let's suppose the previous problem is ten times worse. After a lengthy session you've made a bunch of commits. But you're not quite happy with the way they're organized, and some of those commit messages could use rewording. Then type:
+Suppose the previous problem is ten times worse. After a lengthy session you've
+made a bunch of commits. But you're not quite happy with the way they're
+organized, and some of those commit messages could use rewording. Then type:
 
  $ git rebase -i HEAD~10
 
@@ -37,9 +39,11 @@ and the last 10 commits will appear in your favourite $EDITOR. A sample excerpt:
     pick a311a64 Reordered analogies in "Work How You Want"
     pick 100834f Added push target to Makefile
 
-Then:
+Older commits precede newer commits in this list, unlike the `log` command.
+Here, 5c6eb73 is the oldest commit, and 100834f is the newest. Then:
 
-- Remove commits by deleting lines.
+- Remove commits by deleting lines. Like the revert command, but off the
+  record: it will be as if the commit never existed.
 - Reorder commits by reordering lines.
 - Replace `pick` with:
    * `edit` to mark a commit for amending.
@@ -47,14 +51,26 @@ Then:
    * `squash` to merge a commit with the previous one.
    * `fixup` to merge a commit with the previous one and discard the log message.
 
-Save and quit. If you marked a commit for editing, then
-run:
+For example, we might replace the second `pick` with `squash`:
 
- $ git commit --amend
+    pick 5c6eb73 Added repo.or.cz link
+    squash a311a64 Reordered analogies in "Work How You Want"
+    pick 100834f Added push target to Makefile
 
-Otherwise, run:
+After we save and quit, Git merges a311a64 into 5c6eb73. Thus *squash* merges
+into the next commit up: think ``squash up''.
+
+Git then combines their log messages and presents them for editing. The
+command *fixup* skips this step; the squashed log message is simply discarded.
+
+If you marked a commit with *edit*, Git returns you to the past, to the oldest
+such commit. You can amend the old commit as described in the previous section,
+and even create new commits that belong here. Once you're pleased with the
+``retcon'', go forward in time by running:
 
  $ git rebase --continue
+
+Git replays commits until the next *edit*, or to the present if none remain.
 
 So commit early and commit often: you can tidy up later with rebase.
 

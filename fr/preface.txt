@@ -30,21 +30,21 @@ recettes pour répondre à vos besoins.
    Gaborit et Nicolas Deram. Hébergé aussi chez
    http://tutoriels.itaapy.com/[itaapy].
 
- - link:/~blynn/gitmagic/intl/de/[Allemand]&#160;: par Benjamin Bellee et Armin
+ - link:/~blynn/gitmagic/intl/de/[Allemande]&#160;: par Benjamin Bellee et Armin
    Stebich. Hébergé aussi sur http://gitmagic.lordofbikes.de/[le site web
    d'Armin].
 
- - http://www.slideshare.net/slide_user/magia-git[Portugais]&#160;: par
+ - http://www.slideshare.net/slide_user/magia-git[Portugaise]&#160;: par
    Leonardo Siqueira Rodrigues
    [http://www.slideshare.net/slide_user/magia-git-verso-odt[version ODT]].
 
- - link:/~blynn/gitmagic/intl/ru/[Russian]: par Tikhon Tarnavsky, Mikhail
+ - link:/~blynn/gitmagic/intl/ru/[Russe]: par Tikhon Tarnavsky, Mikhail
    Dymskov et d'autres.
 
- - link:/~blynn/gitmagic/intl/es/[Espagnol]&#160;: par Rodrigo Toledo et Ariset
+ - link:/~blynn/gitmagic/intl/es/[Espagnole]&#160;: par Rodrigo Toledo et Ariset
    Llerena Tapia.
 
- - link:/~blynn/gitmagic/intl/vi/[Vietnamien]: par Trần Ngọc Quân. Hébergé
+ - link:/~blynn/gitmagic/intl/vi/[Vietnamienne]: par Trần Ngọc Quân. Hébergé
    aussi sur http://vnwildman.users.sourceforge.net/gitmagic.html[son site
    Web].
 
