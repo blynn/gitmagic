@@ -72,12 +72,9 @@ and even create new commits that belong here. Once you're pleased with the
 
 Git replays commits until the next *edit*, or to the present if none remain.
 
-If you're going to do a complicated rebase and you're worried you might "do
-something bad", you can make a local clone of your repository (see section 3.8
-Light-Speed Multitask) and practice on that.  Or, if you've started a rebase
-and you've messed things up, you can cancel the rebase with:
+You can also abandon the rebase with:
 
-  $ git rebase --abort
+ $ git rebase --abort
 
 So commit early and commit often: you can tidy up later with rebase.
 
@@ -92,6 +89,9 @@ This is a job for *git rebase* as described above. In many cases you can use
 the *--onto* flag and avoid interaction.
 
 Also see *git help rebase* for detailed examples of this amazing command. You can split commits. You can even rearrange branches of a tree.
+
+Take care: rebase is a powerful command. For complicated rebases, first make a
+backup with *git clone*.
 
 === Rewriting History ===
 
