@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Git Magic deutsch\n"
 "Report-Msgid-Bugs-To: git-magic@lordofbikes.de\n"
-"POT-Creation-Date: 2010-11-05 17:47+0100\n"
+"POT-Creation-Date: 2011-07-03 23:06+0300\n"
 "PO-Revision-Date: 2010-11-01 22:14+0100\n"
 "Last-Translator: Armin Stebich <armin@lordofbikes.de>\n"
 "Language-Team: DE <gitmagic@lordofbikes.de>\n"
@@ -631,7 +631,7 @@ msgid " $ git whatchanged --since=\"2 weeks ago\"\n"
 msgstr " $ git whatchanged --since=\"2 weeks ago\"\n"
 
 #. type: Plain text
-#: ../en/basic.txt:193
+#: ../en/basic.txt:189
 msgid ""
 "Often I'll browse history with http://sourceforge.net/projects/qgit[qgit] "
 "instead, due to its slick photogenic interface, or http://jonas.nitro.dk/tig/"
@@ -647,12 +647,12 @@ msgstr ""
 "kannst du mit jedem Webbrowser darauf zugreifen."
 
 #. type: Plain text
-#: ../en/basic.txt:195
+#: ../en/basic.txt:191
 msgid "=== Exercise ==="
 msgstr "=== Übung ==="
 
 #. type: Plain text
-#: ../en/basic.txt:197
+#: ../en/basic.txt:193
 msgid ""
 "Let A, B, C, D be four successive commits where B is the same as A except "
 "some files have been removed. We want to add the files back at D. How can we "
@@ -663,12 +663,12 @@ msgstr ""
 "wieder hinzufügen, aber nicht in B. Wie machen wir das?"
 
 #. type: Plain text
-#: ../en/basic.txt:199
+#: ../en/basic.txt:195
 msgid "There are at least three solutions. Assuming we are at D:"
 msgstr "Es gibt mindestens 3 Lösungen. Angenommen, wir sind bei D:"
 
 #. type: Bullet: '  1. '
-#: ../en/basic.txt:201
+#: ../en/basic.txt:197
 msgid ""
 "The difference between A and B are the removed files. We can create a patch "
 "representing this difference and apply it:"
@@ -678,39 +678,39 @@ msgstr ""
 "auf D anwenden:"
 
 #. type: Plain text
-#: ../en/basic.txt:203
+#: ../en/basic.txt:199
 #, no-wrap
 msgid "   $ git diff B A | git apply\n"
 msgstr "   $ git diff B A | git apply\n"
 
 #. type: Bullet: '  2. '
-#: ../en/basic.txt:205
+#: ../en/basic.txt:201
 msgid "Since we saved the files back at A, we can retrieve them:"
 msgstr ""
 "Da die Dateien im 'Repository' unter dem 'Commit' A gespeichert sind, können "
 "wir sie wieder herstellen:"
 
 #. type: Plain text
-#: ../en/basic.txt:207
+#: ../en/basic.txt:203
 #, no-wrap
 msgid "   $ git checkout A foo.c bar.h\n"
 msgstr "   $ git checkout A foo.c bar.h\n"
 
 #. type: Bullet: '  3. '
-#: ../en/basic.txt:209
+#: ../en/basic.txt:205
 msgid "We can view going from A to B as a change we want to undo:"
 msgstr ""
 "Wir können den 'Commit' von A auf B als Änderung betrachten, die wir "
 "rückgängig machen wollen:"
 
 #. type: Plain text
-#: ../en/basic.txt:211
+#: ../en/basic.txt:207
 #, no-wrap
 msgid "   $ git revert B\n"
 msgstr "   $ git revert B\n"
 
 #. type: Plain text
-#: ../en/basic.txt:212
+#: ../en/basic.txt:208
 msgid ""
 "Which choice is best? Whichever you prefer most. It is easy to get what you "
 "want with Git, and often there are many ways to get it."

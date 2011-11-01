@@ -1,14 +1,14 @@
 # Git Magic - A guide to using Git
 # This file is distributed under the GNU GENERAL PUBLIC LICENSE Version 3.
 # Benn Lynn <benlynn@gmail.com>, 2007.
-# Armin Stebich <armin@lordofbikes.de>, 2010.
+# Armin Stebich <armin@lordofbikes.de>, 2010, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Git Magic deutsch\n"
 "Report-Msgid-Bugs-To: bennlynn@gmail.com\n"
 "POT-Creation-Date: 2010-10-30 08:21+0300\n"
-"PO-Revision-Date: 2010-11-14 19:00+0100\n"
+"PO-Revision-Date: 2011-07-03 15:23+0200\n"
 "Last-Translator: Armin Stebich <armin@lordofbikes.de>\n"
 "Language-Team: DE <gitmagic@lordofbikes.de>\n"
 "Language: de\n"
@@ -348,7 +348,7 @@ msgid ""
 "As an example, paste the following listing into temporary file, such as `/tmp/history`:\n"
 "----------------------------------\n"
 msgstr ""
-"As an example, paste the following listing into temporary file, such as `/tmp/history`:\n"
+"Erstelle zum Beispiel aus folgendem Listing eine temporäre Datei, z.B. `/tmp/history`:\n"
 "----------------------------------\n"
 
 #. type: Plain text

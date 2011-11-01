@@ -1,0 +1,183 @@
+== Anhang A: Git's Mängel ==
+
+Ein paar Git-Probleme habe ich bisher unter den Teppich gekehrt. Einige
+lassen sich einfach mit Skripten und 'Hooks' lösen, andere erfordern eine
+Reorganisation oder Neudefinition des gesamten Projekt und für die wenigen
+verbleibenden Beeinträchtigungen kannst Du nur auf eine Lösung warten. Oder
+noch besser, anpacken und mithelfen.
+
+=== SHA1 Schwäche ===
+
+Mit der Zeit entdecken Kryptographen immer mehr Schwächen an SHA1. Schon
+heute wäre es technisch machbar für finanzkräftige Unternehmen
+Hash-Kollisionen zu finden. In ein paar Jahren hat vielleicht schon ein ganz
+normaler Heim-PC ausreichend Rechenleistung um ein Git 'Reopsitory'
+unbemerkt zu korrumpieren.
+
+Hoffentlich stellt Git auf eine bessere Hash Funktion um, bevor die
+Forschung SHA1 komplett unnütz macht.
+
+=== Microsoft Windows ===
+
+Git unter Microsoft Windows kann frustrierend sein:
+
+- http://cygwin.com/[Cygwin], eine Linux ähnliche Umgebung für Windows,
+enthält http://cygwin.com/packages/git/[eine Windows Portierung von Git].
+
+- http://code.google.com/p/msysgit/[Git unter MSys] ist eine Alternative,
+die sehr wenig Laufzeitunterstützung erfordert, jedoch bedürfen einige
+Kommandos noch einer Überarbeitung.
+
+=== Dateien ohne Bezug ===
+
+Wenn Dein Projekt sehr groß ist und viele Dateien enthält, die in keinem
+direkten Bezug stehen, trotzdem aber häufig geändert werden, kann Git
+nachteiliger sein als andere Systeme, weil es keine einzelnen Dateien
+überwacht. Git überwacht immer das ganze Projekt, was normalerweise schon
+von Vorteil ist.
+
+Eine Lösung ist es, Dein Projekt in kleinere Stücke aufzuteilen, von denen
+jedes nur die in Beziehung stehenden Dateien enthält. Benutze *git
+submodule* wenn Du trotzdem alles in einem einzigen 'Repository' halten
+willst.
+
+=== Wer macht was? ===
+
+Einige Versionsverwaltungssysteme zwingen Dich explizit eine Datei auf
+irgendeine Weise für die Bearbeitung zu kennzeichnen. Obwohl es extrem
+lästig ist, wenn es die Kommunikation mit einem zentralen Server erfordert,
+so hat es doch zwei Vorteile:
+
+  1. Unterschiede sind schnell gefunden, weil nur die markierten Dateien
+     untersucht werden müssen.
+
+  2. Jeder kann herausfinden wer sonst gerade an einer Datei arbeitet, indem
+     er beim zentralen Server anfragt, wer die Datei zum Bearbeiten markiert
+     hat.
+
+Mit geeigneten Skripten kannst Du das auch mit Git hinkriegen. Das erfordert
+aber die Mitarbeit der Programmierer, denn sie müssen die Skripte auch
+aufrufen, wenn sie eine Datei bearbeiten.
+
+=== Dateihistorie ===
+
+Da Git die Änderungen über das gesamte Projekt aufzeichnet, erfordert die
+Rekonstruktion des Verlaufs einer einzelnen Datei mehr Aufwand als in
+Versionsverwaltungssystemen die einzelne Dateien überwachen.
+
+Die Nachteile sind üblicherweise gering und werden gern in Kauf genommen, da
+andere Operationen dafür unglaublich effizient sind. Zum Beispiel ist `git
+checkout` schneller als `cp -a` und projektweite Unterschiede sind besser zu
+komprimieren als eine Sammlung von Änderungen auf Dateibasis.
+
+=== Der erster Klon ===
+
+Einen Klon zu erstellen ist aufwendiger als in anderen
+Versionsverwaltungssystemen, wenn ein längerer Verlauf existiert.
+
+Der initiale Aufwand lohnt sich aber auf längere Sicht, da die meisten
+zukünftigen Operationen dann schnell und offline erfolgen. Trotzdem gibt es
+Situationen, in denen es besser ist einen oberflächlichen Klon mit der
+`--depth` Option zu erstellen. Das geht wesentlich schneller, aber der
+resultierende Klon hat nur eingeschränkte Funktionalität.
+
+=== Unbeständige Projekte ===
+
+Git wurde geschrieben um schnell zu sein, im Hinblick auf die Größe der
+Änderungen. Leute machen kleine Änderungen von Version zu Version. Ein
+einzeiliger Bugfix hier, eine neue Funktion da, verbesserte Kommentare und
+so weiter. Aber wenn sich Deine Dateien zwischen aufeinanderfolgenden
+Versionen gravierend ändern, dann wird zwangsläufig mit jedem 'Commit' Dein
+Verlauf um die Größe des gesamten Projekts wachsen. 
+
+Es gibt nichts, was irgendein Versionsverwaltungssystem dagegen machen kann,
+aber der Standard Git Anwender leidet mehr darunter, weil normalerweise der
+ganze Verlauf geklont wird.
+
+Die Ursachen für die großen Unterschiede sollten ermittelt
+werden. Vielleicht können Dateiformate geändert werden. Kleinere
+Bearbeitungen sollten auch nur minimale Änderungen an so wenig Dateien wie
+möglich bewirken.
+
+Vielleicht ist eher eine Datenbank oder Sicherungs-/Archivierungslösung
+gesucht, nicht ein Versionsverwaltungssystem. Ein Versionsverwaltungssystem
+zum Beispiel ist eine ungeeignete Lösung um Fotos zu verwalten, die
+periodisch von einer Webcam gemacht werden.
+
+Wenn die Dateien sich tatsächlich konstant verändern und sie wirklich
+versioniert werden müssen, ist es eine Möglichkeit Git in zentralisierter
+Form zu verwenden. Jeder kann oberflächliche Klone erstellen, die nur wenig
+oder gar nichts vom Verlauf des Projekts enthalten. Natürlich sind dann
+viele Git Funktionen nicht verfügbar und Änderungen müssen als 'Patches'
+übermittelt werden. Das funktioniert wahrscheinlich ganz gut, wenn auch
+unklar ist, warum jemand die Versionsgeschichte von wahnsinnig instabilen
+Dateien braucht.
+
+Ein anderes Beispiel ist ein Projekt, das von Firmware abhängig ist, welche
+die Form einer großen Binärdatei annimmt. Der Verlauf der Firmware
+interessiert den Anwender nicht und Änderungen lassen sich schlecht
+komprimieren, so blähen Firmwarerevisionen die Größe des 'Repository'
+unnötig auf.
+
+In diesem Fall sollte der Quellcode der Firmware in einem Git 'Repository'
+gehalten werden und die Binärdatei außerhalb des Projekts. Um das Leben zu
+vereinfachen, könnte jemand ein Skript erstellen, das Git benutzt um den
+Quellcode zu klonen und 'rsync' oder einen oberflächlichen Klon für die
+Firmware.
+
+=== Globaler Zähler ===
+
+Verschiedene Versionsverwaltungssysteme unterhalten einen Zähler, der mit
+jedem 'Commit' erhöht wird. Git referenziert Änderungen anhand ihres
+SHA1-Hash, was in vielen Fällen besser ist.
+
+Aber einige Leute sind diesen Zähler gewöhnt. Zum Glück ist es einfach,
+Skripte zu schreiben, sodass  mit jedem Update das zentrale Git 'Repository'
+einen Zähler erhöht. Vielleicht in Form eines 'Tags', der mit dem SHA1-Hash
+des letzten 'Commit' verknüpft ist.
+
+Jeder Klon könnte einen solchen Zähler bereitstellen, aber der wäre
+vermutlich nutzlos, denn nur der Zähler des zentralen 'Repository' ist für
+alle relevant.
+
+=== Leere Unterverzeichnisse ===
+
+Leere Unterverzeichnisse können nicht überwacht werden. Erstelle eine
+Dummy-Datei um dieses Problem zu umgehen.
+
+Die aktuelle Implementierung von Git, weniger sein Design, ist
+verantwortlich für diesen Pferdefuß. Mit etwas Glück, wenn Git's Verbreitung
+zunimmt und mehr Anwender nach dieser Funktion verlangen, wird sie
+vielleicht implementiert.
+
+=== Initialer 'Commit' ===
+
+Ein klischeehafter Computerwissenschaftler zählt von 0 statt von 1. Leider,
+bezogen auf 'Commits', hält sich Git nicht an diese Konvention. Viele
+Kommandos sind mürrisch vor dem intialen 'Commit'. Zusätzlich müssen
+verschiedene Grenzfälle speziell behandelt werden, wie der 'Rebase' eines
+'Branch' mit einem abweichenden initialen 'Commit'.
+
+Git würde davon provitieren, einen Null-'Commit' zu definieren: sofort nach
+dem Erstellen eines 'Repository' wird der 'HEAD' auf eine Zeichenfolge von
+20 Null-Bytes gesetzt. Dieser spezielle 'Commit' repräsentiert einen leeren
+'Tree', ohne Eltern, irgendwann vielleicht der Vorfahr aller Git
+'Repositories'.
+
+Würde dann zum Beispiel *git log* ausgeführt, würde der Anwender darüber
+informiert, daß noch keine 'Commits' gemacht wurden, anstelle mit einem
+fatalen Fehler zu beenden. Das gilt stellvertretenden für andere
+Anweisungen.
+
+Jeder initiale 'Commit' ist dann stillschweigend ein Abkömmling dieses
+Null-'Commits'.
+
+Leider gibt es noch ein paar Problemfälle. Wenn mehrere 'Branches' mit
+unterschiedlichen initialen 'Commits' zusammengeführt und dann ein 'Rebase'
+gemacht wird, ist ein manuelles Eingreifen erforderlich.
+
+=== Eigenarten der Anwendung ===
+
+Für die 'Commits' A und B, hängt die Bedeutung der Ausdrücke "A..B" und
+"A...B" davon ab, ob eine Anweisung zwei Endpunkte erwartet oder einen
+Bereich. Siehe *git help diff* und *git help rev-parse*.

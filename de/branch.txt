@@ -107,21 +107,12 @@ einen neu entdeckten Fehler in 'Commit' `1b6d...` zu beheben:
 Dann, wenn du den Fehler behoben hast:
 
  $ git commit -a -m "Fehler behoben"
- $ git push  # ins zentrale 'Repository'
  $ git checkout master
 
-und fahre mit deiner ursprünglichen Arbeit fort.
-
-Du kannst die Fehlerbehebung, die du gerade gemacht hast, auch
-'mergen'. Entweder durch:
+und fahre mit deiner ursprünglichen Arbeit fort. Du kannst sogar die frisch
+gebackene Fehlerkorrektur auf Deinen aktuellen Stand übernehmen:
 
  $ git merge fixes
-
-oder:
-
- $ git pull
-
-da du die Fehlerbehebung schon ins zentrale 'Repository' ge'pushed' hast.
 
 === 'Mergen' ===
 
@@ -205,7 +196,7 @@ Schließlich, Teil I ist zugelassen:
  $ git checkout master  # Gehe zurück zu Teil I.
  $ submit files         # Veröffentliche deine Dateien!
  $ git merge teil2      # 'Merge' in Teil II.
- $ git branch -d teil2
+ $ git branch -d teil2  # Lösche den Branch "teil2"
 
 Nun bist du wieder im `master` 'Branch', mit Teil II im Arbeitsverzeichnis.
 
@@ -214,12 +205,16 @@ erweitern. Es ist genauso einfach rückwirkend zu 'branchen': angenommen, du
 merkst zu spät, dass vor sieben 'Commits' ein 'Branch' erforderlich gewesen
 wäre. Dann tippe:
 
- $ git branch -m master teil2
- $  # Umbenennen des 'Branch' "master" zu "teil2".
- $ git checkout HEAD~7 -b master
+ $ git branch -m master teil2  # Umbenennen des 'Branch' "master" zu "teil2".
+ $ git branch master HEAD~7    # Erstelle neuen "master", 7 Commits voraus
 
-Der `master` 'Branch' enthält nun nur den Teil I und der `teil2` 'Branch'
-enthält den Rest.
+Der `master` Branch enthält nun Teil I, und der `teil2` Branch enthält den
+Rest. Wir befinden uns in letzterem Branch; wir haben `master` erzeugt ohne
+dorthin zu wechseln, denn wir wollen im `teil2` weiterarbeiten. Das ist
+unüblich. Bisher haben wir unmittelbar nach dem Erstellen in einen 'Branch'
+gewechselt, wie in:
+
+ $ git checkout HEAD~7 -b master  # erzeuge einen Branch, und wechsle zu ihm.
 
 === Mischmasch Reorganisieren ===
 
@@ -228,8 +223,8 @@ abzuarbeiten. Du willst deine laufenden Arbeiten für dich behalten und
 andere sollen deine 'Commits' nur sehen, wenn du sie hübsch organisiert
 hast. Beginne ein paar 'Branches':
 
-  $ git checkout -b bereinigt
-  $ git checkout -b mischmasch
+  $ git branch sauber           # Erzeuge einen Branch für gesäuberte Commits.
+  $ git checkout -b mischmasch  # Erzeuge und wechsle in den Branch zum Arbeiten.
 
 Fahre fort alles zu bearbeiten: Behebe Fehler, füge Funktionen hinzu,
 erstelle temporären Code und so weiter und 'commite' deine Änderungen
