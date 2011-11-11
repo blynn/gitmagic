@@ -33,17 +33,17 @@ Tôi gửi lời cảm ơn đến những người đã dịch quyển sách nà
 Tôi rất cảm kích vì có được số lượng độc giả rộng lớn có được bởi những người
 đã được nêu tên ở trên.
 
-Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael Budde, Richard Albury, Tarmigan, Derek Mahar, Frode Aannevik, Keith Rarick, Andy Somerville, Ralf Recker, Øyvind A. Holm, Miklos Vajna, Sébastien Hinderer, Thomas Miedema, Joe Malin, và Tyler Breisacher đã đóng góp trong việc sửa chữa và cải tiến.
+Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael Budde, Richard Albury, Tarmigan, Derek Mahar, Frode Aannevik, Keith Rarick, Andy Somerville, Ralf Recker, Øyvind A. Holm, Miklos Vajna, Sébastien Hinderer, Thomas Miedema, Joe Malin, Tyler Breisacher và Sonia Hamilton đã đóng góp trong việc sửa chữa và cải tiến nội dung.
 
 François Marier đã bảo trì gói Debian do Daniel
 Baumann khởi xướng.
 
 Tôi cũng gửi lời cảm ơn tới sự giúp đỡ và sự tán dương của các bạn. Tôi muốn 
-trích dẫn ra ở đây, nhưng làm như thế có vẻ hơi lố bịch.
+trích dẫn những điều đó ra đây, nhưng làm như thế có vẻ hơi lố bịch, tự cao tự đại.
 
 Nếu tôi có sai sót gì, xin hãy thông tin hay gửi bản vá cho tôi!
 
-.Nơi lưu giữ Git miễn phí
+.Nơi có dịch vụ Git miễn phí
 
  - http://repo.or.cz/[http://repo.or.cz/] lưu trữ các dự án miễn phí. Đây là địa chỉ lưu giữ Git đầu tiên. Được thành lập và bảo trì bởi một trong số những người phát triển Git đầu tiên.
  - http://gitorious.org/[http://gitorious.org/] là một địa chỉ lưu giữ Git khác nhằm vào các dự án nguồn mở.
@@ -58,7 +58,7 @@ và bạn có thể dễ dàng có được nó bằng cách gõ:
 
  $ git clone git://repo.or.cz/gitmagic.git  # Tạo ra thư mục "gitmagic".
 
-hay từ các kho chứa khác:
+hay từ các máy chủ khác:
 
  $ git clone git://github.com/blynn/gitmagic.git
  $ git clone git://gitorious.org/gitmagic/mainline.git
