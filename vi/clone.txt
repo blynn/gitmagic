@@ -79,8 +79,8 @@ không được phép.
 
 === Mã nguồn riêng tư ===
 
-Với một dự án nguồn-đóng, omit the touch command, và chắc chắn là chưa từng
-tạo ra file có tên `git-daemon-export-ok`. Kho chứa từ giờ trở đi không thể lấy về
+Với một dự án nguồn-đóng, bỏ quên lệnh touch, và chắc chắn là chưa từng
+tạo ra file nào có tên `git-daemon-export-ok`. Kho chứa từ giờ trở đi không thể lấy về
 thông qua giao thức git; chỉ những người có khả năng truy cập bằng SSH mới có thể thấy nó. Nếu tất cả
 các kho chứa đều đóng, việc chạy git daemon là không cần thiết nữa bởi vì tất cả
 việc truyền thông bây giờ đều thông qua SSH.

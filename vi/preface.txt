@@ -18,7 +18,7 @@ Thay vì đi sâu vào chi tiết, chúng tôi đưa ra phác thảo cách làm 
  - http://www.slideshare.net/slide_user/magia-git[Tiếng Bồ Đào Nha]: dịch bởi Leonardo Siqueira Rodrigues [http://www.slideshare.net/slide_user/magia-git-verso-odt[định dạng ODT]].
  - link:/~blynn/gitmagic/intl/ru/[Tiếng Nga]: dịch bởi Tikhon Tarnavsky, Mikhail Dymskov và một số người khác.
  - link:/~blynn/gitmagic/intl/es/[Tiếng Tây Ban Nha]: dịch bởi Rodrigo Toledo và Ariset Llerena Tapia.
- - link:/~blynn/gitmagic/intl/vi/[Tiếng Việt]: dịch bởi Trần Ngọc Quân và đồng thời xuất bản bản dịch này trên http://vnwildman.users.sourceforge.net/gitmagic.html[trang Web cá nhân của mình].
+ - link:/~blynn/gitmagic/intl/vi/[Tiếng Việt]: dịch bởi Trần Ngọc Quân và đồng thời xuất bản bản dịch này trên http://vnwildman.users.sourceforge.net/gitmagic/[trang Web cá nhân của mình].
 
 .Các định dạng khác
 
