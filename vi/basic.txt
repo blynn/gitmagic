@@ -1,4 +1,4 @@
-﻿== Các Thủ Thuật Cơ Bản ==
+== Các Thủ Thuật Cơ Bản ==
 
 Thay vì lao vào cả một biển lệnh với Git, bạn hãy sử dụng các ví dụ cơ bản để bắt đầu.
 Mặc dù chúng rất đơn giản, nhưng tất cả chúng đều rất hữu dụng.
