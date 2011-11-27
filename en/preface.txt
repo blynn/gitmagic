@@ -43,14 +43,13 @@ quote you here, but it might raise expectations to ridiculous heights.
 
 If I've left you out by mistake, please tell me or just send me a patch!
 
-.Free Git hosting
+*Free Git hosting*: The following sites host public projects for free.
+Many thanks to each of them for hosting this guide.
 
- - http://repo.or.cz/[http://repo.or.cz/] hosts free projects. The first Git hosting site. Founded and maintained by one of the earliest Git developers.
- - http://gitorious.org/[http://gitorious.org/] is another Git hosting site aimed at open-source projects.
- - http://github.com/[http://github.com/] hosts open-source projects for free, and private projects for a fee.
- - http://www.assembla.com/[http://www.assembla.com/] hosts up to 2GB for free for open or private projects.
-
-Many thanks to each of these sites for hosting this guide.
+ - http://repo.or.cz/[repo.or.cz]
+ - http://gitorious.org/[Gitorious]
+ - http://github.com/[GitHub]: hosts private projects for a fee.
+ - http://www.assembla.com/[Assembla]: hosts private projects for a fee, though the first gigabyte is free.
 
 === License ===
 
@@ -63,3 +62,4 @@ or from one of the mirrors:
 
  $ git clone git://github.com/blynn/gitmagic.git
  $ git clone git://gitorious.org/gitmagic/mainline.git
+ $ git clone git://git.assembla.com/gitmagic.git
