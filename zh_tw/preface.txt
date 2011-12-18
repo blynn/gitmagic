@@ -58,25 +58,24 @@ François Marier維護Debian包，該Debian包起初由Daniel Baumann創建。
 
 如果我不小心把你的名字落下，請告訴我或者發一個補丁。
 
-.免費Git伺服
+*免費 Git 主機*: 底下網站可以免費放置公開專案。
+非常感謝底下網站贊助放置手冊。
 
- - http://repo.or.cz/[http://repo.or.cz/] 為自由項目提供服務。第一個Git伺服器。
-   由最早的Git開發人員創建和維護。
- - http://gitorious.org/[http://gitorious.org/] 是另一個Git服務站點，為開源項
-   目提供服務。
- - http://github.com/[http://github.com/] 開源項目免費，私有項目收錢。
-
-感謝以上站點為本文檔提供伺服服務。
+ - http://repo.or.cz/[http://repo.or.cz/]
+ - http://gitorious.org/[http://gitorious.org/]
+ - http://github.com/[http://github.com/] 私有項目收錢。
+ - http://www.assembla.com/[Assembla]: 私有項目收錢, 雖然有 1 gigabyte 空間免費.
 
 === 許可 ===
 
 本指南在http://www.gnu.org/licenses/gpl-3.0.html[ GNU通用公共許可協議版本3 ]
 之下發佈。很自然，源碼保存在一個Git倉庫裡，可以通過以下命令獲得源碼：
 
- $ git clone git://repo.or.cz/gitmagic.git  # 創建“gitmagic”目錄.
+ $ git clone git://repo.or.cz/gitmagic.git  # 建立 "gitmagic" 目錄.
 
 或從以下鏡像得到：
 
  $ git clone git://github.com/blynn/gitmagic.git
  $ git clone git://gitorious.org/gitmagic/mainline.git
+ $ git clone git://git.assembla.com/gitmagic.git
 
