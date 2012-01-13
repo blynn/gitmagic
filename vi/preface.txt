@@ -12,7 +12,7 @@ Thay vì đi sâu vào chi tiết, chúng tôi đưa ra phác thảo cách làm 
 
 .Bản dịch
 
- - link:/\~blynn/gitmagic/intl/zh_cn/[Tiếng Trung Giản thể]: dịch bởi JunJie, Meng và JiangWei. Đã chuyển đổi sang:/~blynn/gitmagic/intl/zh_tw/[Tiếng Trung Phồn thể] thông qua lệnh  +cconv -f UTF8-CN -t UTF8-TW+.
+ - link:/\~blynn/gitmagic/intl/zh_cn/[Tiếng Trung Giản thể]: dịch bởi JunJie, Meng và JiangWei. Đã chuyển đổi sang: link:/~blynn/gitmagic/intl/zh_tw/[Tiếng Trung Phồn thể] thông qua lệnh  +cconv -f UTF8-CN -t UTF8-TW+.
  - link:/~blynn/gitmagic/intl/fr/[Tiếng Pháp]: dịch bởi Alexandre Garel; và đồng thời được xuất bản tại http://tutoriels.itaapy.com/[itaapy].
  - link:/~blynn/gitmagic/intl/de/[Tiếng Đức]: dịch bởi Benjamin Bellee và Armin Stebich. Armin ; và đồng thời xuất bản http://gitmagic.lordofbikes.de/[bản dịch tiếng Đức trên website của chính mình].
  - http://www.slideshare.net/slide_user/magia-git[Tiếng Bồ Đào Nha]: dịch bởi Leonardo Siqueira Rodrigues [http://www.slideshare.net/slide_user/magia-git-verso-odt[định dạng ODT]].
@@ -39,17 +39,17 @@ François Marier đã bảo trì gói Debian do Daniel
 Baumann khởi xướng.
 
 Tôi cũng gửi lời cảm ơn tới sự giúp đỡ và sự tán dương của các bạn. Tôi muốn 
-trích dẫn những điều đó ra đây, nhưng làm như thế có vẻ hơi lố bịch, tự cao tự đại.
+trích dẫn những lời đó ra đây, nhưng làm như thế có vẻ hơi lố bịch, tự cao tự đại.
 
 Nếu tôi có sai sót gì, xin hãy thông tin hay gửi bản vá cho tôi!
 
-.Nơi có dịch vụ Git miễn phí
-
- - http://repo.or.cz/[http://repo.or.cz/] lưu trữ các dự án miễn phí. Đây là địa chỉ lưu giữ Git đầu tiên. Được thành lập và bảo trì bởi một trong số những người phát triển Git đầu tiên.
- - http://gitorious.org/[http://gitorious.org/] là một địa chỉ lưu giữ Git khác nhằm vào các dự án nguồn mở.
- - http://github.com/[http://github.com/] lưu giữ các dự án nguồn mở miễn phí, và dự án riêng có thu phí.
-
+*Nơi có dịch vụ Git miễn phí*: Những địa chỉ sau đây cho phép lưu trữ các dự án công cộng miễn phí.
 Trân thành cảm ơn các máy chủ đã lưu giữ bản hướng dẫn này.
+
+ - http://repo.or.cz/[repo.or.cz]
+ - http://gitorious.org/[Gitorious]
+ - http://github.com/[GitHub] lưu giữ các dự án riêng có thu phí.
+ - http://www.assembla.com/[Assembla]: lưu giữ các dự án riêng có thu phí, nhưng dù sao thì một gigabyte đầu tiên là miễn phí.
 
 === Giấy phép sử dụng ===
 
@@ -62,3 +62,5 @@ hay từ các máy chủ khác:
 
  $ git clone git://github.com/blynn/gitmagic.git
  $ git clone git://gitorious.org/gitmagic/mainline.git
+ $ git clone git://git.assembla.com/gitmagic.git
+ 
