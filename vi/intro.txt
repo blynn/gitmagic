@@ -4,7 +4,7 @@ Tôi sử dụng cách ví von để giới thiệu về hệ thống quản lý
 
 === Công Việc giống như Trò Chơi ===
 
-Tôi đã chơi trò chơi trên máy tính suốt từ bé đến giờ. Ngược lại, tôi chỉ bắt đầu sử dụng hệ thống quản lý mã nguồn khi đã trưởng thành. Tôi tin rằng không chỉ có tôi như thế, và việc so sánh giữa hai điều đó sẽ làm có các khái niệm trở nên dễ hiểu, dễ giải thích hơn.
+Tôi đã chơi trò chơi trên máy tính suốt từ bé đến giờ. Ngược lại, tôi chỉ bắt đầu sử dụng hệ thống quản lý mã nguồn khi đã trưởng thành. Tôi tin rằng không chỉ có tôi như thế, và việc so sánh giữa hai điều đó sẽ làm cho các khái niệm trở nên dễ hiểu, dễ giải thích hơn.
 
 Hãy nghĩ việc biên soạn mã nguồn, tài liệu cũng giống như việc chúng ta đang chơi trò chơi trên máy tính. Một khi bạn đã làm được kha khá, bạn sẽ muốn ghi lại thành quả công việc của mình. Để làm điều đó, bạn chỉ việc bấm vào nút 'Save' trong chương trình biên soạn của mình.
 
@@ -40,7 +40,7 @@ Việc khởi tạo bản sao như thế có vẻ hơi xa hoa, đặc biệt là
 
 Một quan niệm phổ biến là hệ thống phân tán không thích hợp với các dự án có yêu cầu một kho chứa trung tâm chính thức. Không điều gì có thể chà đạp lên sự thật. Chụp ảnh ai đó không có nghĩa là lấy đi linh hồn họ. Cũng như thế, nhân bản kho chính cũng không làm giảm đi sự quan trọng của nó.
 
-Tóm lại, một hệ thống phân tán đã thiết kế tốt thì làm bất cứ công việc nào cũng khá hơn một hệ thống quản lý mã nguồn tập trung. Tài nguyên mạng thường thì tốn kém hơn các tài nguyên nội bộ. Chúng ta sẽ nói đến các hạn chế của hệ thống phân tán sau, sự so sánh như sau thường đúng: hệ thống phân tán tốt hơn.
+Tóm lại, một hệ thống phân tán đã thiết kế tốt thì làm bất cứ công việc nào cũng khá hơn một hệ thống quản lý mã nguồn tập trung. Tài nguyên mạng thường thì tốn kém hơn các tài nguyên nội bộ. Chúng ta sẽ nói đến các hạn chế của hệ thống phân tán sau, sự so sánh như sau thường đúng: hệ thống phân tán thường tốt hơn.
 
 Một dự án nhỏ có thể chỉ cần dùng một phần nhỏ các đặc tính được đưa ra bởi một
 hệ thống như thế, nhưng việc sử dụng một hệ thống không có khả năng mở rộng cho một dự án nhỏ thì cũng giống như việc sử dụng 

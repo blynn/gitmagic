@@ -17,8 +17,7 @@ Khởi tạo kho chứa Git và commit các tệp tin trên một máy tính. Sa
  $ git commit -a
  $ git pull other.computer:/path/to/files HEAD
 
-sẽ lấy về một trạng thái của các tệp tin trên máy tính khác về máy bạn đang làm việc. Nếu bạn vừa tạo ra một sự chỉnh sửa
-xung đột trong cùng một tệp tin , Git sẽ cho bạn biết và bạn có thể commit lại sau khi đã sửa chữa chúng.
+sẽ lấy về một trạng thái của các tệp tin trên máy tính khác về máy bạn đang làm việc. Nếu bạn vừa tạo ra một sự chỉnh sửa xung đột trong cùng một tệp tin , Git sẽ cho bạn biết và bạn có thể commit lại sau khi đã sửa chữa chúng.
 
 === Quản lý theo cách Cũ ===
 
@@ -33,7 +32,7 @@ Trên máy chủ trung tâm, khởi tạo 'kho bare' ở một thư mục nào �
  $ mkdir proj.git
  $ cd proj.git
  $ git init --bare
- $  # one-line variant: GIT_DIR=proj.git git init
+ $ touch proj.git/git-daemon-export-ok
 
 Khởi động dịch vụ Git daemon nếu cần:
 
@@ -44,11 +43,11 @@ và khởi tạo kho Git. Cách thường thấy nhất là điền vào mẫu c
 
 'Push' dự án của bạn lên máy chủ trung tâm bằng lệnh:
 
- $ git push git://central.server/path/to/proj.git HEAD
+ $ git push central.server/path/to/proj.git HEAD
 
 Để lấy về mã nguồn, các nhà phát triển phần mềm chỉ cần gõ:
 
- $ git clone git://central.server/path/to/proj.git
+ $ git clone central.server/path/to/proj.git
 
 Sau khi thay đổi, các nhà phát triển phần mềm sẽ lưu lại các thay đổi trên máy tính của mình:
 
@@ -69,7 +68,24 @@ Gửi thay đổi của mình lên máy chủ trung tâm:
 Nếu máy chủ trung tâm có thay đổi bởi hành động của một người phát triển phần mềm khác, quá trình
 push sẽ bị lỗi, và anh ta phải pull về bản mới nhất, xử lý các xung đột khi trộn, sau đó thử lại.
 
-=== Kho Thuần ===
+Người dùng phải có quyền truy cập SSH mới có thể thực hiện được lệnh pull và push ở trên.
+Tuy nhiên, ai cũng có thể lấy mã nguồn về bằng lệnh::
+
+ $ git clone git://central.server/path/to/proj.git
+
+Giao thức git nguyên bản thì cũng giống như là HTTP: ở đây không cần xác thực, do vậy ai cũng có thể
+lấy về dự án. Do vậy, theo mặc định, việc push thông qua giao thức git là
+không được phép.
+
+=== Mã nguồn riêng tư ===
+
+Với một dự án nguồn-đóng, bỏ quên lệnh touch, và chắc chắn là chưa từng
+tạo ra file nào có tên `git-daemon-export-ok`. Kho chứa từ giờ trở đi không thể lấy về
+thông qua giao thức git; chỉ những người có khả năng truy cập bằng SSH mới có thể thấy nó. Nếu tất cả
+các kho chứa đều đóng, việc chạy git daemon là không cần thiết nữa bởi vì tất cả
+việc truyền thông bây giờ đều thông qua SSH.
+
+=== Kho thuần ===
 
 Kho thuần (bare) được đặt tên như vậy vì nó không chứa thư mục làm việc; nó chỉ chứa các tệp tin thường là ẩn trong thư mục phụ `.git`. Hay nói cách khác, nó chứa lịch sử mã nguồn của một dự án, và không bao giờ giữ dữ liệu còn đang dang dở của bất kỳ phiên bản nào.
 
@@ -82,7 +98,7 @@ thư mục làm việc.
 
 Nhiều lệnh Git gặp lỗi trên kho thuần trừ phi biến môi trường `GIT_DIR` được đặt với giá trị là đường dẫn đến kho chứa, hay tùy chọn `--bare` được áp dụng.
 
-=== Push đối lập với pull ===
+=== Push ngược với pull ===
 
 Tại sao chúng tôi lại giới thiệu lệnh push, thay vì trông cậy vào lệnh pull
 quen thuộc? Trước hết, việc pull gặp lỗi trên kho thuần: thay vào đó bạn phải dùng lệnh 'fetch',
@@ -96,7 +112,7 @@ Tuy nhiên, ngoài trường hợp này ra, chúng ta còn nản lòng với vi�
 
 Tóm lại, khi bạn học Git, chỉ push khi đích là kho thuần; nếu không thì dùng pull.
 
-=== Rẽ Nhánh Dự Án ===
+=== Rẽ Nhánh một Dự Án ===
 
 Bạn chán ngấy cách mà dự án mà bạn đang làm việc chạy? Bạn nghĩ mình có thể làm tốt hơn thế? Thế thì trên máy chủ của mình:
 

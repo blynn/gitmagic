@@ -1,7 +1,7 @@
 == Bài Học về Lịch Sử ==
 
 Một hệ quả tất yếu của đặc tính phân tán của Git là việc lịch sử có thể biên soạn lại một cách
-dễ dàng. Nhưng nếu bạn xáo trộn quá khứ, hãy cẩn thận: chỉ biên soạn lại quá khứ trong lịch sử
+dễ dàng. Nhưng nếu bạn xáo trộn quá khứ, hãy cẩn thận: chỉ biên soạn lại các phần trong lịch sử
 chỉ khi bạn sở hữu nó một mình. Cũng giống như việc các quốc gia tranh cãi không kết thúc xem ai là người
 tận tâm hành động nào là tàn ác, nếu một người khác có một bản sao mà lịch sử của nó lại khác với
 cái của bạn, bạn sẽ gặp rắc rối ngay khi cần tương tác với họ.
@@ -25,9 +25,11 @@ Bạn muốn thêm vài chỉnh sửa vào lần cuối mình đã commit ư? Th
 
  $ git commit --amend -a
 
-=== ... Và Nhiều Lần mộtlúc ===
+=== ... Và Sau đó là Nhiều Lần ===
 
-Hãy giả sử vấn đề trục trặc ở lần commit cách đây mười lần. Trong một buổi làm việc dài, bạn đã tạo ra hàng tá các lần commit. Nhưng bạn không hoàn toàn hài lòng với cách mà chúng được tổ chức, và một số lần commit cần được soạn lại phần mô tả. Thế thì hãy gõ:
+Giả sử vấn đề trục trặc ở lần commit cách đây mười lần. Sau một buổi làm việc dài, bạn đã
+tạo ra hàng tá các lần commit. Nhưng bạn không hoàn toàn hài lòng với cách mà chúng được
+tổ chức, và một số lần commit cần được soạn lại phần mô tả. Thế thì hãy gõ:
 
  $ git rebase -i HEAD~10
 
@@ -37,24 +39,42 @@ và 10 lần commit cuối sẽ xuất hiện trong $EDITOR yêu thích của b�
     pick a311a64 Reordered analogies in "Work How You Want"
     pick 100834f Added push target to Makefile
 
-Thế thì:
+Lần commit cũ đứng trước lần mới hơn trong danh sách, không giống như kết quả khi chạy lệnh `log`.
+Ở đây, 5c6eb73 là lần commit cũ nhất, và 100834f là mới nhất. Thế thì:
 
--Xóa bỏ các lần commit bằng cách xóa các dòng tương ứng.
--Đặt lại các lần commit bằng các đặt lại các dòng.
-- Thay thế `pick` với:
+- Xóa bỏ các lần commit bằng cách xóa các dòng tương ứng. Giống như lệnh revert, nhưng không
+ghi biên bản: nó sẽ coi như là lần commit đó chưa từng bao giờ tồn tại.
+- Đặt lại thứ tự các lần commit bằng cách thay đổi thứ tự các dòng.
+- Thay thế `pick` bằng:
    * `edit` để đánh dấu lần commit đó là dành cho việc tu bổ.
    * `reword` để thay đổi phần chú giải.
    * `squash` để hòa trộn với lần commit trước.
    * `fixup` để hòa trộn với lần commit trước và bỏ qua việc ghi lại phần chú giải.
 
-Ghi lại và thoát ra. Nếu bạn đánh dấu một lần commit dành cho việc 'edit', thế thì
-chạy:
+Ví dụ, chúng ta chẳng hạn thay thế `pick` ở dòng thứ hai bằng `squash`:
 
- $ git commit --amend
+    pick 5c6eb73 Added repo.or.cz link
+    squash a311a64 Reordered analogies in "Work How You Want"
+    pick 100834f Added push target to Makefile
 
-Cách khác, chạy:
+Sau đó chúng ta ghi lại thay đổi và thoát ra. Git trộn lần a311a64 vào 5c6eb73. Vì vậy *squash* trộn
+với lần kế trước nó: có thể nghĩ đây là quá trình ``nén dữ liệu''.
+
+Hơn thế nữa, Git sau đó tổ hợp nhật ký của chúng và hiện tại và chỉnh sửa lại. Lệnh
+*fixup* bỏ qua bước này; việc sửa nhật ký đơn giản là bỏ qua.
+
+Nếu bạn đánh dấu một lần commit bằng *edit*, Git đưa bạn trở lại quá khứ, tới lần
+commit lâu nhất đó. Bạn có thể tu bổ một lần commit cũ như đã mô tả ở phần trên,
+và thậm chí tạo ra các lần commit mới ở chỗ này. Một khi bạn đã hài lòng với việc
+``retcon'', hãy chạy 'cỗ máy thời gian' bằng cách chạy lệnh:
 
  $ git rebase --continue
+
+Git sửa commits cho tới *edit* kế tiếp, hoặc tới hiện tại nếu không còn việc gì cần phải làm.
+
+Bạn còn có thể bãi bỏ việc rebase bằng lệnh:
+
+ $ git rebase --abort
 
 Do vậy cứ commit thoải mái và thường xuyên bởi vì bạn có thể dọn dẹp cho gọn gàng sau này bằng lệnh rebase.
 
@@ -69,6 +89,9 @@ Nhưng hiện tại lịch sử bản sao Git trên máy tính của bạn là m
 cờ *--onto* và tránh xa sự tương tác với các máy tính khác.
 
 Xem thêm trong *git help rebase* để thấy được chi tiết các ví dụ dành cho lệnh đáng kinh ngạc này. Bạn có thể chia cắt các lần commit. Bạn còn có thể xắp xếp lại các nhánh của một cấu trúc cây.
+
+Hãy cẩn thận: rebase là một lệnh mạnh mẽ. Với những lần rebases phức tạp, trước hết hãy tạo ra
+một bản sao lưu dự phòng bằng lệnh *git clone*.
 
 === Viết Lại Lịch Sử ===
 

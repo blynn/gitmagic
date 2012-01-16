@@ -187,7 +187,7 @@ Cũng có thể dùng lệnh:
 
 Thường thường, tôi duyệt lịch sử bằng http://sourceforge.net/projects/qgit[qgit] để thay thế cách ở trên, bởi vì nó có giao diện đồ họa bóng bẩy, hay http://jonas.nitro.dk/tig/[tig], có giao diện dòng lệnh làm việc rất tốt với các máy có kết nối mạng chậm. Một lựa chọn khác là cài đặt máy chủ web, chạy lệnh *git instaweb* và sử dụng bất kỳ trình duyệt web nào.
 
-=== Bài Tập===
+=== Bài Tập ===
 
 Coi A, B, C, D là 4 lần commit thành công, nơi mà B giống A ngoại trừ một số tệp tin bị xóa bỏ. Chúng ta muốn thêm các tệp tin đó trở lại D. Chúng ta thực hiện điều này bằng cách nào?
 
