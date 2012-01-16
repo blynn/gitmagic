@@ -29,8 +29,8 @@ http://git.or.cz/[Git] это швейцарский нож управления
 
 .Другие варианты
 
- - link:book-ru.html[HTML одной страницей]: чистый HTML без CSS.
- - link:book-ru.pdf[PDF файл]: для печати.
+ - link:book.html[HTML одной страницей]: чистый HTML без CSS.
+ - link:book.pdf[PDF файл]: для печати.
  - http://packages.debian.org/gitmagic[Пакет Debian], http://packages.ubuntu.com/gitmagic[пакет Ubuntu]: получите локальную копию этого сайта. Придется кстати, http://csdcf.stanford.edu/status/[если этот сервер будет недоступен].
 
 === Благодарности ===
