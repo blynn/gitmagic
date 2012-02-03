@@ -4,11 +4,11 @@ Tháng Tám, 2007
 
 == Lời nói đầu ==
 
-http://git.or.cz/[Git] là công cụ quản lý mã nguồn vạn năng. Đây là một công cụ quản lý mã nguồn tin cậy, ổn định, đa dụng và sự cực kỳ mềm dẻo và chính sự mềm dẻo của Git làm cho việc học nó trở nên khó khăn, tất nhiên là không nói đến người tạo ra nó.
+http://git.or.cz/[Git] là công cụ quản lý mã nguồn vạn năng. Đây là một công cụ quản lý mã nguồn tin cậy, ổn định, đa dụng và cực kỳ mềm dẻo và chính sự mềm dẻo của Git làm cho việc học nó trở nên khó khăn, tất nhiên là không nói đến những người đã tạo ra nó.
 
-Theo quan sát của Arthur C. Clarke, bất kể công nghệ tiên tiến nào cũng không thể phân biệt rạch ròi là nó có kỳ diệu hay không. Đây cũng là cách hay đề đề cập đến Git: những người mới sử dụng không cần quan tâm đến bên trong Git làm việc như thế nào mà hãy xem khả năng thần kỳ của nó như là một điệu gizmo có thể làm những người coi nó là bạn sửng sốt và làm điên đầu các những người đối lập.
+Theo quan sát của Arthur C. Clarke, bất kể công nghệ tiên tiến nào cũng không thể phân biệt rạch ròi là nó có kỳ diệu hay không. Đây cũng là cách hay đề đề cập đến Git: những người mới sử dụng không cần quan tâm đến bên trong Git làm việc như thế nào mà hãy xem khả năng thần kỳ của nó như là một điệu gizmo có thể làm những người coi nó là bạn sửng sốt và làm điên đầu  những người đối lập.
 
-Thay vì đi sâu vào chi tiết, chúng tôi đưa ra phác thảo cách làm việc của các hiệu ứng chuyên biệt. Sau khi sử dụng lặp lại nhiều lần, từ từ bạn sẽ hiểu từng mẹo một, và thực hiện được những việc mà mình muốn làm.
+Thay vì đi sâu vào chi tiết, chúng tôi đưa ra phác thảo cách làm việc của các hiệu ứng chuyên biệt. Sau khi sử dụng lặp lại nhiều lần, từ từ bạn sẽ hiểu từng mẹo một và thực hiện được những việc mà mình muốn làm.
 
 .Bản dịch
 
@@ -24,7 +24,7 @@ Thay vì đi sâu vào chi tiết, chúng tôi đưa ra phác thảo cách làm 
 
  - link:book.html[Trang web đơn]: định dạng HTML đơn giản, không định dạng bằng CSS.
  - link:book.pdf[Định dạng PDF]: thuận tiện cho việc in ấn.
- - http://packages.debian.org/gitmagic[Gói dành cho Debian], http:://packages.ubuntu.com/gitmagic[gói dành cho Ubuntu]: cài tự động tại địa chỉ này. Hay tải về và cài đặt thủ công tại http://csdcf.stanford.edu/status/[đây] khi bạn không nối mạng.
+ - http://packages.debian.org/gitmagic[Gói dành cho Debian], http://packages.ubuntu.com/gitmagic[gói dành cho Ubuntu]: tải về đĩa cứng từ các địa chỉ này. Tiện lợi http://csdcf.stanford.edu/status/[khi máy chủ này không kết nối mạng hay không hoạt động].
  - http://www.amazon.com/Git-Magic-Ben-Lynn/dp/1451523343/[Sách giấy [Amazon.com]]: 64 trang, 15.24cm x 22.86cm, đen trắng. Rất tiện sử dụng vì chẳng cần đến điện.
 
 === Lời cảm ơn! ===
@@ -53,7 +53,7 @@ Trân thành cảm ơn các máy chủ đã lưu giữ bản hướng dẫn này
 
 === Giấy phép sử dụng ===
 
-Hướng dẫn này được phát hành dựa trên Giấy Ghép Công phiên bản 3 http://www.gnu.org/licenses/gpl-3.0.html[the GNU General Public License version 3]. Đương nhiên, nội dung của quyển sách được quản lý bằng Git,
+Hướng dẫn này được phát hành dựa trên http://www.gnu.org/licenses/gpl-3.0.html[Giấy Ghép Công phiên bản 3]. Đương nhiên, nội dung của quyển sách được quản lý bằng Git,
 và bạn có thể dễ dàng có được nó bằng cách gõ:
 
  $ git clone git://repo.or.cz/gitmagic.git  # Tạo ra thư mục "gitmagic".
