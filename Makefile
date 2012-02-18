@@ -53,7 +53,7 @@ $(foreach l,$(TRANSLATIONS),$(addprefix $(l)/,$(TXTFILES))):
 
 $(foreach l,$(LANGS),book-$(l)): book-%: book-%.xml
 	xmlto -m custom-html.xsl -o book-$* html book-$*.xml
-	sed -i 's/xmlns:fo[^ ]*//g' book-$*/*.html
+	sed -i'' -e 's/xmlns:fo[^ ]*//g' book-$*/*.html
 	-ls book-$*/*.html | xargs -n 1 tidy -utf8 -m -i -q
 	./makeover $*
 
