@@ -59,7 +59,7 @@ ce changement. Mais ce n'est qu'une illusion. Tapez :
 et ça y est ! Le fichier texte est restauré. Et si le chef repasse pour
 regarder votre dossier, tapez :
 
- $ git checkout boss  # bascule vers la version visible par le chef
+ $ git checkout chef  # bascule vers la version visible par le chef
 
 Vous pouvez basculer entre ces deux versions autant de fois que voulu, et
 intégrer (commit) vos changements à chacune d'elles indépendamment.
