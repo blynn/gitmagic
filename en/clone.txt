@@ -31,7 +31,7 @@ On the central server, initialize a 'bare repository' in some directory:
 
  $ mkdir proj.git
  $ cd proj.git
- $ git init --bare
+ $ git --bare init
  $ touch proj.git/git-daemon-export-ok
 
 Start the Git daemon if necessary:
