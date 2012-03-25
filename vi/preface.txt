@@ -33,23 +33,17 @@ Tôi gửi lời cảm ơn đến những người đã dịch quyển sách nà
 Tôi rất cảm kích vì có được số lượng độc giả rộng lớn có được bởi những người
 đã được nêu tên ở trên.
 
-Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael Budde, Richard Albury, Tarmigan, Derek Mahar, Frode Aannevik, Keith Rarick, Andy Somerville, Ralf Recker, Øyvind A. Holm, Miklos Vajna, Sébastien Hinderer, Thomas Miedema, Joe Malin, Tyler Breisacher và Sonia Hamilton đã đóng góp trong việc sửa chữa và cải tiến nội dung.
+Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael Budde, Richard Albury, Tarmigan, Derek Mahar, Frode Aannevik, Keith Rarick, Andy Somerville, Ralf Recker, Øyvind A. Holm, Miklos Vajna, Sébastien Hinderer, Thomas Miedema, Joe Malin, Tyler Breisacher, Sonia Hamilton, Julian Haagsma, Romain Lespinasse, Sergey Litvinov, Oliver Ferrigni, David Toca,  và Сергей Сергеев đã đóng góp trong việc sửa chữa và cải tiến nội dung.
 
 François Marier đã bảo trì gói Debian do Daniel
 Baumann khởi xướng.
+
+John Hinnegan đã mua tên miền http://www.gitmagic.com/[gitmagic.com].
 
 Tôi cũng gửi lời cảm ơn tới sự giúp đỡ và sự tán dương của các bạn. Tôi muốn 
 trích dẫn những lời đó ra đây, nhưng làm như thế có vẻ hơi lố bịch, tự cao tự đại.
 
 Nếu tôi có sai sót gì, xin hãy thông tin hay gửi bản vá cho tôi!
-
-*Nơi có dịch vụ Git miễn phí*: Những địa chỉ sau đây cho phép lưu trữ các dự án công cộng miễn phí.
-Trân thành cảm ơn các máy chủ đã lưu giữ bản hướng dẫn này.
-
- - http://repo.or.cz/[repo.or.cz]
- - http://gitorious.org/[Gitorious]
- - http://github.com/[GitHub] lưu giữ các dự án riêng có thu phí.
- - http://www.assembla.com/[Assembla]: lưu giữ các dự án riêng có thu phí, nhưng dù sao thì một gigabyte đầu tiên là miễn phí.
 
 === Giấy phép sử dụng ===
 
@@ -62,5 +56,9 @@ hay từ các máy chủ khác:
 
  $ git clone git://github.com/blynn/gitmagic.git
  $ git clone git://gitorious.org/gitmagic/mainline.git
+ $ git clone https://code.google.com/p/gitmagic/
  $ git clone git://git.assembla.com/gitmagic.git
- 
+ $ git clone git@bitbucket.org:blynn/gitmagic.git
+
+GitHub, Assembla, và Bitbucket có hỗ trợ các kho có tính riêng tư, hai địa chỉ còn lại
+là miễn phí.
