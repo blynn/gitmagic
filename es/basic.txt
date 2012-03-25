@@ -64,7 +64,7 @@ Para retomar la analogía de los videojuegos:
 - *`git checkout`*: carga un juego viejo, pero si continúas jugando, el estado del juego se desviará de los juegos que salvaste la primera vez. Cualquierpartido nuevo que guardes, terminará en una branch separada, representando la realidad alternativa a la que entraste. <<branch,Luego nos encargaremos de esto>>
 
 Puedes elegir el restaurar solo archivos o directorios en particular, al agregarlos al final del comando:
-You can choose only to restore particular files and subdirectories by appending them after the command:
+
 
  $ git checkout SHA1_HASH algun.archivo otro.archivo
 
