@@ -10,7 +10,7 @@ diffère du vôtre, vous aurez des difficultés à vous réconcilier lorsque vou
 interagirez.
 
 Certains développeurs insistent très fortement pour que l'historique soit
-considérer comme immuable. D'autres pensent au contraire que les historiques
+considéré comme immuable. D'autres pensent au contraire que les historiques
 doivent être rendus présentables avant d'être présentés publiquement. Git
 s'accommode des deux points de vue. Comme les clones, les branches et les
 fusions, la réécriture de l'historique est juste un pouvoir supplémentaire que
@@ -24,7 +24,7 @@ message différent ? Pour modifier le dernier message, tapez :
  $ git commit --amend
 
 Vous apercevez-vous que vous avez oublié un fichier ? Faites *git add* pour
-l'ajouter puis exécutez le commande ci-dessus.
+l'ajouter puis exécutez la commande ci-dessus.
 
 Voulez-vous ajouter quelques modifications supplémentaires au dernier commit ?
 Faites ces modifications puis exécutez :
