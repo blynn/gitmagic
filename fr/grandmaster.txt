@@ -131,7 +131,7 @@ retrouver l'empreinte appropriée. Vous pouvez toujours explorer les différente
 valeurs d'empreinte trouvées dans `.git/objects` et retrouver celle que vous
 cherchez par essais et erreurs. Mais il existe un moyen plus simple.
 
-Git enregistre l'empreinte de chaque commit qu'il traite dans `.git/logs`. La
+Git enregistre l'empreinte de chaque commit qu'il traite dans `.git/logs`. Le
 sous-dossier `refs` contient l'historique de toute l'activité de chaque
 branche alors que le fichier `HEAD` montre chaque valeur d'empreinte que HEAD a
 pu prendre. Ce dernier peut donc servir à retrouver les commits d'une branche
@@ -186,7 +186,7 @@ que vous utilisez le plus fréquemment :
   alias.co checkout
   $ git co foo                              # identique à 'git checkout foo'
 
-Une autre astuce consiste à intégrer le nom de la branche courant dans votre
+Une autre astuce consiste à intégrer le nom de la branche courante dans votre
 prompt ou dans le titre de la fenêtre. L'invocation de :
 
   $ git symbolic-ref HEAD
