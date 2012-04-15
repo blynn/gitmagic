@@ -33,7 +33,7 @@ Tôi gửi lời cảm ơn đến những người đã dịch quyển sách nà
 Tôi rất cảm kích vì có được số lượng độc giả rộng lớn có được bởi những người
 đã được nêu tên ở trên.
 
-Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael Budde, Richard Albury, Tarmigan, Derek Mahar, Frode Aannevik, Keith Rarick, Andy Somerville, Ralf Recker, Øyvind A. Holm, Miklos Vajna, Sébastien Hinderer, Thomas Miedema, Joe Malin, Tyler Breisacher, Sonia Hamilton, Julian Haagsma, Romain Lespinasse, Sergey Litvinov, Oliver Ferrigni, David Toca,  và Сергей Сергеев đã đóng góp trong việc sửa chữa và cải tiến nội dung.
+Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael Budde, Richard Albury, Tarmigan, Derek Mahar, Frode Aannevik, Keith Rarick, Andy Somerville, Ralf Recker, Øyvind A. Holm, Miklos Vajna, Sébastien Hinderer, Thomas Miedema, Joe Malin, Tyler Breisacher, Sonia Hamilton, Julian Haagsma, Romain Lespinasse, Sergey Litvinov, Oliver Ferrigni, David Toca, Сергей Сергеев và Joël Thieffry đã đóng góp trong việc sửa chữa và cải tiến nội dung.
 
 François Marier đã bảo trì gói Debian do Daniel
 Baumann khởi xướng.
