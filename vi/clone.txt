@@ -31,7 +31,7 @@ Trên máy chủ trung tâm, khởi tạo 'kho bare' ở một thư mục nào �
 
  $ mkdir proj.git
  $ cd proj.git
- $ git init --bare
+ $ git --bare init
  $ touch proj.git/git-daemon-export-ok
 
 Khởi động dịch vụ Git daemon nếu cần:
@@ -112,7 +112,7 @@ Tuy nhiên, ngoài trường hợp này ra, chúng ta còn nản lòng với vi�
 
 Tóm lại, khi bạn học Git, chỉ push khi đích là kho thuần; nếu không thì dùng pull.
 
-=== Rẽ Nhánh một Dự Án ===
+=== Rẽ nhánh một dự án ===
 
 Bạn chán ngấy cách mà dự án mà bạn đang làm việc chạy? Bạn nghĩ mình có thể làm tốt hơn thế? Thế thì trên máy chủ của mình:
 
@@ -124,7 +124,7 @@ Từ bây giờ trở đi, bạn có thể trộn các sự thay đổi từ d�
 
  $ git pull
 
-=== Sao Lưu Không Giới Hạn ===
+=== Sao lưu không giới hạn ===
 
 Bạn muốn lưu trữ dự án của mình ở nhiều nơi khác nhau ư? Nếu dự án của bạn có nhiều người cùng phát triển, bạn không cần phải làm gì cả! Mỗi một bản sao đều đồng thời có tác dụng như một bản sao lưu dự phòng. Mỗi bản sao không chỉ lưu trạng thái hiện hành mà toàn bộ lịch sử trong dự án. Nhờ có giá trị băm bằng mật mã, nếu bản sao của người nào đó bị hỏng, nó sẽ được phát hiện ngay sau khi họ liên lạc với những người khác.
 
@@ -147,7 +147,7 @@ và pull các thay đỏi từ một bản sao khác:
 
  $ git pull /the/other/clone HEAD
 
-=== Song Hành cùng các hệ thống SCM khác  ===
+=== Song hành cùng các hệ thống SCM khác  ===
 
 Bạn đang làm việc cho một dự án có sử dụng hệ thống quản lý mã nguồn cũ, và bạn lại muốn sử dụng Git? Thế thì hãy khởi tạo kho chứa Git trong thư mục bạn đang làm việc:
 
