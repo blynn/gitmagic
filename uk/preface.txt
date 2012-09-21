@@ -1,0 +1,65 @@
+= Магія Git =
+Ben Lynn
+Серпень 2007
+
+== Передмова ==
+
+http://git.or.cz/[Git] це швейцарський ніж керування версіями – надійний універсальний багатоцільовий інструмент, чия надзвичайна гнучкість робить його складним у вивченні навіть для багатьох професіоналів.
+
+Як говорив Артур Кларк, будь-яка досить розвинена технологія не відрізняється від чаклунства. Це відмінний підхід до Git: новачки можуть ігнорувати принципи його внутрішньої роботи і розглядати Git як щось, що захоплює друзів і приводить в сказ ворогів своїми чудовими здібностями.
+
+Замість того, щоб вдаватися в подробиці, ми надамо приблизні інструкції для одержання конкретних результатів. При частому використанні ви поступово зрозумієте, як працює кожен трюк і як пристосовувати рецепти під ваші потреби.
+
+.Переклади
+
+ - http://docs.google.com/View?id=dfwthj68_675gz3bw8kj[	Китайська (спрощена)]: JunJie, Meng та JiangWei.
+ - link:/~blynn/gitmagic/intl/es/[Іспанська]: Rodrigo Toledo.
+ - link:/~blynn/gitmagic/intl/de/[Німецька]: Benjamin Bellee и Armin Stebich. Armin також розмістив http://gitmagic.lordofbikes.de/[німецький переклад на його сайті].
+ - link:/~blynn/gitmagic/intl/ru/[Російська]: Тихон Тарнавский, Михаил Дымсков і інші.
+ - link:/~blynn/gitmagic/intl/fr/[Французька]: Alexandre Garel. Також розміщений на http://tutoriels.itaapy.com/[itaapy].
+ - http://www.slideshare.net/slide_user/magia-git[Португальська]: Leonardo Siqueira Rodrigues [http://www.slideshare.net/slide_user/magia-git-verso-odt[в форматі ODT]].
+
+.Інші варіанти
+
+ - link:book.html[HTML однією сторінкою]: чистий HTML без CSS.
+ - link:book.pdf[PDF файл]: для друку.
+ - http://packages.debian.org/gitmagic[пакунок Debian], http://packages.ubuntu.com/gitmagic[пакунок Ubuntu]: отримайте локальну копію цього сайту. Стане у нагоді, http://csdcf.stanford.edu/status/[якщо цей сервер буде недоступним].
+
+=== Подяки ===
+
+Я дуже ціную, що так багато людей працювали над перекладами цих рядків. Я вдячний названим вище людям за їхні зусилля, які розширили мою аудиторію.
+
+Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael Budde, Richard Albury, Tarmigan, Derek Mahar, Frode Aannevik, Keith Rarick, Andy Somerville, Ralf Recker, Øyvind A. Holm, Miklos Vajna, Sébastien Hinderer, Thomas Miedema, Joe Malin, Tyler Breisacher, Sonia Hamilton, Julian Haagsma, Romain Lespinasse, Sergey Litvinov, Oliver Ferrigni, David Toca, Сергей Сергеев та Joël Thieffry сприяли в правках і доробках.
+
+François Marier супроводжує пакунок Debian, спочатку створений Daniel Baumann.
+
+John Hinnegan купив http://www.gitmagic.com/[gitmagic.com] домен.
+
+Мої подяки іншим за вашу підтримку і похвалу. Мені дуже хотілося процитувати вас тут, але це могло б підняти ваше марнославство до неймовірних висот.
+
+Якщо я випадково забув згадати вас, будь ласка, нагадайте мені або просто вишліть патч.
+
+.Безкоштовні хостинги Git
+
+ - http://repo.or.cz/[http://repo.or.cz/] хостинг вільних проектів. Перший сайт Git-хостингу. Заснований і підтримується одним з перших розробників Git.
+ - http://gitorious.org/[http://gitorious.org/] інший сайт Git-хостингу, націлений на проекти з відкритим кодом.
+ - http://github.com/[http://github.com/] хостинг для проектів з відкритим кодом; а також для закритих проектів (на платній основі).
+
+Велике спасибі кожному з цих сайтів за розміщення цього керівництва.
+
+=== Ліцензія ===
+
+Це керівництво випущено під http://www.gnu.org/licenses/gpl-3.0.html[GNU General Public License 3-ї версії]. Природньо, вихідний текст знаходиться в сховищі Git і може бути отриманий командою:
+
+ $ git clone git://repo.or.cz/gitmagic.git  # Створить каталог "gitmagic".
+
+або з одного із дзеркал:
+
+ $ git clone git://github.com/blynn/gitmagic.git
+ $ git clone git://gitorious.org/gitmagic/mainline.git
+ $ git clone https://code.google.com/p/gitmagic/
+ $ git clone git://git.assembla.com/gitmagic.git
+ $ git clone git@bitbucket.org:blynn/gitmagic.git
+
+GitHub, Assembla, і Bitbucket підтримують приватні сховища, останні два
+безкоштовно.
