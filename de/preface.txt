@@ -2,20 +2,20 @@
 
 == Vorwort ==
 
-http://git.or.cz/[Git] ist wie ein schweizer Taschenmesser für
+http://git.or.cz/[Git] ist eine Art "Schweizer Taschenmesser" für
 Versionsverwaltung. Ein zuverlässiges, vielseitiges
 Mehrzweck-Versionsverwaltungswerkzeug, dessen außergewöhnliche Flexibilität
-es schwierig zu erlernen macht, ganz zu schweigen davon es zu meistern.
+es schwierig zu erlernen macht, ganz zu schweigen davon, es zu meistern.
 
 Wie Arthur C. Clarke festgestellt hat, ist jede hinreichend fortschrittliche
-Technologie von Magie nicht zu unterscheiden. Das ist ein großartiger Ansatz
+Technologie nicht von Magie zu unterscheiden. Das ist ein großartiger Ansatz, 
 um an Git heranzugehen: Anfänger können seine inneren Mechanismen ignorieren
 und Git als ein Ding ansehen, das mit seinen erstaunlichen Fähigkeiten
 Freunde verzückt und Gegner zur Weißglut bringt.
 
 Anstatt die Details aufzudecken, bieten wir grobe Anweisungen für die
 jeweiligen Funktionen. Bei regelmäßiger Anwendung wirst Du allmählich
-verstehen, wie jeder Trick funktioniert und wie Du die Rezepte auf Deinen
+verstehen, wie die Tricks funktionieren und wie Du die Rezepte auf Deinen
 Bedarf zuschneiden kannst.
 
 .Übersetzungen
@@ -54,8 +54,8 @@ Bedarf zuschneiden kannst.
 
 === Danke! ===
 
-Ich bin erstaunt, daß so viele Leute an der Übersetzung dieser Seiten
-gearbeitet haben. Ich weiß es zu würdigen, daß ich, dank der Bemühungen der
+Ich bin erstaunt, dass so viele Leute an der Übersetzung dieser Seiten
+gearbeitet haben. Ich weiß es zu würdigen, dass ich, dank der Bemühungen der
 oben genannten, einen größeren Leserkreis erreiche.
 
 Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone,
@@ -68,10 +68,10 @@ François Marier unterhält das Debian Packet, das ursprünglich von Daniel
 Baumann erstellt wurde.
 
 Meine Dankbarkeit gilt auch vielen anderen für deren Unterstützung und
-Lob. Ich war versucht euch hier alle aufzuzählen, aber das könnte
+Lob. Ich war versucht, euch hier alle aufzuzählen, aber das könnte
 Erwartungen in unermesslichem Umfang wecken.
 
-Wenn ich Dich versehentlich vergessen habe, sag mir bitte Bescheid oder
+Wenn ich Dich versehentlich vergessen habe, sag' mir bitte Bescheid oder
 schicke mir einfach einen Patch!
 
 .Kostenloses Git Hosting
@@ -84,13 +84,13 @@ schicke mir einfach einen Patch!
  - http://github.com/[http://github.com/] hostet Open-Source Projekte
    kostenlos und geschlossene Projekte gegen Gebühr.
 
-Vielen Dank an jede dieser Seiten für das Hosten dieser Anleitung.
+Vielen Dank an alle diese Seiten für das Hosten dieser Anleitung.
 
 === Lizenz ===
 
-Diese Anleitung ist veröffnetlicht unter
-http://www.gnu.org/licenses/gpl-3.0.html[der GNU General Public License
-Version 3]. Natürlich wird der Quelltext in einem Git 'Repository' gehalten
+Diese Anleitung ist unter der 
+http://www.gnu.org/licenses/gpl-3.0.html[GNU General Public License
+Version 3] veröffentlicht. Natürlich wird der Quelltext in einem Git 'Repository' gehalten
 und kann abgerufen werden durch:
 
  $ git clone git://repo.or.cz/gitmagic.git  # Erstellt "gitmagic" Verzeichnis.
