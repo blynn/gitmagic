@@ -16,6 +16,7 @@ http://git.or.cz/[Git] це швейцарський ніж керування �
  - link:/~blynn/gitmagic/intl/es/[Іспанська]: Rodrigo Toledo.
  - link:/~blynn/gitmagic/intl/de/[Німецька]: Benjamin Bellee и Armin Stebich. Armin також розмістив http://gitmagic.lordofbikes.de/[німецький переклад на його сайті].
  - link:/~blynn/gitmagic/intl/ru/[Російська]: Тихон Тарнавский, Михаил Дымсков і інші.
+ - link:/~blynn/gitmagic/intl/uk/[Українська]: Володимир Боденчук.
  - link:/~blynn/gitmagic/intl/fr/[Французька]: Alexandre Garel. Також розміщений на http://tutoriels.itaapy.com/[itaapy].
  - http://www.slideshare.net/slide_user/magia-git[Португальська]: Leonardo Siqueira Rodrigues [http://www.slideshare.net/slide_user/magia-git-verso-odt[в форматі ODT]].
 
