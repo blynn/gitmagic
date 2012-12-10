@@ -41,7 +41,7 @@ Una creencia popular errónea es que los sistemas distribuídos son poco apropia
 
 Una buena aproximación inicial, es que cualquier cosa que se puede hacer con un sistema de control de versiones centralizado, se puede hacer mejor con un sistema de versiones distribuído que esté bien diseñado. Los recursos de red son simplemente más costosos que los recursos locales. Aunque luego veremos que hay algunas desventajas para un sistema distribuído, hay menos probabilidad de hacer comparaciones erroneas al tener esto en cuenta.
 
-Un proyecto pequeño, puede necesitar solo una fracción de de las características que un sistema así ofrece. Pero, ¿usarías números romanos si solo necesitas usar números pequeños?. Además, tu proyecto puede crecer más allá de tus expectativas originales. Usar Git desde el comienzo, es como llevar una navaja suiza, aunque solo pretendas usarla para abrir botellas. El día que necesites desesperadamente un destornillador, vas a agradecer el tener más que un simple destapador.
+Un proyecto pequeño, puede necesitar solo una fracción de las características que un sistema así ofrece. Pero, ¿usarías números romanos si solo necesitas usar números pequeños?. Además, tu proyecto puede crecer más allá de tus expectativas originales. Usar Git desde el comienzo, es como llevar una navaja suiza, aunque solo pretendas usarla para abrir botellas. El día que necesites desesperadamente un destornillador, vas a agradecer el tener más que un simple destapador.
 
 === Conflictos al fusionar ===
 
