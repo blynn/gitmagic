@@ -1,7 +1,7 @@
 == Lecciones de Historia ==
 
 Una consecuencia de la naturaleza distribuída de git, es que la historia puede ser editada
-facilmente. Pero si manipulas el pasado, ten cuidado: solo reescribe la parte de
+fácilmente. Pero si manipulas el pasado, ten cuidado: solo reescribe la parte de
 la historia que solamente tú posees. Así como las naciones discuten eternamente sobre quién
 cometió qué atrocidad, si otra persona tiene un clon cuya versión de la historia
 difiere de la tuya, vas a tener problemas para reconciliar ambos árboles cuando éstos interactúen.
@@ -70,7 +70,7 @@ y los cambios oficiales. Preferirías ver todos tus cambios en una sección cont
 luego de todos los cambios oficiales.
 
 Lo descrito arriba es un trabajo para *git rebase*. En muchos casos se puede usar
-la bandera *--onto* y evitar la interacción.
+el parámetro *--onto* y evitar la interacción.
 
 Ver *git help rebase* para ejemplos detallados de este asombroso comando.
 Se pueden partir commits. Incluso se pueden reordenar las branches de un árbol.
@@ -112,9 +112,9 @@ un solo tiro.
 Como ejemplo, pega el texto a continuación en un archivo temporal, como ser `/tmp/history`:
 ----------------------------------
 commit refs/heads/master
-committer Alice <alice@example.com> Thu, 01 Jan 1970 00:00:00 +0000
+committer Alice <alice@ejemplo.com> Thu, 01 Jan 1970 00:00:00 +0000
 data <<EOT
-Initial commit.
+Commit inicial.
 EOT
 
 M 100644 inline hello.c
@@ -122,16 +122,16 @@ data <<EOT
 #include <stdio.h>
 
 int main() {
-  printf("Hello, world!\n");
+  printf("Hola mundo!\n");
   return 0;
 }
 EOT
 
 
 commit refs/heads/master
-committer Bob <bob@example.com> Tue, 14 Mar 2000 01:59:26 -0800
+committer Bob <bob@ejemplo.com> Tue, 14 Mar 2000 01:59:26 -0800
 data <<EOT
-Replace printf() with write().
+Reemplazo printf() con write().
 EOT
 
 M 100644 inline hello.c
@@ -139,7 +139,7 @@ data <<EOT
 #include <unistd.h>
 
 int main() {
-  write(1, "Hello, world!\n", 14);
+  write(1, "Hola mundo!\n", 14);
   return 0;
 }
 EOT
@@ -185,7 +185,7 @@ original escribiendo:
 
  $ git bisect reset
 
-En lugar de testear cada cambio a mano, automatiza la búsquea escribiendo:
+En lugar de testear cada cambio a mano, automatiza la búsqueda escribiendo:
 
  $ git bisect run COMANDO
 
@@ -243,7 +243,7 @@ revisar el e-mail o escribir documentación. A la hora de volver a la tarea orig
 el comando había terminado hace tiempo, y yo perdía más tiempo intentando recordar
 qué era lo que estaba haciendo. Los humanos no son buenos para el cambio de contexto.
 
-También había un interesante efecto tragediad-de-los-comunes: anticipando
+También ocurría un interesante efecto de "tragedia-de-los-comunes": anticipando
 la congestión de la red, la gente consume más ancho de banda que el necesario
 en varias operaciones, intentando anticipar futuras demoras. El esfuerzo combinado
 intensifica la congestión, alentando a las personas a consumir aún más ancho de banda

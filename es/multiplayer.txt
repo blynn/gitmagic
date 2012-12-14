@@ -4,7 +4,7 @@ Inicialmente usaba Git en un proyecto privado donde yo era el único desarrollad
 Entre los comandos relacionados a la naturaleza distribuida de Git, sólo necesitaba *pull*
 y *clone* así yo podía mantener el mismo proyecto en diferentes lugares.
 
-Más tarde quize publicar mi código con Git, e incluir cambios de los
+Más tarde quise publicar mi código con Git, e incluir cambios de los
 contribuyentes. Tuve que aprender a administrar proyectos con múltiples desarrolladores
 de todo el mundo. Afortunadamente, esta es la fortaleza de Git, y podría decirse
 que su razón de ser.
@@ -16,14 +16,14 @@ Por defecto, Git usa la configuración del sistema para rellenar estos campos.
 Para decirle explícitamente, escribe:
 
   $ git config --global user.name "John Doe"
-  $ git config --global user.email johndoe@example.com
+  $ git config --global user.email johndoe@ejemplo.com
 
-Omite la bandera global para poner estas opciones sólo para el repositorio actual.
+Omite el parámetro *--global* si quieres que estas opciones sólo sean aplicadas en el repositorio actual.
 
 === Git Sobre SSH, HTTP ===
 
 Supón que tienes acceso SSH a un servidor web, pero Git no está instalado. Aunque
-es menos eficiente que su protocolo nativo, Git se puede comuncar por HTTP.
+es menos eficiente que su protocolo nativo, Git se puede comunicar por HTTP.
 
 Descarga, compila e instala Git en tu cuenta, y crea un repositorio en
 tu directorio web:
@@ -39,11 +39,11 @@ En versiones antiguas de Git, el comando cp falla y debes ejecutar:
 
 Ahora tú puedes publicar tus últimas ediciones via SSH desde cualquier clon:
 
- $ git push web.server:/path/to/proj.git master
+ $ git push servidor.web:/ruta/al/proyecto.git master
 
 y cualquiera puede obtener tu proyecto con:
 
- $ git clone http://web.server/proj.git
+ $ git clone http://servidor.web/proyecto.git
 
 === Git Sobre Cualquier Cosa ===
 
@@ -53,34 +53,34 @@ fast-export* y *git fast-import* pueden convertir repositorios a un único archi
 y viceversa>>. Podríamos transportar tales archivos de ida y vuelta para enviar repositorios
 git sobre cualquier medio, pero una herramienta más eficiente es *git bundle*.
 
-El emisor crea un 'paquete':
+El emisor crea un 'bundle' (paquete):
 
- $ git bundle create somefile HEAD
+ $ git bundle create algunarchivo HEAD
 
-luego envía el paquete, +somefile+, a la otra parte de alguna forma: email,
+Luego envía el paquete, +algunarchivo+, a la otra parte de alguna forma: email,
 pendrive, una impresión *xxd* y un escáner OCR, leyendo bits a través del teléfono,
 señales de humo, etc. El receptor recupera los commits del paquete escribiendo:
 
- $ git pull somefile
+ $ git pull algunarchivo
 
 El receptor puede incluso hacer esto desde un repositorio vacío. A pesar de su
-tamaño, +somefile+ contiene el repositorio git original completo.
+tamaño, +algunarchivo+ contiene el repositorio git original completo.
 
 En proyectos más grandes, elimina la basura empaquetando sólo los cambios de los que
-carece el otro repositorio. Por ejemplo, supón que el commit ``1b6d...'' es commit
-compartido más reciente compartido por ambas partes:
+carece el otro repositorio. Por ejemplo, supón que el commit ``1b6d...'' es el commit
+más reciente compartido por ambas partes:
 
- $ git bundle create somefile HEAD ^1b6d
+ $ git bundle create algunarchivo HEAD ^1b6d
 
 Si se hace a menudo, uno puede olvidar fácilmente cual commit fue el último enviado. La
 página de ayuda sugiere usar tags para resolver esto. Es decir, después de que envías un paquete,
 escribe:
 
- $ git tag -f lastbundle HEAD
+ $ git tag -f ultimopaquete HEAD
 
 y crea nuevos paquetes de actualización con:
 
- $ git bundle create newbundle HEAD ^lastbundle
+ $ git bundle create nuevopaquete HEAD ^ultimopaquete
 
 === Parches: La Moneda Global ===
 
@@ -138,7 +138,7 @@ cambiar o borrar este alias, pero usualmente no hay razón para hacerlo.
 
 Si el repositorio original se mueve, podemos actualizar la URL con:
 
- $ git config remote.origin.url git://new.url/proj.git
+ $ git config remote.origin.url git://nueva.url/proyecto.git
 
 La opción +branch.master.merge+ especifica la rama remota por defecto en un
 *git pull*. Durante la clonación inicial, se configura a la rama actual del repositorio
@@ -187,20 +187,20 @@ O puedes ver lo que ha sucedido con la rama ``experimental'':
 Supón que otros dos desarrolladores están trabajando en nuestro proyecto, y 
 queremos mantener pestañas en ambos. Podemos seguir más de un repositorio a la vez con:
 
- $ git remote add other git://example.com/some_repo.git
- $ git pull other some_branch
+ $ git remote add otro git://ejemplo.com/algun_repositorio.git
+ $ git pull otro alguna_rama
 
 Ahora hemos mezclado una rama desde el segundo repositorio, y tenemos
 acceso fácil a todas las ramas de todos los repositorios:
 
- $ git diff origin/experimental^ other/some_branch~5
+ $ git diff origin/experimental^ otro/alguna_rama~5
 
-Pero ¿Qué pasa si queremos comparar sus cambios sin afectar nuestro propio trabajo?
-En otras palabras, queremos examinar las ramas evitando que sis cambios invadan nuestro
-directorio de trabajo. Entonces, en vez de pull, corre:
+Pero, ¿qué pasa si queremos comparar sus cambios sin afectar nuestro propio trabajo?
+En otras palabras, queremos examinar las ramas evitando que sus cambios invadan nuestro
+directorio de trabajo. Entonces, en vez de pull, ejecuta:
 
- $ git fetch        # Fetch from origin, the default.
- $ git fetch other  # Fetch from the second programmer.
+ $ git fetch       # Recuperamos desde el origen, por defecto.
+ $ git fetch otro  # Recuperamos lo del segundo programador.
 
 Esto sólo obtiene historias. Aunque el directorio de trabajo permanece intacto,
 podemos referirnos a cualquier rama de cualquier repositorio en un comando Git
@@ -220,14 +220,14 @@ los cuales voy a hacer pull. Algunos servicios de hosting Git te permiten hosped
 tu propia bifurcación de un proyecto con el clic de un botón.
 
 Después de que obtengo un árbol, uso comandos Git para navegar y examinar los cambios,
-los que idealmente están bien organizados y biein descritos. Mezclo mis propios cambios,
+los que idealmente están bien organizados y bien descritos. Mezclo mis propios cambios,
 y quizás hago más ediciones. Una vez satisfecho, los empujo al repositorio principal.
 
 Aunque rara vez recibo contribuciones, creo que este enfoque escala bien. Vea
-http://torvalds-family.blogspot.com/2009/06/happiness-is-warm-scm.html [esta
+http://torvalds-family.blogspot.com/ncr/2009/06/happiness-is-warm-scm.html[esta
 entrada de blog por Linus Torvalds].
 
 Permanecer en el mundo Git es ligeramente más conveniente que parchar archivos,
 dado que me ahorra convertirlos a commits de Git. Además, Git maneja detalles como
 grabar el nombre y dirección de email del autor, así como la hora y fecha, y
-le pide al autor desdribir sus propios cambios.
+le pide al autor describir sus propios cambios.
