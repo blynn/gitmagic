@@ -8,7 +8,7 @@ En Git, y otros sistemas de control de versiones distribuídos, clonar es la ope
 
 Este es el motivo por el que usé Git por primera vez. Puedo tolerar hacer tarballs o usar *rsync* para backups y sincronización básica. Pero algunas veces edito en mi laptop, otras veces en mi desktop, y ambas pueden no haberse comunicado en el medio.
 
-Inicializa un repositorio de Git y haz haz commit de tus archivos en una máquina, luego en la otra:
+Inicializa un repositorio de Git y haz commit de tus archivos en una máquina, luego en la otra:
 
  $ git clone otra.computadora:/ruta/a/archivos
 
