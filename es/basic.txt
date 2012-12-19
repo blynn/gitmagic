@@ -9,7 +9,7 @@ Estás a punto de intentar algo drástico? Antes de hacerlo, toma una instantán
 
  $ git init
  $ git add .
- $ git commit -m "My first backup"
+ $ git commit -m "Mi primer respaldo"
 
 Ahora, si tu edición se vuelve irrecuperable, ejecuta:
 
@@ -61,7 +61,7 @@ Para retomar la analogía de los videojuegos:
 
 - *`git reset \--hard`*: carga un juego viejo y borra todos los que son mas nuevos que el que acabas de cargar.
 
-- *`git checkout`*: carga un juego viejo, pero si continúas jugando, el estado del juego se desviará de los juegos que salvaste la primera vez. Cualquierpartido nuevo que guardes, terminará en una branch separada, representando la realidad alternativa a la que entraste. <<branch,Luego nos encargaremos de esto>>
+- *`git checkout`*: carga un juego viejo, pero si continúas jugando, el estado del juego se desviará de los juegos que salvaste la primera vez. Cualquier partida nueva que guardes, terminará en una branch separada, representando la realidad alternativa a la que entraste. <<branch,Luego nos encargaremos de esto>>
 
 Puedes elegir el restaurar solo archivos o directorios en particular, al agregarlos al final del comando:
 
@@ -135,7 +135,7 @@ y tus usuarios puede actualizar su versión yendo al directorio que tiene tu scr
 
 Tus usuarios nunca terminarán usando una versión de tu script que no quieres que vean. Obviamente este truco funciona para lo que sea, no solo scripts.
 
-=== Que es lo que hice? ===
+=== ¿Que es lo que hice? ===
 
 Averigua que cambios hiciste desde el último commit con:
 
@@ -149,7 +149,7 @@ O entre una versión en particular y 2 versiones hacia atrás:
 
  $ git diff SHA1_HASH "master~2"
 
-En cado caso la salida es un patch (parche) que puede ser aplicado con *git apply*
+En cada caso la salida es un patch (parche) que puede ser aplicado con *git apply*
 Para ver cambios desde hace 2 semanas, puedes intentar:
 
  $ git whatchanged --since="2 weeks ago"

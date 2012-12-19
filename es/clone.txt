@@ -1,14 +1,14 @@
 == Clonando  ==
 
-En sistemas de control de versiones antiguos, checkout es la operación standard para obtener archivos. Obtienes un conjunto de archivos en estado guardado que solicistaste.
+En sistemas de control de versiones antiguos, checkout es la operación standard para obtener archivos. Obtienes un conjunto de archivos en el estado guardado que solicitaste.
 
-En Git, y otros sistemas de control de versiones distribuídos, clonar es la operación standard. Para obtener archivos se crea un clon de un repositorio entero. En otras palabras, practicamente se crea una copia idéntica del servidor central. Todo lo que se pueda hacer en el repositorio principal, también podrás hacerlo.
+En Git, y otros sistemas de control de versiones distribuídos, clonar es la operación standard. Para obtener archivos se crea un clon de un repositorio entero. En otras palabras, prácticamente se crea una copia idéntica del servidor central. Todo lo que se pueda hacer en el repositorio principal, también podrás hacerlo.
 
 === Sincronizar Computadoras ===
 
 Este es el motivo por el que usé Git por primera vez. Puedo tolerar hacer tarballs o usar *rsync* para backups y sincronización básica. Pero algunas veces edito en mi laptop, otras veces en mi desktop, y ambas pueden no haberse comunicado en el medio.
 
-Inicializa un repositorio de Git y haz haz commit de tus archivos en una máquina, luego en la otra:
+Inicializa un repositorio de Git y haz commit de tus archivos en una máquina, luego en la otra:
 
  $ git clone otra.computadora:/ruta/a/archivos
 
@@ -33,7 +33,7 @@ y abre el Git daemon si es necesario:
  $ GIT_DIR=proj.git git init
  $ git daemon --detach  # podría ya estar corriendo
 
-Algunos servidores publicos, como http://repo.or.cz[repo.or.cz], tienen un método diferente para configurar el repositorio inicialmente vacío de Git, como llenar un formulario en una página.
+Algunos servidores públicos, como http://repo.or.cz[repo.or.cz], tienen un método diferente para configurar el repositorio inicialmente vacío de Git, como llenar un formulario en una página.
 
 Empuja (push) tu proyecto hacia el servidor central con:
 
@@ -79,9 +79,9 @@ Digamos que quieres trabajar en varias prestaciones a la vez. Haz commit de tu p
 
  $ git clone . /un/nuevo/directorio
 
-Git se aprovecha de los hard links y de compartir archivos de la manera mas segura posible para crear este clon, por lo que estará listo en un segundo, y podrás trabajar en dos prestaciones independientes de manera simultánea. Por ejemplo, puedes editar un clon mientras el otro está compilando.
+Gracias a los http://es.wikipedia.org/wiki/Enlace_duro[enlaces duros], los clones locales requieren menos tiempo y espacio que un backup plano.
 
-En cualquier momento, puedes hacer commit y pull de los cambios desde el otro clon.
+Ahora podrás trabajar en dos prestaciones independientes de manera simultánea. Por ejemplo, puedes editar un clon mientras el otro está compilando. En cualquier momento, puedes hacer commit y pull de los cambios desde el otro clon.
 
  $ git pull /el/otro/clon HEAD
 
@@ -110,4 +110,4 @@ Luego ve al nuevo directorio y escribe:
 El procedimiento para pasarle tus cambios a los demás depende de cuál es tu otro sistema de control de versiones. El nuevo directorio contiene los archivos con tus cambios. Ejecuta los comandos que sean necesarios para subirlos al repositorio central del otro sistema de control de versiones.
 
 El comando *git svn* automatiza lo anterior para repositorios de Subversion,
-y también puede ser usado para http://google-opensource.blogspot.com/2008/05/export-git-project-to-google-code.html[exportar un proyecto de Git a un repositorio de Subversion].
+y también puede ser usado para http://google-opensource.blogspot.com/ncr/2008/05/export-git-project-to-google-code.html[exportar un proyecto de Git a un repositorio de Subversion].

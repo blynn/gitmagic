@@ -1,12 +1,12 @@
 == Introducción ==
 
-Voy a usar una analogía para explicar el control de versiones. Mira http://es.wikipedia.org/wiki/Control_de_versiones[el artículo de wikipedia sobre control de versiones] para una explicación más cuerda.
+Voy a usar una analogía para explicar el control de versiones. Mira http://es.wikipedia.org/wiki/Control_de_versiones[el artículo de Wikipedia sobre control de versiones] para una explicación más cuerda.
 
 === Trabajar Es Jugar ===
 
 He jugado juegos de PC casi toda mi vida. En cambio, empecé a usar sistemas de control de versiones siendo adulto. Sospecho que no soy el único, y comparar ambas cosas puede hacer que estos conceptos sean más fáciles de explicar y entender.
 
-Piensa en editar tu código o documento, o lo que sea, como si fuera jugar un juego. Una vez que progresaste mucho, te gustaría guardar. Para lograrlo, haces click en el botón de "Guardar" en tu editor de confianza.
+Piensa en editar tu código o documento, o lo que sea, como si fuera jugar un juego. Una vez que progresaste mucho, te gustaría guardar. Para lograrlo, haces clic en el botón de "Guardar" en tu editor de confianza.
 
 Pero esto va a sobreescribir tu versión antigua. Es como esos viejos juegos que solo tenían un slot para guardar: se podía guardar, pero nunca podías volver a un estado anterior. Esto era una pena, porque tu versión anterior podía haber estado justo en una parte que era particularmente divertida, y podías querer volver a jugarla algún día. O peor aún, tu partida actual está en un estado donde es imposible ganar, y tienes que volver a empezar.
 
@@ -14,7 +14,7 @@ Pero esto va a sobreescribir tu versión antigua. Es como esos viejos juegos que
 
 Cuando estás editando, puedes "Guardar Como..." un archivo diferente, o copiar el archivo a otro lugar antes de guardar si quieres probar versiones viejas. También puedes usar compresión para ahorrar espacio. Esta es una forma primitiva y muy trabajosa de control de versiones. Los videojuegos han mejorado esto hace ya tiempo, muchas veces permitiendo guardar en varios slots, fechados automáticamente.
 
-Hagamos que el problema sea un poco más complejo. Imagina que tienes un montón de archivos que van juntos, como el código fuente de un proyecto, o archivos para un sitio web. Ahora, si quieres mantener una vieja versión, debes archivar un directorio completo. Tener muchar versiones a mano es inconveniente y rápidamente se vuelve costoso.
+Hagamos que el problema sea un poco más complejo. Imagina que tienes un montón de archivos que van juntos, como el código fuente de un proyecto, o archivos para un sitio web. Ahora, si quieres mantener una vieja versión, debes archivar un directorio completo. Tener muchas versiones a mano es inconveniente y rápidamente se vuelve costoso.
 
 Con algunos juegos, una partida guardada en realidad consiste de un directorio lleno de archivos. Estos videojuegos ocultan este detalle del jugador y presentan una interfaz conveniente para administrar diferentes versiones de este directorio.
 
@@ -22,12 +22,12 @@ Los sistemas de control de versiones no son diferentes. Todos tienen lindas inte
 
 === Control Distribuído ===
 
-Ahora imagina un juego muy difícil. Tan difícil para terminar, que muchos jugadores experientes alrededor del mundo deciden agruparse e intercambiar sus juegos guardados para intentar terminarlo. Los "Speedruns" son ejemplos de la vida real: los jugadores se especializan en diferents niveles del mismo juego y colaboran para lograr resultados sorprendentes.
+Ahora imagina un juego muy difícil. Tan difícil para terminar, que muchos jugadores experimentados alrededor del mundo deciden agruparse e intercambiar sus juegos guardados para intentar terminarlo. Los "Speedruns" son ejemplos de la vida real: los jugadores se especializan en diferentes niveles del mismo juego y colaboran para lograr resultados sorprendentes.
 ¿Cómo armarías un sistema para que puedan descargar las partidas de los otros de manera simple? ¿Y para que suban las nuevas?
 
-Antes, cada proyecto usaba un control de versiones centralizado. Un servidor en algún lado contenía todos los juegos salvados. Nadie más los tenía. Cada jugador tenía a lo sumo un un par de juegos guardados en su máquina. Cuando un jugador quería progresar, obtenía la última versión del servidor principal, jugaba un rato, guardaba y volvía a subir al servidor para que todos los demás pudieran usarlo.
+Antes, cada proyecto usaba un control de versiones centralizado. Un servidor en algún lado contenía todos los juegos salvados. Nadie más los tenía. Cada jugador tenía a lo sumo un par de juegos guardados en su máquina. Cuando un jugador quería progresar, obtenía la última versión del servidor principal, jugaba un rato, guardaba y volvía a subir al servidor para que todos los demás pudieran usarlo.
 
-¿Qué pasa si un jugador quería obtener un juego anterior por algún motivo? Tal vez el juego actual está en un estado donde es imposible ganar, porque alguien olvidó obtener un objeto antes de pasar el nivel tres, por que que se quiere obtener el último juego guardado donde todavía es posible completarlo. O tal vez quieren comparar dos estados antiguos, para ver cuánto trabajo hizo un jugador en particular.
+¿Qué pasa si un jugador quería obtener un juego anterior por algún motivo? Tal vez el juego actual está en un estado donde es imposible ganar, porque alguien olvidó obtener un objeto antes de pasar el nivel tres, por que se quiere obtener el último juego guardado donde todavía es posible completarlo. O tal vez quieren comparar dos estados antiguos, para ver cuánto trabajo hizo un jugador en particular.
 
 Puede haber varias razones para querer ver una revisión antigua, pero el resultado es siempre el mismo. Tienen que pedirle esa vieja partida al servidor central. Mientras mas juegos guardados se quieran, más se necesita esa comunicación.
 
@@ -39,7 +39,7 @@ Esta operación inicial de clonado, puede ser cara, especialmente si el historia
 
 Una creencia popular errónea es que los sistemas distribuídos son poco apropiados para proyectos que requieren un repositorio central oficial. Nada podría estar más lejos de la verdad. Fotografiar a alguien no hace que su alma sea robada, clonar el repositorio central no disminuye su importancia.
 
-Una buena aproximación inicial, es que cualquier cosa que se puede hacer con un sistema de control de versiones centralizado, se puede hacer mejor con un sistema de versiones distribuído que esté bien diseñado. Los recursos de red son simplemente más costosos que los recursos locales. Aunque luego veremos que hay algunas desventajas para un sistema distribuído, hay menos probabilidad de hacer comparaciones erroneas al tener esto en cuenta.
+Una buena aproximación inicial, es que cualquier cosa que se puede hacer con un sistema de control de versiones centralizado, se puede hacer mejor con un sistema de versiones distribuído que esté bien diseñado. Los recursos de red son simplemente más costosos que los recursos locales. Aunque luego veremos que hay algunas desventajas para un sistema distribuído, hay menos probabilidad de hacer comparaciones erróneas al tener esto en cuenta.
 
 Un proyecto pequeño, puede necesitar solo una fracción de las características que un sistema así ofrece. Pero, ¿usarías números romanos si solo necesitas usar números pequeños?. Además, tu proyecto puede crecer más allá de tus expectativas originales. Usar Git desde el comienzo, es como llevar una navaja suiza, aunque solo pretendas usarla para abrir botellas. El día que necesites desesperadamente un destornillador, vas a agradecer el tener más que un simple destapador.
 
