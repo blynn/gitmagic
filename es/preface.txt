@@ -6,7 +6,7 @@ August 2007
 
 http://git.or.cz/[Git] es la navaja suiza del control de versiones. Una herramienta de control de revisiones confiable, versátil y multipropósito, que por su extraordinaria flexibilidad es complicada de aprender, y más aún de dominar. Estoy documentando lo que he aprendido hasta ahora en estas páginas, porque inicialmente tuve dificultades para comprender http://www.kernel.org/pub/software/scm/git/docs/user-manual.html[el manual de usuario de Git].
 
-Tal como observó Arthur C. Clarke, cualquier tecnología suficientemente avanzada, es indistinguible de la magia. Este es un gran modo de acercarce a Git: los novatos pueden ignorar su funcionamiento interno, y ver a Git como un artefacto que puede asombrar a los amigos y enfurecer a los enemigos con sus maravillosas habilidades.
+Tal como observó Arthur C. Clarke, cualquier tecnología suficientemente avanzada, es indistinguible de la magia. Este es un gran modo de acercarse a Git: los novatos pueden ignorar su funcionamiento interno, y ver a Git como un artefacto que puede asombrar a los amigos y enfurecer a los enemigos con sus maravillosas habilidades.
 
 En lugar de ser detallados, proveemos instrucciones generales para efectos particulares. Luego de un uso reiterado, gradualmente irás entendiendo como funciona cada truco, y como adaptar las recetas a tus necesidades.
 
@@ -19,7 +19,7 @@ En lugar de ser detallados, proveemos instrucciones generales para efectos parti
 
 === Gracias! ===
 
-Agradezco a Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael Budde, Richard Albury, Tarmigan, Derek Mahar y Frode Aannevik por sugerencias y mejoras. Gracias a Daniel Baumann por crear y mantener el paquete para Debian. También gracias a  JunJie, Meng y JiangWei por la traduccción al chino. [Si me olvidé de tí, por favor recuérdamelo, porque suelo olvidarme de actualizar esta sección]
+Agradezco a Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael Budde, Richard Albury, Tarmigan, Derek Mahar y Frode Aannevik por sugerencias y mejoras. Gracias a Daniel Baumann por crear y mantener el paquete para Debian. También gracias a  JunJie, Meng y JiangWei por la traducción al chino. [Si me olvidé de tí, por favor recuérdamelo, porque suelo olvidarme de actualizar esta sección]
 
 Estoy muy agradecido por todos los que me han dado apoyo y elogios. Me gustaría que este fuera un libro real impreso, para poder citar sus generosas palabras en la tapa a modo de promoción. Hablando en serio, aprecio enormemente cada mensaje. El leerlos siempre ilumina mi ánimo.
 

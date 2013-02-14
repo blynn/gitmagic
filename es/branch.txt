@@ -4,13 +4,11 @@ El hacer branches (ramificar) y merges (unir) de manera instantánea, son dos de
 
 *Problema*: Factores externos necesitan inevitablemente de cambios de contexto.
 Un bug severo se manifiesta en la última versión sin previo aviso. El plazo para
-alguna prestación se acorta. Un desarrollador que tiene que ayudar en una sección indispensable
-del proyecto está por tomar licencia. En cualquier caso, debes soltar abruptamente lo que estás haciendo
-y enfocarte en una tarea completamente diferente.
+alguna prestación se acorta. Un desarrollador que tiene que ayudar en una sección indispensable del proyecto está por tomar licencia. En cualquier caso, debes soltar abruptamente lo que estás haciendo y enfocarte en una tarea completamente diferente.
 
 Interrumpir tu línea de pensamiento puede ser negativo para tu productividad, y cuanto más engorroso sea el cambiar contextos, mayor es la pérdida. Con los sistemas centralizados, debemos descargar una nueva copia. Los sistemas distribuídos se comportan mejor, dado que podemos clonar la versión deseada localmente.
 
-Pero el clonar igual implica copiar todo el directorio junto con toda la historia hasta el momento. Aunque Git reduce el costousando hard links y el compartir archivos, los archivos del proyecto deben ser recreados enteramente en el nuevo directorio.
+Pero el clonar igual implica copiar todo el directorio junto con toda la historia hasta el momento. Aunque Git reduce el costo de esta operación usando hard links y el compartir archivos, los archivos del proyecto deben ser recreados enteramente en el nuevo directorio.
 
 *Solución*: Git tiene una mejor herramienta para estas situaciones que es mucho más rápida y eficiente en tamaño que clonar *git branch*.
 
@@ -37,7 +35,7 @@ Parecería que sobreescribimos nuestro archivo y le hicimos commit. Pero es una 
 
  $ git checkout master  # cambia a la versión original del archivo
 
-y presto! El archivo de texto es restaurado. Y si el jefe decide investigar este directorio, escribimos:
+y ¡presto! El archivo de texto es restaurado. Y si el jefe decide investigar este directorio, escribimos:
 
  $ git checkout jefe  # cambia a la versión adecuada para los ojos del jefe
 
@@ -49,7 +47,7 @@ Puedes cambiar entre ambas versiones del archivo cuantas veces quieras, y hacer 
 Supongamos que estás trabajando en alguna prestación, y que por alguna razón, necesitas volver a una versión vieja y poner temporalmente algunos "print" para ver como funciona algo. Entonces:
 
  $ git commit -a
- $ git checkout SHA1_HASH
+ $ git checkout HASH_SHA1
 
 Ahora puedes agregar cualquier código temporal horrible por todos lados.
 Incluso puedes hacer commit de estos cambios. Cuando termines,
@@ -58,7 +56,7 @@ Incluso puedes hacer commit de estos cambios. Cuando termines,
 
 para volver a tu trabajo original. Observa que arrastrarás cualquier cambio del que no hayas hecho commit.
 
-¿Que pasa si quisieras cambiar los cambios temporales? Facil:
+¿Que pasa si quisieras cambiar los cambios temporales? Fácil:
 
  $ git checkout -b sucio
 
@@ -75,7 +73,7 @@ En otras palabras, luego de traer un estado viejo, Git automáticamente te pone 
 Estás en medio de algo cuando te piden que dejes todo y soluciones un bug recién descubierto:
 
  $ git commit -a
- $ git checkout -b arreglos SHA1_HASH
+ $ git checkout -b arreglos HASH_SHA1
 
 Luego, una vez que solucionaste el bug:
 
@@ -132,7 +130,7 @@ Quizás quieras trabajar en todos los aspectos de un proyecto sobre la misma bra
 A continuación, trabaja en lo que sea: soluciona bugs, agrega prestaciones, agrega código temporal o lo que quieras, haciendo commits seguidos a medida que avanzas. Entonces:
 
   $ git checkout prolijo
-  $ git cherry-pick SHA1_HASH
+  $ git cherry-pick HASH_SHA1
 
 aplica un commit dado a la branch "prolijo". Con cherry-picks apropiados, puedes construir una rama que contenga solo el código permanente, y los commits relacionados juntos en un grupo.
 
@@ -164,7 +162,7 @@ para solucionar un bug de alta prioridad o algo.
 Es análogo a cambiar el canal de la TV temporalmente, para ver que otra
 cosa están dando. Pero en lugar de apretar un par de botones, tienes que
 crear, hacer checkout y eliminar branches y commits temporales. Por suerte,
-Git tiene un aatajo que es tan conveniente como un control remoto de TV:
+Git tiene un atajo que es tan conveniente como un control remoto de TV:
 
  $ git stash
 

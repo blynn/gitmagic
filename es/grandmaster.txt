@@ -40,7 +40,7 @@ No te preocupes, ejecuta:
 
  $ git add -p
 
-Por cada edición que hiciset, Git va a mostrar el pedazo de código que fue cambiado,
+Por cada edición que hiciste, Git va a mostrar el pedazo de código que fue cambiado,
 y preguntar si debería ser parte del próximo commit. Contesta con "y" o "n". 
 Hay otras opciones, como posponer la decisión; escribe "?" para saber más.
 
@@ -60,22 +60,18 @@ cual hace commit luego de que terminas.
 
 ==== Cambios en el 'stage' ====
 
-Hasta ahora hemos evitado el famoso 'indice' de git, pero ahora debermos enfrentarlo
-para explicar lo de arriba. El indice es un area temporal de montaje. Git evita enviar
+Hasta el momento hemos evitado el famoso 'indice' de git, pero ahora debemos enfrentarlo
+para explicar lo de arriba. El indice es un área temporal de montaje. Git evita enviar
 datos directamente entre tu proyecto y su historia. En su lugar, Git primero escribe datos
 al índice, y luego copia los datos del índice a su destino final.
 
 Por ejemplo, *commit -a* es en realidad un proceso de 2 pasos. El primer paso pone 
-una foto del estado actual de cada archivo administrado en el índice. El segundo paso
-graba de forma permanente esa foto que está en el índice. Un commit hecho sin *-a*
-solo efectúa el segundo paso, y solo tiene sentido luego de haber ejecutado comandos
-que de alguna forma alteran el índice, como *git add*.
+una instantánea del estado actual de cada archivo administrado en el índice. El segundo paso graba de forma permanente esa instantánea que está en el índice. Un commit hecho sin *-a* solo efectúa el segundo paso, y solo tiene sentido luego de haber ejecutado comandos que de alguna forma alteran el índice, como *git add*.
 
 Usualmente podemos ignorar el índice y pretender que estamos leyendo y escribiendo
 directo en la historia. En esta ocasión, queremos un control más fino de lo que se
-escribe en la historia, y nos vemos forzados a manipular el índice. Guardamos una foto de
-algunos, pero no todos, de nuestros cambios en el índice, y luego grabamos
-de forma permanenta esta instantánea cuidadosamente organizada.
+escribe en la historia, y nos vemos forzados a manipular el índice. Guardamos una instantánea de algunos, pero no todos, de nuestros cambios en el índice, y luego grabamos
+de forma permanente esta instantánea cuidadosamente organizada.
 
 === No Pierdas La Cabeza ===
 
@@ -105,7 +101,7 @@ Quizás ORIG_HEAD no es suficiente. Quizás acabas de descubrir que cometiste un
 y que hay que volver a un commit antiguo en una rama olvidada hace largo tiempo.
 
 Por defecto, Git guarda un commit por al menos 2 semanas, incluso si le ordenaste destruir
-la rama que lo contenía. El problema es encontra el hash apropiado. Podrías
+la rama que lo contenía. El problema es encontrar el hash apropiado. Podrías
 mirar todos los hashes en `.git/objects` y usar prueba y error para encontrar el que buscas.
 Pero hay una forma mucho más fácil.
 
@@ -133,7 +129,7 @@ Podrías querer configurar un periodo de gracia mayor para los commits condenado
   $ git config gc.pruneexpire "30 days"
 
 significa que un commmit eliminado se va a perder de forma permanente solo cuando
-hayan pasado 30 dáis y se ejecute *git gc*.
+hayan pasado 30 días y se ejecute *git gc*.
 
 También podrías querer deshabilitar invocaciones automáticas de *git gc*:
 
@@ -143,7 +139,7 @@ en cuyo caso los commits solo serán borrados cuando ejecutes *git gc* de forma 
 
 === Construyendo sobre Git ===
 
-Siguiendo la tradición UNIX, el diseño de Git permite ser facilmente usado como un componente de bajo
+Siguiendo la tradición UNIX, el diseño de Git permite ser fácilmente usado como un componente de bajo
 nivel de otros programas, como GUI e interfaces web, interfaces de linea de comandos alternativas,
 herramientas de manejo de patches, herramientas de importación y conversión, etc.
 De hecho, algunos de los comandos de Git son ellos mismos scripts parados sobre los hombros de gigantes.
@@ -182,14 +178,14 @@ No hay necesidad de merges, push ni pull.
 
 === Acrobacias Peligrosas ===
 
-En estos dias, Git hace difícil que el usuario destruya datos de manera accidental.
+En estos días, Git hace difícil que el usuario destruya datos de manera accidental.
 Pero si sabes lo que estás haciendo, puedes hacer caso omiso de las trabas de seguridad para
 los comandos comunes.
 
 
 *Checkout*: Los cambios no commiteados hacen que checkout falle. Para destruir tus cambios, y hacer checkout de un commit dado, usa la opción de forzar:
 
-  $ git checkout -f COMMIT
+  $ git checkout -f HEAD^
 
 Por otro lado, si especificas una ruta específica para hacer checkout, no hay chequeos de seguridad.
 Las rutas suministradas son sobre-escritas de forma silenciosa.
@@ -201,14 +197,15 @@ Hay que tener cuidado al usar checkout de esta forma:
 
 *Branch*: El borrado de una rama falla si esto causa que se pierdan cambios, para forzarlo escribe:
 
-  $ git branch -D BRANCH  # en lugar de -d
+  $ git branch -D rama_muerta  # en lugar de -d
 
 De forma similar, intentar sobreescribir una rama moviendo otra, falla si esto resultase en pérdida de datos. Para forzar el mover una rama, corre:
 
   $ git branch -M [ORIGEN] DESTINO  # en lugar de -m
+
 A diferencia de checkout y reset, estos dos comandos evitan la destrucción de datos.
 Los cambios están aún guardados en el subdirectorio .git, y pueden obtenerse
-recuperando el has apropiado de `.git/logs` (ver "Cazando Cabezas" arriba).
+recuperando el hash apropiado de `.git/logs` (ver "Cazando Cabezas" arriba).
 Por defecto, serán guardados por al menos dos semanas.
 
 *Clean*: Algunos comandos de Git se rehúsan a proceder porque están preocupados
@@ -255,6 +252,6 @@ pare prevenirme de la desatención.
 Varias operaciones de git soportan hooks; ver *git help hooks*. Se pueden escribir
 hooks para quejarse de errores ortográficos en los mensajes de commit, agregar nuevos archivos,
 indentar párrafos, agregar una entrada en una página, reproducir un sonido, etc.
-
-Habíamos encontrado el hook *post-update* antes, cuando discutíamos como usar Git sobre HTTP.
-Este hook actualiza algunos archivos que Git necesita para comunicación no nativa.
+Habíamos activado el hook *post-update* antes, cuando discutíamos como usar Git sobre HTTP.
+Los hooks se ejecutan cada vez que la rama HEAD sufre cambios. Este hook en particular actualiza 
+algunos archivos que Git necesita para comunicación no nativa (como HTTP).

@@ -118,7 +118,7 @@ esta funcionalidad y va a ser implementada.
 
 === Commit Inicial ===
 
-El estereotipo de de un informático teórico cuenta desde 0, en lugar de desde 1.
+El estereotipo de un informático teórico cuenta desde 0, en lugar de desde 1.
 Lamentablemente, con respecto a los commit, Git no mantiene esta convención. Muchos
 comandos son poco amigables antes del commit inicial. Adicionalmente algunos casos
 borde deben ser manejados de forma especial, como hacer rebase de una rama con
