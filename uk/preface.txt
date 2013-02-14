@@ -1,0 +1,60 @@
+= Магія Git =
+Ben Lynn
+Серпень 2007
+
+== Передмова ==
+
+http://git.or.cz/[Git] — це швейцарський ніж керування версіями — надійний універсальний багатоцільовий інструмент, чия надзвичайна гнучкість робить його складним у вивченні навіть для багатьох професіоналів.
+
+Як говорив Артур Кларк, будь-яка досить розвинена технологія не відрізняється від чаклунства. Це відмінний підхід до Git: новачки можуть ігнорувати принципи його внутрішньої роботи і розглядати Git як щось, що викликає захоплення у друзів і доводить до сказу ворогів своїми чудовими здібностями.
+
+Замість того, щоб вдаватися в подробиці, ми дамо приблизні інструкції для одержання конкретних результатів. При частому використанні ви поступово зрозумієте, як працює кожен трюк і як пристосовувати рецепти під ваші потреби.
+
+.Переклади
+
+ - link:/~blynn/gitmagic/intl/vi/[В'єтнамська]: Trần Ngọc Quân; також http://vnwildman.users.sourceforge.net/gitmagic/[розміщено на його вебсайті].
+ - link:/~blynn/gitmagic/intl/es/[Іспанська]: Rodrigo Toledo та Ariset Llerena Tapia.
+  - http://docs.google.com/View?id=dfwthj68_675gz3bw8kj[Китайська (спрощена)]: JunJie, Meng та JiangWei. Конвертовано у link:/~blynn/gitmagic/intl/zh_tw/[Традиційна китайська] via +cconv -f UTF8-CN -t UTF8-TW+.
+ - link:/~blynn/gitmagic/intl/de/[Німецька]: Benjamin Bellee і Armin Stebich. Armin також розмістив http://gitmagic.lordofbikes.de/[німецький переклад на своєму сайті].
+  - http://www.slideshare.net/slide_user/magia-git[Португальська]: Leonardo Siqueira Rodrigues [http://www.slideshare.net/slide_user/magia-git-verso-odt[в форматі ODT]].
+ - link:/~blynn/gitmagic/intl/ru/[Російська]: Тихон Тарнавский, Михаил Дымсков і інші.
+ - link:/~blynn/gitmagic/intl/uk/[Українська]: Володимир Боденчук.
+ - link:/~blynn/gitmagic/intl/fr/[Французька]: Alexandre Garel, Paul Gaborit, та Nicolas Deram. Також розміщений на http://tutoriels.itaapy.com/[itaapy].
+
+.Інші варіанти
+
+ - link:book.html[HTML однією сторінкою]: чистий HTML без CSS.
+ - link:book.pdf[PDF файл]: для друку.
+ - http://packages.debian.org/gitmagic[пакунок Debian], http://packages.ubuntu.com/gitmagic[пакунок Ubuntu]: отримайте локальну копію цього сайту. Стане у нагоді, http://csdcf.stanford.edu/status/[якщо цей сервер буде недоступним].
+ - http://www.amazon.com/Git-Magic-Ben-Lynn/dp/1451523343/[друкована версія [Amazon.com]]: 64 сторінок, 15.24cm x 22.86cm, чорно-біле зображення. Стане у нагоді у випадку відсутності електроенергії.
+
+=== Подяки ===
+
+Я дуже ціную, що так багато людей працювали над перекладами цих рядків. Я вдячний названим вище людям за їхні зусилля, які розширили мою аудиторію.
+
+Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael Budde, Richard Albury, Tarmigan, Derek Mahar, Frode Aannevik, Keith Rarick, Andy Somerville, Ralf Recker, Øyvind A. Holm, Miklos Vajna, Sébastien Hinderer, Thomas Miedema, Joe Malin, Tyler Breisacher, Sonia Hamilton, Julian Haagsma, Romain Lespinasse, Sergey Litvinov, Oliver Ferrigni, David Toca, Сергей Сергеев, Joël Thieffry та Baiju Muthukadan сприяли в правках і доробках.
+
+François Marier супроводжує пакунок Debian, спочатку створений Daniel Baumann.
+
+John Hinnegan купив http://www.gitmagic.com/[gitmagic.com] домен.
+
+Мої подяки іншим за вашу підтримку і похвалу. Мені дуже хотілося процитувати вас тут, але це могло б підняти ваше марнославство до неймовірних висот.
+
+Якщо я випадково забув згадати вас, будь ласка, нагадайте мені або просто вишліть патч.
+
+=== Ліцензія ===
+
+Це керівництво випущено під http://www.gnu.org/licenses/gpl-3.0.html[GNU General Public License 3-ї версії]. Природньо, вихідний текст знаходиться в сховищі Git і може бути отриманий за допомогою команди:
+
+ $ git clone git://repo.or.cz/gitmagic.git  # Створить каталог "gitmagic".
+
+або з одного із дзеркал:
+
+ $ git clone git://github.com/blynn/gitmagic.git
+ $ git clone git://gitorious.org/gitmagic/mainline.git
+ $ git clone https://code.google.com/p/gitmagic/
+ $ git clone git://git.assembla.com/gitmagic.git
+ $ git clone git@bitbucket.org:blynn/gitmagic.git
+
+GitHub, Assembla, і Bitbucket підтримують приватні сховища, останні два
+безкоштовно.
