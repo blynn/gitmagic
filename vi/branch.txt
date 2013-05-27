@@ -2,21 +2,21 @@
 
 Tạo Nhánh và Trộn là các đặc tính sát thủ của Git.
 
-*Vấn đề đặt ra*: Những nhân tố bên ngoài chắc hẳn có đòi hỏi việc hoán chuyển văb cảnh. Một lỗi tồi tệ
+*Vấn đề đặt ra*: Những nhân tố bên ngoài chắc hẳn đòi hỏi cần hoán chuyển văn cảnh. Một lỗi tồi tệ
 xuất hiện trong phiên bản đã được phát hành mà không được cảnh báo gì. Điều tồi tệ nhất có thể xảy ra
-là phải xóa bỏ hẳn đặc tính kỹ thuật đó. Người phát triển phần mềm, người mà đã giúp bạn viết nó, cần biết lý do về việc bãi bỏ. Trong tất cả các trường hợp, bạn buộc phải xóa bỏ cái mà bạn đang làm và làm một cái hoàn toàn mới.
+là phải xóa bỏ hẳn đặc tính kỹ thuật đó. Người phát triển phần mềm, người mà đã giúp bạn viết nó, cần biết lý do về việc bãi bỏ. Trong tất cả các trường hợp trên, bạn buộc phải xóa bỏ cái mà bạn đang làm và làm một cái hoàn toàn mới.
 
-Việc gán đoạn suy nghĩ có thể làm giảm hiệu suất làm việc của bạn, và việc hoán chuyển nội dung càng cồng kềnh vướng víu càng gây hậu quả nặng nề. Đối với các hệ thống quản lý mã nguồn tập trung chúng ta phải tải về một bản sao công việc mới từ máy chủ trung tâm. Các hệ thống phân tán hoạt động hiệu quả hơn, như là chúng ta có thể nhân bản một cách cục bộ.
+Việc gán đoạn suy nghĩ có thể làm giảm hiệu suất làm việc, và việc hoán chuyển nội dung càng cồng kềnh, vướng víu càng gây hậu quả nặng nề. Đối với các hệ thống quản lý mã nguồn tập trung chúng ta phải tải về một bản sao các tập tin mới từ máy chủ trung tâm. Các hệ thống phân tán hoạt động hiệu quả hơn, như là chúng ta có thể nhân bản một cách cục bộ.
 
 Nhưng việc nhân bản bắt buộc phải sao chép toàn bộ thư mục làm việc cũng như là toàn bộ các mục trong lịch sử cho đến thời điểm đã được chỉ ra. Dù là Git giảm bớt sự lãng phí cho việc này bằng cách chia sẻ và tạo ra các liên kết tệp tin cứng, chính bản thân các tệp tin dự án cũng phải được tạo ra trong các đề mục của chúng trong thư mục làm việc.
 
 *Giải pháp*: Git có một công cụ tốt hơn để sử lý tình huống này, nó nhanh và tiết kiệm không gian lưu trữ hơn lệnh nhân bản đó chính là: *git branch*.
 
-Với vài câu thần chú, các tệp tin trong thư mục của bạn dễ dàng biến đổi từ phiên bản này sang phiên bản khác. Sự chuyển đổi này có thể làm nhiều hơn việc di chuyển trong trong lịch sử một các đơn thuần. Các tệp tin của bạn có thể chuyển hình thái từ bản phát hành cuối thành phiên bản thử nghiệm, thành phiên bản phát triển hiện hành, thành phiên bản của người bạn của bạn, và cứ như thế.
+Với vài câu thần chú, các tệp tin trong thư mục của bạn dễ dàng biến đổi từ phiên bản này sang phiên bản khác. Sự chuyển đổi này có thể làm nhiều hơn việc di chuyển trong trong lịch sử một các đơn thuần. Các tệp tin của bạn có thể chuyển hình thái từ bản phát hành cuối thành phiên bản thử nghiệm, thành phiên bản phát triển hiện nay, thành phiên bản của người bạn của bạn, và cứ như thế.
 
 === Nút Điều Khiển ===
 
-Mỗi khi chơi trò chơi, bạn bấm vào nút (``nút điều khiển''), màn hình có lẽ hiển thị ngay ra một cái bảng hay một thứ gì đó? Thế thì nhỡ ông chủ của bạn đang đi lại trong văn phòng nơi bạn đang chơi trò chơi thì làm cách nào để nhanh chóng giấu chúng đi?
+Mỗi khi chơi điện tử, bạn bấm vào nút (``nút điều khiển''), màn hình có lẽ hiển thị ngay ra một cái bảng hay một thứ gì đó? Thế thì nhỡ ông chủ của bạn đang đi lại trong văn phòng nơi bạn đang chơi điện tử thì làm cách nào để nhanh chóng giấu chúng đi?
 
 Ở thư mục nào đó:
 
@@ -37,14 +37,14 @@ Chúng ta đã tạo ra kho chứa Git mà nó theo dõi một tệp tin văn b�
 
 Ối trời ơi! Tệp tin văn bản lại trở về như cũ mất rồi. Và nếu ông chủ có ý định ngó qua thư mục của bạn thì hãy gõ:
 
- $ git checkout boss  # chuyển trở lại phiên bạn vừa mắt ông chủ
+ $ git checkout boss  # chuyển trở lại phiên bản vừa mắt ông chủ
 
 Bạn có thể hoán chuyển giữa hai phiên bản của tệp tin tùy thích, và commit từng cái trong số chúng một cách độc lập.
 
 === Bản Nháp ===
 
 [[branch]]
-Bạn nói mình đang làm việc với một số đặc tính kỹ thuật, và vì lý do nào đó, bạn muốn quay trở lại bản cách đây ba bản và tạm thời đặt vài dòng lệnh
+Bạn nói rằng mình đang làm việc với một số đặc tính kỹ thuật, và vì lý do nào đó, bạn muốn quay trở lại bản cách đây ba bản và tạm thời đặt thêm vài dòng lệnh
 in ra màn hình để có thể thấy được một số hàm hoạt động như thế nào. Thế thì:
 
  $ git commit -a
@@ -56,7 +56,7 @@ Giờ thì bạn có thể thêm những dòng mã lệnh tạm thời ở đâu
 
 để quay lại công việc chính. Chú ý là bất kỳ các thay đổi không được commit sẽ đổ xuống sông xuống biển.
 
-Nhưng bạn lại muốn ghi lại các thay đổi tạm thời đó sau khi làm xong? Rất dễ:
+Nhưng bạn lại muốn ghi lại các thay đổi tạm thời đó sau khi đã làm xong? Rất dễ:
 
  $ git checkout -b dirty
 
@@ -70,17 +70,17 @@ Mặt khác, sau khi 'check out' một trạng thái cũ, Git tự động đặ
 
 === Sửa Nhanh ===
 
-Bạn đang phân vân giữa ngã ba đường khi bạn phải xác định là xóa tất cả mọi thứ hoặc là sửa chữa các lỗi mới phát hiện ra trong lần commit `1b6d...`:
+Bạn đang phân vân giữa ngã ba đường khi bạn phải quyết định là xóa tất cả mọi thứ hoặc là sửa chữa các lỗi mới phát hiện ra trong lần commit `1b6d...`:
 
  $ git commit -a
- $ git checkout -b fixes 1b6d
+ $ git checkout -b fixes 1b6d # checkout và đặt tên là nhánh fixes
 
-Một khi bạn đã sửa lỗi:
+Sau khi hoàn tất việc sửa chữa:
 
  $ git commit -a -m "Đã sửa"
  $ git checkout master
 
-và quay lại công việc theo phận sự của mình. Bạn thậm chí có thể trộn với lần commit đã sửa để
+và sau đó quay lại công việc theo phận sự của mình. Bạn thậm chí có thể trộn với lần commit đã sửa để
 sửa lỗi:
 
  $ git merge fixes
@@ -91,11 +91,11 @@ Với một số hệ thống quản lý mã nguồn, việc tạo các nhánh r
 trở lại là một bài toán hóc búa. Với Git, việc trộn là dễ dàng và bạn có thể
 không hay biết nó hoạt động như thế nào.
 
-Chúng ta đã sử dụng việc trộn từ lâu rồi. Lệnh *pull* trên thực tế đã 'fetch'
+Chúng ta đã sử dụng việc trộn từ lâu rồi. Lệnh *pull* trên thực tế đã 'fetch' (lấy về)
 các lần commit và sau đó trộn chúng vào trong nhánh hiện hành của bạn. Nếu trên máy của mình bạn không có
-thay đổi gì cả, thế thì việc trộn sẽ là một 'fast forward', trường hợp này cũng na ná như việc lấy về
+thay đổi gì cả, thế thì việc trộn sẽ là một 'fast forward' (chuyển tiếp nhanh), trường hợp này cũng na ná như việc lấy về
 phiên bản cuối cùng trong hệ thống quản lý mã nguồn tập trung. Nhưng nếu bạn đã có thay đổi
-trên máy của mình, Git sẽ tự động trộn, và báo cáo cho bạn nếu có xung đột xảy ra.
+trên máy của mình, Git sẽ tự động trộn, và báo lỗi cho bạn nếu có xung đột xảy ra.
 
 Thông thường, mỗi lần commit có một 'commit cha', tạm gọi thế, chính là lần
 commit trước. Việc trộn các nhánh với nhau phát sinh ra một lần commit với ít nhất hai 'cha'.
@@ -104,7 +104,7 @@ có thể có nhiều cha, thế thì chúng ta phải theo cái nào?
 
 Nó sẽ gọi ra 'cha' đầu tiên. Đây là
 điều ta mong muốn bởi vì nhánh hiện hành trở thành cha đầu tiên trong suốt quá trình trộn;
-một cách thường xuyên, bạn chỉ liên quan đến những thay đổi mình tạo ra trong nhánh
+thường, bạn chỉ liên quan đến những thay đổi mình tạo ra trong nhánh
 hiện hành, cốt để mà đối lập với việc trộn thay đổi từ các nhánh khác.
 
 Bạn hãy nhớ Git quy một cha nào đó với một dấu mũ. Ví dụ, để hiển thị
@@ -182,8 +182,8 @@ Có lẽ bạn thích làm việc trên mọi khía cạnh của một dự án 
 
 Tiếp theo, làm việc gì đó: sửa lỗi, thêm các đặc tính kỹ thuật, thêm mã lệnh tạm thời, vân vân, commit thường xuyên. Sau đó:
 
-  $ git checkout sanitized
-  $ git cherry-pick medley^^
+  $ git checkout sanitized # tạm dịch: đã được vệ sinh
+  $ git cherry-pick medley^^ # tạm dịch: hỗn độn; ^^: ông bà
 
 áp dụng nhánh ông-bà của lần commit head của nhánh ``medley'' thành nhánh ``sanitized''. Với lệnh thích hợp là cherry-picks bạn có thể cấu trúc một nhánh mà nó chỉ chứa mã nguồn không thay đổi, và những lần commit có liên quan sẽ được nhóm lại với nhau.
 
@@ -209,10 +209,10 @@ nhưng bạn không nên làm như thế mà hãy tôn trọng thỏa thuận ng
 Một lát sau bạn có lẽ nhận thức được rằng mình cần có các nhánh tạm thời
 vì các lý do như: mọi nhánh khác đơn thuần phục vụ cho
 việc ghi lại trạng thái hiện tại do vậy bạn có thể nhảy trở lại các trạng thái cũ hơn để mà
-sửa chữa các lỗi nghiêm trọng hay thứ gì đó.
+sửa chữa các lỗi nghiêm trọng hay làm một cái gì đó.
 
 Điều này cũng tương tự như việc chuyển kênh trên TV một cách tạm thời để thấy chương trình khác đang chiếu cái gì.
-Nhưng thay vì chỉ cần nhấn vài cái nút, bạn phải tạo, check out,
+Nhưng thay vì chỉ cần nhấn vài cái nút, bạn phải tạo, ``checkout'',
 trộn và xóa nhánh tạm đó. May mắn thay, Git có cách ngắn gọn tiện lợi
 chẳng thua kém gì chiếc điều khiển từ xa của một chiếc TV:
 
@@ -230,7 +230,7 @@ Bạn có thể có nhiều trạng thái được tạm giấu đi, và vận d
 
 === Làm Theo Cách Của Mình ===
 
-Bạn có thể sẽ cảm thấy việc sử dụng nhánh phiền hà quá. Cuối cùng, clones có lẽ là
+Bạn có thể sẽ cảm thấy việc sử dụng nhánh phiền hà quá. Cuối cùng, *clone* có lẽ là
 lệnh nhanh nhất, và bạn có thể hoán chuyển giữa chúng với lệnh *cd* thay vì sử dụng
 lệnh riêng của Git.
 
@@ -238,8 +238,8 @@ Ta thử xét đến các trình duyệt web. Tại sao việc hỗ trợ mở n
 Bởi vì cả hai điều này thể hiện tính đa dạng của quan điểm, phong cách sống. Một số người sử dụng lại thích
 chỉ giữ một cửa sổ trình duyệt được mở, và sử dụng các tab để hiển thị nhiều trang web một lúc. Những người khác
 có lẽ lại khăng khăng cực đoan cho rằng: mở trên nhiều cửa sổ khác nhau và chẳng cần tab nữa.
-Một nhóm khác lại thích cả hai một lúc.
+Một nhóm khác lại thích cả hai cách trên.
 
 Việc tạo nhánh thì cũng giống như tạo các tab cho thư mục làm việc của bạn, còn việc nhân bản thì lại giống như việc mở một cửa sổ duyệt mới. Những việc này nhanh chóng và nội bộ, thế thì sao lại không
-thử nghiệm để tìm thấy cách thực hiện thích hợp nhất cho mình? Git giúp bạn làm việc chính xác
+thử nghiệm để tìm thấy cách nào thích hợp nhất cho mình? Git giúp bạn làm việc chính xác
 như bạn muốn.

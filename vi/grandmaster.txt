@@ -95,7 +95,7 @@ Nhưng giả sử bạn không có được nó? Đừng lo: với những lện
 
  $ git reset ORIG_HEAD
 
-=== Săn tìm-HEAD ===
+=== Tìm HEAD ===
 
 Có thể ORIG_HEAD là chưa đủ. Có lẽ bạn vừa nhận thấy mình vừa tạo ra một sai sót có quy mô lớn và bạn cần phải quay lại một lần commit cách đây lâu lắm rồi trong một nhánh mà bạn đã quên rồi vì nó đã quá lâu.
 
@@ -118,7 +118,7 @@ Hay checkout lần thứ 5 kể từ lần commit cuối viếng thăm thông qu
 
  $ git checkout "@{5}"
 
-Xem chương ``Specifying Revisions'' từ lệnh *git help rev-parse* để biết thêm chi tiết.
+Xem chương ``Specifying Revisions'' (tạm dịch: chỉ định các điểm xét duyệt) từ lệnh *git help rev-parse* để biết thêm chi tiết.
 
 Bạn muốn cấu hình thời gian gia hạn lâu hơn việc xóa bỏ những lần commit. Ví
 dụ:
@@ -136,18 +136,18 @@ trong trường hợp này những lần commit sẽ chỉ bị xóa bỏ khi b�
 
 === Xây Dựng trên Git ===
 
-Tuân thủ theo phong thái UNIX, Git được thiết kế cho phép nó dễ dàng được sử dụng như là một thành phần bên dưới của các chương trình khác, như là cho giao diện đồ họa GUI và giao diện Web để thay thế cho giao diện dòng lệnh, công cụ quản lý các miếng vá, các công cụ nhập và chuyển đổi, và những thứ tương tự như thế. Trên thực tế, một số lệnh Git bản chất nó cũng là các kịch bản đứng trên vai của những người khổng lồ, chính là hệ điều hành. Chỉ cần sửa đổi một chút, bạn có thể bắt Git làm việc phù hợp với sở thích của mình.
+Tuân thủ theo phong thái UNIX, Git được thiết kế cho phép nó dễ dàng được sử dụng như là một thành phần thực thi bên dưới của các chương trình khác, như là cho giao diện đồ họa GUI và giao diện Web để thay thế cho giao diện dòng lệnh, công cụ quản lý các miếng vá, các công cụ xuất/nhập và chuyển đổi, và những thứ tương tự như thế. Trên thực tế, một số lệnh Git bản chất nó cũng là các kịch bản đứng trên vai của những người khổng lồ, chính là hệ điều hành. Chỉ cần sửa đổi một chút, bạn có thể bắt Git làm việc phù hợp với sở thích của mình.
 
-Một mẹo nhỏ là sử dụng một tính năng dựng sẵn trong Git là gán bí danh cho các lệnh để nó trở nên ngắn gọn hơn
-sử dụng lệnh:
+Một mẹo nhỏ là sử dụng một tính năng sẵn có trong Git bằng cách gán bí danh cho các lệnh để nó trở nên ngắn gọn hơn
+như sau:
 
-  $ git config --global alias.co checkout  #gán bí danh cho lệnh checkout là co
+  $ git config --global alias.co checkout   # gán bí danh cho lệnh checkout là co
   $ git config --global --get-regexp alias  # hiển thị bí danh hiện hành
   alias.co checkout
   $ git co foo                              # có kết quả giống như chạy lệnh 'git checkout foo'
 
 Một thứ khác là hiển thị nhánh hiện hành lên màn hình hay thanh tiêu đề của cửa sổ.
-Gọi lệnh
+Gọi lệnh:
 
   $ git symbolic-ref HEAD
 
@@ -192,7 +192,7 @@ Cũng tương tự như thế, việc cố gắng ghi đè lên một nhánh b�
 
 Không giống như checkout và reset, hai lệnh trên trì hoãn việc phá hủy dữ liệu. Các
 thay đổi vẫn còn lưu giữ trong thư mục con .git, và có thể lấy lại được bằng cách
-lấy giá trị băm `.git/logs` thích hợp (xem phần "Săn tìm - HEAD" ở phía trên).
+lấy giá trị băm `.git/logs` thích hợp (xem phần "Tìm - HEAD" ở phía trên).
 Theo mặc định, chúng sẽ giữ ít nhất là hai tuần lễ.
 
 *Clean*: Một số lệnh Git từ chối thi hành bởi vì chúng lo lắng về việc làm như thế

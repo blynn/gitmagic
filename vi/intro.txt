@@ -4,11 +4,11 @@ Tôi sử dụng cách ví von để giới thiệu về hệ thống quản lý
 
 === Công Việc giống như Trò Chơi ===
 
-Tôi đã chơi trò chơi trên máy tính suốt từ bé đến giờ. Ngược lại, tôi chỉ bắt đầu sử dụng hệ thống quản lý mã nguồn khi đã trưởng thành. Tôi tin rằng không chỉ có tôi như thế, và việc so sánh giữa hai điều đó sẽ làm cho các khái niệm trở nên dễ hiểu, dễ giải thích hơn.
+Tôi đã chơi điện tử trên máy tính suốt từ bé đến giờ. Nhưng tôi chỉ bắt đầu sử dụng hệ thống quản lý mã nguồn khi đã trưởng thành. Tôi tin rằng không chỉ có mình tôi như thế, và việc so sánh giữa hai điều đó sẽ làm cho các khái niệm trở nên dễ hiểu, dễ giải thích hơn.
 
-Hãy nghĩ việc biên soạn mã nguồn, tài liệu cũng giống như việc chúng ta đang chơi trò chơi trên máy tính. Một khi bạn đã làm được kha khá, bạn sẽ muốn ghi lại thành quả công việc của mình. Để làm điều đó, bạn chỉ việc bấm vào nút 'Save' trong chương trình biên soạn của mình.
+Hãy nghĩ việc biên soạn mã nguồn, tài liệu cũng giống như việc chúng ta đang chơi trò chơi điện tử trên máy tính. Một khi bạn đã làm được kha khá, bạn sẽ muốn ghi lại thành quả công việc của mình. Để làm điều đó, bạn chỉ việc bấm vào nút 'Save' trong chương trình biên soạn của mình.
 
-Nhưng việc làm này sẽ ghi đè lên bản cũ. Điều này cũng giống như các trò chơi đã cũ chỉ cho phép ghi trên một tệp tin: bạn phải chắc chắn là mình muốn ghi lại, nếu không thì bạn không bao giờ có thể quay lại trạng thái cũ nữa. Và thật không may vì lần lưu trước đó có thể là đúng tại một điểm rất hay trong lượt chơi và bạn muốn thăm lại về sau. Tệ hơn nữa là khi bản ghi lại hiện tại lại không đúng, và thế là bạn sẽ phải bắt đầu lại từ đầu.
+Nhưng việc làm này sẽ ghi đè lên dữ liệu của bản cũ. Điều này cũng giống như các trò chơi đã cũ chỉ cho phép ghi trên một tệp tin: bạn phải chắc chắn là mình muốn ghi lại, nếu không thì bạn không bao giờ có thể quay lại trạng thái cũ nữa. Và thật không may vì lần lưu trước đó có thể là đúng tại một điểm rất hay trong lượt chơi và bạn muốn quay lại đó sau này. Tệ hơn nữa là khi bản ghi lại hiện tại lại không đúng, và thế là bạn sẽ phải bắt đầu lại từ đầu.
 
 === Quản Lý Mã Nguồn ===
 
@@ -22,17 +22,17 @@ Các hệ thống quản lý mã nguồn cũng hoạt động theo cách ấy. C
 
 === Hệ Thống Phân Tán ===
 
-Bây giờ hãy tưởng tượng có một trò chơi rất khó. Khó để hoàn thành đến mức là có nhiều game thủ lão luyện trên toàn thế giới quyết định lập thành đội và chia sẻ những trò chơi mà họ đã lưu lại với mục đích là để tất cả mọi người có thể theo dõi được nhau. Speedruns là những ví dụ trong đời sống thực: các đấu thủ được phân hóa theo các mức của cùng một trò chơi hợp tác với nhau để đạt được các kết quả đáng kinh ngạc.
+Bây giờ hãy tưởng tượng có một trò chơi rất khó. Khó để hoàn thành đến mức là có nhiều game thủ lão luyện trên toàn thế giới quyết định lập thành đội và chia sẻ những trò chơi mà họ đã lưu lại với mục đích là để tất cả mọi người có thể theo dõi được nhau. *Speedruns* là những ví dụ trong đời sống thực: các đấu thủ được phân hóa theo các mức của cùng một trò chơi hợp tác với nhau để đạt được các kết quả đáng kinh ngạc.
 
 Làm thế nào bạn có thể cài đặt một hệ thống mà chúng có thể lấy được từng bản ghi của mỗi người một cách dễ dàng? Và tải lên cái mới hơn?
 
-Ngày xưa, mọi dự án đều sử dụng hệ thống quản lý tập trung. Máy chủ ở một chỗ đâu đó và giữ tất cả các trò chơi đã được ghi lại. Không còn ai khác làm điều đó nữa. Mọi người giữ phần lớn các trò chơi được ghi lại trong máy của họ. Khi một đấu thủ muốn chơi, họ có thể tải về bản ghi lại cuối cùng đã lưu lại ở máy chủ, chơi một lúc, ghi lại và tải trở lại máy chủ để mọi người có thể sử dụng.
+Ngày xưa, mọi dự án đều sử dụng hệ thống quản lý tập trung. Máy chủ ở một chỗ đâu đó và giữ tất cả các trò chơi đã được ghi lại. Không còn ai khác làm điều đó nữa. Mọi người giữ phần lớn các trò chơi được ghi lại trong máy của họ. Khi một đấu thủ muốn chơi, họ có thể tải về bản ghi lại cuối cùng đã lưu lại ở máy chủ, chơi một lúc, ghi lại và tải trở lại máy chủ để những người khác có thể sử dụng.
 
-Điều gì xảy ra khi một người chơi, vì một lý do nào đó, muốn có được lần chơi cũ hơn? Lý do có thể là lần chơi hiện tại không ổn định hay có sai sót bởi vì một người chơi nào đó quên không chỉnh lại trò chơi về mức 3, và họ muốn tìm lần chơi đã ghi lại cuối cùng mà họ vẫn chưa hoàn thành. Hay có thể là họ muốn so sánh sự  khác nhau giữa các lần chơi để thấy được thành quả của từng người chơi.
+Điều gì xảy ra khi một người chơi, vì một lý do nào đó, muốn có được lần chơi cũ hơn? Lý do có thể là lần chơi hiện tại không ổn định hay có sai sót bởi vì một người chơi nào đó quên không chỉnh lại trò chơi về mức 3, và họ muốn tìm lần chơi đã ghi lại cuối cùng mà họ vẫn chưa hoàn thành. Hay có thể là họ muốn so sánh sự khác nhau giữa các lần chơi để thấy được thành quả của từng người chơi.
 
 Có rất nhiều lý do vì sao cần đến bản cũ hơn, nhưng kết cục là giống nhau. Họ phải hỏi máy chủ trung tâm để lấy về trò chơi cũ đã được lưu lại. Càng ghi lại nhiều trò chơi, họ càng cần phải liên lạc nhiều với nhau.
 
-Những hệ thống quản lý mã nguồn thế hệ mới, Git cũng nằm trong số đó, được biết đến như một hệ thống phân tán, và có thể coi nó là một hệ thống tập trung có mở rộng. Khi người chơi tải về từ máy chủ chính, họ lấy toàn bộ tất cả các lần đã ghi lại, không chỉ mỗi bản cuối cùng. Điều đó có nghĩa là họ trở thành bản sao của máy chủ trung tâm.
+Những hệ thống quản lý mã nguồn thế hệ mới, Git là một trong số đó, được biết đến như một hệ thống phân tán, và có thể coi nó là một hệ thống tập trung có mở rộng. Khi người chơi tải về từ máy chủ chính, họ lấy toàn bộ tất cả các lần đã ghi lại, không chỉ mỗi bản cuối cùng. Điều đó có nghĩa là họ trở thành bản sao của máy chủ trung tâm.
 
 Việc khởi tạo bản sao như thế có vẻ hơi xa hoa, đặc biệt là nếu nó có lịch sử phát triển lâu dài, nhưng cái giá phải trả cũng chỉ là việc cần nhiều thời gian để lấy về. Một lợi ích trực tiếp của việc này là khi các tài liệu cũ cần đến, việc liên lạc với máy chủ trung tâm là không cần thiết nữa.
 

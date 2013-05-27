@@ -4,7 +4,7 @@ Tháng Tám, 2007
 
 == Lời nói đầu ==
 
-http://git.or.cz/[Git] là công cụ quản lý mã nguồn vạn năng. Đây là một công cụ quản lý mã nguồn tin cậy, ổn định, đa dụng và cực kỳ mềm dẻo và chính sự mềm dẻo của Git làm cho việc học nó trở nên khó khăn, tất nhiên là không nói đến những người đã tạo ra nó.
+http://git-scm.com/[Git] là công cụ quản lý mã nguồn vạn năng. Đây là một công cụ quản lý mã nguồn tin cậy, ổn định, đa dụng và cực kỳ mềm dẻo và chính sự mềm dẻo của Git làm cho việc học nó trở nên khó khăn, tất nhiên là không nói đến những người đã tạo ra nó.
 
 Theo quan sát của Arthur C. Clarke, bất kể công nghệ tiên tiến nào cũng không thể phân biệt rạch ròi là nó có kỳ diệu hay không. Đây cũng là cách hay đề đề cập đến Git: những người mới sử dụng không cần quan tâm đến bên trong Git làm việc như thế nào mà hãy xem khả năng thần kỳ của nó như là một điệu gizmo có thể làm những người coi nó là bạn sửng sốt và làm điên đầu  những người đối lập.
 
@@ -18,11 +18,12 @@ Thay vì đi sâu vào chi tiết, chúng tôi đưa ra phác thảo cách làm 
  - http://www.slideshare.net/slide_user/magia-git[Tiếng Bồ Đào Nha]: dịch bởi Leonardo Siqueira Rodrigues [http://www.slideshare.net/slide_user/magia-git-verso-odt[định dạng ODT]].
  - link:/~blynn/gitmagic/intl/ru/[Tiếng Nga]: dịch bởi Tikhon Tarnavsky, Mikhail Dymskov và một số người khác.
  - link:/~blynn/gitmagic/intl/es/[Tiếng Tây Ban Nha]: dịch bởi Rodrigo Toledo và Ariset Llerena Tapia.
+ - link:/~blynn/gitmagic/intl/uk/[Ukrainian]: dịch bởi Volodymyr Bodenchuk.
  - link:/~blynn/gitmagic/intl/vi/[Tiếng Việt]: dịch bởi Trần Ngọc Quân và đồng thời xuất bản bản dịch này trên http://vnwildman.users.sourceforge.net/gitmagic/[trang Web cá nhân của mình].
 
 .Các định dạng khác
 
- - link:book.html[Trang web đơn]: định dạng HTML đơn giản, không định dạng bằng CSS.
+ - link:book.html[Trang web đơn]: dạng HTML đơn giản, không được định dạng bằng CSS.
  - link:book.pdf[Định dạng PDF]: thuận tiện cho việc in ấn.
  - http://packages.debian.org/gitmagic[Gói dành cho Debian], http://packages.ubuntu.com/gitmagic[gói dành cho Ubuntu]: tải về đĩa cứng từ các địa chỉ này. Tiện lợi http://csdcf.stanford.edu/status/[khi máy chủ này không kết nối mạng hay không hoạt động].
  - http://www.amazon.com/Git-Magic-Ben-Lynn/dp/1451523343/[Sách giấy [Amazon.com]]: 64 trang, 15.24cm x 22.86cm, đen trắng. Rất tiện sử dụng vì chẳng cần đến điện.
@@ -33,7 +34,7 @@ Tôi gửi lời cảm ơn đến những người đã dịch quyển sách nà
 Tôi rất cảm kích vì có được số lượng độc giả rộng lớn có được bởi những người
 đã được nêu tên ở trên.
 
-Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael Budde, Richard Albury, Tarmigan, Derek Mahar, Frode Aannevik, Keith Rarick, Andy Somerville, Ralf Recker, Øyvind A. Holm, Miklos Vajna, Sébastien Hinderer, Thomas Miedema, Joe Malin, Tyler Breisacher, Sonia Hamilton, Julian Haagsma, Romain Lespinasse, Sergey Litvinov, Oliver Ferrigni, David Toca, Сергей Сергеев và Joël Thieffry đã đóng góp trong việc sửa chữa và cải tiến nội dung.
+Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael Budde, Richard Albury, Tarmigan, Derek Mahar, Frode Aannevik, Keith Rarick, Andy Somerville, Ralf Recker, Øyvind A. Holm, Miklos Vajna, Sébastien Hinderer, Thomas Miedema, Joe Malin, Tyler Breisacher, Sonia Hamilton, Julian Haagsma, Romain Lespinasse, Sergey Litvinov, Oliver Ferrigni, David Toca, Сергей Сергеев, Joël Thieffry và Baiju Muthukadan đã đóng góp trong việc sửa chữa và cải tiến nội dung.
 
 François Marier đã bảo trì gói Debian do Daniel
 Baumann khởi xướng.
@@ -60,5 +61,5 @@ hay từ các máy chủ khác:
  $ git clone git://git.assembla.com/gitmagic.git
  $ git clone git@bitbucket.org:blynn/gitmagic.git
 
-GitHub, Assembla, và Bitbucket có hỗ trợ các kho có tính riêng tư, hai địa chỉ còn lại
+GitHub, Assembla, và Bitbucket có hỗ trợ các kho có tính riêng tư, hai địa sau
 là miễn phí.

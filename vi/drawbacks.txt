@@ -39,7 +39,7 @@ Với một đoạn kịch bản thích hợp, bạn có thể lưu giữ theo c
 
 Sau khi Git ghi lại các thay đổi cho các dự án lớn, việc cấu trúc lại lịch sử của một tệp tin đơn lẻ yêu cầu phải làm việc nhiều hơn các chương trình quản lý mã nguồn giữ dấu vết theo các tệp tin riêng lẻ.
 
-Hình phạt thường là không đáng kể, và thứ đáng giá mà nó nhận được là các tác vụ khác hoạt động hiệu quả đến không ngờ. Ví dụ, `git checkout` nhanh hơn `cp -a`, và dữ liệu trong dự án lớn nén tốt hơn việc gom lại từ tệp tin cơ bản.
+Thiệt hại thường là không đáng kể, và thứ đáng giá mà nó nhận được là các tác vụ khác hoạt động hiệu quả đến không ngờ. Ví dụ, `git checkout` nhanh hơn `cp -a`, và dữ liệu trong dự án lớn nén tốt hơn việc gom lại từ tệp tin cơ bản.
 
 === Khởi tạo Bản Sao ===
 

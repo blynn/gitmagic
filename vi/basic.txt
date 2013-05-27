@@ -13,11 +13,11 @@ trong thư mục hiện hành chứa các mã nguồn hay văn bản mà bạn m
  $ git add .
  $ git commit -m "Bản sao lưu đầu tiên"
 
-Bây giờ nếu như các sửa đổi vừa xong của bạn không như mong đợi, hãy phục hồi lại bản cũ:
+Bây giờ nếu như các sửa đổi của bạn vừa làm không được như mong đợi, hãy phục hồi lại bản cũ:
 
  $ git reset --hard # Đặt lại trạng thái và dữ liệu như lần commit cuối
 
-Sau đó sửa nội dung cho đúng ý bạn rồi ghi lại thành một trạng thái mới:
+Sau đó sửa nội dung cho đúng ý mình rồi ghi lại thành một trạng thái mới:
 
  $ git commit -a -m "Bản sao lưu khác"
 
@@ -116,7 +116,7 @@ commit mới, bạn có thể xác nhận lại điều này bằng lệnh *git 
 === Tạo Nhật Ký các thay đổi ===
 
 Một số dự án yêu cầu có một http://en.wikipedia.org/wiki/Changelog[changelog].
-Tạo một cái bằng cách gõ:
+Bạn có thể tạo một cái bằng cách gõ:
 
  $ git log > ThayĐổi
 
@@ -150,11 +150,11 @@ Thực hiện điều này với Git, trong thư mục làm việc của Git:
 
 Sau đó nói với những người cùng sử dụng hãy chạy:
 
- $ git clone your.computer:/path/to/script
+ $ git clone máy.tính.của.bạn:/đường/dẫn/tới/script
 
 để tải dữ liệu về. Giả định là họ truy cập thông qua ssh. Nếu không, chạy *git daemon* và nói với người sử dụng là chạy lệnh sau để thay thế:
 
- $ git clone git://your.computer/path/to/script
+ $ git clone git://máy.tính.của.bạn:/đường/dẫn/tới/script
 
 Kể từ lúc này, bất cứ khi nào mã nguồn của bạn đã có thể sử dụng được, chỉ việc thực hiện:
 

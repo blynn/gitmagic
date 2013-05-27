@@ -9,12 +9,11 @@ những người đóng góp. Tôi đã phải học cách làm thế nào để
 ở khắp nơi trên toàn thế giới. May mắn thay, đây là sở trường của Git, và người ta có thể nói đây là
 điều sống còn của một hệ thống quản lý mã nguồn.
 
-
 === Tôi Là Ai? ===
 
 Mỗi lần commit sẽ lưu giữ tên và địa chỉ thư điện tử, điều này có thể nhìn thấy bằng lệnh *git log*.
 Theo mặc định, Git sử dụng các trường để lưu giữ các cài đặt trong hệ thống của mình.
-Để chỉ định chúng một cách rõ ràng, hãy gõ:
+Để cài đặt các thông tin cá nhân của mình vào, hãy gõ:
 
   $ git config --global user.name "John Doe"
   $ git config --global user.email johndoe@example.com
@@ -40,11 +39,11 @@ Với các phiên bản Git cũ, lệnh copy không thực hiện được và b
 
 Từ giờ bạn có thể xuất bản mới nhất của mình thông qua SSH từ một bản sao bất kỳ:
 
- $ git push web.server:/path/to/proj.git master
+ $ git push máy.chủ.web:/đường/dẫn/đến/proj.git master
 
 và mọi người có thể lấy dự án của bạn với lệnh:
 
- $ git clone http://web.server/proj.git
+ $ git clone http://máy.chủ.web/proj.git
 
 === Git Thông Qua Mọi Thứ ===
 
@@ -85,7 +84,7 @@ và tạo một bản bundles mới với:
 
 === Vá: Sự Thịnh Hành Toàn Cầu ===
 
-Miếng vá được trình bày ở dạng văn bản các thay đổi của bạn, nó dễ dàng được đọc hiểu bởi
+Miếng vá được trình bày ở dạng văn bản để thể hiện các thay đổi của bạn, nó dễ dàng được đọc hiểu bởi
 con người cũng như là máy tính. Điều này mang lại cho chúng sức lôi cuốn toàn cầu. Bạn có thể gửi miếng vá qua
 thư điện tử cho những nhà phát triển phần mềm khác mà chẳng cần lo họ đang sử dụng hệ thống quản lý mã nguồn nào. Chừng nào
 mà độc giả của bạn có thể đọc được thư điện tử của mình thì họ còn có thể thấy được phần chỉnh sửa của bạn. Tương tự thế, về phía mình,
@@ -137,7 +136,7 @@ thay đổi hay xóa các tên này nhưng chẳng có lý do gì để phải l
 
 Nếu kho chứa nguyên bản đã chuyển chỗ, chúng ta có thể cập nhật URL thông qua:
 
- $ git config remote.origin.url git://new.url/proj.git
+ $ git config remote.origin.url git://url.mới/proj.git
 
 Tùy chọn +branch.master.merge+ chỉ ra nhánh remote mặc định trong
 lệnh *git pull*. Trong suốt quá trình nhân bản, nó được đặt cho nhánh hiện hành của kho chứa

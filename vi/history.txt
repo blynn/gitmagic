@@ -3,7 +3,7 @@
 Một hệ quả tất yếu của đặc tính phân tán của Git là việc lịch sử có thể biên soạn lại một cách
 dễ dàng. Nhưng nếu bạn xáo trộn quá khứ, hãy cẩn thận: chỉ biên soạn lại các phần trong lịch sử
 chỉ khi bạn sở hữu nó một mình. Cũng giống như việc các quốc gia tranh cãi không kết thúc xem ai là người
-tận tâm hành động nào là tàn ác, nếu một người khác có một bản sao mà lịch sử của nó lại khác với
+tận tâm, hành động nào là tàn ác, nếu một người khác có một bản sao mà lịch sử của nó lại khác với
 cái của bạn, bạn sẽ gặp rắc rối ngay khi cần tương tác với họ.
 
 Một số nhà phát triển phần mềm quả quyết rằng lịch sử không thể thay đổi, tất cả mọi thứ.
@@ -14,7 +14,7 @@ nếu muốn.
 
 === Dừng Lại Sửa Chữa ===
 
-Bạn vừa mới commit, nhưng lại ước mình đã gõ những dòng chú thích có nội dung khác phải không? Thế thì hãy chạy:
+Bạn vừa mới commit, nhưng lại ước rằng mình đã gõ những dòng chú thích có nội dung khác phải không? Thế thì hãy chạy:
 
  $ git commit --amend
 
@@ -83,7 +83,7 @@ Do vậy cứ commit thoải mái và thường xuyên bởi vì bạn có thể
 Bạn đang làm việc trên một dự án đang hoạt động. Bạn đã tạo ra một số lần commit tại máy tính của mình, và
 sau đó bạn đồng bộ hóa với cây chính thức bằng cách hòa trộn. Chu kỳ này tự lặp chính nó một số lần trước khi bạn thực sự push tới cây trên máy chủ trung tâm.
 
-Nhưng hiện tại lịch sử bản sao Git trên máy tính của bạn là một mớ hỗn độn của những lần thay đổi trên máy tính riêng và máy chính thức. Bạn muốn thấy tất cả các thay đôi của riêng mình trong một đoạn liên tục không ngắt quãng, và sau tất cả các thay đổi từ văn phòng.
+Nhưng hiện tại lịch sử bản sao Git trên máy tính của bạn là một mớ hỗn độn của những lần thay đổi trên máy tính riêng và máy chính thức. Bạn muốn thấy tất cả các thay đổi của riêng mình trong một đoạn liên tục không ngắt quãng, và sau tất cả các thay đổi từ kho chính thức.
 
 Đây chính là công việc dành cho lệnh *git rebase* đã được miêu tả ở trên. Trong nhiều trường hợp bạn có thể sử dụng
 cờ *--onto* và tránh xa sự tương tác với các máy tính khác.
@@ -176,7 +176,7 @@ những lệnh này có thể gửi một kho chứa ở dạng văn bản thôn
 
 === Vị Trí Nào Phát Sinh Lỗi? ===
 
-Bạn vừa mới phát hiện ra một đặc tính không hoạt động trong chương trình mà bạn chắc chắn là nó đã hoạt động vài tháng trước. Tệ quá! Lỗi bắt đầu từ chỗ nào nhỉ? Nếu như chỉ có mình bạn kiểm tra cũng như phát triển đặc tính này.
+Bạn vừa mới phát hiện ra một đặc tính không hoạt động trong chương trình mà bạn chắc chắn là nó đã hoạt động vài tháng trước. Tệ quá! Bạn tự hỏi là lỗi bắt đầu từ chỗ nào nhỉ? Nếu như chỉ có mình bạn kiểm tra cũng như phát triển đặc tính này.
 
 Lúc này thì đã quá muộn rồi. Tuy nhiên, chỉ cần bạn commit thường xuyên, Git
 có thể xác định vị trí của trục trặc:
@@ -256,5 +256,5 @@ chính của mình, lệnh đã hoàn tất từ lâu rồi, và tôi phải lã
 Ở đây còn có một hậu quả rất đáng quan tâm nữa: đoán trước được việc tắc nghẽn của mạng máy tính,
 nhiều cá nhân riêng lẻ có thể chiếm dụng nhiều lưu lượng mạng hơn cần thiết trên các tác vụ
 khác nhau để cố gắng giảm thiểu sự chậm trễ có thể xảy ra trong tương lai. Hậu quả cuối cùng là
-sự quá tải quá mức, việc vô tình ủng hộ việc tiêu dùng cá nhân như thế làm đốt cháy nhiều lưu lượng mạng hơn
+sự quá tải quá mức, chính việc vô tình ủng hộ việc tiêu dùng cá nhân như thế đã tiêu tốn nhiều lưu lượng mạng hơn
 và sau đó nó làm cho việc tắc nghẽn càng lúc càng trở nên tồi tệ hơn.

@@ -2,7 +2,7 @@
 
 Trong các hệ thống quản lý mã nguồn trước đây, checkout là tác vụ cơ bản để lấy các tệp tin về. Bạn lấy về toàn bộ các tập tin được lưu giữ trong từng phiên bản riêng biệt.
 
-Với Git và các hệ thống quản lý mã nguồn phân tán, clone là tác vụ cơ bản. Để lấy các tệp tin, bạn tạo một của toàn bộ kho chứa. Nói cách khác, bạn thực tế là một bản sao của máy chủ trung tâm. Bất kỳ cái gì bạn thể làm được với kho chứa chính thì cũng làm được ở đây.
+Với Git và các hệ thống quản lý mã nguồn phân tán, clone là tác vụ cơ bản. Để lấy các tệp tin, bạn lấy về toàn bộ kho chứa. Nói cách khác, bạn thực tế là một bản sao của máy chủ trung tâm. Bất kỳ cái gì bạn thể làm được với kho chứa chính thì cũng làm được ở đây.
 
 === Đồng bộ hóa Các Máy tính ===
 
@@ -17,7 +17,7 @@ Khởi tạo kho chứa Git và commit các tệp tin trên một máy tính. Sa
  $ git commit -a
  $ git pull other.computer:/path/to/files HEAD
 
-sẽ lấy về một trạng thái của các tệp tin trên máy tính khác về máy bạn đang làm việc. Nếu bạn vừa tạo ra một sự chỉnh sửa xung đột trong cùng một tệp tin , Git sẽ cho bạn biết và bạn có thể commit lại sau khi đã sửa chữa chúng.
+sẽ lấy về một trạng thái của các tệp tin trên máy tính khác về máy bạn đang làm việc. Nếu bạn vừa tạo ra một sự chỉnh sửa xung đột trong cùng một tệp tin, Git sẽ cho bạn biết và bạn có thể commit lại sau khi đã sửa chữa chúng.
 
 === Quản lý theo cách Cũ ===
 
@@ -69,7 +69,7 @@ Nếu máy chủ trung tâm có thay đổi bởi hành động của một ngư
 push sẽ bị lỗi, và anh ta phải pull về bản mới nhất, xử lý các xung đột khi trộn, sau đó thử lại.
 
 Người dùng phải có quyền truy cập SSH mới có thể thực hiện được lệnh pull và push ở trên.
-Tuy nhiên, ai cũng có thể lấy mã nguồn về bằng lệnh::
+Tuy nhiên, ai cũng có thể lấy mã nguồn về bằng lệnh:
 
  $ git clone git://central.server/path/to/proj.git
 
@@ -87,7 +87,7 @@ việc truyền thông bây giờ đều thông qua SSH.
 
 === Kho thuần ===
 
-Kho thuần (bare) được đặt tên như vậy vì nó không chứa thư mục làm việc; nó chỉ chứa các tệp tin thường là ẩn trong thư mục phụ `.git`. Hay nói cách khác, nó chứa lịch sử mã nguồn của một dự án, và không bao giờ giữ dữ liệu còn đang dang dở của bất kỳ phiên bản nào.
+Kho thuần (bare) được đặt tên như vậy vì nó không chứa thư mục làm việc; nó chỉ chứa các tệp tin thường là ẩn trong thư mục phụ `.git`. Hay nói cách khác, nó chứa lịch sử mã nguồn của một dự án, và không bao giờ giữ các tập tin bất kỳ phiên bản nào.
 
 Kho thuần có vai trò hoạt động giống như máy chủ trung tâm trong các hệ thống
 quản lý mã nguồn tập trung: thư mục chủ dự án của bạn. Các nhà phát triển phần mềm nhân bản
@@ -209,10 +209,10 @@ Plugin `bzr-git` giúp người dùng Bazaar làm việc với kho Git trong ch�
 
 === Tại sao Tôi sử dụng Git ===
 
-Trước tiên, tôi chọn Git bởi tôi nghe nói nó làm được việc phi thường là có thể quản lý mã nguồn cho một thứ khó quản lý như hạt nhân của hệ điều hành Linux. Tôi chưa bao giờ nghĩ đến việc chuyển sang cái khác. Git làm được những việc thật đáng ngưỡng mộ, và tôi chưa từng bao giờ gặp các vấn đề với sai sót của nó. Do tôi hoạt động chủ yếu trên Linux, phát hành trên các nền tảng khác không phải là điều mà tôi quan tâm.
+Trước tiên, tôi chọn Git bởi tôi nghe nói nó làm được việc phi thường là có thể quản lý mã nguồn cho một thứ khó quản lý như hạt nhân của hệ điều hành Linux. Tôi chưa bao giờ nghĩ đến việc chuyển sang dùng một phần mềm quản lý mã nguồn khác. Git làm được những việc thật đáng ngưỡng mộ, và tôi chưa từng bao giờ gặp các vấn đề với sai sót của nó. Do tôi hoạt động chủ yếu trên Linux, phát hành trên các nền tảng khác không phải là điều mà tôi quan tâm.
 
 Ngoài ra, tôi thích lập trình bằng ngôn ngữ C và bash scripts để thực thi như là Python script: ở đây có rất ít sự phụ thuộc, và tôi đam mê với những hệ thống thi hành nhanh chóng.
 
 Tôi đã nghĩ về việc làm thế nào để Git có thể phát triển, xa hơn nữa là tự mình viết một công cụ tương tự như Git, nhưng đây không phải là bài tập có tính thực tế. Khi tôi hoàn thành dự án của mình, dù sao đi nữa tôi vẫn sẽ dùng Git, với lợi thế là có thể chuyển đổi từ hệ thống cũ sang một cách nhanh chóng.
 
-Theo lẽ tự nhiên, những thứ cần thiết cho bạn và những thứ bạn mong muốn có lẽ khác nhau, và bạn có thể tốt hơn nếu ở một hệ thống khác. Dù sao đi nữa, bạn sẽ không bao giờ phải hối tiếc vì đã chọn Git.
+Theo lẽ tự nhiên, những thứ cần thiết cho bạn và những thứ bạn mong muốn có lẽ khác nhau, và bạn có thể tốt hơn nếu mình làm việc với hệ thống khác. Dù sao đi nữa, bạn sẽ không bao giờ phải hối tiếc vì đã chọn Git.
