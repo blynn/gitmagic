@@ -1,0 +1,99 @@
+= Git Magic =
+Ben Lynn
+Agosto 2007
+
+== Prefazione ==
+
+http://git.or.cz/[Git] è il coltellino svizzero per il controllo di
+versioni. Uno strumento per la gestione di revisioni affidabile,
+versatile e multifunzionale, ma la cui flessibilità ne rende difficile
+l'apprendimento, e ancora di più la padronanza.
+
+Come osserva Arthur C. Clarke, qualunque tecnologia sufficientemente
+avanzata è indistinguibile dalla magia. Questo è un buon atteggiamento
+con cui approcciare Git: i novizi possono ignorare i suoi meccanismi
+interni e utilizzare Git come fosse una bacchetta magica con cui
+meravigliare gli amici e far infuriare gli avversari.
+
+Invece di dilungarci nei dettagli, vedremo quali istruzioni vanno usate
+per ottenere risultati specifici. In seguito, grazie all'uso ripetuto,
+capiremo il funzionamento di ognuno dei trucchi, e come possono essere
+combinati per sopperire alle nostre necessità.
+
+.Traduzioni
+
+ - link:/\~blynn/gitmagic/intl/zh_cn/[Cinese semplificato]: JunJie, Meng
+   e JiangWei. Conversione in link:/~blynn/gitmagic/intl/zh_tw/[Cinese
+   traditional] tramite +cconv -f UTF8-CN -t UTF8-TW+.
+ - link:/~blynn/gitmagic/intl/fr/[Francese]: Alexandre Garel, Paul
+   Gaborit, e Nicolas Deram. Anche scaricabile da http://tutoriels.itaapy.com/[itaapy].
+ - link:/~blynn/gitmagic/intl/de/[Tedesco]: Benjamin Bellee e Armin
+   Stebich; anche scaricabile dal http://gitmagic.lordofbikes.de/[sito
+   web di Armin].
+ - http://www.slideshare.net/slide_user/magia-git[Portoghese]: Leonardo
+   Siqueira Rodrigues
+   [http://www.slideshare.net/slide_user/magia-git-verso-odt[formato ODT]].
+ - link:/~blynn/gitmagic/intl/ru/[Russo]: Tikhon Tarnavsky, Mikhail
+   Dymskov, e altri.
+ - link:/~blynn/gitmagic/intl/es/[Spagnolo]: Rodrigo Toledo e Ariset Llerena Tapia.
+ - link:/~blynn/gitmagic/intl/uk/[Ucraino]: Volodymyr Bodenchuk.
+ - link:/~blynn/gitmagic/intl/vi/[Vietnamita]: Trần Ngọc Quân; anche
+   scaribabile dal http://vnwildman.users.sourceforge.net/gitmagic/[suo
+   sito web].
+
+.Altre edizioni
+
+ - link:book.html[Pagina web individuale]&#160;: simplice documento
+   HTML, senza CSS ;
+ - link:book.pdf[File PDF]: versione stampabile.
+ - http://packages.debian.org/gitmagic[Pacchetto Debian],
+   http:://packages.ubuntu.com/gitmagic[pacchetto Ubuntu]: ottenete
+   rapidamente una copia locale. Pratico quando
+   http://csdcf.stanford.edu/status/[questo server] non è raggiungibile.
+ - http://www.amazon.com/Git-Magic-Ben-Lynn/dp/1451523343/[Libro vero e
+   proprio [Amazon.com]]: 64 pagine, 15.24cm x 22.86cm, bianco e nero,
+   in inglese. Pratico in caso di mancanza di elettricità.
+
+=== Grazie! ===
+
+Voglio ringraziare le persone che hanno prestato il loro lavoro per
+tradurre queste pagine. Sono grato di poter raggiungere un numero più
+ampio di lettori grazie agli sforzi delle persone appena citate.
+
+Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael
+Budde, Richard Albury, Tarmigan, Derek Mahar, Frode Aannevik, Keith Rarick,
+Andy Somerville, Ralf Recker, Øyvind A. Holm, Miklos Vajna, Sébastien Hinderer,
+Thomas Miedema, Joe Malin e Tyler Breisacher hanno contribuito con le
+loro correzioni e miglioramenti.
+
+François Marier mantiene il pacchetto Debian, creato originariamente da
+Daniel Baumarr.
+
+John Hinnegan ha acquistato il dominio http://www.gitmagic.com/[gitmagic.com].
+
+Sono anche grato a molti altri per i loro sostegno e incoraggiamenti.
+Sono tentato di menzionarvi qui, ma rischierei di alzare eccessivamente
+le vostre aspettative.
+
+Se per errore ho dimenticato di menzionare qualcuno, fatemelo per favore
+sapere, o mandatemi semplicemente una patch!
+
+=== Licenza ===
+
+Questo manuale è pubblicato sotto la licenza http://www.gnu.org/licenses/gpl-3.0.html[GNU
+General Public License version 3]. Naturalmente il codice sorgente è
+disponibile come deposito Git, e si può ottenere digitando: 
+
+ $ git clone git://repo.or.cz/gitmagic.git  # Crea la cartella
+ "gitmagic"
+
+oppure da altri server:
+
+ $ git clone git://github.com/blynn/gitmagic.git
+ $ git clone git://gitorious.org/gitmagic/mainline.git
+ $ git clone https://code.google.com/p/gitmagic/
+ $ git clone git://git.assembla.com/gitmagic.git
+ $ git clone git@bitbucket.org:blynn/gitmagic.git
+    
+GitHub, Assembla, e Bitbucket supportano deposito privati, gli ultimi
+due sono gratuiti.
