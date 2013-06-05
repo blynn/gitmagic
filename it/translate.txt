@@ -1,0 +1,38 @@
+== Appendice B: Tradurre Questo Manuale  ==
+
+La mia raccomandazione è di rispettare la seguente procedura per la
+traduzione di questo manuale, in maniera da poter rapidamente generare
+le versioni HTML e PDF del documento con gli script forniti, e così che
+tutte le traduzioni siano incorporate nello stesso repository.
+
+Fate un clone della sorgente, poi create una directory il cui nome
+corrisponda http://www.iana.org/assignments/language-subtag-registry[al
+codice IETF della lingua desiderata] : vedere
+http://www.w3.org/International/articles/language-tags/Overview.en.php[l'articolo
+del W3C concernente internationalizzazione]. Per esempio la versione in
+inglese è nella directory "en", quella in giapponese è in "ja". Nella
+nuova directory traducete i file +txt+ della directory originari "en".
+
+Per esempio, per creare questa guida in
+http://it.wikipedia.org/wiki/Lingua_klingon[Klingon], eseguite:
+
+ $ git clone git://repo.or.cz/gitmagic.git
+ $ cd gitmagic
+ $ mkdir tlh  # "tlh" è il codice IETF della lingua Klingon.
+ $ cd tlh
+ $ cp ../en/intro.txt .
+ $ edit intro.txt  # Tradurre il file.
+
+e così di seguito per tutti i file.
+
+Modificate il Makefile aggiungendo il codice della lingua alla
+variabile `TRANSLATIONS`. In questo modo potete rivedere il vostro
+lavoro  in modo incrementale:
+
+ $ make tlh
+ $ firefox book-tlh/index.html
+
+Fate spesso dei commit per le vostre modifiche e avvertitemi non appena
+sono state implementate. Github possiede un'interfaccia che facilita il
+lavoro collaborativo: fate un fork del progetto "gitmagic", fate un
+push delle vostre modifiche, e chiedetemi di incorporarle.

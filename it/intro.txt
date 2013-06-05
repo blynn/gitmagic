@@ -1,0 +1,157 @@
+== Introduzione ==
+
+Farò uso di un'analogia per introdurre il controllo di versione. Fate
+riferimento alla http://it.wikipedia.org/wiki/Controllo_versione[pagina
+wikipedia sul controllo di versione] per una spiegazione più sobria.
+
+=== Il lavoro è gioco ===
+
+Ho giocato ai videogiochi quasi tutta la mia vita. Per contro ho
+iniziato ad utilizzare sistemi di controllo di versione solo da adulto.
+Sospetto di non essere il solo, e il paragone tra i due può rendere
+alcuni concetti più facile da spiegare e comprendere.
+
+Pensate alla scrittura di codice o documenti come ad un videogioco.
+Non appena avete fatto progressi sostanziali, è desiderabile salvare il
+vostro lavoro. Per fare ciò cliccate sul pulsante 'Salva' del vostro
+fidato editor.
+
+Ma questo sovrascriverà la versione precedente del documento. È come
+quei vecchi videogiochi in cui si poteva salvare la partita, ma senza
+poter ritornare a uno stato precedente del gioco. Il che era un peccato,
+perché il vostro salvataggio precedente avrebbe potuto trovarsi ad un punto
+particolarmente divertente del gioco che avreste magari voluto
+rivisitare in futuro. O ancora peggio se il vostro salvataggio più
+recente si fosse rivelato essere uno stato da cui è impossibile vincere
+il gioco, obbligandovi a ricominciare la partita da zero. 
+
+=== Controllo di versione ===
+
+Quando modificate un documento di cui volete conservare le vecchie
+versioni, potete 'Salvare come...' sotto un nome di file diverso, oppure
+copiare il file in un'altra cartella prima di salvarlo. Potreste anche
+comprimere  queste copie del file, se volete risparmiare spazio su
+disco. Questa è una forma primitiva e inefficiente forma di controllo di
+versione. I videogiochi hanno migliorato questo punto molto tempo fa,
+provvedendo in molti casi multiple possibilità di salvataggio
+automaticamente ordinate temporalmente.
+
+Rendiamo il problema un po' più complicato. Immaginate di avere un
+un gruppo di files che vanno insieme, come il codice sorgente di un
+progetto o i files per un sito web. In questo caso se volete conservare
+una vecchia versione dovete archiviare una directory intera. Conservare
+diverse versioni a mano non è scomodo e diventa rapidamente
+impraticabile.
+
+Nel caso di alcuni videogiochi, il salvataggio di una partita consiste
+effettivamente in una directory contenente diversi files. Questi giochi
+nascondono questo dettaglio al giocatore e presentano una comoda
+interfaccia per gestire le diverse versioni di tale cartella.
+
+I sistemi di controllo di versione non sono niente più di questo. Hanno
+tutti una comoda interfaccia per gestire una directory piena di files.
+Potete salvare lo stato della directory di tanto in tanto, e più tardi
+potete caricare ognuno degli stati precedentemente salvati. A differenza
+della maggioranza di videogiochi, conservano in maniere intelligente lo
+spazio. Tipicamente, pochi files alla volta cambiano da una versione
+alla successiva. Si può quindi risparmiare spazio salvando le differenze
+invece di fare nuove copie complete.
+
+=== Controllo distribuito ===
+
+Immaginate ora un videogioco difficilissimo. Così difficile da terminare
+che molti esperti giocatori da tutto il mondo decidono di collaborare e
+condividere le loro partite salvate per cercare di venirne a capo. 
+Gli http://it.wikipedia.org/wiki/Speedrun[Speedrun] sono un
+esempio concreto di questa pratica: dei giocatori si specializzano
+ognuno a giocare un livello dello stesso gioco nel miglior modo
+possibile, e collaborano così per ottenere dei risultati incredibili.
+
+Come costruireste un sistema che permetta loro di accedere facilmente ai
+salvataggi degli altri? E che permetta di caricarne di nuovi?
+
+Nel passato ogni progetto usava un sistema di controllo di versione
+centralizzato. Un server centrale unico da qualche parte manteneva tutte le partite
+salvate. Ogni giocatore conservava al massimo qualche salvataggio sul
+proprio computer. Quando un giocatore aveva intenzione di avanzare nel
+gioco, scaricava il salvataggio più recente dal server centrale, giocava
+per un po', salvava e ricaricava sul server i progressi ottenuti così
+che ognuno potesse usufruirne.
+
+Ma che cosa succedeva se un giocatore per qualche ragione voleva
+accedere ad una vecchia partita salvata? Forse perché la versione più
+attuale si trovava in uno stato da cui non era più possibile vincere il
+gioco perché qualcuno aveva dimenticato di raccogliere un oggetto al
+terzo livello, e ora era necessario ritrovare l'ultima partita salvata
+in un momento in cui la partita è ancora completabile. O magari si
+desiderava paragonare due partite salvate precedentemente per vedere
+quanto progresso avesse fatto un giocatore particolare.
+
+Potrebbero esserci molte ragioni per voler recuperare una vecchia
+versione, ma il risultato è sempre lo stesso: era necessario chiederla
+al server centrale. E più partite salvate erano necessarie, più dati era
+necessario trasmettere.
+
+La nuova generazione di sistemi di controllo di versione di cui Git fa
+parte sono detti sistemi distribuiti e possono essere pensati come una
+generalizzazione dei sistemi centralizzati. Quando i giocatori scaricano
+dal server centrale ricevono tutti i giochi salvati, non solo l'ultima.
+È come se fossero un
+http://it.wikipedia.org/wiki/Mirror_(informatica)[mirror] del server
+centrale.
+
+Questa operazione iniziale di clonaggio può essere costosa, soprattutto
+se c'è una lunga storia di salvataggi precedenti. Ma a lungo termine è
+una strategia che ripaga. Un beneficio immediato è che, quando per
+qualche ragione si desidera un salvataggio precedente, non è necessario
+comunicare con il server centrale.
+
+=== Una sciocca superstizione  ===
+
+Una credenza popolare vuole che i sistemi distribuiti non siano adatti a
+progetti che richiedono un deposito centrale ufficiale. Niente potrebbe
+essere più lontano dalla verità. Fotografare qualcuno non ne ruba
+l'anima. Similarmente, clonare un deposito principale non ne diminuisce
+l'importanza.
+
+Una buona prima approssimazione è che tutto ciò che può fare un sistema
+di controllo di versione centralizzato può essere fatto meglio da un
+sistema distribuito ben concepito. Le risorse di rete sono semplicemente
+più costose che le risorse locali. Nonostante vedremo più in là che ci
+sono alcuni svantaggi associati agli approcci distribuiti, ci sono meno
+probabilità di fare paragoni sbagliate con questa approssimazione.
+
+Un piccolo progetto potrebbe non necessitare di tutte le funzionalità
+offerte da un tale sistema, ma il fatto di usare un sistema
+difficilmente estensibile per progetti piccoli è come usare il sistema
+di numerazione romano per calcoli con numeri piccoli.
+
+In aggiunta il vostro progetto potrebbe crescere al di là delle vostre
+previsioni iniziali. Usare Git dall'inizio è come avere sempre con se un
+coltellino svizzero, anche se lo utilizzate primariamente per aprire
+delle bottiglie. Quel giorno in cui avrete disperatamente bisogno un
+cacciavite sarete felici di avere più di un semplice apribottiglie.
+
+=== Merge di conflitti ===
+
+Per questo argomento la nostra analogia basata sui videogiochi inizia ad
+essere tirata per i capelli. Ritorniamo quindi invece al caso della
+formattazione di un documento.
+
+Immaginiamo che Alice inserisce una linea di codice all'inizio di un
+file, e Bob ne aggiunge una alla fine della propria copia. Entrambi
+caricano le loro modifiche nel deposito. La maggior parte dei sistemi
+decideranno una linea d'azione ragionevole: accettare e fondere (merge)
+entrambe le modifiche, così che sia le modifiche di Alice e Bob sono
+applicate.
+
+Ma supponiamo ora che Alice e Bob hanno fatto distinte modifiche alla
+stessa linea del documento. È impossibile procedere senza intervento
+umano. La seconda persona a caricare il file viene informata di un
+_conflitto di merge_, e bisogna scegliere una modifica piuttosto che un
+altra, oppure riscrivere interamente la riga.
+
+Situazioni più complesse possono presentarsi. Sistemi di controllo di
+versioni si possono occupare autonomamente dei casi più semplici, et
+lasciano i casi difficili all'intervento umano. Generalmente, questo
+comportamento è configurabile.

@@ -1,0 +1,269 @@
+== Trucchi di base  ==
+
+Piuttosto che immergerci nel mare di comandi di Git, bagnamoci un po' i
+piedi con i seguenti esempi elementari. Nonostance la loro semplicità,
+ognuno di loro è utile. In effetti, durante i miei mesi iniziali
+d'utilizzazione di Git, non mi sono mai avventurato al di là di del
+materiale in questo capitolo.
+
+=== Salvare lo stato corrente ===
+
+Siete sul punto di fare qualcosa di drastico? Prima di proseguire,
+catturate lo stato di tutti i files nella directory corrente:
+
+ $ git init
+ $ git add .
+ $ git commit -m "Il mio primo backup"
+
+Qualora le cose dovessero andare per il peggio, potrete sempre
+ripristinare la versione salvatae:
+
+ $ git reset --hard
+
+Per salvare un nuovo state:
+
+ $ git commit -a -m "Un altro backup"
+
+=== Aggiungere, rimuovere e rinominare files ===
+
+Le istruzioni che abbiamo appena visto tengono traccia solo dei files
+ che erano presenti nel momento dell'esecuzione di *git add*. Ma se
+ aggiungete nuovi files o sottocartelle, dovrete dirlo a Git:
+
+ $ git add readme.txt Documentation
+
+Analogamente se volete che Git ignori alcuni files:
+
+ $ git rm kludge.h obsolete.c
+ $ git rm -r incriminating/evidence/
+
+Git rimuoverà questi files per voi, se non l'avete ancora fatto.
+
+Un file può essere rinominato rimuovendo il vecchio nome e aggiungendo
+il nuovo nome. È anche possibile usare la scorciatoia *git mv* che segue
+la stessa sintassi del comando *mv*. Ad esempio:
+
+ $ git mv bug.c feature.c
+
+=== Annullare/Ripristino avanzati ===
+
+A volte può capitare che vogliate solamente ritornare indietro e
+dimenticare le modifiche effettuate dopo un certo punto, perché sono
+tutte sbagliate. In quel caso:
+
+ $ git log
+
+vi nostra una lista dei commits più recenti, accompagnati dal loro
+codice SHA1:
+
+----------------------------------
+commit 766f9881690d240ba334153047649b8b8f11c664
+Author: Bob <bob@example.com>
+Date: Tue Mar 14 01:59:26 2000 -0800
+
+    Sostituzione di prinf() con write()
+
+commit 82f5ea346a2e651544956a8653c0f58dc151275c
+Author: Alice <alice@example.com>
+Date:   Thu Jan 1 00:00:00 1970 +0000
+
+    Commit iniziale
+----------------------------------
+
+I primi caratteri del codice SHA1 sono sufficienti per specificare un
+commit; alternativamente copiate e incollate l'intero codice SHA1.
+Digitate:
+
+ $ git reset --hard 766f
+
+per reinstaurare lo stato corrspondente al commit corrente e
+permanetemente cancellare i commits più recenti.
+
+Altre volte potrebbe capitarvi di voler fare solo un breve salto in uno
+stato precedente. In questo caso eseguite:
+
+ $ git checkout 82f5
+
+Questo vi riporta indietro nel tempo, preservando i commits più recenti.
+Bisogna però sapere che, come in ogni viaggio nel tempo in un film di
+fantascienza, se ora modificate e sottomettete un commit vi ritroverete
+in una realtà alternativa, perché avrete fatto delle azioni differenti
+rispetto alla realtà originaria.
+
+Questa realtà parallela viene chiamata 'ramificazione' o 'branch', et
+<<branch,vi dirò di più in proposito in seguito>>. Per ora è abbastanza
+ricordare che
+
+ $ git checkout master
+
+vi riporta al presente. In oltre, per evitare che Git si lamenti,
+ricordatevi di fare un commit o un reset delle vostre modifiche prima di
+fare un checkout.
+
+Per riprendere l'analogia con i videogiochi digitate:
+
+- *`git reset --hard`* : carica un vecchio salvataggio e cancella
+  tutte le partite salvate più recenti di quella appena caricata.
+
+- *`git checkout`* : carica una vecchia partita, ma se ci giocate, lo
+  stato della partita sarà diverso da quello dei salvataggi successivi
+  che avete fato inizialmente. Da ora in poi ogni volta che salvate una
+  partita finirete in un branch separata che rappresenta la realtà
+  parallela in cui siete entrati. <<branch,Ci occuperemo di questo più
+  tardi>>.
+
+
+Potete scegliere di ripristinare files e sottocartelle particolari
+aggiungendoli alla fine del seguente comando:
+
+ $ git checkout 82f5 un.file un-altro.file
+
+Fate però attenzione: questa forma di *checkout* può sovrascrivere dei
+files senza avvertimenti. Per evitare incidenti, fate un commit prima di
+eseguire un comando di checkout, specialmente se siete alle prime armi
+con Git. In generale, ogni volta che non siete sicuri delle conseguenze
+di comando, che sia di Git o no, eseguite prima *git commit -a*.
+
+Non vi piace copiare e incollare codice hash? Allora utilizzate:
+
+ $ git checkout :/"Il mio primo b"
+
+per saltare direttamente al commit che inizia con quel messaggio. Potete
+anche chiedere, ad esempio, il quintultimo stato salvato:
+
+ $ git checkout master~5
+
+=== Annullare (revert) ===
+
+In una corte di giustizia, certi avvenimenti possono essere stralciati
+dal processo verbale. Analogamente, potete selezionare degli specifici
+commit da annullare.
+
+ $ git commit -a
+ $ git revert 1b6d
+
+annulla solo l'ultimo commit con il dato codice hash. Il revert viene
+registrato come un nuovo commit, fatto che potrete verificare eseguendo
+un *git log*.
+
+=== Generare un diario delle modifiche (changelog) ===
+
+Certi progetti richiedono un
+http://it.wikipedia.org/wiki/Changelog[changelog].  Createlo digitando:
+
+ $ git log > ChangeLog
+
+=== Scaricare dei files ===
+
+Fate una copia di un progetto gestito da Git digitando:
+
+ $ git clone git://server/percorso/verso/files
+
+Ad esempio, per ottenere tutti i files che ho usato per creare questo
+sito:
+
+ $ git clone git://git.or.cz/gitmagic.git
+
+Avremo molto da dire a proposito del comando *clone* tra poco.
+
+=== L'ultima versione ===
+
+Se avete già scaricato una copia di un progetto usando *git clone*,
+potete aggiornarla all'ultima versione con:
+
+ $ git pull
+
+=== Pubblicazione istantanea ===
+
+Immaginate di aver scritto uno script che volete condividere con altri.
+Potreste semplicemente dire loro di scaricarlo dal vostro computer, ma
+le fanno mentre state migliorando lo script o sperimentando con delle
+modifiche, potrebbero finire nei guai. Naturalmente, questo tipo di
+situazioni sono la ragione per cui esistono i cicli di rilascio. Gli
+sviluppatori possono lavorare frequentemente ad un progetto, ma
+rilasciano il codice solo quando hanno l'impressione che sia
+presentabile. 
+
+Per fare questo con Git, nella cartella che contiene lo script eseguite:
+
+ $ git init
+ $ git add .
+ $ git commit -m "Prima versione"
+
+In seguito dite agli utenti di eseguire:
+
+ $ git clone il.vostro.computer:/percorso/verso/lo/script
+
+per scaricare il vostro script. Questo assume che tutti abbiamo accesso
+ssh al vostro computer. Se non fosse il caso, esguite *git daemon* e
+dite ai vostri utenti di eseguire invece:
+
+ $ git clone git://il.vostro.computer/percorso/verso/lo/script
+
+A partire da questo momento, ogni volta che il vostro script è pronto
+per essere rilasciato, eseguite:
+
+ $ git commit -a -m "Nuova versione"
+
+e i vostri utenti potranno aggiornare la loro versione andando
+nella cartella che contiene lo script e digitando:
+
+ $ git pull
+
+I vostri utenti non si ritroveranno mai più con una versione del vostro
+script che non volete che vedano.
+
+=== Che cosa ho fatto? ===
+
+Ritroverete le modifiche fatte dall'ultimo commit con:
+ 
+ $ git diff
+
+Oppure quelle a partire da ieri con:
+
+ $ git diff "@{yesterday}"
+
+O tra una versione specifica e due versioni fa:
+
+ $ git diff 1b6d "master~2"
+
+In ogni caso il risultato è una patch che può essere applicata con *git
+apply*.
+Potete anche provare:
+
+ $ git whatchanged --since="2 weeks ago"
+
+Spesso esamino invece la storia dei commits con
+http://sourceforge.net/projects/qgit[qgit], per via della sua
+sfolgorante interfaccia, oppure http://jonas.nitro.dk/tig/[tig],
+un'interfaccia in modalità testo che funziona bene anche con le
+connessioni più lente. Alternativamente, installate un server web,
+lanciate *git instaweb* e lanciate il vostro browser.
+
+
+=== Esercizio ===
+
+
+Siano A, B, C, D quattro commits successivi, dove B è identico a A, con
+l'eccezione che alcuni files sono stati rimossi. Vogliamo rimettere i
+files in D. Come possiamo fare?
+
+Ci sono almeno tre soluzioni. Assumiamo che siao in D:
+
+  1. La differenza tra A e B sono i files rimossi. Possiamo creare una
+  patch che rappresenti la differenza e applicarla:
+
+   $ git diff B A | git apply
+
+  2. Visto che i files in questioni sono presenti in A, possiamo
+  recuperarli:
+
+   $ git checkout A foo.c bar.h
+
+  3. Possiamo anche pensare al passo da A a B come ad una modifica che
+  vogliamo annullare:
+
+   $ git revert B
+
+Quel è la scelta migliore? Quella che preferite! È facile ottenere
+quello che volete con Git, e spesso ci sono diversi modi di ottenerlo.
