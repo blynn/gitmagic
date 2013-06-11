@@ -1,0 +1,309 @@
+== Cloniamo ==
+
+In vecchi sistemi di controllo di versione l'operazione standard per
+ottenere dei files era il checkout. Ottenete così un insieme di files
+corrispondenti a un particolare stato precedentemente salvato.
+
+In Git e altri sistemi distribuiti di controllo versione, l'operazione
+standard è il clonaggio. Per ottenere dei files si crea un 'clone' di
+tutto il deposito. In altre parole, diventate praticamente un
+http://it.wikipedia.org/wiki/Mirror_(informatica)[mirror] del server
+centrale. Tutto ciò che può fare il deposito centrale, potete farlo
+anche voi.
+
+=== Sincronizzazione tra computers ===
+
+Posso tollerare l'idea di creare degli archivi *tar* o di utilizzare
+*rsync* per backup di base. Ma a volte lavoro sul mio laptop, altre
+volte sul mio desktop, e può darsi che nel frattempo le due macchine non
+si siano parlate.
+
+Inizializzate un deposito Git e fate un *commt* dei vostri files su una
+macchina. Poi sull'altra eseguite:
+
+ $ git clone altro.computer:/percorso/verso/il/file
+
+per creare una seconda copia dei files in un deposito Git. Da adesso in
+avanti,
+
+ $ git commit -a
+ $ git pull altro.computer:/percorso/verso/il/file HEAD
+
+trasferirà lo stato dei files sull'altro computer aggiornando quello su
+cui state lavorando. Se avete recentemente fatto delle modifiche
+conflittuali dello stesso file, Git ve lo segnalerà e dovrete ripetere
+nuovamente il commit, dopo che avrete risolto il conflitto.
+
+=== Controllo classico di files sorgente ===
+
+Inizializzate il deposito Git dei vostri files:
+
+ $ git init
+ $ git add .
+ $ git commit -m "Commit iniziale"
+
+Sul server central inizializzate un 'deposito nudo' (*nudo* nella
+terminologia Git) in una cartella qualunque:
+
+ $ mkdir proj.git
+ $ cd proj.git
+ $ git init --bare
+ $ touch proj.git/git-daemon-export-ok
+
+Se necessario, lanciate il daemon:
+
+ $ git daemon --detach  # potrebbe già essere in esecuzione
+
+Per servizi di hosting Git, seguite le istruzioni per il setup del
+deposito Git che inizialmente sarà vuoto. Tipicamente bisognerà riempire
+un formulario in una pagina web.
+
+Trasferite il vostro progetto sul server centrale con:
+
+ $ git push git://server.centrale/percorso/fino/a/proj.git HEAD
+
+Per ottenere i files surgente, uno sviluppatore deve eseguire: 
+
+ $ git clone git://server.centrale/percorso/fino/a/proj.git
+
+Dopo aver fatto delle modifiche, lo sviluppatore le salva in locale:
+
+ $ git commit -a
+
+Per aggiornare alla versione corrente:
+
+ $ git pull
+
+Tutti i conflitti nel momento del merge devono essere risolti e
+validati:
+
+ $ git commit -a
+
+Per inviare le modifiche locali al deposito centrale:
+
+ $ git push
+
+Se il server principale ha nuove modifiche introdotte da altri
+sviluppatori, il push fallisce et lo sviluppatore deve aggiornarsi
+all'ultima versione, risolvere eventuali conflitti , e provare di
+nuovo.
+
+Perché i comandi pull e pushj precedenti funzionino bisogna avere
+accesso SSH. Comunque, chiunque può vedere il codice sorgente digitando:
+ 
+ $ git clone git://server.centrale/percorso/fino/a/proj.git
+
+Il protocollo nativo git è come l'HTTP: non c'è nessuna autenticazione,
+così che tutti possono ottenere il progetto. Quindi, per default, push è
+proibito con protocollo git.
+
+=== File sorgente segreti ===
+
+Per un progetto chiuso, omettete il comando touch, e assicuratevi di mai
+creare un file chiamato `git-daemon-export-ok`. Il deposito in questo
+caso non potrà più essere ottenuto con il protocollo git; solo chi ha
+accesso SSH potrà vederlo. Se tutti i vostri deposito sono chiusi,
+lanciare il daemon git non è necessario perché la comunicazione avviene
+via SSH.
+
+=== Depositi nudi ===
+
+Un deposito nudo (*bare repository*) si chiama così perché non possiede
+una cartella di lavoro; contiene solo i files che sono solitamente
+nascosti nella sottocartella `.git`. In altre parole, mantiene
+unicamente la storia del progetto, e e non conserva nessuna versione.
+
+Un deposito nudo gioca un ruolo simile a quello di un server principale
+in un sistema di controllo di versione centralizzato: è dove è
+localizzato il vostro progetto. Altri sviluppatori clonano il nostro
+progetto da lì, e vi trasferiscono gli ultimi modifiche ufficiali.
+Tipicamente si trova su un server che non fa altro che distribuire dati.
+Lo sviluppo avviene nei cloni, così che il deposito principale non ha
+bisogno di una cartella di lavoro.
+
+Molti comandi git non funzionano per depositi nudi, a meno che la
+variabile globale `GIT_DIR` non viene definita con il percorso al
+deposito, o si utilizza l'opzione `--bare`.
+
+=== Push vs pull ===
+
+Perché abbiamo introdotto il comando `push`, invece di affidarci
+al più familiare comando `pull`? Prima di tutto il comando `pull` non
+funziona con depositi nudi: in questo caso bisogna invece usare `fetch`, 
+un comando che discuteremo più tardi. Ma anche se avessimo un deposito
+normale sul server centrale, usare `pull` sarebbe sarebbe scomodo.
+Bisognerebbe per prima cosa connettersi al server e poi dare come
+argomento a `pull` l'indirizzo della macchina dalla quale vogliamo
+ottenere le modifiche. I firewalls potrebbero interferire nel processo,
+e cosa faremmo se non avessimo nemmeno accesso shell al server?
+
+In ogni caso, questo caso a parte, vi scoraggiamo l'uso di `push` per
+via della confusione che potrebbe generare quando la destinazione ha una
+cartella di lavoro.
+
+In conclusione, mentre state imparando ad usare Git, usate `push` solo
+se la destinazione è un deposito nudo; altrimenti usate `pull`.
+
+=== Fare il forking di un progetto ===
+
+Stufi del modo in cui un progetto è amministrato? Pensate che potreste
+fare un lavoro migliore? In questo caso, dal vostro server eseguite:
+
+ $ git clone git://server.principale/percorso/verso/i/files
+
+Informate ora tutti del vostro fork del progetto sul vostro server.
+
+In seguito potete includere le modifiche provenenti dal progetto
+originale con:
+
+ $ git pull
+
+=== Il sistema definitivo di salvataggio ===
+
+Volete degli archivi ridondanti e geograficamente distribuiti? Se il
+vostro progetto ha moti sviluppatori non c'è bisogno di fare niente!
+Ogni clone del vostro codice è effettivamente un backup. Non solo dello
+stato corrente, ma dell'intera storia del vostro progetto. Grazie al
+hashing crittografico, se qualcuno dovesse avere un close corrotto, 
+sarà individuato non appena si connetterà agli altri.
+
+Se il vostro progetto non è molto popolare, trovate il più alto numero
+possibile di server che possano ospitare dei cloni.
+
+Il vero paranoico dovrebbe anche sempre annotarsi l'ultimo codice SHA1
+dell'HEAD di 20 bytes in un posto sicuro. Deve essere sicuro, non
+privato. Ad esempio, pubblicarlo in un giornale funzionerebbe bene,
+visto che sarebbe difficile realizzare un attacco modificando tutte le
+copie del giornale.
+
+===  Multi-tasking alla velocità della luce ===
+
+Immaginiamo di voler lavorare simultaneamente su diverse funzionalità.
+In questo caso fate un commit del progetto e eseguite:
+
+ $ git clone . /una/nuova/cartella
+
+Grazie ai http://it.wikipedia.org/wiki/Collegamento_fisico[collegamenti
+fisici], i cloni locali richiedono meno tempo e spazio che i backup
+usuali.
+
+Potete ora lavorare simultaneamente su due funzionalità
+indipendentemente. Ad esempio, potete modificare un clone mentre l'altro
+sta compilando. Ad ogni modo, potete validare con 'commit' le vostre
+modifiche e importare con `pull` i cambiamenti dagli altri cloni:
+
+ $ git pull /il/mio/altro/clone HEAD
+
+=== Controllo di versione da battaglia ===
+
+State lavorando ad un progetto che usa qualche altro sistema di
+controllo di versione, e vi manca disperatamente Git? In tal caso,
+inizializzate un deposito Git nella vostra cartella di lavoro:
+
+ $ git init
+ $ git add .
+ $ git commit -m "Commit iniziale"
+
+poi clonatelo:
+
+ $ git clone . /una/nuva/cartella
+
+Ora navigate alla nuova cartella e lavorate da qua, utilizzando Git come
+volete. Di tanto in tanto, quando volete sincronizzarvi con gli altri,
+recatevi nella cartella originale, sincronizzate utilizzando l'altro
+sistema di controllo di gestione, e poi digitate:
+
+ $ git add .
+ $ git commit -m "Sincronizzazione con gli altri"
+
+Andate quindi nella nuova cartella e lanciate:
+
+ $ git commit -a -m "Descrizione delle mie modifiche"
+ $ git pull
+
+La procedura per condividere le vostre modifiche con gli altri dipende
+d'altro canto dall'altro sistema di controllo di versione. La nuova
+cartella contiene i files con i vostri cambiamenti. Lanciate qualsiasi
+comando dell'altro sistema di controllo di gestione sia necessario per
+inviarli al deposito centrale.
+
+Subversion, che è forse il migliore sistema di gestione di versione
+centralizzato, è utilizzato da innumerevoli progetti. Il comando *git
+svn* automatizza la procedura precedente per i depositi Subversion, e
+può anche essere usato per esportare un progetto Git in un deposito
+Subversion.
+
+=== Mercurial ===
+
+Mercurial è un sistema di controllo di versione che può funzionare
+in tandem con Git in modo quasi trasparente. Con il plugin `hg-git` un
+utente di Mercurial può, senza svantaggi, inviare a (push) e ottenere
+(pull) da un reposito Git.
+
+Scaricate il plugin `hg-git` con Git:
+
+ $ git clone git://github.com/schacon/hg-git.git
+
+o Mercurial:
+
+ $ hg clone http://bitbucket.org/durin42/hg-git/
+
+Sfortunatamente, non sembra ci sia un plugin analogo per Git. Per questa
+ragione, mi sembra preferibile utilizzare Git piuttosto che Mercurial
+per i depositi principali. Nel caso di un progetto Mercurial di solito
+un volontario mantiene in parallelo un deposito Git che accomoda utenti
+Git, mentre, grazie al plugin `hg-git`, un progetto Git accomoda
+automaticamente utenti Mercurial.
+
+Nonostante il plugin può convertire un deposito Mercurial in uno Git
+trasferendolo in un deposito vuoto, questo è più facile con lo script
+`hg-fast-export.sh`, ottenibile da:
+
+ $ git clone git://repo.or.cz/fast-export.git
+
+Per fare una conversione, in una nuovo cartella eseguite:
+
+ $ git init
+ $ hg-fast-export.sh -r /depot/hg
+
+dopo aver aggiunto lo script al vostro `$PATH`.
+
+=== Bazaar ===
+
+Menzioniamo brevemente Bazaar perché è il sistema di controllo di
+versione distribuito gratuito più popolare dopo Git e Mercurial. 
+
+Bazaar ha il vantaggio del senno di poi, visto che è relativamente
+giovane; i suoi disegnatori hanno potuto imparare dagli errori commessi
+nel passato e evitare gli scogli storici. Inoltre, i suoi sviluppatori
+sono attenti a questioni come la portabilità e l'interoperabilità con
+altri sistemi di controllo di versione. 
+
+Un plugin chiamato `bzr-git` permette agli utilizzatori di Bazaar di
+lavorare con depositi Git in una certa misura. Il programma `tailor`
+converte depositi Bazaar in depositi Git, e può farlo in maniera
+incrementale, mentre `bzr-fast-export` è fatto per le conversioni
+uniche.
+
+=== Perché utilizzo Git ===
+
+Ho originariamente scelto Git perché avevo sentito che era in grado di
+gestire l'inimmaginabilmente ingestibile sorgente del kernel Linux. Non
+ho mai sentito la necessità di cambiare. Git mi ha servito un servizio
+impeccabile, e non sono mai stato colto alla sprovvista dai suoi
+limiti. Siccome utilizzo primariamente Linux, i problemi che appaiono
+sulle altre piattaforme non mi concernono. 
+
+In più preferisco programmi in C e scripts in bash rispetto agli
+eseguibili tipo gli scripts Python: ci sono meno dipendenze, e sono
+dipendente all'alta velocità di esecuzione. 
+
+Ho riflettuto a come migliorare Git, arrivando fino al punto di scrivere
+la mia propria versione, ma solo come un esercizio accademico. Anche se
+avessi completato il mio progetto, sarei rimasto a Git comunque, visto
+che i vantaggi sarebbero stati minimi per giustificare l'utilizzazione
+di un sistema solitario. 
+
+Naturalmente, i vostri bisogni e richieste probabilmente differiscono
+dai miei, e quindi potreste trovarvi meglio con un altro sistema.
+Nonostante ciò, non potete sbagliarvi scegliendo Git.
