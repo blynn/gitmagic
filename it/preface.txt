@@ -24,12 +24,13 @@ combinati per sopperire alle nostre necessità.
 
  - link:/\~blynn/gitmagic/intl/zh_cn/[Cinese semplificato]: JunJie, Meng
    e JiangWei. Conversione in link:/~blynn/gitmagic/intl/zh_tw/[Cinese
-   traditional] tramite +cconv -f UTF8-CN -t UTF8-TW+.
+   tradizionale] tramite +cconv -f UTF7-CN -t UTF8-TW+.
  - link:/~blynn/gitmagic/intl/fr/[Francese]: Alexandre Garel, Paul
    Gaborit, e Nicolas Deram. Anche scaricabile da http://tutoriels.itaapy.com/[itaapy].
  - link:/~blynn/gitmagic/intl/de/[Tedesco]: Benjamin Bellee e Armin
    Stebich; anche scaricabile dal http://gitmagic.lordofbikes.de/[sito
    web di Armin].
+ - link:/~blynn/gitmagic/intl/it/[Italiano]: Mattia Rigotti
  - http://www.slideshare.net/slide_user/magia-git[Portoghese]: Leonardo
    Siqueira Rodrigues
    [http://www.slideshare.net/slide_user/magia-git-verso-odt[formato ODT]].
@@ -38,8 +39,9 @@ combinati per sopperire alle nostre necessità.
  - link:/~blynn/gitmagic/intl/es/[Spagnolo]: Rodrigo Toledo e Ariset Llerena Tapia.
  - link:/~blynn/gitmagic/intl/uk/[Ucraino]: Volodymyr Bodenchuk.
  - link:/~blynn/gitmagic/intl/vi/[Vietnamita]: Trần Ngọc Quân; anche
-   scaribabile dal http://vnwildman.users.sourceforge.net/gitmagic/[suo
+   scaricabile dal http://vnwildman.users.sourceforge.net/gitmagic/[suo
    sito web].
+   scaricabile dal suo sito
 
 .Altre edizioni
 
