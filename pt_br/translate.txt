@@ -1,0 +1,24 @@
+== Apendice B: Traduzindo esse guia ==
+
+Recomendo os seguintes passos para a tradução desse guia, de modo que meus scripts produzam a versão HTML e PDF, e que todas as traduções possam conviver em um mesmo repositório.
+
+Faça um clone do fonte, e então crie um diretório correspondente a tag IETF da idioma alvo: veja
+http://www.w3.org/International/articles/language-tags/Overview.en.php[o artigo da W3C sobre internacionalização]. Por exemplo, Ingles (English) é "en" e Japonês é "ja". No novo diretório, traduza os arquivos .txt a partir do subdiretorio "en".
+
+Por exemplo, para traduzir este guia para a língua http://en.wikipedia.org/wiki/Klingon_language[Klingon], você deve digitar:
+
+ $ git clone git://repo.or.cz/gitmagic.git
+ $ cd gitmagic
+ $ mkdir tlh  # "tlh" is the IETF language code for Klingon.
+ $ cd tlh
+ $ cp ../en/intro.txt .
+ $ edit intro.txt  # Translate the file.
+
+e assim por diante, para cada arquivo .txt
+
+Edite o Makefile e adicione o código do idioma na variável `TRANSLATIONS`. Você poderá então rever seu trabalho de forma incremental:
+
+ $ make tlh
+ $ firefox book-tlh/index.html
+
+Faça frequentes commits de suas alterações, e me avise quando o trabalho estiver pronto. O GitHub tem uma interface que facilita isso: faça um fork do projeto "gitmagic", faça um push de suas alterações, e então me peça para fazer um merge.

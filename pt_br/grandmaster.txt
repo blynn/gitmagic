@@ -1,0 +1,179 @@
+== Grão-Mestre Git ==
+
+Até agora, você deve ser capaz de navegar pelas páginas do *git help* e entender quase tudo. Entretanto, identificar o comando exato para resolver um dados problema pode ser tedioso. Talvez possa economizar algum tempo seu: a seguir estão algumas receitas que precisei no passado.
+
+=== Disponibilização de Código ===
+
+Para meus projetos, o Git organiza exatamente os arquivos que quero guardar e disponibilizar para os usuários. Para criar um tarball do código fonte, executo:
+
+ $ git archive --format=tar --prefix=proj-1.2.3/ HEAD
+
+=== Commit do que Mudou ===
+
+Mostrar ao Git quando adicionamos, apagamos e/ou renomeamos arquivos pode ser problemático em alguns projetos. Em vez disso, você pode digitar:
+
+ $ git add .
+ $ git add -u
+
+O Git analisará os arquivos no diretório atual e trabalhar nos detalhes, automaticamente. No lugar do segundo comando add, execute `git commit -a` se sua intenção é efetuar um commit neste momento. Veja *git help ignore* para saber como especificar os arquivos que devem ser ignorados.
+
+Você pode executar isto em apenas um passo com:
+
+ $ git ls-files -d -m -o -z | xargs -0 git update-index --add --remove
+
+As opções *-z* e *-0* previnem contra os transtornos de arquivos com caracteres estranhos no nome. Note que este comando adiciona os arquivos ignorados. Logo, você pode querer usar as opções `-x` ou `-X`.
+
+=== Meu Commit é muito Grande! ===
+
+Você esqueceu de fazer commit por um muito tempo? Ficou codificando furiosamente e esqueceu do controle de versões até agora? Fez uma série de modificações não relacionadas entre si, pois este é seu estilo?
+
+Não se preocupe. Execute:
+
+ $ git add -p
+
+Para cada modificação realizada, o Git mostrará o pedaço do código alterado, e perguntará se ele deve fazer parte do próximo commit. Responda "y" (sim) ou "n" (não). Há outras opções, como o adiamento dessa decisão; digite "?" para aprender como.
+
+Uma vez satisfeito, digite:
+
+ $ git commit
+
+para fazer um commit exatamente com as modificações aprovadas ('staged'). Lembre-se de retirar a opção *-a*, caso contrário o commit conterá todas as modificações.
+
+E se você tiver editado vários arquivos em vários locais? Rever cada modificação uma por uma será frustante e enfadonho. Neste caso, use *git add -i*, cuja interface é menos simples, porém mais flexível. Com algumas poucas teclas, você pode aprovar ou não vários arquivos de uma vez, ou rever e selecionar as modificações em um arquivo especifico. Alternativamente, execute *git commit \--interactive* o que automaticamente efetuará seus commit assim que terminar de aprovar.
+
+=== O Indice: A Área de Atuação do Git ===
+
+Até agora estivemos evitando o famoso 'index' do git, mas agora teremos que enfrentá-lo para explicar o tópico acima. O index é uma área de atuação temporária. O Git frequentemente atualiza os dados diretamente entre seu projeto e sua historia. Preferencialmente, Git primeiro armazena os dados no index, e então copia os dados do index para seu destino final.
+
+Por exemplo, *commit -a* é na realidade um processo em duas etapas. A primeira etapa coloca uma “fotografia” do estado atual de cada arquivo rastreado em um índice. O segundo passo registra permanentemente a “fotografia” localizado no índice. O commit sem a opção *-a* somente executa o segundo passo, e somente faz sentido após a execução de um comando que de alguma maneira altera o índice, tal como o *git add*.
+
+Geralmente podemos ignorar o index e supor que estamos lendo e escrevendo diretamente no histórico. Nessas ocasiões, queremos um controle mais fino, de modo que manipulamos o índice. Colocamos uma “fotografia” de algumas, mas não todas, as nossas alterações no índice, e então registramos permanentemente esta “fotografia” cuidadosamente manipulada.
+
+=== Não perca a CABEÇA (HEAD) ===
+
+A etiqueta HEAD (cabeçalho) é como um indicador que normalmente aponta para o último commit, avançando a cada novo commit. Alguns comandos do Git permitem movê-la. Por exemplo:
+
+ $ git reset HEAD~3
+
+irá mover o HEAD três commit para trás. Assim todos os comandos do Git passam a agir como se você não tivesse realizados os últimos três commit, enquanto seus arquivos permanecem no presente. Consulte a página do manual para mais aplicações.
+
+Mas como se faz para voltar para o futuro? Os últimos commit não sabem do futuro.
+
+Se você tem o SHA1 do HEAD original então:
+
+ $ git reset 1b6d
+
+Mas suponha que você não tenha anotado. Não se preocupe, para comandos desse tipo, o Git salva o HEAD original com uma etiqueta chamada de ORIG_HEAD, e você pode retornar são e salvo com:
+
+ $ git reset ORIG_HEAD
+
+=== Explorando o HEAD ===
+
+Talvez ORIG_HEAD não seja suficiente. Talvez você só tenha percebido que fez um erro descomunal e precisa voltar para um antigo commit de um branch há muito esquecido.
+
+Por default, o Git mantém um commit por pelo menos duas semanas, mesmo se você mandou o Git destruir o branch que o contêm. O problema é achar o hash certo. Você pode procurar por todos os valores de hash em `.git/objects` e por tentativa e erro encontrar o que procura. Mas há um modo mais fácil.
+
+O Git guarda o hash de todos os commit que ele calcula em `.git/logs`. O sub-diretório refs contêm o histórico de toda atividade em todos os branch, enquanto o arquivo `HEAD` mostra todos os valores de hash que teve. Este último pode ser usado para encontrar o hash de um commit num branch que tenha sido acidentalmente apagado.
+
+O comando reflog fornece uma interface amigável para estes arquivos de log. Experimente
+
+  $ git reflog
+
+Ao invés de copiar e colar o hash do reflog, tente:
+
+ $ git checkout "@{10 minutes ago}"
+
+Ou faça um checkout do quinto último commit com:
+
+ $ git checkout "@{5}"
+
+Leia a seção ``Specifying Revisions'' da ajuda com *git help rev-parse* para mais informações.
+
+Você pode querer configurar um período mais longo de carência para condenar um commit. Por exemplo:
+
+  $ git config gc.pruneexpire "30 days"
+
+significa que um commit apagado será permanentemente eliminado após passados 30 dias e executado o comando *git gc*.
+
+Você também pode desativar as execuções automáticas do *git gc*:
+
+  $ git config gc.auto 0
+
+assim os commit só serão permanentemente eliminados quando executado o *git gc* manualmente.
+
+=== Baseando se no Git ===
+
+Seguindo o jeito UNIX de ser, o Git permite ser facilmente utilizado como um componente de “baixo nível” para outros programas, tais como interfaces GUI, interfaces web, interfaces alternativas de linha de comando, ferramentas de gerenciamento de patchs, ferramentas de importação e conversão e outras. Na realidade, alguns comandos Git são eles mesmos, scripts apoiados em ombros de gigantes. Com pouco trabalho, você pode configurar o Git para suas preferencias.
+
+Um truque simples é criar alias (abreviações), internas ao Git para abreviar os comandos utilizados mais frequentemente:
+
+  $ git config --global alias.co checkout
+  $ git config --global --get-regexp alias  # display current aliases
+  alias.co checkout
+  $ git co foo                              # same as 'git checkout foo'
+
+Outra é imprimir o branch atual no prompt, ou no título da janela. É só executar:
+
+  $ git symbolic-ref HEAD
+
+que mostra o nome do branch atual. Na prática, muito provavelmente você não quer ver o "refs/heads/" e ignorar os erros:
+
+  $ git symbolic-ref HEAD 2> /dev/null | cut -b 12-
+
+O subdiretório +contrib+ é um baú do tesouro de ferramentas construídas com o Git. Com o tempo algumas delas devem ser promovidas para comandos oficiais. Nos sistemas Debian e Ubuntu esse diretório esta em +/usr/share/doc/git-core/contrib+.
+
+Um residente popular é +workdir/git-new-workdir+. Por meio de um inteligente link simbólico, este script cria um novo diretório de trabalho cujo histórico é compartilhado com o repositório original:
+
+  $ git-new-workdir an/existing/repo new/directory
+
+O novo diretório e arquivos dentro dele podem ser vistos como um clone, exceto que como o histórico é compartilhado, as duas arvores automaticamente estarão em sincronia. Não é necessário fazer merge, push ou pull.
+
+=== Manobras Radicais ===
+
+As versões recentes do Git tornaram mais difícil para o usuário destruir acidentalmente um dado. Mas se você sabe o que esta fazendo, você pode transpor estas salvaguardas utilizadas nos comandos mais comuns.
+
+*Checkout*: Se há modificações sem commit, um checkout simples falhará. Para destruir estas modificações, e fazer um checkout de um certo commit assim mesmo, use a opção force (-f):
+
+  $ git checkout -f HEAD^
+
+Por outro lado, se for especificado algum endereço em particular para o checkout, então não haverá checagem de segurança. O endereço fornecido será silenciosamente sobrescrito. Tenha cuidado se você usa o checkout desse jeito.
+
+*Reset*: O Reset também falha na presença de modificações sem commit. Para obrigá-lo, execute:
+
+  $ git reset --hard 1b6d
+
+*Branch*: Apagar um branch falha se isto levar a perda das modificações. Para forçar, digite:
+
+  $ git branch -D dead_branch  # instead of -d
+
+Analogamente, a tentativa de sobrescrever um branch movendo-o falha for causar a perda de dados. Para forçar a movimentação do branch, use:
+
+  $ git branch -M source target  # instead of -m
+
+Ao contrário do checkout e do reset, estes dois comandos adiarão a destruição dos dados. As modificações ainda serão armazenadas no subdiretório .git, e podem ser resgatados, recuperando o hash apropriado do `.git/logs` (veja a seção "Explorando o HEAD" acima). Por padrão, eles serão mantidos por pelo menos duas semanas.
+
+*Clean*: Alguns comandos do Git recusam-se a avançar devido o receio de sobrescrever arquivos não “monitorados” (sem commit). Se você tiver certeza de que todos os arquivos e diretórios não monitorados são dispensáveis, então apague-os sem misericórdia com:
+
+  $ git clean -f -d
+
+Da próxima vez, o maldito comando não se recusará a funcionar!
+
+=== Prevenção a maus Commits ===
+
+Erros estúpidos poluem meus repositórios. Os mais assustadores são os arquivos perdidos devido a comandos *git add* esquecidos. Transgressões mais leves são espaço em branco e conflitos de merge não resolvidos: embora sem perigo, eu gostaria que eles nunca aparecessem nos meus registros públicos.
+
+Se eu tivesse comprado um seguro idiota usando _hook_ para me alertar sobre esses problemas:
+
+ $ cd .git/hooks
+ $ cp pre-commit.sample pre-commit  # Older Git versions: chmod +x pre-commit
+
+Agora o Git aborta um commit se espaço em branco sem utilidade ou um conflito de merge não resolvido for detectado.
+
+Para este guia, eu eventualmente adiciono o seguinte ao inicio do hook *pre-commit* para proteção contra as “mentes sem noção”.
+
+ if git ls-files -o | grep '\.txt$'; then
+   echo FAIL! Untracked .txt files.
+   exit 1
+ fi
+
+Várias operações do Git suportam o hook: veja *git help hooks*. Nós ativamos o hook de exemplo *post-update* anteriormente quando discutimos o Git sob HTTP. Isso executa sempre que o HEAD se movimenta. O script de exemplo post-update atualiza os arquivos que o Git necessita para a comunicação sob transportes agnósticos do Git, como o HTTP.

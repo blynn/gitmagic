@@ -1,0 +1,190 @@
+== Lições de historia ==
+
+Uma consequência da natureza distribuída do Git é que o histórico pode ser editado facilmente. Mas se você adulterar o passado, tenha cuidado: apenas rescreva a parte do histórico que só você possui. Assim como as nações sempre argumentam sobre quem comete atrocidades, se alguém tiver um clone cuja versão do histórico seja diferente do seu, você pode ter problemas para conciliar suas árvores quando interagirem.
+
+Alguns desenvolvedores acreditam que o histórico deva ser imutável, com falhas ou não. Outros, acreditam que suas árvores devem estar apresentáveis antes de liberá-las ao público. O Git contempla ambos pontos de vista. Tal como a clonagem, branch e merge, rescrever o histórico é simplesmente outro poder que o Git lhe concede. Cabe a você a usá-lo sabiamente.
+
+=== Eu corrijo ===
+
+Acabou de fazer um commit, mas queria ter escrito uma mensagem diferente? Então execute:
+
+ $ git commit --amend
+
+para mudar a última mensagem. Percebeu que esqueceu de adicionar um arquivo? Execute *git add* para adicioná-lo, e então execute o comando acima.
+
+Quer incluir mais algumas modificações no último commit? Faça-as e então execute:
+
+ $ git commit --amend -a
+
+=== ... e tem mais ===
+
+Suponha que o problema anterior é dez vezes pior. Após uma longa sessão onde você fez um monte de commit. E você não está muito satisfeito com a organização deles, e algumas das mensagens dos commit poderiam ser reformuladas. Então execute:
+
+ $ git rebase -i HEAD~10
+
+e os últimos 10 commit aparecerão em seu $EDITOR favorito. Trecho de exemplo:
+
+    pick 5c6eb73 Added repo.or.cz link
+    pick a311a64 Reordered analogies in "Work How You Want"
+    pick 100834f Added push target to Makefile
+
+Os commit antigos precedem os mais novos nessa lista, diferentemente do comando `log`.
+Aqui, 5c6eb73 é o commit mais velho e o 100834f é o commit mais novo. Então:
+
+- Remova os commit deletando as linhas. Como o comando revert, mas sem fazer o registro: será como se o commit nunca tenha existido.
+- Reorganize os commit reorganizando as linhas.
+- Substitua `pick` com:
+   * `edit` para modificar a mensagem do commit;
+   * `reword` para alterar a mensagem de log;
+   * `squash` para fazer o merge de um commit com o commit anterior;
+   * `fixup` para fazer o merge de um commit com o anterior e descartar a mensagem de log.
+
+Por exemplo, queremos substituir o segundo `pick` por `squash`:
+
+    pick 5c6eb73 Added repo.or.cz link
+    squash a311a64 Reordered analogies in "Work How You Want"
+    pick 100834f Added push target to Makefile
+
+Após salvar e sair, o Git ira fazer o merge a311a64 com o 5c6eb73. Assim *squash* faz o merge no próximo commit: pense como ``squash up''.
+
+O Git, então combina suas mensagens de logs e apresenta para edição. O comando *fixup* salta essa etapa; a mensagem de log squashed é simplesmente descartada.
+
+Se marcar um commit com *edit*, o Git retorna você ao passado, ao commit mais velho. Você pode emendar o commit velho como descrito na seção anterior, e até mesmo criar um novo commit que pertença a esse. Uma vez que esteja satisfeito com o ``retcon'', siga adiante executando:
+
+ $ git rebase --continue
+
+O Git reenvia os commits até o próximo *edit*, ou ao presente se não restar nenhum.
+
+Você pode também, abandonar o rebase com:
+
+ $ git rebase --abort
+
+Portanto, faça commit cedo e com frequência: e arrume tudo facilmente mais tarde com um rebase.
+
+=== Alterações locais por último ===
+
+Você está trabalhando em um projeto ativo. Faz alguns commit locais ao longo do tempo, e sincroniza com a árvore oficial com merge. Este ciclo se repete algumas vezes até estar tudo pronto para ser enviado à árvore central.
+
+Mas agora o histórico no seu clone local está uma confusão com o emaranhado de modificações locais e oficiais. Você gostaria de ver todas as suas modificações em uma seção contínua e depois todas as modificações oficiais.
+
+Este é um trabalho para *git rebase* conforme descrito acima. Em muitos casos pode-se usar a opção *--onto* e evitar sua interação.
+
+Veja também *git help rebase* com exemplos detalhados deste incrível comando. Você pode dividir commit. Ou até reorganizar branch de uma árvore.
+
+Tome cuidado: o comando rebase é muito poderoso. Para rebases complicados, primeiro faça um backup com *git clone*.
+
+=== Reescrevendo o histórico ===
+
+Eventualmente, será necessário que seu controle de código tenha algo equivalente ao modo Stanlinesco de retirada de pessoas das fotos oficiais, apagando-os da história. Por exemplo, suponha que temos a intenção de lançar um projeto, mas este envolve um arquivo que deve ser mantido privado por algum motivo. Talvez eu deixe meu número do cartão de crédito num arquivo texto e acidentalmente adicione-o ao projeto. Apagá-lo é insuficiente, pois, pode ser acessado pelos commit anteriores. Temos que remover o arquivo de todos os commit:
+
+ $ git filter-branch --tree-filter 'rm top/secret/file' HEAD
+
+Veja *git help filter-branch*, que discute este exemplo e mostra um método mais rápido. No geral, *filter-branch* permite que você altere grandes seções do histórico só com um comando.
+
+Depois, o diretório +.git/refs/original+ descreve o estado dos casos antes da operação. Verifique se o comando filter-branch faz o que você deseja, e então apague esse diretório se você deseja executar mais comandos filter-branch.
+
+Por ultimo, você deve substituir os clones do seu projeto pela versão revisada se desejar interagir com eles depois.
+
+=== Fazendo história ===
+
+[[makinghistory]]
+Quer migrar um projeto para Git? Se ele for gerenciado por um algum dos sistemas mais conhecidos, então é possível que alguém já tenha escrito um script para exportar todo o histórico para o Git.
+
+Caso contrário, dê uma olhada em *git fast-import*, que lê um texto num formato especifico para criar o histórico Git do zero. Normalmente um script usando este comando é feito as pressas sem muita frescura e é executado apenas uma vez, migrando o projeto de uma só vez.
+
+Por exemplo, cole a listagem a seguir num arquivo temporário, como `/tmp/history`:
+----------------------------------
+commit refs/heads/master
+committer Alice <alice@example.com> Thu, 01 Jan 1970 00:00:00 +0000
+data <<EOT
+Initial commit.
+EOT
+
+M 100644 inline hello.c
+data <<EOT
+#include <stdio.h>
+
+int main() {
+  printf("Hello, world!\n");
+  return 0;
+}
+EOT
+
+
+commit refs/heads/master
+committer Bob <bob@example.com> Tue, 14 Mar 2000 01:59:26 -0800
+data <<EOT
+Replace printf() with write().
+EOT
+
+M 100644 inline hello.c
+data <<EOT
+#include <unistd.h>
+
+int main() {
+  write(1, "Hello, world!\n", 14);
+  return 0;
+}
+EOT
+
+----------------------------------
+
+Em seguida crie um repositório Git a partir deste arquivo temporário digitando:
+
+ $ mkdir project; cd project; git init
+ $ git fast-import --date-format=rfc2822 < /tmp/history
+
+Faça um checkout da última versão do projeto com:
+
+ $ git checkout master .
+
+O comando *git fast-export* converte qualquer repositório para o formato do
+*git fast-import* format, cujo resultado você pode estudar para escrever seus exportadores, e também para converter repositórios Git para um formato legível aos humanos. Na verdade, estes comandos podem enviar repositórios de arquivos de texto por canais exclusivamente textuais.
+
+=== Onde foi que tudo deu errado? ===
+
+Você acabou de descobrir uma função errada em seu programa, que você sabe com certeza que estava funcionando há alguns meses atrás. Merda! Onde será que este erro começou? Se só você estivesse testando a funcionalidade que desenvolveu.
+
+Agora é tarde para reclamar. No entanto, se você estiver fazendo commit, o Git pode localizar o problema:
+
+ $ git bisect start
+ $ git bisect bad HEAD
+ $ git bisect good 1b6d
+
+O Git verifica um estado intermediário entre as duas versões. Testa a função, e se ainda estiver errada:
+
+ $ git bisect bad
+
+Senão, substitua "bad" por "good". O Git novamente o levará até um estado intermediário entre as versões definidas como good e bad, diminuindo as possibilidades. Após algumas iterações, esta busca binária o guiará até o commit onde começou o problema. Uma vez terminada sua investigação, volte ao estado original digitando:
+
+ $ git bisect reset
+
+Ao invés de testar todas as mudanças manualmente, automatize a busca com:
+
+ $ git bisect run my_script
+
+O Git usa o valor de retorno do comando utilizado, normalmente um único script, para decidir se uma mudança é good ou bad: o comando deve terminar retornando com o código 0 se for good, 125 se a mudança for ignorável e qualquer coisa entre 1 e 127 se for bad. Um valor negativo abortará a bissecção.
+
+Podemos fazer muito mais: a página de ajuda explica como visualizar as bissecções, examinar ou reproduzir o log da bissecção, e eliminar mudanças reconhecidamente inocentes para acelerar a busca.
+
+=== Quem fez tudo dar errado? ===
+
+Tal como outros sistema de controle de versões, o Git tem um comando blame (culpado):
+
+ $ git blame bug.c
+
+que marca cada linha do arquivo mostrando quem o modificou por último e quando. Ao contrário de outros sistemas de controle de versões, esta operação ocorre offline, lendo apenas do disco local.
+
+=== Experiência pessoal ===
+
+Em um sistema de controle de versões centralizado, modificações no histórico são operações difíceis, e disponíveis apenas para administradores. Clonagem, branch e merge são impossíveis sem uma rede de comunicação. Bem como as operações básicas: navegar no histórico ou fazer commit das mudanças. Em alguns sistemas, é exigido do usuário uma conexão via rede, apenas para visualizar suas próprias modificações ou abrir um arquivo para edição.
+
+Sistemas centralizados impedem o trabalho offline, e exigem um infraestrutura de rede mais cara, especialmente quando o número de desenvolvedores aumenta. Mais importante, todas a operações são mais lentas, até certo ponto, geralmente até o ponto onde os usuários evitam comandos mais avançados até serem absolutamente necessários. Em casos extremos, esta é a regra até para a maioria dos comandos básicos. Quando os usuários devem executar comandos lento, a produtividade sofre por causa de uma interrupção no fluxo de trabalho.
+
+Já experimentei este fenômeno na pele. O Git foi o primeiro sistema de controle de versões que usei. E rapidamente cresci acostumado a ele, tomando muitas de suas características como normais. Simplesmente assumi que os outros sistemas eram semelhante: escolher um sistema de controle de versões deveria ser igual a escolher um novo editor de texto ou navegador para internet.
+
+Fiquei chocado quando, posteriormente, fui forçado a usar um sistema centralizado. Uma conexão ruim com a Internet pouco importa com o Git, mas torna o desenvolvimento insuportável quando precisa ser tão confiável quanto o disco local. Além disso, me condicionava a evitar determinados comandos devido a latência envolvida, o que me impediu, em última instância, de continuar seguindo meu fluxo de trabalho.
+
+Quando executava um comando lento, a interrupção na minha linha de pensamento causava um enorme prejuízo. Enquanto espero a comunicação com o servidor concluir, faço algo para passar o tempo, como checar email ou escrever documentação.  Na hora em que retorno a tarefa original, o comando já havia finalizado há muito tempo, e perco mais tempo lembrando o que estava fazendo. Os seres humanos são ruins com trocas de contexto.
+
+Houve também um interessante efeito da tragédia dos comuns: antecipando o congestionamento da rede, os indivíduos consomem mais banda que o necessário em varias operações numa tentativa de reduzir atrasos futuros. Os esforços combinados intensificam o congestionamento, encorajando os indivíduos a consumir cada vez mais banda da próxima vez para evitar os longos atrasos.

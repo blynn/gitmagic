@@ -1,0 +1,171 @@
+== Git Multiplayer ==
+
+Inicialmente, utilizei o Git em um projeto particular onde era o único desenvolvedor. Entre os comandos relacionados a natureza distribuída do Git, eu precisava somente do *pull* e *clone*, de modo a manter o mesmo projeto em vários lugares.
+
+Mais tarde, quis publicar meu código com o Git, e incluir as alterações dos contribuidores. Tive que aprender como gerenciar projetos com vários desenvolvedores de todas as partes do mundo. Felizmente, esse é o forte do Git, e indiscutivelmente sua razão de existir.
+
+=== Quem sou eu? ===
+
+Cada commit tem um nome de autor e e-mail, que pode ser mostrado pelo *git log*. O Git utiliza as configurações do sistema para preencher esses campos. Para fazer o preenchimento explícito, digite:
+
+  $ git config --global user.name "John Doe"
+  $ git config --global user.email johndoe@example.com
+
+Omita o flag global para configurar essas opções somente para o repositório atual.
+
+=== Git sob SSH, HTTP ===
+
+Suponha que você tenha acesso SSH a um servidor web, mas que o Git não esteja instalado. Embora não tão eficiente quanto seu protocolo nativo, o Git pode se comunicar via HTTP.
+
+Baixe, compile e instale o Git em sua conta, e crie um repositório no seu diretório web:
+
+ $ GIT_DIR=proj.git git init
+ $ cd proj.git
+ $ git --bare update-server-info
+ $ cp hooks/post-update.sample hooks/post-update
+
+Para versões mais antigas do Git, o comando copy falha e você deve executar:
+
+ $ chmod a+x hooks/post-update
+
+Agora você pode publicar suas últimas edições via SSH de qualquer clone:
+
+ $ git push web.server:/path/to/proj.git master
+
+E qualquer um pode obter seu projeto com:
+
+ $ git clone http://web.server/proj.git
+
+=== Git sobre qualquer coisa ===
+
+Deseja sincronizar os repositórios sem servidores, ou mesmo sem uma conexão de rede? Precisa improvisar durante uma emergência? Vimos que <<makinghistory, *git fast-export* e *git fast-import* podem converter repositórios para um único arquivo e vice-versa>>. Podemos enviar esses arquivos para outros lugares fazendo o transporte de repositórios git sob qualquer meio, mas uma ferramenta mais eficiente é o *git bundle*.
+
+O emissor cria um 'bundle':
+
+ $ git bundle create somefile HEAD
+
+E então transporta o pacote, +somefile+, para outro lugar: por e-mail, pen-drive (ou mesmo uma saida impressa *xxd* e um scanner com ocr, sinais binários pelo telefone, sinais de fumaça, etc). O receptor recupera os commits do pacote executando:
+
+ $ git pull somefile
+
+O receptor pode inclusive fazer isso em um diretório vazio. Apesar do seu tamanho, +somefile+ contém todo o repositório git original.
+
+Em grandes projetos, podemos eliminar o desperdício fazendo o empacotamento somente das mudanças que o outro repositório necessita. Por exemplo, suponha que o commit ``1b6d...'' é o commit mais recente compartilhado por ambas as partes:
+
+ $ git bundle create somefile HEAD ^1b6d
+
+Se executado frequentemente, podemos esquecer que commit foi feito por último. A página de ajuda sugere utilizar tags para resolver esse problema. Isto é, após enviar um pacote, digite:
+
+ $ git tag -f lastbundle HEAD
+
+e crie um novo pacote de atualização com:
+
+ $ git bundle create newbundle HEAD ^lastbundle
+
+=== Patches: A moeda Universal ===
+
+Patches são representações textuais das suas mudanças que podem ser facilmente entendidas pelos computadores e pelos seres humanos. Isso tem um forte apelo. Você pode mandar um patch por e-mail para os desenvolvedores não importando que sistema de versão eles estão utilizando. Como os desenvolvedores podem ler o e-mail, eles podem ver o que você editou.
+
+Da mesma maneira, do seu lado, tudo o que você precisa é de uma conta de e-mail: não é necessário configurar um repositório online do Git.
+
+Lembrando do primeiro capítulo:
+
+ $ git diff 1b6d > my.patch
+
+produz um patch que pode ser colado em um e-mail para discussão. Em um repositório Git, digite:
+
+ $ git apply < my.patch
+
+para aplicar o patch.
+
+Em configurações mais formais, quando o nome do autor e talvez sua assinatura precisem ser armazenadas, podemos gerar os patches correspondentes a partir de um certo ponto com o comando:
+
+ $ git format-patch 1b6d
+
+Os arquivos resultantes podem ser fornecidos ao *git-send-email*, ou enviados manualmente. Você também pode especificar uma faixa de commits:
+
+ $ git format-patch 1b6d..HEAD^^
+
+No lado do receptor, salve o e-mail como um arquivo, e entre com:
+
+ $ git am < email.txt
+
+Isso aplica o patch de entrada e também cria um commit, incluindo as informações tais como o autor.
+
+Com um navegador cliente de e-mail, pode ser necessário clicar o botão para ver o e-mail em seu formato original antes de salvar o patch para um arquivo.
+
+Existem pequenas diferenças para os clientes de e-mail baseados em mbox, mas se você utiliza algum desses, provavelmente é o tipo de pessoa que pode resolver os problemas sem ler o manual.
+
+=== Sinto muito, mas mudamos ===
+
+Após fazer o clone de um repositório, executar o *git push* ou *git pull* irá automaticamente fazer o push ou pull da URL original. Como o Git faz isso? O segredo reside nas opções de configuração criadas com o clone. Vamos dar uma olhada:
+
+ $ git config --list
+
+A opção +remote.origin.url+ controla a URL de origem; ``origin'' é um apelido dados ao repositório fonte. Da mesma maneira que a convenção do branch ``master'', podemos mudar ou deletar esse apelido mas geralmente não existe um motivo para fazê-lo.
+
+Se o repositório original for movido, podemos atualizar a URL via:
+
+ $ git config remote.origin.url git://new.url/proj.git
+
+A opção +branch.master.merge+ especifica o branch remoto default em um *git pull*. Durante a clonagem inicial, ele é configurado para o branch atual do repositório fonte, mesmo que o HEAD do repositório fonte subsequentemente mova para um branch diferente, um pull posterior irá seguir fielmente o branch original.
+
+Essa opção somente aplica ao repositório que fizemos a clonagem em primeiro lugar, que é armazenado na opção +branch.master.remote+. Se fizermos um pull de outro repositório devemos estabelecer explicitamente que branch desejamos:
+
+ $ git pull git://example.com/other.git master
+
+Isso explica por que alguns de nossos exemplos de pull e push não possuem argumentos.
+
+=== Branches Remotos ===
+
+Quando clonamos um repositório, clonamos também todos os seus branches. Voce pode não ter notado isso porque o Git sempre esconde os branches: mas podemos solicitá-los especificamente. Isso previne os branches no repositório remoto de interferir com seus branches, e também torna o Git mais fácil para os iniciantes.
+
+Liste os branches remotos com:
+
+ $ git branch -r
+
+Voce deve obter uma saída como:
+
+ origin/HEAD
+ origin/master
+ origin/experimental
+
+Eles representam branches e a HEAD de um repositório remoto, e pode ser utilizado em comandos normais do Git. Por exemplo, suponha que você fez vários commits, e gostaria de comparar contra a última versão buscada (fetched). Você pode buscar nos logs pelo hash apropriado SHA1, mas é muito mais fácil digitar:
+
+ $ git diff origin/HEAD
+
+Ou você pode ver o que o branch ``experimental'' contém:
+
+ $ git log origin/experimental
+
+=== Remotos Múltiplos ===
+
+Suponha que dois desenvolvedores estão trabalhando em nosso projeto, e que queremos manter o controle de ambos. Podemos seguir mais de um repositório a qualquer hora com:
+
+ $ git remote add other git://example.com/some_repo.git
+ $ git pull other some_branch
+
+Agora temos merged em um branch a partir do segundo repositório, e temos fácil acesso a todos os branches de todos os repositórios:
+
+ $ git diff origin/experimental^ other/some_branch~5
+
+Mas e se só queremos comparar as suas alterações sem afetar o trabalho de ambos? Em outras palavras, queremos examinar seus branches sem ter que suas alterações invadam nosso diretório de trabalho. Então ao invés de pull, execute:
+
+ $ git fetch        # Fetch from origin, the default.
+ $ git fetch other  # Fetch from the second programmer.
+
+Isso faz com que somente busque os históricos. Embora o diretório de trabalho continue intocado, podemos fazer referencia a qualquer branch de qualquer repositório em um comando Git pois agora possuímos uma copia local.
+
+Lembre-se de nos bastidores, um pull é simplesmente um *fetch* e um *merge*. Geralmente fazemos um *pull* pois queremos fazer um merge do ultimo commit após o fetch; essa situação é uma exceção notável.
+
+Veja *git help remote* para saber como remover repositórios remotos, ignorar certos branches e outras informações.
+
+=== Minhas preferencias ===
+
+Para meus projetos, eu gosto que contribuidores para preparar os repositórios a partir dos quais eu possa fazer um pull. Alguns serviços hospedeiros de Git permite que você hospede seu próprio fork de um projeto com o clique de um botão.
+
+Após ter buscado (fetch) uma árvore, eu executo comandos Git para navegar e examinar as alterações, que idealmente estão bem organizadas e bem descritas. Faço merge de minhas próprias alterações, e talvez faça edições posteriores. Uma vez satisfeito, eu faço um push para o repositório principal.
+
+Embora eu receba infrequentes contribuições, eu acredito que essa abordagem funciona bem. Veja http://torvalds-family.blogspot.com/2009/06/happiness-is-warm-scm.html[esse post do blog do Linus Torvalds].
+
+Continuar no mundo Git é mais conveniente do que fazer patch de arquivos, já que ele me salva de convertê-los para commits Git. Além disso, o Git trata dos detalhes tais como registrar o nome do autor e seu endereço de e-mail, bem como o dia e hora, alem de pedir ao autor para descrever sua própria alteração.

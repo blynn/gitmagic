@@ -1,0 +1,190 @@
+== Bruxarias com branch ==
+
+Ramificações (Branch) e mesclagens (merge) instantâneos são as características mais fantásticas do Git.
+
+*Problema*: Fatores externos inevitavelmente exigem mudanças de contexto. Um erro grave que se manifesta sem aviso, em uma versão já liberada. O prazo final é diminuído. Um desenvolvedor que o ajuda, em uma função chave do seu projeto, precisa sair. Em todos esses casos, você deixará de lado bruscamente o que esta fazendo e focará em uma tarefa completamente diferente.
+
+Interromper sua linha de pensamento provavelmente prejudicará sua produtividade, e quanto mais trabalhoso for trocar de contexto, maior será a perda. Com um controle de versões centralizado precisamos pegar uma nova cópia do servidor central. Sistemas distribuídos fazem melhor, já que podemos clonar o que quisermos localmente.
+
+Mais clonar ainda implica copiar todo o diretório de trabalho, bem como todo o histórico até o ponto determinado. Mesmo que o Git reduza o custo disso com o compartilhamento de arquivos e hardlinks, os arquivos do projeto devem ser recriados completamente no novo diretório de trabalho.
+
+*Solução*: O Git tem a melhor ferramenta para estas situações que é muito mais rápida e mais eficiente no uso de espaço do que a clonagem: *git branch*.
+
+Com esta palavra mágica, os arquivos em seu diretório de repente mudam de forma, de uma versão para outra. Esta transformação pode fazer mais do que apenas avançar ou retroceder no histórico. Seus arquivos podem mudar a partir da última liberação para a versão experimental, para a versão atualmente em desenvolvimento, ou para a versão dos seus amigos, etc.
+
+=== A “tecla” chefe ===
+
+Sempre joguei um desses jogos que ao apertar de um botão (“a tecla chefe”), a tela instantaneamente mudará para uma planilha ou algo mais sério. Assim se o chefe passar pelo seu escritório enquanto você estiver jogando, poderá rapidamente esconder o jogo.
+
+Em algum diretório:
+
+ $ echo "I'm smarter than my boss" > myfile.txt
+ $ git init
+ $ git add .
+ $ git commit -m "Initial commit"
+
+Criamos um repositório Git que rastreará um arquivo texto contendo uma certa mensagem. Agora digite:
+
+ $ git checkout -b boss  # nothing seems to change after this
+ $ echo "My boss is smarter than me" > myfile.txt
+ $ git commit -a -m "Another commit"
+
+ficou parecendo que nós sobrescrevemos nosso arquivo e fizemos um commit. Mas isto é um ilusão. Digite:
+
+ $ git checkout master  # switch to original version of the file
+
+e tcham tcham tcham! O arquivo texto foi restaurado. E se o chefe decidir bisbilhotar este diretório. Digite:
+
+ $ git checkout boss  # switch to version suitable for boss' eyes
+
+Você pode trocar entre as duas versões do arquivo quantas vezes quiser, e fazer commit independentes para cada uma.
+
+=== Trabalho porco ===
+
+[[branch]]
+Digamos que você está trabalhando em alguma função, e por alguma razão, precisa voltar 3 versões, e temporariamente colocar algumas declarações de controle para ver como algo funciona. Então:
+
+ $ git commit -a
+ $ git checkout HEAD~3
+
+Agora você pode adicionar temporariamente código feio em qualquer lugar. Pode até fazer commit destas mudanças. Quando estiver tudo pronto,
+
+ $ git checkout master
+
+para voltar para o trabalho original. Observe que qualquer mudança sem commit são temporárias.
+
+E se você desejasse salvar as mudanças temporárias depois de tudo? Fácil:
+
+ $ git checkout -b dirty
+
+e faça commit antes de voltar ao branch master. Sempre que quiser voltar à sujeira, simplesmente digite:
+
+ $ git checkout dirty
+
+Nós já falamos deste comando num capítulo anterior, quando discutimos carregamento de estados antigos salvos. Finalmente podemos contar toda a história: os arquivos mudam para o estado requisitado, porém saímos do branch master. Cada commit realizado a partir deste ponto nos seus arquivos o levarão em outra direção, que nomearemos mais adiante.
+
+Em outra palavras, depois de fazer checkout em um estado antigo, o Git automaticamente o colocará em um novo branch não identificado, que pode ser identificado e salvo com *git checkout -b*.
+
+=== Correções rápidas ===
+
+Você está fazendo algo quando mandam largar o que quer que seja e corrigir um erro recém-descoberto no commit `1b6d...`:
+
+ $ git commit -a
+ $ git checkout -b fixes 1b6d
+
+Então assim que tiver corrigido o erro:
+
+ $ git commit -a -m "Bug fixed"
+ $ git checkout master
+
+e volte a trabalhar no que estava fazendo anteriormente. Você pode até fazer um merge na correção realizada:
+
+ $ git merge fixes
+
+=== Merging ===
+
+Com alguns sistemas de controle de versões, a criação de ramos (branching) é fácil mas realizar o merge de volta é dificil. Com o Git, o merge é tão trivial que você pode nem perceber que ele acontece.
+
+Nós, na realidade encontramos o merge há bastante tempo. O comando *pull* na realidade 'busca' ('fetches') um commit e faz um merge no ramo (branch) atual. Se você não tem nenhuma alteração local, então ele faz um merge rápido, que é um caso especial parecido a buscar a ultima versão em um sistema de controle de versões centralizado. Mas se você tem mudanças locais, o Git irá automaticamente fazer o merge, e reportar qualquer conflito.
+
+Comumente, um commit possui exatamente um 'commit pai', que recebe o nome de  commit anterior. Fazer o merge de ramos (branches) juntos produz um commit com no mínimo dois pais. Isso levanta a questão: a que commit `HEAD~10` estamos nos referindo? Um commit pode ter vários pais, e qual deles vamos seguir?
+
+Acontece que essa notação escolhe o primeiro pai a cada vez. Isso é o desejável porque o ramo atual se torna o primeiro pai durante o merge; frequentemente você estará preocupado com as alterações que realizou no ramo atual, em oposição às alterações merged de outros ramos.
+
+Podemos referenciar um pai especifico com um circunflexo. Por exemplo, para mostrar os logs do segundo pai:
+
+ $ git log HEAD^2
+
+Podemos omitir o número para o primeiro pai. Por exemplo, para mostrar as diferenças com o primeiro pai:
+
+ $ git diff HEAD^
+
+Podemos combinar essa notação com outras. Por exemplo:
+
+ $ git checkout 1b6d^^2~10 -b ancient
+
+inicia um novo ramo ``ancient'' representando o estado 10 commit atrás para o segundo pai do primeiro pai do commit iniciando com 1b6d.
+
+=== Fluxo ininterrupto ===
+
+Frequentemente em projetos de hardware, o segundo passo de um plano deve esperar que o primeiro passo termine. Um carro que esta esperando uma peça do fabricante deve permanecer na oficina até que a peça chegue. Um protótipo deve esperar até que o chip seja fabricado para que a montagem possa continuar.
+
+Os projetos de software pode ser semelhantes a isso. A segunda parte de uma nova função pode ter que esperar até que a primeira parte seja testada e liberada. Alguns projetos requerem que o código seja revisto antes de seu aceite, de modo que você deve esperar até que a primeira parte seja aprovada antes de iniciar a segunda parte.
+
+Graças à facilidade de realizar branch e merge, podemos “desviar” das regras e trabalhar na parte 2 antes da parte 1 estar oficialmente pronta. Suponha que fizemos o commit da parte 1 e enviamos para a revisão. Vamos dizer que estamos no ramo (branch) `master`. Então podemos ramificar:
+
+ $ git checkout -b part2
+
+Em seguida, trabalhamos na parte 2, fazendo commit das alterações durante o desenvolvimento. Mas errar é humano, e frequentemente você vai querer retornar e corrigir alguma coisa na parte 1. Se você estiver com sorte, ou for realmente bom, pode saltar esses comandos:
+
+ $ git checkout master  # Go back to Part I.
+ $ fix_problem
+ $ git commit -a        # Commit the fixes.
+ $ git checkout part2   # Go back to Part II.
+ $ git merge master     # Merge in those fixes.
+
+Eventualmente, quando a parte 1 for aprovada:
+
+ $ git checkout master  # Go back to Part I.
+ $ submit files         # Release to the world!
+ $ git merge part2      # Merge in Part II.
+ $ git branch -d part2  # Delete "part2" branch.
+
+Agora, você estará no ramo `master` novamente, com a parte 2 no diretório de trabalho.
+
+É fácil de estender esse truque para qualquer número de partes. É fácil também fazer branching retroativos: suponha que você percebeu tardiamente que deveria ter criado um branch 7 commits atrás. Então digite:
+
+ $ git branch -m master part2  # Rename "master" branch to "part2".
+ $ git branch master HEAD~7    # Create new "master", 7 commits upstream.
+
+O branch `master` agora contém somente a parte 1, e o branch `part2` contém todo o resto. Estamos no ultimo branch; criamos o `master` sem mudar para ele, porque queremos continuar a trabalhar na `part2`. Isso não é comum. Até agora, nós trocamos de ramos imediatamente após a sua criação, como em:
+
+ $ git checkout HEAD~7 -b master  # Create a branch, and switch to it.
+
+=== Reorganizando uma Bagunça ===
+
+Talvez você goste de trabalhar com todos os aspectos de um projeto num mesmo branch. E gostaria de manter seu trabalho para você mesmo e que os outros só vejam seus commit, apenas quando eles estiverem organizados. Inicie um par de branch:
+
+  $ git branch sanitized    # Create a branch for sanitized commits.
+  $ git checkout -b medley  # Create and switch to a branch to work in.
+
+A seguir, trabalhe em alguma coisa: corrigindo erros, adicionando funções, adicionando código temporário, e assim por diante, faça commit muitas vezes ao longo do caminho. Então:
+
+  $ git checkout sanitized
+  $ git cherry-pick medley^^
+
+aplique o comit avô ao commit HEAD do ramo ``medley'' para o ramo ``sanitized''. Com os cherry-picks apropriados você pode construir um branch que contêm apenas código permanente, e tem os commit relacionados agrupados juntos.
+
+=== Gerenciando os Branches ===
+
+Para listar todos os branch, digite:
+
+ $ git branch
+
+Por default, você deve iniciar em um branch chamado ``master''. Alguns defendem que o branch ``master'' deve permanecer intocado e que a seja criado novos branchs para suas próprias mudanças.
+
+As opções *-d* e *-m* permitem a você deletar ou mover (renomear) um branch. Veja *git help branch*.
+
+O branch ``master'' é uma personalização útil. Outros podem assumir que seu repositório possui um branch com esse nome e que ele contém a versão oficial de seu projeto. Embora possamos renomear ou apagar o branch ``master'', você deve procurar respeitar essa convenção.
+
+=== Branches Temporários ===
+
+Depois de um tempo você perceberá que está criando um branch de curta duração, frequentemente e por motivos parecidos: cada novo branch serve apenas para guardar o estado atual, assim você pode rapidamente voltar para estados antigos para corrigir um erro ou algo assim.
+
+É semelhante a mudar o canal da TV temporariamente para ver o que está passando nos outros canais. Mas, ao invés de apertar dois botões, você está criando, checando e apagando branchs temporários e seus commit. Felizmente, o Git tem um atalho que é tão conveniente como um controle remoto de TV:
+
+ $ git stash
+
+Isto salva o estado atual num local temporário (um 'stash') e restaura o estado anterior. Seu diretório de trabalho parece ter voltado ao estado anteriormente salvo, e você pode corrigir erros, puxar as mudanças mais novas, e assim por diante. Quando quiser retornar ao estado anterior ao uso do stash, digite:
+
+ $ git stash apply  # You may need to resolve some conflicts.
+
+Você pode ter múltiplos stash, e manipulá-los de várias formas. Veja *git help stash*. Como deve ter adivinhado, o Git usa branch por traz dos panos para fazer este truque.
+
+=== Trabalhe como quiser ===
+
+Você pode se perguntar se os ramos valem a pena. Afinal, os clones são quase tão rápidos e você pode trocar entre eles com um comando cd ao invés de um comando esotérico do Git.
+
+Considere um navegador web. Por que suportar abas múltiplas bem como janelas múltiplas? É porque ao permitir ambas as características podemos acomodar uma variedade de estilos. Alguns usuários gostam de manter somente uma janela aberta do navegador, e utilizar varias abas para as páginas web. Outros preferem o outro extremo, várias janelas sem nenhuma aba. Outros podem preferir uma mistura dos estilos.
+
+Branching é como as abas para seu diretório de trabalho, e o clone é como uma nova janela do navegador. Essas operações são rápidas e locais, de modo que por que não experimentar para encontrar a combinação que melhor se adequa a você? O Git permite que você trabalhe exatamente do jeito que você desejar.

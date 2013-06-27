@@ -1,0 +1,198 @@
+== Truques básicos ==
+
+Ao invés de se aprofundar no mar de comandos do Git, use estes exemplos elementares para dar os primeiros passos. Apesar de sua simplicidade, cada um deles são muito úteis. Na verdade, no meu primeiro mês com o Git, nunca precisei ir além das informações deste capítulo.
+
+=== Salvando estados ===
+
+Pensando em tentar algo mais arriscado? Antes de fazê-lo, tire uma “fotografia” de todos os arquivos do diretório atual com:
+
+ $ git init
+ $ git add .
+ $ git commit -m "My first backup"
+
+Assim se algo der errado, você só precisará executar:
+
+ $ git reset --hard
+
+Para salvar o estado novamente, faça:
+
+ $ git commit -a -m "Another backup"
+
+=== Adicionar, Remover, Renomear ===
+
+Os comandos acima só irão verificar alterações nos arquivos que estavam presentes quando você executou seu primeiro *git add*. Se você adicionar novos arquivos ou diretórios terá que informar ao Git, com:
+
+ $ git add readme.txt Documentation
+
+Do mesmo modo, se você quiser que o Git não verifique certos arquivos, faça:
+
+ $ git rm kludge.h obsolete.c
+ $ git rm -r incriminating/evidence/
+
+O Git irá apagar estes arquivos, se você ainda não apagou.
+
+Renomear um arquivo é o mesmo que remover o nome antigo e adicionar um novo nome. Há também o atalho *git mv* que tem a mesma sintaxe do comando *mv*. Por exemplo:
+
+ $ git mv bug.c feature.c
+
+=== Desfazer/Refazer avançado ===
+
+Às vezes, você só quer voltar e esquecer todas as mudanças realizadas a partir de um certo ponto, pois estão todos erradas. Então:
+
+ $ git log
+
+mostrará uma lista dos últimos commit e seus hash SHA1:
+
+----------------------------------
+commit 766f9881690d240ba334153047649b8b8f11c664
+Author: Bob <bob@example.com>
+Date:   Tue Mar 14 01:59:26 2000 -0800
+
+    Replace printf() with write().
+
+commit 82f5ea346a2e651544956a8653c0f58dc151275c
+Author: Alice <alice@example.com>
+Date:   Thu Jan 1 00:00:00 1970 +0000
+
+    Initial commit.
+----------------------------------
+
+Os primeiros caracteres do hash são suficientes para especificar o commit; alternativamente, copie e cole o hash completo. Digite:
+
+ $ git reset --hard 766f
+
+para restaurar ao estado de um dado commit e apagar permanentemente os registros de todos os novos commit a partir deste ponto.
+
+Outras vezes você quer voltar, brevemente, para um estado. Neste caso, digite:
+
+ $ git checkout 82f5
+
+Isto levará você de volta no tempo, preservando os novos commit. Entretanto, como nas viagens no tempo dos filmes de ficção, se você editar e fizer um commit, você estará numa realidade alternativa, pois suas ações são diferentes das realizadas da primeira vez.
+
+Esta realidade alternativa é chamada de branch, nós falaremos mais sobre isso depois. Por ora, apenas lembre-se que:
+
+ $ git checkout master
+
+lhe levará de volta para o presente. Assim faça o Git parar de reclamar, sempre faça um commit ou reset em suas alterações antes de executar um checkout.
+
+Voltemos para a analogia dos jogos de computador :
+
+- *`git reset --hard`*: carrega um salvamento antigo e apaga todos jogos salvos  mais novos do que este que foi carregado.
+
+- *`git checkout`*: carrega um salvamento antigo, mas se jogar a partir dele, os próximos salvamento realizados se desvincularão dos salvamentos já realizados após o que foi carregado. Qualquer jogo salvo que você fizer será colocado em um branch separado representado uma realidade alternativa em que entrou. Lidaremos com isso mais adiante. <<branch,We deal with this later>>.
+
+Você pode escolher restaurar apenas alguns arquivos ou diretórios acrescentando-os ao final do comando:
+
+ $ git checkout 82f5 some.file another.file
+
+Tome cuidado, pois esta forma de *checkout* pode sobrescrever arquivos sem avisar. Para prevenir acidentes, faça um commit antes de qualquer comando checkout, especialmente quando esta aprendendo a utilizar o Git. De modo geral, sempre que se sentir inseguro sobre alguma operação, seja um comando Git ou não, execute primeiro o comando *git commit -a*.
+
+Não gosta de copiar e colar hash? Então use:
+
+ $ git checkout :/"My first b"
+
+para ir ao commit que começa a frase informada. Você também pode solicitar pelo estado salvo ha 5 commit atrás:
+
+ $ git checkout master~5
+
+=== Revertendo ===
+
+Como num tribunal, eventos podem ser retirados dos registros. Da mesma maneira, você pode especificar qual commit desfazer.
+
+ $ git commit -a
+ $ git revert 1b6d
+
+irá desfazer apenas o commit do hash informado. A regressão é gravada como um novo commit, e que pode ser confirmada executando o comando *git log*.
+
+=== Geração do Changelog ===
+
+Alguns projetos precisam de um http://en.wikipedia.org/wiki/Changelog[changelog].
+Podemos gerar um changelog com o comando:
+
+ $ git log > ChangeLog
+
+=== Download de arquivos ===
+
+Para obter uma cópia de um projeto gerenciado com GIT digite:
+
+ $ git clone git://server/path/to/files
+
+Por exemplo, para obter todos os arquivos usados para criar este site:
+
+ $ git clone git://git.or.cz/gitmagic.git
+
+Mais adiante, teremos muito o que dizer sobre o comando *clone*.
+
+=== A Última Versão ===
+
+Se você já obteve a cópia de um projeto usando *git clone*, pode agora atualizar para a última versão com:
+
+ $ git pull
+
+=== Publicação instantânea ===
+
+Suponha que você tenha escrito um script e gostaria de compartilhá-lo. Você poderia simplesmente dizer para pegarem do seu computador, mas se o fizerem enquanto você está melhorando o script ou experimentando algumas mudanças, eles podem ter problemas. Obviamente, é por isso que existem ciclos de liberação. Desenvolvedores podem trabalhar num projeto com frequência, mas só disponibilizam o código quando sentem que o mesmo está apresentável.
+
+Para fazer isso com Git, no diretório onde está seu script, execute:
+
+ $ git init
+ $ git add .
+ $ git commit -m "First release"
+
+Então avise aos outros para executarem:
+
+ $ git clone your.computer:/path/to/script
+
+para obter seu script. Assume-se que eles têm acesso ssh. Se não, execute *git daemon* e avise-os para executar:
+
+ $ git clone git://your.computer/path/to/script
+
+A partir de agora, toda vez que seu script estiver pronto para liberar, execute:
+
+ $ git commit -a -m "Next release"
+
+e seu usuários podem atualizar suas versões, indo para o diretório que contém seu script, e executando:
+
+ $ git pull
+
+Seu usuários nunca ficarão com uma versão do seu script que você não queira. Obviamente este truque serve para tudo, não apenas script.
+
+=== O que eu fiz? ===
+
+Saiba quais as mudanças que você fez desde o último commit com:
+
+ $ git diff
+
+Ou desde ontem:
+
+ $ git diff "@{yesterday}"
+
+Ou entre uma versão particular e duas versões atrás:
+
+ $ git diff 1b6d "master~2"
+
+Em cada um dos exemplos, a saída será um patch que pode ser aplicado com o *git apply*. Tente também:
+
+ $ git whatchanged --since="2 weeks ago"
+
+Às vezes navego pelo histórico com o http://sourceforge.net/projects/qgit[qgit], em razão de sua interface mais fotogênica, ou com o http://jonas.nitro.dk/tig/[tig], uma interface em modo texto ótima para conexões lentas. Alternativamente, instale um servidor web, e execute git instaweb e use um navegador.
+
+=== Exercícios ===
+
+Seja A, B, C D quatro commits sucessivos onde B é idêntico a A exceto por alguns arquivos que foram removidos. Queremos adicionar novamente os arquivos em D. Como podemos fazer isso?
+
+Existem no minimo 3 soluções. Assumindo que estamos em D.
+
+  1. A diferença entre A e B são or arquivos removidos. Podemos criar um patch representando esta diferença e aplicá-la:
+
+   $ git diff B A | git apply
+
+  2. Como salvamos os arquivos em A, podemos recuperá-los:
+
+   $ git checkout A foo.c bar.h
+
+  3. Podemos visualizar as mudanças de A para B que queremos desfazer:
+
+   $ git revert B
+
+Qual a opção é melhor? A que você preferir, É fácil fazer o que você quer com o git, e na maioria das vezes existe mais de uma forma de fazê-lo.

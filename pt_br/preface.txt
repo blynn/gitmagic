@@ -1,0 +1,60 @@
+= Magia Git =
+Ben Lynn
+Agosto 2007
+
+== Prefácio ==
+
+http://git-scm.com/[Git] é um canivete suíço do controle de versões. Uma ferramenta polivalente realmente versátil, cuja extraordinária flexibilidade torna-o complicado de aprender, principalmente sozinho.
+
+Como Arthur C. Clarke observou, "Qualquer tecnologia suficientemente avançada é considerada mágica”. Esta é uma ótima forma de abordar o Git: novatos podem ignorar seu funcionamento interno e vê-lo como algo divertido que pode agradar aos amigos e enfurecer os inimigos com suas maravilhosas habilidades.
+
+Ao invés de entrar em detalhes, forneceremos apenas instruções para casos específicos. Após o uso repetido, você gradualmente entenderá como cada truque funciona, e como adaptar as receitas às suas necessidades.
+
+.Traduções
+
+ - link:/\~blynn/gitmagic/intl/zh_cn/[Simplified Chinese]: by JunJie, Meng and JiangWei. Converted to link:/~blynn/gitmagic/intl/zh_tw/[Traditional Chinese] via +cconv -f UTF8-CN -t UTF8-TW+.
+ - link:/~blynn/gitmagic/intl/fr/[French]: by Alexandre Garel, Paul Gaborit, and Nicolas Deram. Also hosted at http://tutoriels.itaapy.com/[itaapy].
+ - link:/~blynn/gitmagic/intl/de/[German]: by Benjamin Bellee and Armin Stebich; also http://gitmagic.lordofbikes.de/[hosted on Armin's website].
+ - link:/~blynn/gitmagic/intl/pt-BR/[Portuguese-Brazilian]: by J.I.Serafini and Leonardo Siqueira Rodrigues.
+ - link:/~blynn/gitmagic/intl/ru/[Russian]: by Tikhon Tarnavsky, Mikhail Dymskov, and others.
+ - link:/~blynn/gitmagic/intl/es/[Spanish]: by Rodrigo Toledo and Ariset Llerena Tapia.
+ - link:/~blynn/gitmagic/intl/uk/[Ukrainian]: by Volodymyr Bodenchuk.
+ - link:/~blynn/gitmagic/intl/vi/[Vietnamese]: by Trần Ngọc Quân; also http://vnwildman.users.sourceforge.net/gitmagic/[hosted on his website].
+
+.Outras Edições
+
+ - link:book.html[Single webpage]: barebones HTML, with no CSS.
+ - link:book.pdf[PDF file]: printer-friendly.
+ - http://packages.debian.org/gitmagic[Debian package], http://packages.ubuntu.com/gitmagic[Ubuntu package]: get a fast and local copy of this site. Handy http://csdcf.stanford.edu/status/[when this server is offline].
+ - http://www.amazon.com/Git-Magic-Ben-Lynn/dp/1451523343/[Physical book [Amazon.com]]: 64 pages, 15.24cm x 22.86cm, black and white. Handy when there is no electricity.
+
+=== Agradecimentos! ===
+
+É com grande orgulho que vejo o grande número de pessoas que trabalho na tradução deste livro. Eu realmente agradeço pela grande audiência permitida pelos esforços dos tradutores citados a seguir.
+
+Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael Budde, Richard Albury, Tarmigan, Derek Mahar, Frode Aannevik, Keith Rarick, Andy Somerville, Ralf Recker, Øyvind A. Holm, Miklos Vajna, Sébastien Hinderer, Thomas Miedema, Joe Malin, Tyler Breisacher, Sonia Hamilton, Julian Haagsma, Romain Lespinasse, Sergey Litvinov, Oliver Ferrigni, David Toca, Сергей Сергеев, Joël Thieffry, e Baiju Muthukadan contribuiram com correções e melhorias.
+
+François Marier mantém o pacote Debian criado originalmente por Daniel Baumann.
+
+John Hinnegan por ter adquirido o domínio http://www.gitmagic.com/[gitmagic.com].
+
+My gratitude goes to many others for your support and praise. I'm tempted to
+quote you here, but it might raise expectations to ridiculous heights.
+
+If I've left you out by mistake, please tell me or just send me a patch!
+
+=== Licença ===
+
+Este guia é regido pelos termos da http://www.gnu.org/licenses/gpl-3.0.html[a Licença Publica Geral GNU Versão 3]. Naturalmente, os fontes estão num repositório Git, e podem ser obtido digitando:
+
+ $ git clone git://repo.or.cz/gitmagic.git  # Cria um diretório "gitmagic".
+
+ou a partir de algum desses mirrors:
+
+ $ git clone git://github.com/blynn/gitmagic.git
+ $ git clone git://gitorious.org/gitmagic/mainline.git
+ $ git clone https://code.google.com/p/gitmagic/
+ $ git clone git://git.assembla.com/gitmagic.git
+ $ git clone git@bitbucket.org:blynn/gitmagic.git
+
+GitHub, Assembla, e Bitbucket suportam repositórios privados, os dois últimos são grátis.

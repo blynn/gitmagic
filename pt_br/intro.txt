@@ -1,0 +1,57 @@
+== Introdução ==
+
+Usaremos uma analogia para falar sobre controle de versões. Veja http://en.wikipedia.org/wiki/Revision_control[o verbete Sistema de Controle de Versões] para uma explicação mais formal.
+
+=== Trabalhar é Divertido ===
+
+Divirto-me com jogos para computador quase a minha vida toda. Em contrapartida, só comecei a usar sistemas de controle de versões quando adulto. Suspeito que não fui o único, e comparar os dois pode tornar estes conceitos mais fáceis de explicar e entender.
+
+Pense na edição de seu código, documento, ou qualquer outra coisa, como jogar um jogo. Uma vez que tenha feito muitos progressos, e gostaria de de salvá-los. Para isso, você clica em “Salvar” no seu editor preferido.
+
+Porém, isto vai sobrescrever a versão anterior. É como nos antigos jogos onde você só tinha uma espaço para salvar: você pode salvar, mas nunca mais poderá voltar a um estado salvo anteriormente. O que é um pena, pois o estado anterior era uma parte muito divertida do jogo e você gostaria de poder revisitá-lo outra hora. Ou pior, o último estado salvo é dificílimo e você terá que recomeçar.
+
+=== Controle de Versões ===
+
+Ao editar, você pode “Salvar como ...” num arquivo diferente, ou copiar o arquivo antes de sobrescrevê-lo se você quiser manter as versões anteriores. Pode também comprimí-los para economizar espaço. Isto é uma forma rudimentar e muito trabalhosa de controle de versões. Jogos de computador aperfeiçoaram este método, muitos deles acrescentam automaticamente a data e a hora aos estados salvos.
+
+Vamos dificultar um pouco. Digamos que são um monte de arquivos juntos, como os fontes do seu projeto, ou arquivos para um website. Agora se quiser manter suas versões anteriores, terá que arquivar todo um diretório ou vários. Manter muitas versões na mão é inconveniente e rapidamente se tornará caro.
+
+Em alguns jogos de computador, um estado salvo consiste de um diretório cheio de arquivos. Estes jogos escondem estes detalhes do jogador e lhe apresentam uma interface conveniente para gerenciar as diferentes versões neste diretório.
+
+Sistemas de controle de versões não são diferentes. Todos têm uma boa interface para gerenciar seu diretório de versões. Você pode salvar o diretório sempre que desejar, e pode rever qualquer um dos estados salvos quando quiser. Ao contrário da maioria dos jogos de computador, eles são geralmente mais espertos na economia de espaço. Normalmente, apenas uns poucos arquivos mudam de versão para versão, e com poucas diferenças. Armazenar as diferenças, ao invés de todos os arquivos, economiza espaço.
+
+=== Controle distribuído ===
+
+Agora imagine um jogo de computador muito difícil. Tão difícil de terminar que vários jogadores experientes pelo mundo decidem formar uma equipe e compartilhar seus estados salvos do jogo para tentar vencê-lo. Speedruns são exemplos reais: jogadores especializados em diferentes níveis do mesmo jogo colaboram na produção de resultados incríveis.
+
+Como você configura um sistema para que todos possam obter facilmente o que os outros salvarem? E salvar novos estados?
+
+Nos velhos tempos, todos os projetos utilizavam um controle de versões centralizado. Um servidor em algum lugar mantinha os jogos salvos. Ninguém mais teria todos os jogos. Cada jogador mantinha apenas alguns jogos salvos em suas maquinas. Quando algum jogador quiser avançar no jogo, ele pega o ultimo jogo salvo do servidor, joga um pouco, salva e manda de volta para o servidor para que os outros possam usar.
+
+E se um jogador quiser pegar um jogo antigo salvo por algum motivo? Talvez o jogo atual salvo esteja em um nível impossível de jogar devido alguém ter esquecido um objeto três níveis atrás, e é preciso encontrar o último jogo salvo que está em um nível que pode ser completado com sucesso. Ou talvez queira comparar dois jogos salvos para saber o quanto um jogador avançou.
+
+Podem existir vários motivos para ver uma versão antiga, mas o modus operandi é o mesmo. Têm que solicitar ao servidor centralizado a versão antiga. E quanto mais jogos salvos forem necessários, maior é o tráfego de informação.
+
+A nova geração de sistemas de controle de versões, dentre eles o Git, é conhecida como sistemas distribuídos, e pode ser pensada como uma generalização dos sistemas centralizados. Quando os jogadores baixam do servidor principal, eles recebem todos os jogos salvos, e não apenas o mais recente. É como se estivessem espelhando o servidor principal.
+
+A primeira operação de clonagem pode ser bem demorada, especialmente se há um longo histórico, mas é compensada no longo prazo. Um benefício imediato é que, se por qualquer razão desejar uma antiga versão, o trafego de informação com o servidor é desnecessário.
+
+=== Uma superstição ===
+
+Um equívoco popular é que sistemas distribuídos estão mal adaptados a projetos que exijam um repositório central oficial. Nada poderia estar mais longe da verdade. Fotografar alguém não irá roubar a sua alma. Igualmente, clonar o repositório master não diminui sua importância.
+
+Uma boa comparação inicial é: qualquer coisa que um sistema centralizado de controle de versões faz, um sistema distribuído de controle de versões bem concebido pode fazer melhor. Recursos de rede são simplesmente mais onerosos que recursos locais. Embora vejamos mais adiante que existem inconvenientes numa abordagem distribuída, é menos provável que alguém faça comparações errôneas com esta regra de ouro.
+
+Um pequeno projeto pode precisar de apenas uma fração dos recursos oferecidos pelo sistema, mas utilizar um sistema que não permite expansão é como utilizar os algarismos romanos quando calculamos com números pequenos.
+
+E mais, seu projeto pode crescer além da suas expectativas. Usando Git, desde o inicio é como ter um canivete suíço, embora o use na maioria das vezes para abrir garrafas. No dia que necessitar, desesperadamente, de uma chave de fenda você agradecerá por ter mais do que um abridor de garrafas.
+
+=== Conflitos de mesclagem (Merge) ===
+
+Neste tópico, nossa analogia com jogos de computador torna-se ruim. Em vez disso, vamos considerar novamente a edição de um documento.
+
+Suponha que Alice insira uma linha no início do arquivo, e Bob uma no final. Ambos enviam suas alterações. A maioria dos sistemas irá de maneira automática e reativa deduzir o plano de ação: aceitando e mesclando as mudanças, assim as alterações de Alice e Bob serão aplicadas.
+
+Agora suponha que ambos, Alice e Bob, façam alterações distintas na mesma linha. Tornando impossível resolver o conflito sem intervenção humana. A segunda pessoa, entre Alice e Bob, que enviar suas alterações será informado do conflito, e escolherá se aplica sua alteração sobre a do outro, ou revisa a linha para manter ambas as alterações.
+
+Situações muito mais complexas podem surgir. Sistemas de controle de versões são capazes de resolver os casos mais simples, e deixar os casos mais difíceis para nós resolvermos. Normalmente seu comportamento é configurável.

@@ -1,0 +1,194 @@
+== Um pouco de clonagem ==
+
+Em sistemas de controle de versões mais antigos, checkout é a operação padrão para se obter arquivos. Obtendo assim os arquivos do ponto de salvamento informado.
+
+No Git e em outros sistemas distribuídos de controle de versões, clonagem é a operação padrão. Para obter os arquivos, criamos um clone do repositório inteiro. Em outras palavras, você praticamente faz um espelhamento do servidor central. Tudo o que se pode fazer no repositório principal, você pode fazer no seu repositório local.
+
+=== Sincronizando Computadores ===
+
+Eu posso aguentar fazer tarball1 ou usar o *rsync* para backup e sincronizações básicas. Mas, às vezes edito no meu laptop, outras no meu desktop, e os dois podem não ter conversado entre si nesse período.
+
+Inicialize um repositório Git e faça um commit seus arquivos em uma das máquinas. Então faça na outra máquina:
+
+ $ git clone other.computer:/path/to/files
+
+para criar uma segunda cópia dos seus arquivos e do repositório Git. A partir de agora, use:
+
+ $ git commit -a
+ $ git pull other.computer:/path/to/files HEAD
+
+o que deixará os arquivos da máquina em que você está trabalhando, no mesmo estado que estão no outro computador. Se você recentemente fez alguma alteração conflitante no mesmo arquivo, o Git lhe informará e você poderá fazer um novo commit e então escolher o que fazer para resolvê-lo.
+
+=== Controle clássico de código ===
+
+Inicialize um repositório Git para seus arquivos:
+
+ $ git init
+ $ git add .
+ $ git commit -m "Initial commit"
+
+No servidor principal, inicialize um 'repositório vazio' do Git em algum diretório:
+
+ $ mkdir proj.git
+ $ cd proj.git
+ $ git --bare init
+ $ touch proj.git/git-daemon-export-ok
+
+E inicie o daemon Git se necessário:
+
+ $ git daemon --detach  # it may already be running
+
+Algumas hospedagens públicas, siga as instruções para configuração de um repositório git vazio. Na maioria das vezes, isso é feito através do preenchimento de um formulário no site deles.
+
+Envie ('Push') seu projeto para o servidor principal com:
+
+ $ git push central.server/path/to/proj.git HEAD
+
+Para verificar os fontes, um desenvolvedor pode digitar:
+
+ $ git clone central.server/path/to/proj.git
+
+Após realizar as alterações, o desenvolvedor pode salvar as alterações localmente com:
+
+ $ git commit -a
+
+Para atualizar para a ultima versão:
+
+ $ git pull
+
+Qualquer conflito de merge deve ser resolvido e então feito o commit:
+
+ $ git commit -a
+
+Para verificar as mudanças locais no repositório central:
+
+ $ git push
+
+Se o servidor principal possui novas alterações devido a atividades de outros desenvolvedores, o push irá falhar, e o desenvolvedor deverá fazer o pull da ultima versão, resolver qualquer conflito de merge, e então tentar novamente.
+
+Os desenvolvedores devem ter acesso a SSH para utilizar os comandos de push e pull acima. Entretanto qualquer pessoa pode examinar os arquivos-fonte, digitando:
+
+ $ git clone git://central.server/path/to/proj.git
+
+O protocolo nativo do Git é semelhante ao HTTP, não existe nenhum tipo de autenticação, de modo que qualquer um pode baixar o projeto. Da mesma maneira, o push, por default, é proibido pelo protocolo Git.
+
+=== Codigo-fonte secreto ===
+
+Para um projeto que não seja de código aberto, omita o comando touch e garanta que você nunca irá criar um arquivo com o nome `git-daemon-export-ok`. O repositório não poderá ser baixado via protocolo git; somente aqueles com acesso SSH poderão visualiza-lo. Se todos os seus repósitórios forem fechados, não é necessária a execução do daemon do git, pois todas as comunicações irão ocorrer por meio do SSH.
+
+=== Repositorios Vazios ===
+
+Um repositório é chamado de vazio (bare) porque ele não possui um diretório de trabalho; ele contém somente arquivos que normalmente estão escondidos no subdiretório `.git`. Em outras palavras, ele mantém a história de um projeto, e nunca guarda uma “fotografia” de alguma versão.
+
+Um repositório vazio tem um papel semelhante aquele do servidor principal nos sistemas de controle de versão centralizados: o diretório principal (home) de seu projeto. Os desenvolvedores clonam seu projeto a partir dele, e fazem o push da ultima versão oficial para ele. Geralmente, ele reside em um servidor que somente dissemina os dados. O desenvolvimento ocorre nos clones, de modo que o repositório principal (home) pode funcionar sem um diretório de trabalho.
+
+Muitos comandos git falham em repositórios vazios a não ser que a variável de ambiente `GIT_DIR` seja configurada para o path do repositório, ou a opção `--bare` seja fornecida.
+
+=== Push versus Pull ===
+
+Por que nós falamos do comando push, ao invés de basearmos no familar comando pull? Em primeiro lugar, porque o pulling falha em repositórios vazios: ao contrário você deve fazer um fetch, um comando que será discutido mais adiante. Mas mesmo que utilizamos um repositório normal em um servidor centralizado, fazer o pull para ele ainda será problemático. Primeiro, teremos que fazer o login no servidor, e então entrar com o comando pull com o endereço de rede da máquina que estamos fazendo o pull. Os firewall podem interferir, e o que dizer quando não temos acesso a uma janela de shell  do servidor?
+
+Entretanto, além desse caso, desencorajamos o push em um repositório , por causa da confusão que pode ocorrer quando o destino possui um diretório de trabalho.
+
+Em resumo, enquanto estiver aprendendo a utilizar o git, somente faça push quando o alvo for um repositório vazio, caso contrário utilize o pull.
+
+=== Fazendo um Fork do Projeto ===
+
+Chateado com a rumo que o seu projeto está tomando? Acha que pode fazer um trabalho melhor? Então no seu servidor:
+
+ $ git clone git://main.server/path/to/files
+
+Em seguida avise a todos sobre seu fork do projeto no seu servidor.
+
+A qualquer hora, você poderá mesclar (merge) suas mudanças do projeto original no mesmo com:
+
+ $ git pull
+
+=== Backup Supremos ===
+
+Gostaria de ter vários arquivos geográficamente dispersos, redundantes e anti-falsificações? Se seu projeto tem muitos desenvolvedores, não faça nada! Cada clonagem do seu código é um backup efetivo. E não apenas uma cópia do estado atual, e sim o histórico completo do seu projeto. Graças ao hash criptográfico, se alguma clonagem for corrompida, ela será identificada assim que tentar se comunicar com as outras.
+
+Se seu projeto não é tão popular, encontre quantos servidores puder para hospedar seus clones.
+
+Um paranóico verdadeiro sempre anotará os últimos 20 byte do hash SHA1 do cabeçalho (HEAD) em algum lugar seguro. Tem que ser seguro, e não privado. Por exemplo, publicá-lo em um jornal funciona bem, pois é muito difícil para um atacante alterar todas as cópias de um jornal.
+
+=== Multitarefa na velocidade da luz ===
+
+Digamos que você queira trabalhar em diversas funções em paralelo. Então, faça um commit do seu projeto executando:
+
+ $ git clone . /some/new/directory
+
+Graças aos http://en.wikipedia.org/wiki/Hard_link[hardlinking], os clones locais necessitam de menos tempo e espaço do que os backups comuns.
+
+Agora você pode trabalhar em duas funções independentes de forma simultânea. Por exemplo, pode editar um clone enquanto o outro está sendo compilado. A qualquer momento, você pode fazer um commit e pegar (pull) as alterações de outro clone:
+
+ $ git pull /the/other/clone HEAD
+
+=== Controle de Versões de Guerrilha ===
+
+Você está trabalhando em um projeto que utiliza outro sistema de controle de versões, e sente saudade do Git? Inicialize um repositório Git no seu diretório de trabalho:
+
+ $ git init
+ $ git add .
+ $ git commit -m "Initial commit"
+
+Faça um clone dele:
+
+ $ git clone . /some/new/directory
+
+Agora vá para o novo diretório e trabalhe nele, não no anterior, usando Git para felicidade geral da nação. De vez em quando você desejará sincronizar com os outros, neste caso, vá para o diretório original, sincronize usando o outro sistema de controle de versões, e então digite:
+
+ $ git add .
+ $ git commit -m "Sync with everyone else"
+
+Depois vá para o novo diretório e execute:
+
+ $ git commit -a -m "Description of my changes"
+ $ git pull
+
+O procedimento para enviar suas alterações para os outros depende do outro sistema de controle de versões. O novo diretório contém os arquivos com as suas alterações. Execute qualquer comando do outro sistema de controle de versões necessário para enviá-las para o repositório central.
+
+O subversion, é talvez o melhor sistema de controle de versões centralizado, é utilizado em muitos projetos. O comando *git svn* automatiza tudo isso para repositórios Subversion, e também pode ser utilizado para http://google-opensource.blogspot.com/2008/05/export-git-project-to-google-code.html[exportar um repositório Git para um repositório Subversion].
+
+=== Mercurial ===
+
+Mercurial é um sistema de controle de versões semelhante, e que pode trabalhar perfeitamente junto com o Git. Com o plugin `hg-git`, um usuário do Mercurial pode realizar push e pulls de um repositorio Git.
+
+Para obter o `hg-git` plugin com o Git:
+
+ $ git clone git://github.com/schacon/hg-git.git
+
+ou no Mercurial:
+
+ $ hg clone http://bitbucket.org/durin42/hg-git/
+
+Infelizmente, não conheço de um plugin semelhante para o Git. Por essa razão, aconselho o Git no lugar do Mercurial para o repositório principal, mesmo que você prefira o Mercurial. Com o Mercurial, geralmente um voluntário mantém um repositorio Git paralelo para acomodar os usuários Git, e graças ao plugin `hg-git`, um projeto Git automaticamente acomoda os usuários Mercurial.
+
+Embora o plugin converta um repositorio Mercurial em um repositório Git fazendo o push para um repositório vazio, esse serviço é mais fácil de fazer com o script `hg-fast-export.sh` disponível em:
+
+ $ git clone git://repo.or.cz/fast-export.git
+
+Para fazer a conversão, em um diretório vazio, execute:
+
+ $ git init
+ $ hg-fast-export.sh -r /hg/repo
+
+após adicionar o script ao seu `$PATH`.
+
+=== Bazaar ===
+
+Vamos mencionar o Bazaar rapidamente por que é o sistema de controle de versões distribuído mais utilizado, depois do Git e do Mercurial.
+
+Bazaar tem a vantagem de retrospectiva, já que é relativamente recente; seus projetistas puderam aprender com os erros dos projetos anteriores, e evitar as principais falhas. Além disso, seus desenvolvedores estão preocupados com a portabilidade e interoperação com outros sistemas de controle de versão.
+
+O plugin `bzr-git` permite que os usuários do Bazaar trabalhem com os repositorios Git de alguma forma. O programa `tailor` converte um repositório Bazaar em repositórios Git, e pode fazer isso de forma incremental, enquanto que `bzr-fast-export` é adequada para realizar conversões uma única vez.
+
+=== Por que uso o Git? ===
+
+Originalmente, escolhi o Git porque escutei que poderia gerenciar o inimaginável e ingerenciável código fonte do kernel do Linux. E nunca senti necessidade de mudar. O Git tem me servido admiravelmente bem, e já estou acostumado com suas falhas. Como utilizo na maior parte do tempo o Linux, os problemas nas outras plataformas não são importantes.
+
+Também, prefiro programas em C e scripts bash a executáveis tais como scripts Python: existem poucas dependências, e sou viciado em tempos de execução muito rápidos.
+
+Já pensei também como o Git poderia ser melhorado, criando minha própria ferramenta Git, mas somente como um exercício académico. Assim que completei meu projeto, continuei com o git, pois os ganhos seriam mínimos para justificar a utilização de um sistema diferente.
+
+Naturalmente, você pode e precisa pensar diferente, e pode se sentir melhor com outro sistema. No entanto, você não pode estar muito errado com o Git.
