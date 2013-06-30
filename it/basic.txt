@@ -1,7 +1,7 @@
 == Trucchi di base  ==
 
-Piuttosto che immergerci nel mare di comandi di Git, bagnamoci un po' i
-piedi con i seguenti esempi elementari. Nonostance la loro semplicità,
+Piuttosto che immergerci nel mare di comandi di Git, bagniamoci un po' i
+piedi con i seguenti esempi elementari. Nonostante la loro semplicità,
 ognuno di loro è utile. In effetti, durante i miei mesi iniziali
 d'utilizzazione di Git, non mi sono mai avventurato al di là di del
 materiale in questo capitolo.
@@ -9,14 +9,14 @@ materiale in questo capitolo.
 === Salvare lo stato corrente ===
 
 Siete sul punto di fare qualcosa di drastico? Prima di proseguire,
-catturate lo stato di tutti i files nella directory corrente:
+catturate lo stato di tutti i file nella directory corrente:
 
  $ git init
  $ git add .
  $ git commit -m "Il mio primo backup"
 
 Qualora le cose dovessero andare per il peggio, potrete sempre
-ripristinare la versione salvatae:
+ripristinare la versione salvate:
 
  $ git reset --hard
 
@@ -24,20 +24,20 @@ Per salvare un nuovo state:
 
  $ git commit -a -m "Un altro backup"
 
-=== Aggiungere, rimuovere e rinominare files ===
+=== Aggiungere, rimuovere e rinominare file ===
 
-Le istruzioni che abbiamo appena visto tengono traccia solo dei files
+Le istruzioni che abbiamo appena visto tengono traccia solo dei file
  che erano presenti nel momento dell'esecuzione di *git add*. Ma se
- aggiungete nuovi files o sottocartelle, dovrete dirlo a Git:
+ aggiungete nuovi file o sottocartelle, dovrete dirlo a Git:
 
  $ git add readme.txt Documentation
 
-Analogamente se volete che Git ignori alcuni files:
+Analogamente se volete che Git ignori alcuni file:
 
  $ git rm kludge.h obsolete.c
  $ git rm -r incriminating/evidence/
 
-Git rimuoverà questi files per voi, se non l'avete ancora fatto.
+Git rimuoverà questi file per voi, se non l'avete ancora fatto.
 
 Un file può essere rinominato rimuovendo il vecchio nome e aggiungendo
 il nuovo nome. È anche possibile usare la scorciatoia *git mv* che segue
@@ -53,7 +53,7 @@ tutte sbagliate. In quel caso:
 
  $ git log
 
-vi nostra una lista dei commits più recenti, accompagnati dal loro
+vi nostra una lista dei commit più recenti, accompagnati dal loro
 codice SHA1:
 
 ----------------------------------
@@ -76,15 +76,15 @@ Digitate:
 
  $ git reset --hard 766f
 
-per reinstaurare lo stato corrspondente al commit corrente e
-permanetemente cancellare i commits più recenti.
+per reinstaurare lo stato corrispondente al commit corrente e
+permanentemente cancellare i commit più recenti.
 
 Altre volte potrebbe capitarvi di voler fare solo un breve salto in uno
 stato precedente. In questo caso eseguite:
 
  $ git checkout 82f5
 
-Questo vi riporta indietro nel tempo, preservando i commits più recenti.
+Questo vi riporta indietro nel tempo, preservando i commit più recenti.
 Bisogna però sapere che, come in ogni viaggio nel tempo in un film di
 fantascienza, se ora modificate e sottomettete un commit vi ritroverete
 in una realtà alternativa, perché avrete fatto delle azioni differenti
@@ -96,7 +96,7 @@ ricordare che
 
  $ git checkout master
 
-vi riporta al presente. In oltre, per evitare che Git si lamenti,
+vi riporta al presente. Inoltre, per evitare che Git si lamenti,
 ricordatevi di fare un commit o un reset delle vostre modifiche prima di
 fare un checkout.
 
@@ -113,13 +113,13 @@ Per riprendere l'analogia con i videogiochi digitate:
   tardi>>.
 
 
-Potete scegliere di ripristinare files e sottocartelle particolari
+Potete scegliere di ripristinare file e sottocartelle particolari
 aggiungendoli alla fine del seguente comando:
 
  $ git checkout 82f5 un.file un-altro.file
 
 Fate però attenzione: questa forma di *checkout* può sovrascrivere dei
-files senza avvertimenti. Per evitare incidenti, fate un commit prima di
+file senza avvertimenti. Per evitare incidenti, fate un commit prima di
 eseguire un comando di checkout, specialmente se siete alle prime armi
 con Git. In generale, ogni volta che non siete sicuri delle conseguenze
 di comando, che sia di Git o no, eseguite prima *git commit -a*.
@@ -159,7 +159,7 @@ Fate una copia di un progetto gestito da Git digitando:
 
  $ git clone git://server/percorso/verso/files
 
-Ad esempio, per ottenere tutti i files che ho usato per creare questo
+Ad esempio, per ottenere tutti i file che ho usato per creare questo
 sito:
 
  $ git clone git://git.or.cz/gitmagic.git
@@ -195,7 +195,7 @@ In seguito dite agli utenti di eseguire:
  $ git clone il.vostro.computer:/percorso/verso/lo/script
 
 per scaricare il vostro script. Questo assume che tutti abbiamo accesso
-ssh al vostro computer. Se non fosse il caso, esguite *git daemon* e
+ssh al vostro computer. Se non fosse il caso, eseguite *git daemon* e
 dite ai vostri utenti di eseguire invece:
 
  $ git clone git://il.vostro.computer/percorso/verso/lo/script
@@ -244,13 +244,13 @@ lanciate *git instaweb* e lanciate il vostro browser.
 === Esercizio ===
 
 
-Siano A, B, C, D quattro commits successivi, dove B è identico a A, con
-l'eccezione che alcuni files sono stati rimossi. Vogliamo rimettere i
-files in D. Come possiamo fare?
+Siano A, B, C, D quattro commit successivi, dove B è identico a A, con
+l'eccezione che alcuni file sono stati rimossi. Vogliamo rimettere i
+file in D. Come possiamo fare?
 
-Ci sono almeno tre soluzioni. Assumiamo che siao in D:
+Ci sono almeno tre soluzioni. Assumiamo che siamo in D:
 
-  1. La differenza tra A e B sono i files rimossi. Possiamo creare una
+  1. La differenza tra A e B sono i file rimossi. Possiamo creare una
   patch che rappresenti la differenza e applicarla:
 
    $ git diff B A | git apply
