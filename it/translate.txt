@@ -1,15 +1,15 @@
-== Appendice B: Tradurre Questo Manuale  ==
+== Appendice B: Tradurre questo manuale  ==
 
 La mia raccomandazione è di rispettare la seguente procedura per la
 traduzione di questo manuale, in maniera da poter rapidamente generare
 le versioni HTML e PDF del documento con gli script forniti, e così che
-tutte le traduzioni siano incorporate nello stesso repository.
+tutte le traduzioni siano incorporate nello stesso deposito.
 
 Fate un clone della sorgente, poi create una directory il cui nome
 corrisponda http://www.iana.org/assignments/language-subtag-registry[al
 codice IETF della lingua desiderata] : vedere
 http://www.w3.org/International/articles/language-tags/Overview.en.php[l'articolo
-del W3C concernente internationalizzazione]. Per esempio la versione in
+del W3C concernente internazionalizzazione]. Per esempio la versione in
 inglese è nella directory "en", quella in giapponese è in "ja". Nella
 nuova directory traducete i file +txt+ della directory originari "en".
 
