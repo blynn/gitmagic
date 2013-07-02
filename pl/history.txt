@@ -1,0 +1,260 @@
+== Lessons of History ==
+
+A consequence of Git's distributed nature is that history can be edited
+easily. But if you tamper with the past, take care: only rewrite that part of
+history which you alone possess. Just as nations forever argue over who
+committed what atrocity, if someone else has a clone whose version of history
+differs to yours, you will have trouble reconciling when your trees interact.
+
+Some developers strongly feel history should be immutable, warts and all.
+Others feel trees should be made presentable before they are unleashed in
+public. Git accommodates both viewpoints. Like cloning, branching, and merging,
+rewriting history is simply another power Git gives you. It is up to you
+to use it wisely.
+
+=== I Stand Corrected ===
+
+Did you just commit, but wish you had typed a different message? Then run:
+
+ $ git commit --amend
+
+to change the last message. Realized you forgot to add a file? Run *git add* to
+add it, and then run the above command.
+
+Want to include a few more edits in that last commit? Then make those edits and run:
+
+ $ git commit --amend -a
+
+=== ... And Then Some ===
+
+Suppose the previous problem is ten times worse. After a lengthy session you've
+made a bunch of commits. But you're not quite happy with the way they're
+organized, and some of those commit messages could use rewording. Then type:
+
+ $ git rebase -i HEAD~10
+
+and the last 10 commits will appear in your favourite $EDITOR. A sample excerpt:
+
+    pick 5c6eb73 Added repo.or.cz link
+    pick a311a64 Reordered analogies in "Work How You Want"
+    pick 100834f Added push target to Makefile
+
+Older commits precede newer commits in this list, unlike the `log` command.
+Here, 5c6eb73 is the oldest commit, and 100834f is the newest. Then:
+
+- Remove commits by deleting lines. Like the revert command, but off the
+  record: it will be as if the commit never existed.
+- Reorder commits by reordering lines.
+- Replace `pick` with:
+   * `edit` to mark a commit for amending.
+   * `reword` to change the log message.
+   * `squash` to merge a commit with the previous one.
+   * `fixup` to merge a commit with the previous one and discard the log message.
+
+For example, we might replace the second `pick` with `squash`:
+
+    pick 5c6eb73 Added repo.or.cz link
+    squash a311a64 Reordered analogies in "Work How You Want"
+    pick 100834f Added push target to Makefile
+
+After we save and quit, Git merges a311a64 into 5c6eb73. Thus *squash* merges
+into the next commit up: think ``squash up''.
+
+Git then combines their log messages and presents them for editing. The
+command *fixup* skips this step; the squashed log message is simply discarded.
+
+If you marked a commit with *edit*, Git returns you to the past, to the oldest
+such commit. You can amend the old commit as described in the previous section,
+and even create new commits that belong here. Once you're pleased with the
+``retcon'', go forward in time by running:
+
+ $ git rebase --continue
+
+Git replays commits until the next *edit*, or to the present if none remain.
+
+You can also abandon the rebase with:
+
+ $ git rebase --abort
+
+So commit early and commit often: you can tidy up later with rebase.
+
+=== Local Changes Last ===
+
+You're working on an active project. You make some local commits over time, and
+then you sync with the official tree with a merge. This cycle repeats itself a few times before you're ready to push to the central tree.
+
+But now the history in your local Git clone is a messy jumble of your changes and the official changes. You'd prefer to see all your changes in one contiguous section, and after all the official changes.
+
+This is a job for *git rebase* as described above. In many cases you can use
+the *--onto* flag and avoid interaction.
+
+Also see *git help rebase* for detailed examples of this amazing command. You can split commits. You can even rearrange branches of a tree.
+
+Take care: rebase is a powerful command. For complicated rebases, first make a
+backup with *git clone*.
+
+=== Rewriting History ===
+
+Occasionally, you need the source control equivalent of airbrushing people out
+of official photos, erasing them from history in a Stalinesque fashion. For
+example, suppose we intend to release a project, but it involves a file that
+should be kept private for some reason. Perhaps I left my credit card number in
+a text file and accidentally added it to the project. Deleting the file is
+insufficient, for the file can be accessed from older commits. We must remove
+the file from all commits:
+
+ $ git filter-branch --tree-filter 'rm top/secret/file' HEAD
+
+See *git help filter-branch*, which discusses this example and gives a faster
+method. In general, *filter-branch* lets you alter large sections of history
+with a single command.
+
+Afterwards, the +.git/refs/original+ directory describes the state of affairs before the operation. Check the filter-branch command did what you wanted, then delete this directory if you wish to run more filter-branch commands.
+
+Lastly, replace clones of your project with your revised version if you want to interact with them later.
+
+=== Making History ===
+
+[[makinghistory]]
+Want to migrate a project to Git? If it's managed with one of the more well-known systems, then chances are someone has already written a script to export the whole history to Git.
+
+Otherwise, look up *git fast-import*, which reads text input in a specific
+format to create Git history from scratch. Typically a script using this
+command is hastily cobbled together and run once, migrating the project in a
+single shot.
+
+As an example, paste the following listing into temporary file, such as `/tmp/history`:
+----------------------------------
+commit refs/heads/master
+committer Alice <alice@example.com> Thu, 01 Jan 1970 00:00:00 +0000
+data <<EOT
+Initial commit.
+EOT
+
+M 100644 inline hello.c
+data <<EOT
+#include <stdio.h>
+
+int main() {
+  printf("Hello, world!\n");
+  return 0;
+}
+EOT
+
+
+commit refs/heads/master
+committer Bob <bob@example.com> Tue, 14 Mar 2000 01:59:26 -0800
+data <<EOT
+Replace printf() with write().
+EOT
+
+M 100644 inline hello.c
+data <<EOT
+#include <unistd.h>
+
+int main() {
+  write(1, "Hello, world!\n", 14);
+  return 0;
+}
+EOT
+
+----------------------------------
+
+Then create a Git repository from this temporary file by typing:
+
+ $ mkdir project; cd project; git init
+ $ git fast-import --date-format=rfc2822 < /tmp/history
+
+You can checkout the latest version of the project with:
+
+ $ git checkout master .
+
+The *git fast-export* command converts any repository to the
+*git fast-import* format, whose output you can study for writing exporters,
+and also to transport repositories in a human-readable format. Indeed,
+these commands can send repositories of text files over text-only channels.
+
+=== Where Did It All Go Wrong? ===
+
+You've just discovered a broken feature in your program which you know for sure was working a few months ago. Argh! Where did this bug come from? If only you had been testing the feature as you developed.
+
+It's too late for that now. However, provided you've been committing often, Git
+can pinpoint the problem:
+
+ $ git bisect start
+ $ git bisect bad HEAD
+ $ git bisect good 1b6d
+
+Git checks out a state halfway in between. Test the feature, and if it's still broken:
+
+ $ git bisect bad
+
+If not, replace "bad" with "good". Git again transports you to a state halfway
+between the known good and bad versions, narrowing down the possibilities.
+After a few iterations, this binary search will lead you to the commit that
+caused the trouble. Once you've finished your investigation, return to your
+original state by typing:
+
+ $ git bisect reset
+
+Instead of testing every change by hand, automate the search by running:
+
+ $ git bisect run my_script
+
+Git uses the return value of the given command, typically a one-off script, to
+decide whether a change is good or bad: the command should exit with code 0
+when good, 125 when the change should be skipped, and anything else between 1
+and 127 if it is bad. A negative return value aborts the bisect.
+
+You can do much more: the help page explains how to visualize bisects, examine
+or replay the bisect log, and eliminate known innocent changes for a speedier
+search.
+
+=== Who Made It All Go Wrong? ===
+
+Like many other version control systems, Git has a blame command:
+
+ $ git blame bug.c
+
+which annotates every line in the given file showing who last changed it, and when. Unlike many other version control systems, this operation works offline, reading only from local disk.
+
+=== Personal Experience ===
+
+In a centralized version control system, history modification is a difficult
+operation, and only available to administrators. Cloning, branching, and
+merging are impossible without network communication. So are basic operations
+such as browsing history, or committing a change. In some systems, users
+require network connectivity just to view their own changes or open a file for
+editing.
+
+Centralized systems preclude working offline, and need more expensive network
+infrastructure, especially as the number of developers grows. Most
+importantly, all operations are slower to some degree, usually to the point
+where users shun advanced commands unless absolutely necessary. In extreme
+cases this is true of even the most basic commands. When users must run slow
+commands, productivity suffers because of an interrupted work flow.
+
+I experienced these phenomena first-hand. Git was the first version control
+system I used. I quickly grew accustomed to it, taking many features for
+granted. I simply assumed other systems were similar: choosing a version
+control system ought to be no different from choosing a text editor or web
+browser.
+
+I was shocked when later forced to use a centralized system. A flaky internet
+connection matters little with Git, but makes development unbearable when it
+needs to be as reliable as local disk. Additionally, I found myself conditioned
+to avoid certain commands because of the latencies involved, which ultimately
+prevented me from following my desired work flow.
+
+When I had to run a slow command, the interruption to my train of thought
+dealt a disproportionate amount of damage. While waiting for server
+communication to complete, I'd do something else to pass the time, such as
+check email or write documentation. By the time I returned to the original
+task, the command had finished long ago, and I would waste more time trying to
+remember what I was doing. Humans are bad at context switching.
+
+There was also an interesting tragedy-of-the-commons effect: anticipating
+network congestion, individuals would consume more bandwidth than necessary on
+various operations in an attempt to reduce future delays. The combined efforts
+intensified congestion, encouraging individuals to consume even more bandwidth
+next time to avoid even longer delays.
