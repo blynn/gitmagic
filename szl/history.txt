@@ -1,28 +1,28 @@
 == Lekcja historii ==
 
-Jedną z charakterystycznych cech rozproszonej natury Git jest to, że jego kronika historii może być łatwo edytowana. Ale jeśli masz zamiar manipulować przeszłością, bądź ostrożny: zmieniaj tylko tą część historii, którą wyłącznie jedynie ty sam posiadasz. Tak samo jak Narody ciągle dyskutują, który jakie popełnił okrucieństwa, popadniesz w kłopoty przy synchronizacji, jeśli ktoś inny posiada klon z różniącą się historią i jeśli te odgałęzienia mają się wymieniać.
+Jedną z charakterystycznych cech rozproszonej natury Git jest to, że jego kronika historii może być łatwo edytowana.  Ale jeśli masz zamiar manipulować przeszłością, bądź ostrożny: zmieniaj tylko tą część historii, którą wyłącznie jedynie ty sam posiadasz. Tak samo jak Narody ciągle dyskutują, który jakie popełnił okrucieństwa, popadniesz w kłopoty przy synchronizacji, jeśli ktoś inny posiada klon z różniącą się historią i jeśli te odgałęzienia mają się wymieniać.
 
-Niektórzy programiści zarzekają się w kwestii nienaruszalności historii - ze wszystkimi jej błędami i niedociągnięciami. Inni uważają, że odgałęzienia powinny dobrze się prezentować nim zostaną przedstawione publicznie. Git jest wyrozumiały dla obydwu stron. Tak samo jak 'clone', 'branch', czy 'merge', możliwość zmian kroniki historii to tylko kolejna mocna strona Gita. Stosowanie lub nie, tej możliwości zależy wyłącznie od ciebie.
+Niektórzy programiści zarzekają się w kwestii nienaruszalności historii - ze wszystkimi jej błędami i niedociągnięciami. Inni uważają, ze odgałęzienia powinny dobrze się prezentować nim zostaną przedstawione publicznie. Git jest wyrozumiały dla obydwóch stron. Tak samo jak 'clone', 'branch' czy 'merge', możliwość zmian kroniki historii to tylko kolejna mocna strona Gita. Stosowanie lub nie, tej możliwości zależy wyłącznie od ciebie.
 
 === Muszę się skorygować ===
 
-Właśnie wykonałaś 'commit', ale chętnie chciałbyś podać inny opis? Wpisujesz:
+Właśnie wykonałeś 'commit', ale chętnie chciałbyś podać inny opis? Wpisujesz:
 
  $ git commit --amend 
 
-by zmienić ostatni opis. Zauważasz jednak, że zapomniałaś dodać jakiegoś pliku? Wykonaj *git add*, by go dodać a następnie poprzednią instrukcje.
+by zmienić ostatni opis. Zauważasz jednak, że zapomniałeś dodać jakiegoś pliku? Wykonaj *git add*, by go dodać a następnie poprzednią instrukcje.
 
 Chcesz wprowadzić jeszcze inne zmiany do ostatniego 'commit'? Wykonaj je i wpisz:
 
 $ git commit --amend -a 
 
-=== ... i jeszcze coś ===
+=== ...  i jeszcze coś ===
 
-Załóżmy, że poprzedni problem będzie 10 razy gorszy. Po dłuższej sesji zrobiłaś całą masę 'commits'. Nie jesteś jednak szczęśliwy z takiego zorganizowania, a niektóre z 'commits' mogłyby być inaczej sformułowane. Wpisujesz:
+Załóżmy, że poprzedni problem będzie 10 razy gorszy. Po dłuższej sesji zrobiłeś całą masę 'commits'. Nie jesteś jednak szczęśliwy z takiego zorganizowania a niektóre z 'commits' mogłyby być inaczej sformułowane. Wpisujesz:
 
  $ git rebase -i HEAD~10 
 
-a ostatnie 10 'commits' pojawią się w preferowanym przez ciebie edytorze. Przykładowy wyciąg:
+i ostatnie 10 'commits' pojawią się w preferowanym przez ciebie edytorze. Przykładowy wyciąg:
 
     pick 5c6eb73 Added repo.or.cz link
     pick a311a64 Reordered analogies in "Work How You Want"
@@ -41,7 +41,7 @@ Tutaj 5c6eb73 jest najstarszym 'commit', a 100834f najnowszym. By to zmienić:
 
 Na przykład chcemy zastąpić drugi `pick` na `squash`:
 
-Zapamiętaj i zakończ. Jeśli zaznaczyłaś jakiś 'commit' do 'edit', wpisz:
+Zapamiętaj i zakończ. Jeśli zaznaczyłeś jakiś 'commit' poprzez 'edit', wpisz:
 
  $ git commit --amend 
 
@@ -49,23 +49,26 @@ Zapamiętaj i zakończ. Jeśli zaznaczyłaś jakiś 'commit' do 'edit', wpisz:
     squash a311a64 Reordered analogies in "Work How You Want"
     pick 100834f Added push target to Makefile
 
-Po zapamiętaniu i wyjściu Git połączy a311a64 z 5c6eb73.
-Thus *squash* merges
+After we save and quit, Git merges a311a64 into 5c6eb73. Thus *squash* merges
 into the next commit up: think ``squash up''.
 
-Git połączy wiadomości logów i zaprezentuje je do edycji. Polecenie *fixup* pominie ten krok, wciśnięte logi zostaną pominięte. 
+Git then combines their log messages and presents them for editing. The
+command *fixup* skips this step; the squashed log message is simply discarded.
 
-Jeśli zaznaczyłeś 'commit' opcją *edit*, Git przeniesie cię do najstarszego takiego 'commit'. Możesz użyć 'amend', jak opisane w poprzednim rozdziale, i utworzyć nowy 'commit' mający się tu znaleźć. Gdy już będziesz zadowolony z ``retcon'', przenieś się na przód w czasie:
+If you marked a commit with *edit*, Git returns you to the past, to the oldest
+such commit. You can amend the old commit as described in the previous section,
+and even create new commits that belong here. Once you're pleased with the
+``retcon'', go forward in time by running:
 
  $ git rebase --continue 
 
-Git powtarza 'commits' aż do następnego *edit* albo na przyszłość, jeśli żadne nie stoją na prożu.
+Git replays commits until the next *edit*, or to the present if none remain.
 
-Możesz równierz zrezygnować z 'rebase':
+You can also abandon the rebase with:
 
  $ git rebase --abort
 
-A więc, stosuj polecenie 'commit' wcześnie i często: możesz później zawsze posprzątać za pomocą 'rebase'.
+A więc, stosuj polecenie 'commit' wcześnie i często: możesz później posprzątać za pomocą 'rebase'.
 
 === Lokalne zmiany na koniec ===
 
@@ -87,7 +90,7 @@ Czasami potrzebny ci rodzaj systemu kontroli porównywalnego do wyretuszowania o
 
 Sprawdź *git help filter-branch*, gdzie przykład ten został wytłumaczony i przytoczona została jeszcze szybsza metoda. Ogólnie poprzez *filter-branch* da się dokonać zmian w dużych zakresach historii poprzez tylko jedno polecenie.
 
-Po tej operacji katalog +.git/refs/original+ opisuje stan przed jej wykonaniem. Sprawdź czy 'filter-branch' zrobił to, co od niego oczekiwałaś, następnie skasuj ten katalog zanim wykonasz następne polecenia 'filter-branch'.
+Po tej operacji katalog +.git/refs/original+ opisuje stan przed jej wykonaniem. Sprawdź czy 'filter-branch' zrobił to, co od niego oczekiwałeś, następnie skasuj ten katalog zanim wykonasz następne polecenia 'filter-branch'.
 
 Wreszcie zamień wszystkie klony twojego projektu na zaktualizowaną wersję, jeśli masz zamiar prowadzić z nimi wymianę. 
 
@@ -135,12 +138,12 @@ EOT
 
 ----------------------------------
 
-Następnie utwórz repozytorium Git z tymczasowego pliku poprzez wpisanie:
+Następnie utwórz repozytorium git z tymczasowego pliku poprzez wpisanie:
 
  $ mkdir project; cd project; git init 
  $ git fast-import --date-format=rfc2822 < /tmp/history 
 
-Aktualną wersję projektu możesz przywołać poprzez:
+Aktualną wersję projektu możesz przywołać ('checkout') poprzez:
 
  $ git checkout master
 
@@ -148,9 +151,9 @@ Polecenie *git fast-export* konwertuje każde repozytorium do formatu *git fast-
 
 === Gdzie wszystko się zepsuło? ===
 
-Właśnie znalazłaś w swoim programie funkcję, która już nie chce działać, a jesteś pewna, że czyniła to jeszcze kilka miesięcy temu. Ach! Skąd wziął się ten błąd? A gdybym tylko lepiej przetestowała ją wcześniej, zanim weszła do wersji produkcyjnej.
+Właśnie znalazłeś w swoim programie funkcję, która już nie chce działać, a jesteś pewna, że czyniła to jeszcze kilka miesięcy temu. Ach! Skąd wziął się ten błąd? A gdybym tylko lepiej przetestowała ją wcześniej, zanim weszła do wersji produkcyjnej.
 
-Na to jest już za późno. Jakby nie było, pod warunkiem, że często używałaś 'commit', Git może ci zdradzić gdzie szukać problemu.
+Na to jest już za późno. Jakby nie było, pod warunkiem, że często używałeś 'commit', Git może ci zdradzić gdzie szukać problemu.
 
  $ git bisect start
  $ git bisect bad HEAD
@@ -182,11 +185,11 @@ które komentuje każdą linię podanego pliku, by pokazać kto ją ostatnio zmi
 
 === Osobiste doświadczenia ===
 
-W scentralizowanym systemie kontroli wersji praca nad kroniką historii jest skomplikowanym zadaniem i zarezerwowanym głównie dla administratorów. Polecenia 'clone', 'branch' czy 'merge' nie są możliwe bez podłączenia do sieci. Również takie podstawowe funkcje, jak przeszukanie historii czy 'commit' jakiejś zmiany. W niektórych systemach użytkownik potrzebuje działającej sieci nawet by zobaczyć dokonane przez siebie zmiany, albo by w ogóle otworzyć plik do edycji.
+W scentralizowanym systemie kontroli wersji praca nad kroniką historii jest skomplikowanym zadaniem i zarezerwowanym głównie dla administratorów. Polecenia 'clone', 'branch' czy 'merge' nie są możliwe bez podłączenia do sieci. Również takie podstawowe funkcje, jak przeszukanie historii czy 'commit' jakiejś zmiany. W niektórych systemach użytkownik potrzebuje działającej sieci nawet by zobaczyć  dokonane przez siebie zmiany, albo by w ogóle otworzyć plik do edycji.
 
 Scentralizowane systemy wykluczają pracę offline i wymagają drogiej infrastruktury sieciowej, w szczególności gdy wzrasta liczba programistów. Najgorsze jednak, iż z czasem wszystkie operacje stają się wolniejsze, z reguły do osiągnięcia punktu, gdzie użytkownicy unikają zaawansowanych poleceń, aż staną się one absolutnie konieczne. W ekstremalnych przypadkach dotyczy to również poleceń podstawowych. Jeśli użytkownicy są zmuszeni do wykonywania powolnych poleceń, produktywność spada, ponieważ ciągle przerywany zostaje tok pracy.
 
-Dowiedziałem się o tym fenomenie na sobie samym. Git był pierwszym systemem kontroli wersji którego używałem. Szybko dorosłem do tej aplikacji i przyjąłem wiele funkcji za oczywiste. Wychodziłem też z założenia, że inne systemy są podobne: wybór systemu kontroli wersji nie powinien zbyt bardzo odbiegać od wyboru edytora tekstu, czy przeglądarki internetowej.
+Dowiedziałem się o tym fenomenie z pierwszej ręki. Git był pierwszym systemem kontroli wersji którego używałem. Szybko dorosłem do tej aplikacji i przyjąłem wiele funkcji za oczywiste.  Wychodziłem też z założenia, że inne systemy są podobne: wybór systemu kontroli wersji nie powinien zbyt bardzo odbiegać od wyboru edytora tekstu, czy przeglądarki internetowej.
 
 Byłem zszokowany, gdy musiałem później korzystać ze scentralizowanego systemu. Niesolidne połączenie internetowe ma niezbyt duży wpływ na Gita, praca staje się jednak prawie nie możliwa, gdy wymagana jest niezawodność porównywalny z lokalnym dyskiem. Poza tym sam łapałem się na tym, że unikałem pewnych poleceń i związanym z nimi czasem oczekiwania, w sumie wszystko to wpływało mocno na wypracowany przeze mnie system pracy.
 

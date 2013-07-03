@@ -1,245 +1,190 @@
-== Branch Wizardry ==
+== Magia 'branch' ==
 
-Instant branching and merging are the most lethal of Git's killer features.
+Szybkie, natychmiastowe działanie poleceń 'branch' i 'merge', to jedne z najbardziej zabójczych właściwości Gita.
 
-*Problem*: External factors inevitably necessitate context switching. A severe
-bug manifests in the released version without warning. The deadline for a
-certain feature is moved closer. A developer whose help you need for a key section of the project is about to leave. In all cases, you must abruptly drop what you are doing and focus on a completely different task.
+*Problem*: Zewnętrzne faktory narzucają konieczność zmiany kontekstu. Poważne błędy w opublikowanej wersji ujawniły się bez ostrzeżenia. Skrócono termin opublikowania pewnej właściwości. Autor, którego pomocy potrzebujesz w jednej z kluczowych sekcji postanawia opóścić projekt. We wszystkich tych przypadkach musisz natychmiastowo zaprzestać bieżących prac i skoncentrować się nad zupełnie innymi zadaniami.
 
-Interrupting your train of thought can be detrimental to your productivity, and the more cumbersome it is to switch contexts, the greater the loss. With centralized version control we must download a fresh working copy from the central server. Distributed systems fare better, as we can clone the desired version locally.
+Przerwanie toku myślenia nie jest dobre dla produktywności, a czym większa różnica w kontekście, tym większe straty. Używając centralnych systemów kontroli wersji musielibyśmy najpierw zładować świeżą kopię roboczą z serwera. W systemach rozproszonych wygląda to dużo lepiej, ponieważ możemy żądaną wersje sklonować lokalnie
 
-But cloning still entails copying the whole working directory as well as the entire history up to the given point. Even though Git reduces the cost of this with file sharing and hard links, the project files themselves must be recreated in their entirety in the new working directory.
+Jednak klonowanie również niesie za sobą kopiowanie całego katalogu roboczego jak i całej historii projektu aż do żądanego punktu. Nawet jeśli Git redukuje wielkość przez podział danych i użycie twardych dowiązań, wszystkie pliki projektu muszą zostać odtworzone w nowym katalogu roboczym.
 
-*Solution*: Git has a better tool for these situations that is much faster and more space-efficient than cloning: *git branch*.
+*Rozwiązanie*: Git posiada lepsze narzędzia dla takich sytuacji, jest ono wiele szybsze i zajmujące mniej miejsca na dysku jak klonowanie: *git branch*.
 
-With this magic word, the files in your directory suddenly shapeshift from one version to another. This transformation can do more than merely go back or forward in history. Your files can morph from the last release to the experimental version to the current development version to your friend's version and so on.
+Tym magicznym słowem zmienisz dane w swoim katalogu roboczym z jednej wersji w inną. Ta przemiana potrafi dużo więcej jak tylko poruszać się w historii projektu. Twoje pliki mogą przekształcić się z aktualnej wersji do wersji eksperymentalnej, do wersji testowej, do wersji twojego kolegi i tak dalej.
 
-=== The Boss Key ===
+=== Przycisk 'szef' ===
 
-Ever played one of those games where at the push of a button (``the boss key''), the screen would instantly display a spreadsheet or something? So if the boss walked in the office while you were playing the game you could quickly hide it away?
+Być może grałaś już kiedyś w grę, która posiadała magiczny (``przycisk szef''), po naciśnięciu którego twój monitor natychmiast pokazywał jakieś arkusze kalkulacyjne, czy coś w tym roduaju? Celem przycisku było szybkie ukrycie gierki na wypadek pojawienia się szefa w twoim biurze.
 
-In some directory:
+W jakimś katalogu:
 
- $ echo "I'm smarter than my boss" > myfile.txt
- $ git init
- $ git add .
- $ git commit -m "Initial commit"
+ $ echo "Jestem mądrzejsza od szefa" > mój_plik.txt 
+ $ git init 
+ $ git add . 
+ $ git commit -m "Pierwszy commit"
 
-We have created a Git repository that tracks one text file containing a certain message. Now type:
+Utworzyliśmy repozytorium Gita, które zawiera plik o powyższej zawartości. Następnie wpisujemy:
 
- $ git checkout -b boss  # nothing seems to change after this
- $ echo "My boss is smarter than me" > myfile.txt
- $ git commit -a -m "Another commit"
+ $ git checkout -b szef # wydaje się, jakby nic się nie stało 
+ $ echo "Mój szef jest ode mnie mądrzejszy" > mój_plik.txt 
+ $ git commit -a -m "Druga wersja"
 
-It looks like we've just overwritten our file and committed it. But it's an illusion. Type:
+Wygląda jakbyśmy zmienili zawartość pliku i wykonali 'commit'. Ale to tylko iluzja. Wpisz:
 
- $ git checkout master  # switch to original version of the file
+ $ git checkout master # przejdź do oryginalnej wersji
 
-and hey presto! The text file is restored. And if the boss decides to snoop around this directory, type:
+i hokus-pokus! Poprzedni plik jest przywrócony do stanu pierwotnego. Gdyby jednak szef zdecydował się grzebać w twoim katalogu, wpisz:
 
- $ git checkout boss  # switch to version suitable for boss' eyes
+ $ git checkout szef # przejdź do wersji, która nadaje się do obejrzenia przez szefa
 
-You can switch between the two versions of the file as much as you like, and commit to each independently.
+Możesz zmieniać pomiędzy tymi wersjami pliku tak często jak zechcesz, każdą z tych wersji pliku możesz też niezależnie edytować.
 
-=== Dirty Work ===
+=== Brudna robota ===
 
 [[branch]]
-Say you're working on some feature, and for some reason, you need to go back three versions and temporarily put in a few print statements to see how something works. Then:
+Załóżmy, że pracujesz nad jakąś funkcją i musisz z jakiegokolwiek powodu wrócić o 3 wersje wstecz w celu wprowadzenia kilku poleceń print, aby sprawdzić jej działanie. Wtedy:
 
- $ git commit -a
+ $ git commit -a 
  $ git checkout HEAD~3
 
-Now you can add ugly temporary code all over the place. You can even commit these changes. When you're done,
+Teraz możesz na dziko wprowadzać tymczasowy kod. Możesz te zmiany nawet dodać do'commit'. Po skończeniu,
 
  $ git checkout master
 
-to return to your original work. Observe that any uncommitted changes are carried over.
+wróci cię do poprzedniej pracy. Zauważ, że wszystkie zmiany, które nie zostały zatwierdzone przez 'commit', zostały przejęte.
 
-What if you wanted to save the temporary changes after all? Easy:
+A co jeśli chciałaś zapamiętać wprowadzone zmiany? Proste:
 
- $ git checkout -b dirty
+ $ git checkout -b brudy
 
-and commit before switching back to the master branch. Whenever you want to return to the dirty changes, simply type:
+i tylko jeszcze wykonaj 'commit' zanim wrócisz do 'master branch'. Jeśli tylko chcesz wrócić do twojej brudnej roboty, wpisz po prostu
 
- $ git checkout dirty
+ $ git checkout brudy
 
-We touched upon this command in an earlier chapter, when discussing loading old states. At last we can tell the whole story: the files change to the requested state, but we must leave the master branch. Any commits made from now on take your files down a different road, which can be named later.
+Spotkaliśmy się z tym poleceniem już we wcześniejszym rozdziale, gdy poruszaliśmy temat ładowania starych wersji. Teraz możemy opowiedzieć cala prawdę: pliki zmieniają się do żądanej wersji, jednak musimy opuścić 'master branch'. Każdy 'commit' od teraz prowadzi twoje dane inną drogą, której możemy również nadać nazwę.
 
-In other words, after checking out an old state, Git automatically puts you in a new, unnamed branch, which can be named and saved with *git checkout -b*.
+Innymi słowami, po przywołaniu ('checkout') starszego stanu Git automatycznie przenosi cię do nowego, nienazwanego 'branch', który poleceniem *git checkout -b* otrzyma nazwę i zostanie zapamiętany.
 
-=== Quick Fixes ===
+=== Szybka korekta błędów ===
 
-You're in the middle of something when you are told to drop everything and fix a newly discovered bug in commit `1b6d...`:
+Będąc w środku jakiejś pracy, otrzymujesz polecenie zajęcia się nowo znalezionym błędem w 'commit' `1b6d...`:
 
- $ git commit -a
+ $ git commit -a 
  $ git checkout -b fixes 1b6d
 
-Then once you've fixed the bug:
+Po skorygowaniu błędu:
 
- $ git commit -a -m "Bug fixed"
+ $ git commit -a -m "Błąd usunięty" 
  $ git checkout master
 
-and resume work on your original task. You can even 'merge' in the freshly
-baked bugfix:
+i kontynuujesz przerwaną pracę. Możesz nawet ostatnio świeżo upieczoną poprawkę przejąć do aktualnej wersji:
 
  $ git merge fixes
 
-=== Merging ===
+=== Merge ===
 
-With some version control systems, creating branches is easy but merging them
-back together is tough. With Git, merging is so trivial that you might be
-unaware of it happening.
+Za pomocą niektórych systemów kontroli wersji utworzenie nowego 'branch' może i jest proste, jednak późniejsze połączenie ('merge') skomplikowane. Z Gitem 'merge' jest tak trywialne, że możesz czasem nawet nie zostać powiadomiony o jego wykonaniu.
 
-We actually encountered merging long ago. The *pull* command in fact 'fetches'
-commits and then merges them into your current branch. If you have no local
-changes, then the merge is a 'fast forward', a degenerate case akin to fetching
-the latest version in a centralized version control system. But if you do have
-local changes, Git will automatically merge, and report any conflicts.
+W gruncie rzeczy spotkaliśmy się już dużo wcześniej z funkcją 'merge'. Polecenie *git pull* ściąga inne wersje i łączy ('merge') z twoim aktualnym 'branch'. Jeśli nie wprowadziłaś żadnych lokalnych zmian, to 'merge' jest szybkim przejściem do przodu, jest to przypadek podobny do zładowania ostatniej wersji przy centralnych systemach kontroli wersji. Jeśli jednak wprowadziłaś zmiany, Git automatycznie wykona 'merge' i powiadomi cię o ewentualnych konfliktach.
 
-Ordinarily, a commit has exactly one 'parent commit', namely, the previous
-commit. Merging branches together produces a commit with at least two parents.
-This begs the question: what commit does `HEAD~10` really refer to? A commit
-could have multiple parents, so which one do we follow?
+Zwyczajnie każdy 'commit' posiada matczyny 'commit', a mianowicie poprzedzający go 'commit'. Zespolenie kilku 'branch' wytwarza 'commit' z minimum 2 matczynymi 'commit'. To nasuwa pytanie, który właściwie 'commit' wskazuje na `HEAD~10`? Każdy 'commit' może posiadać więcej rodziców, za którym właściwie podążamy?
 
-It turns out this notation chooses the first parent every time. This is
-desirable because the current branch becomes the first parent during a merge;
-frequently you're only concerned with the changes you made in the current
-branch, as opposed to changes merged in from other branches.
+Wychodzi na to, ze ta notacja zawsze wybiera pierwszego rodzica. To jest wskazane, ponieważ aktualny 'branch' staje się pierwszym rodzicem dla 'merge', częściej będziesz zainteresowany bardziej zmianami których dokonałaś w aktualnym 'branch', niż w innych.
 
-You can refer to a specific parent with a caret. For example, to show
-the logs from the second parent:
+Możesz też wybranego rodzica wskazać używając symbol dzióbka. By na przykład pokazać logi drugiego rodzica. 
 
  $ git log HEAD^2
 
-You may omit the number for the first parent. For example, to show the
-differences with the first parent:
+Możesz pominąć numer pierwszego rodzica. By na przykład pokazać różnice z pierwszym rodzicem:
 
  $ git diff HEAD^
 
-You can combine this notation with other types. For example:
+Możesz ta notacje kombinować także z innymi rodzajami. Na przykład:
 
- $ git checkout 1b6d^^2~10 -b ancient
+ $ git checkout 1b6d^^2~10 -b archaiczne
 
-starts a new branch ``ancient'' representing the state 10 commits back from the
-second parent of the first parent of the commit starting with 1b6d.
+tworzy nowy 'branch' o nazwie 'archaiczne', reprezentujący stan 10 'commit' do tyłu drugiego rodzica dla pierwszego rodzica 'commit', którego hash rozpoczyna się na 1b6d. 
 
-=== Uninterrupted Workflow ===
+=== Praca bez przestojów ===
 
-Often in hardware projects, the second step of a plan must await the completion of the first step. A car undergoing repairs might sit idly in a garage until a particular part arrives from the factory. A prototype might wait for a chip to be fabricated before construction can continue.
+W procesie produkcji często drugi krok planu musi czekać na zakończenie pierwszego. Popsuty samochód stoi w garażu nieużywany do czasu dostarczenia części zamiennej. Prototyp musi czekać na wyprodukowanie jakiegoś chipa zanim będzie można podjąć dalszą konstrukcje.
 
-Software projects can be similar. The second part of a new feature may have to
-wait until the first part has been released and tested. Some projects require
-your code to be reviewed before accepting it, so you might wait until the first
-part is approved before starting the second part.
+W projektach software może to wyglądać podobnie. Druga część jakiegoś feature musi czekać, aż pierwsza zostanie wydana i przetestowana. Niektóre projekty wymagają sprawdzenia twojego kodu zanim zostanie zaakceptowany, musisz wiec czekać z następną częścią aż pierwsza zostanie sprawdzona.
 
-Thanks to painless branching and merging, we can bend the rules and work on
-Part II before Part I is officially ready. Suppose you have committed Part I
-and sent it for review. Let's say you're in the `master` branch. Then branch
-off:
+Dzięki bezbolesnemu 'branch' i 'merge' możemy te reguły naciągnąć i pracować nad druga częścią jeszcze zanim pierwsza zostanie oficjalnie zatwierdzona. Przyjmijmy, że wykonałaś 'commit' pierwszej części i przekazałaś do sprawdzenia. Przyjmijmy też, że znajdujesz się w 'master branch'. Najpierw przejdź do 'branch' o nazwie 'część2':
 
- $ git checkout -b part2
+$ git checkout -b część2
 
-Next, work on Part II, committing your changes along the way. To err is human,
-and often you'll want to go back and fix something in Part I.
-If you're lucky, or very good, you can skip these lines.
+Pracujesz w części 2 i regularnie wykonujesz 'commit'. Błądzenie jest ludzkie i może się zdarzyć, że zechcesz wrócić do części 1 i wprowadzić jakieś poprawki. Jeśli masz szczęście albo jesteś bardzo dobry, możesz ominąć następne linijki.
 
- $ git checkout master  # Go back to Part I.
- $ fix_problem
- $ git commit -a        # Commit the fixes.
- $ git checkout part2   # Go back to Part II.
- $ git merge master     # Merge in those fixes.
+ $ git checkout master  # przejdź do części 1 
+ $ fix_problem 
+ $ git commit -a        # zapisz rozwiązanie 
+ $ git checkout część2  # przejdź do części 2
+ $ git merge master     # połącz zmiany
 
-Eventually, Part I is approved:
+Ewentualnie, część pierwsza zostaje dopuszczona:
 
- $ git checkout master  # Go back to Part I.
- $ submit files         # Release to the world!
- $ git merge part2      # Merge in Part II.
- $ git branch -d part2  # Delete "part2" branch.
+ $ git checkout master  # przejdź do części 1 
+ $ submit files         # opublikuj twoja wersję
+ $ git merge część2     # Połącz z częścią 2 
+ $ git branch -d część2 # usuń branch część2
 
-Now you're in the `master` branch again, with Part II in the working directory.
+Znajdujesz się teraz z powrotem w 'master branch' posiadając 'część2' w katalogu roboczym.
 
-It's easy to extend this trick for any number of parts. It's also easy to
-branch off retroactively: suppose you belatedly realize you should have created
-a branch 7 commits ago. Then type:
+Dość łatwo zastosować ten sam trik na dowolną ilość części. Równie łatwo można utworzyć 'branch' wstecznie: przypuśćmy, właśnie spostrzegłaś, iż już właściwie jakieś 7 'commit' wcześniej powinnaś stworzyć 'branch'. Wpisz wtedy:
 
- $ git branch -m master part2  # Rename "master" branch to "part2".
- $ git branch master HEAD~7    # Create new "master", 7 commits upstream.
+ $ git branch -m master część2 # Zmień nazwę "master" na "część2". 
+ $ git branch master HEAD~7    # utwórz ponownie "master" 7 'commits' do tyłu.
 
-The `master` branch now contains just Part I, and the `part2` branch contains
-the rest. We are in the latter branch; we created `master` without switching to
-it, because we want to continue work on `part2`. This is unusual. Until now,
-we've been switching to branches immediately after creation, as in:
+Teraz 'master branch' zawiera cześć 1 a branch `część2` zawiera całą resztę. Znajdujemy się teraz w tym ostatnim 'branch'; utworzyliśmy `master` bez wchodzenia do niego, gdyż zamierzamy dalszą pracę prowadzić w 'branch' `część2`. Nie jest to zbyt często stosowane. Do tej pory przechodziliśmy do nowego 'branch' zaraz po jego utworzeniu, tak jak w:
 
- $ git checkout HEAD~7 -b master  # Create a branch, and switch to it.
+ $ git checkout HEAD~7 -b master # Utwórz branch i wejdź do niego.
 
-=== Reorganizing a Medley ===
+=== Reorganizacja składanki ===
 
-Perhaps you like to work on all aspects of a project in the same branch. You want to keep works-in-progress to yourself and want others to see your commits only when they have been neatly organized. Start a couple of branches:
+Może lubisz odpracowywać wszystkie aspekty projektu w jednym 'branch'. Chcesz wszystkie bieżące zmiany zachować dla siebie, a wszyscy inni powinni zobaczyć twoje 'commit' po ich starannym zorganizowaniu. Wystartuj parę 'branch':
 
-  $ git branch sanitized    # Create a branch for sanitized commits.
-  $ git checkout -b medley  # Create and switch to a branch to work in.
+ $ git branch czyste          # Utwórz branch dla oczyszczonych 'commits'. 
+ $ git checkout -b zbieranina # utwórz 'branch' i przejdź do niego w celu dalszej pracy.
 
-Next, work on anything: fix bugs, add features, add temporary code, and so forth, committing often along the way. Then:
+Następnie wykonaj zamierzone prace: pousuwaj błędy, dodaj nowe funkcje, utwóż kod tymczasowy i tak dalej, regularnie wykonując 'commit'. Wtedy:
 
-  $ git checkout sanitized
-  $ git cherry-pick medley^^
+ $ git checkout czyste 
+ $ git cherry-pick zbieranina^^
 
-applies the grandparent of the head commit of the ``medley'' branch to the ``sanitized'' branch. With appropriate cherry-picks you can construct a branch that contains only permanent code, and has related commits grouped together.
+zastosuje najstarszy matczyny 'commit' z 'branch' ``zbieranina'' na 'branch' ``czyste''. Poprzez 'przebranie wisienek' możesz tak skonstruować 'branch', który posiada jedynie końcowy kod i zależne od niego pogrupowane 'commit'.
 
-=== Managing Branches ===
+=== Zarządzanie 'branch' ===
 
-List all branches by typing:
+Listę wszystkich 'branch' otrzymasz poprzez:
 
  $ git branch
 
-By default, you start in a branch named ``master''. Some advocate leaving the
-``master'' branch untouched and creating new branches for your own edits.
+Standardowo zaczynasz w 'branch' zwanym ``master''. Wielu opowiada się za pozostawieniem ``master'' branch w stanie dziewiczym i tworzeniu nowych dla twoich prac.
 
-The *-d* and *-m* options allow you to delete and move (rename) branches.
-See *git help branch*.
+Opcje *-d* und *-m*   pozwalają na usuwanie i przesuwanie (zmianę nazwy) 'branch'. Zobacz: *git help branch*.
 
-The ``master'' branch is a useful custom. Others may assume that your
-repository has a branch with this name, and that it contains the official
-version of your project. Although you can rename or obliterate the ``master''
-branch, you might as well respect this convention.
+Nazwa ``master'' jest bardzo użytecznym stworem.  Inni mogą wychodzić z założenia, że twoje repozytorium takowy posiada i że zawiera on oficjalną wersję projektu. Nawet jeśli mogłabyś skasować lub zmienić nazwę na inną powinnaś respektować tę konwencję. 
 
-=== Temporary Branches ===
+=== Tymczasowe 'branch' ===
 
-After a while you may realize you are creating short-lived branches
-frequently for similar reasons: every other branch merely serves to
-save the current state so you can briefly hop back to an older state to
-fix a high-priority bug or something.
+Po jakimś czasie zapewne zauważysz, że często tworzysz 'branch' o krótkiej żywotności, w większości z tego samego powodu: każdy nowy 'branch' służy jedynie do tego, by zabezpieczyć aktualny stan, aby móc wrócić do jednego z poprzednich punktów i poprawić jakieś priorytetowe błędy czy cokolwiek innego.
 
-It's analogous to changing the TV channel temporarily to see what else is on.
-But instead of pushing a couple of buttons, you have to create, check out,
-merge, and delete temporary branches. Luckily, Git has a shortcut that is as
-convenient as a TV remote control:
+Można to porównać do chwilowego przełączenia kanału telewizyjnego, by sprawdzić co dzieje się na innym. Lecz zamiast naciskać guziki pilota, korzystasz z poleceń 'create', 'checkout', 'merge' i 'delete'. Na szczęście Git posiada na te operacje skrót, który jest tak samo komfortowy jak pilot telewizora:
 
  $ git stash
 
-This saves the current state in a temporary location (a 'stash') and
-restores the previous state. Your working directory appears exactly as it was
-before you started editing, and you can fix bugs, pull in upstream changes, and
-so on. When you want to go back to the stashed state, type:
+Polecenie to zabezpiecza aktualny stan w tymczasowym miejscu ('stash' = ukryj) i przywraca poprzedni stan. Twój katalog roboczy wygląda dokładnie tak, jak wyglądał zanim zacząłaś edycję. Teraz możesz poprawiać błędy, zładować zmiany z centralnego repozytorium ('pull') i tak dalej. Jeśli chcesz powrócić z powrotem do ukrytego ('stashed') stanu, wpisz:
 
- $ git stash apply  # You may need to resolve some conflicts.
+ $ git stash apply # Prawdopodobnie będziesz musiał rozwiązać konflikty.
 
-You can have multiple stashes, and manipulate them in various ways. See
-*git help stash*. As you may have guessed, Git maintains branches behind the scenes to perform this magic trick.
+Możesz posiadać więcej 'stash'-ów i traktować je w zupełnie inny sposób. Zobacz *git help stash*. Jak już prawdopodobnie się domyślasz, Git korzysta przy wykonywaniu tej magicznej sztuczki z funkcji 'branch' w tle.
 
-=== Work How You Want ===
+=== Pracuj jak chcesz ===
 
-You might wonder if branches are worth the bother. After all, clones are almost
-as fast, and you can switch between them with *cd* instead of esoteric Git
-commands.
+Może pytasz się, czy 'branch' są warte tego zachodu. Jakby nie było, polecenia 'clone' są prawie tak samo szybkie i możesz po prostu poleceniem *cd* zmieniać pomiędzy nimi, bez stosowania ezoterycznych poleceń Gita.
 
-Consider web browsers. Why support multiple tabs as well as multiple windows?
-Because allowing both accommodates a wide variety of styles. Some users like to
-keep only one browser window open, and use tabs for multiple webpages. Others
-might insist on the other extreme: multiple windows with no tabs anywhere.
-Others still prefer something in between.
+Przyjrzyjmy się takiej przeglądarce internetowej. Dlaczego pozwala używać tabów tak samo jak i nowych okien? Ponieważ udostępnienie obu możliwości pozwala na stosowanie wielu stylów. Niektórzy użytkownicy preferują otwarcie jednego okna przeglądarki i korzystają z tabów dla wyświetlenia różnych stron. Inni upierają się przy stosowaniu pojedynczych okien dla każdej strony, zupełnie bez korzystania z tabów. Jeszcze inni znowu wolą coś pomiędzy.
 
-Branching is like tabs for your working directory, and cloning is like opening
-a new browser window. These operations are fast and local, so why not
-experiment to find the combination that best suits you? Git lets you work
-exactly how you want.
+Stosowanie 'branch' to jak korzystanie z tabów dla twojego katalogu roboczego, a klonowanie porównać można do otwarcia wielu okien przeglądarki. Obie operacje są szybkie i lokalne, dlaczego nie poeksperymentować i nie znaleźć dla siebie najbardziej odpowiedniej kombinacji. Git pozwoli ci pracować dokładnie tak jak chcesz.

@@ -1,0 +1,65 @@
+= Git Magic =
+Ben Lynn
+August 2007
+
+== Preface ==
+
+http://git-scm.com/[Git] is a version control Swiss army knife. A reliable versatile multipurpose revision control tool whose extraordinary flexibility makes it tricky to learn, let alone master.
+
+As Arthur C. Clarke observed, any sufficiently advanced technology is indistinguishable from magic. This is a great way to approach Git: newbies can ignore its inner workings and view Git as a gizmo that can amaze friends and infuriate enemies with its wondrous abilities.
+
+Rather than go into details, we provide rough instructions for particular effects. After repeated use, gradually you will understand how each trick works, and how to tailor the recipes for your needs.
+
+.Translations
+
+ - link:/\~blynn/gitmagic/intl/zh_cn/[Simplified Chinese]: by JunJie, Meng and JiangWei. Converted to link:/~blynn/gitmagic/intl/zh_tw/[Traditional Chinese] via +cconv -f UTF8-CN -t UTF8-TW+.
+ - link:/~blynn/gitmagic/intl/fr/[French]: by Alexandre Garel, Paul Gaborit, and Nicolas Deram. Also hosted at http://tutoriels.itaapy.com/[itaapy].
+ - link:/~blynn/gitmagic/intl/de/[German]: by Benjamin Bellee and Armin Stebich; also http://gitmagic.lordofbikes.de/[hosted on Armin's website].
+ - http://www.slideshare.net/slide_user/magia-git[Portuguese]: by Leonardo Siqueira Rodrigues [http://www.slideshare.net/slide_user/magia-git-verso-odt[ODT version]].
+ - link:/~blynn/gitmagic/intl/ru/[Russian]: by Tikhon Tarnavsky, Mikhail Dymskov, and others.
+ - link:/~blynn/gitmagic/intl/es/[Spanish]: by Rodrigo Toledo and Ariset Llerena Tapia.
+ - link:/~blynn/gitmagic/intl/uk/[Ukrainian]: by Volodymyr Bodenchuk.
+ - link:/~blynn/gitmagic/intl/vi/[Vietnamese]: by Trần Ngọc Quân; also http://vnwildman.users.sourceforge.net/gitmagic/[hosted on his website].
+
+.Other Editions
+
+ - link:book.html[Single webpage]: barebones HTML, with no CSS.
+ - link:book.pdf[PDF file]: printer-friendly.
+ - http://packages.debian.org/gitmagic[Debian package], http://packages.ubuntu.com/gitmagic[Ubuntu package]: get a fast and local copy of this site. Handy http://csdcf.stanford.edu/status/[when this server is offline].
+ - http://www.amazon.com/Git-Magic-Ben-Lynn/dp/1451523343/[Physical book [Amazon.com]]: 64 pages, 15.24cm x 22.86cm, black and white. Handy when there is no electricity.
+
+=== Thanks! ===
+
+I'm humbled that so many people have worked on translations of these pages. I
+greatly appreciate having a wider audience because of the efforts of those
+named above.
+
+Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael Budde, Richard Albury, Tarmigan, Derek Mahar, Frode Aannevik, Keith Rarick, Andy Somerville, Ralf Recker, Øyvind A. Holm, Miklos Vajna, Sébastien Hinderer, Thomas Miedema, Joe Malin, Tyler Breisacher, Sonia Hamilton, Julian Haagsma, Romain Lespinasse, Sergey Litvinov, Oliver Ferrigni, David Toca, Сергей Сергеев, Joël Thieffry, and Baiju Muthukadan contributed corrections and improvements.
+
+François Marier maintains the Debian package originally created by Daniel
+Baumann.
+
+John Hinnegan bought the http://www.gitmagic.com/[gitmagic.com] domain.
+
+My gratitude goes to many others for your support and praise. I'm tempted to
+quote you here, but it might raise expectations to ridiculous heights.
+
+If I've left you out by mistake, please tell me or just send me a patch!
+
+=== License ===
+
+This guide is released under http://www.gnu.org/licenses/gpl-3.0.html[the GNU General Public License version 3]. Naturally, the source is kept in a Git
+repository, and can be obtained by typing:
+
+ $ git clone git://repo.or.cz/gitmagic.git  # Creates "gitmagic" directory.
+
+or from one of the mirrors:
+
+ $ git clone git://github.com/blynn/gitmagic.git
+ $ git clone git://gitorious.org/gitmagic/mainline.git
+ $ git clone https://code.google.com/p/gitmagic/
+ $ git clone git://git.assembla.com/gitmagic.git
+ $ git clone git@bitbucket.org:blynn/gitmagic.git
+
+GitHub, Assembla, and Bitbucket support private repositories, the latter two
+for free.
