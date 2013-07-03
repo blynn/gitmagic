@@ -1,0 +1,142 @@
+== Lekcja historii ==
+
+Jedną z charakterystycznych cech podzielnej natury git jest to, że jego kronika historii może być zmieniana.  Ale jeśli masz zamiar manipulować przeszłpścią, bądź ostrożny: zmieniaj tylko tą część historii, którą wyłącznie jedynie ty sam posiadasz. Tak samo jak Narody ciągle dyskutują, który jakie popełnił okrucieństwa, popadniesz w kłopoty przy synchronizacji, jeśli ktoś inny posiada klon z różniącą się historią i jeśli te odgałęzienia mają sie wymieniać.
+
+Niektórzy programiści zarzekają sie w kwestii nienaruszalności historii - ze wszystkimi jej błędami in niedociągnięciami. Inni uważają, ze odgałęzienia powinny dobrze się prezenotować nim zostaną przedstawione publicznie. Git jest wyrozumiały dla oby dwuch stron. Tak samo jak 'clone', 'branche' czy 'merge', możliwość zmian korniki historii to tylko kolejna siła, jaką obdarza cię git.  Stosowanie tej możliwości zależy od ciebie
+
+=== Wycofuję wszystko co na ten temat powiedziałem. ===
+
+Właśnie wykonałeś 'commit', ale chętnie chciałbyś podać inny opis? Wpisujesz:
+
+$ git commit --amend 
+
+by zmienić ostatni opis. Zauważasu, że zapomniałeś dodać jakiegoś pliku? Wykonak *git add*, by go dodać a następnie poprzedzającą instrukcje.
+
+Chcesz wprowadzić jeszcze inne zmiany do ostatniego 'commit'? Wykonaj je i wpisz:
+
+$ git commit --amend -a 
+
+=== ...  i tak dalej. ===
+
+Możemy teraz założyć, że poprzedni problem będzie 10 razy gorszy. Po dłuższej sesji zrobiłeś całą masę 'commits'. Nie jesteś jednak szczęśliwy z takiego zorganizowania a niektóre z 'commits' mogłyby być inaczej sformuowane. Wpisujesz:
+
+$ git rebase -i HEAD~10 
+
+i ostatnie 10 'commits' pojawią się w preferowanym przez ciebie edytorze. Przykładowy wyciąg:
+
+pick 5c6eb73 Link repo.or.cz dodany pick a311a64 zreorganizowano analogie w "Pracuj jak ci sie podoba" pick 100834f dodano cel do Makefile
+
+Wtedy:
+
+- usuń 'commits' poprzez skasowanie lini. - przeorganizuj 'commits' przesuwając linie. - zamień `pick` na: * `edit`  by zaznaczyć 'commit' do 'amends'. * `reword`, by zmienić opisy logu. * `squash` by połączyć 'commit' z poprzednim ('merge'). * `fixup` by połączyć 'commit' z poprzednim ('merge') i usunąć zapisy z logu.
+
+Zapamietaj i zakończ. Jeśli zaznaczyłeś jakiś 'commit' poprzez 'edit', wpisz:
+
+$ git commit --amend 
+
+W przeciwnym razie:
+
+$ git rebase --continue 
+
+A więc, stosuj polecenie 'commit' wcześnie i często: możesz później posprzątać za pomocą 'rebase'.
+
+=== Końcowe lokalne zmian ===
+
+Pracujesz nad aktywnym projektem. Z biegiem czasu nagromadziła się wiele 'commits' i wtedy za pomocą 'merge' z oficjalną gałęzią. Ten cykl powtarza się kilka razy zanim jesteś gotowy na 'push' do centralnego drzewa.
+
+Teraz jednak historia w twoim lokalnym klonie jest chaotychnym pomieszaniem twoich zmian i zmian z oficjalnego drzewa. Chciałbyś raczej widzieć twoje zmiany uporządkowane chronologichnie w jednej sekcji i za oficjalnymi zmianami. 
+
+To zadanie dla *git rebase*, jak wyżej opisane. W wielu przypadkach możesz skorzystać z przełącznika *--onto* by zapobiec interakcji.
+
+Przeczytaj też *git help rebase* dla zapoznania sie z obszernymi przykładami tej zadziwiającej funkcji. Możesz również podzielć 'commits'. Możesz nawet przeorganizować 'branches' w repozytorium.
+
+=== Przepisanie historii ===
+
+Czasami potrzebny ci rodzaj systemu zarządzania porównywalnego do wyretuszowania osób z oficjalnego zdjęcia, by w stalinistowski sposób wymazać je z historii. Wyobraź sobie, że chcesz opublikować projekt, jednak zawiera on pewny plik, który z jakiegoś powodu musi pozostać prywatnym. Być może zapisałem numer karty kredytowej w danej tekstowej i nieumyślnie dodałem do projektu? Skasowanie tej danej nie ma sensu, ponieważ poprzez starsze 'commits' można nadal ją przywołać. Musimy ten plik usunąć ze wszystkich 'commits':
+
+$ git filter-branch --tree-filter 'rm bardzo/tajny/plik' HEAD
+
+Sprawdź *git help filter-branch*, gdzie przykład ten został wytłumaczony i przytoczona została jeszcze szybsza metoda. Ogólnie poprzez *filter-branch* da się dokonać zmian w dużych zakresach historii poprzez tylko jedno polecenie.
+
+Po tej operacji katalog +.git/refs/original+ opisuje stan przed jej wykonaniem. Sprawdź czy 'filter-branch' zrobił to, co od niego oczekiwałeś, następnie skasuj ten katalog zanim wykonasz następne polecenia 'filter-branch'.
+
+Wreszcie zamień wszystkie klony twojego projektu na zaktualizowaną wersję, jeśli masz zamiar prowadzić z nimi wymianę. 
+
+=== Tworzyć historię ===
+
+[[makinghistory]] Masz zamiar przenieść projekt do git? Jeśli twój projekt był dotychczas zarządzany jednym z bardziej znanch systemów, to istnieje duże prawdopodobieństwo, że ktoś napisał już odpowiedni skrypt, który umożliwi ci eksportowanie do git całej historii.
+
+W innym razie przyjrzyj się funkcji *git fast-import*, która wczytuje tekst w specjalnym formacie by następnie odtworzyć całą historię od początku. Często taki skrypt pisany jest pośpiesznie i służy do jednorazowego wykorzystania, aby tylko w jednym przebiegu udało się migracja projektu.
+
+Utwórz na przykład z następującej listy tymczasowy plik, na przykład: `/tmp/history`: ---------------------------------- commit refs/heads/master committer Alice <alice@example.com> Thu, 01 Jan 1970 00:00:00 +0000 data <<EOT Initial commit.  EOT 
+
+M 100644 inline hello.c data <<EOT #include <stdio.h> 
+
+int main() { printf("Hallo, Welt!\n"); return 0; } EOT 
+
+
+commit refs/heads/master committer Bob <bob@example.com> Tue, 14 Mar 2000 01:59:26 -0800 data <<EOT Ersetze printf() mit write().  EOT 
+
+
+M 100644 inline hello.c data <<EOT #include <unistd.h> 
+
+nt main() { write(1, "Hallo, Welt!\n", 14); return 0; } EOT 
+
+---------------------------------- 
+
+Następnie utwórz repozytorium git z tymczasowego pliku poprzez wpisanie:
+
+$ mkdir project; cd project; git init $ git fast-import --date-format=rfc2822 < /tmp/history 
+
+Aktualną wersję projektu możesz przywołać ('checkout') poprzez:
+
+$ git checkout master
+
+Polecenie *git fast-export* konwertuje każde repozytorium do formatu *git fast-import*, możesz przestudiować komunikaty tego polecenia, jeśli masz zamiar napisaś programy eksportujące a oprócz tego, by przekazywać repozytoria jako zwykłe pliki tekstowe.     Na prawdę, to polecenie potrafi przekazywać repozytoria za pomocą zwykłego tekstu.
+
+=== Gdzie wszystko poszło źle? ===
+
+Właśnie znalazłeś w swoim programie funkcję, która już nie chce działać, a jesteś pewna, że czyniła to jeszcze kilka miesięcy temu. Och! Skąd wziął się ten błąd? A gdybyś tylko lepiej przetestował ją wcześniej, zanim weszła do wersji produkcyjnej.
+
+Na to jest już za późno. Jakby nie było, pod warunkiem, że często używałeś 'commit', git może ci zdradzić gdzie szukać problemu.
+
+$ git bisect start $ git bisect bad HEAD $ git bisect good 1b6d 
+
+Git przywoła stan, który leży dokładnie pośrodku. Przetestuj funkcję, a jeśli ciągle jeszcze nie funkcjonuje:
+
+
+$ git bisect bad 
+
+Jeśli nie, zamień "bad" na "good". Git przeniesie cię znowu do stanu dokładnie pomiędzy znanymi wersjami "good" a "bad" i w ten sposób redukuje możliwości.  Po kilku przejściach doprowadzą cię te poszukiwania do 'commit', który jest odpowiedzialny za kłopoty. Po skończeniu dochodzenia przejdź do orginalnego stanu:
+
+$ git bisect reset 
+
+Zamiast sprawdzania zmian ręcznie, możesz zautomatyzowć poszukiwania za pomocą skryptu:
+
+$ git bisect run moj_skrypt
+
+Git korzysta tutaj z wartości zwróconej przez skrypt, by ocenić czy zmiana jest dobra ('good'), czy zła ('bad'): Skrypt powinien zwracać 0 dla 'good', 128, jeśli zmiana powinna być pominięta, i coś pomiędzy 1 - 127 dla 'bad'. Jeśli wartość zwrócona jest ujemna, program 'bisect' przerywa pracę.
+
+Możesz robić jeszcze dużo innych rzeczy: w pomocy znajdziesz w jaki sposób wizualizować działania 'bisect', które ..............
+
+=== Kto ponosi odpowiedzialność? ===
+
+Jak i wiele innych systemów kontroli wersji posiada również i git polecenie 'blame'.
+
+$ git blame bug.c 
+
+które komentuje każdą linię podanego pliku, by pokazać kto ją ostatnio zmieniał i kiedy. W przeciwieństwie do wielu innych systemów, funkcja ta działa offline, czytane jest tylko z lokalnego dysku.
+
+=== Osobiste doświadczenia ===
+
+W scentralizowanym systemie kontroli wersji praca nad kroniką historii jest skomplikowanym zadaniem i zarezerwowanym głównie dla administratorom. Polecenia 'clone', 'branche' czy 'merge' nie są możliwe bez podłączenia do sieci. Również takie podstawowe funkcje, jak przeszukanie historii czy 'commit' jakiejś zmiany. W niektórych systemach użytkownik potrzebuje działającej sieci nawet by zobaczyć przez siebie dokonane zmiany, albo by wogóle otworzyć plik do edycji.
+
+Scentralizowane systemy wykluczają pracę offline i wymagają drogiej infrastruktura sieciowej, w szczególności gdy wzrasta liczba programistów. Najważniejsze jednak, że po z czasem wszystkie operacje stają się wolniejsze, z regóły do osiągnięcia punktu, gdzie użytkownicy unikają dodatkowych poleceń, aż staną się one absolutnie konieczne. W ekstremalnych przypadkach dotyczy to również poleceń podstawowych. Jeśli użytkownicy są zmuszeni do wykonywania powolnych poleceń, produktywność spada, ponieważ przerywany zostaje ciąg pracy.
+
+Dowiedziałem się o tym fenomenie z pierwszej ręki. Git był pierwszym systemem kontroli wersji którego używałem. Szybko dorosłem do tej aplikacji i przyjąłem wiele funkcji za oczywiste.  Wychodziłem też z założenia, że inne systemy są podobne: wybór systemu kontroli wersji nie powinien zbyt bardzo odbiegać od wyboru edytora tekstu, czy przeglądarki internetowej.
+
+Byłem zszokowany, gdy musiałem później korzystać ze scentralizowanego systemu. Niesolidne połączenie internetowe ma niezbyt duży wpływ na git, praca staje się jednak prawie nie możliwa, gdy wymagana jest niezawodność porównywalny z lokalnym dyskiem. Pozatym sam łapałem sie na tym, że unikałem pewnych poleceń i związanym z nimi czasem oczekiwania, w sumie wszystko to wpływało mocno na wypracowany przeze mnie przebieg prac.
+
+Gdy musiałem wykonywać powolne polecenia, z powodu ciągłego przerywanie toku myślenia, zadawałem nieporównywalne szkody dla całego przebiegu pracy.  Podczas oczekiwania na zakończenie komunikacji pomiędzy serwerami dla przeczekania zaczynałem robiłć coś innego, na przykład czytałem maile albo pisałem dokumentację. Gdy wracałem do poprzedniego zajęcia, po zakończeniu komunikacji, dawno straciłem wątek i czas by przypomnieć sobie co właściwie chciałem zrobić. Ludzie nie potrafią dobrze dostosować się do częstej zmiany kontekstu.
+
+Był też taki ciekawy efekt http://pl.wikipedia.org/wiki/Tragedia_wsp%C3%B3lnego_pastwiska[tragedii-wspólnego-pastwiska]: przypominający przeciążenia w sieci - pojedyńcze indywidua pochłaniają więcej pojemności sieci niż to konieczne, by uchronić się przed mogącymi ewentualnie wystąpić w przyszłości niedoborami. Suma tych starań pogarsza tylko przeciążenia, co motywuje jednostki do zużywania jeszcze większych zasobów, by ochronić się przed jeszcze dłuższymi czasami ozekiwania.

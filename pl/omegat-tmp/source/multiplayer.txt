@@ -1,0 +1,265 @@
+== Multiplayer Git ==
+
+Anfangs benutzte ich Git bei einem privaten Projekt, bei dem ich der einzige
+Entwickler war. Unter den Befehlen im Zusammenhang mit Git's verteilter Art,
+brauchte ich nur *pull* und *clone*, damit konnte ich das selbe Projekt an
+unterschiedlichen Orten halten.
+
+Später wollte ich meinen Code mit Git veröffentlichen und Änderungen von
+Mitstreitern einbinden. Ich musste lernen, wie man Projekte verwaltet, an
+denen mehrere Entwickler aus aller Welt beteiligt waren. Glücklicherweise
+ist das Git's Stärke und wohl auch seine Daseinsberechtigung.
+
+=== Wer bin ich? ===
+
+Jeder 'Commit' enthält Name und eMail-Adresse des Autors, welche mit *git
+log* angezeigt werden. Standardmäßig nutzt Git Systemeinstellungen um diese
+Felder auszufüllen. Um diese Angaben explizit zu setzen, gib ein:
+
+  $ git config --global user.name "Max Mustermann"
+  $ git config --global user.email maxmustermann@beispiel.de
+
+Lasse den -global Schalter weg um diese Einstellungen für das aktuelle
+'Repository' zu setzen.
+
+=== Git über SSH, HTTP ===
+
+Angenommen, Du hast einen SSH-Zugang zu einem Webserver aber Git ist nicht
+installiert. Wenn auch nicht so effizient wie mit dem systemeigenen
+Protokoll, kann Git über HTTP kommunizieren.
+
+Lade Git herunter, compiliere und installiere es unter Deinem Benutzerkonto
+und erstellen ein 'Repository' in Deinem Webverzeichnis:
+
+ $ GIT_DIR=proj.git git init
+ $ cd proj.git
+ $ git --bare update-server-info
+ $ cp hooks/post-update.sample hooks/post-update
+
+Bei älteren Git Versionen funktioniert der 'copy'-Befehl nicht, stattdessen
+gib ein:
+
+ $ chmod a+x hooks/post-update
+
+Nun kannst Du Deine letzten Änderungen über SSH von jedem 'Clone' aus
+veröffentlichen.
+
+ $ git push web.server:/pfad/zu/proj.git master
+
+und jedermann kann Dein Projekt abrufen mit:
+
+ $ git clone http://web.server/proj.git
+
+=== Git über alles ===
+
+Willst Du 'Repositories' ohne Server synchronisieren oder gar ohne
+Netzwerkverbindung? Musst Du während eines Notfalls improvisieren? Wir haben
+gesehen, dass man mit <<makinghistory, *git fast-export* und *git
+fast-import* 'Repositories' in eine einzige Datei konvertieren kann und
+zurück>>. Wir können solche Dateien hin und her schicken um Git
+'Repositories' über jedes beliebige Medium zu transportieren, aber ein
+effizienteres Werkzeug ist *git bundle*.
+
+Der Absender erstellt ein 'Bundle':
+
+ $ git bundle create einedatei HEAD
+
+und transportiert das 'Bundle' +einedatei+ irgendwie zum anderen
+Beteiligten: per eMail, USB-Stick, einen *xxd* Hexdump und einen OCR
+Scanner, Morsecode über Telefon, Rauchzeichen usw. Der Empfänger holt sich
+die 'Commits' aus dem 'Bundle' durch Eingabe von:
+
+ $ git pull einedatei
+
+Der Empfänger kann das sogar mit einem leeren 'Repository' tun. Trotz seiner
+Größe, +einedatei+ enthält das komplette original Git 'Repository'.
+
+In größeren Projekten, vermeidest Du Datenmüll indem Du nur Änderungen
+'bundlest', die in den anderen 'Repositories' fehlen. Zum Beispiel, nehmen
+wir an, der 'Commit' ``1b6d...'' ist der aktuellste, den beide Parteien
+haben:
+
+ $ git bundle create einedatei HEAD ^1b6d
+
+Macht man das regelmäßig, kann man leicht vergessen, welcher 'Commit'
+zuletzt gesendet wurde. Die Hilfeseiten schlagen vor 'Tags' zu benutzen um
+dieses Problem zu lösen. Das heißt, nachdem Du ein 'Bundle' gesendet hast,
+gib ein:
+
+ $ git tag -f letztesbundle HEAD
+
+und erstelle neue Aktualisierungsbundles mit:
+
+ $ git bundle create neuesbundle HEAD ^letztesbundle
+
+=== Patches: Das globale Zahlungsmittel ===
+
+'Patches' sind die Klartextdarstellung Deiner Änderungen, die von Computern
+und Menschen gleichermaßen einfach verstanden werden. Dies verleiht ihnen
+eine universelle Anziehungskraft. Du kannst einen 'Patch' Entwicklern
+schicken, ganz egal, was für ein Versionsverwaltungssystem sie
+benutzen. Solange Deine Mitstreiter ihre eMails lesen können, können sie
+auch Deine Änderungen sehen. Auch auf Deiner Seite ist alles was Du brauchst
+ein eMail-Konto: es gibt keine Notwendigkeit ein Online Git 'Repository'
+aufzusetzen.
+
+Erinnere Dich an das erste Kapitel:
+
+ $ git diff 1b6d > mein.patch
+
+gibt einen 'Patch' aus, der zur Diskussion einfach in eine eMail eingefügt
+werden kann. In einem Git 'Repository' gib ein:
+
+ $ git apply < mein.patch
+
+um den 'Patch' anzuwenden.
+
+In einer offizielleren Umgebung, wenn Autorennamen und eventuell Signaturen
+aufgezeichnet werden sollen, erstelle die entsprechenden 'Patches' nach
+einem bestimmten Punkt durch Eingabe von:
+
+ $ git format-patch 1b6d
+
+Die resultierenden Dateien können an *git-send-email* übergeben werden oder
+von Hand verschickt werden. Du kannst auch eine Gruppe von 'Commits'
+angeben:
+
+ $ git format-patch 1b6d..HEAD^^
+
+Auf der Empfängerseite speichere die eMail in eine Datei, dann gib ein:
+
+ $ git am < email.txt
+
+Das wendet den eingegangenen 'Patch' an und erzeugt einen 'Commit',
+inklusive der Informationen wie z.B. den Autor.
+
+Mit einer Webmail Anwendung musst Du eventuell ein Button anklicken um die
+eMail in ihrem rohen Originalformat anzuzeigen, bevor Du den 'Patch' in eine
+Datei sicherst.
+
+Es gibt geringfügige Unterschiede bei mbox-basierten eMail Anwendungen, aber
+wenn Du eine davon benutzt, gehörst Du vermutlich zu der Gruppe Personen,
+die damit einfach umgehen können ohne Anleitungen zu lesen.!
+
+=== Entschuldigung, wir sind umgezogen. ===
+
+Nach dem 'Clonen' eines 'Repositories', wird *git push* oder *git pull*
+automatisch auf die original URL zugreifen. Wie macht Git das? Das Geheimnis
+liegt in der Konfiguration, die beim 'Clonen' erzeugt wurde. Lasst uns einen
+Blick riskieren:
+
+ $ git config --list
+
+Die +remote.origin.url+ Option kontrolliert die Quell-URL; ``origin'' ist
+der Spitzname, der dem Quell-'Repository' gegeben wurde. Wie mit der
+``master'' 'Branch' Konvention können wir diesen Spitznamen ändern oder
+löschen, aber es gibt für gewöhnlich keinen Grund dies zu tun.
+
+Wenn das original 'Repository' verschoben wird, können wir die URL
+aktualisieren mit:
+
+ $ git config remote.origin.url git://neue.url/proj.git
+
+Die +branch.master.merge+ Option definiert den Standard-Remote-'Branch' bei
+einem *git pull*. Während dem ursprünglichen 'clonen', wird sie auf den
+aktuellen 'Branch' des Quell-'Repository' gesetzt, so dass selbst dann, wenn
+der 'HEAD' des Quell-'Repository' inzwischen auf einen anderen 'Branch'
+gewechselt hat, ein späterer 'pull' wird treu dem original 'Branch' folgen.
+
+Diese Option gilt nur für das 'Repository', von dem als erstes 'gecloned'
+wurde, was in der Option +branch.master.remote+ hinterlegt ist. Bei einem
+'pull' aus  anderen 'Repositories' müssen wir explizit angeben, welchen
+'Branch' wir wollen:
+
+ $ git pull git://beispiel.com/anderes.git master
+
+Das obige erklärt, warum einige von unseren früheren 'push' und 'pull'
+Beispielen keine Argumente hatten.
+
+=== Entfernte 'Branches' ===
+
+Wenn Du ein 'Repository' 'clonst', 'clonst' Du auch alle seine
+'Branches'. Das hast Du vielleicht noch nicht bemerkt, denn Git versteckt
+diese: Du musst speziell danach fragen. Das verhindert, dass 'Branches' vom
+entfernten 'Repository' Deine lokalen 'Branches' stören und es macht Git
+einfacher für Anfänger.
+
+Zeige die entfernten 'Branches' an mit:
+
+ $ git branch -r
+
+Du solltes etwas sehen wie:
+
+ origin/HEAD
+ origin/master
+ origin/experimentell
+
+Diese Liste zeigt die 'Branches' und den HEAD des entfernten 'Repository',
+welche auch in regulären Git Anweisungen verwendet werden können. Zum
+Beispiel, angenommen Du hast viele 'Commits' gemacht und möchtest einen
+Vergleich zur letzten abgeholten Version machen. Du kannst die Logs nach dem
+entsprechenden SHA1 Hashwert durchsuchen, aber es ist viel einfacher
+folgendes einzugeben:
+
+ $ git diff origin/HEAD
+
+Oder Du kannst schauen, was auf dem 'Branch' ``experimentell'' los war:
+
+ $ git log origin/experimentell
+
+=== Mehrere 'Remotes' ===
+
+Angenommen, zwei andere Entwickler arbeiten an Deinem Projekt und wir wollen
+beide im Auge behalten. Wir können mehr als ein 'Repository' gleichzeitig
+beobachten mit:
+
+ $ git remote add other git://example.com/some_repo.git
+ $ git pull other some_branch
+
+Nun haben wir einen 'Branch' vom zweiten 'Repository' eingebunden und wir
+haben einfachen Zugriff auf alle 'Branches' von allen 'Repositories':
+
+ $ git diff origin/experimentell^ other/some_branch~5
+
+Aber was, wenn wir nur deren Änderungen vergleichen wollen, ohne unsere
+eigene Arbeit zu beeinflussen? Mit anderen Worten, wir wollen ihre
+'Branches' untersuchen ohne dass deren Änderungen in unser
+Arbeitsverzeichnis einfließen. Anstatt 'pull' benutzt Du dann:
+
+ $ git fetch        # Fetch vom origin, der Standard.
+ $ git fetch other  # Fetch vom zweiten Programmierer.
+
+Dies holt lediglich die Chroniken. Obwohl das Arbeitsverzeichnis unverändert
+bleibt, können wir nun jeden 'Branch' aus jedem 'Repository' in einer Git
+Anweisung referenzieren, da wir eine lokale Kopie besitzen.
+
+Erinnere Dich, dass ein 'Pull' hinter den Kulissen einfach ein *fetch*
+gefolgt von einem *merge* ist. Normalerweise machen wir einen *pull* weil
+wir die letzten 'Commits' abrufen und einbinden wollen. Die beschriebene
+Situation ist eine erwähnenswerte Ausnahme.
+
+Siehe *git help remote* um zu sehen wie man Remote-'Repositories' entfernt,
+bestimmte 'Branches' ignoriert und mehr.
+
+=== Meine Einstellungen ===
+
+Für meine Projekte bevorzuge ich es, wenn Unterstützer 'Repositories'
+vorbereiten, von denen ich 'pullen' kann. Verschiedene Git Hosting Anbieter
+lassen Dich mit einem Klick deine eigene 'Fork' eines Projekts hosten.
+
+Nachdem ich einen Zweig abgerufen habe, benutze ich Git Anweisungen um durch
+die Änderungen zu navigieren und zu untersuchen, die idealerweise gut
+organisiert und dokumentiert sind. Ich 'merge' meine eigenen Änderungen und
+führe eventuell weitere Änderungen durch. Wenn ich zufrieden bin, 'pushe'
+ich in das zentrale 'Repository'.
+
+Obwohl ich nur unregelmäßig Beiträge erhalte, glaube ich, dass diese Methode
+sich auszahlt. Siehe
+http://torvalds-family.blogspot.com/2009/06/happiness-is-warm-scm.html[diesen
+Blog Beitrag von Linus Torvalds (englisch)].
+
+In der Git Welt zu bleiben ist etwas bequemer als 'Patch'-Dateien, denn es
+erspart mir sie in Git 'Commits' zu konvertieren. Außerdem kümmert sich Git
+um die Details wie Autorname und eMail-Adresse, genauso wie um Datum und
+Uhrzeit und es fordert den Autor zum Beschreiben seiner eigenen Änderungen
+auf.

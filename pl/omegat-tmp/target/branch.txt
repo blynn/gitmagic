@@ -1,0 +1,171 @@
+== Magia BRANCH ==
+
+niezwloczne BRANCHEN i MERGEN sa uderzajacymi wlasciwosciami GIT
+
+*Problem*: Zewnetrzne faktory narzucaja zmiane kontekstu. powazny blad w opublikowanej wersji wystepuje bez ostrzezenia. Termin opublikowania pewnej wlasciwosci zbliza sie. Programista odpowiedzialny za podejmowanie kluczowych decyzji projektu opuszcza team. W wszystkich tych przypadkach musisz zaprzestac pracy nad bierzacymi zadaniami i poswiecic sie rozwiazaniu problemu.
+
+Przerwanie mysli nie jest dobre dla produktywnosci, a czym bardziej skomplikowana zmiana kontekstu, tym wieksze sa straty Przy centralnej kontroli wersji musielibysmy nowa kopie robocza pozyskac ze serwera. Przy podzielonych systemach wyglada to duzo lepiej, poniewaz mozemy potrzebna wersje skonowac lokalnie
+
+Jednak CLONEN niesie za soba kopiowanie calego katalogu roboczego jak i calej historii projektu az do podanego punktu. Nawet jesli GIT redukuje koszty poprzez udostepnienie danych i skroty, wszystkie pliki projektu musza znalezc sie w nowym katalogu roboczym.
+
+*Rozwiazanie*: Git posiada lepsze narzedzia dla takich sytuacji, ktore sa duzo szybsze i oszczedniejsze dla miejsca na dysku jak klonowanie: *git branch*.
+
+Tym magicznym slowem zmienisz dane w swoim katalogu roboczym z jednej wersji w inna. Te przemiany moga wiecej jak tylko poruszanie sie w historii projektu. Twoje dane moga zamienic sie z aktualnego stanu do wersji eksperymentalnej, do najnowszego stanu, do stanu twojeo kolegi u tak dalej.
+
+=== Przycisk SZEF ===
+
+Grales juz kiedys w gre, ktora posiadala przycisk SZEF, po nacisnieciu ktorej monitor od razu pokazywal jakis arkusz kalkulacyjny. albo cos innego? By, jesli tylko szef wszedl do biura, podczas grania w gierke, mogles ja szybko ukryc?
+
+W pewnym katalogu:
+
+$ echo "Ich bin klüger als mein Chef" > meinedatei.txt $ git init $ git add . $ git commit -m "Erster Stand"
+
+Utworzylismy REPOSITORY, ktora posiada dana z ta zawartoscia Podajemy teraz;
+
+$ git checkout -b chef # scheinbar hat sich danach nichts geändert $ echo "Mein Chef ist klüger als ich" > meinedatei.txt $ git commit -a -m "Ein anderer Stand"
+
+Wyglada jakbysmy ta dana zmienili i COMMITED Ale to iluzja. Wpisz:
+
+$ git checkout master # wechsle zur Originalversion der Datei
+
+i Simsalabim! Poprzedni plik jest przywrocony do stanu pierwotnego A gdy szef grzebie w twoim katalogu, wpisz:
+
+$ git checkout chef # wechsle zur Version die der Chef ruhig sehen kann
+
+Mozesz zmieniac pomiedzy tymi wersjami tak szesto jak czesto zechcesz, niezaleznie od tego w kazdej z tych wersji mozesz COMMITEN
+
+=== Brudna robota ===
+
+[[branch]]  Zalozmy, pracujesz nad jakas funkcja, i musisz, jakiegokolwiek powodu, wrocic o 3 wersje wstecz, by wprowadzic kilka polecen print, aby sprawdzic jej dzaialanie. Wtedy:
+
+$ git commit -a $ git checkout HEAD~3
+
+Teraz mozesz temporarnie wszedze wprowadzac na dziko kod Mozesz te zmiany nawet COMMITEN. JAk juz jestes gotowy
+
+$ git checkout master
+
+by wrocic do poprzedniej pracy Oauwaz, ze wszystkie zmiany, ktorre nie zostaly COMMITTED, zostaly przejete
+
+A co jesli chcesz zapamietac wprowadzone zmiany? Proste;
+
+$ git checkout -b schmutzig
+
+ i tylko jeszcze COMMIT zanim wrocisz do MASTER BRANCH. Jesli tylko chcesz wrocic do twojej brudnej roboty, wpisz po prostu
+
+$ git checkout schnmutzig
+
+Spotkalismy sie z tym poleceniem juz we wczesniejszym rozdziale, gdy poruszalismy temat ladowania starych stanow Teraz mozemy opowiedziec cala historie: Pliki zmieniaja die do wymaganego stanu, jednak musimy opuscic MASTER BRANCH. Kazdy COMMIT od teraz prowadzi woje dane inna droga, ktorej mozemy rowniez nadac nazwe.
+
+Innymi slowami, po przywolaniu starego stanu GIT automatychnie zamienia sie w nowy, nienazwany BRANCH, ktory poleceniem *git checout -b* uzyska nazwe i zostanie zapamietany.
+
+=== Szybkie koregowanie bledow. ===
+
+Akurat gdy strasznie zajety biezacymi zadaniami w projekcie otrzymujesz polecenie zajecie sie bledem w COMMIT 1b6d...
+
+$ git commit -a $ git checkout -b fixes 1b6d
+
+Jak juz uporasz sie z bledem:
+
+$ git commit -a -m "Fehler behoben" $ git checkout master
+
+i kontynnuj przerwany prace Mozesz nawet ostatnio swiezo upieczona koreketure przejac do aktualnego stanu:
+
+$ git merge fixes
+
+=== MERGEN ===
+
+Za pomoca niektorych systemow kontroli wersji utworzenie nowegoi BRANCH moze i jest prostem, jednak pozniejsze MERGE trudne.  Z GIT MERGE jest tak prostem, ze czasami nawet nie zauwazysz, gdy to nastepuje
+
+W gruncie rzeczy spotkalismy sie juz wczesniej z MERGE. Polecenie *pull* za pomoca ('fetch') laduje COMMITS i je zespala ('merged'), wtedy z aktualnym BRANCH. Jesli nie wprowadziles zadnych lokalnych zmian, to 'merge' jest szybkim przekierowaniem, jest to przypadek, podobny do przywolania ostatniej wersji z centralnego systemu zarzadzania wersja. Jesli jednak wprowadziles zmiany, GIT bedzie je automatycznie MERGEN i powiadomi cie o eventualnych konfliktach.
+
+Zwyczajnie kazdy COMMIT posiada rodzica-COMMIT, a mianowicie poprzedni COMMIT. MERGEN kilku BRANCHES wytwarza COMMIT z minimum 2 rodzicami-COMMIT. To nasuwa pytanie; ktoremu COMMIT referencuje HEAD++10 wlasciwie? COMMIT moze posiadac wiecej rodzicow, ktoremu wlasciwie nastepowac? 
+
+Wychodzi na to, ze ta notacja zawsze wybiera pierwszego rodzica. To jest erstrebenswert, poniewaz aktualny BRANCH staje sie pierwszym rodzicem podczas MERGE; czesto jestes konfrontowany ze zmianami ktorych dokonales w aktualnym BRANCH bardziej, niz ze zmianami z innych BRANCHES.
+
+Mozesz tez jakiegos rodzica referowac znaczkiem CARET By na przyklad logi drugiego rodzica pokazac
+
+$ git log HEAD^2
+
+Mozesz pominac numer pierwszego rodzica By na przyklad pokazac roznice miedzy pierwszym rodzicem
+
+$ git diff HEAD^
+
+mozesz ta notacje kombinowac takze z innymi typami Na przyklad:
+
+$ git checkout 1b6d^^2~10 -b uralt
+
+rozpoczyna z nowym BRANCH o nazwie '``stare', ktory posiada stan 10 COMMIT spoowrotem od drugiego rodzica COMMIT, ktorego hash rozpoczyna sie na 1b6d. 
+
+=== Nie przerywany przebieg pracy ===
+
+W procesie produkcji czesto drugi krok planu musi czekac na zakonczenie pierwszego Popsuty samochod stoi w garazu nieuzywany do czasu dostarczenia czesci zamiennej. Prototyp musi czekac na wyprodukowanie baustein zanim mozna podjac dalsza konstrukcje.
+
+W projektach software moze to wygladac podobnie. Druga czesc jakiegos feature musi czekac, az pierwsza zostanie upubliczniona i przetestowana. Niektore projekty wymagaja sprawdzenia twojego kodu zanim zostanie zaakceptoany, musisz wiec czekac, zanim pierwsza czesc zostanie sprawdzona, zanim bedziesz mogl zaczac z druga czescia
+
+Dzieki bezbolowemu BANCHEN i MERGEN kozemy te regoly naciagnac i praccowac nad druga czescia juz zanim pierwsza zostanie oficjalnie zatwierdzona Przyjmijmy, że wykonałeś COMMIT pierwszej części i przekazałeś do sprwadzenia. Powiedzmy też, że znajdujesz sie w MASTER BRANCH. Najpierw zmień BRANCH do części drugiej
+
+$ git checkout -b teil2
+
+Pracujesz w cześci 2 i regularnie wykonujesz COMMIT. Błądzenie jest ludzkie i może się zdażyć, że chcecie wrócić do części 1 i wprowadzić poprawki. Jeśli masz szczęście i jesteś dobry, możesz ominąć następne akapity.
+
+$ git checkout master # Gehe zurück zu Teil I. $ fix_problem $ git commit -a # 'Commite' die Lösung. $ git checkout teil2 # Gehe zurück zu Teil II. $ git merge master # 'Merge' die Lösung.
+
+Schließlich, Teil I ist zugelassen:
+
+$ git checkout master # Gehe zurück zu Teil I. $ submit files # Veröffentliche deine Dateien! $ git merge teil2 # 'Merge' in Teil II. $ git branch -d teil2 # Lösche den Branch "teil2"
+
+Nun bist du wieder im `master` 'Branch', mit Teil II im Arbeitsverzeichnis.
+
+Dość łatwo zastosować ten sam trik na dowolną ilość części. Równie łatwo można spowrotem BRANCHEN: przyjmując, spostrzegasz za późno, że powinieneś 7 COMMITS wcześniej utworzyć branch- Wpisz wtedy:
+
+$ git branch -m master teil2 # Umbenennen des 'Branch' "master" zu "teil2". $ git branch master HEAD~7 # Erstelle neuen "master", 7 Commits voraus
+
+Teraz MASTER BRANCH zawiera cześć 1 a BRANCH czesc2 posiada resztę. Znajdujemy się teraz w tym ostatnim BRANCH; utworzyliśmy MASTER bez wchodzenia do niego, ponieważ mamy zamiar pracować teraz dalej w BRANCH czesc2 Znajduje to dość szerokie zastosowanie Do tej pory przechodziliśmy do nowo utworzonego BRANCH, tak jak w:
+
+$ git checkout HEAD~7 -b master # erzeuge einen Branch, und wechsle zu ihm.
+
+=== Reorganizacja chaosu ===
+
+Może lubisz odpracować wszystkie aspekty projektu w  Chcesz wszystkie bieżące prace zachować dla siebie, a wszyscy inni powinni widzieć twoje COMMITS tylko jeśli je ładnie zorganizowałeś. Wystartuj kilka BRANCHES:
+
+$ git branch sauber # Erzeuge einen Branch für gesäuberte Commits. $ git checkout -b mischmasch # Erzeuge und wechsle in den Branch zum Arbeiten.
+
+Zacznij po koleju odpracowywać zadania: usuń błędy, dodaj nowe funkcje, utwóż kod tymczasowy i tak dalej, i COMMITE twój kod regularnie. Wtedy:
+
+$ git checkout bereinigt $ git cherry-pick mischmasch^^
+
+zmień najwyższy COMMIT z BRANCH miszmasz na oszyszczony BRANCH. Poprzez pousuwanie rodzynek możesz tak skonstruować BRANCH, który posiada jedynie końcowy kod i zależne od niego COMMITS pogrupowane COMMITS.
+
+=== Organizacja BRANCHES ===
+
+Listę wszystkich BRANCHES otrzymasz poprzez:
+
+$ git branch
+
+Standardowo zaczynasz w BRANCH zwanym MASTER. Wielu opowiada się za pozostawieniem MASTERBRANCH w stanie dziewiczym i założeniu dla wykonania pracy nowego BRANCH
+
+Die *-d* und *-m* Optionen erlauben dir 'Branches' zu löschen und zu verschieben (umzubenennen). Zobacz: *git help branch*.
+
+MASTER BRANCH jest bardzo użytecznym  Inni mogą wychodzić z założenia, że twój REPOSITORY posiada BRANCH o tej nazwie i że posiada on oficjalną wersję Nawet jeśli mógłbyś skasować lub zmienić nazwę na inną, możesz tą konwencję respektować
+
+=== Tymczasowe BRANCHES ===
+
+Po jakimś czasie stwierdzisz, że ciągle tworzysz krótko żyjące BRANCHES, w wiekszości z tego samego powodu: każdy nowy BRANCH służy jedynie do tego, by zabezpieczyć aktualny stan,, aby móc wrócić do jednego z poprzednich punktów i poprawić jakieś priorytetowe błędy czy cokolwiek.
+
+Można to porównać do chwilowego przełączenia kanału telewizyjnego, by sprawdzić co na innym kanale się dzieje. Lecz zamiast naciskać guziki, dajesz polecenia CREATE, CHECK OUT, MERGE i DELETE z tymczasowymi BRANCHES. Na szczęście GIT posiada na te operacje skrót, który jest tak samo komfortowy jak pilot telewizora:
+
+$ git stash
+
+Polecenie to zabezpiecza aktualny stan w tymczasowym miejscu (STASH = ukryj) i przywraca poprzedni stan. Twój katalog roboczy wygląda dokładnie tak, jak wyglądał zanim zacząłeś w nim edytować Teraz możesz poprawiać błędy, zładować zmiany z centralnego REPOSITORY (PULL) i tak dalej. Jeśli chcesz powrócić spowrotem do swoich zmian, wpisz:
+
+$ git stash apply # Es kann sein, dass du Konflikte auflösen musst.
+
+Możesz posiadać więcej STASHES i traktować je w zupełnie inny sposób. Zobacz *git help stash*. Jak już prawdopodobnie się domyślasz, GIT stosuje BRANCHES w tle, by wykonać tą magiczną sztuczję
+
+=== Pracuj jak chcesz ===
+
+Może pytasz się, czy BRANCHES są warte tego zachodu. Jakby nie było, polecenia CLONE są prawie tak samo szybkie i możesz po prostu poleceniem *cd* zamiast ezoterycznych poleceń GIT miedzy nimi zmieniać.
+
+Przyjżyjmy się takiej przeglądarce internetowej. Dlaczego pozwalają używać tabs albo okien? Ponieważ udostępnienie obu możliwości pozwala na stosowanie wielu stylów. Niektórzy użytkownicy wolą mieć otwarte tylko jedno okno przeglądarki i korzystają z tabs dla różnych stron Inni upierają się przy tym: więcej okien, zupełnie bez tabs. Inni znowu wolą coś pomiędzy.
+
+BRANCHEN to jak tabs dla twojego katalogu roboczego a CLONEN porównać można do otwarcia wielu okien. Obie operacje są szybkie i lokalne, dlaczego nie poeksperymentować i nie znaleźć dla siebie najbardziej odpowiedniej kombinacji. GIT pozwoli ci pracować dokładnie tak jak chcesz.

@@ -1,0 +1,146 @@
+== Einleitung ==
+
+Ich benutze eine Analogie um in die Versionsverwaltung einzuführen. Für eine
+vernünftigere Erklärung siehe
+http://de.wikipedia.org/wiki/Versionsverwaltung[den Wikipedia Artikel zur
+Versionsverwaltung].
+
+=== Arbeit ist Spiel ===
+
+Ich spiele Computerspiele schon fast mein ganzes Leben. Im Gegensatz dazu
+habe ich erst als Erwachsener damit begonnen Versionsverwaltungssysteme zu
+benutzen. Ich vermute, dass ich damit nicht alleine bin und der Vergleich
+hilft vielleicht dabei die Konzepte einfacher zu erklären und zu verstehen.
+
+Stelle dir das Bearbeiten deines Codes oder deiner Dokumente wie ein
+Computerspiel vor. Wenn du gut voran gekommen bist, willst du das Erreichte
+sichern. Um das zu tun, klickst du auf auf Speichern in deinem vertrauten
+Editor.
+
+Aber, das überschreibt die vorherige Version. Das ist wie bei den Spielen
+der alten Schule, die nur Speicherplatz für eine Sicherung hatten:
+sicherlich konntest du speichern, aber du konntest nie zu einem älteren
+Stand zurück. Das war eine Schande, denn vielleicht war deine vorherige
+Sicherung an einer außergewöhnlich spannenden Stelle des Spiels, zu der du
+später gerne noch einmal zurückkehren möchtest. Oder noch schlimmer, deine
+aktuelle Sicherung ist in einem nicht lösbaren Stand, dann musst du von ganz
+vorne beginnen.
+
+=== Versionsverwaltung ===
+
+Beim Editieren kannst du deine Datei durch 'Speichern unter ...' mit einem
+neuen Namen abspeichern oder du kopierst sie vor dem Speichern irgendwo hin
+um die alte Version zu erhalten. Außerdem kannst du sie komprimieren um
+Speicherplatz zu sparen. Das ist eine primitive und mühselige Form der
+Versionsverwaltung. Computerspiele machten das lange Zeit so, viele von
+ihnen hatten automatisch erstellte Sicherungspunkte mit Zeitstempel.
+
+Jetzt lass uns das Problem etwas komplizierter machen. Sagen wir, du hast
+einen Haufen Dateien, die zusammen gehören, z.B. Quellcodes für ein Projekt
+oder Dateien einer Website. Wenn du nun eine alte Version erhalten willst,
+musst du den ganzen Ordner archivieren. Viele Versionen auf diese Art zu
+archivieren ist mühselig und kann sehr schnell teuer werden.
+
+Bei einigen Computerspielen bestand ein gesicherter Stand wirklich aus einem
+Ordner voller Dateien. Diese Spiele versteckten die Details vor dem Spieler
+und präsentierten eine bequeme Oberfläche um verschiedene Versionen des
+Ordners zu verwalten.
+
+Versionsverwaltungen sind nicht anders. Sie alle haben bequeme
+Schnittstellen um Ordner voller Dateien zu verwalten. Du kannst den Zustand
+des Ordners sichern so oft du willst und du kannst später jeden
+Sicherungspunkt wieder herstellen. Im Gegensatz zu den meisten
+Computerspielen sind sie aber in der Regel dafür ausgelegt sparsam mit dem
+Speicherplatz umzugehen. Normalerweise ändern sich immer nur wenige Dateien
+zwischen zwei Versionen und die Änderungen selbst sind oft nicht groß. Die
+Platzersparnis beruht auf dem Speichern der Unterschiede an Stelle einer
+Kopie der ganzen Datei.
+
+=== Verteilte Kontrolle ===
+
+Nun stell dir ein ganz kompliziertes Computerspiel vor. So schwierig zu
+lösen, dass viele erfahrene Spieler auf der ganzen Welt beschließen sich
+zusammen zu tun und ihre gespeicherten Spielstände auszutauschen um das
+Spiel zu beenden. 'Speedruns' sind Beispiele aus dem echten Leben: Spieler,
+die sich in unterschiedlichen Spielebenen des selben Spiels spezialisiert
+haben, arbeiten zusammen um erstaunliche Ergebnisse zu erzielen.
+
+Wie würdest du ein System erstellen, bei dem jeder auf einfache Weise die
+Sicherungen der anderen bekommt? Und eigene Sicherungen bereitstellt?
+
+Früher nutzte jedes Projekt eine zentralisierte Versionsverwaltung. Irgendwo
+speicherte ein Server alle gespeicherten Spiele, sonst niemand. Jeder
+Spieler hatte nur ein paar gespeicherte Spiele auf seinem Rechner. Wenn ein
+Spieler einen Fortschritt machen wollte, musste er den aktuellsten Stand vom
+Hauptserver herunterladen, eine Weile spielen, sichern und den Stand dann
+wieder auf den Server laden, damit irgendjemand ihn nutzen kann.
+
+Was, wenn ein Spieler aus irgendeinem Grund einen alten Spielstand will?
+Vielleicht ist der aktuell gesicherte Spielstand nicht mehr lösbar, weil
+jemand in der dritten Ebene vergessen hat ein Objekt aufzunehmen und sie
+versuchen den letzten Spielstand zu finden, ab dem das Spiel wieder lösbar
+ist. Oder sie wollen zwei Spielstände vergleichen, um festzustellen wie viel
+ein Spieler geleistet hat.
+
+Es gibt viele Gründe warum man einen älteren Stand sehen will, aber das
+Ergebnis ist das selbe. Man muss vom Hauptserver das alte gespeicherte Spiel
+anfordern. Je mehr gespeicherte Spiele benötigt werden, desto mehr
+Kommunikation ist erforderlich.
+
+Die neue Generation der Versionsverwaltungssysteme, zu denen Git gehört,
+werden verteilte Systeme genannt und können als eine Verallgemeinerung der
+zentralisierten Systeme verstanden werden. Wenn Spieler vom Hauptserver
+herunterladen, erhalten sie jedes gespeichertes Spiel, nicht nur das zuletzt
+gespeicherte. Es ist als ob der Hauptserver gespiegelt wird.
+
+Dieses erste 'Cloning' kann teuer sein, vor allem, wenn eine lange
+Geschichte existiert, aber auf Dauer wird es sich lohnen. Ein unmittelbarer
+Vorteil ist, wenn aus irgendeinem Grund ein älterer Stand benötigt wird, ist
+keine Kommunikation mit dem Hauptserver notwendig.
+
+=== Ein dummer Aberglaube ===
+
+Ein weit verbreitetes Missverständnis ist, dass verteilte System ungeeignet
+sind für Projekte, die ein offizielles zentrales 'Repository'
+benötigen. Nichts könnte weiter von der Wahrheit entfernt sein. Jemanden zu
+fotografieren stiehlt nicht dessen Seele. Genauso wenig setzt das 'Clonen'
+des zentralen 'Repository' dessen Bedeutung herab.
+
+Eine gute erste Annäherung ist, dass alles was eine zentralisierte
+Versionsverwaltung kann, ein gut durchdachtes verteiltes System besser
+kann. Netzwerkressourcen sind einfach teurer als lokale Ressourcen. Auch
+wenn wir später Nachteile beim verteilten Ansatz sehen werden, ist man mit
+dieser Faustregel weniger anfällig für falsche Vergleiche.
+
+Ein kleines Projekt mag nur einen Bruchteil der Möglichkeiten benötigen, die
+so ein System bietet. Aber deshalb ein einfacheres, schlecht erweiterbares
+System zu benutzen, ist wie römische Ziffern zum Rechnen mit kleinen Zahlen
+zu verwenden.
+
+Außerdem könnte dein Projekt weit über die ursprünglichen Erwartungen
+hinauswachsen. Git von Anfang an zu benutzen, ist wie ein Schweizer
+Taschenmesser mit sich zu tragen, auch wenn damit meistens nur Flaschen
+geöffnet werden. Eines Tages brauchst du vielleicht dringend einen
+Schraubendreher, dann bist du froh mehr als nur einen einfachen
+Flaschenöffner bei dir zu haben.
+
+=== 'Merge' Konflikte ===
+
+Für diesen Punkt ist unsere Computerspielanalogie ungeeignet. Stattdessen
+stellen wir uns wieder vor, wir editieren ein Dokument.
+
+Stell dir vor, Alice fügt eine Zeile am Dateianfang hinzu und Bob eine am
+Dateiende. Beide laden ihre Änderungen hoch. Die meisten Systeme wählen
+automatisch eine vernünftige Vorgehensweise: akzeptiere beide Änderungen und
+füge sie zusammen, damit fließen beide Änderungen in das Dokument mit ein.
+
+Nun stell dir vor beide, Alice und Bob, machen Änderungen in der selben
+Zeile. Dann ist es unmöglich ohne menschlichen Eingriff fortzufahren. Die
+zweite Person, welche die Datei hoch lädt, wird über einen _'Merge'
+Konflikt_ informiert und muss entscheiden, welche Änderung übernommen wird
+oder die ganze Zeile überarbeiten. 
+
+Es können noch weitaus kompliziertere Situationen
+entstehen. Versionsverwaltungssysteme behandeln die einfacheren Fälle selbst
+und überlassen die schwierigen uns Menschen. Üblicherweise ist deren
+Verhalten einstellbar.

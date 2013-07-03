@@ -1,0 +1,275 @@
+== Geschichtsstunde ==
+
+Eine Folge von Git's verteilter Natur ist, dass die Chronik einfach
+verändert werden kann. Aber, wenn du an der Vergangenheit manipulierst, sei
+vorsichtig: verändere nur den Teil der Chronik, den du ganz alleine hast. So
+wie Nationen ewig diskutieren, wer welche Greueltaten vollbracht hat, wirst
+du beim Abgleichen in Schwierigkeiten geraten, falls jemand einen 'Clone'
+mit abweichender Chronik hat und die Zweige sich austauschen sollen.
+
+Einige Entwickler setzen sich nachhaltig für die Unantastbarkeit der Chronik
+ein, mit allen Fehlern, Nachteilen und Mängeln. Andere denken, daß Zweige
+vorzeigbar gemacht werden sollten, bevor sie auf die Öffentlichkeit
+losgelassen werden. Git versteht beide Gesichtspunkte. Wie 'Clonen',
+'Branchen' und 'Mergen' ist das Umschreiben der Chronik lediglich eine
+weitere Stärke, die Git dir bietet. Es liegt an dir diese weise zu nutzen.
+
+=== Ich nehme alles zurück ===
+
+Hast du gerade 'commitet', aber du hättest gerne eine andere Beschreibung
+eingegeben? Dann gib ein:
+
+ $ git commit --amend
+
+um die letzte Beschreibung zu ändern. Du merkst, dass du vergessen hast eine
+Datei hinzuzufügen? Führe *git add* aus um sie hinzuzufügen und dann die
+vorhergehende Anweisung.
+
+Du willst noch ein paar Änderungen zu deinem letzten 'Commit' hinzufügen?
+Dann mache diese Änderungen und gib ein:
+
+ $ git commit --amend -a
+
+=== ... und noch viel mehr ===
+
+Nehmen wir jetzt an, das vorherige Problem ist zehnmal schlimmer. Nach einer
+längeren Sitzung hast du einen Haufen 'Commits' gemacht. Aber du bist mit
+der Art der Organisation nicht glücklich und einige 'Commits' könnten etwas
+umformuliert werden. Dann gib ein:
+
+ $ git rebase -i HEAD~10
+
+und die letzten zehn 'Commits' erscheinen in deinem bevorzugten
+$EDITOR. Auszug aus einem Beispiel:
+
+    pick 5c6eb73 Link repo.or.cz hinzugefügt
+    pick a311a64 Analogien in "Arbeite wie du willst" umorganisiert
+    pick 100834f Push-Ziel zum Makefile hinzugefügt
+
+Dann:
+
+- Entferne 'Commits' durch das Löschen von Zeilen.
+- Organisiere 'Commits' durch verschieben von Zeilen.
+- Ersetze `pick` mit:
+   * `edit` um einen 'Commit' für 'amends' zu markieren.
+   * `reword` um die Log-Beschreibung zu ändern.
+   * `squash` um einen 'Commit' mit dem vorhergehenden zu vereinen ('merge').
+   * `fixup` um einen 'Commit' mit dem vorhergehenden zu vereinen ('merge') und die Log-Beschreibung zu verwerfen.
+
+Speichere und Beende. Wenn du einen 'Commit' mit 'edit' markiert hast, gib
+ein:
+
+ $ git commit --amend
+
+Ansonsten:
+
+ $ git rebase --continue
+
+Also 'commite' früh und oft: du kannst später mit 'rebase' aufräumen.
+
+=== Lokale Änderungen zum Schluß ===
+
+Du arbeitest an einem aktiven Projekt. Über die Zeit haben sich einige
+lokale 'Commits' angesammelt und dann synchronisierst du mit einem 'Merge'
+mit dem offiziellen Zweig. Dieser Zyklus wiederholt sich ein paar Mal bevor
+du zum 'Pushen' in den zentralen Zweig bereit bist.
+
+Aber nun ist die Chronik in deinem lokalen Git-'Clone' ein chaotisches
+Durcheinander deiner Änderungen und den Änderungen vom offiziellen Zweig. Du
+willst alle Deine Änderungen lieber in einem fortlaufenden Abschnitt und
+hinter den offiziellen Änderungen sehen.
+
+Das ist eine Aufgabe für *git rebase*, wie oben beschrieben. In vielen
+Fällen kannst du den *--onto* Schalter benutzen um Interaktion zu vermeiden.
+
+Siehe auch *git help rebase* für ausführliche Beispiele dieser erstaunlichen
+Anweisung. Du kannst auch 'Commits' aufteilen. Du kannst sogar 'Branches' in
+einem 'Repository' umorganisieren.
+
+=== Chronik umschreiben ===
+
+Gelegentlich brauchst du Versionsverwaltung vergleichbar dem Wegretuschieren
+von Personen aus einem offiziellen Foto, um diese in stalinistischer Art aus
+der Geschichte zu löschen. Stell dir zum Beispiel vor, du willst ein Projekt
+veröffentlichen, aber es enthält eine Datei, die aus irgendwelchen Gründen
+privat bleiben muss. Vielleicht habe ich meine Kreditkartennummer in einer
+Textdatei notiert und diese versehentlich dem Projekt hinzugefügt. Die Datei
+zu löschen ist zwecklos, da über ältere 'Commits' auf sie zugegriffen werden
+könnte. Wir müssen die Datei aus allen 'Commits' entfernen:
+
+ $ git filter-branch --tree-filter 'rm sehr/geheime/Datei' HEAD
+
+Siehe *git help filter-branch*, wo dieses Beispiel erklärt und eine
+schnellere Methode vorstellt wird. Allgemein, *filter-branch* lässt dich
+große Bereiche der Chronik mit einer einzigen Anweisung verändern.
+
+Danach beschreibt der Ordner +.git/refs/original+ den Zustand der Lage vor
+der Operation. Prüfe, ob die 'filter-branch' Anweisung getan hat was du
+wolltest, dann lösche dieses Verzeichnis bevor du weitere 'filter-branch'
+Operationen durchführst.
+
+Zuletzt, ersetze alle 'Clones' deines Projekts mit deiner überarbeiteten
+Version, falls du später mit ihnen interagieren möchtest.
+
+=== Geschichte machen ===
+
+[[makinghistory]] Du möchtest ein Projekt zu Git umziehen? Wenn es mit einem
+der bekannteren Systeme verwaltet wird, besteht die Möglichkeit, dass schon
+jemand ein Skript geschrieben hat, das die gesamte Chronik für Git
+exportiert.
+
+Anderenfalls, sieh dir *git fast-import* an, das Text in einem speziellen
+Format einliest um eine Git Chronik von Anfang an zu
+erstellen. Normalerweise wird ein Skript, das diese Anweisung benutzt,
+hastig zusammengeschustert und einmalig ausgeführt um das Projekt in einem
+einzigen Lauf zu migrieren.
+
+Erstelle zum Beispiel aus folgendem Listing eine temporäre Datei, z.B. `/tmp/history`:
+----------------------------------
+commit refs/heads/master committer Alice <alice@example.com> Thu, 01 Jan
+1970 00:00:00 +0000 data <<EOT Initial commit.  EOT
+
+M 100644 inline hello.c data <<EOT #include <stdio.h>
+
+int main() {
+  printf("Hallo, Welt!\n");
+  return 0;
+}
+EOT
+
+
+commit refs/heads/master committer Bob <bob@example.com> Tue, 14 Mar 2000
+01:59:26 -0800 data <<EOT Ersetze printf() mit write().  EOT
+
+M 100644 inline hello.c data <<EOT #include <unistd.h>
+
+int main() {
+  write(1, "Hallo, Welt!\n", 14);
+  return 0;
+}
+EOT
+
+----------------------------------
+
+Dann, erstelle ein Git 'Repository' aus dieser temporären Datei, durch
+Eingabe von:
+
+ $ mkdir project; cd project; git init
+ $ git fast-import --date-format=rfc2822 < /tmp/history
+
+Die aktuellste Version des Projekts kannst du abrufen ('checkout') mit:
+
+ $ git checkout master .
+
+Die Anweisung *git fast-export* konvertiert jedes 'Repository' in das *git
+fast-import* Format, diese Ausgabe kannst du studieren um Exporteure zu
+schreiben und außerdem um 'Repositories' in Klartext zu übertragen.
+untersuchen wes you can study for writing exporters, and also to transport
+repositories in a human-readable format. Wirklich, diese Anweisung kann
+Klartext-'Repositories' über reine Textkanäle übertragen.
+
+=== Wo ging alles schief? ===
+
+Du hast gerade ein Funktion in deiner Anwendung entdeckt, die nicht mehr
+funktioniert und du weißt sicher, dass sie vor ein paar Monaten noch
+ging. Argh! Wo kommt dieser Fehler her? Hättest du nur die Funktion während
+der Entwicklung getestet.
+
+Dafür ist es nun zu spät. Wie auch immer, vorausgesetzt du hast oft
+'comittet', kann Git dir sagen, wo das Problem liegt:
+
+ $ git bisect start
+ $ git bisect bad HEAD
+ $ git bisect good 1b6d
+
+Git ruft eine Stand ab, der genau dazwischen liegt. Teste die Funktion und
+wenn sich immer noch nicht funktioniert:
+
+ $ git bisect bad
+
+Wenn nicht, ersetzte "bad" mit "good". Git versetzt dich wieder auf einen
+Stand genau zwischen den bekannten Versionen "good" und "bad" und reduziert
+so die Möglichkeiten. Nach ein paar Durchläufen wird dich diese binäre Suche
+zu dem 'Commit' führen, der die Probleme verursacht. Wenn du deine
+Ermittlungen abgeschlossen hast, kehre zum Originalstand zurück mit:
+
+ $ git bisect reset
+
+Anstatt jede Änderung per Hand zu untersuchen, automatisiere die Suche durch
+Ausführen von:
+
+ $ git bisect run mein_skript
+
+Git benutzt den Rückgabewert der übergebenen Anweisung, normalerweise ein
+Skript für einmalige Ausführung, um zu entscheiden, ob eine Änderung gut
+('good') oder schlecht ('bad') ist: Das Skript sollte 0 für 'good'
+zurückgeben, 125 wenn die Änderung übersprungen werden soll und irgendetwas
+zwischen 1 und 127 für 'bad'. Ein negativer Rückgabewert beendet die
+'bisect'-Operation sofort.
+
+Du kannst noch viel mehr machen: die Hilfe erklärt, wie man
+'bisect'-Operationen visualisiert, das 'bisect'-Log untersucht oder
+wiedergibt und sicher unschuldige Änderungen ausschließt um die Suche zu
+beschleunigen.
+
+=== Wer ist verantwortlich? ===
+
+Wie viele andere Versionsverwaltungssysteme hat Git eine 'blame' Anweisung:
+
+ $ git blame bug.c
+
+das jede Zeile in der angegebenen Datei kommentiert um anzuzeigen, wer sie
+zuletzt geändert hat und wann. Im Gegensatz zu vielen anderen
+Versionsverwaltungssystemen funktioniert diese Operation offline, es wird
+nur von der lokalen Festplatte gelesen.
+
+=== Persönliche Erfahrungen ===
+
+In einem zentralisierten Versionsverwaltungssystem ist das Bearbeiten der
+Chronik eine schwierige Angelegenheit und den Administratoren
+vorbehalten. 'Clonen', 'Branchen' und 'Mergen' sind unmöglich ohne
+Netzwerkverbindung. Ebenso grundlegende Funktionen wie das Durchsuchen der
+Chronik oder das 'comitten' einer Änderung. In manchen Systemen benötigt der
+Anwender schon eine Netzwerkverbindung nur um seine eigenen Änderungen zu
+sehen oder um eine Datei zum Bearbeiten zu öffnen.
+
+Zentralisierte Systeme schließen es aus offline zu arbeiten und benötigen
+teurere Netzwerkinfrastruktur, vor allem, wenn die Zahl der Entwickler
+steigt. Am wichtigsten ist, dass alle Operationen bis zu einem gewissen Grad
+langsamer sind, in der Regel bis zu dem Punkt, wo Anwender erweiterte
+Anweisungen scheuen, bis sie absolut notwendig sind. In extremen Fällen
+trifft das auch auf die grundlegenden Anweisungen zu. Wenn Anwender langsame
+Anweisungen ausführen müssen, sinkt die Produktivität, da der Arbeitsfluss
+unterbrochen wird.
+
+Ich habe diese Phänomen aus erster Hand erfahren. Git war das erste
+Versionsverwaltungssystem, das ich benutzt habe. Ich bin schnell in die
+Anwendung hineingewachsen und betrachtete viele Funktionen als
+selbstverständlich. Ich habe einfach vorausgesetzt, dass andere Systeme
+ähnlich sind: die Auswahl eines Versionsverwaltungssystems sollte nicht
+anders sein als die Auswahl eines Texteditors oder Internetbrowser.
+
+Ich war geschockt, als ich später gezwungen war ein zentralisiertes System
+zu benutzen. Eine unzuverlässige Internetverbindung stört mit Git nicht
+sehr, aber sie macht die Entwicklung unerträglich, wenn sie so zuverlässig
+wie ein lokale Festplatte sein sollte. Zusätzlich habe ich mich dabei
+ertappt, bestimmte Anweisungen zu vermeiden, um die damit verbundenen
+Wartezeiten zu vermeiden und das hat mich letztendlich davon abgehalten
+meinem gewohnten Arbeitsablauf zu folgen.
+
+Wenn ich eine langsame Anweisung auszuführen hatte, wurde durch die
+Unterbrechung meiner Gedankengänge dem Arbeitsfluss ein unverhältnismäßiger
+Schaden zugefügt. Während dem Warten auf das Ende der Serverkommunikation
+tat ich etwas anderes um die Wartezeit zu überbrücken, zum Beispiel E-Mails
+lesen oder Dokumentation schreiben. Wenn ich zur ursprünglichen Arbeit
+zurückkehrte, war die Operation längst beendet und ich vergeudete noch mehr
+Zeit beim Versuch mich zu erinnern was ich getan habe. Menschen sind nicht
+gut im Kontextwechsel.
+
+Da war auch ein interessanter
+http://de.wikipedia.org/wiki/Tragik_der_Allmende[Tragik-der-Allmende]
+Effekt: Netzwerküberlastungen erahnend, verbrauchten einzelne Individuen für
+diverse Operationen mehr Netzwerkbandbreite als erforderlich, um zukünftige
+Engpässe zu vermeiden. Die Summe der Bemühungen verschlimmerte die
+Überlastungen, was einzelne wiederum ermutigte noch mehr Bandbreite zu
+verbrauchen um noch längere Wartezeiten zu verhindern.

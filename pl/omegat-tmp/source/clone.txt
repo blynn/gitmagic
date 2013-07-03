@@ -1,0 +1,310 @@
+== Rund ums 'Clonen' ==
+
+In älteren Versionsverwaltungssystemen ist 'checkout' die Standardoperation
+um Dateien zu bekommen. Du bekommst einen Haufen Dateien eines bestimmten
+Sicherungsstands.
+
+In Git und anderen verteilten Versionsverwaltungssystemen ist 'clone' die
+Standardaktion. Um Dateien zu bekommen, erstellst du einen 'Clone' des
+gesamten 'Repository'. Oder anders gesagt, du spiegelst den zentralen
+Server. Alles, was man mit dem zentralen 'Repository' tun kann, kannst du
+auch mit deinem 'Clone' tun.
+
+=== Computer synchronisieren ===
+
+Es ist akzeptabel, für Datensicherungen und einfaches Synchronisieren, mit
+'tarball' Archiven oder *rsync* zu arbeiten. Aber manchmal arbeite ich an
+meinem Laptop, dann an meinem Desktop-PC und die beiden haben sich
+inzwischen nicht austauschen können.
+
+Erstelle ein Git 'Repository' und 'commite' deine Dateien auf dem einen
+Rechner. Dann auf dem anderen:
+
+ $ git clone anderer.computer:/pfad/zu/dateien
+
+um eine zweite Kopie der Dateien und des Git 'Repository' zu erstellen. Von
+jetzt an wird
+
+ $ git commit -a
+ $ git pull anderer.computer:/pfad/zu/dateien HEAD
+
+den Zustand der Dateien des anderen Computer auf den übertragen, an dem du
+gerade arbeitest. Solltest du kürzlich konkurrierende Änderungen an der
+selben Datei vorgenommen haben, lässt Git dich das wissen und musst erneut
+'commiten' nachdem du die Konflikte aufgelöst hast.
+
+=== Klassische Quellcodeverwaltung ===
+
+Erstelle ein Git 'Repository' für deine Dateien:
+
+ $ git init
+ $ git add .
+ $ git commit -m "Erster Commit"
+
+Auf dem zentralen Server erstelle ein 'bare Repository' in irgendeinem
+Ordner:
+
+ $ mkdir proj.git
+ $ cd proj.git
+ $ git init --bare
+ $ touch proj.git/git-daemon-export-ok
+
+Wenn nötig, starte den Git-Dämon:
+
+ $ git daemon --detach  # er könnte schon laufen
+
+Für Git Hostingdienste folge den Anweisungen zum Erstellen des zunächst
+leeren Git 'Repository'. Normalerweise füllt man ein Formular auf einer
+Website aus.
+
+Übertrage ('push') dein Projekt auf den zentralen Server mit:
+
+ $ git push zentraler.server/pfad/zu/proj.git HEAD
+
+Um die Quellcodes abzurufen gibt ein Entwickler folgendes ein:
+
+ $ git clone zentraler.server/pfad/zu/proj.git
+
+Nach dem Bearbeiten sichert der Entwickler die Änderungen lokal:
+
+ $ git commit -a
+
+Um auf die aktuelle Server-Version zu aktualisieren:
+
+ $ git pull
+
+Irgendwelche 'Merge'-Konflikte sollten dann aufgelöst und erneut 'commitet'
+werden:
+
+ $ git commit -a
+
+Um die lokalen Änderungen in das zentrale 'Repository' zu übertragen:
+
+ $ git push
+
+Wenn inzwischen neue Änderungen von anderen Entwicklern beim Hauptserver
+eingegangen sind, schlägt dein 'push' fehl. Aktualisiere das lokale
+'Repository' erneut mit 'pull', löse eventuell aufgetretene
+'Merge'-Konflikte und versuche es nochmal.
+
+Entwickler brauchen SSH Zugriff für die vorherigen 'pull' und 'push'
+Anweisungen. Trotzdem kann jedermann die Quelltexte einsehen, durch Eingabe
+von:
+
+ $ git clone git://zentraler.server/pfad/zu/proj.git
+
+Das ursprüngliche Git-Protokoll ähnelt HTTP: Es gibt keine
+Authentifizierung, also kann jeder das Projekt abrufen. Folglich ist
+standardmäßig das 'Pushen' per Git-Protokoll verboten.
+
+=== Geheime Quellen ===
+
+Für ein Closed-Source-Projekt lasse die 'touch' Anweisung weg und stelle
+sicher, dass niemals eine Datei namens `git-daemon-export-ok` erstellt
+wird. Das 'Repository' kann nun nicht mehr über das Git-Protokol abgerufen
+werden; nur diejenigen mit SSH Zugriff können es einsehen. Wenn alle
+'Repositories' geschlossen sind, ist es unnötig den Git Dämon laufen zu
+lassen, da jegliche Kommunikation über SSH läuft.
+
+=== 'Nackte Repositories' ===
+
+Ein nacktes ('bare') 'Repository' wird so genannt, weil es kein
+Arbeitsverzeichnis hat. Es enthält nur Dateien, die normalerweise im '.git'
+Unterverzeichnis versteckt sind. Mit anderen Worten, es verwaltet die
+Geschichte eines Projekts, enthält aber niemals einen Auszug irgendeiner
+beliebigen Version.
+
+Ein 'bare Repository' übernimmt die Rolle des Hauptserver in einem
+zentralisierten Versionsverwaltungssystem: Das Zuhause deines
+Projekts. Entwickler 'clonen' dein Projekt davon und 'pushen' die letzten
+offiziellen Änderungen dort hin. Meistens befindet es sich auf einem Server,
+der nicht viel tut außer Daten zu verbreiten. Die Entwicklung findet in den
+'Clonen' statt, so kann das Heim-'Repository' ohne Arbeitsverzeichnis
+auskommen.
+
+Viele Git Befehle funktionieren nicht in 'bare Repositories'. Es sei denn
+die `GIT_DIR` Umgebungsvariable wird auf das Arbeitsverzeichnis gesetzt,
+oder die `--bare` Option wird übergeben.
+
+=== 'Push' oder 'Pull' ===
+
+Warum haben wir den 'push'-Befehl eingeführt, anstatt bei dem vertrauten
+'pull'-Befehl zu bleiben? Zuerst, 'pull' funktioniert nicht mit 'bare
+Repositories': stattdessen benutze 'fetch', ein Befehl, den wir später
+behandeln. Aber auch wenn wir ein normales 'Repository' auf dem zentralen
+Server halten würden, wäre das 'pullen' eine mühselige Angelegenheit. Wir
+müssten uns zuerst in den Server einloggen und dem 'pull'-Befehl die
+Netzwerkadresse des Computer übergeben, von dem aus wir die Änderungen
+'pullen', also abholen wollen. Firewalls könnten uns stören und was, wenn
+wir gar keine Berechtigung für eine Serverkonsole haben.
+
+Wie auch immer, abgesehen von diesem Fall, raten wir vom 'Pushen' in ein
+'Repository' ab. Falls das Ziel nämlich ein Arbeitsverzeichnis hat, können
+Verwirrungen entstehen.
+
+Kurzum, während du lernst mit Git umzugehen, 'pushe' nur, wenn das Ziel ein
+'bare Repository' ist; andernfalls benutze 'pull'.
+
+=== 'Fork' eines Projekts ===
+
+Hast du es satt, wie sich ein Projekt entwickelt? Du denkst, du kannst das
+besser? Dann mache folgendes auf deinem Server:
+
+ $ git clone git://haupt.server/pfad/zu/dateien
+
+Dann erzähle jedem von deiner 'Fork' des Projekts auf deinem Server.
+
+Zu jedem späteren Zeitpunkt kannst du die Änderungen des Originalprojekts
+'mergen' mit: 
+
+ $ git pull
+
+=== Ultimative Datensicherung ===
+
+Du willst zahlreiche, vor Manipulation geschützte, redundante
+Datensicherungen an unterschiedlichen Orten? Wenn dein Projekt viele
+Entwickler hat, musst du nichts tun! Jeder 'Clone' deines Codes ist eine
+vollwertige Datensicherung. Nicht nur des aktuellen Stand, sondern der
+gesamten Geschichte. Wird irgendein 'Clone' beschädigt, wird dies dank des
+kryptographischen 'Hashing' sofort erkannt, sobald derjenige versucht mit
+anderen zu kommunizieren.
+
+Wenn dein Projekt nicht so bekannt ist, finde so viele Server wie du kannst
+um dort einen 'Clone' zu platzieren.
+
+Die wirklich Paranoiden sollten immer den letzten 20-Byte SHA1 Hash des
+'HEAD' aufschreiben und an einem sicheren Ort aufbewahren. Er muss sicher
+sein, aber nicht privat. Zum Beispiel wäre es sicher, ihn in einer Zeitung
+zu veröffentlichen, denn es ist schwer für einen Angreifer jede
+Zeitungskopie zu manipulieren.
+
+=== Multitasking mit Lichtgeschwindigkeit ===
+
+Nehmen wir an du willst parallel an mehreren Funktionen arbeiten. Dann
+'commite' dein Projekt und gib ein:
+
+ $ git clone . /irgendein/neuer/ordner
+
+http://de.wikipedia.org/wiki/Harter_Link[Harten Links] ist es zu verdanken,
+dass ein lokaler Klon weniger Zeit und Speicherplatz benötigt als eine
+herkömmliche Datensicherung.
+
+Du kannst nun an zwei unabhängigen Funktionen gleichzeitig arbeiten. Zum
+Beispiel kannst Du einen Klon bearbeiten, während der andere kompiliert
+wird. Zu jeder Zeit kannst Du 'comitten' und die Änderungen des anderen Klon
+'pullen'.
+
+ $ git pull /der/andere/clone HEAD
+
+=== Versionsverwaltung im Untergrund ===
+
+Arbeitest du an einem Projekt, das ein anderes Versionsverwaltungssystem
+nutzt und vermisst du Git? Dann erstelle ein Git 'Repository' in deinem
+Arbeitsverzeichnis:
+
+ $ git init
+ $ git add .
+ $ git commit -m "Erster Commit"
+
+dann 'Clone' es:
+
+ $ git clone . /irgendein/neuer/ordner
+
+Nun gehe in das neue Verzeichnis und arbeite dort mit Git nach
+Herzenslust. Irgendwann wirst du dann mit den anderen synchronisieren
+wollen, dann gehe in das Originalverzeichnis, aktualisiere mit dem anderen
+Versionsverwaltungssystem und gib ein:
+
+ $ git add .
+ $ git commit -m "Synchronisation mit den anderen"
+
+Dann gehe wieder ins neue Verzeichnis und gib ein:
+
+ $ git commit -a -m "Beschreibung der Änderungen"
+ $ git pull
+
+Die Vorgehensweise, wie du deine Änderungen den anderen übergibst, hängt vom
+anderen Versionsverwaltungssystem ab. Das neue Verzeichnis enthält die
+Dateien mit deinen Änderungen. Führe die Anweisungen des anderen
+Versionsverwaltungssystems aus, die nötig sind um die Dateien ins zentrale
+'Repository' zu übertragen.
+
+Subversion, vielleicht das beste zentralisierte Versionsverwaltungssystem,
+wird von unzähligen Projekten benutzt. Der *git svn*-Befehl automatisiert
+den zuvor genannten Ablauf für Subversion 'Repositories' und kann auch
+benutzt werden um
+http://google-opensource.blogspot.com/2008/05/export-git-project-to-google-code.html[ein
+Git Projekt in ein Subversion 'Repository' zu exportieren].
+
+=== Mercurial ===
+
+Mercurial ist ein ähnliches Versionsverwaltungssystem, das fast nahtlos mit
+Git zusammenarbeiten kann. Mit der `hg-git`-Erweiterung kann ein Benutzer
+von Mercurial verlustfrei in ein Git 'Repository' 'pushen' und daraus
+'pullen'.
+
+Beschaffe dir die `hg-git`-Erweiterung mit Git:
+
+ $ git clone git://github.com/schacon/hg-git.git
+
+oder Mercurial:
+
+ $ hg clone http://bitbucket.org/durin42/hg-git/
+
+Leider kenne ich keine solche Erweiterung für Git. Aus diesem Grund plädiere
+ich für Git statt Mercurial für ein zentrales 'Repository', auch wenn man
+Mercurial bevorzugt. Bei einem Mercurial Projekt gibt es gewöhnlich immer
+einen Freiwilligen, der parallel dazu ein Git 'Repository' für die Git
+Anwender unterhält, wogegen, Dank der `hg-git`-Erweiterung, ein Git Projekt
+automatisch die Benutzer von Mercurial mit einbezieht.
+
+Die Erweiterung kann auch ein Mercurial 'Repository' in ein Git 'Repository'
+umwandeln, indem man in ein leeres 'Repository' 'pushed'. Einfacher geht das
+mit dem `hg-fast-export.sh` Skript, welches es hier gibt:
+
+ $ git clone git://repo.or.cz/fast-export.git
+
+Zum Konvertieren gib in einem leeren Verzeichnis ein:
+
+ $ git init
+ $ hg-fast-export.sh -r /hg/repo
+
+nachdem du das Skript zu deinem `$PATH` hinzugefügt hast.
+
+=== Bazaar ===
+
+Wir erwähnen auch kurz Bazaar, weil es nach Git und Mercurial das
+bekannteste freie verteilte Versionsverwaltungssystem ist.
+
+Bazaar hat den Vorteil des Rückblicks, da es relativ jung ist; seine
+Entwickler konnten aus Fehlern der Vergangenheit lernen und kleine
+historische Unwegbarkeiten umgehen. Außerdem waren sich die Entwickler der
+Popularität und Interoperabilität mit anderen Versionsverwaltungssystemen
+bewusst.
+
+Eine `bzr-git`-Erweiterung lässt Anwender von Bazaar einigermaßen mit Git
+'Repositories' arbeiten. Das `tailor` Programm konvertiert Bazaar
+'Repositories' zu Git 'Repositories' und kann das forlaufend tun, während
+`bzr-fast-export` für einmalige Konvertierungen besser geeignet ist.
+
+=== Warum ich Git benutze ===
+
+Ich habe ursprünglich Git gewählt, weil ich gehört habe, dass es die
+unvorstellbar unüberschaubaren Linux Kernel Quellcodes verwalten kann. Ich
+hatte noch keinen Grund zu wechseln. Git hat mir bewundernswert gedient und
+hat mich bis jetzt noch nie im Stich gelassen. Da ich in erster Linie unter
+Linux arbeite, sind Probleme anderer Plattformen bedeutungslos.
+
+Ich bevorzuge auch C-Programme und 'bash'-Skripte gegenüber Anwendungen wie
+zum Beispiel Python Skripts: Es gibt weniger Abhängigkeiten und ich bin
+süchtig nach schellen Ausführungszeiten.
+
+Ich dachte darüber nach, wie Git verbessert werden könnte, ging sogar so
+weit, dass ich meine eigene Git-Ähnliche Anwendung schrieb, allerdings nur
+als akademische Übungen. Hätte ich mein Projekt fertig gestellt, wäre ich
+trotzdem bei Git geblieben, denn die Verbesserungen wären zu gering gewesen
+um den Einsatz eines Eigenbrödler-Systems zu rechtfertigen.
+
+Natürlich können deine Bedürfnisse und Wünsche ganz anders sein und
+vielleicht bist du mit einem anderen System besser dran. Wie auch immer, mit
+Git kannst du nicht viel falsch machen.

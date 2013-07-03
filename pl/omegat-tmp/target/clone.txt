@@ -1,0 +1,183 @@
+== Polecenie CLONEN ==
+
+W starszych systemach zarządzania wersją polecenie CHECKOUT stanowi standardową operacje pozyskania danych. Otrzymasz całą masę plików konkretnego stanu
+
+W GIT i innych dzielonych systemach zarządzania wersją to CLONE jest standardem. By pozyskać dane, tworzysz klon całej REPOSITORY. Lub inaczej mówiąc, odzwierciedlasz zentralny server. Wszystko, co można zwobić z centralnym REPOSITORY, możesz również zrobić z klonem.
+
+=== Synchronizacja komputera ===
+
+Można zaakceptować, dla ochrony danych i prostej synchonizacji, pracę z archiwami TARBALL albo *rscnc*. Jednak czasami pracuję na laptopie, później na desktopie, w międzyczasie nie nastąpiła miedzy nimi synchronizacja
+
+Utwóż GIT REPOSITORY i COMMITE twoje dane na komputerze. Potem na następnym:
+
+$ git clone anderer.computer:/pfad/zu/dateien
+
+by uzyskać drugą kopie danych i utworzyć GIT REPOSITORY. Od teraz poleceniem:
+
+$ git commit -a $ git pull anderer.computer:/pfad/zu/dateien HEAD
+
+przenosisz stan drugiego komputera na komputer na którym właśnie pracujesz Jeśli dokonałeś zmian na tej samej danej na obydwóch komputerach, GIT cię o tym poinformuje, po usunięciu konfliktu musidz ponownie COMMITEN
+
+=== Klasyczne zarządzanie kodem źródłowym ===
+
+Utwóż GIT REPOSITORY dla twoich danych
+
+  $ git commit -m "Erster Commit"
+
+Na centralnym serwerze utwóż tzw BARE REPOSITORY w jakimkolwiek katalogu
+
+$ mkdir proj.git $ cd proj.git $ git init --bare $ touch proj.git/git-daemon-export-ok
+
+Jeśli konieczne, wystartuj GIT-DAEMON
+
+$ git daemon --detach # er könnte schon laufen
+
+Jeśli korzystasz z hosting to poszukaj wskazówek utwożemia najpierw pustego REPOSITORY Zwykle konieczne jest wypełnienie formulaża online na stronie internetowej usługodawcy
+
+Przenieś (PUSH) twój projekt teraz na centralny serwer:
+
+$ git push zentraler.server/pfad/zu/proj.git HEAD
+
+By pozyskać kod źródłowy programista podaje zwykle polecenie tego rodzaju:
+
+$ git clone zentraler.server/pfad/zu/proj.git
+
+Po dokonaniu edycji programista zapamiętuje zmiany lokalnie:
+
+$ git commit -a
+
+Aby zaktualizować do wersji na serwerze:
+
+$ git pull
+
+Jeżli wystąpią jakiekolwiek konflikty MERGE, powinny być usunięte in na nowo COMMIT
+
+$ git commit -a
+
+Lokalne zmiany przekazujemy do serwera poleceniem:
+
+$ git push
+
+Jeśli w międzyczasie nastąpiły nowe zmiany na serwerze wprowadzone przez innego programistę, twój PUSH nie powiedzie sie. Zaktualizuj lokalne REPOSITORY ponownie poleceniem PULL, pozbądź się konfliktów i spróbuj jeszcze raz
+
+Programiści potrzebują dostęp SSH by móc wykonać polecenia PULL i PUSH. Mimo to każdy może otrzymać kod źródłowy poprzez podanie:
+
+$ git clone git://zentraler.server/pfad/zu/proj.git
+
+Protokół GIT przypomina HTTP: nie posiada autentyfikacji, więc każdy może zładować dane. Przy ustawieniach standardowych polecenie PUSH za pomocą protokołu GIT jest zdeaktywowane.
+
+=== Utajnione Zródła ===
+
+Przy projektach Closed-Source nie używaj polecenia TOUCH i upewnij się, że nigdy nie zostanie utworzony plik o nazwie git-daemon-export-ok To REPOSITORY nie może komunikować sie poprzez protokół GIT, tylko posiadający dostęp przez SSH mogą widzieć dane. Jeśli wszystkie REPOSITORIES są zamknięte, nie ma potrzeby startować deamon GIT, ponieważ cała komunikacja odbywa się za pomocą SSH.
+
+=== Gołe REPOSITORIES ===
+
+Gołe (BARE) REPOSITORY jest tak nazywane, ponieważ nie posiada katalogu roboczego Posiada jedynie dane, które są zwykle schowane w podkatalogu .git. Innymi słowami, zarządza historią projektum, nie otrzymuje jednak nigdy jakiejkolwiek wersji
+
+BARE REPOSITORY przejmuje rolę głównego serwera w scentralizowanych systemach kontroli wersi: dom trojego projektu Programiści klonują twój projekt stamtąd i PUSHEN ostatnie oficjalne zmiany na niego. Często znajduje się ono na serwerze, który nie robi dużo więcej, niż rozdzielanie danych. Sama praca dzieje się w klonach projektu, w ten sposób domowe-REPOSITORY daje sobie radę nie korzystając z katalogu roboczego
+
+Wiele z poleceń GIT nie funkcjonuje na BARE REPOSITORIACH Jedynie w wypadku gdy zmienna systemowa GIT_DIR  ustawiona zostanie na katalog roboczy albo  opcja --bare zostanie przekazana.
+
+=== PUSH albo PULL ===
+
+Dlaczego wprowadziliśmy polecenie PUSH, i nie pozostaliśmy przy znanym nam już PULL? Po pierwsze, ponieważ PULL nie działa z BARE REPOSITORIES: zamiast niego używaj FETCH, polecenie którym zajmiemy się później. Również gdybyśmy nawet używali normalnego REPOSITORY na serwerze centralnym, polecenie PULL stanowiłoby żmudną sprawę.  Musielibyśmy najpierw zalogować się na serwerze i poleceniu PULL przekazać adres IP komputera z którego chcemy sciągnąć pliki. Mogłyby nam stanąć na przeszkodzie firewalls, nie wspominając już o braku uprawnień do konsoli.
+
+W każdymbądź razie, odradzamy z korzystania z polecenia PUSH do REPOSITORY Jeśli cel posiadałny katalog roboczy, mogłyby powstać nieścisłości.
+
+Krótko mówiąc, podczas gdy uczysz się korzystania z GIR, korzystaj z polecenia PUSH tylko, gdy cel jest BARE REPOSITORY, w wszystkich innych wypadkach z polecenia PULL
+
+=== FORK projektu ===
+
+Jeśli nie masz już ochoty patrzeć na kierunek rozwoju w którym poszedł projekt Uważasz, że potrafisz to lepiej To po prostu zwób coś takiego na twoim serwerze:
+
+$ git clone git://haupt.server/pfad/zu/dateien
+
+No i poinformuj wszystkich o twoim fork projektu na twoim serwerze.
+
+W każdej późniejszej chwili możesz zmiany oryginalnego projektu MERGEN poprzez:
+
+$ git pull
+
+=== Ultymatywny backup danych ===
+
+Chcesz posiadać liczne, wolne od manipulacji, redudante kopie bezpieczeństwa w różnych miejscach Jeśli projekt posiada wielu programistów, nie musisz niczego robić Ponieważ każdy klon twojego kodu jest pełnowartościową kopią bezpieczeństwa Nie tylko jedo aktualny stan, lecz również jego całą historię. Gdy jakikolwiek klon zostanie uszkodzony, dzięki kryptograficznemu hashowaniu, zostanie to natychmiast rozpoznane, jeśli tylko osoba ta będzie próbować komunikować się z innymi.
+
+Jeśli twój projekt nie jest zbyt mocno znany, spróbuj pozyskać tak wiele serwerów ile to możliwe, by umieścić tam klon
+
+Ci najbardziej paranoidalni powinni zawsze zapisać 20 bajtów SHA1 hash z HEAD i przechowywać na bezpiecznym miejscu Musi być bezpieczne, jednak nie musi być prywatne Na przykład można opublikować go w gazecie, ponieważ byłoby dość trudnym zadaniem zmanipulować każdą kopię gazety
+
+=== Multitasking z prędkością światła ===
+
+Załóżmy, że chcesz pracować równocześnie nad wieloma funkcjami Wtedy COMMIT twój projekt i wykomaj:
+
+$ git clone . /irgendein/neuer/ordner
+
+Twardym linkom możemy podziękować, że lokalny klon potrzebuje dużo mniej czasu i pamięci niż zwykły backupq
+
+Możesz pracować nad dwoma funkcjami jednocześnie Na przykład możesz pracować nad klonem, podczas gdy drugi jest kompilowany W każdym momencie możesz COMMITEN i zmiany innego klonu PULLEN
+
+$ git pull /der/andere/clone HEAD
+
+=== Zarządzanie wersją w poddziemiu ===
+
+Pracujesz nad projektem, który używa innego systemu kontroli wersji i tęsknisz za GIT? Utwórz GIT REPOSITORY w katalogu roboczym
+
+  $ git commit -m "Erster Commit"
+
+następnie sklonuj go:
+
+$ git clone . /irgendein/neuer/ordner
+
+Przejdź teraz do nowego katalogu i pracuj według upodobania. Kiedyś zechcesz zsynchronizować pracę, idź więc do orginalnego katakogu zaktualizuj go najpierw z tym innym systemem kontroli wersji i wpisz:
+
+$ git add . $ git commit -m "Synchronisation mit den anderen"
+
+Następnie przejdź do dowego katalogu i podaj:
+
+$ git commit -a -m "Beschreibung der Änderungen" $ git pull
+
+Sposób w jaki przekaższ zmiany drugiemu systemowi zależy już od niego. Twoj nowy katalog posiada dane z przez ciebie wprowadzonymi zmianami Wykonaj konieczne kroki opisane w innym systemie, by przekazać dane do centralnego składu.
+
+Subversion, być może najlepszy z centralnych systemów, stosowany jest w wielu projektach. Der *git svn*-Befehl automatisiert den zuvor genannten Ablauf für Subversion 'Repositories' und kann auch benutzt werden um http://google-opensource.blogspot.com/2008/05/export-git-project-to-google-code.html[ein Git Projekt in ein Subversion 'Repository' zu exportieren].
+
+=== Mercurial ===
+
+Mercurial to podobny system kontroli wersji, który prawie bezproblemowo potrafi pracować z GIT Korzystając z rozszerzenia hg-git użytkownik Mercurial jest w stanie prawie bez większych strat PUSH i PULL ze składem GIT.
+
+Sciągnij sobie rozszerzenie hg-git za pomocą GIT:
+
+$ git clone git://github.com/schacon/hg-git.git
+
+albo Mercurial:
+
+$ hg clone http://bitbucket.org/durin42/hg-git/
+
+Niestety nie są mi znane takie rozszerzenia dla GIT. Dlatego jestem za używaniem GIT jako centralnegoo składu, nawet gdy preferujesz Mercurial W projektach prowadzonych za pomocą Mercurial często znajdziemy woluntariusza, który równolegle prowadzi skład GIT, do którego za pomocą rozszerzenia hg-git, synchronizowany jest automatycznie z użytkownikami GIT 
+
+To rozszerzenie potrafi również zmienić skład Mercurial w skład GIT, za pomocą komendy PUSH do pustego składu GIT Jeszcze łatwiej dokonamy tego skryptem hg-fast-export.sh, który możemy tu znaleźć:
+
+$ git clone git://repo.or.cz/fast-export.git
+
+Aby przekonwertować wejść do pustego katalogu:
+
+$ git init $ hg-fast-export.sh -r /hg/repo
+
+po uprzednim dodaniu skryptu do `$ PATH`.
+
+=== Bazaar ===
+
+Wspomnijmy również pokrótce o Bazaar, ponieważ jest to najbardziej popularny darmowy rozproszony system kontroli wersji po Git i Mercurial.
+
+Bazar ponieważ jest to stosunkowo młody, posiada zaletę perspektywy czasu; jego twórcy mogli uczyć się na błędach z przeszłości i uniknąć historycznych naleciałości. Pozatem programiści byli świadomi popularności i wagi interakcji z innymi systemami kontroli wersji. 
+
+Rozszerzenie `Bzr-git` pozwala użytkownikom Bazar dość łatwo pracować z repozytoriami Git  Program `tailor` konwertuje składy Bazaar do składów Git i może zrobić na bieżąco, podczas gdy `bzr-fast-export` lepiej nadaje się do jednorazowej konwersji.
+
+=== Dlaczego korzystam z GIT ===
+
+Zdecydowałem się pierwotnie do wyboru GIT, ponieważ słyszałem, że jest w stanie zarządzać tak zawiłym i rozległym projektem jak kod źródłowy Linuxa. Nie miałem jeszcze powodu do zmiany. Git służył mi znakomicie i jak na razoiie jeszcze nigdy mnie nie zawiódł. Ponieważ w pierwszej lini pracuje na linuksie, problemy innych platworm nie mają dla mnie znaczenia.
+
+Preferuję również programy C i skrypty bash w opozycji do na przykład Pythona: posiadają mniej zależności, jestem też spragniony szybkiego wykonywania kodu
+
+Myślałem też nad tym, jak można by ulepszyć GIT, poszło nawet tak daleko, że napisałem własną aplikacje podobną do GIT, w celu jednak wyłącznie ćwiczeń akademickich. Nawet gdybym zakończył mój projekt, mimo to pozostałbym przy GIT, bo ulepszenia byłyby zbyt minimalne by uzasadnić zastosowanie odosobnionego systemu.
+
+Oczywiście może się okazać, że twoje potrzeby i oczekiwania są zupełnie inne i być może wygodniej jest tobie z zupełnie innym systemem. Jakby jednak nie spojrzeć, stosując Git nie stanie ci się niz złego.
