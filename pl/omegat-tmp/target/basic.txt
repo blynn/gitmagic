@@ -1,185 +1,195 @@
 == Pierwsze kroki ==
 
-Zanim zmoczymy nogi w morzu polecen GIT, przyjrzyjmy sie kilku prostym poleceniom Momo ich prostoty, wszystkie sa wazne i pozyteczne. Bedac szczery, przez pierwsze miesiace pracy z GIT nie potrzebowalem zadnych innych, niz opisanych w tym rozdziale
+Zanim utoniemy w morzu poleceń Gita, przyjrzyjmy się najpierw kilku prostym poleceniom. Pomimo ich prostoty, wszystkie jednak są ważne i pożyteczne. W rzeczywistości, podczas pierwszych miesięcy pracy z Git nie wychodziłem poza zakres opisany w tym roźdźiale
 
-=== Backup ===
+=== Zabezpieczenie obecnego stanu ===
 
-Masz zamiar dokonania wielu zmian? Nie ma sprawy, jednak najpierw zabezpiecz dane.
+Zamierzasz przeprowadzić jakieś drastychne zmiany? Zanim to zrobisz, zabezpiecz najpierw dane w aktualnym katalogu.
 
-  $ git commit -m "Meine erste Sicherung"
+ $ git init
+ $ git add .
+ $ git commit -m "Mój pierwszy commit"
 
-Jesli cokolwiek staloby sie podczas wprowadzania zmian, mozesz przywrocic stara wersje
+Teraz, jeśli cokolwiek stałoby się z twymi plikami podczas edycji, możesz przywrócić pierwotną wersję:
 
-$ git reset --hard
+ $ git reset --hard
 
-Aby zapisac nowy stan:
+Aby zapisać nowy stan ponownie:
 
-$ git commit -a -m "Eine andere Sicherung"
+ $ git commit -a -m "Mój następny commit"
 
-=== Dodac, skasowac, zmienic nazwe ===
+=== Dodanie, kasowanie i zmiana nazwy ===
 
-Do tej pory git zajal sie jedynie plikami, ktore juz istnialy podczas gdy wykonales poraz pierwszy polecenie *git add* Jesli dodales nowe pliki, musisz o tym poinformowac GIT
+Powyższa komenda zatrzyma jedynie pliki, które już istniały podczas gdy poraz pierwszy wykonałes polecenie *git add*. Jeśli w międzyczasie dodałeś jakieś nowe pliki, Git musi zostać o tym poinformowany:
 
-$ git add readme.txt Dokumentation
+ $ git add readme.txt Dokumentacja
 
-To samo, gdy chcesz by GIT zapomnial o plikach:
+To samo, gdy zechcesz by Git zapomniał o wybranych plikach:
 
-$ git rm ramsch.h veraltet.c $ git rm -r belastendes/material/
+ $ git rm ramsch.h archaiczne.c 
+ $ git rm -r obciążający/materiał/
 
-GIT usunie dane za ciebie, jesli tego jeszcze nie zrobiles.
+Jeśli sam tego jeszcze nie zrobiłeś, to Git usunie pliki za ciebie.
 
-Zmienic nazwe pliku, to to samo co jego skasowanie  ponowne utworzenie z nowa nazwa. GIT korzysta tu ze skrotu *git mv*, ktory posiada ten sam syntax co polecenie *mv* Na przyklad:
+Zmiana nazwy pliku, to to samo co jego skasowanie i ponowne utworzenie z nowa nazwa. Git wykorzystuje do tego skrót *git mv*, który posiada tą samą składnię co polecenie *mv*. Na przykład:
 
-$ git mv fehler.c feature.c
+ $ git mv bug.c feature.c
 
-=== Zaawansowane usuwanie/przywracanie ===
+=== Zaawansowane anulowanie/przywracanie ===
 
-Czasami zechcesz po prostu cofnac sie w czasie i zapomniec o wszystkich zmianach ktorych dokonales Wtedy:
+Czasami zechcesz po prostu cofnać się w czasie, zapominając o wszystkich wprowadzonych od tego punktu zmianach. Wtedy:
 
-$ git log
+ $ git log
 
-pokaze ci liste dotychczasowych 'commits' i ich SHA1-hash:
+pokaże ci listę dotychczasowych 'commits' i ich kluczy SHA1:
 
----------------------------------- commit 766f9881690d240ba334153047649b8b8f11c664 Author: Bob <bob@example.com> Date: Tue Mar 14 01:59:26 2000 -0800
+----------------------------------
+commit 766f9881690d240ba334153047649b8b8f11c664 Author: Bob <bob@example.com>
+Date: Tue Mar 14 01:59:26 2000 -0800
 
-Ersetze printf() mit write().
+    Ersetzt printf() mit write().
 
-commit 82f5ea346a2e651544956a8653c0f58dc151275c Author: Alice <alice@example.com> Date: Thu Jan 1 00:00:00 1970 +0000
+commit 82f5ea346a2e651544956a8653c0f58dc151275c
+Author: Alicja <alicja@example.com>
+Date: Thu Jan 1 00:00:00 1970 +0000
 
-Initial commit. ---------------------------------- 
+    Initial commit. ---------------------------------- 
 
-Pierwsze kilka znakow hash wystarcza by jednoznacznie zidentyfikowac 'commit'; alternatywnie mozesz wkopiowac caly hash. Za pomoc
+Kilka początkowych znaków klucza SHA1 wystarcza by jednoznacznie zidentyfikować 'commit', alternatywnie możesz skopiować i wkleić cały klucz. Wpisując:
 
-$ git reset --hard 766f
+ $ git reset --hard 766f
 
-możesz przywrócic stan wybranego commit i wszystkie poźniejsze zmiany bezpowrotnie skasować.
+przywrócisz stan do stanu podanego 'commit', a wszystkie poźniejsze zmiany zostaną bezpowrotnie skasowane.
 
-Innym razem chcesz tylko na moment przejść do jednedo z poprzednich stanów. W tym wypadku użyj komendy:
+Innym razem chcesz tylko na moment przejść do jednego z poprzednich stanów. W tym wypadku użyj komendy:
 
-$ git checkout 82f5
+ $ git checkout 82f5
 
-Tym poleceniem wrócisz się w czasie zachowując jednak nowsze zmiany. Ale, tak samo jak w filmach science-fiction o podróżach w czasie, jeśli teraz dokonasz zmian i zapamietsz je poleceniem commit, przeniesiesz się do innej rzeczywostosci, ponieważ twoje zmiany różnią sie od dokonanych wcześniej.
+Tym poleceniem wrócisz się w czasie zachowując nowsze zmiany. Ale, tak samo jak w podróżach w czasie z filmaów science-fiction - jeśli teraz dokonasz zmian i zapamietsz je poleceniem 'commit', zostaniesz przeniesiona do alternatywnej rzeczywostosci, ponieważ twoje zmiany różnią się od dokonanych w późniejszych punktach czasu.
 
-Ta inna rzeczywistość, to tzw. branch <<branch, zajmiemy się tym w późniejszym czasie>>. zapamietaj jednak na razie, że:
+Tą alternatywną rzeczywistość nazywamy 'branch', a <<branch,zajmiemy się tym w późniejszym czasie>>. Na razie, zapamietaj tylko, że:
 
-$ git checkout master
+ $ git checkout master
 
-sprowadzi cie znów do teraźniejszości. Aby zapobiec by GIT sie stawiał, powinieneś przed każdym CHECKOUT wszystkie zmiany COMMITEN albo RESETEN
+sprowadzi cię znów do teraźniejszości. Również, aby uprzedzić narzekanie Gita, powinieneś przed każdym 'checkout' wykonać 'commit' lub 'reset'.
 
-Jeśli znów skorzystamy z analogii do gier komputerkowych:
+Korzystając ponownie z analogii do gier komputerkowych:
 
-- *`git reset --hard`*:  załadój poprzedni stan i skasuj wszystkie stany które są nowsze niż teraz załadowany.
+- *`git reset --hard`*: załadój jakiś starszy stan gry i skasuj wszystkie nowsze niż właśnie ładowany.
 
-- *`git checkout`*:  Załadój stary stan, ale jeśli będziesz grał dalej, twój stan będzie się różnił od poprzednio zapamietanych. Każdy stan, który od teraz zostanie zapamiętany, powstanie w osobnym BRANCH, który odpowiada alternatywnej rzeczywitości. <<branch, wrócimy do tego później>>
+- *`git checkout`*:  Załadój stary stan, grając dalej, twój stan będzie się różnił od nowszych zapamietanych. Każdy stan, który zapamiętasz od teraz, powstanie w osobnym 'branch', reprezentującym alternatywną rzeczywitość. <<branch, Wrócimy do tego później>>
 
-Jeśłi chcesz, możesz przywołać jedynie wybrane pliki lub katalogi poprzez dodanie ich nazw do polecenia
+Jeśli chcesz, możesz przywrócić jedynie wybrane pliki lub katalogi poprzez dodanie ich nazw do polecenia
 
-$ git checkout 82f5 eine.datei andere.datei
+ $ git checkout 82f5 jeden.plik inny.plik
 
-Bądź ostrożny, ten sposób wykonania komendy CHECKOUT może skasować pliki bez poinformowania o tym. Aby zabezpieczyc sie przed takimi wypadkami powinieneś zawsze wykonać polecenie COMMIT zanim wykonasz CHECKOUT, szczególnie ucząc się jeszcze pracy z GIT, Ogólnia zasadą powinno być, że gdy nie jesteś pewien, obojętnie czy to jest polecenie GIT czy jakakolwiek inna operacja. wykonaj zawsze *git commit -a*.
+Bądź ostrożny, ten sposób użycia komendy *checkout* może bez uprzedzenia skasować pliki. Aby zabezpieczyć sie przed takimi wypadkami powinieneś zawsze wykonać polecenie 'commit' zanim wykonasz 'checkout', szczególnie w okresie poznawania Gita. Jeśli czujesz się niepewnie przed wykonaniem jakiejś operacji Gita, generalną zasadą powinno stać sie dla ciebie uprzednie wykonanie *git commit -a*.
 
-Nie lubisz kopiować i wklejać hash-ów? Możesz w tym wypadku skorzystać z:
+Nie lubisz kopiować i wklejać kluczy SHA1? Możesz w tym wypadku skorzystać z:
 
-$ git checkout :/"Meine erste Si"
+ $ git checkout :/"Mój pierwszy c"
 
-by przenieś się do COMMIT, którego opis właśnie tak sie rozpoczyna, Możesz również udać się do 5 z ostatnich COMMIT:
+by przenieś się do 'commit', którego opis rozpoczyna zawartą wiadomość. Możesz również cofnąć się do piątego z ostatnio zapamiętanych 'commit':
 
 $ git checkout master~5
 
 === Przywracanie ===
 
-W sali sądowej można pewne zdarzenia wykreślić z  akt. Podobnie możesze celowo wykasować wybrane COMMITS.
+W sali sądowej pewne zdarzenia mogą zostać wykreślone z akt. Podobnie możesze zaznaczyć pewne 'commits' do wykreślenia.
 
-$ git commit -a $ git revert 1b6d
+ $ git commit -a 
+ $ git revert 1b6d
 
-To polecenie skasuje COMMIT o wybranym hash-u. To wycofanie zostanie zapamiętane jako nowy COMMIT, co można sprawdzić poleceniem *git log*.
+To polecenie wymaże 'commit' o wybranym kluczu. ten rewers zostanie zapamiętany jako nowy 'commit', co można sprawdzić poleceniem *git log*.
 
-=== Utwożenie historii ===
+=== Generowanie listy zmian ===
 
-Niektóre projekty wymagają pliku historii zmian Możesz go utwoszyć korzystając z polecenia:
+Niektóre projekty wymagają http://en.wikipedia.org/wiki/Changelog[pliku changelog]. Wygenerujesz go poleceniem:
 
-$ git log > ChangeLog
+ $ git log > Changelog
 
-=== Zładowanie danych ===
+=== Ładowanie plików ===
 
-Kopię projektu zarządzanego za pomocą GIT uzyskasz poleceniem:
+Kopię projektu zarządzanego za pomocą Gita uzyskasz poleceniem:
 
-$ git clone git://server/pfad/zu/dateien
+ $ git clone git://ścieżka/do/projektu
 
 By na przykład zładować wszystkie dane, których urzyłem do stworzenia tej strony skorzystaj z:
 
-$ git clone git://git.or.cz/gitmagic.git
+ $ git clone git://git.or.cz/gitmagic.git
 
-O poleceniu CLONE można przytoczyć jeszcze wiele innych wątków.
+Do polecenia 'clone' wrócimy niebawem.
 
-=== Najnowsze z nowych ===
+=== Najnowszy stan ===
 
-Jeśli posiadasz już kopię projektu, możesz ją zaktualizować poleceniem:
+Jeśli posiadasz już kopię projektu wykonaną za pomocą *git clone*, możesz ją zaktualizować poleceniem:
 
-$ git pull
+ $ git pull
 
-=== Uproszczone publikowanie ===
+=== Szybka publikacja ===
 
-Załóżmy, że napisałeś skrypt i chcesz go udostępnić innym. Móglbyś ich po prostu poprosić, by zładowali go po prostu bezpośrednio z twojego komputera, ale jeśli to zrobią podczas gdy ty eksperymentujesz czy poprawiasz pracę nad skryptem, mogliby wpaść w tarapaty. Właśnie dla tego istnieje coś takiego jak RELEASEZYKLEN. Programiści regularnie pracują nad projektem, upubliczniają kod jednak dopiero, jeśli uznają, że nadaje sie do pokazania.
+Przypóśćmy, że napisałeś skrypt i chcesz go udostępnić innym. Mogłabyś poprosić ich, by zładowali go bezpośrednio z twojego komputera. Jeśli jednak zrobią podczas gdy gdy ty wprowadzasz poprawki lub eksperymentujesz ze zmianami, mogłabyś przysporzyć im nieprzyjemności. Z tego powodu istnieje coś takiego jak cykl wydawniczy. Programiści regularnie pracują nad projektem, upubliczniają kod jednak dopiero, jeśli uznają, że nadaje sie już do pokazania.
 
 Aby wykonać to za pomocą GIT, wejdź do katalogu w którym znajduje się twój skrypt:
 
-  $ git commit -m "Erster Stand"
+ $ git init
+ $ git add .
+ $ git commit -m "Pierwsze wydanie"
 
-Następnie udostępnij link twoim użytkownikom:
+Następnie poproś twych użytkowników o wykonanie:
 
-$ git clone dein.computer:/pfad/zum/skript
+ $ git clone twój.komputer:/ścieżka/do/skryptu
 
-by mogli zładować skrypt. Wymaga to od nich posiadanie klucza SSH do twojego komputera. Jeśli nie mają go, wykonaj *git daemon* i podaj im następujący link:
+by zładować twój skrypt. Zakładamy tu posiadanie przez nich klucza SSH do twojego komputera. Jeśli go nie mają, uruchom *git daemon* i podaj im następujący link:
 
-$ git clone git://dein.computer/pfad/zum/skript
+ $ git clone git://twój.komputer/ścieżka/do/skryptu
 
-Od teraz, zawsze gdy uznasz, że twój skrypt nadaje sie do opublikowania, wykonaj polecenie:
+Od teraz, zawsze gdy uznasz, że wersja nadaje sie do opublikowania, wykonaj polecenie:
 
-$ git commit -a -m "Nächster Stand"
+ $ git commit -a -m "Następna wersja"
 
-a twoji uzytkownicy beda mogli zaktualisowac go poprzez:
+a twoi użytkownicy, po wejściu do katalogu zawierającym twój skrypt, będą go mogli zaktualizować poprzez:
 
-$ git pull
+ $ git pull
 
-Twoi uzytkownicy nigdy nie wejda w posiadanie wersji, ktorych nie chcesz by posiadali Oczywiscie ten trick funkcjonuje ze wszystkim, nie tylko ze skryptami
+Twoi użytkownicy nigdy nie wejdą w posiadanie wersji, których nie chcesz im udostępniać.
 
-=== Co ostatnio robilem? ===
+=== A co robiłem ostatnio? ===
 
-Znajdz co zrobiles od ostatniego COMMIT:
+Jeśli chcesz zobaczyć zmiany, które wprowadziłeś of ostatniego 'commit', wpisz:
 
-$ git diff
+ $ git diff
 
-Albo od wczoraj
+Albo tylko zmiany od wczoraj:
 
-$ git diff "@{gestern}"
+ $ git diff "@{yesterday}"
 
-Albo miedzy jakakolwiek wersja a przedostatnia:
+Albo miedzy określoną wersją i dwoma poprzedzającymi:
 
-$ git diff 1b6d "master~2"
+ $ git diff 1b6d "master~2"
 
-Za kazdym razem uzyskane informacje sa PATCH ktory poprzez *git applly* moze zostac wgrany Sprobuj rowniez:
+Za każdym razem uzyskane informacje są równocześnie patchem, który poprzez *git apply* może zostac być zastosowany. Spróbuj również:
 
-$ git whatchanged --since="2 weeks ago"
+ $ git whatchanged --since="2 weeks ago"
 
-Jesli chce sprawdzic historie jakiegos REPOSITORY korzystam czesto z  XXXX, poniewaz posiada przyjazny interfejs uzytkownika, albo  XXXX, program konsolowy, ktory bardzo dobrze dziala jesli mamy do czynienia z powolnymi laczami interenetowymi. Alternatywnie mozesz zaiinstalowac serwer http za pomoca *git instaweb*, wtedy mozesz przegladac kazda przegladarka.
+Jeśli chcę sprawdzić listę zmian jakiegoś repozytorium, często korzystam czesto z  http://sourceforge.net/projects/qgit[qgit], ze względu na jego fotogeniczny interfejs, albo z http://jonas.nitro.dk/tig/[tig], tekstowy interfejs, działający zadowalająco gdy mamy do czynienia z wolnym łączem internetowym. Alternatywnie, zainstaluj serwer http, uruchom *git instaweb*, i odpal dowolną przeglądarkę internetową.
 
-=== Cwiczenie ===
+=== Ćwiczenie ===
 
-A, B, C i D sa 4 nastepujacymi po sobie COMMITS. B rozni sie od A, jedynie tym, ze usunieto kilka plikow. Chcemy teraz te usuniete pliki zrekonstruowac w D, a nie w B. Jak to zrobic?
+Niech A, B, C i D będą 4 nastepujacymi po sobie 'commits', gdzie B różni sie od A, jedynie tym, iż usunieto kilka plikow. Chcemy teraz te usuniete pliki zrekonstruowac do D. Jak to można zrobić?
 
-Istnieja przynajmniej 3 rozwiazania. Zalozmym ze jestesmy w D:
+Istnieją przynajmniej 3 rozwiązania. Załóżmm że znajdujemy się obecnie w D:
 
-1. Roznica miedzy A i B, to skasowane pliki. Mozemy utworzyc PATCH, ktory pokaze te roznice i nastepnie zastosowac go na D
+1. Różnica pomiędzy A i B, to skasowane pliki. Możemy utworzyc patch, który pokaże te różnice i nastepnie zastosować go:
 
-$ git diff B A | git apply
+ $ git diff B A | git apply
 
-2. Poniewaz dane zostaly zapamietane w COMMIT A, mozemy je przywrocic
+2. Ponieważ pliki zostaly już raz zapamietane w A, możemy je przywrócić:
 
-$ git checkout A foo.c bar.h
+ $ git checkout A foo.c bar.h
 
-3. Mozemy rowniez COMMIT A na B widziec jako zmiane, ktora mozemy przywrocic
+3. Możemy też widzieć przejście z A na B jako zmianę, którą można zrewertować:
 
-$ git revert B
+ $ git revert B
 
-Ktore rozwiazanie jest najlepsze? To, ktore najbardziej tobie odpowiada. Korzystajac z GIT latwo mozna osiagnac cel, czasami prowadza do niego rozne drogi.
+A które z tych rozwiązań jest najlepsze? To, które najbardziej tobie odpowiada. Korzystając z Git łatwo osiągnąć cel, czasami prowadzi do niego wiele dróg.
