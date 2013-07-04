@@ -1,97 +1,91 @@
-== Appendix A: Git Shortcomings ==
+== Załącznik A: Niedociągnięcia Gita ==
 
-There are some Git issues I've swept under the carpet. Some can be handled easily with scripts and hooks, some require reorganizing or redefining the project, and for the few remaining annoyances, one will just have to wait. Or better yet, pitch in and help!
+O kilku problemach mogących wystąpić z GIT nie wspomniałem do tej pory. Niektóre z nich można łatwo rozwiązać korzystając ze skryptów i 'Hooks', inne wymagają reorganizacji i ponownego zdefiniowania całego projektu, a na rozwiązanie kilku innych uniedogodnień możesz tylko uzbroić się w cierpliwość i czekać na ich rozwiązanie. Albo jeszcze lepiej, samemu się nimi zająć i spróbować pomóc.
 
-=== SHA1 Weaknesses ===
+=== Słabości SHA1 ===
 
-As time passes, cryptographers discover more and more SHA1 weaknesses. Already,
-finding hash collisions is feasible for well-funded organizations. Within
-years, perhaps even a typical PC will have enough computing power to silently
-corrupt a Git repository.
+Z biegiem czasu kryptografowie odkrywają coraz więcej słabości systemu SHA1. Już dzisiaj byłoby możliwe dla przeciębiostw dysponujących odpowiednimi zosobami finansowymi znaleźć kolizje w hash-ach Za kilka lat możliwe, że całkiem normalny domowy PC będzie dysponował odpowiednim zasobem mocy obliczeniiowej, by skorumpować niepostrzeżenie repozytorium Gita.
 
-Hopefully Git will migrate to a better hash function before further research
-destroys SHA1.
+Miejmy nadzieję, że Git przestawi sie na lepszą funkcje hashującą, zanim badania nad SHA1 zupełnie zrobią go bezużytecznym.
 
 === Microsoft Windows ===
 
-Git on Microsoft Windows can be cumbersome:
+Korzystanie z Gita pod Microsoft Windows może być frustrujące:
 
-- http://cygwin.com/[Cygwin], a Linux-like environment for Windows, contains http://cygwin.com/packages/git/[a Windows port of Git].
+- http://cygwin.com/[Cygwin], unixoidalne środowisko dla Windowsa posiada http://cygwin.com/packages/git/[port Gita].
 
-- http://code.google.com/p/msysgit/[Git on MSys] is an alternative requiring minimal runtime support, though a few of the commands need some work.
+- http://code.google.com/p/msysgit/[Git dla MSys] jest jedną z alternatyw, niektóre polecenia wymagają jednak poprawek.
 
-=== Unrelated Files ===
+=== Pliki niepowiązane ===
 
-If your project is very large and contains many unrelated files that are constantly being changed, Git may be disadvantaged more than other systems because single files are not tracked. Git tracks changes to the whole project, which is usually beneficial.
+Jeśli twój projekt jest bardzo duży i zawiera wiele plików, które nie są bezpośrednio ze sobą związane, mimo to jednak często zostają zmieniane, Git może tu działać gorzej niż innye systemy, ponieważ nie prowadzi monitoringu poszczególnych plików. Git kontrojuje zawsze całość projektu, co w normalnym wypadku jest zaletą.
 
-A solution is to break up your project into pieces, each consisting of related files. Use *git submodule* if you still want to keep everything in a single repository.
+Jednym z możliwych rozwiązań mogłoby być podzielenie twojego projektu na kilka mniejszych, w których znajdują się jedynie pliki od siebie zależne. Korzystaj z *git submodule* jeśli mimo to chcesz cały twój projekt mieć w tym samym repozytorium.
 
-=== Who's Editing What? ===
+=== Kto nad czym pracuje? ===
 
-Some version control systems force you to explicitly mark a file in some way before editing. While this is especially annoying when this involves talking to a central server, it does have two benefits:
+Niektóre systemy kontroli wersji zmuszają cię, by w jakiś sposób oznaczyć pliki nad którymi pracujesz.  Mimo że jest to bardzo uciążliwe, gdyż wymaga ciągłej komunikacji z serwerem centralnym, posiada to też swoje zalety:
 
-  1. Diffs are quick because only the marked files need be examined.
+1. Różnice zostają szybko znalezione, ponieważ wystarczy skontrolować wyłącznie oznaczone pliki.
 
-  2. One can discover who else is working on the file by asking the central server who has marked it for editing.
+2. Każdy może szybko sprawdzić, kto aktualnie nad czym pracuje, sprawdzając na serwerze po prostu kto zaznaczył jakie dane do edycji.
 
-With appropriate scripting, you can achieve the same with Git. This requires cooperation from the programmer, who should execute particular scripts when editing a file.
+Używając odpowiednich skryptów uda ci się to również przy pomocy Gita. Wymaga to jednak współdziałania programistów, ponieważ muszą również korzystać z tych skryptów podczas pracy nad plikiem.
 
-=== File History ===
+=== Historia pliku ===
 
-Since Git records project-wide changes, reconstructing the history of a single file requires more work than in version control systems that track individual files.
+Pomieważ Git loguje zmiany tylko dla całości projektu jako takiego, rekonstrukcja przebiegu zmian pojedyńczego pliku jest bardziej pracochłonna, niż w innych systemach, które kontrolują pojedyńcze pliki. 
 
-The penalty is typically slight, and well worth having as other operations are incredibly efficient. For example, `git checkout` is faster than `cp -a`, and project-wide deltas compress better than collections of file-based deltas.
+Te wady są w wieszości przypadków marginalne i nie są brane pod uwagę, ponieważ inne operacje są bardzo wydajne. Na przykład polecenie `git checkout` jest szybsze niż `cp -a`, zmiany w zakresie całego projektu daje się lepiej komprymować niż zbiór zmian na bazie pojedyńczych plików.
 
-=== Initial Clone ===
+=== Pierwszy klon ===
 
-Creating a clone is more expensive than checking out code in other version control systems when there is a lengthy history.
+Wykonanie klonu jest kosztowniejsze niż w innych systemach kontrli wersji jeśli istnieje długa historia.
 
-The initial cost is worth paying in the long run, as most future operations will then be fast and offline. However, in some situations, it may be preferable to create a shallow clone with the `--depth` option. This is much faster, but the resulting clone has reduced functionality.
+Początkowy koszt spłaca sie jednak na dłuższą metę ponieważ większość przyszłych operacji przeprowadzane będzie szybko i offline.  Niemniej jednak istnieją sytuacje, w których lepiej utworzyć powierzchowny klon korzystając z opcji `--depth`. Trwa to o wiele krócej, taki klon taki posiada też tylko ograniczoną funkcjonalność.
 
-=== Volatile Projects ===
+=== Niestałe projekty ===
 
-Git was written to be fast with respect to the size of the changes. Humans make small edits from version to version. A one-liner bugfix here, a new feature there, emended comments, and so forth. But if your files are radically different in successive revisions, then on each commit, your history necessarily grows by the size of your whole project.
+Git został napisany z myślą optymalizacji prędkości działania przy dokonywaniu wielkich zmian.  Ludzie robią jednak pomniejsze zmiany z wersji na wersję. Jakaś poprawka tutaj, jakaś nowa funkcja gdzie indziej, poprawienie komentarzy itd. Ale jeśli twoje dane znacznie się od siebie różnią pomiędzy następującymi po sobie wersjami, to chcąc nie chcąc przy każdym 'commit' projekt zwiększy się o twoje zmiany. 
 
-There is nothing any version control system can do about this, but standard Git users will suffer more since normally histories are cloned.
+Nie wymyślono jednak do tej pory niczego w żadnym systemie kontroli wersji, by móc temu zapobiec, tutaj jednak użytkownik Gita cierpi najbardziej, ponieważ w normalnym wypadku klonuje cały przebieg projektu.
 
-The reasons why the changes are so great should be examined. Perhaps file formats should be changed. Minor edits should only cause minor changes to at most a few files.
+Powinno się w takim wypadku szukać powodów wystąpienia największych zmian. Ewentualnie można czasami zmienić format danych. Małe zmiany w projekcie powinny pociągać tylko minimalne zmiany na tak wąskiej grupie plików, jak to tylko możliwe.
 
-Or perhaps a database or backup/archival solution is what is actually being sought, not a version control system. For example, version control may be ill-suited for managing photos periodically taken from a webcam.
+Może czasami bardziej wskazana byłaby baza danych, czy jakiś system archiwizacji zamiast systemu kontroli wersji. Na przykład nie jest dobrym sposobem zastosowanie systemu kontroli wersji do zarządzania zdjęciami wykonywanymi periodycznie przez kamerę internetową.
 
-If the files really must be constantly morphing and they really must be versioned, a possibility is to use Git in a centralized fashion. One can create shallow clones, which checks out little or no history of the project. Of course, many Git tools will be unavailable, and fixes must be submitted as patches. This is probably fine as it's unclear why anyone would want the history of wildly unstable files.
+Jeśli dane ulegają ciągłym zmianom i naprawdę muszą być wersjonowane, jedną z możliwości jest zastosowanie Git w scentralizowanej formie. Każdy może dokonywać pobierznych klonów, które mało co lub wcale nie mają nic do czynienia z przebiegiem projektu. Oczywiście w takim wypadku wiele funkcji Gita nie bedzie dostępnych a zmiany muszą być przekazywane w formie 'patch'. Prawdopodobnie będzie to dość dobrze działać, mimo iż nie jest do końca jasne komu potrzebna jest znajomość przebiegu tak ogromnej ilości niestabilnych danych.
 
-Another example is a project depending on firmware, which takes the form of a huge binary file. The history of the firmware is uninteresting to users, and updates compress poorly, so firmware revisions would unnecessarily blow up the size of the repository.
+Innym przykładem może być projekt, który zależny jest od firmware przyjmującej kształt wielkiej danej w formie binarej. Historia pliku firmware nie interesuje użytkownika, a zmiany nie pozwalają sie wygodnie komprymować, wielkość repozytorium wzrasta niepotrzebnie o nowe wersje binarnego pliku firmware.
 
-In this case, the source code should be stored in a Git repository, and the binary file should be kept separately. To make life easier, one could distribute a script that uses Git to clone the code, and rsync or a Git shallow clone for the firmware.
+W takim wypadku należałoby trzymać w repozytorium wyłącznie kod źródłowy, a sam plik binarny poza nim. By ułatwić sobie życie, ktoś mógłby opracować skrypt, który Git wykorzystuje do klonowania kodu źródłowego i 'rsync' albo pobieżny klon dla samego firmware.
 
-=== Global Counter ===
+=== Licznik globalny ===
 
-Some centralized version control systems maintain a positive integer that increases when a new commit is accepted. Git refers to changes by their hash, which is better in many circumstances.
+Wiele systemów kontroli wersji udostępnia licznik, który jest zwiększany z każdym "commit". Git natomiast odwołuje się przy zmianach do hasha SHA1, który w wielu przypadkach jest lepszym rozwiązaniem. 
 
-But some people like having this integer around. Luckily, it's easy to write scripts so that with every update, the central Git repository increments an integer, perhaps in a tag, and associates it with the hash of the latest commit.
+Niektórzy jednak przyzwyczaili się do tego licznika. Na szczęście, łatwo jest pisać skrypty, zwiększające stan licznika przy każdej aktualizacji centralnego repozytorium Gita. Może jako forma taga, który powiązany jest z hashem SHA1 ostatniego 'commit'.
 
-Every clone could maintain such a counter, but this would probably be useless, since only the central repository and its counter matters to everyone.
+Każdy klon mógłby posiadać taki licznik, jednak byłby on prawdopodobnie bezużyteczny, ponieważ tylko licznik centralnego repozytoriom ma znaczenie.
 
-=== Empty Subdirectories ===
+=== Puste katalogi ===
 
-Empty subdirectories cannot be tracked. Create dummy files to work around this problem.
+Nie ma możliwości wersjonowania pustych katalogów. Aby obejść ten problem wystarczy utworzyć w takim katalogu plik dummy.
 
-The current implementation of Git, rather than its design, is to blame for this drawback. With luck, once Git gains more traction, more users will clamour for this feature and it will be implemented.
+To raczej obecna implementacja Gita, a mniej jego konstrukcja, jest odpowiedzialna za to wadę. Przy odrobinie szczęścia, jeśli Git jeszcze bardziej sie upowszechni i więcej użytkowników żądać będzie tej funkcji, to być może zostanie zaimplementowana.
 
-=== Initial Commit ===
+=== Pierwszy 'commit' ===
 
-A stereotypical computer scientist counts from 0, rather than 1. Unfortunately, with respect to commits, git does not adhere to this convention. Many commands are unfriendly before the initial commit. Additionally, some corner cases must be handled specially, such as rebasing a branch with a different initial commit.
+Stereotypowegy informatyk liczy od 0 zamiast 1. Niestety, w kwestii 'commits' Git nie podąża za tą konwencją. Wiele komend zachowuje sie zgrzędliwie przed wykonaniem pierwszego 'commit'. Dodatkowo, różnego rodzaju krańcowe przypadki muszą być traktowane specjalnie, jak 'rebase' dla 'branch' o różniącym sie pierwszym 'commit'.
 
-Git would benefit from defining the zero commit: as soon as a repository is constructed, HEAD would be set to the string consisting of 20 zero bytes. This special commit represents an empty tree, with no parent, at some time predating all Git repositories.
+Git zyskałby na zdefiniowaniu tzw 0-'commit' zaraz po zainicjowaniu repozytorium, 'HEAD' zostałby ustawiony na 20 bajtow SHA1. Ten specjalny 'commit' reprezentowałby puste drzewo, bez rodziców, być może pradziad wszystkich repozytorii.
 
-Then running git log, for example, would inform the user that no commits have been made yet, instead of exiting with a fatal error. Similarly for other tools.
+Jeśli na przykład użytkownik wykonałby polecenie *git log*, zostałby poinformowany, że nie istnieje jeszcze żaden 'commit', gdzie na dzień dzisiejszy taka komenda wywoła błąd. Analogicznie dzieje się też z innymi poleceniami.
 
-Every initial commit is implicitly a descendant of this zero commit.
+Każdy inicjujący 'commit' byłby pochodną tego zerowego 'commit'.
 
-However there are some problem cases unfortunately. If several branches with different initial commits are merged together, then rebasing the result requires substantial manual intervention.
+Niestety występuje jeszcze kilka innych problemów. Jeśli chcemy scalić kilka 'branches' o różniących sie inicjalnych 'commits' i przeprowadzić 'rebase', musimy ręcznie ingerować.
 
-=== Interface Quirks ===
+=== Charakterystyka zastosowania ===
 
-For commits A and B, the meaning of the expressions "A..B" and "A...B" depends
-on whether the command expects two endpoints or a range. See *git help diff*
-and *git help rev-parse*.
+Dla 'commits' A i B, znaczenie wyrażeń "A..B" i "A...B" zależy od tego, czy polecenie oczekuje dwóch punktów końcowych, czy zakresu. Sprawdź *git help diff* i *git help rev-parse*.

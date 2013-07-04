@@ -1,232 +1,179 @@
-== Git Grandmastery ==
+== Git dla zaawansowanych ==
 
-By now, you should be able to navigate the *git help* pages and understand
-almost everything. However, pinpointing the exact command required to solve a
-given problem can be tedious. Perhaps I can save you some time: below are some
-recipes I have needed in the past.
+W międzyczasie powinnaś umieć odnaleźć się na stronach *git help* i rozumieć większość zagadnień. Mimo to może okazać się dość mozolne odnalezienie odpowiedniej komendy dla rozwiązania pewnych zadań. Może uda mi się zaoszczędzić ci trochę czasu: poniżej znajdziesz kilka recept, które były mi przydatne w przeszłości.
 
-=== Source Releases ===
+=== Publikowanie kodu źródłowego ===
 
-For my projects, Git tracks exactly the files I'd like to archive and release
-to users. To create a tarball of the source code, I run:
+Git zarządza w moich projektach dokładnie tymi danymi, które chcę archiwizować i dać do dyspozycji innym użytkownikom. Aby utworzyć archiwum tar kodu źródłowego, używam polecenia
 
  $ git archive --format=tar --prefix=proj-1.2.3/ HEAD
 
-=== Commit What Changed ===
+=== Zmiany dla 'commit' ===
 
-Telling Git when you've added, deleted and renamed files is troublesome for
-certain projects. Instead, you can type:
+Powiadomienie Gita o dodaniu, skasowaniu czy zmianie nazwy plików może okazać sie przy niektórych projektach dość uciążliwą pracą. Zamiast tego można skorzystać z:
 
- $ git add .
+ $ git add . 
  $ git add -u
 
-Git will look at the files in the current directory and work out the details by
-itself. Instead of the second add command, run `git commit -a` if you also
-intend to commit at this time. See *git help ignore* for how to specify files
-that should be ignored.
+Git przyjży się danym w aktualnym katalogu i odpracuje sam szczegóły. Zamiast tego drugiego polecenia możemy użyć `git commit -a`, jeśli i tak mamy zamiar przeprowadzić 'comit'.  Sprawdź też *git help ignore*, by dowiedzieć się jak zdefiniować dane, które powinny być zignorowane.
 
-You can perform the above in a single pass with:
+Można to także wykonać za jednyym zamachem:
 
  $ git ls-files -d -m -o -z | xargs -0 git update-index --add --remove
 
-The *-z* and *-0* options prevent ill side-effects from filenames containing
-strange characters. As this command adds ignored files, you may want to use the
-`-x` or `-X` option.
+Opcje *-z* i *-0* zapobiegą przed niechcianymi efektmi ubocznymi przez niestandardowe znaki w nazwach plików. Ale ponieważ to polecenie dodaje również pliki które powinny być zignorowane, można dodać do niego jeszcze opcje `-x` albo `-X` 
 
-=== My Commit Is Too Big! ===
+=== Mój 'commit' jest za duży! ===
 
-Have you neglected to commit for too long? Been coding furiously and forgotten
-about source control until now? Made a series of unrelated changes, because
-that's your style?
+Od dłuższego czasu nie pamiętałeś o wykonaniu 'commit'? Tak namiętnie programowałeś, że zupełnie zapomniałeś o kontroli kodu źródłowego? Przeprowadzasz serię niezależnych zmian, bo jest to w twoim stylu?
 
-No worries. Run:
+Nie ma sprawy, wpisz polecenie:
 
  $ git add -p
 
-For each edit you made, Git will show you the hunk of code that was changed,
-and ask if it should be part of the next commit. Answer with "y" or "n". You
-have other options, such as postponing the decision; type "?" to learn more.
+Dla każdej zmiany, której dokonałeś Git pokaże ci pasaże z kodem, który uległ zmianom i spyta cię, czy mają zostać częścią następnego 'commit'. Odpowiedz po prostu "y" dla tak, albo "n" dla nie. Dysponujesz jeszcze innymi opcjami, na przykład dla odłożenie w czasie decyzji, wpisz "?", by dowiedzieć się więcej.
 
-Once you're satisfied, type
+Jeśli jesteś już zadowolony z wyniku, wpisz:
 
  $ git commit
 
-to commit precisely the changes you selected (the 'staged' changes). Make sure
-you omit the *-a* option, otherwise Git will commit all the edits.
+by dokonać wybranych zmian. Uważaj tylko, by nie skorzystać z opcji *-a*, ponieważ wtedy git dokona 'commit' zawierający wszystkie zmiany.
 
-What if you've edited many files in many places? Reviewing each change one by
-one becomes frustratingly mind-numbing. In this case, use *git add -i*, whose
-interface is less straightforward, but more flexible. With a few keystrokes,
-you can stage or unstage several files at a time, or review and select changes
-in particular files only. Alternatively, run *git commit \--interactive* which
-automatically commits after you're done.
+A co, jeśli pracowałeś nad wieloma danymi w wielu różnych miejscach? Sprawdzenie każdej danej z osobna jest frustrujące i męczące zarówno. W takim wypadku skorzystaj z *git add -i*, obsługa tego polecenia może nie jest zbyt łatwa, za to jednak bardzo elastyczna. Kilkoma naciśnięciami klawiszy możesz wiele zmienionych plików dodać ('stage') albo usunąć z 'commit' ('unstage'), jak również sprawdzić, czy dodać zmiany dla poszczególnych plików. Alternaywnie możesz skorzystać z *git commit \--interactive*, polecenie to wykona automatycznie 'commit' gdy skończysz.
 
-=== The Index: Git's Staging Area ===
+=== Index: rusztowanie Gita ===
 
-So far we have avoided Git's famous 'index', but we must now confront it to
-explain the above. The index is a temporary staging area. Git seldom shuttles
-data directly between your project and its history. Rather, Git first writes
-data to the index, and then copies the data in the index to its final
-destination.
+Do tej pory staraliśmy się omijać sławny 'index', jednak przyszedł czas się nim zająć, aby móc wyjaśnić wszystko to co poznaliśmy do tej pory. Index jest tymczasowym rusztowaniem Git rzadko wymienia dane bezpośrednio między twoim projektem a swoją historią wersji. Raczej zapisuje on dane najpierw w indexie, dopiero po tym kopiuje dane z indexu na ich właściwe miejsce przeznaczenia.
 
-For example, *commit -a* is really a two-step process. The first step places a
-snapshot of the current state of every tracked file into the index. The second
-step permanently records the snapshot now in the index. Committing without the
-*-a* option only performs the second step, and only makes sense after running
-commands that somehow change the index, such as *git add*.
+Na przykład polecenie *commit -a* jest właściwie procesem dwustopniowym. Pierwszy krok to stworzenie obrazu bieżącego statusu każdego monitorowanego pliku do indeksu.  Drugim krokiem jest trwałe zapamiętanie obrazu do indeksu. Wykonanie 'commit' bez opcji *-a* wykona jedynie drugi wspomniany krok i ma jedynie sens, jeśli poprzednio wykonano komendę, która dokonała odpowiednich zmian w indexie, na przykład *git add*.
 
-Usually we can ignore the index and pretend we are reading straight from and writing straight to the history. On this occasion, we want finer control, so we manipulate the index. We place a snapshot of some, but not all, of our changes into the index, and then permanently record this carefully rigged snapshot.
+Normalnie możemy ignorować indeks i udawać, że czytamy i zapisujemy bezpośrednio z historii. W tym wypadku chcemy posiadać jednak większą kontrolę, więc manipulujemy indeks. Tworzymy obraz niektórych, jednak nie wszystkich zmian w indeksie i zapamiętujemy trwale starannie dobrany obraz.
 
-=== Don't Lose Your HEAD ===
+=== Nie trać głowy ===
 
-The HEAD tag is like a cursor that normally points at the latest commit, advancing with each new commit. Some Git commands let you move it. For example:
+Identyfikator 'HEAD' zachowuje się jak kursor, który zwykle wskazuje na najmłodszy 'commit' i z każdym nowym 'commit' zostaje przesunięty do przodu. Niektóre komendy Gita pozwolą ci nim manipulować. Na przyklad:
 
  $ git reset HEAD~3
 
-will move the HEAD three commits back. Thus all Git commands now act as if you hadn't made those last three commits, while your files remain in the present. See the help page for some applications.
+przesunie identyfikator 'HEAD' o 3 'commits' spowrotem. Spowoduje to, że wszystkie następne komendy Gita będą reagować, jakby tych trzech ostatnich 'commits' wogóle nie było, podczas gdy twoje dane zostaną w przyszłości. Na stronach pomocy Gita znajdziesz więcej takich zastosowań.
 
-But how can you go back to the future? The past commits know nothing of the future.
+Ale jak teraz wrócić znów do przyszłości? Poprzednie 'commits' nic nie wiedzą o jej istnieniu.
 
-If you have the SHA1 of the original HEAD then:
+Jeśli posiadasz klucz SHA1 orginalnego 'HEAD', wtedy możesz wrócić komendą:
 
  $ git reset 1b6d
 
-But suppose you never took it down? Don't worry: for commands like these, Git saves the original HEAD as a tag called ORIG_HEAD, and you can return safe and sound with:
+Wyobraź jednak sobie, że nigdy go nie notowałeś? Nie ma sprawy: Przy wykonywaniu takich poleceń Git archiwizuje orginalny HEAD jako indentyfikator o nazwie ORIG_HEAD a ty możesz bezproblemowo wrócić używając:
 
  $ git reset ORIG_HEAD
 
-=== HEAD-hunting ===
+=== Łowcy głów ===
 
-Perhaps ORIG_HEAD isn't enough. Perhaps you've just realized you made a monumental mistake and you need to go back to an ancient commit in a long-forgotten branch.
+Może się zdarzyć, że ORIG_HEAD nie wystarczy. Może właśnie spostrzegłeś, iż dokonałeś kapitalnego błędu i musisz wrócić się do bardzo starego 'commit' w zapomnianym 'branch'.
 
-By default, Git keeps a commit for at least two weeks, even if you ordered
-Git to destroy the branch containing it. The trouble is finding the appropriate
-hash. You could look at all the hash values in `.git/objects` and use trial
-and error to find the one you want. But there's a much easier way.
+Standardowo Git zapamiętuje 'commit' przez przynajmniej 2 tygodnie, nawet jeśli poleciłeś zniszczyć 'branch' w którym istniał. Problemem staje się tutaj odnalezienie odpowieniego klucza SHA1. Możesz po kolei testować wszystkie klucze SHA1 w `.git/objects` i w ten sposób próbować odnaleźć szukany 'commit'. Istnieje jednak na to dużo prostszy sposób.
 
-Git records every hash of a commit it computes in `.git/logs`. The subdirectory `refs` contains the history of all activity on all branches, while the file `HEAD` shows every hash value it has ever taken. The latter can be used to find hashes of commits on branches that have been accidentally lopped off.
+Git zapamiętuje każdy obliczony klucz SHA1 dla odpowiednich 'commit' w `.git/logs`. Podkatalog `refs` zawieza przebieg wszystkich aktywności we wszystkich 'branches', podczas gdy plik `HEAD` wszystkie klucze SHA1 które kiedykolwiek posiadał.  Ostatnie możemy zastosować do odnalezienia kluczy SHA1 tych 'commits' które znajdowały się w nieuważnie usuniętym 'branch'.
 
-The reflog command provides a friendly interface to these log files. Try
+Polecenie 'reflog' daje nam do dyspozycji przyjazny interfejs do tych właśnie logów. Wypróbuj polecenie:
 
-  $ git reflog
+ $ git reflog
 
-Instead of cutting and pasting hashes from the reflog, try:
+Zamiast kopiować i wklejać klucze z 'reflog', możesz:
 
  $ git checkout "@{10 minutes ago}"
 
-Or checkout the 5th-last visited commit via:
+Albo przywołaj 5 z ostatnio oddwiedzanych 'commits' za pomocą:
 
- $ git checkout "@{5}"
+$ git checkout "@{5}"
 
-See the ``Specifying Revisions'' section of *git help rev-parse* for more.
+Jeśli chciałbyś pogłębić wiedze na ten temat przeczytaj sekcję ``Specifying Revisions`` w  *git help rev-parse*.
 
-You may wish to configure a longer grace period for doomed commits. For
-example:
+Byś może zechcesz zmienić okres karencji dla przeznaczonych na stracenie 'commits'. Na przyklad:
 
-  $ git config gc.pruneexpire "30 days"
+ $ git config gc.pruneexpire "30 days" 
 
-means a deleted commit will only be permanently lost once 30 days have passed
-and *git gc* is run.
+znaczy, że skasowany 'commit' zostanie nieuchronnie utracony dopiero po 30 dniach od wykonania polecenia *git gc*.
 
-You may also wish to disable automatic invocations of *git gc*:
+Jeśli chcałbyś zapobiec automatyycznemu wykonywaniu *git gc*:
 
-  $ git config gc.auto 0
+ $ git config gc.auto 0 
 
-in which case commits will only be deleted when you run *git gc* manually.
+wtedy 'commits' będą tylko wtedy usuwane, gdy ręcznie wykonasz polecenie *git gc*.
 
-=== Building On Git ===
+=== Budować na bazie Gita ===
 
-In true UNIX fashion, Git's design allows it to be easily used as a low-level component of other programs, such as GUI and web interfaces, alternative command-line interfaces, patch managements tools, importing and conversion tools and so on. In fact, some Git commands are themselves scripts standing on the shoulders of giants. With a little tinkering, you can customize Git to suit your preferences.
+W prawdziwym unixowym świecie sama konstrukcja Gita pozwala na wykorzystanie go, jako komponent niskiego poziomu, przez inne aplikacje, jak na przykład interfejsy graficzne i aplikacje internetowe, alternatywne narzędzia konsoli, narzędzia patchujące, narzędzia pomocne w importowaniu i konwertowaniu i tak dalej. Nawek same polecenia git są czasami malutkimi skryptami, jak krasnoludki na ramieniu olbrzyma. Przykładając trochę ręki możesz adoptować Git do twoich własnych potrzeb.
 
-One easy trick is to use built-in Git aliases to shorten your most frequently
-used commands:
+Prostą sztuczką może być korzystanie z zintegrowanej w git funkcji aliasu, by skrócić najczęściej stosowane polecenia:
 
   $ git config --global alias.co checkout
-  $ git config --global --get-regexp alias  # display current aliases
+  $ git config --global --get-regexp alias  # wyświetli aktualne aliasy
   alias.co checkout
-  $ git co foo                              # same as 'git checkout foo'
+  $ git co foo                              # to samo co 'git checkout foo' 
 
-Another is to print the current branch in the prompt, or window title.
-Invoking
+Czymś troszeczkę innym będzie zapis nazwy aktualnego 'branch' w prompcie lub jako nazwy okna. Polecenie:
 
-  $ git symbolic-ref HEAD
+ $ git symbolic-ref HEAD 
 
-shows the current branch name. In practice, you most likely want to remove
-the "refs/heads/" and ignore errors:
+pokaże nazwę aktualnego 'branch'. W praktyce chciałbyś raczej usunąć "refs/heads/" i ignorować błędy:
 
-  $ git symbolic-ref HEAD 2> /dev/null | cut -b 12-
+ $ git symbolic-ref HEAD 2> /dev/null | cut -b 12- 
 
-The +contrib+ subdirectory is a treasure trove of tools built on Git.
-In time, some of them may be promoted to official commands. On Debian and
-Ubuntu, this directory lives at +/usr/share/doc/git-core/contrib+.
+Podkatakog +contrib+ jest wielkim znaleziskiem narzędzi zbudowanych dla git. Z czasem niektóre z nich mogą uzyskać status oficjalnych poleceń. W dystrybucji Debian i Ubuntu znajdziemy ten katalog pod +/usr/share/doc/git-core/contrib+.
 
-One popular resident is +workdir/git-new-workdir+. Via clever symlinking, this script creates a new working directory whose history is shared with the original repository:
+Ulubionym przedstawicielem jest +workdir/git-new-workdir+. Poprzez sprytne przelinkowania skrypt ten tworzy nowy katalog roboczy, który dzieli swoją historię wersji z orginalnym repozytorium:
 
-  $ git-new-workdir an/existing/repo new/directory
+ $ git-new-workdir istniejacy/repo nowy/katalog
 
-The new directory and the files within can be thought of as a clone, except since the history is shared, the two trees automatically stay in sync. There's no need to merge, push, or pull.
+Ten nowy katalog i znajdujące się w nim pliki można sobie wyobrazić jako klon, z tą różnicą, że ze względu na wspólną niepodzieloną historie obje wersje pozostaną zsynchronizowane.  Synchronizacja za pomocą  'merge', 'push', czy 'pull' nie będzie konieczna.
 
-=== Daring Stunts ===
+=== Śmiałe wyczyny ===
 
-These days, Git makes it difficult for the user to accidentally destroy data.
-But if you know what you are doing, you can override safeguards for common
-commands.
+Obecnie Git dość dobrze chroni użytkownika przed przypadkowym zniszczeniem danych. Ale, jeśli wiemy co robić, możemy obejść środki ochrony najczęściej stosowanych poleceń.
 
-*Checkout*: Uncommitted changes cause checkout to fail. To destroy your changes, and checkout a given commit anyway, use the force flag:
+*Checkout*: nie wersjonowane zmiany doprowadzą do niepowodzenia polecenia 'checkout'. Aby mimo tego zniszczyć zmiany i przywołać istniejący 'commit', możemy skorzystać z opcji 'force':
 
-  $ git checkout -f HEAD^
+ $ git checkout -f HEAD^ 
 
-On the other hand, if you specify particular paths for checkout, then there are no safety checks. The supplied paths are quietly overwritten. Take care if you use checkout in this manner.
+Jeśli poleceniu 'checkout' podamy inną ścieżkę, środki ochrony nie znajdą zastosowania. Podana ścieżka zostanie bez pytania zastąpiona. Bądź ostrożny stosując 'checkout' w ten sposób.
 
-*Reset*: Reset also fails in the presence of uncommitted changes. To force it through, run:
+*reset*: reset odmówi pracy, jeśli znajdzie niewersjonowane zmiany.  By zmusić go do tego, możesz użyć:
 
-  $ git reset --hard 1b6d
+ $ git reset --hard 1b6d 
 
-*Branch*: Deleting branches fails if this causes changes to be lost. To force a deletion, type:
+*Branch*: Skasowanie 'branches' też się nie powiedzie, jeśli mogłyby przez to zostać utracone zmiany. By wymusić skasowanie, podaj:
 
-  $ git branch -D dead_branch  # instead of -d
+ $ git branch -D martwy_branch # zamiast -d
 
-Similarly, attempting to overwrite a branch via a move fails if data loss would ensue. To force a branch move, type:
+Również nie uda się próba przesunięcia 'branch' poleceniem 'move', jeśliby miałoby to oznaczać utratę danych. By wymusić przesunięcie, podaj:
 
-  $ git branch -M source target  # instead of -m
+ $ git branch -M źródło cel # zamiast -m
 
-Unlike checkout and reset, these two commands defer data destruction. The
-changes are still stored in the .git subdirectory, and can be retrieved by
-recovering the appropriate hash from `.git/logs` (see "HEAD-hunting" above).
-By default, they will be kept for at least two weeks.
+Inaczej niż w przypadku 'checkout' i 'reset', te oba polecenia przesuną zniszczenie danych. Zmiany te zostaną zapisane w podkatalogu .git i mogą znów zostać przywrócone, jeśli znajdziemy odpowiedni kluch SHA1 w `.git/logs` (zobacz "Łowcy głów" powyżej).  Standardowo dane te pozostają jeszcze przez 2 tygodnie.
 
-*Clean*: Some git commands refuse to proceed because they're worried about
-clobbering untracked files. If you're certain that all untracked files and
-directories are expendable, then delete them mercilessly with:
+*clean*: Różnorakie polecenia Git nie chcą się zadziałać, ponieważ podejżewają konflikty z niewersjonowanymi danymi. Jeśli jesteś pewny, że wszystkie niezwersjonowane pliki i katalogi są zbędne, skasujesz je bezlitośnie poleceniem: 
 
-  $ git clean -f -d
+ $ git clean -f -d 
 
-Next time, that pesky command will work!
+Następnym razem te uciążliwe polecenia zaczną znów być posłuszne.
 
-=== Preventing Bad Commits ===
+=== Zapobiegaj złym 'commits' ===
 
-Stupid mistakes pollute my repositories. Most frightening are missing files due
-to a forgotten *git add*. Lesser transgressions are trailing whitespace and
-unresolved merge conflicts: though harmless, I wish these never appeared on the
-public record.
+Głupie błędy zaśmiecają moje repozytoria. Najbardziej fatalny jest brak plików z powodu zapomnianych *git add*. Mniejszymi usterkami mogą być spacje na końcu linii i nierozwiązane konflikty poleceń 'merge': mimo iż nie są groźne, życzyłbym sobie, by nigdy nie wystąpiły publicznie.
 
-If only I had bought idiot insurance by using a _hook_ to alert me about these problems:
+Gdybym tylko zabezpieczył się wcześniej, stosując prosty _hook_, który alarmowałby mnie przy takich problemach.
 
  $ cd .git/hooks
- $ cp pre-commit.sample pre-commit  # Older Git versions: chmod +x pre-commit
+ $ cp pre-commit.sample pre-commit  # Starsze wersje Gita wymagają jeszcze: chmod +x pre-commit
 
-Now Git aborts a commit if useless whitespace or unresolved merge conflicts are
-detected.
+I już 'commit' przerywa, jeśli odkryje niepotrzebne spacje na końcu linii albo nierozwiązane konflikty 'merge'.
 
-For this guide, I eventually added the following to the beginning of the
-*pre-commit* hook to guard against absent-mindedness:
+Na początku *pre-commit* tego 'hook' umieściłbym dla ochrony przed rozdrobnieniem:
 
  if git ls-files -o | grep '\.txt$'; then
    echo FAIL! Untracked .txt files.
    exit 1
- fi
+ fi 
 
-Several git operations support hooks; see *git help hooks*. We activated the
-sample *post-update* hook earlier when discussing Git over HTTP. This runs
-whenever the head moves. The sample post-update script updates files Git needs
-for communication over Git-agnostic transports such as HTTP.
+Wiele operacji Gita pozwala na używanie 'hooks'; zobacz też: *git help hooks*.  We wcześniejszcm rozdziale "Git poprzez http" przytoczyliśmy przykład 'hook' dla *post-update*, który wykonywany jest zawsze, jeśli znacznik 'HEAD' zostaje przesunięty. Ten przykładowy skrypt 'post-update' aktualizuje dane, które potrzebne są do komunikacji poprzez 'Git-agnostic transports', jak na przykład HTTP.

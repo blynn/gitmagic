@@ -1,208 +1,195 @@
-== Basic Tricks ==
+== Pierwsze kroki ==
 
-Rather than diving into a sea of Git commands, use these elementary examples to
-get your feet wet. Despite their simplicity, each of them are useful.
-Indeed, in my first months with Git I never ventured beyond the material in this chapter.
+Zanim utoniemy w morzu poleceń Gita, przyjrzyjmy się najpierw kilku prostym poleceniom. Pomimo ich prostoty, wszystkie jednak są ważne i pożyteczne. W rzeczywistości, podczas pierwszych miesięcy pracy z Git nie wychodziłem poza zakres opisany w tym roźdźiale
 
-=== Saving State ===
+=== Zabezpieczenie obecnego stanu ===
 
-About to attempt something drastic? Before you do, take a snapshot of all files
-in the current directory with:
+Zamierzasz przeprowadzić jakieś drastychne zmiany? Zanim to zrobisz, zabezpiecz najpierw dane w aktualnym katalogu.
 
  $ git init
  $ git add .
- $ git commit -m "My first backup"
+ $ git commit -m "Mój pierwszy commit"
 
-Now if your new edits go awry, restore the pristine version:
+Teraz, jeśli cokolwiek stałoby się z twymi plikami podczas edycji, możesz przywrócić pierwotną wersję:
 
  $ git reset --hard
 
-To save the state again:
+Aby zapisać nowy stan ponownie:
 
- $ git commit -a -m "Another backup"
+ $ git commit -a -m "Mój następny commit"
 
-=== Add, Delete, Rename ===
+=== Dodanie, kasowanie i zmiana nazwy ===
 
-The above only keeps track of the files that were present when you first ran *git add*. If you add new files or subdirectories, you'll have to tell Git:
+Powyższa komenda zatrzyma jedynie pliki, które już istniały podczas gdy poraz pierwszy wykonałes polecenie *git add*. Jeśli w międzyczasie dodałeś jakieś nowe pliki, Git musi zostać o tym poinformowany:
 
- $ git add readme.txt Documentation
+ $ git add readme.txt Dokumentacja
 
-Similarly, if you want Git to forget about certain files:
+To samo, gdy zechcesz by Git zapomniał o wybranych plikach:
 
- $ git rm kludge.h obsolete.c
- $ git rm -r incriminating/evidence/
+ $ git rm ramsch.h archaiczne.c 
+ $ git rm -r obciążający/materiał/
 
-Git deletes these files for you if you haven't already.
+Jeśli sam tego jeszcze nie zrobiłeś, to Git usunie pliki za ciebie.
 
-Renaming a file is the same as removing the old name and adding the new name. There's also the shortcut *git mv* which has the same syntax as the *mv* command. For example:
+Zmiana nazwy pliku, to to samo co jego skasowanie i ponowne utworzenie z nowa nazwa. Git wykorzystuje do tego skrót *git mv*, który posiada tą samą składnię co polecenie *mv*. Na przykład:
 
  $ git mv bug.c feature.c
 
-=== Advanced Undo/Redo ===
+=== Zaawansowane anulowanie/przywracanie ===
 
-Sometimes you just want to go back and forget about every change past a certain point because they're all wrong. Then:
+Czasami zechcesz po prostu cofnać się w czasie, zapominając o wszystkich wprowadzonych od tego punktu zmianach. Wtedy:
 
  $ git log
 
-shows you a list of recent commits, and their SHA1 hashes:
+pokaże ci listę dotychczasowych 'commits' i ich kluczy SHA1:
 
 ----------------------------------
-commit 766f9881690d240ba334153047649b8b8f11c664
-Author: Bob <bob@example.com>
-Date:   Tue Mar 14 01:59:26 2000 -0800
+commit 766f9881690d240ba334153047649b8b8f11c664 Author: Bob <bob@example.com>
+Date: Tue Mar 14 01:59:26 2000 -0800
 
-    Replace printf() with write().
+    Ersetzt printf() mit write().
 
 commit 82f5ea346a2e651544956a8653c0f58dc151275c
-Author: Alice <alice@example.com>
-Date:   Thu Jan 1 00:00:00 1970 +0000
+Author: Alicja <alicja@example.com>
+Date: Thu Jan 1 00:00:00 1970 +0000
 
-    Initial commit.
-----------------------------------
+    Initial commit. ---------------------------------- 
 
-The first few characters of the hash are enough to specify the commit;
-alternatively, copy and paste the entire hash. Type:
+Kilka początkowych znaków klucza SHA1 wystarcza by jednoznacznie zidentyfikować 'commit', alternatywnie możesz skopiować i wkleić cały klucz. Wpisując:
 
  $ git reset --hard 766f
 
-to restore the state to a given commit and erase all newer commits from the record permanently.
+przywrócisz stan do stanu podanego 'commit', a wszystkie poźniejsze zmiany zostaną bezpowrotnie skasowane.
 
-Other times you want to hop to an old state briefly. In this case, type:
+Innym razem chcesz tylko na moment przejść do jednego z poprzednich stanów. W tym wypadku użyj komendy:
 
  $ git checkout 82f5
 
-This takes you back in time, while preserving newer commits. However, like time travel in a science-fiction movie, if you now edit and commit, you will be in an alternate reality, because your actions are different to what they were the first time around.
+Tym poleceniem wrócisz się w czasie zachowując nowsze zmiany. Ale, tak samo jak w podróżach w czasie z filmaów science-fiction - jeśli teraz dokonasz zmian i zapamietsz je poleceniem 'commit', zostaniesz przeniesiona do alternatywnej rzeczywostosci, ponieważ twoje zmiany różnią się od dokonanych w późniejszych punktach czasu.
 
-This alternate reality is called a 'branch', and <<branch,we'll have more to say about this later>>. For now, just remember that
+Tą alternatywną rzeczywistość nazywamy 'branch', a <<branch,zajmiemy się tym w późniejszym czasie>>. Na razie, zapamietaj tylko, że:
 
  $ git checkout master
 
-will take you back to the present. Also, to stop Git complaining, always
-commit or reset your changes before running checkout.
+sprowadzi cię znów do teraźniejszości. Również, aby uprzedzić narzekanie Gita, powinieneś przed każdym 'checkout' wykonać 'commit' lub 'reset'.
 
-To take the computer game analogy again:
+Korzystając ponownie z analogii do gier komputerkowych:
 
-- *`git reset --hard`*: load an old save and delete all saved games newer than the one just loaded.
+- *`git reset --hard`*: załadój jakiś starszy stan gry i skasuj wszystkie nowsze niż właśnie ładowany.
 
-- *`git checkout`*: load an old game, but if you play on, the game state will deviate from the newer saves you made the first time around. Any saved games you make now will end up in a separate branch representing the alternate reality you have entered. <<branch,We deal with this later>>.
+- *`git checkout`*:  Załadój stary stan, grając dalej, twój stan będzie się różnił od nowszych zapamietanych. Każdy stan, który zapamiętasz od teraz, powstanie w osobnym 'branch', reprezentującym alternatywną rzeczywitość. <<branch, Wrócimy do tego później>>
 
-You can choose only to restore particular files and subdirectories by appending them after the command:
+Jeśli chcesz, możesz przywrócić jedynie wybrane pliki lub katalogi poprzez dodanie ich nazw do polecenia
 
- $ git checkout 82f5 some.file another.file
+ $ git checkout 82f5 jeden.plik inny.plik
 
-Take care, as this form of *checkout* can silently overwrite files. To
-prevent accidents, commit before running any checkout command, especially when
-first learning Git. In general, whenever you feel unsure about any operation, Git command or not, first run *git commit -a*.
+Bądź ostrożny, ten sposób użycia komendy *checkout* może bez uprzedzenia skasować pliki. Aby zabezpieczyć sie przed takimi wypadkami powinieneś zawsze wykonać polecenie 'commit' zanim wykonasz 'checkout', szczególnie w okresie poznawania Gita. Jeśli czujesz się niepewnie przed wykonaniem jakiejś operacji Gita, generalną zasadą powinno stać sie dla ciebie uprzednie wykonanie *git commit -a*.
 
-Don't like cutting and pasting hashes? Then use:
+Nie lubisz kopiować i wklejać kluczy SHA1? Możesz w tym wypadku skorzystać z:
 
- $ git checkout :/"My first b"
+ $ git checkout :/"Mój pierwszy c"
 
-to jump to the commit that starts with a given message.
-You can also ask for the 5th-last saved state:
+by przenieś się do 'commit', którego opis rozpoczyna zawartą wiadomość. Możesz również cofnąć się do piątego z ostatnio zapamiętanych 'commit':
 
- $ git checkout master~5
+$ git checkout master~5
 
-=== Reverting ===
+=== Przywracanie ===
 
-In a court of law, events can be stricken from the record. Likewise, you can pick specific commits to undo.
+W sali sądowej pewne zdarzenia mogą zostać wykreślone z akt. Podobnie możesze zaznaczyć pewne 'commits' do wykreślenia.
 
- $ git commit -a
+ $ git commit -a 
  $ git revert 1b6d
 
-will undo just the commit with the given hash. The revert is recorded as a new
-commit, which you can confirm by running *git log*.
+To polecenie wymaże 'commit' o wybranym kluczu. ten rewers zostanie zapamiętany jako nowy 'commit', co można sprawdzić poleceniem *git log*.
 
-=== Changelog Generation ===
+=== Generowanie listy zmian ===
 
-Some projects require a http://en.wikipedia.org/wiki/Changelog[changelog].
-Generate one by typing:
+Niektóre projekty wymagają http://en.wikipedia.org/wiki/Changelog[pliku changelog]. Wygenerujesz go poleceniem:
 
- $ git log > ChangeLog
+ $ git log > Changelog
 
-=== Downloading Files ===
+=== Ładowanie plików ===
 
-Get a copy of a project managed with Git by typing:
+Kopię projektu zarządzanego za pomocą Gita uzyskasz poleceniem:
 
- $ git clone git://server/path/to/files
+ $ git clone git://ścieżka/do/projektu
 
-For example, to get all the files I used to create this site:
+By na przykład zładować wszystkie dane, których urzyłem do stworzenia tej strony skorzystaj z:
 
  $ git clone git://git.or.cz/gitmagic.git
 
-We'll have much to say about the *clone* command soon.
+Do polecenia 'clone' wrócimy niebawem.
 
-=== The Bleeding Edge ===
+=== Najnowszy stan ===
 
-If you've already downloaded a copy of a project using *git clone*, you can upgrade to the latest version with:
+Jeśli posiadasz już kopię projektu wykonaną za pomocą *git clone*, możesz ją zaktualizować poleceniem:
 
  $ git pull
 
-=== Instant Publishing ===
+=== Szybka publikacja ===
 
-Suppose you've written a script you'd like to share with others. You could just tell them to download from your computer, but if they do so while you're improving the script or making experimental changes, they could wind up in trouble.  Of course, this is why release cycles exist. Developers may work on a project frequently, but they only make the code available when they feel it is presentable.
+Przypóśćmy, że napisałeś skrypt i chcesz go udostępnić innym. Mogłabyś poprosić ich, by zładowali go bezpośrednio z twojego komputera. Jeśli jednak zrobią podczas gdy gdy ty wprowadzasz poprawki lub eksperymentujesz ze zmianami, mogłabyś przysporzyć im nieprzyjemności. Z tego powodu istnieje coś takiego jak cykl wydawniczy. Programiści regularnie pracują nad projektem, upubliczniają kod jednak dopiero, jeśli uznają, że nadaje sie już do pokazania.
 
-To do this with Git, in the directory where your script resides:
+Aby wykonać to za pomocą GIT, wejdź do katalogu w którym znajduje się twój skrypt:
 
  $ git init
  $ git add .
- $ git commit -m "First release"
+ $ git commit -m "Pierwsze wydanie"
 
-Then tell your users to run:
+Następnie poproś twych użytkowników o wykonanie:
 
- $ git clone your.computer:/path/to/script
+ $ git clone twój.komputer:/ścieżka/do/skryptu
 
-to download your script. This assumes they have ssh access. If not, run *git daemon* and tell your users to instead run:
+by zładować twój skrypt. Zakładamy tu posiadanie przez nich klucza SSH do twojego komputera. Jeśli go nie mają, uruchom *git daemon* i podaj im następujący link:
 
- $ git clone git://your.computer/path/to/script
+ $ git clone git://twój.komputer/ścieżka/do/skryptu
 
-From now on, every time your script is ready for release, execute:
+Od teraz, zawsze gdy uznasz, że wersja nadaje sie do opublikowania, wykonaj polecenie:
 
- $ git commit -a -m "Next release"
+ $ git commit -a -m "Następna wersja"
 
-and your users can upgrade their version by changing to the directory containing your script and typing:
+a twoi użytkownicy, po wejściu do katalogu zawierającym twój skrypt, będą go mogli zaktualizować poprzez:
 
  $ git pull
 
-Your users will never end up with a version of your script you don't want them to see.
+Twoi użytkownicy nigdy nie wejdą w posiadanie wersji, których nie chcesz im udostępniać.
 
-=== What Have I Done? ===
+=== A co robiłem ostatnio? ===
 
-Find out what changes you've made since the last commit with:
+Jeśli chcesz zobaczyć zmiany, które wprowadziłeś of ostatniego 'commit', wpisz:
 
  $ git diff
 
-Or since yesterday:
+Albo tylko zmiany od wczoraj:
 
  $ git diff "@{yesterday}"
 
-Or between a particular version and 2 versions ago:
+Albo miedzy określoną wersją i dwoma poprzedzającymi:
 
  $ git diff 1b6d "master~2"
 
-In each case the output is a patch that can be applied with *git apply*.
-Try also:
+Za każdym razem uzyskane informacje są równocześnie patchem, który poprzez *git apply* może zostac być zastosowany. Spróbuj również:
 
  $ git whatchanged --since="2 weeks ago"
 
-Often I'll browse history with http://sourceforge.net/projects/qgit[qgit] instead, due to its slick photogenic interface, or http://jonas.nitro.dk/tig/[tig], a text-mode interface that works well over slow connections. Alternatively, install a web server, run *git instaweb* and fire up any web browser.
+Jeśli chcę sprawdzić listę zmian jakiegoś repozytorium, często korzystam czesto z  http://sourceforge.net/projects/qgit[qgit], ze względu na jego fotogeniczny interfejs, albo z http://jonas.nitro.dk/tig/[tig], tekstowy interfejs, działający zadowalająco gdy mamy do czynienia z wolnym łączem internetowym. Alternatywnie, zainstaluj serwer http, uruchom *git instaweb*, i odpal dowolną przeglądarkę internetową.
 
-=== Exercise ===
+=== Ćwiczenie ===
 
-Let A, B, C, D be four successive commits where B is the same as A except some files have been removed. We want to add the files back at D. How can we do this?
+Niech A, B, C i D będą 4 nastepujacymi po sobie 'commits', gdzie B różni sie od A, jedynie tym, iż usunieto kilka plikow. Chcemy teraz te usuniete pliki zrekonstruowac do D. Jak to można zrobić?
 
-There are at least three solutions. Assuming we are at D:
+Istnieją przynajmniej 3 rozwiązania. Załóżmm że znajdujemy się obecnie w D:
 
-  1. The difference between A and B are the removed files. We can create a patch representing this difference and apply it:
+1. Różnica pomiędzy A i B, to skasowane pliki. Możemy utworzyc patch, który pokaże te różnice i nastepnie zastosować go:
 
-   $ git diff B A | git apply
+ $ git diff B A | git apply
 
-  2. Since we saved the files back at A, we can retrieve them:
+2. Ponieważ pliki zostaly już raz zapamietane w A, możemy je przywrócić:
 
-   $ git checkout A foo.c bar.h
+ $ git checkout A foo.c bar.h
 
-  3. We can view going from A to B as a change we want to undo:
+3. Możemy też widzieć przejście z A na B jako zmianę, którą można zrewertować:
 
-   $ git revert B
+ $ git revert B
 
-Which choice is best? Whichever you prefer most. It is easy to get what you want with Git, and often there are many ways to get it.
+A które z tych rozwiązań jest najlepsze? To, które najbardziej tobie odpowiada. Korzystając z Git łatwo osiągnąć cel, czasami prowadzi do niego wiele dróg.

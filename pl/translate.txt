@@ -1,33 +1,17 @@
-== Appendix B: Translating This Guide ==
+== Załącznik B: Przetłumaszyć to HOWTO ==
 
-I recommend the following steps for translating this guide, so my scripts can
-quickly produce HTML and PDF versions, and all translations can live in the
-same repository.
+Aby przetłumaszyć mije HOWTO polecam wykonanie następujących ponniżej kroków, wtedy moje skrypty będą w prosty sposób mogły wygenerować wersje HTML i PDF.  Poza tym wszystkie tłumaszenia mogą być prowadzone w jednym repozytorium.
 
-Clone the source, then create a directory corresponding to the target
-language's IETF tag: see
-http://www.w3.org/International/articles/language-tags/Overview.en.php[the W3C
-article on internationalization]. For example, English is "en" and Japanese is
-"ja". In the new directory, and translate the +txt+ files from the "en"
-subdirectory.
+'Clone' texty źródłowe, następnie utwórz katalog o nazwie skrótu IETF przetłumaszonego języka: sprawdź http://www.w3.org/International/articles/language-tags/Overview.en.php[Artykół W3C o internacjonalizacji]. Na przykład, angielski to "en", a japoński to "ja". Skopiuj wszystkie pliki +txt+ z katalogu "en" do nowoutworzonego katalogu.
 
-For instance, to translate the guide into http://en.wikipedia.org/wiki/Klingon_language[Klingon], you might type:
+Aby przykładowo przetłumaczyć to HOWTO na http://de.wikipedia.org/wiki/Klingonische_Sprache[Klingonisch], musisz wykonać następujące polecenia:
 
- $ git clone git://repo.or.cz/gitmagic.git
- $ cd gitmagic
- $ mkdir tlh  # "tlh" is the IETF language code for Klingon.
- $ cd tlh
- $ cp ../en/intro.txt .
- $ edit intro.txt  # Translate the file.
+$ git clone git://repo.or.cz/gitmagic.git $ cd gitmagic $ mkdir tlh # "tlh" jest skrótem IETF języka Klingonisch. $ cd tlh $ cp ../en/intro.txt . $ edit intro.txt # Przetłumacz ten plik.
 
-and so on for each text file.
+i zrób to z każdą następną daną textową.
 
-Edit the Makefile and add the language code to the `TRANSLATIONS` variable.
-You can now review your work incrementally:
+Edytuj Makefile i dodaj skrót języka do zmiennej `TRANSLATIONS`. Teraz możesz swoją pracę w każdej chwili sprawdzić:
 
- $ make tlh
- $ firefox book-tlh/index.html
+$ make tlh $ firefox book-tlh/index.html
 
-Commit your changes often, then let me know when they're ready.
-GitHub has an interface that facilitates this: fork the "gitmagic" project,
-push your changes, then ask me to merge.
+Używaj często 'commit' a gdy już skończysz, to daj znać. GitHub posiada interfejs, który to ułatwi: utwórz twój własny 'Fork' projektu "gitmagic", 'push' twoje zmiany i daj mi znać, by je 'mergen'.

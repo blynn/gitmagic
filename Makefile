@@ -7,7 +7,7 @@
 #
 # For now, I've uploaded a PDF to the website; it was supplied by
 # Trần Ngọc Quân who used OpenOffice to convert HTML to PDF.
-TRANSLATIONS = de es fr ru uk vi zh_cn zh_tw it
+TRANSLATIONS = de es fr ru uk vi zh_cn zh_tw it pl
 LANGS = en $(TRANSLATIONS)
 SHELL := /bin/bash
 
