@@ -2,11 +2,11 @@
 
 Szybkie, natychmiastowe działanie poleceń branch i merge, to jedne z najbardziej zabójczych właściwości Gita.
 
-*Problem*: Zewnetrzne faktory narzucają konieczność zmiany kontekstu. Poważne błędy w opublikowanej wersji ujawniły się bez ostrzeżenia. Skrócono termin opublikowania pewnej wlaściwości. Autor, którego pomocy potrzebujesz w jednej z kluczowych sekcji postanawia opóścić projekt. W wszystkich tych przypadkach musisz natychmiastowo zaprzestać bierzących prac i skoncentrować się nad zupełnie innymi zadaniami.
+*Problem*: Zewnętrzne faktory narzucają konieczność zmiany kontekstu. Poważne błędy w opublikowanej wersji ujawniły się bez ostrzeżenia. Skrócono termin opublikowania pewnej właściwości. Autor, którego pomocy potrzebujesz w jednej z kluczowych sekcji postanawia opóścić projekt. W wszystkich tych przypadkach musisz natychmiastowo zaprzestać bierzących prac i skoncentrować się nad zupełnie innymi zadaniami.
 
-Przerwanie toku myślenia nie jest dobre dla produktywności, a czym większa różnica w kontekście, tym wieksze straty. Używając centralnych systemów kontroli wersji musielibyśmy najpierw zładować świeżą kopię roboczą z serwera. W systemach rozproszonych wyglada to dużo lepiej, ponieważ możemy żądaną wersje skonowac lokalnie
+Przerwanie toku myślenia nie jest dobre dla produktywności, a czym większa różnica w kontekście, tym wieksze straty. Używając centralnych systemów kontroli wersji musielibyśmy najpierw zładować świeżą kopię roboczą z serwera. W systemach rozproszonych wyglada to dużo lepiej, ponieważ możemy żądaną wersje sklonować lokalnie
 
-Jednak klonowanie równeż niesie za soba kopiowanie całego katalogu roboczego jak i całej historii projektu aż do żądanego punktu. Nawet jesli Git redukuje wielkość przez podział danych i użycie twardych dowiązań, wszystkie pliki projektu musza zostać odtworzone w nowym katalogu roboczym.
+Jednak klonowanie równeż niesie za soba kopiowanie całego katalogu roboczego jak i całej historii projektu aż do żądanego punktu. Nawet jeśli Git redukuje wielkość przez podział danych i użycie twardych dowiązań, wszystkie pliki projektu musza zostać odtworzone w nowym katalogu roboczym.
 
 *Rozwiazanie*: Git posiada lepsze narzędzia dla takich sytuacji, jest ono wiele szybsze i zajmujące mniej miejsca na dysku jak klonowanie: *git branch*.
 
@@ -33,7 +33,7 @@ Wygląda jakbyśmy zmienili zawartość pliku i wykonali 'commit'. Ale to iluzja
 
  $ git checkout master # przejdź do orginalnej wersji
 
-i hokus-pokus! Poprzedni plik jest przywrócony do stanu pierwotnego. Gdyby jedmak szef zdecydował się grzebać w twoim katalogu, wpisz:
+i hokus-pokus! Poprzedni plik jest przywrócony do stanu pierwotnego. Gdyby jednak szef zdecydował się grzebać w twoim katalogu, wpisz:
 
  $ git checkout szef # przejdź do wersji, która nadaje się do obejrzenia przez szefa
 
@@ -42,22 +42,22 @@ Możesz zmieniać pomiedzy tymi wersjami pliku tak często jak zechcesz, każdą
 === Brudna robota ===
 
 [[branch]]
-Zalozmy, pracujesz nad jakas funkcja, i musisz, jakiegokolwiek powodu, wrocic o 3 wersje wstecz w celu wprowadzenia kilku polecen print, aby sprawdzic jej działanie. Wtedy:
+Załóżmy, pracujesz nad jakąś funkcją, i musisz z jakiegokolwiek powodu, wrócić o 3 wersje wstecz w celu wprowadzenia kilku poleceń print, aby sprawdzic jej działanie. Wtedy:
 
  $ git commit -a 
  $ git checkout HEAD~3
 
-Teraz mozesz na dziko wprowadzać tymczasowy kod. Mozesz te zmiany nawet 'commit'. Po skończeniu,
+Teraz możesz na dziko wprowadzać tymczasowy kod. Możesz te zmiany nawet 'commit'. Po skończeniu,
 
  $ git checkout master
 
-wróci cię do poprzedniej pracy. Zauwaz, ze wszystkie zmiany, ktore nie zostaly zatwierdzone przez 'commit', zostaly przejete.
+wróci cię do poprzedniej pracy. Zauważ, że wszystkie zmiany, które nie zostaly zatwierdzone przez 'commit', zostały przejęte.
 
-A co jesli chciałeś zapamietac wprowadzone zmiany? Proste:
+A co jeśli chciałeś zapamiętać wprowadzone zmiany? Proste:
 
  $ git checkout -b brudy
 
-i tylko jeszcze wykonaj 'commit' zanim wrocisz do master branch. Jesli tylko chcesz wrocic do twojej brudnej roboty, wpisz po prostu
+i tylko jeszcze wykonaj 'commit' zanim wrócisz do master branch. Jeśli tylko chcesz wrócić do twojej brudnej roboty, wpisz po prostu
 
  $ git checkout brudy
 

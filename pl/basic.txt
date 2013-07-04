@@ -1,6 +1,6 @@
 == Pierwsze kroki ==
 
-Zanim utoniemy w morzu poleceń Gita, przyjrzyjmy się najpierw kilku prostym poleceniom. Pomimo ich prostoty, wszystkie jednak są ważne i pożyteczne. W rzeczywistości, podczas pierwszych miesięcy pracy z Git nie wychodziłem poza zakres opisany w tym roźdźiale
+Zanim utoniemy w morzu poleceń Gita, przyjrzyjmy się najpierw kilku prostym poleceniom. Pomimo ich prostoty, wszystkie jednak są ważne i pożyteczne. W rzeczywistości, podczas pierwszych miesięcy pracy z Git nie wychodziłem poza zakres opisany w tym roździale
 
 === Zabezpieczenie obecnego stanu ===
 
@@ -53,7 +53,8 @@ commit 82f5ea346a2e651544956a8653c0f58dc151275c
 Author: Alicja <alicja@example.com>
 Date: Thu Jan 1 00:00:00 1970 +0000
 
-    Initial commit. ---------------------------------- 
+    Initial commit. 
+---------------------------------- 
 
 Kilka początkowych znaków klucza SHA1 wystarcza by jednoznacznie zidentyfikować 'commit', alternatywnie możesz skopiować i wkleić cały klucz. Wpisując:
 
@@ -77,7 +78,7 @@ Korzystając ponownie z analogii do gier komputerkowych:
 
 - *`git reset --hard`*: załadój jakiś starszy stan gry i skasuj wszystkie nowsze niż właśnie ładowany.
 
-- *`git checkout`*:  Załadój stary stan, grając dalej, twój stan będzie się różnił od nowszych zapamietanych. Każdy stan, który zapamiętasz od teraz, powstanie w osobnym 'branch', reprezentującym alternatywną rzeczywitość. <<branch, Wrócimy do tego później>>
+- *`git checkout`*:  Załadój stary stan, grając dalej, twój stan będzie się różnił od nowszych zapamietanych. Każdy stan, który zapamiętasz od teraz, powstanie w osobnym 'branch', reprezentującym alternatywną rzeczywitość. <<branch,Wrócimy do tego później>>
 
 Jeśli chcesz, możesz przywrócić jedynie wybrane pliki lub katalogi poprzez dodanie ich nazw do polecenia
 
@@ -91,7 +92,7 @@ Nie lubisz kopiować i wklejać kluczy SHA1? Możesz w tym wypadku skorzystać z
 
 by przenieś się do 'commit', którego opis rozpoczyna zawartą wiadomość. Możesz również cofnąć się do piątego z ostatnio zapamiętanych 'commit':
 
-$ git checkout master~5
+ $ git checkout master~5
 
 === Przywracanie ===
 
