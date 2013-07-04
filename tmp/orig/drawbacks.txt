@@ -1,0 +1,97 @@
+== Appendix A: Git Shortcomings ==
+
+There are some Git issues I've swept under the carpet. Some can be handled easily with scripts and hooks, some require reorganizing or redefining the project, and for the few remaining annoyances, one will just have to wait. Or better yet, pitch in and help!
+
+=== SHA1 Weaknesses ===
+
+As time passes, cryptographers discover more and more SHA1 weaknesses. Already,
+finding hash collisions is feasible for well-funded organizations. Within
+years, perhaps even a typical PC will have enough computing power to silently
+corrupt a Git repository.
+
+Hopefully Git will migrate to a better hash function before further research
+destroys SHA1.
+
+=== Microsoft Windows ===
+
+Git on Microsoft Windows can be cumbersome:
+
+- http://cygwin.com/[Cygwin], a Linux-like environment for Windows, contains http://cygwin.com/packages/git/[a Windows port of Git].
+
+- http://code.google.com/p/msysgit/[Git on MSys] is an alternative requiring minimal runtime support, though a few of the commands need some work.
+
+=== Unrelated Files ===
+
+If your project is very large and contains many unrelated files that are constantly being changed, Git may be disadvantaged more than other systems because single files are not tracked. Git tracks changes to the whole project, which is usually beneficial.
+
+A solution is to break up your project into pieces, each consisting of related files. Use *git submodule* if you still want to keep everything in a single repository.
+
+=== Who's Editing What? ===
+
+Some version control systems force you to explicitly mark a file in some way before editing. While this is especially annoying when this involves talking to a central server, it does have two benefits:
+
+  1. Diffs are quick because only the marked files need be examined.
+
+  2. One can discover who else is working on the file by asking the central server who has marked it for editing.
+
+With appropriate scripting, you can achieve the same with Git. This requires cooperation from the programmer, who should execute particular scripts when editing a file.
+
+=== File History ===
+
+Since Git records project-wide changes, reconstructing the history of a single file requires more work than in version control systems that track individual files.
+
+The penalty is typically slight, and well worth having as other operations are incredibly efficient. For example, `git checkout` is faster than `cp -a`, and project-wide deltas compress better than collections of file-based deltas.
+
+=== Initial Clone ===
+
+Creating a clone is more expensive than checking out code in other version control systems when there is a lengthy history.
+
+The initial cost is worth paying in the long run, as most future operations will then be fast and offline. However, in some situations, it may be preferable to create a shallow clone with the `--depth` option. This is much faster, but the resulting clone has reduced functionality.
+
+=== Volatile Projects ===
+
+Git was written to be fast with respect to the size of the changes. Humans make small edits from version to version. A one-liner bugfix here, a new feature there, emended comments, and so forth. But if your files are radically different in successive revisions, then on each commit, your history necessarily grows by the size of your whole project.
+
+There is nothing any version control system can do about this, but standard Git users will suffer more since normally histories are cloned.
+
+The reasons why the changes are so great should be examined. Perhaps file formats should be changed. Minor edits should only cause minor changes to at most a few files.
+
+Or perhaps a database or backup/archival solution is what is actually being sought, not a version control system. For example, version control may be ill-suited for managing photos periodically taken from a webcam.
+
+If the files really must be constantly morphing and they really must be versioned, a possibility is to use Git in a centralized fashion. One can create shallow clones, which checks out little or no history of the project. Of course, many Git tools will be unavailable, and fixes must be submitted as patches. This is probably fine as it's unclear why anyone would want the history of wildly unstable files.
+
+Another example is a project depending on firmware, which takes the form of a huge binary file. The history of the firmware is uninteresting to users, and updates compress poorly, so firmware revisions would unnecessarily blow up the size of the repository.
+
+In this case, the source code should be stored in a Git repository, and the binary file should be kept separately. To make life easier, one could distribute a script that uses Git to clone the code, and rsync or a Git shallow clone for the firmware.
+
+=== Global Counter ===
+
+Some centralized version control systems maintain a positive integer that increases when a new commit is accepted. Git refers to changes by their hash, which is better in many circumstances.
+
+But some people like having this integer around. Luckily, it's easy to write scripts so that with every update, the central Git repository increments an integer, perhaps in a tag, and associates it with the hash of the latest commit.
+
+Every clone could maintain such a counter, but this would probably be useless, since only the central repository and its counter matters to everyone.
+
+=== Empty Subdirectories ===
+
+Empty subdirectories cannot be tracked. Create dummy files to work around this problem.
+
+The current implementation of Git, rather than its design, is to blame for this drawback. With luck, once Git gains more traction, more users will clamour for this feature and it will be implemented.
+
+=== Initial Commit ===
+
+A stereotypical computer scientist counts from 0, rather than 1. Unfortunately, with respect to commits, git does not adhere to this convention. Many commands are unfriendly before the initial commit. Additionally, some corner cases must be handled specially, such as rebasing a branch with a different initial commit.
+
+Git would benefit from defining the zero commit: as soon as a repository is constructed, HEAD would be set to the string consisting of 20 zero bytes. This special commit represents an empty tree, with no parent, at some time predating all Git repositories.
+
+Then running git log, for example, would inform the user that no commits have been made yet, instead of exiting with a fatal error. Similarly for other tools.
+
+Every initial commit is implicitly a descendant of this zero commit.
+
+However there are some problem cases unfortunately. If several branches with different initial commits are merged together, then rebasing the result requires substantial manual intervention.
+
+=== Interface Quirks ===
+
+For commits A and B, the meaning of the expressions "A..B" and "A...B" depends
+on whether the command expects two endpoints or a range. See *git help diff*
+and *git help rev-parse*.
