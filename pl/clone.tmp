@@ -1,14 +1,14 @@
 == Klonowanie ==
 
-W starszych systemach kontroli wersji polecenie 'checkout' stanowi standardową operacje pozyskiwania danych. Otrzymasz zbiór plików konkretnegj wersji.
+W starszych systemach kontroli wersji polecenie 'checkout' stanowi standardową operacje pozyskiwania danych. Otrzymasz zbiór plików konkretnej wersji.
 
-W Git i innych rozproszonych systemach kontroli wersji to operacja 'clone' jest standardem. By pozyskać dane, tworzysz klon całego repozytorium. Lub inaczej mówiąc, odzwierciedlasz centralny server. Wszystko, co można zrobić w centralnym repozytorium, możesz również robić z klonem.
+W Git i innych rozproszonych systemach kontroli wersji to operacja 'clone' jest standardem. By pozyskać dane, tworzysz klon całego repozytorium. Lub inaczej mówiąc, odzwierciedlasz centralny serwer. Wszystko, co można zrobić w centralnym repozytorium, możesz również robić z klonem.
 
 === Synchronizacja komputera ===
 
-Dla celów ochrony danych mógłbym jeszcze zaakceptować korzystanie z archiwów tar, a dla prostej synchonizacji używania *rsync*. Jednak czasami pracując na laptopie,innym razem na desktopie, może zdarzyć się, że nie miały możliwości w międzyczasie się zsynchronizować.
+Dla celów ochrony danych mógłbym jeszcze zaakceptować korzystanie z archiwów tar, a dla prostej synchronizacji używania *rsync*. Jednak czasami pracując na laptopie,innym razem na desktopie, może zdarzyć się, że nie miały możliwości w międzyczasie się zsynchronizować.
 
-Utwóż repozytorium Gita w wykonaj 'commit' twoich danych na jednym komputerze. Potem na tym następnym wpisz:
+Utwórz repozytorium Gita w wykonaj 'commit' twoich danych na jednym komputerze. Potem na tym następnym wpisz:
 
  $ git clone drugi.komputer:/ścieżka/do/danych
 
@@ -21,7 +21,7 @@ przenosisz stan drugiego komputera na komputer na którym właśnie pracujesz. J
 
 === Klasyczna kontrola kodu źródłowego ===
 
-Utwóż repozytorium Gita twoich danych
+Utwórz repozytorium Gita twoich danych
 
  $ git init
  $ git add .
@@ -34,11 +34,11 @@ Na centralnym serwerze utwóż tzw 'bare repository' w jakimkolwiek katalogu:
  $ git --bare init
  $ touch proj.git/git-daemon-export-ok
 
-W razie konieczności, wysartuj daemon Gita:
+W razie konieczności, wystartuj daemon Gita:
 
  $ git daemon --detach # ponieważ, mógłby już lecieć
 
-Jeśli korzystasz z hostingu to poszukaj wskazówek utwożenia pustego repozytorium. Zwykle konieczne jest do tego wypełnienie formulaża online na stronie internetowej usługodawcy.
+Jeśli korzystasz z hostingu to poszukaj wskazówek utworzenia pustego repozytorium. Zwykle konieczne jest do tego wypełnienie formularza online na stronie internetowej usługodawcy.
 
 Przenieś ('push') twój projekt teraz na centralny serwer:
 
@@ -56,7 +56,7 @@ Aby zaktualizować do wersji na serwerze:
 
  $ git pull
 
-Jeżli wystąpią jakiekolwiek konflikty 'merge', powinny być usunięte in na nowo wykonany 'commit'.
+Jeśli wystąpią jakiekolwiek konflikty 'merge', powinny być usunięte in na nowo wykonany 'commit'.
 
  $ git commit -a
 
@@ -70,11 +70,11 @@ Programiści potrzebują dostępu poprzez SSH by móc wykonać polecenia 'pull' 
 
  $ git clone git://centralny.serwer/ścieżka/do/projektu.git
 
-Protokół Git przypomina HTTP: nie posiada autentyfikacji, więc każdy może zładować dane. Przy ustawieniach standardowych wykonanie 'push' za pomocą protokołu 'git' jest zdeaktywowane.
+Protokół Git przypomina HTTP: nie posiada autentyfikacji, więc każdy może zładować dane. Przy ustawieniach standardowych wykonanie 'push' za pomocą protokołu 'git' jest zdezaktywowane.
 
 === Utajnione Źródło ===
 
-Przy projektach Closed-Source wyklucz używanie poleceń jak clone i upewnij się, że nigdy nie został utworzony plik o nazwie git-daemon-export-ok. Wtedy repozytorium nie może już komunikować sie poprzez protokół 'git', tylko posiadający dostęp przez SSH mogą widzieć dane. Jeśli wszystkie REPOSITORIES są zamknięte, nie ma potrzeby startować deamon GIT, ponieważ cała komunikacja odbywa się za pomocą SSH.
+Przy projektach Closed-Source wyklucz używanie poleceń jak clone i upewnij się, że nigdy nie został utworzony plik o nazwie git-daemon-export-ok. Wtedy repozytorium nie może już komunikować się poprzez protokół 'git', tylko posiadający dostęp przez SSH mogą widzieć dane. Jeśli wszystkie REPOSITORIES są zamknięte, nie ma potrzeby startować deamon GIT, ponieważ cała komunikacja odbywa się za pomocą SSH.
 
 === Gołe repozytoria ===
 
