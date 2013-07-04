@@ -38,8 +38,9 @@ Duże dzięki dla wszystkich tych stron za hosting tego poradnika.
 
 Ten poradnik publikowany jest na bazie licencji http://www.gnu.org/licenses/gpl-3.0.html[GNU General Public License Version 3]. Oczywiście, tekst źródłowy znajduje się w repozytorium Git i może zostać powielone przez:
 
-$ git clone git://repo.or.cz/gitmagic.git # Utworzy katalog "gitmagic".
+ $ git clone git://repo.or.cz/gitmagic.git # Utworzy katalog "gitmagic".
 
 albo z lustrzanego serwera:
 
-$ git clone git://github.com/blynn/gitmagic.git $ git clone git://gitorious.org/gitmagic/mainline.git 
+ $ git clone git://github.com/blynn/gitmagic.git 
+ $ git clone git://gitorious.org/gitmagic/mainline.git 

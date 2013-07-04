@@ -8,7 +8,8 @@ Później chciałem opublikować mój kod za pomocą git i dołączyć zmiany ko
 
 Każdy 'commit' otrzymuje nazwę i adres email autora, które zostaną pokazane w *git log*. Standardowo git korzysta z ustawień systemowych do wypełnienia tych pól. Aby wprowadzić te dane bezpośrednio, podaj:
 
-$ git config --global user.name "Jan Kowalski" $ git config --global user.email jan.kowalski@example.com
+ $ git config --global user.name "Jan Kowalski" 
+ $ git config --global user.email jan.kowalski@example.com
 
 Jeśli opóścisz przełącznik '--global' zmiany zostaną zastosowane wyłącznie do aktualnego repozytorium.
 
@@ -18,7 +19,10 @@ Załóżmy, posiadasz dostęp SSH do serwera stron internetowych, gdzie jednak g
 
 Zładuj git, skompiluj i zainstaluj pod własnym kontem oraz utwórz repozytorium w twoim katalogu strony internetowej.
 
-$ GIT_DIR=proj.git git init $ cd proj.git $ git --bare update-server-info $ cp hooks/post-update.sample hooks/post-update 
+ $ GIT_DIR=proj.git git init 
+ $ cd proj.git 
+ $ git --bare update-server-info 
+ $ cp hooks/post-update.sample hooks/post-update 
 
 Przy starszych wersjach git samo polecenie 'cp' nie będzie funkcjonować, wtedy musisz jeszcze:
 
@@ -26,11 +30,11 @@ chmod a+x hooks/post-update
 
 Od teraz możesz publikować aktualizacje z każdego klonu poprzez SSH.
 
-$ git push web.server:/sciezka/do/proj.git master 
+ $ git push web.server:/sciezka/do/proj.git master 
 
 i każdy może teraz sklonować twój projekt przez:
 
-$ git clone http://web.server/proj.git 
+ $ git clone http://web.server/proj.git 
 
 === Git ponad wszystko ===
 
@@ -38,27 +42,27 @@ Chciałbyś synchronizować repozytoria bez pomocy serwera czy nawet bez użycia
 
 Nadawca tworzy 'bundle':
 
-$ git bundle create plik HEAD
+ $ git bundle create plik HEAD
 
 i transportuje 'bundle' +plik+ do innych zaangażowanych: przez email, stik-usb, *xxd* hexdump i skaner OCR, kod morse przez telefon, znaki dymne itd. Odbiorca wyciąga 'commits' z 'bundle' poprzez podanie:
 
 
-$ git pull plik
+ $ git pull plik
 
 Odbiorca może to zrobić z pustym repozytorium. Mimo swojej wielkości +plik+ zawiera kompletny orginał repozytorium.
 
 W dużych projektach unikniesz śmieci danych, jeśli tylko zrobisz 'bundle' zmian brakujących w innych repozytoriach. Na przykład załóżmy, że 'commit' ``1b6d...'' jest najaktualniejszym, które posiadają obie partie:
 
 
-$ git bundle create plik HEAD ^1b6d
+ $ git bundle create plik HEAD ^1b6d
 
 Jeśli robi się to regularnie, łatwo można zapomnieć, który 'commit' został wysłany ostatnio. Strony pomocy zalecają stosowanie tagów, by rozwiązać ten problem. To znaczy, po wysłaniu 'bundle', podaj:
 
-$ git tag -f ostatnibundle HEAD
+ $ git tag -f ostatnibundle HEAD
 
 a nowy 'bundle' tworzymy następnie poprzez:
 
-$ git bundle create nowybundle HEAD ^ostatnibundle
+ $ git bundle create nowybundle HEAD ^ostatnibundle
 
 === Patches: globalny środek płatniczy ===
 
@@ -66,25 +70,25 @@ $ git bundle create nowybundle HEAD ^ostatnibundle
 
 Przypomnij sobie pierwszy rozdział:
 
-$ git diff 1b6d > moj.patch
+ $ git diff 1b6d > moj.patch
 
 produkuje 'patch', który można dołączyć do maila dla dalszej dyskusji. W repozytorium git natomiast podajesz:
 
-$ git apply < moj.patch
+ $ git apply < moj.patch
 
 By zastosować patch.
 
 W bardziej oficjalnym środowisku, jeśli nawiska autorów i ich sygnatury powinny również być notowane, tworz 'patch' od pewnego punktu, po wpisaniu:
 
-git format-patch 1b6d 
+ $ git format-patch 1b6d 
 
 Uzyskane w ten sposób dane mogą przekazane być do *git-send-mail* albo odręcznie wysłane. Możesz podać grupę 'commits'
 
-$ git format-patch 1b6d..HEAD^^ 
+ $ git format-patch 1b6d..HEAD^^ 
 
 Po stronie odbiorcy zapamiętaj email jako daną i podaj:
 
-$ git am < email.txt 
+ $ git am < email.txt 
 
 Patch zostanie wprowadzony i utworzy commit, włącznie z informacjami jak naprzykład o autorze.
 
@@ -96,19 +100,19 @@ Występują minimalne różnice między aplikacjami emailowymi bazującymi na mb
 
 Po sklonowaniu repozytorium, polecenia *git push* albo *git pull* będą automatycznie wskazywały na orginalne URL. Jak Git to robi? Tajemnica leży w konfiguracji, która utworzona zostaje podczas klonowania. Zaryzykujmy spojrzenie:
 
-$ git config --list 
+ $ git config --list 
 
 Opcja +remote.origin.url+ kontroluje źródłowe URL; ``origin'' to alias, nadany źródłowemu repozytorium. Tak jak i przy konwencji z  ``master'' 'Branch' , możemy ten alias zmienić albo skasować, zwykle jednak nie ma powodów by to robić.
 
 Jeśli orginalne repozytorium zostanie przesunięte, możemy zaktualizować link poprzez: 
 
-git config remote.origin.url git://nowy_link/proj.git
+ $ git config remote.origin.url git://nowy_link/proj.git
 
 Opcja +branch.master.merge+ definuje standardowy Remote-'Branch' dla *git pull*. Podczas początkowego klonowania, zostanie ustawiony na aktualny branch źródłowego repozytorium, że nawet i potym jak 'HEAD' źródłowego repozytorium przejdzie do innego branch, późniejszy 'pull' pozostanie wierny orginalnemu branch.
 
 Ta opcja jest ważna jedynie dla repozytorium, z którego dokonało się pierwsze klonowanie, co zapisane jest w opcji +branch.master.remote+. Przy 'pull' z innego repozytorium musimy podać z którego branch chcemy korzystać.
 
-$ git pull git://example.com/inny.git master
+ $ git pull git://example.com/inny.git master
 
 To wyjaśnia dlaczego nasze poprzednie przykłady z 'push' i 'pull' nie posiadały argumentów.
 
@@ -118,7 +122,7 @@ Jeśli klonujesz repozytorium, klonujesz równierz wszystkie jego 'branches' Mo�
 
 Oddalone 'branches' możesz pokazać poprzez:
 
-$ git branch -r 
+ $ git branch -r 
 
 Powinieneś zobaczyć coś jak:
 
@@ -126,7 +130,7 @@ origin/HEAD origin/master origin/experimental
 
 Lista ta ukazje BRANCHES i HEAD odległego repozytorium, które mogą być również stosowane w zwykłych poleceniach Git. Przyjmijmy, na przykład, że wykonałeś wiele COMMITTS i chciałbyś uzyskać porównanie do ostatnio ściągniętej wersji. Możesz przeszukać logi za odpowiednim kluczem SHA1, ale dużo prościej jest podać:
 
-$ git diff origin/HEAD 
+ $ git diff origin/HEAD 
 
 Możesz też sprawdzić co działo się w 'Branch' ``experimental'' 
 
