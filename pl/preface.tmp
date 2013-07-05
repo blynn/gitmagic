@@ -4,9 +4,9 @@
 
 http://git.or.cz/[Git] to rodzaj scyzoryka szwajcarskiego dla kontroli wersji. Niezawodne, wielostronne narzędzie do kontroli wersji, jego niezwykła elastyczność sprawia trudności w poznaniu, nie wspominając o samym użyciu.
 
-Jak stwierdźił Arthur C. Clarke, każda wystarczająco postępowa technologia jest porównywalna z magią. Jest to wspaniałe podejście, by zacząć pracę z Git: Amatorzy mogą zognorować swoje wewnętrzene mechanizmy i ujrzeć Git jako rzecz, która urzeka przyjaciół swoimi niezwykłymi możliwościami, a przeciwników doprowadza do białej gorączki.
+Jak stwierdził Arthur C. Clarke, każda wystarczająco postępowa technologia jest porównywalna z magią. Jest to wspaniałe podejście, by zacząć pracę z Git: Początkujący mogą zignorować swoje wewnętrzne mechanizmy i ujrzeć Git jako rzecz, która urzeka przyjaciół swoimi niezwykłymi możliwościami, a przeciwników doprowadza do białej gorączki.
 
-Zamiast wchodzić głęboko w szczegóły, oferujemy proste instrukcje do odpowiednich funkcji. Podczas regularnego korzystania sam dojdziesz do tego, jak te sztuczki funkcjpnują i jak możesz dopasować podane instrukcje na swoje własne potrzeby.
+Zamiast wchodzić głęboko w szczegóły, oferujemy proste instrukcje do odpowiednich funkcji. Podczas regularnego korzystania sam dojdziesz do tego, jak te sztuczki funkcjonują i jak możesz dopasować podane instrukcje na swoje własne potrzeby.
 
 .Tłumaczenia
 
@@ -24,7 +24,7 @@ Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael B
 
 François Marier jest mentorem pakietu Debiana, który uprzednio utworzony został przez Daniela Baumann.
 
-Chcałbym podziękować również wszystkim innym za ich pomoc i dobre słowo. Chciałem was tu wszystkich wyszczegąlnić, mogłoby to jednak wzbudzić oczekiwania w szerokim zakresie.
+Chciałbym podziękować również wszystkim innym za ich pomoc i dobre słowo. Chciałem was tu wszystkich wyszczególnić, mogłoby to jednak wzbudzić oczekiwania w szerokim zakresie.
 
 Gdybym o tobie przypadkowo zapomniał, daj mi znać albo przyślij mi po prostu patch.
 
@@ -34,7 +34,7 @@ Gdybym o tobie przypadkowo zapomniał, daj mi znać albo przyślij mi po prostu 
 
 Duże dzięki dla wszystkich tych stron za hosting tego poradnika.
 
-=== Lizencja ===
+=== Licencja ===
 
 Ten poradnik publikowany jest na bazie licencji http://www.gnu.org/licenses/gpl-3.0.html[GNU General Public License Version 3]. Oczywiście, tekst źródłowy znajduje się w repozytorium Git i może zostać powielone przez:
 
