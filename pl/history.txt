@@ -101,7 +101,8 @@ Masz zamiar przenieść projekt do Gita? Jeśli twój projekt był dotychczas za
 
 W innym razie przyjrzyj się funkcji *git fast-import*, która wczytuje tekst w specjalnym formacie by następnie odtworzyć całą historię od początku. Często taki skrypt pisany jest pośpiesznie i służy do jednorazowego wykorzystania, aby tylko w jednym przebiegu udała się migracja projektu.
 
-Utwórz na przykład z następującej listy tymczasowy plik, na przykład jako: `/tmp/history`: ----------------------------------
+Utwórz na przykład z następującej listy tymczasowy plik, na przykład jako: `/tmp/history`: 
+----------------------------------
 commit refs/heads/master
 committer Alice <alice@example.com> Thu, 01 Jan 1970 00:00:00 +0000
 data <<EOT
