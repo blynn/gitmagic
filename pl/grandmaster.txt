@@ -1,10 +1,10 @@
 == Git dla zaawansowanych ==
 
-W międzyczasie powinnaś umieć odnaleźć się na stronach *git help* i rozumieć większość zagadnień. Mimo to może okazać się dość mozolne odnalezienie odpowiedniej komendy dla rozwiązania pewnych zadań. Może uda mi się zaoszczędzić ci trochę czasu: poniżej znajdziesz kilka recept, które były mi przydatne w przeszłości.
+W międzyczasie powinnaś umieć odnaleźć się na stronach *git help* i rozumieć większość zagadnień. Mimo to może okazać się dość mozolne odnalezienie odpowiedniej komendy dla rozwiązania pewnego zadania. Może uda mi się zaoszczędzić ci trochę czasu: poniżej znajdziesz kilka przepisów, które były mi przydatne w przeszłości.
 
 === Publikowanie kodu źródłowego ===
 
-Git zarządza w moich projektach dokładnie tymi danymi, które chcę archiwizować i dać do dyspozycji innym użytkownikom. Aby utworzyć archiwum tar kodu źródłowego, używam polecenia
+Git zarządza w moich projektach dokładnie tymi danymi, które chcę archiwizować i dać do dyspozycji innym użytkownikom. Aby utworzyć archiwum tar kodu źródłowego, używam polecenia:
 
  $ git archive --format=tar --prefix=proj-1.2.3/ HEAD
 
@@ -39,17 +39,17 @@ Jeśli jesteś już zadowolony z wyniku, wpisz:
 
 by dokonać wybranych zmian. Uważaj tylko, by nie skorzystać z opcji *-a*, ponieważ wtedy git dokona 'commit' zawierający wszystkie zmiany.
 
-A co, jeśli pracowałaś nad wieloma danymi w wielu różnych miejscach? Sprawdzenie każdej danej z osobna jest frustrujące i męczące zarówno. W takim wypadku skorzystaj z *git add -i*, obsługa tego polecenia może nie jest zbyt łatwa, za to jednak bardzo elastyczna. Kilkoma naciśnięciami klawiszy możesz wiele zmienionych plików dodać ('stage') albo usunąć z 'commit' ('unstage'), jak również sprawdzić, czy dodać zmiany dla poszczególnych plików. Alternaywnie możesz skorzystać z *git commit \--interactive*, polecenie to wykona automatycznie 'commit' gdy skończysz.
+A co, jeśli pracowałaś nad wieloma danymi w wielu różnych miejscach? Sprawdzenie każdej danej z osobna jest zarówno rustrujące jak i męczące. W takim wypadku skorzystaj z *git add -i*, obsługa tego polecenia może nie jest zbyt łatwa, za to jednak bardzo elastyczna. Kilkoma naciśnięciami klawiszy możesz wiele zmienionych plików dodać ('stage') albo usunąć z 'commit' ('unstage'), jak również sprawdzić, czy dodać zmiany dla poszczególnych plików. Alternaywnie możesz skorzystać z *git commit \--interactive*, polecenie to wykona automatycznie 'commit' gdy skończysz.
 
 === Index: rusztowanie Gita ===
 
-Do tej pory staraliśmy się omijać sławny 'index', jednak przyszedł czas się nim zająć, aby móc wyjaśnić wszystko to co poznaliśmy do tej pory. Index jest tymczasowym rusztowaniem Git rzadko wymienia dane bezpośrednio między twoim projektem a swoją historią wersji. Raczej zapisuje on dane najpierw w indexie, dopiero po tym kopiuje dane z indexu na ich właściwe miejsce przeznaczenia.
+Do tej pory staraliśmy się omijać sławny 'indeks', jednak przyszedł czas się nim zająć, aby móc wyjaśnić wszystko to co poznaliśmy do tej pory. Index jest tymczasową przechowalnią. Git rzadko wymienia dane bezpośrednio między twoim projektem a swoją historią wersji. Raczej zapisuje on dane najpierw w indeksie, dopiero po tym kopiuje dane z indeksu na ich właściwe miejsce przeznaczenia.
 
-Na przykład polecenie *commit -a* jest właściwie procesem dwustopniowym. Pierwszy krok to stworzenie obrazu bieżącego statusu każdego monitorowanego pliku do indeksu.  Drugim krokiem jest trwałe zapamiętanie obrazu do indeksu. Wykonanie 'commit' bez opcji *-a* wykona jedynie drugi wspomniany krok i ma jedynie sens, jeśli poprzednio wykonano komendę, która dokonała odpowiednich zmian w indexie, na przykład *git add*.
+Na przykład polecenie *commit -a* jest właściwie procesem dwustopniowym. Pierwszy krok to stworzenie obrazu bieżącego statusu każdego monitorowanego pliku do indeksu.  Drugim krokiem jest trwałe zapamiętanie obrazu do indeksu. Wykonanie 'commit' bez opcji *-a* wykona jedynie drugi wspomniany krok i ma jedynie sens, jeśli poprzednio wykonano komendę, która dokonała odpowiednich zmian w indeksie, na przykład *git add*.
 
-Normalnie możemy ignorować indeks i udawać, że czytamy i zapisujemy bezpośrednio z historii. W tym wypadku chcemy posiadać jednak większą kontrolę, więc manipulujemy indeks. Tworzymy obraz niektórych, jednak nie wszystkich zmian w indeksie i zapamiętujemy trwale starannie dobrany obraz.
+Normalnie możemy ignorować indeks i udawać, że czytamy i zapisujemy bezpośrednio z historii. W tym wypadku chcemy posiadać jednak większą kontrolę, więc manipulujemy indeks. Tworzymy obraz niektórych, jednak nie wszystkich zmian w indeksie i później zapamiętujemy trwale starannie dobrany obraz.
 
-=== Nie trać głowy ===
+=== Nie trać głowy! ===
 
 Identyfikator 'HEAD' zachowuje się jak kursor, który zwykle wskazuje na najmłodszy 'commit' i z każdym nowym 'commit' zostaje przesunięty do przodu. Niektóre komendy Gita pozwolą ci nim manipulować. Na przyklad:
 
@@ -59,7 +59,7 @@ przesunie identyfikator 'HEAD' o 3 'commits' spowrotem. Spowoduje to, że wszyst
 
 Ale jak teraz wrócić znów do przyszłości? Poprzednie 'commits' nic nie wiedzą o jej istnieniu.
 
-Jeśli posiadasz klucz SHA1 orginalnego 'HEAD', wtedy możesz wrócić komendą:
+Jeśli posiadasz hash SHA1 orginalnego 'HEAD', wtedy możesz wrócić komendą:
 
  $ git reset 1b6d
 
@@ -71,9 +71,9 @@ Wyobraź jednak sobie, że nigdy go nie notowałaś? Nie ma sprawy: Przy wykonyw
 
 Może się zdarzyć, że ORIG_HEAD nie wystarczy. Może właśnie spostrzegłaś, iż dokonałaś kapitalnego błędu i musisz wrócić się do bardzo starego 'commit' w zapomnianym 'branch'.
 
-Standardowo Git zapamiętuje 'commit' przez przynajmniej 2 tygodnie, nawet jeśli poleciłaś zniszczyć 'branch' w którym istniał. Problemem staje się tutaj odnalezienie odpowieniego klucza SHA1. Możesz po kolei testować wszystkie klucze SHA1 w `.git/objects` i w ten sposób próbować odnaleźć szukany 'commit'. Istnieje jednak na to dużo prostszy sposób.
+Standardowo Git zapamiętuje 'commit' przez przynajmniej 2 tygodnie, nawet jeśli poleciłaś zniszczyć 'branch' w którym istniał. Problemem staje się tutaj odnalezienie odpowieniej sumy kontrolnej SHA1. Możesz po kolei testować wszystkie hashe SHA1 w `.git/objects` i w ten sposób próbować odnaleźć szukany 'commit'. Istnieje jednak na to dużo prostszy sposób.
 
-Git zapamiętuje każdy obliczony klucz SHA1 dla odpowiednich 'commit' w `.git/logs`. Podkatalog `refs` zawieza przebieg wszystkich aktywności we wszystkich 'branches', podczas gdy plik `HEAD` wszystkie klucze SHA1 które kiedykolwiek posiadał.  Ostatnie możemy zastosować do odnalezienia kluczy SHA1 tych 'commits' które znajdowały się w nieuważnie usuniętym 'branch'.
+Git zapamiętuje każdy obliczony hash SHA1 dla odpowiednich 'commit' w `.git/logs`. Podkatalog `refs` zawieza przebieg wszystkich aktywności we wszystkich 'branches', podczas gdy plik `HEAD` wszystkie klucze SHA1 które kiedykolwiek posiadał.  Ostatnie możemy zastosować do odnalezienia sum kontrolnych SHA1 tych 'commits' które znajdowały się w nieuważnie usuniętym 'branch'.
 
 Polecenie 'reflog' daje nam do dyspozycji przyjazny interfejs do tych właśnie logów. Wypróbuj polecenie:
 
@@ -103,9 +103,9 @@ wtedy 'commits' będą tylko wtedy usuwane, gdy ręcznie wykonasz polecenie *git
 
 === Budować na bazie Gita ===
 
-W prawdziwym unixowym świecie sama konstrukcja Gita pozwala na wykorzystanie go, jako komponent niskiego poziomu, przez inne aplikacje, jak na przykład interfejsy graficzne i aplikacje internetowe, alternatywne narzędzia konsoli, narzędzia patchujące, narzędzia pomocne w importowaniu i konwertowaniu i tak dalej. Nawek same polecenia git są czasami malutkimi skryptami, jak krasnoludki na ramieniu olbrzyma. Przykładając trochę ręki możesz adoptować Git do twoich własnych potrzeb.
+W prawdziwym unixowym świecie sama konstrukcja Gita pozwala na wykorzystanie go jako funkcji niskiego poziomu przez inne aplikacje, jak na przykład interfejsy graficzne i aplikacje internetowe, alternatywne narzędzia konsoli, narzędzia patchujące, narzędzia pomocne w importowaniu i konwertowaniu i tak dalej. Nawek same polecenia Git są czasami malutkimi skryptami, jak krasnoludki na ramieniu olbrzyma. Przykładając trochę ręki możesz adoptować Git do twoich własnych potrzeb.
 
-Prostą sztuczką może być korzystanie z zintegrowanej w git funkcji aliasu, by skrócić najczęściej stosowane polecenia:
+Prostą sztuczką może być korzystanie z zintegrowanej w Git funkcji aliasu, by skrócić najczęściej stosowane polecenia:
 
  $ git config --global alias.co checkout
  $ git config --global --get-regexp alias  # wyświetli aktualne aliasy
@@ -120,13 +120,13 @@ pokaże nazwę aktualnego 'branch'. W praktyce chciałbyś raczej usunąć "refs
 
  $ git symbolic-ref HEAD 2> /dev/null | cut -b 12- 
 
-Podkatakog +contrib+ jest wielkim znaleziskiem narzędzi zbudowanych dla git. Z czasem niektóre z nich mogą uzyskać status oficjalnych poleceń. W dystrybucji Debian i Ubuntu znajdziemy ten katalog pod +/usr/share/doc/git-core/contrib+.
+Podkatakog +contrib+ jest wielkim znaleziskiem narzędzi zbudowanych dla Gita. Z czasem niektóre z nich mogą uzyskać status oficjalnych poleceń. W dystrybucjach Debiana i Ubuntu znajdziemy ten katalog pod +/usr/share/doc/git-core/contrib+.
 
-Ulubionym przedstawicielem jest +workdir/git-new-workdir+. Poprzez sprytne przelinkowania skrypt ten tworzy nowy katalog roboczy, który dzieli swoją historię wersji z orginalnym repozytorium:
+Ulubionym przedstawicielem jest +workdir/git-new-workdir+. Poprzez sprytne przelinkowania skrypt ten tworzy nowy katalog roboczy, który dzieli swoją historię wersji z oryginalnym repozytorium:
 
  $ git-new-workdir istniejacy/repo nowy/katalog
 
-Ten nowy katalog i znajdujące się w nim pliki można sobie wyobrazić jako klon, z tą różnicą, że ze względu na wspólną niepodzieloną historie obje wersje pozostaną zsynchronizowane.  Synchronizacja za pomocą  'merge', 'push', czy 'pull' nie będzie konieczna.
+Ten nowy katalog i znajdujące się w nim pliki można sobie wyobrazić jako klon, z tą różnicą, że ze względu na wspólną niepodzieloną historie obje wersje pozostaną zsynchronizowane. Synchronizacja za pomocą 'merge', 'push', czy 'pull' nie będzie konieczna.
 
 === Śmiałe wyczyny ===
 
@@ -150,9 +150,9 @@ Również nie uda się próba przesunięcia 'branch' poleceniem 'move', jeśliby
 
  $ git branch -M źródło cel # zamiast -m
 
-Inaczej niż w przypadku 'checkout' i 'reset', te oba polecenia przesuną zniszczenie danych. Zmiany te zostaną zapisane w podkatalogu .git i mogą znów zostać przywrócone, jeśli znajdziemy odpowiedni kluch SHA1 w `.git/logs` (zobacz "Łowcy głów" powyżej).  Standardowo dane te pozostają jeszcze przez 2 tygodnie.
+Inaczej niż w przypadku 'checkout' i 'reset', te oba polecenia przesuną zniszczenie danych. Zmiany te zostaną zapisane w podkatalogu .git i mogą znów zostać przywrócone, jeśli znajdziemy odpowiedni hash SHA1 w `.git/logs` (zobacz "Łowcy głów" powyżej).  Standardowo dane te pozostają jeszcze przez 2 tygodnie.
 
-*clean*: Różnorakie polecenia Git nie chcą się zadziałać, ponieważ podejżewają konflikty z niewersjonowanymi danymi. Jeśli jesteś pewny, że wszystkie niezwersjonowane pliki i katalogi są zbędne, skasujesz je bezlitośnie poleceniem: 
+*clean*: Różnorakie polecenia Git nie chcą zadziałać, ponieważ podejżewają konflikty z niewersjonowanymi danymi. Jeśli jesteś pewny, że wszystkie niezwersjonowane pliki i katalogi są zbędne, skasujesz je bezlitośnie poleceniem: 
 
  $ git clean -f -d 
 
@@ -176,4 +176,4 @@ Na początku *pre-commit* tego 'hook' umieściłbym dla ochrony przed rozdrobnie
    exit 1
  fi 
 
-Wiele operacji Gita pozwala na używanie 'hooks'; zobacz też: *git help hooks*.  We wcześniejszcm rozdziale "Git poprzez http" przytoczyliśmy przykład 'hook' dla *post-update*, który wykonywany jest zawsze, jeśli znacznik 'HEAD' zostaje przesunięty. Ten przykładowy skrypt 'post-update' aktualizuje dane, które potrzebne są do komunikacji poprzez 'Git-agnostic transports', jak na przykład HTTP.
+Wiele operacji Gita pozwala na używanie 'hooks'; zobacz też: *git help hooks*.  We wcześniejszym rozdziale "Git poprzez http" przytoczyliśmy przykład 'hook' dla *post-update*, który wykonywany jest zawsze, jeśli znacznik 'HEAD' zostaje przesunięty. Ten przykładowy skrypt 'post-update' aktualizuje dane, które potrzebne są do komunikacji poprzez 'Git-agnostic transports', jak na przykład HTTP.
