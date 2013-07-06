@@ -105,7 +105,7 @@ Możesz ta notacje kombinować także z innymi rodzajami. Na przykład:
 
 tworzy nowy 'branch' o nazwie 'archaiczne', reprezentujący stan 10 'commit' do tyłu drugiego rodzica dla pierwszego rodzica 'commit', którego hash rozpoczyna się na 1b6d. 
 
-=== Praca bez przestojów===
+=== Praca bez przestojów ===
 
 W procesie produkcji często drugi krok planu musi czekać na zakończenie pierwszego. Popsuty samochód stoi w garażu nieużywany do czasu dostarczenia części zamiennej. Prototyp musi czekać na wyprodukowanie jakiegoś chipa zanim będzie można podjąć dalszą konstrukcje.
 
