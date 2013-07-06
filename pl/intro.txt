@@ -8,7 +8,7 @@ Gram w gry komputerowe chyba już przez całe moje życie. W przeciwieństwie do
 
 Wyobraź sobie pracę nad twoim kodem albo edycję dokumentu jak granie na komputerze. Jeśli dobrze ci poszło, chcesz zabezpieczyć swoje osiągnięcia. W tym celu klikasz na 'zapisz' w wybranym edytorze.
 
-Niestety wymaże to poprzednio zapamiętaną wersję. To jak w grach starej szkoły, które posiadały pamięć na zapisanie tylko jednego stanu: oczywiście, mogłeś zapamiętać, ale już nigdy nie mogłeś powrócić do poprzednio zapisanej wersji. To była hańba, bo być może poprzednio zabezpieczony stan znajdował się w jakimś bardzo interesującym miejscu gry, do którego chętnie chciałbyś jeszcze kiedyś wrócić. Albo jeszcze gorzej, twój zabezpieczony stan utknął w niemożliwym do dokończenia gry miejscu i musisz zacząć wszystko od początku.
+Niestety wymaże to poprzednio zapamiętaną wersję. To jak w grach starej szkoły, które posiadały pamięć na zapisanie tylko jednego stanu: oczywiście, mogłaś zapamiętać, ale już nigdy nie mogłaś powrócić do poprzednio zapisanej wersji. To była hańba, bo być może poprzednio zabezpieczony stan znajdował się w jakimś bardzo interesującym miejscu gry, do którego chętnie chciałbyś jeszcze kiedyś wrócić. Albo jeszcze gorzej, twój zabezpieczony stan utknął w niemożliwym do dokończenia gry miejscu i musisz zacząć wszystko od początku.
 
 === Kontrola wersji ===
 

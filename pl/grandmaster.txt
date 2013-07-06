@@ -25,13 +25,13 @@ Opcje *-z* i *-0* zapobiegą przed niechcianymi efektmi ubocznymi przez niestand
 
 === Mój 'commit' jest za duży! ===
 
-Od dłuższego czasu nie pamiętałeś o wykonaniu 'commit'? Tak namiętnie programowałeś, że zupełnie zapomniałeś o kontroli kodu źródłowego? Przeprowadzasz serię niezależnych zmian, bo jest to w twoim stylu?
+Od dłuższego czasu nie pamiętałaś o wykonaniu 'commit'? Tak namiętnie programowałaś, że zupełnie zapomniałaś o kontroli kodu źródłowego? Przeprowadzasz serię niezależnych zmian, bo jest to w twoim stylu?
 
 Nie ma sprawy, wpisz polecenie:
 
  $ git add -p
 
-Dla każdej zmiany, której dokonałeś Git pokaże ci pasaże z kodem, który uległ zmianom i spyta cię, czy mają zostać częścią następnego 'commit'. Odpowiedz po prostu "y" dla tak, albo "n" dla nie. Dysponujesz jeszcze innymi opcjami, na przykład dla odłożenie w czasie decyzji, wpisz "?", by dowiedzieć się więcej.
+Dla każdej zmiany, której dokonałaś Git pokaże ci pasaże z kodem, który uległ zmianom i spyta cię, czy mają zostać częścią następnego 'commit'. Odpowiedz po prostu "y" dla tak, albo "n" dla nie. Dysponujesz jeszcze innymi opcjami, na przykład dla odłożenie w czasie decyzji, wpisz "?", by dowiedzieć się więcej.
 
 Jeśli jesteś już zadowolony z wyniku, wpisz:
 
@@ -39,7 +39,7 @@ Jeśli jesteś już zadowolony z wyniku, wpisz:
 
 by dokonać wybranych zmian. Uważaj tylko, by nie skorzystać z opcji *-a*, ponieważ wtedy git dokona 'commit' zawierający wszystkie zmiany.
 
-A co, jeśli pracowałeś nad wieloma danymi w wielu różnych miejscach? Sprawdzenie każdej danej z osobna jest frustrujące i męczące zarówno. W takim wypadku skorzystaj z *git add -i*, obsługa tego polecenia może nie jest zbyt łatwa, za to jednak bardzo elastyczna. Kilkoma naciśnięciami klawiszy możesz wiele zmienionych plików dodać ('stage') albo usunąć z 'commit' ('unstage'), jak również sprawdzić, czy dodać zmiany dla poszczególnych plików. Alternaywnie możesz skorzystać z *git commit \--interactive*, polecenie to wykona automatycznie 'commit' gdy skończysz.
+A co, jeśli pracowałaś nad wieloma danymi w wielu różnych miejscach? Sprawdzenie każdej danej z osobna jest frustrujące i męczące zarówno. W takim wypadku skorzystaj z *git add -i*, obsługa tego polecenia może nie jest zbyt łatwa, za to jednak bardzo elastyczna. Kilkoma naciśnięciami klawiszy możesz wiele zmienionych plików dodać ('stage') albo usunąć z 'commit' ('unstage'), jak również sprawdzić, czy dodać zmiany dla poszczególnych plików. Alternaywnie możesz skorzystać z *git commit \--interactive*, polecenie to wykona automatycznie 'commit' gdy skończysz.
 
 === Index: rusztowanie Gita ===
 
@@ -63,15 +63,15 @@ Jeśli posiadasz klucz SHA1 orginalnego 'HEAD', wtedy możesz wrócić komendą:
 
  $ git reset 1b6d
 
-Wyobraź jednak sobie, że nigdy go nie notowałeś? Nie ma sprawy: Przy wykonywaniu takich poleceń Git archiwizuje orginalny HEAD jako indentyfikator o nazwie ORIG_HEAD a ty możesz bezproblemowo wrócić używając:
+Wyobraź jednak sobie, że nigdy go nie notowałaś? Nie ma sprawy: Przy wykonywaniu takich poleceń Git archiwizuje orginalny HEAD jako indentyfikator o nazwie ORIG_HEAD a ty możesz bezproblemowo wrócić używając:
 
  $ git reset ORIG_HEAD
 
 === Łowcy głów ===
 
-Może się zdarzyć, że ORIG_HEAD nie wystarczy. Może właśnie spostrzegłeś, iż dokonałeś kapitalnego błędu i musisz wrócić się do bardzo starego 'commit' w zapomnianym 'branch'.
+Może się zdarzyć, że ORIG_HEAD nie wystarczy. Może właśnie spostrzegłaś, iż dokonałaś kapitalnego błędu i musisz wrócić się do bardzo starego 'commit' w zapomnianym 'branch'.
 
-Standardowo Git zapamiętuje 'commit' przez przynajmniej 2 tygodnie, nawet jeśli poleciłeś zniszczyć 'branch' w którym istniał. Problemem staje się tutaj odnalezienie odpowieniego klucza SHA1. Możesz po kolei testować wszystkie klucze SHA1 w `.git/objects` i w ten sposób próbować odnaleźć szukany 'commit'. Istnieje jednak na to dużo prostszy sposób.
+Standardowo Git zapamiętuje 'commit' przez przynajmniej 2 tygodnie, nawet jeśli poleciłaś zniszczyć 'branch' w którym istniał. Problemem staje się tutaj odnalezienie odpowieniego klucza SHA1. Możesz po kolei testować wszystkie klucze SHA1 w `.git/objects` i w ten sposób próbować odnaleźć szukany 'commit'. Istnieje jednak na to dużo prostszy sposób.
 
 Git zapamiętuje każdy obliczony klucz SHA1 dla odpowiednich 'commit' w `.git/logs`. Podkatalog `refs` zawieza przebieg wszystkich aktywności we wszystkich 'branches', podczas gdy plik `HEAD` wszystkie klucze SHA1 które kiedykolwiek posiadał.  Ostatnie możemy zastosować do odnalezienia kluczy SHA1 tych 'commits' które znajdowały się w nieuważnie usuniętym 'branch'.
 

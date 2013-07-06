@@ -6,11 +6,11 @@ Niektórzy programiści zarzekają się w kwestii nienaruszalności historii - z
 
 === Muszę się skorygować ===
 
-Właśnie wykonałeś 'commit', ale chętnie chciałbyś podać inny opis? Wpisujesz:
+Właśnie wykonałaś 'commit', ale chętnie chciałbyś podać inny opis? Wpisujesz:
 
  $ git commit --amend 
 
-by zmienić ostatni opis. Zauważasz jednak, że zapomniałeś dodać jakiegoś pliku? Wykonaj *git add*, by go dodać a następnie poprzednią instrukcje.
+by zmienić ostatni opis. Zauważasz jednak, że zapomniałaś dodać jakiegoś pliku? Wykonaj *git add*, by go dodać a następnie poprzednią instrukcje.
 
 Chcesz wprowadzić jeszcze inne zmiany do ostatniego 'commit'? Wykonaj je i wpisz:
 
@@ -18,7 +18,7 @@ $ git commit --amend -a
 
 === ...  i jeszcze coś ===
 
-Załóżmy, że poprzedni problem będzie 10 razy gorszy. Po dłuższej sesji zrobiłeś całą masę 'commits'. Nie jesteś jednak szczęśliwy z takiego zorganizowania a niektóre z 'commits' mogłyby być inaczej sformułowane. Wpisujesz:
+Załóżmy, że poprzedni problem będzie 10 razy gorszy. Po dłuższej sesji zrobiłaś całą masę 'commits'. Nie jesteś jednak szczęśliwy z takiego zorganizowania a niektóre z 'commits' mogłyby być inaczej sformułowane. Wpisujesz:
 
  $ git rebase -i HEAD~10 
 
@@ -41,7 +41,7 @@ Tutaj 5c6eb73 jest najstarszym 'commit', a 100834f najnowszym. By to zmienić:
 
 Na przykład chcemy zastąpić drugi `pick` na `squash`:
 
-Zapamiętaj i zakończ. Jeśli zaznaczyłeś jakiś 'commit' poprzez 'edit', wpisz:
+Zapamiętaj i zakończ. Jeśli zaznaczyłaś jakiś 'commit' poprzez 'edit', wpisz:
 
  $ git commit --amend 
 
@@ -90,7 +90,7 @@ Czasami potrzebny ci rodzaj systemu kontroli porównywalnego do wyretuszowania o
 
 Sprawdź *git help filter-branch*, gdzie przykład ten został wytłumaczony i przytoczona została jeszcze szybsza metoda. Ogólnie poprzez *filter-branch* da się dokonać zmian w dużych zakresach historii poprzez tylko jedno polecenie.
 
-Po tej operacji katalog +.git/refs/original+ opisuje stan przed jej wykonaniem. Sprawdź czy 'filter-branch' zrobił to, co od niego oczekiwałeś, następnie skasuj ten katalog zanim wykonasz następne polecenia 'filter-branch'.
+Po tej operacji katalog +.git/refs/original+ opisuje stan przed jej wykonaniem. Sprawdź czy 'filter-branch' zrobił to, co od niego oczekiwałaś, następnie skasuj ten katalog zanim wykonasz następne polecenia 'filter-branch'.
 
 Wreszcie zamień wszystkie klony twojego projektu na zaktualizowaną wersję, jeśli masz zamiar prowadzić z nimi wymianę. 
 
@@ -151,9 +151,9 @@ Polecenie *git fast-export* konwertuje każde repozytorium do formatu *git fast-
 
 === Gdzie wszystko się zepsuło? ===
 
-Właśnie znalazłeś w swoim programie funkcję, która już nie chce działać, a jesteś pewna, że czyniła to jeszcze kilka miesięcy temu. Ach! Skąd wziął się ten błąd? A gdybym tylko lepiej przetestowała ją wcześniej, zanim weszła do wersji produkcyjnej.
+Właśnie znalazłaś w swoim programie funkcję, która już nie chce działać, a jesteś pewna, że czyniła to jeszcze kilka miesięcy temu. Ach! Skąd wziął się ten błąd? A gdybym tylko lepiej przetestowała ją wcześniej, zanim weszła do wersji produkcyjnej.
 
-Na to jest już za późno. Jakby nie było, pod warunkiem, że często używałeś 'commit', Git może ci zdradzić gdzie szukać problemu.
+Na to jest już za późno. Jakby nie było, pod warunkiem, że często używałaś 'commit', Git może ci zdradzić gdzie szukać problemu.
 
  $ git bisect start
  $ git bisect bad HEAD

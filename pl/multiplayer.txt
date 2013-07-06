@@ -118,7 +118,7 @@ To wyjaśnia dlaczego nasze poprzednie przykłady z 'push' i 'pull' nie posiada�
 
 === Oddalone 'Branches' ===
 
-Jeśli klonujesz repozytorium, klonujesz również wszystkie jego 'branches' Może jeszcze tego nie zauważyłeś, ponieważ Git je ukrywa: musisz się o nie specjalnie pytać: To zapobiega temu, że branches z oddalonego repozytorium nie przeszkadzają twoim lokalnym branches i czyni to Git łatwiejszym dla początkujących.
+Jeśli klonujesz repozytorium, klonujesz również wszystkie jego 'branches' Może jeszcze tego nie zauważyłaś, ponieważ Git je ukrywa: musisz się o nie specjalnie pytać: To zapobiega temu, że branches z oddalonego repozytorium nie przeszkadzają twoim lokalnym branches i czyni to Git łatwiejszym dla początkujących.
 
 Oddalone 'branches' możesz pokazać poprzez:
 
@@ -128,7 +128,7 @@ Powinieneś zobaczyć coś jak:
 
 origin/HEAD origin/master origin/experimental
 
-Lista ta ukazuje branches i HEAD odległego repozytorium, które mogą być również stosowane w zwykłych poleceniach Git. Przyjmijmy, na przykład, że wykonałeś wiele commits i chciałbyś uzyskać porównanie do ostatnio ściągniętej wersji. Możesz przeszukać logi za odpowiednim kluczem SHA1, ale dużo prościej jest podać:
+Lista ta ukazuje branches i HEAD odległego repozytorium, które mogą być również stosowane w zwykłych poleceniach Git. Przyjmijmy, na przykład, że wykonałaś wiele commits i chciałbyś uzyskać porównanie do ostatnio ściągniętej wersji. Możesz przeszukać logi za odpowiednim kluczem SHA1, ale dużo prościej jest podać:
 
  $ git diff origin/HEAD 
 
