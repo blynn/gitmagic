@@ -34,6 +34,8 @@ recettes pour répondre à vos besoins.
    Stebich. Hébergé aussi sur http://gitmagic.lordofbikes.de/[le site web
    d'Armin].
 
+ - link:/~blynn/gitmagic/intl/it/[Italien]&#160;: par Mattia Rigotti.
+
  - http://www.slideshare.net/slide_user/magia-git[Portugaise]&#160;: par
    Leonardo Siqueira Rodrigues
    [http://www.slideshare.net/slide_user/magia-git-verso-odt[version ODT]].
