@@ -1,0 +1,58 @@
+= Git Magic =
+Ben Lynn
+Sierpień 2007
+
+== Przedmowa ==
+
+http://git-scm.com/[Git] to rodzaj scyzoryka szwajcarskiego dla kontroli wersji. To niezawodne, wielostronne narzędzie do kontroli wersji o niezwykłej elastyczności przysprawia trudności już w samym jego poznaniu, nie wspominając o opanowaniu.
+
+Jak stwierdził Arthur C. Clarke, każda wystarczająco postępowa technologia jest porównywalna z magią. Jest to wspaniałe podejście, by zacząć pracę z Gitem: Początkujący mogą zignorować jego wewnętrzne mechanizmy i ujrzeć jako rzecz, która urzeka przyjaciół swoimi niezwykłymi możliwościami, a przeciwników doprowadza do białej gorączki.
+
+Zamiast wchodzić w szczegóły, oferujemy proste instrukcje dla osiągnięcia zamierzonych efektów. W miarę regularnego korzystania stopniowo sam zrozumiesz jak każda z tych sztuczek funkcjonuje i jak dopasować podane instrukcje na twoje własne potrzeby.
+
+.Tłumaczenia
+
+ - link:/\~blynn/gitmagic/intl/zh_cn/[Chiński uproszczony]: od JunJie, Meng i JiangWei. Konwertacja do link:/~blynn/gitmagic/intl/zh_tw/[Tradycjonalnego chińskiego] za pomocą +cconv -f UTF8-CN -t UTF8-TW+.
+ - link:/~blynn/gitmagic/intl/fr/[Francuski]: od Alexandre Garel, Paul Gaborit, i Nicolas Deram. Również hostowany na http://tutoriels.itaapy.com/[itaapy].
+ - link:/~blynn/gitmagic/intl/de/[Niemiecki]: od Benjamin Bellee i Armin Stebich; również hostowany na http://gitmagic.lordofbikes.de/[stronie Armina].
+ - http://www.slideshare.net/slide_user/magia-git[Portugalski]: od Leonardo Siqueira Rodrigues [http://www.slideshare.net/slide_user/magia-git-verso-odt[wersja ODT]].
+ - link:/~blynn/gitmagic/intl/ru/[Rosyjski]: od Tikhon Tarnavsky, Mikhail Dymskov, i innych.
+ - link:/~blynn/gitmagic/intl/es/[Hiszpański]: od Rodrigo Toledo i Ariset Llerena Tapia.
+ - link:/~blynn/gitmagic/intl/uk/[Ukraiński]: od Volodymyr Bodenchuk.
+ - link:/~blynn/gitmagic/intl/vi/[Wietnamski]: od Trần Ngọc Quân; również hostowany http://vnwildman.users.sourceforge.net/gitmagic/[na tej stronie].
+
+.Inne wydania
+
+ - link:book.html[Jako jedna strona]: uszczuplone HTML, bez CSS.
+ - link:book.pdf[Wersja PDF]: przyjazna w druku.
+ - http://packages.debian.org/gitmagic[Pakiet Debiana], http://packages.ubuntu.com/gitmagic[Pakiet Ubuntu]: Pobiera szybką i lokalną kopię tej strony. Przydatne http://csdcf.stanford.edu/status/[gdyby ten serwer był offline].
+ - http://www.amazon.com/Git-Magic-Ben-Lynn/dp/1451523343/[Drukowane wydanie [Amazon.com]]: 64 strony, 15.24cm x 22.86cm, czarno-biały. Przyda się, gdy zabraknie prądu.
+
+
+=== Podziękowania! ===
+
+Jestem mile zaskoczony, że tak dużo ludzi pracowało nad przetłumaczeniem tych stron. Bardzo cenię, iż dzięki staraniom wyżej wspommnianych osób otrzymałem możliwość dotarcia do większego grona czytelników.
+
+Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael Budde, Richard Albury, Tarmigan, Derek Mahar, Frode Aannevik, Keith Rarick, Andy Somerville, Ralf Recker, Øyvind A. Holm, Miklos Vajna, Sébastien Hinderer, Thomas Miedema, Joe Malin, i Tyler Breisacher przyczynilli się do poprawek i korektur.
+
+François Marier jest mentorem pakietu Debiana, który uprzednio utworzony został przez Daniela Baumann.
+
+Chciałbym podziękować również wszystkim innym za ich pomoc i dobre słowo. Chciałbym tu wszystkich wyszczególnić, mogłoby to jednak wzbudzić oczekiwania w szerokim zakresie.
+
+Gdybym o tobie przypadkowo zapomniał, daj mi znać albo przyślij mi po prostu patch.
+
+=== Licencja ===
+
+Ten poradnik publikowany jest na bazie licencji http://www.gnu.org/licenses/gpl-3.0.html[GNU General Public License Version 3]. Oczywiście, tekst źródłowy znajduje się w repozytorium Git i może zostać pobrany przez:
+
+ $ git clone git://repo.or.cz/gitmagic.git # Utworzy katalog "gitmagic".
+
+albo z serwerów lustrzanych:
+
+ $ git clone git://github.com/blynn/gitmagic.git
+ $ git clone git://gitorious.org/gitmagic/mainline.git
+ $ git clone https://code.google.com/p/gitmagic/
+ $ git clone git://git.assembla.com/gitmagic.git
+ $ git clone git@bitbucket.org:blynn/gitmagic.git
+
+GitHub, Assembla, i Bitbucket pozwalają na prowadzienie prywatnych repozytorii, te dwa ostatnie za darmo.

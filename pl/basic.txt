@@ -1,0 +1,196 @@
+== Pierwsze kroki ==
+
+Zanim utoniemy w morzu poleceń Gita, przyjrzyjmy się najpierw kilku prostym poleceniom. Pomimo ich prostoty, wszystkie jednak są ważne i pożyteczne. W rzeczywistości, podczas pierwszych miesięcy pracy z Git nie wychodziłem poza zakres opisany w tym rozdziale
+
+=== Zabezpieczenie obecnego stanu ===
+
+Zamierzasz przeprowadzić jakieś drastyczne zmiany? Zanim to zrobisz, zabezpiecz najpierw dane w aktualnym katalogu.
+
+ $ git init
+ $ git add .
+ $ git commit -m "Mój pierwszy commit"
+
+Teraz, jeśli cokolwiek stałoby się z twymi plikami podczas edycji, możesz przywrócić pierwotną wersję:
+
+ $ git reset --hard
+
+Aby zapisać nową wersję:
+
+ $ git commit -a -m "Mój następny commit"
+
+=== Dodanie, kasowanie i zmiana nazwy ===
+
+Powyższa komenda zatrzyma jedynie pliki, które już istniały podczas gdy po raz pierwszy wykonałaś polecenie *git add*. Jeśli w międzyczasie dodałaś jakieś nowe pliki, Git musi zostać o tym poinformowany:
+
+ $ git add readme.txt Dokumentacja
+
+To samo, gdy zechcesz by Git zapomniał o wybranych plikach:
+
+ $ git rm ramsch.h archaiczne.c
+ $ git rm -r obciążający/materiał/
+
+Jeśli sam tego jeszcze nie zrobiłaś, to Git usunie pliki za ciebie.
+
+Zmiana nazwy pliku, to jak jego skasowanie i ponowne utworzenie z nową nazwą. Git wykorzystuje do tego skrót *git mv*, który posiada tą samą składnię co polecenie *mv*. Na przykład:
+
+ $ git mv bug.c feature.c
+
+=== Zaawansowane anulowanie/przywracanie ===
+
+Czasami zechcesz po prostu cofnąć się w czasie, zapominając o wszystkich wprowadzonych od tego punktu zmianach. Wtedy:
+
+ $ git log
+
+pokaże ci listę dotychczasowych 'commits' i ich sum kontrolnych SHA1:
+
+----------------------------------
+commit 766f9881690d240ba334153047649b8b8f11c664 Author: Bob <bob@example.com>
+Date: Tue Mar 14 01:59:26 2000 -0800
+
+    Zamień printf() na write().
+
+commit 82f5ea346a2e651544956a8653c0f58dc151275c
+Author: Alicja <alicja@example.com>
+Date: Thu Jan 1 00:00:00 1970 +0000
+
+    Initial commit.
+----------------------------------
+
+Kilka początkowych znaków sumy kontrolnej SHA1 wystarcza by jednoznacznie zidentyfikować 'commit', alternatywnie możesz skopiować i wkleić cały hash. Wpisując:
+
+ $ git reset --hard 766f
+
+przywrócisz stan do wersji żądanego 'commit', a wszystkie późniejsze zmiany zostaną bezpowrotnie skasowane.
+
+Innym razem chcesz tylko na moment przejść do jednej z poprzednich wersji. W tym wypadku użyj komendy:
+
+ $ git checkout 82f5
+
+Tym poleceniem wrócisz się w czasie zachowując nowsze zmiany. Ale, tak samo jak w podróżach w czasie z filmów science-fiction - jeśli teraz dokonasz zmian i zapamiętasz je poleceniem 'commit', zostaniesz przeniesiona do alternatywnej rzeczywistości, ponieważ twoje zmiany różnią się od już dokonanych w późniejszych punktach czasu.
+
+Tą alternatywną rzeczywistość nazywamy 'branch', a <<branch,zajmiemy się tym w późniejszym czasie>>. Na razie, zapamiętaj tylko, że:
+
+ $ git checkout master
+
+sprowadzi cię znów do teraźniejszości. Również, aby uprzedzić narzekanie Gita, powinnaś przed każdym 'checkout' wykonać 'commit' lub 'reset'.
+
+Korzystając ponownie z analogii do gier komputerowych:
+
+- *`git reset --hard`*: załaduj jakiś starszy stan gry i skasuj wszystkie nowsze niż właśnie ładowany.
+
+- *`git checkout`*:  Załaduj stary stan, grając dalej, twój stan będzie się różnił od nowszych zapamiętanych. Każdy stan, który zapamiętasz od teraz, powstanie jako osobna gałęź ('branch'), reprezentującym alternatywną rzeczywistość. <<branch,Wrócimy do tego później>>
+
+Jeśli chcesz, możesz przywrócić jedynie wybrane pliki lub katalogi poprzez dodanie ich nazw do polecenia:
+
+ $ git checkout 82f5 jeden.plik inny.plik
+
+Bądź ostrożna, ten sposób użycia komendy *checkout* może bez uprzedzenia skasować pliki. Aby zabezpieczyć się przed takimi wypadkami powinnaś zawsze zrobić 'commit' zanim wpiszesz 'checkout', szczególnie w okresie poznawania Gita. Jeśli czujesz się niepewnie przed wykonaniem jakiejś operacji Gita, generalną zasadą powinno stać się dla ciebie uprzednie wykonanie *git commit -a*.
+
+Nie lubisz kopiować i wklejać hashów SHA1? Możesz w tym wypadku skorzystać z:
+
+ $ git checkout :/"Mój pierwszy c"
+
+by przenieś się do 'commit', którego opis rozpoczyna się jak zawarta wiadomość. Możesz również cofnąć się do piątego z ostatnio zapamiętanych 'commit':
+
+ $ git checkout master~5
+
+=== Przywracanie ===
+
+W sali sądowej pewne zdarzenia mogą zostać wykreślone z akt. Podobnie możesz zaznaczyć pewne 'commits' do wykreślenia.
+
+ $ git commit -a
+ $ git revert 1b6d
+
+To polecenie wymaże 'commit' o wybranym hashu. Ten rewers zostanie zapamiętany jednak jako nowy 'commit', co można sprawdzić poleceniem *git log*.
+
+=== Generowanie listy zmian ===
+
+Niektóre projekty wymagają http://en.wikipedia.org/wiki/Changelog[pliku changelog]. Wygenerujesz go poleceniem:
+
+ $ git log > changelog
+
+=== Ładowanie plików ===
+
+Kopię projektu zarządzanego za pomocą Gita uzyskasz poleceniem:
+
+ $ git clone git://ścieżka/do/projektu
+
+By na przykład zładować wszystkie dane, których użyłem do stworzenia tej strony skorzystaj z:
+
+ $ git clone git://git.or.cz/gitmagic.git
+
+Do polecenia 'clone' wrócimy niebawem.
+
+=== Najnowszy stan ===
+
+Jeśli posiadasz już kopię projektu wykonaną za pomocą *git clone*, możesz ją zaktualizować poleceniem:
+
+ $ git pull
+
+=== Szybka publikacja ===
+
+Przypuśćmy, że napisałaś skrypt i chcesz go udostępnić innym. Mogłabyś poprosić ich, by zładowali go bezpośrednio z twojego komputera. Jeśli jednak zrobią to podczas gdy ty jeszcze wprowadzasz poprawki lub eksperymentujesz ze zmianami, mogłabyś przysporzyć im nieprzyjemności. Z tego powodu istnieje coś takiego jak cykl wydawniczy. Programiści regularnie pracują nad projektem, upubliczniają kod jednak dopiero, jeśli uznają, że nadaje się już do pokazania.
+
+Aby wykonać to za pomocą GIT, wejdź do katalogu w którym znajduje się twój skrypt:
+
+ $ git init
+ $ git add .
+ $ git commit -m "Pierwsze wydanie"
+
+Następnie poproś twych użytkowników o wykonanie:
+
+ $ git clone twój.komputer:/ścieżka/do/skryptu
+
+by zładować twój skrypt. Zakładamy tu posiadanie przez nich klucza SSH do twojego komputera. Jeśli go nie mają, uruchom *git daemon* i podaj im następujący link:
+
+ $ git clone git://twój.komputer/ścieżka/do/skryptu
+
+Od teraz, zawsze gdy uznasz, że wersja nadaje się do opublikowania, wykonaj polecenie:
+
+ $ git commit -a -m "Następna wersja"
+
+a twoi użytkownicy, po wejściu do katalogu zawierającego twój skrypt, będą go mogli zaktualizować poprzez:
+
+ $ git pull
+
+Twoi użytkownicy nigdy nie wejdą w posiadanie wersji, których nie chcesz im udostępniać.
+
+=== A co robiłem ostatnio? ===
+
+Jeśli chcesz zobaczyć zmiany, które wprowadziłaś od ostatniego 'commit', wpisz:
+
+ $ git diff
+
+Albo tylko zmiany od wczoraj:
+
+ $ git diff "@{yesterday}"
+
+Albo miedzy określoną wersją i dwoma poprzedzającymi:
+
+ $ git diff 1b6d "master~2"
+
+Za każdym razem uzyskane informacje są równocześnie patchem, który poprzez *git apply* może być zastosowany. Spróbuj również:
+
+ $ git whatchanged --since="2 weeks ago"
+
+Jeśli chcę sprawdzić listę zmian jakiegoś repozytorium, często korzystam z http://sourceforge.net/projects/qgit[qgit], ze względu na jego fotogeniczny interfejs, albo z http://jonas.nitro.dk/tig/[tig], tekstowy interfejs, działający zadowalająco gdy mamy do czynienia z wolnym łączem internetowym. Alternatywnie, zainstaluj serwer HTTP, uruchom *git instaweb* i odpal dowolną przeglądarkę internetową.
+
+=== Ćwiczenie ===
+
+Niech A, B, C i D będą 4 następującymi po sobie 'commits', gdzie B różni się od A, jedynie tym, iż usunięto kilka plików. Chcemy teraz te usunięte pliki zrekonstruować do D. Jak to można zrobić?
+
+Istnieją przynajmniej 3 rozwiązania. Załóżmy że znajdujemy się obecnie w D:
+
+1. Różnica pomiędzy A i B, to skasowane pliki. Możemy utworzyć patch, który pokaże te różnice i następnie zastosować go:
+
+ $ git diff B A | git apply
+
+2. Ponieważ pliki zostały już raz zapamiętane w A, możemy je przywrócić:
+
+ $ git checkout A foo.c bar.h
+
+3. Możemy też widzieć przejście z A na B jako zmianę, którą można zrewertować:
+
+ $ git revert B
+
+A które z tych rozwiązań jest najlepsze? To, które najbardziej tobie odpowiada. Korzystając z Git łatwo osiągnąć cel, czasami prowadzi do niego wiele dróg.

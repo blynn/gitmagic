@@ -1,0 +1,21 @@
+== Załącznik B: Przetłumaczyć to HOWTO ==
+
+Aby przetłumaczyć moje HOWTO polecam wykonanie następujących poniżej kroków, wtedy moje skrypty będą w prosty sposób mogły wygenerować wersje HTML i PDF.  Poza tym wszystkie tłumaszenia mogą być prowadzone w jednym repozytorium.
+
+Sklonuj texty źródłowe, następnie utwórz katalog o nazwie skrótu IETF przetłumaszonego języka: sprawdź http://www.w3.org/International/articles/language-tags/Overview.en.php[Artykół W3C o internacjonalizacji]. Na przykład, angielski to "en", a japoński to "ja". Skopiuj wszystkie pliki +txt+ z katalogu "en" do nowoutworzonego katalogu.
+
+Aby przykładowo przetłumaczyć to HOWTO na http://de.wikipedia.org/wiki/Klingonische_Sprache[Klingonisch], musisz wykonać następujące polecenia:
+
+ $ git clone git://repo.or.cz/gitmagic.git
+ $ cd gitmagic
+ $ mkdir tlh # "tlh" jest skrótem IETF języka Klingonisch.
+ $ cd tlh $ cp ../en/intro.txt .
+ $ edit intro.txt # Przetłumacz ten plik.
+
+i zrób to z każdą następną daną textową.
+
+Edytuj Makefile i dodaj skrót języka do zmiennej `TRANSLATIONS`. Teraz możesz swoją pracę w każdej chwili sprawdzić:
+
+ $ make tlh $ firefox book-tlh/index.html
+
+Używaj często 'commit' a gdy już skończysz, to daj znać. GitHub posiada interfejs, który to ułatwi: utwórz twój własny 'Fork' projektu "gitmagic", 'push' twoje zmiany i daj mi znać, by je 'mergen'.

@@ -1,0 +1,91 @@
+== Załącznik A: Niedociągnięcia Gita ==
+
+O kilku problemach mogących wystąpić z Gitem nie wspomniałem do tej pory. Niektóre z nich można łatwo rozwiązać korzystając ze skryptów i 'hooks', inne wymagają reorganizacji i ponownego zdefiniowania całego projektu, a na rozwiązanie kilku innych uniedogodnień możesz tylko uzbroić się w cierpliwość i czekać na ich usunięcie. Albo jeszcze lepiej, samemu się nimi zająć i spróbować pomóc.
+
+=== Słabości SHA1 ===
+
+Z biegiem czasu kryptografowie odkrywają coraz więcej słabości systemu SHA1. Już dzisiaj byłoby możliwe dla przedsięwzięć dysponujących odpowiednimi zasobami finansowymi znaleźć kolizje w hashach. Za kilka lat, całkiem możliwe, że normalny domowy PC będzie dysponował odpowiednim zasobem mocy obliczeniowej, by skorumpować niepostrzeżenie repozytorium Gita.
+
+Miejmy nadzieję, że Git przestawi się na lepszą funkcje hashującą, zanim badania nad SHA1 zrobią go bezużytecznym.
+
+=== Microsoft Windows ===
+
+Korzystanie z Gita pod Microsoft Windows może być frustrujące:
+
+- http://cygwin.com/[Cygwin], unixoidalne środowisko dla Windowsa posiada http://cygwin.com/packages/git/[port Gita].
+
+- http://code.google.com/p/msysgit/[Git dla MSys] jest jedną z alternatyw, niektóre polecenia wymagają jednak poprawek.
+
+=== Pliki niepowiązane ===
+
+Jeśli twój projekt jest bardzo duży i zawiera wiele plików, które nie są bezpośrednio ze sobą związane, mimo to jednak często zostają zmieniane, Git może tu działać gorzej niż inne systemy, ponieważ nie prowadzi monitoringu poszczególnych plików. Git kontroluje zawsze całość projektu, co w normalnym wypadku jest zaletą.
+
+Jednym z możliwych rozwiązań mogłoby być podzielenie twojego projektu na kilka mniejszych, w których znajdują się jedynie pliki od siebie zależne. Korzystaj z *git submodule* jeśli mimo to chcesz cały twój projekt mieć w tym samym repozytorium.
+
+=== Kto nad czym pracuje? ===
+
+Niektóre systemy kontroli wersji zmuszają cię, by w jakiś sposób oznaczyć pliki nad którymi pracujesz. Mimo że jest to bardzo uciążliwe, gdyż wymaga ciągłej komunikacji z serwerem centralnym, posiada to też swoje zalety:
+
+1. Różnice zostają szybko znalezione, ponieważ wystarczy skontrolować wyłącznie oznaczone pliki.
+
+2. Każdy może szybko sprawdzić, kto aktualnie nad czym pracuje, sprawdzając na serwerze po prostu kto zaznaczył jakie dane do edycji.
+
+Używając odpowiednich skryptów uda ci się to również przy pomocy Gita. Wymaga to jednak współdziałania programistów, ponieważ muszą również korzystać z tych skryptów podczas pracy nad projektem.
+
+=== Historia pliku ===
+
+Ponieważ Git loguje zmiany tylko dla całości projektu jako takiego, rekonstrukcja przebiegu zmian pojedynczego pliku jest bardziej pracochłonna, niż w innych systemach kontrolujących pojedyncze .
+
+Te wady są w większości przypadków uznawane za marginalne i nie są brane pod uwagę, ponieważ inne operacje są bardzo wydajne. Na przykład polecenie `git checkout` jest szybsze niż `cp -a`, zmiany w zakresie całego projektu daje się lepiej komprymować niż zbiór zmian na bazie pojedynczych plików.
+
+=== Pierwszy klon ===
+
+Wykonanie klonu jest kosztowniejsze niż w innych systemach kontroli wersji jeśli istnieje długa historia.
+
+Początkowy koszt spłaca się jednak na dłuższą metę ponieważ większość przyszłych operacji przeprowadzane będzie szybko i offline.  Niemniej jednak istnieją sytuacje, w których lepiej utworzyć powierzchowny klon korzystając z opcji `--depth`. Trwa to o wiele krócej, taki klon jednak posiada też tylko ograniczoną funkcjonalność.
+
+=== Niestałe projekty ===
+
+Git został napisany z myślą optymalizacji prędkości działania przy dokonywaniu wielkich zmian.  Ludzie robią jednak pomniejsze zmiany z wersji na wersję. Jakaś poprawka tutaj, jakaś nowa funkcja gdzie indziej, poprawienie komentarzy, itd. Ale jeśli twoje dane znacznie się od siebie różnią pomiędzy następującymi po sobie wersjami, to chcąc nie chcąc przy każdym 'commit' projekt zwiększy się o te zmiany.
+
+Nie wymyślono jednak do tej pory niczego w żadnym systemie kontroli wersji, by móc temu zapobiec, tutaj jednak użytkownik Gita cierpi najbardziej, ponieważ w normalnym wypadku klonuje cały przebieg projektu.
+
+Powinno się w takim wypadku szukać powodów wystąpienia największych zmian. Ewentualnie można czasami zmienić format danych. Małe zmiany w projekcie powinny pociągać tylko minimalne zmiany na tak wąskiej grupie plików, jak to tylko możliwe.
+
+Może czasami bardziej wskazana byłaby baza danych, czy jakiś system archiwizacji zamiast systemu kontroli wersji. Na przykład nie jest dobrym sposobem zastosowanie systemu kontroli wersji do zarządzania zdjęciami wykonywanymi periodycznie przez kamerę internetową.
+
+Jeśli dane ulegają ciągłym zmianom i naprawdę muszą być objęte kontrolą wersji, jedną z możliwości jest zastosowanie Gita w scentralizowanej formie. Każdy może dokonywać pobieżnych klonów, które mało co lub wcale nie mają nic do czynienia z przebiegiem projektu. Oczywiście w takim wypadku wiele funkcji Gita nie będzie dostępnych a zmiany muszą być przekazywane w formie 'patch'. Prawdopodobnie będzie to dość dobrze działać, mimo iż nie jest do końca jasne komu potrzebna jest znajomość przebiegu tak ogromnej ilości niestabilnych danych.
+
+Innym przykładem może być projekt, który zależny jest od firmware przyjmującej kształt wielkiej danej w formie binarnej. Historia pliku firmware nie interesuje użytkownika, a zmiany nie pozwalają się wygodnie komprymować, wielkość repozytorium wzrasta niepotrzebnie o nowe wersje binarnego pliku firmware.
+
+W takim wypadku należałoby trzymać w repozytorium wyłącznie kod źródłowy, a sam plik binarny poza nim. By ułatwić sobie życie, ktoś mógłby opracować skrypt, który Git wykorzystuje do klonowania kodu źródłowego i 'rsync' albo pobieżny klon dla samego firmware.
+
+=== Licznik globalny ===
+
+Wiele systemów kontroli wersji udostępnia licznik, który jest zwiększany z każdym "commit". Git natomiast odwołuje się przy zmianach do sum kontrolnych SHA1, co w wielu przypadkach jest lepszym rozwiązaniem.
+
+Niektórzy jednak przyzwyczaili się do tego licznika. Na szczęście, łatwo jest napisać skrypt zwiększający stan licznika przy każdej aktualizacji centralnego repozytorium Gita. Może w formie taga, który powiązany jest z sumą kontrolną ostatniego 'commit'.
+
+Każdy klon mógłby posiadać taki licznik, jednak byłby on prawdopodobnie bezużyteczny, ponieważ tylko licznik centralnego repozytoriom ma znaczenie.
+
+=== Puste katalogi ===
+
+Nie ma możliwości kontroli wersji pustych katalogów. Aby obejść ten problem wystarczy utworzyć w takim katalogu plik dummy.
+
+To raczej obecna implementacja Gita, a mniej jego konstrukcja, jest odpowiedzialna za to wadę. Przy odrobinie szczęścia, jeśli Git jeszcze bardziej się upowszechni i więcej użytkowników żądać będzie tej funkcji, to być może zostanie zaimplementowana.
+
+=== Pierwszy 'commit' ===
+
+Stereotypowy informatyk liczy od 0 zamiast 1. Niestety, w kwestii 'commits' Git nie podąża za tą konwencją. Wiele komend marudzi przed wykonaniem pierwszego 'commit'. Dodatkowo, różnego rodzaju krańcowe przypadki muszą być traktowane specjalnie, jak 'rebase' dla 'branch' o różniącym się pierwszym 'commit'.
+
+Git zyskałby na zdefiniowaniu tzw. 'zero-commit', ponieważ zaraz po zainicjowaniu repozytorium, 'HEAD' otrzymałby 20 bajtowy hash SHA1. Ten specjalny 'commit' reprezentowałby puste drzewo, bez rodziców, być może pradziad wszystkich repozytoriów.
+
+Jeśli na przykład użytkownik wykonałby polecenie *git log*, zostałby poinformowany, że nie istnieje jeszcze żaden 'commit', gdzie na dzień dzisiejszy taka komenda wywoła błąd. Analogicznie dzieje się też z innymi poleceniami.
+
+Każdy inicjujący 'commit' byłby pochodną tego zerowego 'commit'.
+
+Niestety występuje jeszcze kilka innych problemów. Jeśli chcemy scalić kilka 'branches' o różniących sie inicjalnych 'commits' i przeprowadzić 'rebase', musimy ingerować ręcznie.
+
+=== Charakterystyka zastosowania ===
+
+Dla 'commits' A i B, znaczenie wyrażeń "A..B" i "A...B" zależy od tego, czy polecenie oczekuje dwóch punktów końcowych, czy zakresu. Sprawdź *git help diff* i *git help rev-parse*.

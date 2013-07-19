@@ -1,0 +1,190 @@
+== Magia 'branch' ==
+
+Szybkie, natychmiastowe działanie poleceń 'branch' i 'merge', to jedne z najbardziej zabójczych właściwości Gita.
+
+*Problem*: Zewnętrzne faktory narzucają konieczność zmiany kontekstu. Poważne błędy w opublikowanej wersji ujawniły się bez ostrzeżenia. Skrócono termin opublikowania pewnej właściwości. Autor, którego pomocy potrzebujesz w jednej z kluczowych sekcji postanawia opóścić projekt. We wszystkich tych przypadkach musisz natychmiastowo zaprzestać bieżących prac i skoncentrować się nad zupełnie innymi zadaniami.
+
+Przerwanie toku myślenia nie jest dobre dla produktywności, a czym większa różnica w kontekście, tym większe straty. Używając centralnych systemów kontroli wersji musielibyśmy najpierw zładować świeżą kopię roboczą z serwera. W systemach rozproszonych wygląda to dużo lepiej, ponieważ możemy żądaną wersje sklonować lokalnie
+
+Jednak klonowanie również niesie za sobą kopiowanie całego katalogu roboczego jak i całej historii projektu aż do żądanego punktu. Nawet jeśli Git redukuje wielkość przez podział danych i użycie twardych dowiązań, wszystkie pliki projektu muszą zostać odtworzone w nowym katalogu roboczym.
+
+*Rozwiązanie*: Git posiada lepsze narzędzia dla takich sytuacji, jest ono wiele szybsze i zajmujące mniej miejsca na dysku jak klonowanie: *git branch*.
+
+Tym magicznym słowem zmienisz dane w swoim katalogu roboczym z jednej wersji w inną. Ta przemiana potrafi dużo więcej jak tylko poruszać się w historii projektu. Twoje pliki mogą przekształcić się z aktualnej wersji do wersji eksperymentalnej, do wersji testowej, do wersji twojego kolegi i tak dalej.
+
+=== Przycisk 'szef' ===
+
+Być może grałaś już kiedyś w grę, która posiadała magiczny (``przycisk szef''), po naciśnięciu którego twój monitor natychmiast pokazywał jakieś arkusze kalkulacyjne, czy coś w tym roduaju? Celem przycisku było szybkie ukrycie gierki na wypadek pojawienia się szefa w twoim biurze.
+
+W jakimś katalogu:
+
+ $ echo "Jestem mądrzejsza od szefa" > mój_plik.txt
+ $ git init
+ $ git add .
+ $ git commit -m "Pierwszy commit"
+
+Utworzyliśmy repozytorium Gita, które zawiera plik o powyższej zawartości. Następnie wpisujemy:
+
+ $ git checkout -b szef # wydaje się, jakby nic się nie stało
+ $ echo "Mój szef jest ode mnie mądrzejszy" > mój_plik.txt
+ $ git commit -a -m "Druga wersja"
+
+Wygląda jakbyśmy zmienili zawartość pliku i wykonali 'commit'. Ale to tylko iluzja. Wpisz:
+
+ $ git checkout master # przejdź do oryginalnej wersji
+
+i hokus-pokus! Poprzedni plik jest przywrócony do stanu pierwotnego. Gdyby jednak szef zdecydował się grzebać w twoim katalogu, wpisz:
+
+ $ git checkout szef # przejdź do wersji, która nadaje się do obejrzenia przez szefa
+
+Możesz zmieniać pomiędzy tymi wersjami pliku tak często jak zechcesz, każdą z tych wersji pliku możesz też niezależnie edytować.
+
+=== Brudna robota ===
+
+[[branch]]
+Załóżmy, że pracujesz nad jakąś funkcją i musisz z jakiegokolwiek powodu wrócić o 3 wersje wstecz w celu wprowadzenia kilku poleceń print, aby sprawdzić jej działanie. Wtedy:
+
+ $ git commit -a
+ $ git checkout HEAD~3
+
+Teraz możesz na dziko wprowadzać tymczasowy kod. Możesz te zmiany nawet dodać do'commit'. Po skończeniu,
+
+ $ git checkout master
+
+wróci cię do poprzedniej pracy. Zauważ, że wszystkie zmiany, które nie zostały zatwierdzone przez 'commit', zostały przejęte.
+
+A co jeśli chciałaś zapamiętać wprowadzone zmiany? Proste:
+
+ $ git checkout -b brudy
+
+i tylko jeszcze wykonaj 'commit' zanim wrócisz do 'master branch'. Jeśli tylko chcesz wrócić do twojej brudnej roboty, wpisz po prostu
+
+ $ git checkout brudy
+
+Spotkaliśmy się z tym poleceniem już we wcześniejszym rozdziale, gdy poruszaliśmy temat ładowania starych wersji. Teraz możemy opowiedzieć cala prawdę: pliki zmieniają się do żądanej wersji, jednak musimy opuścić 'master branch'. Każdy 'commit' od teraz prowadzi twoje dane inną drogą, której możemy również nadać nazwę.
+
+Innymi słowami, po przywołaniu ('checkout') starszego stanu Git automatycznie przenosi cię do nowego, nienazwanego 'branch', który poleceniem *git checkout -b* otrzyma nazwę i zostanie zapamiętany.
+
+=== Szybka korekta błędów ===
+
+Będąc w środku jakiejś pracy, otrzymujesz polecenie zajęcia się nowo znalezionym błędem w 'commit' `1b6d...`:
+
+ $ git commit -a
+ $ git checkout -b fixes 1b6d
+
+Po skorygowaniu błędu:
+
+ $ git commit -a -m "Błąd usunięty"
+ $ git checkout master
+
+i kontynuujesz przerwaną pracę. Możesz nawet ostatnio świeżo upieczoną poprawkę przejąć do aktualnej wersji:
+
+ $ git merge fixes
+
+=== Merge ===
+
+Za pomocą niektórych systemów kontroli wersji utworzenie nowego 'branch' może i jest proste, jednak późniejsze połączenie ('merge') skomplikowane. Z Gitem 'merge' jest tak trywialne, że możesz czasem nawet nie zostać powiadomiony o jego wykonaniu.
+
+W gruncie rzeczy spotkaliśmy się już dużo wcześniej z funkcją 'merge'. Polecenie *git pull* ściąga inne wersje i łączy ('merge') z twoim aktualnym 'branch'. Jeśli nie wprowadziłaś żadnych lokalnych zmian, to 'merge' jest szybkim przejściem do przodu, jest to przypadek podobny do zładowania ostatniej wersji przy centralnych systemach kontroli wersji. Jeśli jednak wprowadziłaś zmiany, Git automatycznie wykona 'merge' i powiadomi cię o ewentualnych konfliktach.
+
+Zwyczajnie każdy 'commit' posiada matczyny 'commit', a mianowicie poprzedzający go 'commit'. Zespolenie kilku 'branch' wytwarza 'commit' z minimum 2 matczynymi 'commit'. To nasuwa pytanie, który właściwie 'commit' wskazuje na `HEAD~10`? Każdy 'commit' może posiadać więcej rodziców, za którym właściwie podążamy?
+
+Wychodzi na to, ze ta notacja zawsze wybiera pierwszego rodzica. To jest wskazane, ponieważ aktualny 'branch' staje się pierwszym rodzicem dla 'merge', częściej będziesz zainteresowany bardziej zmianami których dokonałaś w aktualnym 'branch', niż w innych.
+
+Możesz też wybranego rodzica wskazać używając symbol dzióbka. By na przykład pokazać logi drugiego rodzica.
+
+ $ git log HEAD^2
+
+Możesz pominąć numer pierwszego rodzica. By na przykład pokazać różnice z pierwszym rodzicem:
+
+ $ git diff HEAD^
+
+Możesz ta notacje kombinować także z innymi rodzajami. Na przykład:
+
+ $ git checkout 1b6d^^2~10 -b archaiczne
+
+tworzy nowy 'branch' o nazwie 'archaiczne', reprezentujący stan 10 'commit' do tyłu drugiego rodzica dla pierwszego rodzica 'commit', którego hash rozpoczyna się na 1b6d.
+
+=== Praca bez przestojów ===
+
+W procesie produkcji często drugi krok planu musi czekać na zakończenie pierwszego. Popsuty samochód stoi w garażu nieużywany do czasu dostarczenia części zamiennej. Prototyp musi czekać na wyprodukowanie jakiegoś chipa zanim będzie można podjąć dalszą konstrukcje.
+
+W projektach software może to wyglądać podobnie. Druga część jakiegoś feature musi czekać, aż pierwsza zostanie wydana i przetestowana. Niektóre projekty wymagają sprawdzenia twojego kodu zanim zostanie zaakceptowany, musisz wiec czekać z następną częścią aż pierwsza zostanie sprawdzona.
+
+Dzięki bezbolesnemu 'branch' i 'merge' możemy te reguły naciągnąć i pracować nad druga częścią jeszcze zanim pierwsza zostanie oficjalnie zatwierdzona. Przyjmijmy, że wykonałaś 'commit' pierwszej części i przekazałaś do sprawdzenia. Przyjmijmy też, że znajdujesz się w 'master branch'. Najpierw przejdź do 'branch' o nazwie 'część2':
+
+$ git checkout -b część2
+
+Pracujesz w części 2 i regularnie wykonujesz 'commit'. Błądzenie jest ludzkie i może się zdarzyć, że zechcesz wrócić do części 1 i wprowadzić jakieś poprawki. Jeśli masz szczęście albo jesteś bardzo dobry, możesz ominąć następne linijki.
+
+ $ git checkout master  # przejdź do części 1
+ $ fix_problem
+ $ git commit -a        # zapisz rozwiązanie
+ $ git checkout część2  # przejdź do części 2
+ $ git merge master     # połącz zmiany
+
+Ewentualnie, część pierwsza zostaje dopuszczona:
+
+ $ git checkout master  # przejdź do części 1
+ $ submit files         # opublikuj twoja wersję
+ $ git merge część2     # Połącz z częścią 2
+ $ git branch -d część2 # usuń branch część2
+
+Znajdujesz się teraz z powrotem w 'master branch' posiadając 'część2' w katalogu roboczym.
+
+Dość łatwo zastosować ten sam trik na dowolną ilość części. Równie łatwo można utworzyć 'branch' wstecznie: przypuśćmy, właśnie spostrzegłaś, iż już właściwie jakieś 7 'commit' wcześniej powinnaś stworzyć 'branch'. Wpisz wtedy:
+
+ $ git branch -m master część2 # Zmień nazwę "master" na "część2".
+ $ git branch master HEAD~7    # utwórz ponownie "master" 7 'commits' do tyłu.
+
+Teraz 'master branch' zawiera cześć 1 a branch `część2` zawiera całą resztę. Znajdujemy się teraz w tym ostatnim 'branch'; utworzyliśmy `master` bez wchodzenia do niego, gdyż zamierzamy dalszą pracę prowadzić w 'branch' `część2`. Nie jest to zbyt często stosowane. Do tej pory przechodziliśmy do nowego 'branch' zaraz po jego utworzeniu, tak jak w:
+
+ $ git checkout HEAD~7 -b master # Utwórz branch i wejdź do niego.
+
+=== Reorganizacja składanki ===
+
+Może lubisz odpracowywać wszystkie aspekty projektu w jednym 'branch'. Chcesz wszystkie bieżące zmiany zachować dla siebie, a wszyscy inni powinni zobaczyć twoje 'commit' po ich starannym zorganizowaniu. Wystartuj parę 'branch':
+
+ $ git branch czyste          # Utwórz branch dla oczyszczonych 'commits'.
+ $ git checkout -b zbieranina # utwórz 'branch' i przejdź do niego w celu dalszej pracy.
+
+Następnie wykonaj zamierzone prace: pousuwaj błędy, dodaj nowe funkcje, utwóż kod tymczasowy i tak dalej, regularnie wykonując 'commit'. Wtedy:
+
+ $ git checkout czyste
+ $ git cherry-pick zbieranina^^
+
+zastosuje najstarszy matczyny 'commit' z 'branch' ``zbieranina'' na 'branch' ``czyste''. Poprzez 'przebranie wisienek' możesz tak skonstruować 'branch', który posiada jedynie końcowy kod i zależne od niego pogrupowane 'commit'.
+
+=== Zarządzanie 'branch' ===
+
+Listę wszystkich 'branch' otrzymasz poprzez:
+
+ $ git branch
+
+Standardowo zaczynasz w 'branch' zwanym ``master''. Wielu opowiada się za pozostawieniem ``master'' branch w stanie dziewiczym i tworzeniu nowych dla twoich prac.
+
+Opcje *-d* und *-m*   pozwalają na usuwanie i przesuwanie (zmianę nazwy) 'branch'. Zobacz: *git help branch*.
+
+Nazwa ``master'' jest bardzo użytecznym stworem.  Inni mogą wychodzić z założenia, że twoje repozytorium takowy posiada i że zawiera on oficjalną wersję projektu. Nawet jeśli mogłabyś skasować lub zmienić nazwę na inną powinnaś respektować tę konwencję.
+
+=== Tymczasowe 'branch' ===
+
+Po jakimś czasie zapewne zauważysz, że często tworzysz 'branch' o krótkiej żywotności, w większości z tego samego powodu: każdy nowy 'branch' służy jedynie do tego, by zabezpieczyć aktualny stan, aby móc wrócić do jednego z poprzednich punktów i poprawić jakieś priorytetowe błędy czy cokolwiek innego.
+
+Można to porównać do chwilowego przełączenia kanału telewizyjnego, by sprawdzić co dzieje się na innym. Lecz zamiast naciskać guziki pilota, korzystasz z poleceń 'create', 'checkout', 'merge' i 'delete'. Na szczęście Git posiada na te operacje skrót, który jest tak samo komfortowy jak pilot telewizora:
+
+ $ git stash
+
+Polecenie to zabezpiecza aktualny stan w tymczasowym miejscu ('stash' = ukryj) i przywraca poprzedni stan. Twój katalog roboczy wygląda dokładnie tak, jak wyglądał zanim zacząłaś edycję. Teraz możesz poprawiać błędy, zładować zmiany z centralnego repozytorium ('pull') i tak dalej. Jeśli chcesz powrócić z powrotem do ukrytego ('stashed') stanu, wpisz:
+
+ $ git stash apply # Prawdopodobnie będziesz musiał rozwiązać konflikty.
+
+Możesz posiadać więcej 'stash'-ów i traktować je w zupełnie inny sposób. Zobacz *git help stash*. Jak już prawdopodobnie się domyślasz, Git korzysta przy wykonywaniu tej magicznej sztuczki z funkcji 'branch' w tle.
+
+=== Pracuj jak chcesz ===
+
+Może pytasz się, czy 'branch' są warte tego zachodu. Jakby nie było, polecenia 'clone' są prawie tak samo szybkie i możesz po prostu poleceniem *cd* zmieniać pomiędzy nimi, bez stosowania ezoterycznych poleceń Gita.
+
+Przyjrzyjmy się takiej przeglądarce internetowej. Dlaczego pozwala używać tabów tak samo jak i nowych okien? Ponieważ udostępnienie obu możliwości pozwala na stosowanie wielu stylów. Niektórzy użytkownicy preferują otwarcie jednego okna przeglądarki i korzystają z tabów dla wyświetlenia różnych stron. Inni upierają się przy stosowaniu pojedynczych okien dla każdej strony, zupełnie bez korzystania z tabów. Jeszcze inni znowu wolą coś pomiędzy.
+
+Stosowanie 'branch' to jak korzystanie z tabów dla twojego katalogu roboczego, a klonowanie porównać można do otwarcia wielu okien przeglądarki. Obie operacje są szybkie i lokalne, dlaczego nie poeksperymentować i nie znaleźć dla siebie najbardziej odpowiedniej kombinacji. Git pozwoli ci pracować dokładnie tak jak chcesz.

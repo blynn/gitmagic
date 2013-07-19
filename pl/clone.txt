@@ -1,0 +1,194 @@
+== Klonowanie ==
+
+W starszych systemach kontroli wersji polecenie 'checkout' stanowi standardową operacje pozyskiwania danych. Otrzymasz nią zbiór plików konkretnej wersji.
+
+W Git i innych rozproszonych systemach standardowo służy temu operacja 'clone'. By pozyskać dane, tworzysz najpierw klon całego repozytorium. Lub inaczej mówiąc, otrzymujesz lustrzane odbicie serwera. Wszystko, co można zrobić w centralnym repozytorium, możesz również robić z klonem.
+
+=== Synchronizacja komputera ===
+
+W celu ochrony danych mógłbym jeszcze zaakceptować korzystanie z archiwum 'tar', a dla prostej synchronizacji używania *rsync*. Jednak czasami pracując na laptopie, a innym razem na komputerze stacjonarnym, może się zdarzyć, że komputery nie miały możliwości zsynchwonizowania się w międzyczasie.
+
+Utwórz repozytorium Gita w wykonaj 'commit' twoich danych na jednym z komputerów. Potem na następnym wpisz:
+
+ $ git clone drugi.komputer:/ścieżka/do/danych
+
+by otrzymać drugą kopie danych i jednocześnie utworzyć repozytorium Gita na drugim komputerze. Od teraz poleceniem:
+
+ $ git commit -a
+ $ git pull drugi.komputer:/ścieżka/do/danych HEAD
+
+przenosisz stan drugiego komputera na komputer na którym właśnie pracujesz. Jeśli dokonałaś zmian w tym samym pliku na obydwu komputerach, Git poinformuje cię o tym, po usunięciu konfliktu powinnaś ponowić 'commit'.
+
+=== Klasyczna kontrola kodu źródłowego ===
+
+Utwórz repozytorium Gita w katalogu roboczym projektu:
+
+ $ git init
+ $ git add .
+ $ git commit -m "Pierwszy commit"
+
+Na centralnym serwerze utwórz gołe ('bare') repozytorium w jakimkolwiek katalogu:
+
+ $ mkdir proj.git
+ $ cd proj.git
+ $ git --bare init
+ $ touch proj.git/git-daemon-export-ok
+
+W razie konieczności, wystartuj daemon Gita:
+
+ $ git daemon --detach # ponieważ, gdyby uruchomiony był wcześniej
+
+Jeśli korzystasz z hostingu to poszukaj na stronie usługodawcy wskazówek jak utworzyć repozytorium 'bare'. Zwykle konieczne jest do tego wypełnienie formularza online na jego stronie.
+
+Popchaj ('push') twój projekt teraz na centralny serwer:
+
+ $ git push centralny.serwer/ścieżka/do/projektu.git HEAD
+
+By pozyskać kod źródłowy programista podaje zwykle polecenie w rodzaju:
+
+ $ git clone główny.serwer/ścieżka/do/projektu.git
+
+Po dokonaniu edycji programista zapamiętuje zmiany najpierw lokalnie:
+
+ $ git commit -a
+
+Aby zaktualizować do wersji istniejącej na głównym serwerze:
+
+ $ git pull
+
+Jeśli wystąpią jakiekolwiek konflikty łączenia ('merge') , powinny być najpierw usunięte i na nowo zostać wykonany 'commit'.
+
+ $ git commit -a
+
+Lokalne zmiany przekazujemy do serwera poleceniem:
+
+ $ git push
+
+Jeśli w międzyczasie nastąpiły nowe zmiany na serwerze wprowadzone przez innego programistę, twój 'push' nie powiedzie się. Zaktualizuj lokalne repozytorium ponownie poleceniem 'pull', pozbądź się konfliktów i spróbuj jeszcze raz.
+
+Programiści potrzebują dostępu poprzez SSH dla wykonania poleceń 'pull' i 'push'. Mimo to, każdy może skopiowć kod źródłowy poprzez podanie:
+
+ $ git clone git://główny.serwer/ścieżka/do/projektu.git
+
+Protokół GIT przypomina HTTP: nie posiada autentyfikacji, a więc każdy może skopiować dane. Przy ustawieniach standardowych wykonanie 'push' za pomocą protokołu GIT jest zdezaktywowane.
+
+=== Utajnienie źródła ===
+
+Przy projektach Closed-Source wyklucz używanie poleceń takich jak 'clone' i upewnij się, że nie został utworzony plik o nazwie 'git-daemon-export-ok'. Wtedy repozytorium nie może już komunikować się poprzez protokół 'git', tylko posiadający dostęp przez SHH mogą widzieć dane. Jeśli wszystkie repozytoria są zamknięte, nie ma potrzeby startować daemona 'git', ponieważ cała komunikacja odbywa się wyłącznie za pomocą SSH.
+
+=== Gołe repozytoria ===
+
+Określenie: 'gołe' ('bare') repozytorium, powstało, ze względu na fakt, iż repozytorium to nie posiada katalogu roboczego. Posiada jedynie dane, które są zwykle schowane w podkatalogu '.git'. Innymi słowy: zarządza historią projektu, nie posiada jednak katalogu roboczego jakiejkolwiek wersji.
+
+Repozytorium 'bare' przejmuje rolę podobną do roli głównego serwera w scentralizowanych systemach kontroli wersji: dach twojego projektu. Programiści klonują twój projekt stamtąd i przesyłają tam ostatnie oficjalne zmiany. Często znajduje się ono na serwerze, którego jedynym zadaniem jest wyłącznie dystrybucja danych. Sama praca nad projektem przebiega na jego klonach, w ten sposób główne repozytorium daje sobie radę nie korzystając z katalogu roboczego.
+
+Wiele z poleceń Gita nie będzie funkcjonować w repozytoriach 'bare', chyba że ustawimy zmienną systemową GIT_DIR na katalog roboczy repozytorium albo przekażemy opcję `--bare`.
+
+=== 'Push', czy 'pull'? ===
+
+Dlaczego wprowadziliśmy polecenie 'push', a nie pozostaliśmy przy znanym nam już 'pull'? Po pierwsze, 'pull' nie działa z repozytoriami 'bare': zamiast niego używaj 'fetch', polecenia którym zajmiemy się później. Również gdybyśmy nawet używali normalnego repozytorium na serwerze centralnym, polecenie 'pull' byłoby raczej niewygodne.  Musielibyśmy wpierw zalogować się na serwerze i przekazać poleceniu 'pull' adres IP komputera z którego chcemy ściągnąć pliki. Jeśli w ogóle posiadalibyśmy dostęp do konsoli serwera, to prawdopodobnie przeszkodziłaby nam firewalle na drodze do naszego komputera.
+
+W każdym bądź razie, nawet jeśli nawet mogło by to zadziałać, odradzam z korzystania z funkcji 'push' w ten sposób. Poprzez samo posiadanie katalogu roboczego na serwerze mogłoby powstać wiele nieścisłości.
+
+Krótko mówiąc, podczas gdy uczysz się korzystania z Git, korzystaj z polecenia 'push' tylko, gdy celem jest repozytorium 'bare', w wszystkich innych wypadkach z 'pull'.
+
+=== Rozwidlenie projektu ===
+
+Jeśli nie potrafisz już patrzeć na kierunek rozwoju w jakim poszedł jakiś projekt. Uważasz, że potrafisz to lepiej. To po prostu utwórz jego 'fork', w tym celu na twoim serwerze podaj:
+
+ $ git clone git://główny.serwer/ścieżka/do/danych
+
+Następnie, poinformuj wszystkich o nowym 'forku' projektu na twoim serwerze.
+
+W każdej późniejszej chwili możesz dokonać łączenia ('merge') zmian z oryginalnego projektu, poprzez:
+
+ $ git pull
+
+=== Ultymatywny backup ===
+
+Chcesz posiadać liczne, wolne od manipulacji, redundantne kopie bezpieczeństwa w różnych miejscach? Jeśli projekt posiada wielu programistów, nie musisz niczego robić. Ponieważ każdy klon twojego kodu jest pełnowartościową kopią bezpieczeństwa. Nie tylko jego aktualna wersja, lecz również cała historia projektu. Gdy jakikolwiek klon zostanie uszkodzony, dzięki kryptograficznemu hashowaniu, zostanie to natychmiast rozpoznane, jeśli tylko dana osoba będzie próbować wymiany z innymi.
+
+Jeśli twój projekt nie jest jeszcze wystarczająco znany, spróbuj pozyskać tak wiele serwerów, ile to możliwe, by umieścić tam jego klon.
+
+Ci najbardziej paranoidalni powinni zawsze zapisywać 20 bajtów ostatniej sumy kontrolnej SHA1 dla HEAD i przechowywać w bezpiecznym miejscu. Musi być bezpieczny, jednak nie tajny. Na przykład opublikowanie go w gazecie dobrze by spełniło swoje zadanie, dość trudnym zadaniem byłoby zmanipulowanie każdej kopii gazety.
+
+=== Wielozadaniowość z prędkością światła ===
+
+Załóżmy, że chcesz pracować nad kilkoma funkcjami równocześnie. Wykonaj 'commit' i wpisz:
+
+ $ git clone . /jakiś/nowy/katalog
+
+Za sprawą http://en.wikipedia.org/wiki/Hard_link[twardych linków] stworzenie lokalnej kopii zajmuje dużo mniej czasu i pamięci niż zwykły backup.
+
+Możesz pracować nad dwoma niezależnymi funkcjami jednocześnie. Na przykład, możesz pracować nad jednym klonem dalej, podczas gdy drugi jest właśnie kompilowany. W każdym momencie możesz wykonać 'commit' i 'pull' innego klonu.
+
+ $ git pull /inny/klon HEAD
+
+=== Kontrola wersji z podziemia ===
+
+Pracujesz nad projektem, który używa innego systemu kontroli wersji i tęsknisz za Gitem? Utwórz po prostu repozytorium Gita w twoim katalogu roboczym:
+
+ $ git init
+ $ git add .
+ $ git commit -m "Pierwszy commit"
+
+następnie sklonuj go:
+
+ $ git clone . /jakiś/inny/katalog
+
+Przejdź teraz do nowego katalogu i pracuj według upodobania. Kiedyś zechcesz zsynchronizować pracę, idź do oryginalnego katalogu, zaktualizuj go najpierw z tym innym systemem kontroli wersji, następnie wpisz:
+
+ $ git add .
+ $ git add . $ git commit -m"Synchronizacja z innym systemem kontroli wersji"
+
+Teraz przejdź do nowego katalogu i podaj:
+
+ $ git commit -a -m "Opis zmian"
+ $ git pull
+
+Sposób w jaki przekażesz zmiany drugiemu systemowi zależy już od jego sposobu działania. Twój nowy katalog posiada dane ze zmianami przez ciebie wprowadzonymi. Wykonaj jeszcze adekwatne kroki żądane przez ten inny system kontroli wersji, by przekazać dane do centralnego repozytorium.
+
+Subversion, być może najlepszy z centralnych systemów, stosowany jest w wielu projektach. Komenda *git svn* automatyzuje powyższe kroki, może być użyta na przykład do http://google-opensource.blogspot.com/2008/05/export-git-project-to-google-code.html[exportu projektu Git do repozytorium Subversion].
+
+=== Mercurial ===
+
+Mercurial to podobny do Gita system kontroli wersji, który prawie bezproblemowo potrafi pracować z Gitem. Korzystając z rozszerzenia `hg-git` użytkownik Mercurial jest w stanie bez strat wykonywać 'push' i 'pull' z repozytorium Gita.
+
+Możesz ściągnąć sobie rozszerzenie `hg-git` za pomocą Gita:
+
+ $ git clone git://github.com/schacon/hg-git.git
+
+albo za pomocą Mercurial:
+
+ $ hg clone http://bitbucket.org/durin42/hg-git/
+
+Niestety nie są mi znane takie rozszerzenia dla Gita. Dlatego jestem za używaniem Gita jako głównego repozytorium, nawet gdy preferujesz Mercurial. W projektach prowadzonych za pomocą Mercurial często znajdziemy woluntariusza, który równolegle prowadzi repozytorium Gita, dzięki pomocy rozszerzenia `hg-git` projekty Gita automatycznie osiągają użytkowników Mercurial.
+
+To rozszerzenie potrafi również zmienić skład Mercurial w skład Gita, za pomocą komendy 'push' do gołego repozytorium Gita. Jeszcze łatwiej dokonamy tego skryptem `hg-fast-export.sh`, który możemy tu znaleźć:
+
+ $ git clone git://repo.or.cz/fast-export.git
+
+Aby skonwertować, wejdź do pustego katalogu:
+
+ $ git init
+ $ hg-fast-export.sh -r /hg/repo
+
+po uprzednim dodaniu skryptu do twojego `$ PATH`.
+
+=== Bazaar ===
+
+Wspomnijmy również pokrótce o Bazaar, ponieważ jest to najbardziej popularny darmowy rozproszony system kontroli wersji po Git i Mercurial.
+
+Bazar będąc stosunkowo młodym systemem, posiada zaletę perspektywy czasu, jego twórcy mogli uczyć się na błędach z przeszłości i uniknąć historycznych naleciałości. Poza tym programiści byli świadomi popularności i wagi interakcji z innymi systemami kontroli wersji.
+
+Rozszerzenie `Bzr-git` pozwala użytkownikom Bazar dość łatwo pracować z repozytoriami Gita. Program `tailor` konwertuje składy Bazaar do składów Gita i może robić to na bieżąco, podczas gdy `bzr-fast-export` lepiej nadaje się do jednorazowej konwersji.
+
+=== Dlaczego korzystam z Gita ===
+
+Zdecydowałem się pierwotnie do wyboru Gita, ponieważ słyszałem, że jest w stanie zarządzać tak zawiłym i rozległym projektem jak kod źródłowy Linuksa. Jak na razie nie miałem powodów do zmiany. Git służył mi znakomicie i do tej pory mnie nie zawiódł. Ponieważ w pierwszej linii pracuję na Linuksie, problemy innych platform nie mają dla mnie znaczenia.
+
+Preferuję również programy 'C' i skrypty 'bash' w opozycji do na przykład Pythona: posiadają mniej zależności, wolę też, gdy kod jest wykonywany szybko.
+
+Myślałem już też nad tym, jak można by ulepszyć Gita, poszło to nawet tak daleko, że napisałem własną aplikacje podobną do niego, w celu jednak wyłącznie ćwiczeń akademickich. Nawet gdybym zakończył mój projekt, mimo to pozostałbym przy Git, bo ulepszenia byłyby zbyt minimalne by uzasadnić zastosowanie odosobnionego systemu.
+
+Oczywiście może się okazać, że twoje potrzeby i oczekiwania są zupełnie inne i być może wygodniej jest tobie z zupełnie innym systemem. Jakby jednak nie spojrzeć, stosując Git nie popełnisz tu niczego złego.

@@ -1,0 +1,179 @@
+== Git dla zaawansowanych ==
+
+W międzyczasie powinnaś umieć odnaleźć się na stronach *git help* i rozumieć większość zagadnień. Mimo to może okazać się dość mozolne odnalezienie odpowiedniej komendy dla rozwiązania pewnego zadania. Może uda mi się zaoszczędzić ci trochę czasu: poniżej znajdziesz kilka przepisów, które były mi przydatne w przeszłości.
+
+=== Publikowanie kodu źródłowego ===
+
+Git zarządza w moich projektach dokładnie tymi danymi, które chcę archiwizować i dać do dyspozycji innym użytkownikom. Aby utworzyć archiwum tar kodu źródłowego, używam polecenia:
+
+ $ git archive --format=tar --prefix=proj-1.2.3/ HEAD
+
+=== Zmiany dla 'commit' ===
+
+Powiadomienie Gita o dodaniu, skasowaniu czy zmianie nazwy plików może okazać sie przy niektórych projektach dość uciążliwą pracą. Zamiast tego można skorzystać z:
+
+ $ git add .
+ $ git add -u
+
+Git przyjży się danym w aktualnym katalogu i odpracuje sam szczegóły. Zamiast tego drugiego polecenia możemy użyć `git commit -a`, jeśli i tak mamy zamiar przeprowadzić 'comit'.  Sprawdź też *git help ignore*, by dowiedzieć się jak zdefiniować dane, które powinny być zignorowane.
+
+Można to także wykonać za jednyym zamachem:
+
+ $ git ls-files -d -m -o -z | xargs -0 git update-index --add --remove
+
+Opcje *-z* i *-0* zapobiegą przed niechcianymi efektmi ubocznymi przez niestandardowe znaki w nazwach plików. Ale ponieważ to polecenie dodaje również pliki które powinny być zignorowane, można dodać do niego jeszcze opcje `-x` albo `-X`
+
+=== Mój 'commit' jest za duży! ===
+
+Od dłuższego czasu nie pamiętałaś o wykonaniu 'commit'? Tak namiętnie programowałaś, że zupełnie zapomniałaś o kontroli kodu źródłowego? Przeprowadzasz serię niezależnych zmian, bo jest to w twoim stylu?
+
+Nie ma sprawy, wpisz polecenie:
+
+ $ git add -p
+
+Dla każdej zmiany, której dokonałaś Git pokaże ci pasaże z kodem, który uległ zmianom i spyta cię, czy mają zostać częścią następnego 'commit'. Odpowiedz po prostu "y" dla tak, albo "n" dla nie. Dysponujesz jeszcze innymi opcjami, na przykład dla odłożenie w czasie decyzji, wpisz "?", by dowiedzieć się więcej.
+
+Jeśli jesteś już zadowolony z wyniku, wpisz:
+
+ $ git commit
+
+by dokonać wybranych zmian. Uważaj tylko, by nie skorzystać z opcji *-a*, ponieważ wtedy git dokona 'commit' zawierający wszystkie zmiany.
+
+A co, jeśli pracowałaś nad wieloma danymi w wielu różnych miejscach? Sprawdzenie każdej danej z osobna jest zarówno rustrujące jak i męczące. W takim wypadku skorzystaj z *git add -i*, obsługa tego polecenia może nie jest zbyt łatwa, za to jednak bardzo elastyczna. Kilkoma naciśnięciami klawiszy możesz wiele zmienionych plików dodać ('stage') albo usunąć z 'commit' ('unstage'), jak również sprawdzić, czy dodać zmiany dla poszczególnych plików. Alternaywnie możesz skorzystać z *git commit \--interactive*, polecenie to wykona automatycznie 'commit' gdy skończysz.
+
+=== Index: rusztowanie Gita ===
+
+Do tej pory staraliśmy się omijać sławny 'indeks', jednak przyszedł czas się nim zająć, aby móc wyjaśnić wszystko to co poznaliśmy do tej pory. Index jest tymczasową przechowalnią. Git rzadko wymienia dane bezpośrednio między twoim projektem a swoją historią wersji. Raczej zapisuje on dane najpierw w indeksie, dopiero po tym kopiuje dane z indeksu na ich właściwe miejsce przeznaczenia.
+
+Na przykład polecenie *commit -a* jest właściwie procesem dwustopniowym. Pierwszy krok to stworzenie obrazu bieżącego statusu każdego monitorowanego pliku do indeksu.  Drugim krokiem jest trwałe zapamiętanie obrazu do indeksu. Wykonanie 'commit' bez opcji *-a* wykona jedynie drugi wspomniany krok i ma jedynie sens, jeśli poprzednio wykonano komendę, która dokonała odpowiednich zmian w indeksie, na przykład *git add*.
+
+Normalnie możemy ignorować indeks i udawać, że czytamy i zapisujemy bezpośrednio z historii. W tym wypadku chcemy posiadać jednak większą kontrolę, więc manipulujemy indeks. Tworzymy obraz niektórych, jednak nie wszystkich zmian w indeksie i później zapamiętujemy trwale starannie dobrany obraz.
+
+=== Nie trać głowy! ===
+
+Identyfikator 'HEAD' zachowuje się jak kursor, który zwykle wskazuje na najmłodszy 'commit' i z każdym nowym 'commit' zostaje przesunięty do przodu. Niektóre komendy Gita pozwolą ci nim manipulować. Na przyklad:
+
+ $ git reset HEAD~3
+
+przesunie identyfikator 'HEAD' o 3 'commits' spowrotem. Spowoduje to, że wszystkie następne komendy Gita będą reagować, jakby tych trzech ostatnich 'commits' wogóle nie było, podczas gdy twoje dane zostaną w przyszłości. Na stronach pomocy Gita znajdziesz więcej takich zastosowań.
+
+Ale jak teraz wrócić znów do przyszłości? Poprzednie 'commits' nic nie wiedzą o jej istnieniu.
+
+Jeśli posiadasz hash SHA1 orginalnego 'HEAD', wtedy możesz wrócić komendą:
+
+ $ git reset 1b6d
+
+Wyobraź jednak sobie, że nigdy go nie notowałaś? Nie ma sprawy: Przy wykonywaniu takich poleceń Git archiwizuje orginalny HEAD jako indentyfikator o nazwie ORIG_HEAD a ty możesz bezproblemowo wrócić używając:
+
+ $ git reset ORIG_HEAD
+
+=== Łowcy głów ===
+
+Może się zdarzyć, że ORIG_HEAD nie wystarczy. Może właśnie spostrzegłaś, iż dokonałaś kapitalnego błędu i musisz wrócić się do bardzo starego 'commit' w zapomnianym 'branch'.
+
+Standardowo Git zapamiętuje 'commit' przez przynajmniej 2 tygodnie, nawet jeśli poleciłaś zniszczyć 'branch' w którym istniał. Problemem staje się tutaj odnalezienie odpowieniej sumy kontrolnej SHA1. Możesz po kolei testować wszystkie hashe SHA1 w `.git/objects` i w ten sposób próbować odnaleźć szukany 'commit'. Istnieje jednak na to dużo prostszy sposób.
+
+Git zapamiętuje każdy obliczony hash SHA1 dla odpowiednich 'commit' w `.git/logs`. Podkatalog `refs` zawieza przebieg wszystkich aktywności we wszystkich 'branches', podczas gdy plik `HEAD` wszystkie klucze SHA1 które kiedykolwiek posiadał.  Ostatnie możemy zastosować do odnalezienia sum kontrolnych SHA1 tych 'commits' które znajdowały się w nieuważnie usuniętym 'branch'.
+
+Polecenie 'reflog' daje nam do dyspozycji przyjazny interfejs do tych właśnie logów. Wypróbuj polecenie:
+
+ $ git reflog
+
+Zamiast kopiować i wklejać klucze z 'reflog', możesz:
+
+ $ git checkout "@{10 minutes ago}"
+
+Albo przywołaj 5 z ostatnio oddwiedzanych 'commits' za pomocą:
+
+ $ git checkout "@{5}"
+
+Jeśli chciałbyś pogłębić wiedze na ten temat przeczytaj sekcję ``Specifying Revisions`` w  *git help rev-parse*.
+
+Byś może zechcesz zmienić okres karencji dla przeznaczonych na stracenie 'commits'. Na przyklad:
+
+ $ git config gc.pruneexpire "30 days"
+
+znaczy, że skasowany 'commit' zostanie nieuchronnie utracony dopiero po 30 dniach od wykonania polecenia *git gc*.
+
+Jeśli chcałbyś zapobiec automatyycznemu wykonywaniu *git gc*:
+
+ $ git config gc.auto 0
+
+wtedy 'commits' będą tylko wtedy usuwane, gdy ręcznie wykonasz polecenie *git gc*.
+
+=== Budować na bazie Gita ===
+
+W prawdziwym unixowym świecie sama konstrukcja Gita pozwala na wykorzystanie go jako funkcji niskiego poziomu przez inne aplikacje, jak na przykład interfejsy graficzne i aplikacje internetowe, alternatywne narzędzia konsoli, narzędzia patchujące, narzędzia pomocne w importowaniu i konwertowaniu i tak dalej. Nawek same polecenia Git są czasami malutkimi skryptami, jak krasnoludki na ramieniu olbrzyma. Przykładając trochę ręki możesz adoptować Git do twoich własnych potrzeb.
+
+Prostą sztuczką może być korzystanie z zintegrowanej w Git funkcji aliasu, by skrócić najczęściej stosowane polecenia:
+
+ $ git config --global alias.co checkout
+ $ git config --global --get-regexp alias  # wyświetli aktualne aliasy
+ alias.co checkout
+ $ git co foo                              # to samo co 'git checkout foo'
+
+Czymś troszeczkę innym będzie zapis nazwy aktualnego 'branch' w prompcie lub jako nazwy okna. Polecenie:
+
+ $ git symbolic-ref HEAD
+
+pokaże nazwę aktualnego 'branch'. W praktyce chciałbyś raczej usunąć "refs/heads/" i ignorować błędy:
+
+ $ git symbolic-ref HEAD 2> /dev/null | cut -b 12-
+
+Podkatakog +contrib+ jest wielkim znaleziskiem narzędzi zbudowanych dla Gita. Z czasem niektóre z nich mogą uzyskać status oficjalnych poleceń. W dystrybucjach Debiana i Ubuntu znajdziemy ten katalog pod +/usr/share/doc/git-core/contrib+.
+
+Ulubionym przedstawicielem jest +workdir/git-new-workdir+. Poprzez sprytne przelinkowania skrypt ten tworzy nowy katalog roboczy, który dzieli swoją historię wersji z oryginalnym repozytorium:
+
+ $ git-new-workdir istniejacy/repo nowy/katalog
+
+Ten nowy katalog i znajdujące się w nim pliki można sobie wyobrazić jako klon, z tą różnicą, że ze względu na wspólną niepodzieloną historie obje wersje pozostaną zsynchronizowane. Synchronizacja za pomocą 'merge', 'push', czy 'pull' nie będzie konieczna.
+
+=== Śmiałe wyczyny ===
+
+Obecnie Git dość dobrze chroni użytkownika przed przypadkowym zniszczeniem danych. Ale, jeśli wiemy co robić, możemy obejść środki ochrony najczęściej stosowanych poleceń.
+
+*Checkout*: nie wersjonowane zmiany doprowadzą do niepowodzenia polecenia 'checkout'. Aby mimo tego zniszczyć zmiany i przywołać istniejący 'commit', możemy skorzystać z opcji 'force':
+
+ $ git checkout -f HEAD^
+
+Jeśli poleceniu 'checkout' podamy inną ścieżkę, środki ochrony nie znajdą zastosowania. Podana ścieżka zostanie bez pytania zastąpiona. Bądź ostrożny stosując 'checkout' w ten sposób.
+
+*reset*: reset odmówi pracy, jeśli znajdzie niewersjonowane zmiany.  By zmusić go do tego, możesz użyć:
+
+ $ git reset --hard 1b6d
+
+*Branch*: Skasowanie 'branches' też się nie powiedzie, jeśli mogłyby przez to zostać utracone zmiany. By wymusić skasowanie, podaj:
+
+ $ git branch -D martwy_branch # zamiast -d
+
+Również nie uda się próba przesunięcia 'branch' poleceniem 'move', jeśliby miałoby to oznaczać utratę danych. By wymusić przesunięcie, podaj:
+
+ $ git branch -M źródło cel # zamiast -m
+
+Inaczej niż w przypadku 'checkout' i 'reset', te oba polecenia przesuną zniszczenie danych. Zmiany te zostaną zapisane w podkatalogu .git i mogą znów zostać przywrócone, jeśli znajdziemy odpowiedni hash SHA1 w `.git/logs` (zobacz "Łowcy głów" powyżej).  Standardowo dane te pozostają jeszcze przez 2 tygodnie.
+
+*clean*: Różnorakie polecenia Git nie chcą zadziałać, ponieważ podejżewają konflikty z niewersjonowanymi danymi. Jeśli jesteś pewny, że wszystkie niezwersjonowane pliki i katalogi są zbędne, skasujesz je bezlitośnie poleceniem:
+
+ $ git clean -f -d
+
+Następnym razem te uciążliwe polecenia zaczną znów być posłuszne.
+
+=== Zapobiegaj złym 'commits' ===
+
+Głupie błędy zaśmiecają moje repozytoria. Najbardziej fatalny jest brak plików z powodu zapomnianych *git add*. Mniejszymi usterkami mogą być spacje na końcu linii i nierozwiązane konflikty poleceń 'merge': mimo iż nie są groźne, życzyłbym sobie, by nigdy nie wystąpiły publicznie.
+
+Gdybym tylko zabezpieczył się wcześniej, stosując prosty _hook_, który alarmowałby mnie przy takich problemach.
+
+ $ cd .git/hooks
+ $ cp pre-commit.sample pre-commit  # Starsze wersje Gita wymagają jeszcze: chmod +x pre-commit
+
+I już 'commit' przerywa, jeśli odkryje niepotrzebne spacje na końcu linii albo nierozwiązane konflikty 'merge'.
+
+Na początku *pre-commit* tego 'hook' umieściłbym dla ochrony przed rozdrobnieniem:
+
+ if git ls-files -o | grep '\.txt$'; then
+   echo FAIL! Untracked .txt files.
+   exit 1
+ fi
+
+Wiele operacji Gita pozwala na używanie 'hooks'; zobacz też: *git help hooks*.  We wcześniejszym rozdziale "Git poprzez http" przytoczyliśmy przykład 'hook' dla *post-update*, który wykonywany jest zawsze, jeśli znacznik 'HEAD' zostaje przesunięty. Ten przykładowy skrypt 'post-update' aktualizuje dane, które potrzebne są do komunikacji poprzez 'Git-agnostic transports', jak na przykład HTTP.
