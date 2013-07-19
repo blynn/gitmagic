@@ -29,6 +29,7 @@ Bedarf zuschneiden kannst.
  - link:/~blynn/gitmagic/intl/de/[Deutsch]: von Benjamin Bellee und Armin
    Stebich; Auch gehostet unter http://gitmagic.lordofbikes.de/[Armin's
    Website].
+ - link:/~blynn/gitmagic/intl/it/[Italienisch]: von Mattia Rigotti.
  - http://www.slideshare.net/slide_user/magia-git[Portugiesisch]: von
    Leonardo Siqueira Rodrigues
    [http://www.slideshare.net/slide_user/magia-git-verso-odt[ODT-Version]].

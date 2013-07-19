@@ -23,7 +23,7 @@ perché il vostro salvataggio precedente avrebbe potuto trovarsi ad un punto
 particolarmente divertente del gioco che avreste magari voluto
 rivisitare in futuro. O ancora peggio se il vostro salvataggio più
 recente si fosse rivelato essere uno stato da cui è impossibile vincere
-il gioco, obbligandovi a ricominciare la partita da zero. 
+il gioco, obbligandovi a ricominciare la partita da zero.
 
 === Controllo di versione ===
 
@@ -37,23 +37,23 @@ provvedendo in molti casi multiple possibilità di salvataggio
 automaticamente ordinate temporalmente.
 
 Rendiamo il problema un po' più complicato. Immaginate di avere un
-un gruppo di files che vanno insieme, come il codice sorgente di un
-progetto o i files per un sito web. In questo caso se volete conservare
+un gruppo di file che vanno insieme, come il codice sorgente di un
+progetto o i file per un sito web. In questo caso se volete conservare
 una vecchia versione dovete archiviare una directory intera. Conservare
 diverse versioni a mano non è scomodo e diventa rapidamente
 impraticabile.
 
 Nel caso di alcuni videogiochi, il salvataggio di una partita consiste
-effettivamente in una directory contenente diversi files. Questi giochi
+effettivamente in una directory contenente diversi file. Questi giochi
 nascondono questo dettaglio al giocatore e presentano una comoda
 interfaccia per gestire le diverse versioni di tale cartella.
 
 I sistemi di controllo di versione non sono niente più di questo. Hanno
-tutti una comoda interfaccia per gestire una directory piena di files.
+tutti una comoda interfaccia per gestire una directory piena di file.
 Potete salvare lo stato della directory di tanto in tanto, e più tardi
 potete caricare ognuno degli stati precedentemente salvati. A differenza
 della maggioranza di videogiochi, conservano in maniere intelligente lo
-spazio. Tipicamente, pochi files alla volta cambiano da una versione
+spazio. Tipicamente, pochi file alla volta cambiano da una versione
 alla successiva. Si può quindi risparmiare spazio salvando le differenze
 invece di fare nuove copie complete.
 
@@ -61,7 +61,7 @@ invece di fare nuove copie complete.
 
 Immaginate ora un videogioco difficilissimo. Così difficile da terminare
 che molti esperti giocatori da tutto il mondo decidono di collaborare e
-condividere le loro partite salvate per cercare di venirne a capo. 
+condividere le loro partite salvate per cercare di venirne a capo.
 Gli http://it.wikipedia.org/wiki/Speedrun[Speedrun] sono un
 esempio concreto di questa pratica: dei giocatori si specializzano
 ognuno a giocare un livello dello stesso gioco nel miglior modo

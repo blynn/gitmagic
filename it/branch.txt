@@ -1,7 +1,7 @@
-== La stregoneria dei branch ==
+== La stregoneria delle branch ==
 
-Le funzioni di branch e merge sono le migliori "killer features" di
-Git.
+Le funzioni di merge e di ramificazione (o 'branch') sono le migliori
+"killer features" di Git.
 
 *Problema*: Fattori esterni conducono inevitabilmente a cambiamenti di
 contesto. Un grave bug si manifesta inaspettatamente nella versione di
@@ -20,18 +20,18 @@ versione che si vuole.
 
 Ma clonare richiede comunque di copiare un'intera cartella di lavoro, in
 aggiunta all'intera storia fino al punto voluto. Anche se Git riduce i
-costi tramite la condivisione di files e gli hard links, i files di
+costi tramite la condivisione di file e gli hard link, i file di
 progetto stessi devono essere ricreati interamente nella nuova cartella
 di lavoro.
 
 *Soluzione*: Git ha un metodo migliore per queste situazioni che è molto
-migliore ed efficiente in termini di spazio che il clonaggio: il comando 
+migliore ed efficiente in termini di spazio che il clonaggio: il comando
 *git branch*.
 
-Grazie a questa parola magica i files nella directory si trasformano
+Grazie a questa parola magica i file nella directory si trasformano
 immediatamente da una versione a un'altra. Questa trasformazione può
 fare molto di più che portarvi avanti e indietro nella storia del
-progetto. I vostri files possono trasformarsi dall'ultima release alla
+progetto. I vostri file possono trasformarsi dall'ultima release alla
 versione corrente di sviluppo, alla versione di un vostro collega, ecc.
 
 === Boss key ===
@@ -72,17 +72,17 @@ in commit le vostre modifiche per ognuna indipendentemente.
 
 === Lavoro temporaneo ===
 
-[[branch]] 
+[[branch]]
 Diciamo che state lavorando ad una funzionalità e, per qualche ragione,
 dovete ritornare a tre versioni precedenti e temporaneamente aggiungere
-qualche istruzione per vedere come funziona qualcosa. Fate: 
+qualche istruzione per vedere come funziona qualcosa. Fate:
 
  $ git commit -a
  $ git checkout HEAD~3
 
 Ora potete aggiungere codice temporaneo ovunque vogliate. Potete
 addirittura fare un commit dei cambiamenti. Quando avete finito
-eseguite: 
+eseguite:
 
  $ git checkout master
 
@@ -101,9 +101,9 @@ ritornare ai cambiamenti temporanei, eseguite semplicemente:
 
 Abbiamo già parlato del comando _checkout_ in un capitolo precedente, mentre
 discutevamo il caricamento di vecchi stati. Ne parleremo ancora più
-avanti. Per ora ci basta sapere questo: i files vengono cambiati allo
+avanti. Per ora ci basta sapere questo: i file vengono cambiati allo
 stato richiesto, ma bisogna lasciare la branch master. A partire da
-questo momento, tutti i commit porteranno i vostri files su una strada
+questo momento, tutti i commit porteranno i vostri file su una strada
 diversa che potrà essere nominata più avanti.
 
 In altre parole, dopo un checkout verso uno stato precedente, Git ci
@@ -131,7 +131,7 @@ nuove correzioni del bug:
 
 === Merge ===
 
-Con alcuni sistemi di controllo di versione creare delle branches è
+Con alcuni sistemi di controllo di versione creare delle branch è
 molto facile, ma fare un merge è difficile. Com Git, fare un merge è
 così facile che potreste anche non accorgervi che lo state facendo.
 
@@ -187,8 +187,8 @@ completata e testata. Alcuni progetti richiedono che il vostro codice
 sia rivisto prima di essere accettato. Siete quindi obbligati ad
 aspettare l'approvazione della prima parte prima di iniziare la seconda.
 
-Grazie alla facilità con cui si effettuano branching e merging, si
-possono piegare le regole e lavorare sulla parte II prima che la parte I
+Grazie alla facilità con cui si creano delle branch e si effettua un
+merge, si possono piegare le regole e lavorare sulla parte II prima che la parte I
 sia ufficialmente pronta. Supponiamo che avete fatto il commit della
 parte I e l'avete sottomessa per approvazione. Diciamo che siete nella
 branch `master`. Create allora una nuova branch così:
@@ -202,14 +202,14 @@ potete saltare questo passaggio.
 
  $ git checkout master  # Ritorno alla parte 1
  $ correzione_problemi
- $ git commit -a        # Commit delle correzioni. 
+ $ git commit -a        # Commit delle correzioni.
  $ git checkout part2   # Ritorno alla parte 2.
  $ git merge master     # Merge delle correzioni.
 
 Finalmente la parte I è approvata.
 
- $ git checkout master    # Ritorno alla parte I. 
- $ distribuzione files    # Distribuzione in tutto il mondo! 
+ $ git checkout master    # Ritorno alla parte I.
+ $ distribuzione files    # Distribuzione in tutto il mondo!
  $ git merge part2        # Merge della parte II
  $ git branch -d part2    # Eliminazione della branch "part2"
 
@@ -240,7 +240,7 @@ solo a voi stessi e volete che altri possano vedere le vostre versioni
 solo quando sono ben organizzate. Cominciamo creando due branch:
 
   $ git branch ordine           # Crea una branch per commit organizzati.
-  $ git checkout -b pasticcio   # Crea e si sposta in una branch in cui lavorare 
+  $ git checkout -b pasticcio   # Crea e si sposta in una branch in cui lavorare
 
 In seguito lavorate su tutto quello che volete: correggere bugs,
 aggiungere funzionalità, aggiungere codice temporaneo, e così via,
@@ -252,7 +252,7 @@ facendo commit quando necessario. Poi:
 applica le modifiche della versione progenitore della corrente versione
 ``pasticcio'' alla versione ``ordine''. Con i cherry-pick appropriati
 potete costruire una branch che contiene solo il codice permanente e
-che raggruppa tutti i commit collegati. 
+che raggruppa tutti i commit collegati.
 
 === Gestione di branch ===
 
@@ -299,14 +299,14 @@ volete ritornare allo stato corrispondente al vostro 'stash', eseguite:
 
 Potete avere stash multipli, e manipolarli in modi diversi. Vedere *git
 help stash* per avere più informazioni. Come avrete indovinato, Git
-mantiene delle branch dietro le quiente per realizzare questi trucchi
+mantiene delle branch dietro le quinte per realizzare questi trucchi
 magici.
 
 === Lavorate come volete ===
 
 Potreste chiedervi se vale la pena usare delle branch. Dopotutto creare
 dei cloni è un processo altrettanto rapido e potete passare da uno
-all'altro con un semplice *cd*, invece che gli esoterici comandi di Git. 
+all'altro con un semplice *cd*, invece che gli esoterici comandi di Git.
 
 Consideriamo un browser web. Perché supportare tabs multiple oltre a
 finestre multiple? Perché permettere entrambi accomoda una gamma

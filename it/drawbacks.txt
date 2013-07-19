@@ -1,0 +1,185 @@
+== Appendice A: Le lacune di Git ==
+
+Git presenta qualche problema che ho nascosto sotto il tappeto. Alcuni
+possono essere facilmente risolti con script e 'hook', altri richiedono
+di riorganizzare e ridefinire il progetto, e per le poche rimanenti
+seccature non vi rimarrà che attendere. O meglio ancora, contribuire
+con il vostro aiuto!
+
+=== Le debolezze di SHA1 ===
+
+Con il tempo, gli specialisti in crittografia continuano a scoprire
+debolezze di SHA1. È già possibile trovare collisioni hash (cioè
+sequenze di byte che risultano nello stesso codice hash), dati
+sufficienti mezzi. Fra qualche anno anche un normale PC potrebbe avere
+abbastanza potenza di calcolo per corrompere in maniera non rilevabile
+un deposito Git.
+
+Auspicabilmente Git sarà migrato verso un migliore sistema di funzioni
+hash prima che ulteriore ricerca distruggerà lo standard SHA1.
+
+=== Microsoft Windows ===
+
+Git per Microsoft Windows può essere piuttosto ingombrante:
+
+- http://cygwin.com/[Cygwin] è un ambiente di emulazione di Linux per
+  Windows che contiene http://cygwin.com/packages/git/[una versione di
+  Git per Windows].
+
+- http://code.google.com/p/msysgit/[Git per MSys] è un alternativa che
+  richiede meno risorse, anche se alcuni comandi necessitano ancora di
+  essere migliorati.
+
+=== File senza relazione  ===
+
+Se il vostro progetto è molto grande e contiene molti file scorrelati
+che tendono a cambiare spesso, Git può essere in svantaggio rispetto ad
+altri sistemi perché file singoli non sono tenuti sotto controllo. Git
+tiene sotto controllo l'intero progetto, che normalmente è una strategia
+vantaggiosa.
+
+Una soluzione è di suddividere il vostro progetto in pezzi, ognuno
+consistente di gruppi di file correlati. Usate *git submodule* se volete
+poi comunque mantenere tutto in un deposito unico.
+
+=== Chi modifica cosa? ===
+
+Certi sistemi di controllo di versione vi obbligano a marcare
+esplicitamente un file prima di poterlo modificare. Mentre questo è
+particolarmente fastidioso perché implica comunicazioni addizionali con
+un server centrale, ha comunque due benefici:
+
+  1. Il calcolo delle differenze è rapido, perché solo i file marcati
+  devono essere esaminati.
+
+  2. Ognuno può sapere chi sta lavorando su un file chiedendo al server
+  centrale chi l'ha marcato per modifiche.
+
+Con qualche script appropriato, potete ottenere la stessa cosa con Git.
+Questo richiede cooperazione dagli altri programmatori, i quali devono
+eseguire script particolari prima di modificare un file.
+
+=== La storia di un file ===
+
+Perché Git registra modifiche in maniera globale al progetto, la
+ricostruzione della storia di un singolo file richiede più lavoro che in
+altri sistemi di controllo di versioni che si occupano di file
+individuali.
+
+Questo sovrappiù è generalmente trascurabile e ne vale la pena visto che
+permette altre operazioni di incredibile efficienza. Per esempio, `git
+checkout` è più rapido che `cp -a`, e una differenza di versione globale
+al progetto si comprime meglio che una collezione di differenze di file
+individuali.
+
+=== Il clone iniziale ===
+
+Creare un clone è più costoso che fare un checkout in altri sistemi di
+controllo di versione se il progetto ha una storia lunga.
+
+Il costo iniziale è un buon investimento, visto che operazioni future
+saranno più rapide e offline. Tuttavia, in alcune situazioni può essere
+preferibile creare un clone superficiale utilizzando l'opzione
+`--depth`. Questo è più rapido, ma il clone risultante ha funzionalità
+limitate.
+
+=== Progetti volatili ===
+
+Git è stato scritto per essere rapido rispetto alla dimensione dei
+cambiamenti. Normalmente si tende a fare piccole modifiche da una
+versione all'altra. La correzione di un bug in una linea qui, una nuova
+funzionalità là, commenti corretti, e così via. Ma se i vostri file
+cambiano radicalmente in revisioni successive, ad ogni commit la vostra
+storia crescerà necessariamente proporzionalmente alle dimensioni
+dell'intero progetto.
+
+Non c'è niente che nessun sistema di controllo di versione possa fare
+per evitare questo, ma gli utilizzatori di Git ne soffriranno di più
+perché ogni clone contiene normalmente la storia completa.
+
+Bisogna cercare la ragione per cui questi cambiamenti sono così grandi.
+Magari bisogna cambiare il formato dei file. Modifiche minori dovrebbero
+causare solo cambiamenti minori in solo pochi file.
+
+Magari un database o un sistema d'archivio sono invece una soluzione più
+adatta invece di un sistema di controllo di versione. Per esempio, un
+sistema di controllo di versione potrebbe non essere adatto per gestire
+fotografie prese periodicamente da una webcam.
+
+Se i file devono essere cambiare radicalmente e se devono essere gestite
+in versioni, una possibilità è di usare Git in maniera centralizzata. È
+possibile creare cloni superficiali che contengono solo una parte minore
+o addirittura inesistente della storia del progetto. Naturalmente in
+questo caso molti strumenti di Git non saranno più a disposizione, e
+correzioni dovranno essere fornite sotto forma di patch. Questo va
+probabilmente bene, visto che non sembrerebbe doverci essere nessun
+motivo per mantenere la storia di file ampiamente instabili.
+
+Un altro esempio è un progetto che dipende da un firmware che consiste
+in un enorme file binario. La storia di questo firmware non interessa
+agli utilizzatori, e gli aggiornamenti non sono molto compressibili, il
+che significa che le revisioni del firmware inflazionano inutilmente il
+deposito.
+
+In questo caso il codice sorgente dovrebbe essere salvato in un deposito
+Git, mentre i file binari dovrebbero essere tenuti separatamente. Per
+rendere la vita più facile, si potrebbe distribuire uno script che usa
+Git per clonare il codice sorgente, e rsync o un Git superficiale per il
+firmware.
+
+=== Contatore globale ===
+
+Alcuni sistemi di controllo di versione centralizzati mantengono un
+numero intero che aumenta quando un nuovo commit è accettato. Git fa
+riferimento ai cambiamenti tramite il loro codice hash, un metodo
+migliore in molte circostanze.
+
+Alcune persone vorrebbero però avere accesso a questo contatore.
+Fortunatamente è facile scrivere uno script che fa in maniera di
+aumentare un contatore nel deposito Git centrale ad ogni aggiornamento,
+magari grazie ad una tag associata con un hash dell'ultimo commit.
+
+Ogni clone potrebbe mantenere un tale contatore, ma questo sarebbe
+probabilmente inutile, visto che solo il contatore del deposito centrale
+è interessante per gli utenti.
+
+=== Sottocartelle vuote ===
+
+Sottocartelle vuote non possono essere gestite. Create dei file
+segnaposto per rimediare a questo problema.
+
+Queste limitazioni non sono dovute a come Git è concepito, ma piuttosto
+a come è correntemente implementato. Con un po' di fortuna, se
+abbastanza utilizzatori lo richiedono, questa funzionalità potrebbe
+essere implementata.
+
+=== Commit iniziale ===
+
+In informatico tipico conta a partire da 0, invece che da 1.
+Sfortunatamente, rispetto ai commit, Git non aderisce a questa
+convenzione. Molti comandi non funzionano prima del primo commit.
+Inoltre alcuni casi limite devono essere gestiti in maniera specifica:
+ad esempio, usare 'rebase' su una branch con commit iniziale diverso.
+
+Git beneficerebbe della definizione del commit numero zero: non appena
+un deposito è costruito, HEAD verrebbe assegnato ad una stringa
+consistente in 20 bytes zero. Questo commit speciale rappresenterebbe un
+tree vuoto, senza genitori, che sarebbe presente in tutti i depositi
+Git.
+
+In questo modo ad esempio l'esecuzione di 'git log' informerebbe
+l'utente che non sono ancora stati fatti commit, invece di terminare con
+un 'fatal error'. Una cosa simile varrebbe per altri comandi.
+
+Ogni commit iniziale sarebbe implicitamente discendente da questo commit
+zero.
+
+Ci sarebbero tuttavia casi problematici. Se diverse branch con commit
+iniziali diversi fossero fusi assieme con un merge, l'uso del comando
+'rebase' richiederebbe un sostanziale intervento manuale.
+
+=== Bizzarrie dell'interfaccia ===
+
+Dati due commit A e B, il significato delle espressioni "A..B" e "A...B"
+dipende da se il comando si attende due estremità o un intervallo.
+Vedete *git help diff* e *git help rev-parse*.

@@ -1,11 +1,11 @@
 == Cloniamo ==
 
 In vecchi sistemi di controllo di versione l'operazione standard per
-ottenere dei files era il checkout. Ottenete così un insieme di files
+ottenere dei file era il checkout. Ottenete così un insieme di file
 corrispondenti a un particolare stato precedentemente salvato.
 
 In Git e altri sistemi distribuiti di controllo versione, l'operazione
-standard è il clonaggio. Per ottenere dei files si crea un 'clone' di
+standard è il clonaggio. Per ottenere dei file si crea un 'clone' di
 tutto il deposito. In altre parole, diventate praticamente un
 http://it.wikipedia.org/wiki/Mirror_(informatica)[mirror] del server
 centrale. Tutto ciò che può fare il deposito centrale, potete farlo
@@ -18,31 +18,31 @@ Posso tollerare l'idea di creare degli archivi *tar* o di utilizzare
 volte sul mio desktop, e può darsi che nel frattempo le due macchine non
 si siano parlate.
 
-Inizializzate un deposito Git e fate un *commt* dei vostri files su una
+Inizializzate un deposito Git e fate un *commit* dei vostri file su una
 macchina. Poi sull'altra eseguite:
 
  $ git clone altro.computer:/percorso/verso/il/file
 
-per creare una seconda copia dei files in un deposito Git. Da adesso in
+per creare una seconda copia dei file in un deposito Git. Da adesso in
 avanti,
 
  $ git commit -a
  $ git pull altro.computer:/percorso/verso/il/file HEAD
 
-trasferirà lo stato dei files sull'altro computer aggiornando quello su
+trasferirà lo stato dei file sull'altro computer aggiornando quello su
 cui state lavorando. Se avete recentemente fatto delle modifiche
 conflittuali dello stesso file, Git ve lo segnalerà e dovrete ripetere
 nuovamente il commit, dopo che avrete risolto il conflitto.
 
-=== Controllo classico di files sorgente ===
+=== Controllo classico di file sorgente ===
 
-Inizializzate il deposito Git dei vostri files:
+Inizializzate il deposito Git dei vostri file:
 
  $ git init
  $ git add .
  $ git commit -m "Commit iniziale"
 
-Sul server central inizializzate un 'deposito nudo' (*nudo* nella
+Sul server centrale inizializzate un 'deposito nudo' (*nudo* nella
 terminologia Git) in una cartella qualunque:
 
  $ mkdir proj.git
@@ -62,7 +62,7 @@ Trasferite il vostro progetto sul server centrale con:
 
  $ git push git://server.centrale/percorso/fino/a/proj.git HEAD
 
-Per ottenere i files surgente, uno sviluppatore deve eseguire: 
+Per ottenere i file sorgente, uno sviluppatore deve eseguire:
 
  $ git clone git://server.centrale/percorso/fino/a/proj.git
 
@@ -88,9 +88,9 @@ sviluppatori, il push fallisce et lo sviluppatore deve aggiornarsi
 all'ultima versione, risolvere eventuali conflitti , e provare di
 nuovo.
 
-Perché i comandi pull e pushj precedenti funzionino bisogna avere
+Perché i comandi pull e push precedenti funzionino bisogna avere
 accesso SSH. Comunque, chiunque può vedere il codice sorgente digitando:
- 
+
  $ git clone git://server.centrale/percorso/fino/a/proj.git
 
 Il protocollo nativo git è come l'HTTP: non c'è nessuna autenticazione,
@@ -109,7 +109,7 @@ via SSH.
 === Depositi nudi ===
 
 Un deposito nudo (*bare repository*) si chiama così perché non possiede
-una cartella di lavoro; contiene solo i files che sono solitamente
+una cartella di lavoro; contiene solo i file che sono solitamente
 nascosti nella sottocartella `.git`. In altre parole, mantiene
 unicamente la storia del progetto, e e non conserva nessuna versione.
 
@@ -129,7 +129,7 @@ deposito, o si utilizza l'opzione `--bare`.
 
 Perché abbiamo introdotto il comando `push`, invece di affidarci
 al più familiare comando `pull`? Prima di tutto il comando `pull` non
-funziona con depositi nudi: in questo caso bisogna invece usare `fetch`, 
+funziona con depositi nudi: in questo caso bisogna invece usare `fetch`,
 un comando che discuteremo più tardi. Ma anche se avessimo un deposito
 normale sul server centrale, usare `pull` sarebbe sarebbe scomodo.
 Bisognerebbe per prima cosa connettersi al server e poi dare come
@@ -164,7 +164,7 @@ Volete degli archivi ridondanti e geograficamente distribuiti? Se il
 vostro progetto ha moti sviluppatori non c'è bisogno di fare niente!
 Ogni clone del vostro codice è effettivamente un backup. Non solo dello
 stato corrente, ma dell'intera storia del vostro progetto. Grazie al
-hashing crittografico, se qualcuno dovesse avere un close corrotto, 
+hashing crittografico, se qualcuno dovesse avere un clone corrotto,
 sarà individuato non appena si connetterà agli altri.
 
 Se il vostro progetto non è molto popolare, trovate il più alto numero
@@ -223,7 +223,7 @@ Andate quindi nella nuova cartella e lanciate:
 
 La procedura per condividere le vostre modifiche con gli altri dipende
 d'altro canto dall'altro sistema di controllo di versione. La nuova
-cartella contiene i files con i vostri cambiamenti. Lanciate qualsiasi
+cartella contiene i file con i vostri cambiamenti. Lanciate qualsiasi
 comando dell'altro sistema di controllo di gestione sia necessario per
 inviarli al deposito centrale.
 
@@ -238,7 +238,7 @@ Subversion.
 Mercurial è un sistema di controllo di versione che può funzionare
 in tandem con Git in modo quasi trasparente. Con il plugin `hg-git` un
 utente di Mercurial può, senza svantaggi, inviare a (push) e ottenere
-(pull) da un reposito Git.
+(pull) da un deposito Git.
 
 Scaricate il plugin `hg-git` con Git:
 
@@ -271,13 +271,13 @@ dopo aver aggiunto lo script al vostro `$PATH`.
 === Bazaar ===
 
 Menzioniamo brevemente Bazaar perché è il sistema di controllo di
-versione distribuito gratuito più popolare dopo Git e Mercurial. 
+versione distribuito gratuito più popolare dopo Git e Mercurial.
 
 Bazaar ha il vantaggio del senno di poi, visto che è relativamente
 giovane; i suoi disegnatori hanno potuto imparare dagli errori commessi
 nel passato e evitare gli scogli storici. Inoltre, i suoi sviluppatori
 sono attenti a questioni come la portabilità e l'interoperabilità con
-altri sistemi di controllo di versione. 
+altri sistemi di controllo di versione.
 
 Un plugin chiamato `bzr-git` permette agli utilizzatori di Bazaar di
 lavorare con depositi Git in una certa misura. Il programma `tailor`
@@ -292,17 +292,17 @@ gestire l'inimmaginabilmente ingestibile sorgente del kernel Linux. Non
 ho mai sentito la necessità di cambiare. Git mi ha servito un servizio
 impeccabile, e non sono mai stato colto alla sprovvista dai suoi
 limiti. Siccome utilizzo primariamente Linux, i problemi che appaiono
-sulle altre piattaforme non mi concernono. 
+sulle altre piattaforme non mi concernono.
 
 In più preferisco programmi in C e scripts in bash rispetto agli
 eseguibili tipo gli scripts Python: ci sono meno dipendenze, e sono
-dipendente all'alta velocità di esecuzione. 
+dipendente all'alta velocità di esecuzione.
 
 Ho riflettuto a come migliorare Git, arrivando fino al punto di scrivere
 la mia propria versione, ma solo come un esercizio accademico. Anche se
 avessi completato il mio progetto, sarei rimasto a Git comunque, visto
 che i vantaggi sarebbero stati minimi per giustificare l'utilizzazione
-di un sistema solitario. 
+di un sistema solitario.
 
 Naturalmente, i vostri bisogni e richieste probabilmente differiscono
 dai miei, e quindi potreste trovarvi meglio con un altro sistema.

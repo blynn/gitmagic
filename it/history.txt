@@ -1,0 +1,313 @@
+== Lezioni di storia ==
+
+Una delle conseguenze della natura distribuita di Git è che il corso
+storico può essere modificato facilmente. Ma se alterate il passato fate
+attenzione: riscrivete solo le parti di storia che riguardano solo voi.
+Nello stesso modo in cui nazioni dibattono le responsabilità di
+atrocità, se qualcun altro ha un clone la cui storia differisce dalla
+vostra, avrete problemi a riconciliare le vostre differenze.
+
+Certi sviluppatori insistono che la storia debba essere considerata
+immutabile, inclusi i difetti. Altri pensano invece che le strutture
+storiche debbano essere rese presentabili prima di essere presentate
+pubblicamente. Git è compatibile con entrambi i punti di vista. Come con
+l'uso di clone, branch e merge, riscrivere la storia è semplicemente un
+altra capacità che vi permette Git. Sta a voi farne buon uso.
+
+=== Mi correggo ===
+
+Avete appena fatto un commit, ma ora vi accorgete che avreste voluto
+scrivere un messaggio diverso? Allora eseguite:
+
+ $ git commit --amend
+
+per modificare l'ultimo messaggio. Vi siete accorti di aver dimenticato
+di aggiungere un file? Allora eseguite *git add* per aggiungerlo, e
+eseguite il comando precedente.
+
+Volete aggiungere qualche modifica supplementare nell'ultimo commit?
+Allora fatele e eseguite:
+
+ $ git commit --amend -a
+
+=== ... e ancora di più ===
+
+Supponiamo che il problema precedente è dieci volte peggio. Dopo una
+lunga seduta avete fatto parecchi commit. Ma non siete soddisfatto da
+come sono organizzati, e alcuni messaggi di commit potrebbero essere
+riscritti meglio. Allora digitate:
+
+ $ git rebase -i HEAD~10
+
+e gli ultimi 10 commit appariranno nel vostro $EDITOR di teso
+preferito. Ecco un piccolo estratto come esempio:
+
+    pick 5c6eb73 Added repo.or.cz link
+    pick a311a64 Reordered analogies in "Work How You Want"
+    pick 100834f Added push target to Makefile
+
+I commit più vecchi precedono quelli più recenti in questa lista, a
+differenza del comando `log`. Qua 5c6eb73 è il commit più vecchio e
+100834f è il più recente. In seguito:
+
+- Rimuovete un commit cancellando la sua linea. È simile al comando
+  revert, ma è come se il commit non fosse mai esistito.
+- Cambiate l'ordine dei commit cambiando l'ordine delle linee.
+- Sostituite `pick` con:
+   * `edit` per marcare il commit per essere modificato.
+   * `reword` per modificare il messaggio nel log.
+   * `squash` per fare un merge del commit con quello precedente.
+   * `fixup` per fare un merge di questo commit con quello precedente e rimuovere il messaggio nel log.
+
+Ad esempio, possiamo sostituire il secondo `pick` con `squash`:
+
+    pick 5c6eb73 Added repo.or.cz link
+    squash a311a64 Reordered analogies in "Work How 'ou Want"
+    pick 100834f Added push target to Makefile
+
+Dopo aver salvato ed essere usciti dal file, Git fa un merge di a311a64
+in 5c6eb73. Quindi *squash* fa un merge combinando le versioni nella
+versione precedente.
+
+Git quindi combina i loro messaggi e li presenta per eventuali
+modifiche. Il comando *fixup* salta questo passo; il messaggio log a cui
+viene applicato il comando viene semplicemente scartato.
+
+Se avete marcato un commit con *edit*, Git vi riporta nel passato, al
+commit più vecchio. Potete correggere il vecchio commit come descritto
+nella sezione precedente, e anche creare nuovi commit nella posizione
+corrente. Non appena siete soddisfatto con le rettifiche, ritornate in
+avanti nel tempo eseguendo:
+
+ $ git rebase --continue
+
+Git ripercorre i commit fino al prossimo *edit*, o fino al presente se
+non ne rimane nessuno.
+
+Potete anche abbandonare il vostro tentativo di cambiare la storia con
+'rebase' nel modo seguente:
+
+ $ git rebase --abort
+
+Quindi fate dei commit subito e spesso: potrete mettere tutto in ordine
+più tardi con 'rebse'.
+
+=== E cambiamenti locali per finire ===
+
+State lavorando ad un progetto attivo. Fate alcuni commit locali, e poi vi
+sincronizzate con il deposito ufficiale con un merge. Questo ciclo si
+ripete qualche volta fino a che siete pronti a integrare a vostra volta
+i vostri cambiamenti nel deposito centrale con 'push'.
+
+Ma a questo punto la storia del vostro clone Git locale è un confuso
+garbuglio di modifiche vostre e ufficiali. Preferireste vedere tutti i
+vostri cambiamenti in una sezione contigua, seguita dai cambiamenti
+ufficiali.
+
+Questo è un lavoro per *git rebase* come descritto precedentemente. In
+molti casi potete usare la flag *--onto* per evitare interazioni.
+
+Leggete *git help rebase* per degli esempi dettagliati di questo
+fantastico comando. Potete scindere dei commit. Potete anche
+riarrangiare delle branch di un deposito.
+
+State attenti: rebase è un comando potente. In casi complessi fate prima
+un backup con *git clone*.
+
+=== Riscrivere la storia ===
+
+Occasionalmente c'è bisogno  di fare delle modifiche equivalenti a
+cancellare con persone da una foto ufficiale, cancellandole dalla storia
+in stile Stalinista. Per esempio, supponiamo che avete intenzione di
+pubblicare un progetto, ma che questo include un file che per qualche
+ragione volete tenere privato. Diciamo ad esempio che ho scritto il mio
+numero di carta di credito in un file che ho aggiunto per sbaglio al
+progetto. Cancellare il file non è abbastanza, visto che si può ancora
+recuperare accedendo ai vecchi commit. Quello che bisogna fare è
+rimuovere il file da tutti i commit:
+
+ $ git filter-branch --tree-filter 'rm file/segreto' HEAD
+
+Nella documentazione in *git help filter-branch* viene discusso questo
+esempio e dà anche un metodo più rapido. In generale, *filter-branch* vi
+permette di modificare intere sezioni della storia con un singolo
+comando.
+
+In seguito la cartella +.git/refs/original+ conterrà lo stato del vostro
+deposito prima dell'operazione. Verificate che il comando filter-branch
+abbia fatto quello che desiderate, e cancellate questa cartella se
+volete eseguire ulteriori comandi filter-branch.
+
+Infine rimpiazzate i cloni del vostro progetto con la versione
+revisionata se avete intenzione di interagire con loro più tardi.
+
+=== Fare la storia ===
+
+[[makinghistory]]
+Volete far migrare un progetto verso Git? Se è gestito con uno dei
+sistemi più diffusi, è molto probabile che qualcuno abbia già scritto
+uno script per esportare l'intera storia verso Git.
+
+Altrimenti, documentatevi sul comando *git fast-import* che legge un
+file di testo in un formato specifico per creare una storia Git a partire
+dal nulla. Tipicamente uno script che utilizza questo comando è uno
+script usa-e-getta scritto rapidamente e eseguito una volta sola per far
+migrare il progetto.
+
+Come esempio, incollate il testo seguente in un file temporaneo
+chiamato `/tmp/history`:
+----------------------------------
+commit refs/heads/master
+committer Alice <alice@example.com> Thu, 01 Jan 1970 00:00:00 +0000
+data <<EOT
+Commit iniziale
+EOT
+
+M 100644 inline hello.c
+data <<EOT
+#include <stdio.h>
+
+int main() {
+  printf("Hello, world!\n");
+  return 0;
+}
+EOT
+
+
+commit refs/heads/master
+committer Bob <bob@example.com> Tue, 14 Mar 2000 01:59:26 -0800
+data <<EOT
+Remplacement de printf() par write().
+EOT
+
+M 100644 inline hello.c
+data <<EOT
+#include <unistd.h>
+
+int main() {
+  write(1, "Hello, world!\n", 14);
+  return 0;
+}
+EOT
+----------------------------------
+
+Poi create un deposito Git a partire da questo file temporaneo
+eseguendo:
+
+ $ mkdir project; cd project; git init
+ $ git fast-import --date-format=rfc2822 < /tmp/history
+
+Potete fare il checkout dell'ultima versione di questo progetto con:
+
+ $ git checkout master .
+
+Il comando *git fast-export* può convertire qualsiasi deposito Git nel
+formato *git fast-import*, che vi permette di studiare come funzionano
+gli script di esportazione, e vi permette anche di convertire un
+deposito in un formato facilmente leggibile. Questi comandi permettono
+anche di inviare un deposito attraverso canali che accettano solo
+formato testo.
+
+=== Dov'è che ho sbagliato? ===
+
+Avete appena scoperto un bug in una funzionalità del vostro programma
+che siete sicuri funzionasse qualche mese fa. Argh! Da dove viene questo
+bug? Se solo aveste testato questa funzionalità durante lo sviluppo!
+
+Ma è troppo tardi. D'altra parte, a condizione di aver fatto dei commit
+abbastanza spesso, Git può identificare il problema.
+
+ $ git bisect start
+ $ git bisect bad HEAD
+ $ git bisect good 1b6d
+
+Git estrae uno stato a metà strada di queste due versioni (HEAD e 1b6d).
+Testate la funzionalità e, se ancora non funziona:
+
+ $ git bisect bad
+
+Altrimenti rimpiazzate "bad" con "good". Git vi trasporta a un nuovo
+stato a metà strada tra le versioni "buone" e quelle "cattive",
+riducendo così le possibilità. Dopo qualche iterazione, questa ricerca
+binaria vi condurrà al commit che ha causato problemi. Una volta che la
+vostra ricerca è finita, ritornate allo stato originario digitando:
+
+ $ git bisect reset
+
+Invece di testare ogni cambiamento a mano, automatizzate la ricerca
+scrivendo:
+
+ $ git bisect run my_script
+
+Git usa il valore di ritorno dello script 'my_script' che avete passato
+per decidere se un cambiamento è buono o cattivo: my_script deve
+terminare con il valore 0 quando una versione è ok, 125 quando deve
+essere ignorata, o un valore tra 1 e 127 se ha un bug. Un valore di
+ritorno negativo abbandona il comando bisect.
+
+Ma potete fare molto di più: la pagina di help spiega come visualizzare
+le bisezioni, esaminare o rivedere il log di bisect, e eliminare noti
+cambiamenti innocui per accelerare la ricerca.
+
+=== Chi è che ha sbagliato?  ===
+
+Come in molti altri sistemi di controllo di versione, Git ha un comando
+per assegnare una colpa:
+
+ $ git blame bug.c
+
+Questo comando annota ogni linea del file mostrando chi l'ha cambiata
+per ultimo e quando. A differenza di molti altri sistemi di controllo di
+versione, questa operazione è eseguita off-line, leggendo solo da disco
+locale.
+
+=== Esperienza personale ===
+
+In un sistema di controllo di versione centralizzato le modifiche della
+storia sono un'operazione difficile, che è solo disponibile agli
+amministratori. Creare un clone, una branch e fare un merge sono delle
+operazioni impossibili senza una connessione di rete. La stessa cosa
+vale per operazioni di base come ispezionare la storia, o fare il commit
+di un cambiamento. In alcuni sistemi, è necessaria una connessione di
+rete anche solo per vedere le proprie modifiche o per aprire un file con
+diritto di modifica.
+
+Sistemi centralizzati precludono il lavoro off-line, e necessitano
+infrastrutture di rete più ampie all'aumentare del numero di
+sviluppatori. Ancora più importante è il fatto che le operazioni sono a
+volte così lente da scoraggiare l'uso di alcune funzioni  avanzate, a
+meno che non siano assolutamente necessarie. In casi estremi questo può
+valere addirittura per comandi di base. Quando gli utenti devono
+eseguire comandi lenti, la produttività viene compromessa per via delle
+continue interruzioni del flusso di lavoro.
+
+Ho sperimentato questi fenomeni personalmente. Git è stato il primo
+sistema di controllo di versione che ho utilizzato. Mi sono velocemente
+abituato al suo uso, dando per scontate molte funzionalità. Assumevo
+semplicemente che altri sistemi fossero simili: scegliere un sistema di
+controllo di versione non mi sembrava diverso da scegliere un editor di
+testo o un navigatore web.
+
+Sono rimasto molto sorpreso quando più tardi sono obbligato ad
+utilizzare un sistema centralizzato. Una connessione internet instabile
+ha poca importanza con Git, ma rende lo sviluppo quasi impossibile
+quando il sistema esige che sia tanto affidabile quanto il disco locale.
+Inoltre, mi sono trovato ad evitare l'uso di alcuni comandi per via
+delle latenze che comportavano, fatto che finalmente mi impediva di
+seguire il metodo di lavoro abituale.
+
+Quando dovevo eseguire un comando lento, le interruzioni influivano
+molto negativamente sulla mia concentrazione. Durante l'attesa della
+fine delle comunicazioni col server, facevo qualcos'altro per passare il
+tempo, come ad esempio controllare le email o scrivere della
+documentazione. Quando ritornavo al lavoro iniziale, il comando aveva
+terminato da tempo e mi ritrovare a dover cercare di ricordare che cosa
+stessi facendo. Gli esseri umani non sono bravi a passare da un contesto
+all'altro.
+
+C'erano anche interessanti effetti di tragedia dei beni comuni:
+prevedendo congestioni di rete, alcuni utenti consumavano più banda di
+rete che necessario per effettuare operazioni il cui scopo era di
+ridurre le loro attese future. Questi sforzi combinati risultavano ad
+aumentare ulteriormente le congestioni, incoraggiando a consumare ancora
+più larghezza di banda per cercare di evitare latenze sempre più lunghe.

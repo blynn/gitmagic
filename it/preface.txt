@@ -84,7 +84,7 @@ sapere, o mandatemi semplicemente una patch!
 
 Questo manuale è pubblicato sotto la licenza http://www.gnu.org/licenses/gpl-3.0.html[GNU
 General Public License version 3]. Naturalmente il codice sorgente è
-disponibile come deposito Git, e si può ottenere digitando: 
+disponibile come deposito Git, e si può ottenere digitando:
 
  $ git clone git://repo.or.cz/gitmagic.git  # Crea la cartella
  "gitmagic"
@@ -96,6 +96,6 @@ oppure da altri server:
  $ git clone https://code.google.com/p/gitmagic/
  $ git clone git://git.assembla.com/gitmagic.git
  $ git clone git@bitbucket.org:blynn/gitmagic.git
-    
+
 GitHub, Assembla, e Bitbucket supportano deposito privati, gli ultimi
 due sono gratuiti.

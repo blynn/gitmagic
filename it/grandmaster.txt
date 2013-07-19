@@ -1,0 +1,301 @@
+== Padroneggiare Git ==
+
+A questo punto dovreste essere capaci di navigare la guida *git help* e
+di capire quasi tutto (a condizione ovviamente di capire l'inglese).
+Nonostante ciò ritrovare il comando esatto richiesto per risolvere un
+particolare problema può essere tedioso. Magari posso aiutarvi a
+risparmiare un po' di tempo: qua sotto trovate qualcuna delle ricette di
+cui ho avuto bisogno in passato.
+
+=== Pubblicazione di codice sorgente ===
+
+Per i miei progetti Git gestisce esattamente i file che voglio
+archiviare e pubblicare. Per creare un archivio in formato tar del
+codice sorgente utilizzo:
+
+ $ git archive --format=tar --prefix=proj-1.2.3/ HEAD
+
+=== Commit dei cambiamenti ===
+
+Dire a Git quando avete aggiunto, cancellato o rinominato dei file può
+essere fastidioso per certi progetti. Invece potete eseguire:
+
+ $ git add .
+ $ git add -u
+
+Git cercherà i file della cartella corrente e gestirà tutti i dettagli
+automaticamente. Invece del secondo comando 'add', eseguite `git
+commit -a` se volete anche fare un commit. Guardate *git help ignore*
+per sapere come specificare i file che devono essere ignorati.
+
+Potete anche effettuare tutti i passi precedenti in un colpo solo con:
+
+ $ git ls-files -d -m -o -z | xargs -0 git update-index --add --remove
+
+Le opzioni *-z* e *-0* permettono di evitare effetti collaterali dovuti
+a file il cui nome contiene strani caratteri. Visto che questo comando
+aggiunge anche file che sono ignorati, potreste voler usare le opzioni
+`-x` o `-X`.
+
+=== Il mio commit è troppo grande! ===
+
+Vi siete trascurati da un po' di tempo di fare dei commit? Avete scritto
+codice furiosamente dimenticandovi di controllo di versione? Avete
+implementato una serie di cambiamenti indipendenti, perché è il vostro
+stile di lavoro?
+
+Non c'è problema. Eseguite:
+
+ $ git add -p
+
+Per ognuna delle modifiche che avete fatto, Git vi mostrerà la parte di
+codice che è stata cambiata e vi domanderà se dovrà fare parte del
+prossimo commit. Rispondete con "y" (sì) o con "n" (no). Avete anche
+altre opzioni, come di postporre la decisione; digitate "?" per saperne
+di più.
+
+Una volta soddisfatti, eseguite:
+
+ $ git commit
+
+per fare un commit che comprende esattamente le modifiche selezionate
+(le modifiche `nell'area di staging`, vedere dopo). Assicuratevi di
+omettere l'opzione *-a*, altrimenti Git farà un commit che includerà
+tutte le vostre modifiche.
+
+Che fare se avete modificato molti file in posti diversi? Verificare ogni
+cambiamento uno alla volta diviene allora rapidamente frustrante e
+noioso. In questo caso usate *git add -i*, la cui interfaccia è meno
+intuitiva ma più flessibile. Con qualche tasto potete aggiungere o
+togliere più file alla volta dall'area di staging, oppure anche rivedere
+e selezionare cambiamenti in file particolari. Altrimenti potete anche
+eseguire *git commit \--interactive* che effettuerà automaticamente un
+commit quando avrete finito.
+
+=== L'indice : l'area di staging ===
+
+Fino ad ora abbiamo evitato il famoso 'indice' di Git, ma adesso
+dobbiamo parlarne per capire meglio il paragrafo precedente. L'indice è
+un'area temporanea di cosiddetto 'staging'. Git trasferisce raramente dati
+direttamente dal vostro progetto alla sua storia. Invece, Git scrive
+prima i dati nell'indice, e poi copia tutti i dati dell'indice nella
+loro destinazione finale.
+
+Un *commit -a* è ad esempio in realtà un processo a due fasi. La prima
+fase stabilisce un'istantanea (un cosiddetto 'snapshot') dello stato
+corrente di ogni file in gestione e la ripone nell'indice. La seconda
+fase salva permanentemente questo snapshot. Effettuare un commit senza
+l'opzione *-a* esegue solamente la seconda fase, e ha quindi solo senso
+solo a seguito di un comando che modifica l'indice, come ad esempio *git
+add*.
+
+Normalmente possiamo ignorare l'indice e comportandoci effettivamente
+come se se stessimo scambiando dati direttamente nella storia. In altri
+casi come quello precedente vogliamo un controllo più fine e manipoliamo
+quindi l'indice. Inseriamo nell'indice uno snapshot di alcuni, ma non
+tutti i cambiamenti, e poi salviamo permanentemente questi snapshot
+accuratamente costruiti.
+
+=== Non perdete la "testa"  ===
+
+La tag HEAD è come un cursore che normalmente punta all'ultimo commit,
+avanzando con ogni commit. Alcuni comandi di Git permettono di muoverla.
+Ad esempio:
+
+ $ git reset HEAD~3
+
+sposta HEAD tre commit indietro. Da qua via tutti i comandi Git agiscono
+come se non aveste fatto quegli ultimi tre commit, mentre i vostri file
+rimangono nello stato presente. Vedere la pagina di help per qualche
+applicazione interessante.
+
+Ma come fare per ritornare al futuro? I commit passati non sanno niente
+del futuro.
+
+Se conoscete il codice SHA1 dell'HEAD  originario (diciamo 1b6d...),
+fate allora:
+
+ $ git reset 1b6d
+
+Ma come fare se non l'avete memorizzato? Non c'è problema: per comandi
+di questo genere Git salva l'HEAD originario in una tag chiamata
+ORIG_HEAD, e potete quindi ritornare al futuro sani e salvi con:
+
+ $ git reset ORIG_HEAD
+
+=== Cacciatore di "teste" ===
+
+ORIG_HEAD può non essere abbastanza. Diciamo che vi siete appena accorti
+di un monumentale errore e dovete ritornare ad un vecchio commit in una
+branch dimenticata da lungo tempo.
+
+Per default Git conserva un commit per almeno due settimane, anche se
+gli avete ordinato di distruggere la branch lo conteneva. La parte
+difficile è trovare il codice hash appropriato. Potete sempre far
+scorrere tutti i codici hash il `.git/objects` e trovare quello che
+cercate per tentativi. C'è però un modo molto più facile.
+
+Git registra ogni codice hash che incontra in `.git/logs`. La
+sottocartella `refs` contiene la storia dell'attività di tutte le
+branch, mentre il file `HEAD` mostra tutti i codici hash che HEAD ha
+assunto. Quest'ultimo può usato per trovare commit di una branch che è
+stata accidentalmente cancellata.
+
+Il comando *reflog* provvede un'interfaccia intuitiva per gestire questi
+file di log. Provate a eseguire:
+
+  $ git reflog
+
+Invece di copiare e incollare codici hash dal reflog, provate:
+
+ $ git checkout "@{10 minutes ago}"
+
+O date un'occhiata al quintultimo commit visitato con:
+
+ $ git checkout "@{5}"
+
+Vedete la sezione ``Specifying Revisions'' di *git help rev-parse* per
+avere più dettagli.
+
+Potreste voler configurare un periodo più lungo per la ritenzione dei
+commit da cancellare. Ad esempio:
+
+  $ git config gc.pruneexpire "30 days"
+
+significa che un commit cancellato sarà perso permanentemente eliminato
+solo 30 giorni più tardi, quando *git gc* sarà eseguito.
+
+Potete anche voler disabilitare l'esecuzione automatica di *git gc*:
+
+  $ git config gc.auto 0
+
+nel qual caso commit verranno solo effettivamente eliminati
+all'esecuzione manuale di *git gc*.
+
+=== Costruire sopra Git ===
+
+In vero stile UNIX, il design di Git ne permette l'utilizzo come
+componente a basso livello di altri programmi, come interfacce grafiche
+e web, interfacce di linea alternative, strumenti di gestione di patch,
+programmi di importazione e conversione, ecc. Infatti, alcuni comandi
+Git sono loro stessi script che fanno affidamento ad altri comandi di
+base. Con un po' di ritocchi potete voi stessi personalizzare Git in
+base alle vostre preferenze.
+
+Un facile trucco consiste nel creare degli alias di comandi Git per
+abbreviare le funzioni che utilizzate di frequente:
+
+  $ git config --global alias.co checkout
+  $ git config --global --get-regexp alias  # mostra gli alias correnti
+  alias.co checkout
+  $ git co foo                              # equivalente a 'git checkout foo'
+
+Un altro trucco consiste nell'integrare il nome della branch corrente
+nella vostra linea di comando o nel titolo della finestra. L'invocazione
+di
+
+  $ git symbolic-ref HEAD
+
+mostra il nome completo della branch corrente. In pratica, vorrete
+probabilmente togliere "refs/heads/" e ignorare gli errori:
+
+  $ git symbolic-ref HEAD 2> /dev/null | cut -b 12-
+
+La sottocartella +contrib+ è uno scrigno di utili strumenti basati su
+Git. Un giorno alcuni di questi potrebbero essere promossi al rango di
+comandi ufficiali. Su Debian e Ubuntu questa cartella si trova in
++/usr/share/doc/git-core/contrib+.
+
+Uno dei più popolari tra questi script si trova in
++workdir/git-new-workdir+. Grazie ad un link simbolico intelligente,
+questo script crea una nuova cartella di lavoro la cui storia è
+condivisa con il deposito originario:
+
+  $ git-new-workdir un/deposito/esistente nuova/cartella
+
+La nuova cartella e i suoi file possono essere visti come dei cloni,
+salvo per il fatto che la storia è condivisa e quindi i rimane
+automaticamente sincronizzata. Non c'è quindi nessun bisogno di fare
+merge, push o pull.
+
+=== Acrobazie audaci  ===
+
+Git fa in modo che sia difficile per un utilizzatore distruggere
+accidentalmente dei dati. Ma se sapete cosa state facendo, potete
+escludere le misure di sicurezza dei comandi più comuni.
+
+*Checkout*: 'Checkout' non funziona in caso di Modifiche non integrate
+con commit. Per distruggere i vostri cambiamenti ed effettuare comunque
+un certo checkout, usate la flag 'force':
+
+  $ git checkout -f HEAD^
+
+D'altro canto, se specificate un percorso particolare per il checkout,
+non ci sono controlli di sicurezza. I percorsi forniti sono
+silenziosamente sovrascritti. Siate cauti se utilizzate checkout in
+questa modalità.
+
+*Reset*: Anche 'reset' non funziona in presenza di cambiamenti non
+integrate con commit. Per forzare il comando, eseguite:
+
+  $ git reset --hard 1b6d
+
+*Branch*: Non si possono cancellare branch se questo risulta nella
+perdita di cambiamenti. Per forzare l'eliminazione scrivete:
+
+  $ git branch -D branch_da_cancellare  # invece di -d
+
+Similmente, un tentativo di rinominare una branch con il nome di
+un'altra è bloccato se questo risulterebbe nella perdita di dati. Per
+forzare il cambiamento di nome scrivete:
+
+  $ git branch -M origine destinazione  # à invece di -m
+
+Contrariamente ai casi di 'checkout' e 'reset', questi ultimi comandi
+non effettuano un'eliminazione immediata dell'informazione. I
+cambiamenti sono salvati nella sottocartella .git, e possono essere
+recuperati tramite il corrispondente codice hash in `.git/logs` (vedete
+"Cacciatore di ``teste''" precedentemente). Per default, sono conservati
+per almeno due settimane.
+
+*Clean*: Alcuni comandi Git si rifiutano di procedere per non rischiare
+di danneggiare file che non sono in gestione. Se siete certi che tutti
+questi file possono essere sacrificati, allora cancellateli senza pietà
+con:
+
+  $ git clean -f -d
+
+In seguito il comando precedentemente eccessivamente prudente
+funzionerà.
+
+=== Prevenire commit erronei ===
+
+Errori stupidi ingombrano i miei depositi. I peggiori sono quelli dovuti
+a file mancanti per via di un *git add* dimenticato. Altri errori meno
+gravi riguardano spazi bianchi dimenticati e conflitti di merge
+irrisolti: nonostante siano inoffensivi, vorrei che non apparissero nel
+registro pubblico.
+
+Se solo mi fossi premunito utilizzando dei controlli preliminari
+automatizzati, i cosiddetti _hook_, che mi avvisino di questi problemi
+comuni!
+
+ $ cd .git/hooks
+ $ cp pre-commit.sample pre-commit  # Vecchie versioni di Git : chmod +x pre-commit
+
+Ora Git blocca un commit se si accorge di spazi inutili o se ci sono
+conflitti di merge non risolti.
+
+Per questa guida ho anche aggiunto le seguenti linee all'inizio del mio
+hook *pre-commit* per prevenire le mie distrazioni:
+
+ if git ls-files -o | grep '\.txt$'; then
+   echo FAIL! Untracked .txt files.
+   exit 1
+ fi
+
+Molte operazioni di Git accettano hook; vedete *git help hooks*. Abbiamo
+già utilizzato l'hook *post-update* in precedenza, quando abbiamo
+discusso Git via HTTP. Questo è eseguito ogni volta che l'HEAD cambia.
+Lo script post-update d'esempio aggiorna i file Git necessari per
+comunicare dati via canali come HTTP che sono agnostici di Git.
