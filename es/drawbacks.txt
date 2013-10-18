@@ -20,7 +20,7 @@ Git en Microsoft Windows puede ser engorroso:
 
 - http://cygwin.com/[Cygwin], un ambiente similar a Linux para Windows, contiene http://cygwin.com/packages/git/[una versión de Git para Windows].
 
-- http://code.google.com/p/msysgit/[Git en MSys] es una alternativa que requiere un soporte mínimo para la ejecución, aunqeu algunos de los comandos necesitan cierto trabajo.
+- http://code.google.com/p/msysgit/[Git en MSys] es una alternativa que requiere un soporte mínimo para la ejecución, aunque algunos de los comandos necesitan cierto trabajo.
 
 === Archivos No Relacionados ===
 
@@ -124,7 +124,7 @@ comandos son poco amigables antes del commit inicial. Adicionalmente algunos cas
 borde deben ser manejados de forma especial, como hacer rebase de una rama con
 un commit inicial distinto.
 
-Git se beneficiaría al definiri el commit cero: tan pronto como se construye un 
+Git se beneficiaría al definir el commit cero: tan pronto como se construye un 
 repositorio, HEAD debería ser un string conteniendo 20 bytes de 0. Este commit especial
 representa un árbol vacío, sin padre, que en algún momento es parte de todos los repositorios de Git.
 
