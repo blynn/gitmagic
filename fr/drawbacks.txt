@@ -15,7 +15,7 @@ faiblesses de SHA1. À ce jour, la découverte de collisions d'empreintes semble
 même un simple PC aura assez de puissance de calcul pour corrompre de manière
 indétectable un dépôt Git.
 
-Heureusement Git aura migrer vers une fonction de calcul d'empreintes de
+Heureusement Git aura migré vers une fonction de calcul d'empreintes de
 meilleure qualité avant que de futures recherches détruisent SHA1.
 
 === Microsoft Windows ===
@@ -97,8 +97,8 @@ Il faut rechercher les raisons de ces changements radicaux. Peut-être faut-il
 changer les formats des fichiers. Des modifications mineures ne devraient
 modifier que très peu de chose dans très peu de fichiers.
 
-Peut-être une base données ou une solution d'archivage est-elle plus adaptée
-solution qu'un système de gestion de versions. À titre d'exemple, un système de
+Peut-être qu'une base données ou une solution d'archivage est-elle plus adaptée
+comme solution qu'un système de gestion de versions. À titre d'exemple, un système de
 gestion de versions n'est certainement pas bien taillé pour gérer des photos prises
 périodiquement par une webcam.
 
