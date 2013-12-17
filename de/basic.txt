@@ -7,7 +7,7 @@ mehr als in diesem Kapitel beschrieben steht.
 
 === Stand sichern ===
 
-Hast du gravierende Änderungen vor? Nur zu, aber speichere deinen aktuellen
+Hast Du gravierende Änderungen vor? Nur zu, aber speichere Deinen aktuellen
 Stand vorher lieber nochmal ab:
 
  $ git init
@@ -25,8 +25,8 @@ Um den neuen Stand zu sichern:
 
 === Hinzufügen, Löschen, Umbenennen ===
 
-Bisher kümmert sich Git nur um Dateien, die existierten, als du das erste
-Mal *git add* ausgeführt hast. Wenn du Dateien oder Verzeichnisse
+Bisher kümmert sich Git nur um Dateien, die existierten, als Du das erste
+Mal *git add* ausgeführt hast. Wenn Du Dateien oder Verzeichnisse
 hinzufügst, musst du Git das mitteilen:
 
  $ git add readme.txt Dokumentation
@@ -36,9 +36,9 @@ Ebenso, wenn Git Dateien vergessen soll:
  $ git rm ramsch.h veraltet.c
  $ git rm -r belastendes/material/
 
-Git löscht diese Dateien für dich, falls du es noch nicht getan hast.
+Git löscht diese Dateien für Dich, falls Du es noch nicht getan hast.
 
-Eine Datei umzubenennen ist das selbe wie sie zu löschen und unter neuem
+Eine Datei umzubenennen, ist das selbe, wie sie zu löschen und unter neuem
 Namen hinzuzufügen. Git benutzt hierzu die Abkürzung *git mv*, welche die
 gleiche Syntax wie *mv* hat. Zum Beispiel:
 
@@ -46,12 +46,12 @@ gleiche Syntax wie *mv* hat. Zum Beispiel:
 
 === Fortgeschrittenes Rückgängig machen/Wiederherstellen ===
 
-Manchmal möchtest du einfach zurück gehen und alle Änderungen ab einem
+Manchmal möchtest Du einfach zurückgehen und alle Änderungen ab einem
 bestimmten Zeitpunkt verwerfen, weil sie falsch waren. Dann:
 
  $ git log
 
-zeigt dir eine Liste der bisherigen 'Commits' und deren SHA1 Hashwerte:
+zeigt Dir eine Liste der bisherigen 'Commits' und deren SHA1 Hashwerte:
 
 ----------------------------------
 commit 766f9881690d240ba334153047649b8b8f11c664
@@ -76,23 +76,23 @@ Hashwert. Gib ein:
 um den Stand eines bestimmten 'Commits' wieder herzustellen und alle
 nachfolgenden Änderungen für immer zu löschen.
 
-Ein anderes Mal willst du nur kurz zu einem älteren Stand springen. In
+Ein anderes Mal willst Du nur kurz zu einem älteren Stand springen. In
 diesem Fall, gib folgendes ein:
 
  $ git checkout 82f5
 
-Damit springst du in der Zeit zurück, behältst aber neuere Änderungen. Aber,
-wie bei Zeitreisen in einem Science-Fiction-Film, wenn du jetzt etwas
-änderst und 'commitest', gelangst du in ein alternative Realität, denn deine
+Damit springst Du in der Zeit zurück, behältst aber neuere Änderungen. Aber,
+wie bei Zeitreisen in einem Science-Fiction-Film, wenn Du jetzt etwas
+änderst und 'commitest', gelangst Du in ein alternative Realität, denn Deine
 Änderungen sind anders als beim früheren 'Commit'.
 
 Diese alternative Realität heißt 'Branch' und <<branch,wir kommen später
-darauf zurück>>. Für jetzt, merke dir
+darauf zurück>>. Für jetzt, merke Dir
 
  $ git checkout master
 
-bringt dich wieder in die Gegenwart. Um zu verhindern, dass sich Git
-beschwert, solltest du vor einem 'Checkout' alle Änderungen 'commiten' oder
+bringt Dich wieder in die Gegenwart. Um zu verhindern, dass sich Git
+beschwert, solltest Du vor einem 'Checkout' alle Änderungen 'commiten' oder
 'reseten'.
 
 Um wieder die Computerspielanalogie anzuwenden:
@@ -100,21 +100,21 @@ Um wieder die Computerspielanalogie anzuwenden:
 - *`git reset --hard`*: Lade einen alten Stand und lösche alle Spielstände,
 die neuer sind als der jetzt geladene.
 
-- *`git checkout`*: Lade einen alten Spielstand, aber wenn du weiterspielst,
+- *`git checkout`*: Lade einen alten Spielstand, aber wenn Du weiterspielst,
 wird der Spielstand von den früher gesicherten Spielständen abweichen. Jeder
 Spielstand, der ab jetzt gesichert wird, entsteht in dem separaten 'Branch',
-welcher der alternative Realität entspricht. <<branch,Dazu kommen wir
+welcher der alternative Realität entspricht. <<branch, dazu kommen wir
 später>>.
 
-Du kannst auch nur einzelne Dateien oder Verzeichnisse wiederherstellen
-indem du sie an den Befehl anhängst:
+Du kannst auch nur einzelne Dateien oder Verzeichnisse wiederherstellen,
+indem Du sie an den Befehl anhängst:
 
  $ git checkout 82f5 eine.datei andere.datei
 
-Sei Vorsichtig, diese Art des '*Checkout*' kann Dateien überschreiben, ohne
-dass du etwas merkst. Um Unfälle zu vermeiden solltest du immer 'commiten'
-bevor du ein 'Checkout' machst, besonders am Anfang wenn du Git noch
-erlernst. Allgemein gilt: Wenn du unsicher bist, egal ob ein Git Befehl oder
+Sei vorsichtig, diese Art des '*Checkout*' kann Dateien überschreiben, ohne
+dass Du etwas merkst. Um Unfälle zu vermeiden, solltest Du immer 'commiten'
+bevor du ein 'Checkout' machst, besonders am Anfang, wenn Du Git noch
+erlernst. Allgemein gilt: Wenn Du unsicher bist, egal, ob ein Git Befehl oder
 irgendeine andere Operation, führe zuerst *git commit -a* aus.
 
 Du magst Kopieren und Einfügen von Hashes nicht? Dann nutze:
@@ -129,7 +129,7 @@ auch nach dem 5. letzten 'Commit' fragen:
 === Rückgängig machen ===
 
 In einem Gerichtssaal können Ereignisse aus den Akten gelöscht
-werden. Ähnlich kannst du gezielt 'Commits' rückgängig machen.
+werden. Ähnlich kannst Du gezielt 'Commits' rückgängig machen.
 
  $ git commit -a
  $ git revert 1b6d
@@ -161,17 +161,17 @@ Es gibt gleich noch viel mehr über den 'clone' Befehl zu sagen.
 
 === Das Neueste vom Neuen ===
 
-Wenn du schon eine Kopie eines Projektes hast, kannst du es auf die neuste
+Wenn Du schon eine Kopie eines Projektes hast, kannst Du es auf die neuste
 Version aktualisieren mit:
 
  $ git pull
 
 === Einfaches Veröffentlichen ===
 
-Angenommen du hast ein Skript geschrieben und möchtest es anderen zugänglich
-machen. Du könntest sie einfach bitten es von deinem Computer
-herunterzuladen, aber falls sie das tun während du experimentierst oder das
-Skript verbesserst könnten sie in Schwierigkeiten geraten. Genau deswegen
+Angenommen Du hast ein Skript geschrieben und möchtest es anderen zugänglich
+machen. Du könntest sie einfach bitten, es von deinem Computer
+herunterzuladen, aber falls sie das tun, während du experimentierst oder das
+Skript verbesserst, könnten sie in Schwierigkeiten geraten. Genau deswegen
 gibt es Releasezyklen. Entwickler arbeiten regelmäßig an einem Projekt,
 veröffentlichen den Code aber nur, wenn sie ihn für vorzeigbar halten.
 
@@ -181,30 +181,30 @@ Um dies in Git zu tun, gehe ins Verzeichnis in dem das Skript liegt:
  $ git add .
  $ git commit -m "Erster Stand"
 
-Dann sage deinen Nutzern:
+Dann sage Deinen Nutzern:
 
  $ git clone dein.computer:/pfad/zum/skript
 
-um dein Skript herunterzuladen. Das setzt voraus, dass sie einen SSH-Zugang
+um Dein Skript herunterzuladen. Das setzt voraus, dass sie einen SSH-Zugang
 haben. Falls nicht, führe *git deamon* aus und sage den Nutzern folgendes:
 
  $ git clone git://dein.computer/pfad/zum/skript
 
-Ab jetzt, immer wenn dein Skript reif für eine Veröffentlichung ist:
+Ab jetzt, immer wenn Dein Skript reif für eine Veröffentlichung ist:
 
  $ git commit -a -m "Nächster Stand"
 
-und deine Nutzer können ihr Skript aktualisieren mit:
+und Deine Nutzer können ihr Skript aktualisieren mit:
 
  $ git pull
 
-Deine Nutzer werden nie mit Versionen in Kontakt kommen, von denen du es
+Deine Nutzer werden nie mit Versionen in Kontakt kommen, von denen Du es
 nicht willst. Natürlich funktioniert der Trick für fast alles, nicht nur
 Skripts.
 
 === Was habe ich getan? ===
 
-Finde heraus was du seit dem letzten 'Commit' getan hast:
+Finde heraus, was Du seit dem letzten 'Commit' getan hast:
 
  $ git diff
 
@@ -216,22 +216,22 @@ Oder zwischen irgendeiner Version und der vorvorletzten:
 
  $ git diff 1b6d "master~2"
 
-Jedes mal ist die Ausgabe ein 'Patch' der mit *git apply* eingespielt werden
+Jedes mal ist die Ausgabe ein 'Patch', der mit *git apply* eingespielt werden
 kann. Versuche auch:
 
  $ git whatchanged --since="2 weeks ago"
 
-Um mir die Geschichte eines 'Repositories' anzuzeigen benutze ich häufig
+Um mir die Geschichte eines 'Repositories' anzuzeigen, benutze ich häufig
 http://sourceforge.net/projects/qgit[qgit] da es eine schicke
 Benutzeroberfläche hat, oder http://jonas.nitro.dk/tig/[tig], eine
 Konsolenanwendung, die sehr gut über langsame Verbindungen
-funktioniert. Alternativ kannst du einen Webserver installieren mit *git
-instaweb*, dann kannst du mit jedem Webbrowser darauf zugreifen.
+funktioniert. Alternativ kannst Du einen Webserver installieren mit *git
+instaweb*, dann kannst Du mit jedem Webbrowser darauf zugreifen.
 
 === Übung ===
 
 A, B, C, D sind 4 aufeinander folgende 'Commits'. B ist identisch mit A,
-außer dass einige Dateien gelöscht wurden. Wir möchten die Dateien in D
+außer, dass einige Dateien gelöscht wurden. Wir möchten die Dateien in D
 wieder hinzufügen, aber nicht in B. Wie machen wir das?
 
 Es gibt mindestens 3 Lösungen. Angenommen, wir sind bei D:
@@ -252,6 +252,6 @@ Es gibt mindestens 3 Lösungen. Angenommen, wir sind bei D:
 
    $ git revert B
 
-Welche Lösung ist die beste? Die, welche dir am besten gefällt. Es ist
-einfach mit Git das zu bekommen was du willst und oft führen viele Wege zum
+Welche Lösung ist die beste? Die, welche Dir am besten gefällt. Es ist
+einfach, mit Git das zu bekommen, was Du willst und oft führen viele Wege zum
 Ziel.

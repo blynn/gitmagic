@@ -10,7 +10,7 @@ es schwierig zu erlernen macht, ganz zu schweigen davon, es zu meistern.
 Wie Arthur C. Clarke festgestellt hat, ist jede hinreichend fortschrittliche
 Technologie nicht von Magie zu unterscheiden. Das ist ein großartiger Ansatz, 
 um an Git heranzugehen: Anfänger können seine inneren Mechanismen ignorieren
-und Git als ein Ding ansehen, das mit seinen erstaunlichen Fähigkeiten
+und Git als ein Ding ansehen, dass mit seinen erstaunlichen Fähigkeiten
 Freunde verzückt und Gegner zur Weißglut bringt.
 
 Anstatt die Details aufzudecken, bieten wir grobe Anweisungen für die
@@ -69,7 +69,7 @@ François Marier unterhält das Debian Packet, das ursprünglich von Daniel
 Baumann erstellt wurde.
 
 Meine Dankbarkeit gilt auch vielen anderen für deren Unterstützung und
-Lob. Ich war versucht, euch hier alle aufzuzählen, aber das könnte
+Lob. Ich war versucht, Euch hier alle aufzuzählen, aber das könnte
 Erwartungen in unermesslichem Umfang wecken.
 
 Wenn ich Dich versehentlich vergessen habe, sag' mir bitte Bescheid oder
