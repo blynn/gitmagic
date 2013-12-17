@@ -13,18 +13,18 @@ ist das Git's Stärke und wohl auch seine Daseinsberechtigung.
 === Wer bin ich? ===
 
 Jeder 'Commit' enthält Name und eMail-Adresse des Autors, welche mit *git
-log* angezeigt werden. Standardmäßig nutzt Git Systemeinstellungen um diese
+log* angezeigt werden. Standardmäßig nutzt Git Systemeinstellungen, um diese
 Felder auszufüllen. Um diese Angaben explizit zu setzen, gib ein:
 
   $ git config --global user.name "Max Mustermann"
   $ git config --global user.email maxmustermann@beispiel.de
 
-Lasse den -global Schalter weg um diese Einstellungen für das aktuelle
+Lasse den -global Schalter weg, um diese Einstellungen für das aktuelle
 'Repository' zu setzen.
 
 === Git über SSH, HTTP ===
 
-Angenommen, Du hast einen SSH-Zugang zu einem Webserver aber Git ist nicht
+Angenommen, Du hast einen SSH-Zugang zu einem Webserver, aber Git ist nicht
 installiert. Wenn auch nicht so effizient wie mit dem systemeigenen
 Protokoll, kann Git über HTTP kommunizieren.
 
@@ -74,7 +74,7 @@ die 'Commits' aus dem 'Bundle' durch Eingabe von:
 Der Empfänger kann das sogar mit einem leeren 'Repository' tun. Trotz seiner
 Größe, +einedatei+ enthält das komplette original Git 'Repository'.
 
-In größeren Projekten, vermeidest Du Datenmüll indem Du nur Änderungen
+In größeren Projekten vermeidest Du Datenmüll, indem Du nur Änderungen
 'bundlest', die in den anderen 'Repositories' fehlen. Zum Beispiel, nehmen
 wir an, der 'Commit' ``1b6d...'' ist der aktuellste, den beide Parteien
 haben:
@@ -82,7 +82,7 @@ haben:
  $ git bundle create einedatei HEAD ^1b6d
 
 Macht man das regelmäßig, kann man leicht vergessen, welcher 'Commit'
-zuletzt gesendet wurde. Die Hilfeseiten schlagen vor 'Tags' zu benutzen um
+zuletzt gesendet wurde. Die Hilfeseiten schlagen vor 'Tags' zu benutzen, um
 dieses Problem zu lösen. Das heißt, nachdem Du ein 'Bundle' gesendet hast,
 gib ein:
 
@@ -133,13 +133,13 @@ Auf der Empfängerseite speichere die eMail in eine Datei, dann gib ein:
 Das wendet den eingegangenen 'Patch' an und erzeugt einen 'Commit',
 inklusive der Informationen wie z.B. den Autor.
 
-Mit einer Webmail Anwendung musst Du eventuell ein Button anklicken um die
+Mit einer Webmail Anwendung musst Du eventuell ein Button anklicken, um die
 eMail in ihrem rohen Originalformat anzuzeigen, bevor Du den 'Patch' in eine
 Datei sicherst.
 
 Es gibt geringfügige Unterschiede bei mbox-basierten eMail Anwendungen, aber
 wenn Du eine davon benutzt, gehörst Du vermutlich zu der Gruppe Personen,
-die damit einfach umgehen können ohne Anleitungen zu lesen.!
+die damit einfach umgehen können, ohne Anleitungen zu lesen.!
 
 === Entschuldigung, wir sind umgezogen. ===
 
@@ -153,7 +153,7 @@ Blick riskieren:
 Die +remote.origin.url+ Option kontrolliert die Quell-URL; ``origin'' ist
 der Spitzname, der dem Quell-'Repository' gegeben wurde. Wie mit der
 ``master'' 'Branch' Konvention können wir diesen Spitznamen ändern oder
-löschen, aber es gibt für gewöhnlich keinen Grund dies zu tun.
+löschen, aber es gibt für gewöhnlich keinen Grund dies, zu tun.
 
 Wenn das original 'Repository' verschoben wird, können wir die URL
 aktualisieren mit:
@@ -161,7 +161,7 @@ aktualisieren mit:
  $ git config remote.origin.url git://neue.url/proj.git
 
 Die +branch.master.merge+ Option definiert den Standard-Remote-'Branch' bei
-einem *git pull*. Während dem ursprünglichen 'clonen', wird sie auf den
+einem *git pull*. Während dem ursprünglichen 'clonen' wird sie auf den
 aktuellen 'Branch' des Quell-'Repository' gesetzt, so dass selbst dann, wenn
 der 'HEAD' des Quell-'Repository' inzwischen auf einen anderen 'Branch'
 gewechselt hat, ein späterer 'pull' wird treu dem original 'Branch' folgen.
@@ -198,7 +198,7 @@ Diese Liste zeigt die 'Branches' und den HEAD des entfernten 'Repository',
 welche auch in regulären Git Anweisungen verwendet werden können. Zum
 Beispiel, angenommen Du hast viele 'Commits' gemacht und möchtest einen
 Vergleich zur letzten abgeholten Version machen. Du kannst die Logs nach dem
-entsprechenden SHA1 Hashwert durchsuchen, aber es ist viel einfacher
+entsprechenden SHA1 Hashwert durchsuchen, aber es ist viel einfacher,
 folgendes einzugeben:
 
  $ git diff origin/HEAD
@@ -209,7 +209,7 @@ Oder Du kannst schauen, was auf dem 'Branch' ``experimentell'' los war:
 
 === Mehrere 'Remotes' ===
 
-Angenommen, zwei andere Entwickler arbeiten an Deinem Projekt und wir wollen
+Angenommen, zwei andere Entwickler arbeiten an Deinem Projekt, und wir wollen
 beide im Auge behalten. Wir können mehr als ein 'Repository' gleichzeitig
 beobachten mit:
 
@@ -223,7 +223,7 @@ haben einfachen Zugriff auf alle 'Branches' von allen 'Repositories':
 
 Aber was, wenn wir nur deren Änderungen vergleichen wollen, ohne unsere
 eigene Arbeit zu beeinflussen? Mit anderen Worten, wir wollen ihre
-'Branches' untersuchen ohne dass deren Änderungen in unser
+'Branches' untersuchen, ohne dass deren Änderungen in unser
 Arbeitsverzeichnis einfließen. Anstatt 'pull' benutzt Du dann:
 
  $ git fetch        # Fetch vom origin, der Standard.
@@ -234,11 +234,11 @@ bleibt, können wir nun jeden 'Branch' aus jedem 'Repository' in einer Git
 Anweisung referenzieren, da wir eine lokale Kopie besitzen.
 
 Erinnere Dich, dass ein 'Pull' hinter den Kulissen einfach ein *fetch*
-gefolgt von einem *merge* ist. Normalerweise machen wir einen *pull* weil
+gefolgt von einem *merge* ist. Normalerweise machen wir einen *pull*, weil
 wir die letzten 'Commits' abrufen und einbinden wollen. Die beschriebene
 Situation ist eine erwähnenswerte Ausnahme.
 
-Siehe *git help remote* um zu sehen wie man Remote-'Repositories' entfernt,
+Siehe *git help remote*, um zu sehen, wie man Remote-'Repositories' entfernt,
 bestimmte 'Branches' ignoriert und mehr.
 
 === Meine Einstellungen ===
@@ -247,7 +247,7 @@ Für meine Projekte bevorzuge ich es, wenn Unterstützer 'Repositories'
 vorbereiten, von denen ich 'pullen' kann. Verschiedene Git Hosting Anbieter
 lassen Dich mit einem Klick deine eigene 'Fork' eines Projekts hosten.
 
-Nachdem ich einen Zweig abgerufen habe, benutze ich Git Anweisungen um durch
+Nachdem ich einen Zweig abgerufen habe, benutze ich Git Anweisungen, um durch
 die Änderungen zu navigieren und zu untersuchen, die idealerweise gut
 organisiert und dokumentiert sind. Ich 'merge' meine eigenen Änderungen und
 führe eventuell weitere Änderungen durch. Wenn ich zufrieden bin, 'pushe'
@@ -258,8 +258,8 @@ sich auszahlt. Siehe
 http://torvalds-family.blogspot.com/2009/06/happiness-is-warm-scm.html[diesen
 Blog Beitrag von Linus Torvalds (englisch)].
 
-In der Git Welt zu bleiben ist etwas bequemer als 'Patch'-Dateien, denn es
-erspart mir sie in Git 'Commits' zu konvertieren. Außerdem kümmert sich Git
+In der Git Welt zu bleiben, ist etwas bequemer als 'Patch'-Dateien, denn es
+erspart mir, sie in Git 'Commits' zu konvertieren. Außerdem kümmert sich Git
 um die Details wie Autorname und eMail-Adresse, genauso wie um Datum und
 Uhrzeit und es fordert den Autor zum Beschreiben seiner eigenen Änderungen
 auf.
