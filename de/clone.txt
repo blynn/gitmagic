@@ -1,23 +1,23 @@
 == Rund ums 'Clonen' ==
 
-In älteren Versionsverwaltungssystemen ist 'checkout' die Standardoperation
+In älteren Versionsverwaltungssystemen ist 'checkout' die Standardoperation,
 um Dateien zu bekommen. Du bekommst einen Haufen Dateien eines bestimmten
 Sicherungsstands.
 
 In Git und anderen verteilten Versionsverwaltungssystemen ist 'clone' die
-Standardaktion. Um Dateien zu bekommen, erstellst du einen 'Clone' des
-gesamten 'Repository'. Oder anders gesagt, du spiegelst den zentralen
-Server. Alles, was man mit dem zentralen 'Repository' tun kann, kannst du
+Standardaktion. Um Dateien zu bekommen, erstellst Du einen 'Clone' des
+gesamten 'Repository'. Oder anders gesagt, Du spiegelst den zentralen
+Server. Alles, was man mit dem zentralen 'Repository' tun kann, kannst Du
 auch mit deinem 'Clone' tun.
 
 === Computer synchronisieren ===
 
 Es ist akzeptabel, für Datensicherungen und einfaches Synchronisieren, mit
 'tarball' Archiven oder *rsync* zu arbeiten. Aber manchmal arbeite ich an
-meinem Laptop, dann an meinem Desktop-PC und die beiden haben sich
+meinem Laptop, dann an meinem Desktop-PC, und die beiden haben sich
 inzwischen nicht austauschen können.
 
-Erstelle ein Git 'Repository' und 'commite' deine Dateien auf dem einen
+Erstelle ein Git 'Repository' und 'commite' Deine Dateien auf dem einen
 Rechner. Dann auf dem anderen:
 
  $ git clone anderer.computer:/pfad/zu/dateien
@@ -28,10 +28,10 @@ jetzt an wird
  $ git commit -a
  $ git pull anderer.computer:/pfad/zu/dateien HEAD
 
-den Zustand der Dateien des anderen Computer auf den übertragen, an dem du
-gerade arbeitest. Solltest du kürzlich konkurrierende Änderungen an der
-selben Datei vorgenommen haben, lässt Git dich das wissen und musst erneut
-'commiten' nachdem du die Konflikte aufgelöst hast.
+den Zustand der Dateien des anderen Computer auf den übertragen, an dem Du
+gerade arbeitest. Solltest Du kürzlich konkurrierende Änderungen an der
+selben Datei vorgenommen haben, lässt Git Dich das wissen und musst erneut
+'commiten', nachdem Du die Konflikte aufgelöst hast.
 
 === Klassische Quellcodeverwaltung ===
 
@@ -115,8 +115,8 @@ Geschichte eines Projekts, enthält aber niemals einen Auszug irgendeiner
 beliebigen Version.
 
 Ein 'bare Repository' übernimmt die Rolle des Hauptserver in einem
-zentralisierten Versionsverwaltungssystem: Das Zuhause deines
-Projekts. Entwickler 'clonen' dein Projekt davon und 'pushen' die letzten
+zentralisierten Versionsverwaltungssystem: Das Zuhause Deines
+Projekts. Entwickler 'clonen' Dein Projekt davon und 'pushen' die letzten
 offiziellen Änderungen dort hin. Meistens befindet es sich auf einem Server,
 der nicht viel tut außer Daten zu verbreiten. Die Entwicklung findet in den
 'Clonen' statt, so kann das Heim-'Repository' ohne Arbeitsverzeichnis
@@ -147,12 +147,12 @@ Kurzum, während du lernst mit Git umzugehen, 'pushe' nur, wenn das Ziel ein
 
 === 'Fork' eines Projekts ===
 
-Hast du es satt, wie sich ein Projekt entwickelt? Du denkst, du kannst das
+Hast Du es satt, wie sich ein Projekt entwickelt? Du denkst, Du kannst das
 besser? Dann mache folgendes auf deinem Server:
 
  $ git clone git://haupt.server/pfad/zu/dateien
 
-Dann erzähle jedem von deiner 'Fork' des Projekts auf deinem Server.
+Dann erzähle jedem von Deiner 'Fork' des Projekts auf Deinem Server.
 
 Zu jedem späteren Zeitpunkt kannst du die Änderungen des Originalprojekts
 'mergen' mit: 
@@ -162,14 +162,14 @@ Zu jedem späteren Zeitpunkt kannst du die Änderungen des Originalprojekts
 === Ultimative Datensicherung ===
 
 Du willst zahlreiche, vor Manipulation geschützte, redundante
-Datensicherungen an unterschiedlichen Orten? Wenn dein Projekt viele
-Entwickler hat, musst du nichts tun! Jeder 'Clone' deines Codes ist eine
-vollwertige Datensicherung. Nicht nur des aktuellen Stand, sondern der
-gesamten Geschichte. Wird irgendein 'Clone' beschädigt, wird dies dank des
-kryptographischen 'Hashing' sofort erkannt, sobald derjenige versucht mit
+Datensicherungen an unterschiedlichen Orten? Wenn Dein Projekt viele
+Entwickler hat, musst Du nichts tun! Jeder 'Clone' Deines Codes ist eine
+vollwertige Datensicherung. Nicht nur des aktuellen Stand, sondern die
+gesamte Geschichte. Wird irgendein 'Clone' beschädigt, wird dies dank des
+kryptographischen 'Hashing' sofort erkannt, sobald derjenige versucht, mit
 anderen zu kommunizieren.
 
-Wenn dein Projekt nicht so bekannt ist, finde so viele Server wie du kannst
+Wenn Dein Projekt nicht so bekannt ist, finde so viele Server, wie Du kannst,
 um dort einen 'Clone' zu platzieren.
 
 Die wirklich Paranoiden sollten immer den letzten 20-Byte SHA1 Hash des
@@ -190,7 +190,7 @@ dass ein lokaler Klon weniger Zeit und Speicherplatz benötigt als eine
 herkömmliche Datensicherung.
 
 Du kannst nun an zwei unabhängigen Funktionen gleichzeitig arbeiten. Zum
-Beispiel kannst Du einen Klon bearbeiten, während der andere kompiliert
+Beispiel kannst Du an einen Klon bearbeiten, während der andere kompiliert
 wird. Zu jeder Zeit kannst Du 'comitten' und die Änderungen des anderen Klon
 'pullen'.
 
@@ -198,8 +198,8 @@ wird. Zu jeder Zeit kannst Du 'comitten' und die Änderungen des anderen Klon
 
 === Versionsverwaltung im Untergrund ===
 
-Arbeitest du an einem Projekt, das ein anderes Versionsverwaltungssystem
-nutzt und vermisst du Git? Dann erstelle ein Git 'Repository' in deinem
+Arbeitest Du an einem Projekt, das ein anderes Versionsverwaltungssystem
+nutzt und vermisst Du Git? Dann erstelle ein Git 'Repository' in deinem
 Arbeitsverzeichnis:
 
  $ git init
@@ -211,7 +211,7 @@ dann 'Clone' es:
  $ git clone . /irgendein/neuer/ordner
 
 Nun gehe in das neue Verzeichnis und arbeite dort mit Git nach
-Herzenslust. Irgendwann wirst du dann mit den anderen synchronisieren
+Herzenslust. Irgendwann wirst Du dann mit den anderen synchronisieren
 wollen, dann gehe in das Originalverzeichnis, aktualisiere mit dem anderen
 Versionsverwaltungssystem und gib ein:
 
@@ -223,16 +223,16 @@ Dann gehe wieder ins neue Verzeichnis und gib ein:
  $ git commit -a -m "Beschreibung der Änderungen"
  $ git pull
 
-Die Vorgehensweise, wie du deine Änderungen den anderen übergibst, hängt vom
+Die Vorgehensweise, wie Du Deine Änderungen den anderen übergibst, hängt vom
 anderen Versionsverwaltungssystem ab. Das neue Verzeichnis enthält die
 Dateien mit deinen Änderungen. Führe die Anweisungen des anderen
-Versionsverwaltungssystems aus, die nötig sind um die Dateien ins zentrale
+Versionsverwaltungssystems aus, die nötig sind, um die Dateien ins zentrale
 'Repository' zu übertragen.
 
 Subversion, vielleicht das beste zentralisierte Versionsverwaltungssystem,
 wird von unzähligen Projekten benutzt. Der *git svn*-Befehl automatisiert
 den zuvor genannten Ablauf für Subversion 'Repositories' und kann auch
-benutzt werden um
+benutzt werden, um
 http://google-opensource.blogspot.com/2008/05/export-git-project-to-google-code.html[ein
 Git Projekt in ein Subversion 'Repository' zu exportieren].
 
@@ -243,7 +243,7 @@ Git zusammenarbeiten kann. Mit der `hg-git`-Erweiterung kann ein Benutzer
 von Mercurial verlustfrei in ein Git 'Repository' 'pushen' und daraus
 'pullen'.
 
-Beschaffe dir die `hg-git`-Erweiterung mit Git:
+Beschaffe Dir die `hg-git`-Erweiterung mit Git:
 
  $ git clone git://github.com/schacon/hg-git.git
 
@@ -269,7 +269,7 @@ Zum Konvertieren gib in einem leeren Verzeichnis ein:
  $ git init
  $ hg-fast-export.sh -r /hg/repo
 
-nachdem du das Skript zu deinem `$PATH` hinzugefügt hast.
+nachdem Du das Skript zu deinem `$PATH` hinzugefügt hast.
 
 === Bazaar ===
 
@@ -302,9 +302,9 @@ süchtig nach schellen Ausführungszeiten.
 Ich dachte darüber nach, wie Git verbessert werden könnte, ging sogar so
 weit, dass ich meine eigene Git-Ähnliche Anwendung schrieb, allerdings nur
 als akademische Übungen. Hätte ich mein Projekt fertig gestellt, wäre ich
-trotzdem bei Git geblieben, denn die Verbesserungen wären zu gering gewesen
+trotzdem bei Git geblieben, denn die Verbesserungen wären zu gering gewesen,
 um den Einsatz eines Eigenbrödler-Systems zu rechtfertigen.
 
-Natürlich können deine Bedürfnisse und Wünsche ganz anders sein und
-vielleicht bist du mit einem anderen System besser dran. Wie auch immer, mit
-Git kannst du nicht viel falsch machen.
+Natürlich können Deine Bedürfnisse und Wünsche ganz anders sein und
+vielleicht bist Du mit einem anderen System besser dran. Wie auch immer, mit
+Git kannst Du nicht viel falsch machen.
