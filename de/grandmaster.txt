@@ -41,7 +41,7 @@ hinzufügen.
 === Mein 'Commit' ist zu groß! ===
 
 Hast Du es zu lange versäumt zu 'comitten'? Hast Du so versessen
-programmiert, daß Du darüber die Quellcodeverwaltung vergessen hast? Machst
+programmiert, dass Du darüber die Quellcodeverwaltung vergessen hast? Machst
 Du eine Serie von unabhängigen Änderungen, weil es Dein Stil ist?
 
 Keine Sorge, gib ein:
@@ -49,7 +49,7 @@ Keine Sorge, gib ein:
  $ git add -p
 
 Für jede Änderung, die Du gemacht hast, zeigt Git Dir die Codepassagen, die
-sich geändert haben und fragt ob sie Teil des nächsten 'Commit' sein
+sich geändert haben und fragt, ob sie Teil des nächsten 'Commit' sein
 sollen. Antworte mit "y" für Ja oder "n" für Nein. Du hast auch noch andere
 Optionen, z.B. den Aufschub der Entscheidung; drücke "?" um mehr zu
 erfahren.
@@ -58,40 +58,40 @@ Wenn Du zufrieden bist, gib
 
  $ git commit
 
-ein um exakt die ausgewählten Änderungen zu 'comitten' (die "inszenierten"
+ein, um exakt die ausgewählten Änderungen zu 'comitten' (die "inszenierten"
 Änderungen). Achte darauf, nicht die Option *-a* einzusetzen, anderenfalls
 wird Git alle Änderungen 'comitten'.
 
 Was ist, wenn Du viele Dateien an verschiedenen Orten bearbeitet hast? Jede
-Datei einzeln nachzuprüfen ist frustrierend und ermüdend. In diesem Fall
+Datei einzeln nachzuprüfen, ist frustrierend und ermüdend. In diesem Fall
 verwende *git add -i*, dessen Bedienung ist nicht ganz einfach, dafür aber
 sehr flexibel. Mit ein paar Tastendrücken kannst Du mehrere geänderte
 Dateien für den 'Commit' hinzufügen ('stage') oder entfernen ('unstage')
 oder Änderungen einzelner Dateien nachprüfen und hinzufügen. Alternativ
 kannst Du *git commit \--interactive* verwenden, was dann automatisch die
-ausgewählten Änderungen 'commited' nachdem Du fertig bist.
+ausgewählten Änderungen 'commited', nachdem Du fertig bist.
 
 === Der Index: Git's Bereitstellungsraum ===
 
 Bis jetzt haben wir Git's berühmten 'Index' gemieden, aber nun müssen wir
-uns mit ihm auseinandersetzen um das bisherige zu erklären. Der Index ist
+uns mit ihm auseinandersetzen, um das bisherige zu erklären. Der Index ist
 ein temporärer Bereitstellungsraum. Git tauscht selten Daten direkt zwischen
 Deinem Projekt und seiner Versionsgeschichte aus. Vielmehr schreibt Git die
 Daten zuerst in den Index, danach kopiert es die Daten aus dem Index an
 ihren eigentlichen Bestimmungsort.
 
 Zum Beispiel ist *commit -a* eigentlich ein zweistufiger Prozess. Der erste
-Schritt erstellt einen Schnappschuß des aktuellen Status jeder überwachten
-Datei im Index. Der zweite Schritt speichert dauerhaft den Schnappschuß, der
+Schritt erstellt einen Schnappschuss des aktuellen Status jeder überwachten
+Datei im Index. Der zweite Schritt speichert dauerhaft den Schnappschuss, der
 sich nun im Index befindet. Ein 'Commit' ohne die *-a* Option führt nur den
 zweiten Schritt aus und macht nur wirklich Sinn, wenn zuvor eine Anweisung
 angewendet wurde, welche den Index verändert, wie zum Beispiel *git add*.
 
-Normalerweise können wir den Index ignorieren und so tun als würden wir
+Normalerweise können wir den Index ignorieren und so tun, als würden wir
 direkt aus der Versionsgeschichte lesen oder in sie schreiben. In diesem
 Fall wollen wir aber mehr Kontrolle, also manipulieren wir den Index. Wir
-erstellen einen Schnappschuß einiger, aber nicht aller unser Änderungen im
-Index und speichern dann diesen sorgfältig zusammengestellten Schnappschuß
+erstellen einen Schnappschuss einiger, aber nicht aller unser Änderungen im
+Index und speichern dann diesen sorgfältig zusammengestellten Schnappschuss
 permanent.
 
 === Verliere nicht Deinen KOPF ===
@@ -103,8 +103,8 @@ Anweisungen lassen Dich ihn manipulieren. Zum Beispiel:
  $ git reset HEAD~3
 
 bewegt den HEAD Bezeichner drei 'Commits' zurück. Dadurch agieren nun alle
-Git Anweisungen als hätte es die drei letzten 'Commits' nicht gegeben,
-während deine Dateien unverändert erhalten bleiben. Siehe auf der Git
+Git Anweisungen, als hätte es die drei letzten 'Commits' nicht gegeben,
+während Deine Dateien unverändert erhalten bleiben. Siehe auf der Git
 Hilfeseite für einige Anwendungsbeispiele.
 
 Aber wie kannst Du zurück in die Zukunft? Die vergangenen 'Commits' wissen
@@ -135,7 +135,7 @@ SHA1-Werte in `.git/objects` vornehmen und ausprobieren ob Du den gesuchten
 Git speichert jeden errechneten SHA1-Wert eines 'Commits' in
 `.git/logs`. Das Unterverzeichnis `refs` enthält den Verlauf aller
 Aktivitäten auf allen 'Branches', während `HEAD` alle SHA1-Werte enthält,
-die jemals diese Bezeichnung hatten. Die letztere kann verwendet werden um
+die jemals diese Bezeichnung hatten. Die letztere kann verwendet werden, um
 SHA1-Werte von 'Commits' zu finden, die sich in einem 'Branch' befanden, der
 versehentlich gestutzt wurde.
 
@@ -181,7 +181,7 @@ sind nur winzige Skripte, wie Zwerge auf den Schultern von Riesen. Mit ein
 bisschen Handarbeit kannst Du Git anpassen, damit es Deinen Anforderungen
 entspricht.
 
-Ein einfacher Trick ist es die in Git integrierte Aliasfunktion zu verwenden
+Ein einfacher Trick ist es, die in Git integrierte Aliasfunktion zu verwenden
 um die am häufigsten benutzten Anweisungen zu verkürzen:
 
   $ git config --global alias.co checkout
@@ -217,8 +217,8 @@ Synchronisierung mittels 'merge', 'push' oder 'pull' ist nicht notwendig.
 
 === Gewagte Kunststücke ===
 
-Heutzutage macht es Git dem Anwender schwer versehentlich Daten zu
-zerstören. Aber, wenn man weiß was man tut, kann man die Schutzmaßnahmen der
+Heutzutage macht es Git dem Anwender schwer, versehentlich Daten zu
+zerstören. Aber, wenn man weiß, was man tut, kann man die Schutzmaßnahmen der
 häufigsten Anweisungen umgehen.
 
 *Checkout*: Nicht versionierte Änderungen lassen 'checkout' scheitern. Um trotzdem die Änderungen zu zerstören und einen vorhandenen 'Commit' abzurufen, benutzen wir die 'force' Option:
@@ -238,7 +238,7 @@ Weise benutzt.
 
   $ git branch -D dead_branch  # instead of -d
 
-Ebenso scheitert der Versuch einen 'Branch' durch ein 'move' zu
+Ebenso scheitert der Versuch, einen 'Branch' durch ein 'move' zu
 überschreiben, wenn das einen Datenverlust zur Folge hat. Um das Verschieben
 zu erzwingen, gib ein:
 
