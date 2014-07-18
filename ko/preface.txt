@@ -1,21 +1,22 @@
 = Git Magic =
 Ben Lynn
-August 2007
+2007년 8월
 
-== Preface ==
+== 서문 ==
 
-http://git-scm.com/[Git] is a version control Swiss army knife. A reliable versatile multipurpose revision control tool whose extraordinary flexibility makes it tricky to learn, let alone master.
+http://git-scm.com/[Git] 은 버전 관리계의 스위스아미나이프 정도로 보면 됩니다. 아주 유연하고 믿을 수 있지만 그만큼 배우기는 어려울 수도있는 본 버전 관리 시스템을 마스터 해봅시다!
 
-As Arthur C. Clarke observed, any sufficiently advanced technology is indistinguishable from magic. This is a great way to approach Git: newbies can ignore its inner workings and view Git as a gizmo that can amaze friends and infuriate enemies with its wondrous abilities.
+Arthur C. Clarke는 충분히 발전한 기술은 마술과 같다고 말하였습니다. Git도 마찬가지입니다. 초보자들은 Git이 어떻게 돌아가는지 알 필요가 없으며 Git이라는 간단한 장치가 어떻게 친구들과 적들을 놀라게하는지만 알면됩니다.
 
-Rather than go into details, we provide rough instructions for particular effects. After repeated use, gradually you will understand how each trick works, and how to tailor the recipes for your needs.
+세부사항들을 설명하는 대신에, 우리는 몇몇 기능들의 대략적인 설명을 하려합니다. 여기에 설명된 기능들을 자주 사용하다 보면 각각의 명령어들이 어떻게 작동하는지 알게 될 것입니다. 그리고 그 명령어들을 적용하여 새로운 일들을 해낼 수 있겠지요.
 
-.Translations
+.번역판
 
  - link:/\~blynn/gitmagic/intl/zh_cn/[Simplified Chinese]: by JunJie, Meng and JiangWei. Converted to link:/~blynn/gitmagic/intl/zh_tw/[Traditional Chinese] via +cconv -f UTF8-CN -t UTF8-TW+.
  - link:/~blynn/gitmagic/intl/fr/[French]: by Alexandre Garel, Paul Gaborit, and Nicolas Deram. Also hosted at http://tutoriels.itaapy.com/[itaapy].
  - link:/~blynn/gitmagic/intl/de/[German]: by Benjamin Bellee and Armin Stebich; also http://gitmagic.lordofbikes.de/[hosted on Armin's website].
  - link:/~blynn/gitmagic/intl/it/[Italian]: by Mattia Rigotti.
+ - link:/~blynn/gitmagic/intl/ko/ [Korean]: by Jung-Ho (John) Han; also https://sites.google.com/site/drinkhanjohn/useful-links
  - link:/~blynn/gitmagic/intl/pl/[Polish]: by Damian Michna.
  - link:/~blynn/gitmagic/intl/pt_br/[Brazilian Portuguese]: by José Inácio Serafini and Leonardo Siqueira Rodrigues.
  - link:/~blynn/gitmagic/intl/ru/[Russian]: by Tikhon Tarnavsky, Mikhail Dymskov, and others.
@@ -23,39 +24,36 @@ Rather than go into details, we provide rough instructions for particular effect
  - link:/~blynn/gitmagic/intl/uk/[Ukrainian]: by Volodymyr Bodenchuk.
  - link:/~blynn/gitmagic/intl/vi/[Vietnamese]: by Trần Ngọc Quân; also http://vnwildman.users.sourceforge.net/gitmagic/[hosted on his website].
 
-.Other Editions
+.그 외의 에디션
 
- - link:book.html[Single webpage]: barebones HTML, with no CSS.
- - link:book.pdf[PDF file]: printer-friendly.
- - http://packages.debian.org/gitmagic[Debian package], http://packages.ubuntu.com/gitmagic[Ubuntu package]: get a fast and local copy of this site. Handy http://csdcf.stanford.edu/status/[when this server is offline].
- - http://www.amazon.com/Git-Magic-Ben-Lynn/dp/1451523343/[Physical book [Amazon.com]]: 64 pages, 15.24cm x 22.86cm, black and white. Handy when there is no electricity.
+ - link:book.html[Single webpage]: CSS 없는 HTML 버전.
+ - link:book.pdf[PDF file]: 프린팅 버전.
+ - http://packages.debian.org/gitmagic[Debian package], http://packages.ubuntu.com/gitmagic[Ubuntu package]: 이 웹사이트의 사본. Handy http://csdcf.stanford.edu/status/[when this server is offline].
+ - http://www.amazon.com/Git-Magic-Ben-Lynn/dp/1451523343/[Physical book [Amazon.com]]: 64 pages, 15.24cm x 22.86cm, black and white. 전기가 들어오지 않을 때 유용.
 
-=== Thanks! ===
+=== 고맙습니다! ===
 
-I'm humbled that so many people have worked on translations of these pages. I
-greatly appreciate having a wider audience because of the efforts of those
-named above.
+많은 분들 께서 번역에 힘써주셔서 저는 어떻게 몸둘 바를 모르겠습니다. 이 분들을 통해
+더 많은 독자들을 만날 수 있어서 정말 기쁘고 감사드립니다.
 
-Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael Budde, Richard Albury, Tarmigan, Derek Mahar, Frode Aannevik, Keith Rarick, Andy Somerville, Ralf Recker, Øyvind A. Holm, Miklos Vajna, Sébastien Hinderer, Thomas Miedema, Joe Malin, Tyler Breisacher, Sonia Hamilton, Julian Haagsma, Romain Lespinasse, Sergey Litvinov, Oliver Ferrigni, David Toca, Сергей Сергеев, Joël Thieffry, and Baiju Muthukadan contributed corrections and improvements.
+Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael Budde, Richard Albury, Tarmigan, Derek Mahar, Frode Aannevik, Keith Rarick, Andy Somerville, Ralf Recker, Øyvind A. Holm, Miklos Vajna, Sébastien Hinderer, Thomas Miedema, Joe Malin, Tyler Breisacher, Sonia Hamilton, Julian Haagsma, Romain Lespinasse, Sergey Litvinov, Oliver Ferrigni, David Toca, Сергей Сергеев, Joël Thieffry, and Baiju Muthukadan 수정 및 편집에 힘써주셧습니다..
 
-François Marier maintains the Debian package originally created by Daniel
-Baumann.
+François Marier 는 Daniel Baumann이 개발한 Debian 패키지를 관리합니다.
 
-John Hinnegan bought the http://www.gitmagic.com/[gitmagic.com] domain.
+John Hinnegan 은 http://www.gitmagic.com/[gitmagic.com] 도메인을 구입하였습니다.
 
-My gratitude goes to many others for your support and praise. I'm tempted to
-quote you here, but it might raise expectations to ridiculous heights.
+고마워 해야할 사람들이 많지만은 여기에 다 쓸수는 없는 노릇입니다.
 
-If I've left you out by mistake, please tell me or just send me a patch!
+그래도 만약에 제가 이 웹사이트에 실수로 이름을 개제하지 않았다면 연락을 주시거나 패치를 만들어 주세요!
 
-=== License ===
+=== 라이센스 ===
 
-This guide is released under http://www.gnu.org/licenses/gpl-3.0.html[the GNU General Public License version 3]. Naturally, the source is kept in a Git
-repository, and can be obtained by typing:
+이 가이드는 http://www.gnu.org/licenses/gpl-3.0.html[the GNU General Public License version 3] 통해 발간되었습니다. 자연스레 소스콛드들은 Git 저장소에
+저장되어있습니다:
 
  $ git clone git://repo.or.cz/gitmagic.git  # Creates "gitmagic" directory.
 
-or from one of the mirrors:
+아니면 다음 미러사이트들에도 소스코드가 저장되어 있을겁니다.:
 
  $ git clone git://github.com/blynn/gitmagic.git
  $ git clone git://gitorious.org/gitmagic/mainline.git
@@ -63,5 +61,5 @@ or from one of the mirrors:
  $ git clone git://git.assembla.com/gitmagic.git
  $ git clone git@bitbucket.org:blynn/gitmagic.git
 
-GitHub, Assembla, and Bitbucket support private repositories, the latter two
-for free.
+GitHub, Assembla, Bitbucket은 사적인 저장소를 지지합니다. Assembla와 Bitbucket은
+무료로 제공되고 있습니다.

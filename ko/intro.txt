@@ -1,59 +1,59 @@
-== Introduction ==
+== 도입부 ==
 
-I'll use an analogy to introduce version control. See http://en.wikipedia.org/wiki/Revision_control[the Wikipedia entry on revision control] for a saner explanation.
+저는 비유법을 사용하여 버전 관리 시스템에 대하여 설명해보려 합니다. http://en.wikipedia.org/wiki/Revision_control 를 방문하셔서 덜 정신나간 버전의 설명을 보시길 권장합니다.
 
-=== Work is Play ===
+=== 일하는 것은 곧 노는 것 ===
 
-I've played computer games almost all my life. In contrast, I only started using version control systems as an adult. I suspect I'm not alone, and comparing the two may make these concepts easier to explain and understand.
+저는 거의 평생을 컴퓨터게임을 하며 지냈습니다. 하지만 어른이 되서야 버전 관리 시스템을 사용하기 시작했지요. 이런 건 저 혼자가 아닐 것이라 생각합니다. 그럼으로써 Git을 게임에 비유하며 설명하는 것이 Git을 이해하는 데 도움이 될 것이라 생각합니다.
 
-Think of editing your code, or document, as playing a game. Once you've made a lot of progress, you'd like to save. To do so, you click on the 'Save' button in your trusty editor.
+코드나 문서를 편집하는 작업이 게임을 하는 것과 같다고 생각해보세요. 편집을 마친 후에는 세이브하고 싶겠지요. 그렇게 하기 위해서는 당신의 믿음직한 에디터에서 '세이브' 버튼을 누르면 될 것입니다.
 
-But this will overwrite the old version. It's like those old school games which only had one save slot: sure you could save, but you could never go back to an older state. Which was a shame, because your previous save might have been right at an exceptionally fun part of the game that you'd like to revisit one day. Or worse still, your current save is in an unwinnable state, and you have to start again.
+그러나 이러한 행동은 예전 세이브를 덮어쓰는 결과를 초래하죠. 세이브 슬롯이 한 개밖에 없는 옛날 구형 게임을 생각하면 됩니다. 다시 말하자면, 세이브를 할 수는 있지만, 당신은 예전 세이브포인트로 돌아갈 수 없는 것 입니다. 이건 참...게임을 아주 재미있는 순간에 세이브를 해 놓았는데 돌아갈 수 없다는 것이죠. 더 나쁜 상황으로는, 당신의 세이브는 더 이상 이길 수없는 상태에 되어 있을 수도 있습니다. 그럴 경우에는 아주 처음부터 다시 시작해야 되겠지요.
 
-=== Version Control ===
+=== 버전 관리 ===
 
-When editing, you can 'Save As...' a different file, or copy the file somewhere first before saving if you want to savour old versions. You can compress them too to save space. This is a primitive and labour-intensive form of version control. Computer games improved on this long ago, many of them providing multiple automatically timestamped save slots.
+편집 시, '다른 이름으로 저장' 기능 및 사본을 다른 디렉토리에 만들어 놓는 방법 등을 이용해 오래된 버전을 보존할 수는 있습니다. 용량을 효율적으로 사용하기 위해서 압축을 할 수도 있죠. 이것은 참 원시적인 버전 컨트롤 방법입니다. 컴퓨터게임은 이런 과정에서 발전해 나간지 오래되었지요. 요즘 게임들은 여러개의 세이브 슬롯을 잘 활용하고 있습니다.
 
-Let's make the problem slightly tougher. Say you have a bunch of files that go together, such as source code for a project, or files for a website. Now if you want to keep an old version you have to archive a whole directory. Keeping many versions around by hand is inconvenient, and quickly becomes expensive.
+이 문제를 좀 더 꼬아서 보죠. 어떤 프로젝트나 웹사이트를 구성하는 소스코드와 같이 여러개의 파일이 하나로 묶여있다고 가정합시다. 현 버전의 프로젝트/웹사이트를 세이브하고 싶다면 모든 디렉토리를 기록해야 한다는 번거로움이 있지요. 일일이 많은 버전들을 관리한다는 것은 그리 효율적이지 않을 겁니다.
 
-With some computer games, a saved game really does consist of a directory full of files. These games hide this detail from the player and present a convenient interface to manage different versions of this directory.
+어떤 컴퓨터게임들은 정말로 모든 디렉토리를 각개 관리하는 형식으로 게임을 세이브하기도 합니다. 이런 게임들은 이런 불필요하게 세부적인 사항들을 게이머들이 보지 못 하게 하고 간편한 인터페이스를 통해 게이머들이 세이브파일들을 관리할 수 있게 해둡니다.
 
-Version control systems are no different. They all have nice interfaces to manage a directory of stuff. You can save the state of the directory every so often, and you can load any one of the saved states later on. Unlike most computer games, they're usually smart about conserving space. Typically, only a few files change from version to version, and not by much. Storing the differences instead of entire new copies saves room.
+버전 관리 시스템은 이런 컨셉과 그리 다르지 않습니다. 버전 관리 시스템들은 디렉토리 등을 관리하기에 편한 인터페이스로 구성되어 있습니다. 원하는 만큼 세이브 및 불러오기를 실행할 수 있습니다. 컴퓨터게임들과는 다르게 용량을 효율적으로 사용하는 데에는 탁월한 성능을 보여주죠. 대부분의 케이스는 소수의 파일들만 살짝 편집을 하게되죠. 디렉토리 전체를 세이브하는 것 보다는 버전과 버전사이의 차이를 세이브하는 것이 용량을 효율적으로 쓰는 버전 컨트롤의 비밀입니다.
 
-=== Distributed Control ===
+=== 분산 제어 ===
 
-Now imagine a very difficult computer game. So difficult to finish that many experienced gamers all over the world decide to team up and share their saved games to try to beat it. Speedruns are real-life examples: players specializing in different levels of the same game collaborate to produce amazing results.
+어려운 컴퓨터 게임을 한다고 생각해보세요. 너무 어렵기 때문에 전 세계의 프로게이머들이 팀을 구성해 이 게임을 끝내보겠다고 합니다. 게임을 빨리 끝내는 것에 초점을 두는 스피드런이 현실적인 예 이지요: 각기 다른 특기를 가지고 있는 게이머들이 각자 자신있는 부분에서 활약함으로써 성공적인 결과를 만들어내는 것을 예로 들어봅니다.
 
-How would you set up a system so they can get at each other's saves easily? And upload new ones?
+어떻게 시스템을 구축해 두어야 게이머들이 서로의 세이브파일들을 올리거나 이어 받을 수 있을까요? 
 
-In the old days, every project used centralized version control. A server somewhere held all the saved games. Nobody else did. Every player kept at most a few saved games on their machine. When a player wanted to make progress, they'd download the latest save from the main server, play a while, save and upload back to the server for everyone else to use.
+예전에 게임들은 중앙 집중식 버전 관리 시스템을 사용하였습니다. 한 개의 서버가 모든 게임 세이브파일을 저장했었지요. 그 서버외에는 아무 것도 그 세이브파일들을 관리할 수 있지 않았습니다. 풀어 말하면, 게이머들은 각자의 컴퓨터에 몇 개의 세이브파일들을 가지고 있었고, 게임을 진행하고 싶을 때에는, 파일들이 저장되어있는 서버에서 다운로드 받은 후, 게임을 좀 하다가, 다시 다른 게이머들이 진행할 수 있게 그 서버에 업로드 해 놓아야 합니다.
 
-What if a player wanted to get an older saved game for some reason? Maybe the current saved game is in an unwinnable state because somebody forgot to pick up an object back in level three, and they want to find the latest saved game where the game can still be completed. Or maybe they want to compare two older saved games to see how much work a particular player did.
+만약에 어떠한 이유에서라도 한 게이머가 예전에 세이브 해두었던 파일을 불러오고 싶다면 어떻게 될까요? 현재 세이브 시점은 아무리 잘 해도 이길 수 없는 상태로 저장이 되어있을지도 모르고, 게이머들은 현 시점보다 전으로 돌아가서 아까 못 구했던 강력한 아이템을 얻을 수 있는 시점으로 돌아가고 싶을지도 모릅니다. 그런게 아니라면 그들은 아마도 세이브파일 두 개를 비교하여 한 특정 게이머가 얼마나 진행을 해두었는지 알고 싶어할지도 모릅니다.
 
-There could be many reasons to want to see an older revision, but the outcome is the same. They have to ask the central server for that old saved game. The more saved games they want, the more they need to communicate.
+예전 세이브 파일을 불러오고 싶은 이유는 여러가지일 수 있습니다, 그러나 방법은 한 가지일 수 밖에 없지요. 중앙서버에서 불러오는 방법 말입니다. 더 많은 세이브파일을 원할 수록 서버와의 통신이 더 잦아질 수 밖에 없지요.
 
-The new generation of version control systems, of which Git is a member, are known as distributed systems, and can be thought of as a generalization of centralized systems. When players download from the main server they get every saved game, not just the latest one. It's as if they're mirroring the central server.
+새로운 세대의 버전 관리 시스템들은 (Git을 포함하여), 분산 제어를 기본으로 합니다. 예전의 중앙관리 방식의 보편화된 방식이라고 생각하면 되지요. 한 게이머가 서버로부터 세이브파일을 받는다면 하나만 받게되는 것이 아니라 모든 세이브파일 받게 되는 겁니다. 중앙서버를 각자의 컴퓨터에 미러링한다고 보시면 됩니다.
 
-This initial cloning operation can be expensive, especially if there's a long history, but it pays off in the long run. One immediate benefit is that when an old save is desired for any reason, communication with the central server is unnecessary.
+처음에는 시간이 많이 걸릴 수 있습니다. 특히 그 세이브파일이 아주 긴 역사를 가지고 있다면 말이지요. 그러나 이 것은 길게보면 아주 효율적인 방법입니다. 이 방법을 통해 즉시 이득을 볼 수있는 점을 따진다면, 예전 세이브파일을 원할 때 중앙서버와 교신을 하지 않아도 된다는 점이지요.
 
-=== A Silly Superstition ===
+=== 멍청한 미신 ===
 
-A popular misconception is that distributed systems are ill-suited for projects requiring an official central repository. Nothing could be further from the truth. Photographing someone does not cause their soul to be stolen. Similarly, cloning the master repository does not diminish its importance.
+분산 제어 시스템에 대한 보편적인 오해가 있다면, 이 시스템은 공식적인 중앙 저장소가 필요한 프로젝트에는 적합하지 않다고 생각하는 것입니다. 이 것은 말도 안되는 오해이지요. 이 오해는 누군가의 사진을 찍는다는 것은 그 피사체의 영혼을 빨아온다는 말도 안 되는 논리와 같습니다. 다시 말하면, 중앙 저장소의 파일을 사본하는 것이 중앙 저장소의 중요성을 훼손한다는 것이 아닙니다.
 
-A good first approximation is that anything a centralized version control system can do, a well-designed distributed system can do better. Network resources are simply costlier than local resources. While we shall later see there are drawbacks to a distributed approach, one is less likely to make erroneous comparisons with this rule of thumb.
+중앙 버전 관리 시스템이 할 수 있는 모든 일들은 잘 짜여진 분산 관리 시스템이 더 잘 할수 있다는 것을 알아야 합니다. 네트워크상의 자원들은 기본적으로 로컬상의 자원들보다 비경제적일 수 밖에 없습니다. 나중에도 말씀드리겠지만 분산 제어 시스템도 문제점이 없는 시스템은 아닙니다. 그러나 주먹구구식의 생각으로 중앙 관리 시스템과 분산 관리 시스템을 비교하는 일은 없어야 할 것입니다. 다음 인용문이 이 것을 대변해 줍니다.
 
-A small project may only need a fraction of the features offered by such a
-system, but using systems that scale poorly for tiny projects is like using
-Roman numerals for calculations involving small numbers.
+규모가 작은 프로젝트는 어떤 시스템으로부터 부분적인 특성만이 필요할 지 모르지만,
+규모가 작은 프로젝트를 잘못 스케일링하는 시스템은 마치
+로마 숫자를 이용해 작은 숫자들의 계산을 실행하는 것과 같다.
 
-Moreover, your project may grow beyond your original expectations. Using Git from the outset is like carrying a Swiss army knife even though you mostly use it to open bottles. On the day you desperately need a screwdriver you'll be glad you have more than a plain bottle-opener.
+더욱이 당신의 프로젝트는 당신이 생각했던 것보다 더 큰 일이 될지도 모릅니다. 처음부터 Git을 사용한다는 것은 아무리 병뚜껑을 여는 데만 쓴다하여도 스위스아미나이프를 들고 다니는 것과 같은 것입니다. 드라이버가 필요할 경우 당신은 병따개를 들고다니지 않았다는 사실에 안도의 한 숨을 쉴 수 있을 것 입니다.
 
-=== Merge Conflicts ===
+=== 결합의 오류 ===
 
-For this topic, our computer game analogy becomes too thinly stretched. Instead, let us again consider editing a document.
+이 주제를 설명하기 위해서는 컴퓨터 게임에 비유하는 것은 더 이상 적합하지 않을 수 있습니다. 대신에 여기서는 문서편집에 비유해서 설명드리도록 하죠.
 
-Suppose Alice inserts a line at the beginning of a file, and Bob appends one at the end of his copy. They both upload their changes. Most systems will automatically deduce a reasonable course of action: accept and merge their changes, so both Alice's and Bob's edits are applied.
+앨리스는 파일 편집 중 첫 줄에 새로운 줄을 추가하고, 밥은 그 파일의 마지막에 한 줄을 넣는다고 가정합니다. 그들은 편집된 파일을 업로드 합니다. 대부분의 시스템은 자동으로 두 사람이 한 편집을 받아들이고 병합할 것입니다. 결과적으로는 앨리스와 밥 두 사람의 편집이 적용될 것입니다.
 
-Now suppose both Alice and Bob have made distinct edits to the same line. Then it is impossible to proceed without human intervention. The second person to upload is informed of a _merge conflict_, and must choose one edit over another, or revise the line entirely.
+자 이제 앨리스와 밥이 같은 부분에서 서로 다른 편집을 한다고 가정해 봅니다. 인간의 직접적인 개입없이는 불가능 하겠지요. 누가 편집을하던 두번째로 편집하는 사람은 merge conflict라는 메세지를 볼 수밖에 없겠지요. 한 사람만의 편집을 선택하거나 두 사람의 편집과는 다른 세번째 편집을 생각해 봐야 할 겁니다.
 
-More complex situations can arise. Version control systems handle the simpler cases themselves, and leave the difficult cases for humans. Usually their behaviour is configurable.
+더 복잡한 상황이 일어날 수 있습니다. 버전 관리 시스템은 간단한 상황들을 알아서 해결해 줍니다. 어려운 상황은 인간의 손에 맡기지요. 시스템의 행동은 대체적으로 조정가능합니다.

@@ -1,90 +1,89 @@
-== Branch Wizardry ==
+== 나뭇가지 (branch) 마법 ==
 
-Instant branching and merging are the most lethal of Git's killer features.
+Git의 죽이는 기능들 중에는 즉석으로 브랜칭 및 병합이 가능하다는 것입니다.
 
-*Problem*: External factors inevitably necessitate context switching. A severe
-bug manifests in the released version without warning. The deadline for a
-certain feature is moved closer. A developer whose help you need for a key section of the project is about to leave. In all cases, you must abruptly drop what you are doing and focus on a completely different task.
+*예시문제*: 외부적인 요소들은 불가피하게 당신이 하던 일은 그만두게 합니다. 예를 들어, 치명적인 버그가
+이미 배포된 버전에서 경고없이 퍼저나가게 생겼습니다. 프로그램에 새로 넣어야 할
+기능이 있는데 데드라인은 가까워져 옵니다. 당신이 도움을 요청하고자 했던 개발자는 퇴사할려고 하니 도움을 요청할 수도 없고요. 시간이 촉박한 만큼 하던 일을 멈추고 버그를 고치는 데에 올인을 해야겠지요.
 
-Interrupting your train of thought can be detrimental to your productivity, and the more cumbersome it is to switch contexts, the greater the loss. With centralized version control we must download a fresh working copy from the central server. Distributed systems fare better, as we can clone the desired version locally.
+위와 같이 하던 일을 멈추는 것은 일의 생산성을 치명적으로 떨어트립니다. 특히나 지금까지 하던 일과 정 상관없는 부분의 프로그램을 건들어야 할 때 말이죠. 이럴 때, 중앙 버전 관리 시스템을 사용하는 경우엔 작동이 되는 버그없는 프로그램을 다시 받아야 합니다. 분산 관리 시스템일 경우에는 원하는 버전만 로컬 컴퓨터로 받아내면 되죠.
 
-But cloning still entails copying the whole working directory as well as the entire history up to the given point. Even though Git reduces the cost of this with file sharing and hard links, the project files themselves must be recreated in their entirety in the new working directory.
+하지만 클로닝은 작업 중인 디렉토리 포함 그 디렉토리의 히스토리를 어느 선까지는 같이 다운로드 받게 합니다. Git은 최대한 효율성있게 시스템이 디자인되어 있지만, 클로닝 명령어를 쓴다면 프로젝트 파일들이 (비효율적으로) 현재 작업 중인 디렉토리에 전부 다시 생성될 것입니다.
 
-*Solution*: Git has a better tool for these situations that is much faster and more space-efficient than cloning: *git branch*.
+*해답*: Git은 이런 상황에서 좀 더 빠르고 공간적으로 효율성있게 클로닝을 할 수 있는 명령어를 가지고 있습니다: *git branch*
 
-With this magic word, the files in your directory suddenly shapeshift from one version to another. This transformation can do more than merely go back or forward in history. Your files can morph from the last release to the experimental version to the current development version to your friend's version and so on.
+이런 환상적인 명령어를 이용하여 디렉토리에 있는 파일들은 탈바꿈을 감행해 이 버전과 저 버전을 넘나들 수 있습니다. 이 변형기법은 버전 사이를 넘나드는 것 외에도 더 많은 것을 할 수 있습니다. 당신의 파일들은 전 버전에서 실험할 있는 임시버전, 개발버전, 친구들이 보유하고 있는 버전 등으로 변형할 수 있습니다.
 
-=== The Boss Key ===
+=== 일하는 척 하기 버튼 ===
 
-Ever played one of those games where at the push of a button (``the boss key''), the screen would instantly display a spreadsheet or something? So if the boss walked in the office while you were playing the game you could quickly hide it away?
+버튼 하나만 누르면 ("일하는 척 하기 버튼") 게임화면이 최소화되고 엑셀파일이 화면상에 나타나는 기능을 보신 적이 있을겁니다. 이 기능을 활용하면 직장상사의 눈을 속이고 일하던 척 할 수 있지요?
 
-In some directory:
+아무 디렉토리에서:
 
- $ echo "I'm smarter than my boss" > myfile.txt
+ $ echo "I'm smarter than my boss" > myfile.txt # 난 내 상사보다 똑똑하다
  $ git init
  $ git add .
  $ git commit -m "Initial commit"
 
-We have created a Git repository that tracks one text file containing a certain message. Now type:
+우리는 "난 내 상사보다 똑똑하다"라는 내용을 가진 텍스트파일을 Git 저장소에 만들었습니다. 그리고:
 
- $ git checkout -b boss  # nothing seems to change after this
- $ echo "My boss is smarter than me" > myfile.txt
+ $ git checkout -b boss  # 이 명령어를 사용한 후엔 아무것도 바뀌지 않은 것처럼 보일겁니다.
+ $ echo "My boss is smarter than me" > myfile.txt # 상사는 나보다 똑똑합니다
  $ git commit -a -m "Another commit"
 
-It looks like we've just overwritten our file and committed it. But it's an illusion. Type:
+겉으로 보기에는 그 텍스트파일을 새로운 (맘에 들지않는) 문장으로 덮어씌우고  commit을 한 것처럼 보일겁니다. 그러나 그건 착각입니다. 다음 명령어를 입력해보세요:
+ 
+ $ git checkout master  # 처음 버전으로 돌아가기
 
- $ git checkout master  # switch to original version of the file
+자! 그럼 처음 생성했던 텍스트파일이 돌아왔을 겁니다. 만약에 그 상사가 이 사실을 알아채고 당신의 디렉토리를 살펴본다고 할 때는:
+ 
+ $ git checkout boss  # 아까 두 번째로 만들어놓은 "상사는 나보다 똑똑합니다"라는 메세지를 담은 myfile.txt 파일로 돌아갑니다.
 
-and hey presto! The text file is restored. And if the boss decides to snoop around this directory, type:
+이런 식으로 두 가지 다른버전의 파일 사이를 오갈 수 있습니다. 그리고 각각 따로 commit을 할 수 있지요.
+ 
+=== 힘든 작업 ===
 
- $ git checkout boss  # switch to version suitable for boss' eyes
-
-You can switch between the two versions of the file as much as you like, and commit to each independently.
-
-=== Dirty Work ===
-
-[[branch]]
-Say you're working on some feature, and for some reason, you need to go back three versions and temporarily put in a few print statements to see how something works. Then:
+[[나뭇가지 (branch)]]
+당신이 어떤 작업을하고 있다고 가정합니다. 작업 도중에 세 버전 전으로 돌아가서 새로운 print 라인을 넣고 테스팅 해보고 싶다는 생각이 들었습니다. 그럴 때엔:
 
  $ git commit -a
  $ git checkout HEAD~3
 
-Now you can add ugly temporary code all over the place. You can even commit these changes. When you're done,
-
+이제 테스팅하고 싶었던 파일에 더하고 싶은 것을 걱정없이 마구 넣어도 됩니다. 이 미친 짓(?)을 Commit 해놓을 수도 있습니다. 작업이 다 끝났다면,
+ 
  $ git checkout master
 
-to return to your original work. Observe that any uncommitted changes are carried over.
-
-What if you wanted to save the temporary changes after all? Easy:
-
+를 사용해 아까 미친 짓을 하기 전의 작업상태로 돌아올 수 있습니다. Commit하지 않았던 작업들이 같이 딸려 왔다는 것을 확인 (조심!)할 수 있을 겁니다.
+ 
+아까 그 임시작업 (미친 짓)을 세이브하고 싶다면 어떻게 해야할까요? 쉽습니다:
+ 
  $ git checkout -b dirty
 
-and commit before switching back to the master branch. Whenever you want to return to the dirty changes, simply type:
+를 실행하여 그 나뭇가지 (branch) 에서 마스터 나뭇가지로 돌아오기 전에 commit을 하면 됩니다. 그런 후 다시 미친 짓을 할 때의 상태로 돌아가고 싶다면:
 
  $ git checkout dirty
 
-We touched upon this command in an earlier chapter, when discussing loading old states. At last we can tell the whole story: the files change to the requested state, but we must leave the master branch. Any commits made from now on take your files down a different road, which can be named later.
+우리는 이 체크아웃이라는 명령어를 전에도 설명했었죠. 여기서는 이 명령어가 어떻게 예전 버전들을 불러오는 지 살펴볼 수 있었습니다: 파일을 원하는 버전으로 돌아가게 할 수 있으나, master 나뭇가지를 우선 벗어나야 하지요. 벗어난 후의 commit은 master 나뭇가지와는 다른 길을 걷게 될 것입니다. 그 길을 나중에 이름도 지어줄 수 있지요.
+ 
+다시 말하면, 예전 상태 (state)에서 벗어나면 Git은 자동으로 이름이 (아직) 붙여지지 않은 새로운 나뭇가지로 이동시켜 줍니다. 이 나뭇가지는 *git checkout -b*로 이름을 바꿔 저장해줄 수 있죠.
 
-In other words, after checking out an old state, Git automatically puts you in a new, unnamed branch, which can be named and saved with *git checkout -b*.
+=== 빠른 해결책 ===
 
-=== Quick Fixes ===
-
-You're in the middle of something when you are told to drop everything and fix a newly discovered bug in commit `1b6d...`:
+작업 중에 갑자기 하던 일을 멈추고 '1b6d...'commit에 있는 버그를 고치라고 부탁을 받았다고 생각해 봅시다:
 
  $ git commit -a
  $ git checkout -b fixes 1b6d
 
-Then once you've fixed the bug:
-
+버그를 다 고친 후에:
+ 
  $ git commit -a -m "Bug fixed"
  $ git checkout master
 
-and resume work on your original task. You can even 'merge' in the freshly
-baked bugfix:
+이제 아까 잠시 중단했던 작업으로 돌아갈 수 있습니다. 버그가 고쳐진 파일도 병합해올 수 있죠:
 
  $ git merge fixes
 
-=== Merging ===
+=== 병합 (Merging) ===
 
 With some version control systems, creating branches is easy but merging them
 back together is tough. With Git, merging is so trivial that you might be
