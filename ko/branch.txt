@@ -85,93 +85,93 @@ Git의 죽이는 기능들 중에는 즉석으로 브랜칭 및 병합이 가능
 
 === 병합 (Merging) ===
 
-With some version control systems, creating branches is easy but merging them
-back together is tough. With Git, merging is so trivial that you might be
-unaware of it happening.
+Git을 제외한 어떤 버전 컨트롤 시스템들을 이용할 땐 나뭇가지 (branch)들을 만드는 것은 쉽지만 
+나뭇가지들을 병합하기는 어려울지도 모릅니다. Git에서는 병합작업이 정말 쉽고
+병합이 진행되고 있는 중인지도 모르는 사이에 끝날 것입니다.
 
-We actually encountered merging long ago. The *pull* command in fact 'fetches'
-commits and then merges them into your current branch. If you have no local
-changes, then the merge is a 'fast forward', a degenerate case akin to fetching
-the latest version in a centralized version control system. But if you do have
-local changes, Git will automatically merge, and report any conflicts.
+우리는 병합을 아까 전에도 소개했었습니다. 당겨오기 (*pull*) 명령어는 
+commit들을 가져와 지금 사용중인 나뭇가지에 병합하여 줍니다. 로컬에서 아무런 
+편집작업을 진행하지 않았더라면 *pull*은 현 나뭇가지를 '빨리 감기' 하여 
+중앙 서버에서 가장 최근의 정보를 가져와 병합합니다. 로컬에서 편집작업을 한
+기록이 있다면, Git은 자동으로 병합을 시도할 것이고, 병합에 버전간의 차질이 있다면 당신에게 보고할 것 입니다.
 
-Ordinarily, a commit has exactly one 'parent commit', namely, the previous
-commit. Merging branches together produces a commit with at least two parents.
-This begs the question: what commit does `HEAD~10` really refer to? A commit
-could have multiple parents, so which one do we follow?
+Commit은 보통 하나의 '부모 commit'이 있습니다. 병합을 다르게 생각해보면
+한 commit이 적어도 두 개의 '부모 commit'이 있다고 생각할 수 있는 것이죠.
+그럼 'HEAD~10'은 어떤 commit을 가르키는 걸까요? 부모가 하나가 아니라면
+어떤 것을 거슬러 올라가야 전 버전에서 작업할 수 있을까요?
 
-It turns out this notation chooses the first parent every time. This is
-desirable because the current branch becomes the first parent during a merge;
-frequently you're only concerned with the changes you made in the current
-branch, as opposed to changes merged in from other branches.
+Git은 먼저 commit되었던 부모를 따르게 설정되어 있습니다. 현재 작업중인
+나뭇가지가 병합이 실행될 경우 첫번째 부모가 되기때문에 당연한 겁니다.:
+당신은 언제나 현 나뭇가지에 가장 최근에 한 작업에만 관심이 있을 수 밖에 없기 때문이지요.
+다른 나뭇가지에서 한 작업은 다음 일입니다.
 
-You can refer to a specific parent with a caret. For example, to show
-the logs from the second parent:
+탈자 기호 (^)를 이용하서 부모를 수동으로 정해줄 수도 있습니다. 예를 들어
+두번째 부모의 기록을 조회하고 싶다면:
 
  $ git log HEAD^2
 
-You may omit the number for the first parent. For example, to show the
-differences with the first parent:
+첫번째 부모의 기록을 조회할 때는 탈자기호 이후의 번호는 생략해도 됩니다. 
+굳이 보여드리자면:
 
  $ git diff HEAD^
 
-You can combine this notation with other types. For example:
-
+이 표기법은 다른 형식의 표기법과도 병행해서 사용할 수 있습니다:
+ 
  $ git checkout 1b6d^^2~10 -b ancient
 
-starts a new branch ``ancient'' representing the state 10 commits back from the
-second parent of the first parent of the commit starting with 1b6d.
+(집중하십시오) 새로운 나뭇가지인 "ancient"를 시작하고 두번째 부모의 첫번째 부모 나뭇가지에서 
+1b6d로 시작하는 commit과 그 commit 전 10개의 commit을 불러와 줄 것입니다.
 
-=== Uninterrupted Workflow ===
+=== 방해받지 않는 작업진행 ===
 
-Often in hardware projects, the second step of a plan must await the completion of the first step. A car undergoing repairs might sit idly in a garage until a particular part arrives from the factory. A prototype might wait for a chip to be fabricated before construction can continue.
+하드웨어 관련작업을 하다보면 현재 작업중인 단계가 완료되어야만 다음 단계 진행이 가능할 것입니다. 자동차를 예로들면 외부로부터 오기로했던 부품들이 도착해야 비로소 수리에 들어갈 수 있겠지요. 프로토타입들은 칩들이 가공되어야 건축이 가능해 지겠죠.
 
-Software projects can be similar. The second part of a new feature may have to
-wait until the first part has been released and tested. Some projects require
-your code to be reviewed before accepting it, so you might wait until the first
-part is approved before starting the second part.
+소프트웨어 관련작업도 비슷합니다. 다음 작업이 진행될려면 
+현재 작업이 이미 발표 및 테스트가 되어있어야 할 겁니다. 어떤 작업들은
+당신의 코드가 받아 들여지기 전 검토부터 되어야 겠지요. 그래서 당신은 그 검토가
+끌날 때까지는 다음 작업으로 진행하지 못 할것입니다.
 
-Thanks to painless branching and merging, we can bend the rules and work on
-Part II before Part I is officially ready. Suppose you have committed Part I
-and sent it for review. Let's say you're in the `master` branch. Then branch
-off:
+하지만 나뭇가지와 병합기능 덕분에 이 규치을 깨고 파트 1이 완료되기도 전에
+파트 2에서 미리 작업을 진행하고 있을 수 있습니다. 파트 1을 commit하고 
+검토를 위해 어디론가 보냈다고 생각하십시오. Master 나뭇가지에서 있었다면,
+그 나뭇가지에서 다른 나뭇가지로 갈아타야합니다:
 
  $ git checkout -b part2
 
-Next, work on Part II, committing your changes along the way. To err is human,
-and often you'll want to go back and fix something in Part I.
-If you're lucky, or very good, you can skip these lines.
+그리곤 파트 2에서 commit을 하며 작업을 계속 진행하세요. 인간은 실수를 많이하는 동물이기에
+파트 1으로 다시 돌아가서 무엇인가 고치고 싶을지도 모릅니다.
+만약에 당신이 천재적인 프로그래머라면 다음 명령어를 사용할 일은 없겠지요.
 
- $ git checkout master  # Go back to Part I.
- $ fix_problem
- $ git commit -a        # Commit the fixes.
- $ git checkout part2   # Go back to Part II.
- $ git merge master     # Merge in those fixes.
+ $ git checkout master  # 파트 1로 돌아갑니다.
+ $ fix_problem # 수정 작업
+ $ git commit -a        # 수정 작업을 commit합니다.
+ $ git checkout part2   # 파트 2로 다시 갑니다.
+ $ git merge master     # 아까 파트 1의 수정을 파트 2로 병합합니다.
 
-Eventually, Part I is approved:
+이 때 즈음이면 이미 파트 1은 허가 받았겠지요.
+ 
+ $ git checkout master  # 파트 1로 돌아갑니다.
+ $ submit files         # 파일 배포!
+ $ git merge part2      # 파트 2도 파트 1으로 병합.
+ $ git branch -d part2  # 파트 2 나뭇가지 삭제.
 
- $ git checkout master  # Go back to Part I.
- $ submit files         # Release to the world!
- $ git merge part2      # Merge in Part II.
- $ git branch -d part2  # Delete "part2" branch.
+이제 파트 2의 모든 것과 함께 master 나뭇가지로 돌아왔습니다.
+ 
+ 나뭇가지는 제한 없이 원하는 만큼 생성할 수 있습니다. 거꾸로도 나뭇가지를 만들 수도
+ 있죠: 만약에 7번의 commit전에 나뭇가지를 하나 만들어 놓았어야 함을
+ 늦게 깨닫았을 때, 다음 명령어를 이용해 보세요:
 
-Now you're in the `master` branch again, with Part II in the working directory.
+ $ git branch -m master part2  # master 나뭇가지의 이름을 part2로 바꿉니다.
+ $ git branch master HEAD~7    # 7 commit 전의 상황에서 master 나뭇가지를 새로 만듭니다.
 
-It's easy to extend this trick for any number of parts. It's also easy to
-branch off retroactively: suppose you belatedly realize you should have created
-a branch 7 commits ago. Then type:
+Master 나뭇가지는 이제 part 1만 들어있고, 나머지는 모두 part 2에 들어가게 되었습니다.
+그리고 우리는 지금 part 2에서 작업을 하고 있는 중이겠지요; master를 만들면서 master로는
+현재 작업공간을 옮겨가지 않았습니다. 처음 보시죠? 여태까지 설명한 예제들에서는
+나뭇가지를 만들면서 곧바로 작업공간도 같이 옮겨갔었는데 말이죠. 이런 식으로요:
+ 
+ $ git checkout HEAD~7 -b master  # 나뭇가지를 만들고 바로 작업공간도 그 나뭇가지로 옮긴다.
 
- $ git branch -m master part2  # Rename "master" branch to "part2".
- $ git branch master HEAD~7    # Create new "master", 7 commits upstream.
-
-The `master` branch now contains just Part I, and the `part2` branch contains
-the rest. We are in the latter branch; we created `master` without switching to
-it, because we want to continue work on `part2`. This is unusual. Until now,
-we've been switching to branches immediately after creation, as in:
-
- $ git checkout HEAD~7 -b master  # Create a branch, and switch to it.
-
-=== Reorganizing a Medley ===
+=== 메들리의 재정리 ===
 
 Perhaps you like to work on all aspects of a project in the same branch. You want to keep works-in-progress to yourself and want others to see your commits only when they have been neatly organized. Start a couple of branches:
 
