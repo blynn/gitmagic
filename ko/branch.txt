@@ -173,72 +173,71 @@ Master 나뭇가지는 이제 part 1만 들어있고, 나머지는 모두 part 2
 
 === 메들리의 재정리 ===
 
-Perhaps you like to work on all aspects of a project in the same branch. You want to keep works-in-progress to yourself and want others to see your commits only when they have been neatly organized. Start a couple of branches:
+하나의 나뭇가지에서 모든 작업을 끝내고 싶을 수도 있습니다. 작업중인 일들은 혼자만 알고 중요한 commit들만 다른사람들에게 보여주고 싶을 수 있습니다. 그럴경우엔 두 개의 나뭇가지를 우선 만드세요:
 
-  $ git branch sanitized    # Create a branch for sanitized commits.
-  $ git checkout -b medley  # Create and switch to a branch to work in.
+  $ git branch sanitized    # 정돈된 commit을 보여주기 위한 나뭇가지를 만듭니다.
+  $ git checkout -b medley  # 작업을 하게 될 "메들리" 나뭇가지를 만들어 이동합니다.
 
-Next, work on anything: fix bugs, add features, add temporary code, and so forth, committing often along the way. Then:
-
+버그를 고치던, 어떤 기능을 더하던, 임시코드를 더하던 작업을 진행합니다. 물론 commit을 해가면서 말이죠. 그리고:
+  
   $ git checkout sanitized
   $ git cherry-pick medley^^
 
-applies the grandparent of the head commit of the ``medley'' branch to the ``sanitized'' branch. With appropriate cherry-picks you can construct a branch that contains only permanent code, and has related commits grouped together.
+위의 명령어들을 차례로 사용한다면 "메들리" 나뭇가지의 commit들을 "sanitzed" 나뭇가지에 붙입니다. "cherry-pick"명령어를 잘 사용한다면 영구적인 코드들만 들어있는 나뭇가지를 만들 수 있습니다. 그리고 그 commit들은 서로 연계가 잘 되어있을 것입니다.
 
-=== Managing Branches ===
+=== 나뭇가지 관리하기 ===
 
-List all branches by typing:
+여태까지 프로젝트에서 생성한 나뭇가지들을 보려면:
 
  $ git branch
 
-By default, you start in a branch named ``master''. Some advocate leaving the
-``master'' branch untouched and creating new branches for your own edits.
+기본적으로 "master" 나뭇가지에서 작업을 시작하는 것이 디폴트로 지정되어 있습니다. 그러나 어떤 개발자들은 
+"master" 나뭇가지는 그대로 냅두고 새로운 나뭇가지를 만들어서 그 곳에서 작업하는 것을 선호합니다.
 
-The *-d* and *-m* options allow you to delete and move (rename) branches.
-See *git help branch*.
+*-d*와 *-m* 옵션들은 각각 나뭇가지들을 지우거나 이름을 바꿔줄 수 있는 파라메터들 입니다.
+*git help branch*를 보시면 더욱 자세히 설명되어 있을겁니다 (번역 주: 어차피 영어입니다)
 
-The ``master'' branch is a useful custom. Others may assume that your
-repository has a branch with this name, and that it contains the official
-version of your project. Although you can rename or obliterate the ``master''
-branch, you might as well respect this convention.
+"master" 나뭇가지는 유용한 관례적인 이름의 나뭇가지일 뿐입니다. 다른 개발자들은
+당신의 저장소에 당연히 "master"라는 이름을 가진 나뭇가지가 있을 것이라고 생각하겠지요. 그리고 
+그 나뭇가지는 모든 공식적인 자료들일 들어있다고 넘겨짚을 것입니다. 그러나 당신은 "master"를 없에거나
+새로운 이름을 지정해줄 수 있으나, "master" 나뭇가지를 쓰는 관례를 따르는 것을 추천합니다.
 
-=== Temporary Branches ===
+=== 임시 나뭇가지 ===
 
-After a while you may realize you are creating short-lived branches
-frequently for similar reasons: every other branch merely serves to
-save the current state so you can briefly hop back to an older state to
-fix a high-priority bug or something.
+Git을 사용하다보면 당신은 쓸모없는 하루살이의 나뭇가지들을 많이 만들고 있다는 사실을
+깨달을 것입니다. 이유는 다음과 같겠지요: 그 많은 나뭇가지들은 작업의 경과를
+저장하기 위해 만들어 놓고 무엇인가 고칠 것이 있을 때 빨리 돌가가기 위해서
+쌓아두기만 하고있는 거겠죠.
 
-It's analogous to changing the TV channel temporarily to see what else is on.
-But instead of pushing a couple of buttons, you have to create, check out,
-merge, and delete temporary branches. Luckily, Git has a shortcut that is as
-convenient as a TV remote control:
+다른 TV채널에서 무얼하나 확인할 때 잠시 채널을 바꾸는 것과 같은 아이디어입니다.
+그러나 리모트 버튼 몇 개 누르면 되는 것과는 달리, 많은 나뭇가지를 만들고, 설정하고, 병합하고,
+나중에 다쓰면 지워야합니다. 다행히도 Git에서는 TV 리모트와 비슷하게 
+지름길이 있습니다:
 
  $ git stash
 
-This saves the current state in a temporary location (a 'stash') and
-restores the previous state. Your working directory appears exactly as it was
-before you started editing, and you can fix bugs, pull in upstream changes, and
-so on. When you want to go back to the stashed state, type:
+이 명령어는 현 버전을 임시저장소 (stash)에 저장해 주고 작업하기 전의 상태로
+돌아갑니다. 작업중인 디렉토리는 작업 (편집, 버그고침 등) 하기 전의 상태로 돌아가겠지요.
+그리고 임시 (stash)로 돌아가고 싶다면:
+ 
+ $ git stash apply  # 에러 (version conflict)가 날지도 몰라요.
 
- $ git stash apply  # You may need to resolve some conflicts.
+물론 여러개의 임시저장소 (stash)를 만들수도 있습니다. *git help stach*에 설명이 되어있으니
+읽어보세요. 눈치챘을지 모르겠지만, Git은 올바른 임시저장소 (stash) 기능을 쓰게 해주기 위해서 나뭇가지들을 몰래 이용한답니다.
 
-You can have multiple stashes, and manipulate them in various ways. See
-*git help stash*. As you may have guessed, Git maintains branches behind the scenes to perform this magic trick.
+=== 원하는 방식대로 작업하기 ===
 
-=== Work How You Want ===
+나뭇가지를 이용하는 것이 꼭 필요한지 생각할지도 모르겠습니다. 파일들을
+클로닝하는게 제일 빠르고 *cd*를 이용해 디렉토리를 바꿈으로써 나뭇가지를
+대체하고 싶을지도 모릅니다.
 
-You might wonder if branches are worth the bother. After all, clones are almost
-as fast, and you can switch between them with *cd* instead of esoteric Git
-commands.
+웹브라우저의 예를 들어보겠습니다. 여러개의 창 아니면 여러개의 탭을 지원하는 이유는 무엇일까요?
+여러 이용자들의 작업방식을 존중하여 주기 위해서랍니다. 어떤 이용자들은
+웹브라우저 창 하나만 열고 여러 탭을 열어서 작업하는 방식을 추구합니다. 다른 이용자들은
+반대의 형식으로 작업하는 것을 추구할지도 모르죠: 여러개의 창을 만들고 탭이 없이 작업하는 것을 말이죠.
+또 어떤 이용자들은 이 두 방법들을 섞어서 작업하는 걸 선호할지도 모릅니다.
 
-Consider web browsers. Why support multiple tabs as well as multiple windows?
-Because allowing both accommodates a wide variety of styles. Some users like to
-keep only one browser window open, and use tabs for multiple webpages. Others
-might insist on the other extreme: multiple windows with no tabs anywhere.
-Others still prefer something in between.
-
-Branching is like tabs for your working directory, and cloning is like opening
-a new browser window. These operations are fast and local, so why not
-experiment to find the combination that best suits you? Git lets you work
-exactly how you want.
+나뭇가지들은 마치 작업중인 디렉토리의 탭과 같습니다. 클로닝은 새로운 브라우저 창을
+여는 것과 같은 것이죠. 이 두가지 방법은 모두 빠르고 로컬에서 진행됩니다. 그러니
+당신에게 맞는 방법을 찾아보는 건 어떨까요? Git은 당신이 원하는 대로 일하게 
+도와줄 것입니다.

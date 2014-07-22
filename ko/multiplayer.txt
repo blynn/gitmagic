@@ -1,4 +1,4 @@
-== Multiplayer Git ==
+== Git은 멀티플레이어 ==
 
 Initially I used Git on a private project where I was the sole developer.
 Amongst the commands related to Git's distributed nature, I needed only *pull*
