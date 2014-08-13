@@ -1,233 +1,229 @@
 == Git은 멀티플레이어 ==
 
-Initially I used Git on a private project where I was the sole developer.
-Amongst the commands related to Git's distributed nature, I needed only *pull*
-and *clone* so could I keep the same project in different places.
+제가 과거 프리랜서 시절부터 Git을 개인적인 용도로 사용해 오고있었습니다.
+여태까지 소개했던 많은 명령어들 중, 당시에는 *pull*과 *clone정도만 사용하여
+같은 프로젝트를 여러 디렉토리에 저장하는데 사용하였습니다.
 
-Later I wanted to publish my code with Git, and include changes from
-contributors. I had to learn how to manage projects with multiple developers
-from all over the world. Fortunately, this is Git's forte, and arguably its
-raison d'être.
+시간이 지난 후 Git에 제가 만든 코드를 올리고 싶었고 다른 개발자들이
+한 작업도 반영하고 싶었습니다. 저는 전 세계의 많은 개발자들을 
+관리하는 방법을 배워야 했습니다. 다행히도 이런 일을 도와주는 것은  Git의 가장 큰 힘입니다.
+Git이 존재하는 이유이기도 하지요.
 
-=== Who Am I? ===
+=== 난 누굴까? ===
 
-Every commit has an author name and email, which is shown by *git log*.
-By default, Git uses system settings to populate these fields.
-To set them explicitly, type:
+각 commit은 작성자의 이름과 작성자의 이메일주소를 저장합니다. *git log*를 사용해 조회할 수 있습니다.
+기본설정 상, Git은 시스템 세팅을 이용해 작성자의 이름과 이메일주소를 저장합니다.
+수동으로 이름과 이메일주소를 설정하려면:
 
   $ git config --global user.name "John Doe"
   $ git config --global user.email johndoe@example.com
 
-Omit the global flag to set these options only for the current repository.
+현재 사용중인 저장소에만 사용할 수 있는 작성자 이름이나 이메일을 설정하려면 위 명령어는 
+사용하지마세요.
+  
+=== Git 을 통한 SSH, HTTP 연결 ===
 
-=== Git Over SSH, HTTP ===
+웹 서버에 관한 SSH 접근권한을 보유하고 있다고 합니다. Git은 아직 설치되어 있지않다고 가정합니다.
+기존 프로토콜만큼 효율적이진 않겠지만, Git은 HTTP를 통해 데이터 교환이 가능합니다.
 
-Suppose you have SSH access to a web server, but Git is not installed. Though
-less efficient than its native protocol, Git can communicate over HTTP.
-
-Download, compile and install Git in your account, and create a repository in
-your web directory:
+Git을 다운받아서 설치합니다. 그리고 웹 디렉토리에 저장소를 만듭니다:
 
  $ GIT_DIR=proj.git git init
  $ cd proj.git
  $ git --bare update-server-info
  $ cp hooks/post-update.sample hooks/post-update
 
-For older versions of Git, the copy command fails and you should run:
-
+Git의 예전 버전에선 복사를 지시하는 명령어가 안 들을 수 있습니다. 그렇다면:
+ 
  $ chmod a+x hooks/post-update
 
-Now you can publish your latest edits via SSH from any clone:
-
+이제 아무 클론에서 SSH를 통해 당신의 작업을 업로드할 수 있습니다:
+ 
  $ git push web.server:/path/to/proj.git master
 
-and anybody can get your project with:
-
+다른 사람들은 당신의 작업을 다운받으려면 다음 명령어를 쓰면 될겁니다:
+ 
  $ git clone http://web.server/proj.git
 
-=== Git Over Anything ===
+=== 모든 것은 Git을 통한다 ===
 
-Want to synchronize repositories without servers, or even a network connection?
-Need to improvise during an emergency? We've seen <<makinghistory, *git
-fast-export* and *git fast-import* can convert repositories to a single file
-and back>>. We could shuttle such files back and forth to transport git
-repositories over any medium, but a more efficient tool is *git bundle*.
+서버와의 연결없이 저장소를 동기화시키고 싶다고요?
+긴급하게 수정할 것이 발견되었다고요? <<makinghistory, *git
+fast-export* 그리고 *git fast-import* 명령어들은 저장소를 하나의 파일로
+묶어주거나 그 하나의 파일을 저장소로 되돌려 줄 수 있는 것을 배웠습니다>>.
+여러가지 매개체를 통해서 저장소의 파일들을 옮길 수 있지만, 정말 효율적인
+방법은 *git bundle* 명령어를 쓰는 것입니다.
 
-The sender creates a 'bundle':
+보내는 이가 '묶음 (bundle)'을 만듭니다:
 
  $ git bundle create somefile HEAD
 
-then transports the bundle, +somefile+, to the other party somehow: email,
-thumb drive, an *xxd* printout and an OCR scanner, reading bits over the phone,
-smoke signals, etc. The receiver retrieves commits from the bundle by typing:
+ 그리고 다른 장소로 그 묶음, +somefile+을 어떻게든 옮겨야합니다: 이메일, USB드라이브,
+ *xxd* 프린트, OCR 스캐너, 전화로 이야기하던지, 연기로 신호를 보내던지 등 어떻게든
+ 보내야합니다. 파일을 받을 사람들은 이 묶음으로부터의 commit을 다음 명령어를 이용하여
+ 받을 수 있습니다:
 
  $ git pull somefile
 
-The receiver can even do this from an empty repository. Despite its
-size, +somefile+ contains the entire original git repository.
+ 파일을 받는 사람들은 빈 저장소에서도 이 명령어를 사용할 수 있습니다. 파일의
+ 사이즈에도 불구하고 +somefile+ 은 저장소의 본 모습을 담고 있습니다.
 
-In larger projects, eliminate waste by bundling only changes the other
-repository lacks. For example, suppose the commit ``1b6d...'' is the most
-recent commit shared by both parties:
+큰 프로젝트에서는 묶음만들기를 좀 더 효율적으로 하기위해서 버전차이만을
+묶어줍니다. 예를 들어서 "1b6d"를 commit 이 가장 최근에 공유된 commit이라고
+가정해 봅니다:
 
  $ git bundle create somefile HEAD ^1b6d
 
-If done frequently, one could easily forget which commit was last sent. The
-help page suggests using tags to solve this. Namely, after you send a bundle,
-type:
+너무 자주 이렇게 한다면, 어떤 commit이 가장 최근 것인지 기억하지 못할 수 있습니다. 도움말에서는
+태그를 이용해 이런 문제점들을 피하라 명시합니다. 다시 말하자면 어떤 묶음을 보낸 후에는:
 
  $ git tag -f lastbundle HEAD
 
-and create new refresher bundles with:
+그리고 새로운 묶음을 만들어 줍니다:
 
  $ git bundle create newbundle HEAD ^lastbundle
 
-=== Patches: The Global Currency ===
+=== 패치: 세계적 통화 ===
 
-Patches are text representations of your changes that can be easily understood
-by computers and humans alike. This gives them universal appeal. You can email a
-patch to developers no matter what version control system they're using. As long
-as your audience can read their email, they can see your edits. Similarly, on
-your side, all you require is an email account: there's no need to setup an online Git repository.
+패치는 컴퓨터와 인간이 쉽게 알아들을 수 있는 언어로 파일의 변화를 
+텍스트로 표현할 수 있는 방법입니다. 이런 식으로  세계적으로 다양하게 사용되고 있습니다.
+어떠한 버전 관리 시스템을 쓰던간에 개발자들에게 패치를 이메일로 보낼 수 있습니다. 그 개발자들이
+그 이메일을 읽을 수만 있다면 그들은 당신이 편집을 한 작업기록을 볼 수 있습니다. 
 
-Recall from the first chapter:
+첫 장에서 본 명령어를 다시 한번 해봅시다:
 
  $ git diff 1b6d > my.patch
 
-outputs a patch which can be pasted into an email for discussion. In a Git
-repository, type:
+위 명령어는 이메일로 추후에 토론할 수 있게 패치를 붙여넣기 하여 공유할 수동으로
+있었습니다. Git 저장소에서 다음을 따라해보세요:
 
  $ git apply < my.patch
 
-to apply the patch.
+위 명령어를 사용하여 패치를 적용시킵니다.
 
-In more formal settings, when author names and perhaps signatures should be
-recorded, generate the corresponding patches past a certain point by typing:
+작성자의 이름과 싸인이 기록되어야하는 좀 더 공식적인 환경에서는
+그에 상응하는 패치 (commit 1b6d 이후)를 만들기위해 다음 명령어를 사용합니다:
 
  $ git format-patch 1b6d
 
-The resulting files can be given to *git-send-email*, or sent by hand. You can also specify a range of commits:
-
+이렇게 만든 파일묶음은 *git-send-email*을 사용하여 보낼 수 있습니다. 보내고싶은 commit 묶음을 수동으로 지정해줄 수도 있습니다:
+ 
  $ git format-patch 1b6d..HEAD^^
 
-On the receiving end, save an email to a file, then type:
+받는 쪽에서는 이메일을 받을 때:
 
  $ git am < email.txt
 
-This applies the incoming patch and also creates a commit, including information such as the author.
+ 이 명령어는 새로받은 패치를 적용시키고 작성자의 정보가 포함된 새로운 commit을 만듭니다.
 
-With a browser email client, you may need to click a button to see the email in its raw original form before saving the patch to a file.
+패치를 받기전에, 당신의 이메일 클라이언트에서 이메일에 첨부된 commit 묶음이 어떤 사람에 의해 포맷이 바뀌진 않았는지 확인합니다.
 
-There are slight differences for mbox-based email clients, but if you use one
-of these, you're probably the sort of person who can figure them out easily
-without reading tutorials!
+mbox-를 기반으로하는 이메일 클라이언트는 약간의 문제점들이 있습니다. 그러나 
+이런 방식의 클라이언트를 쓸만한 사람이라면 손쉽게 튜토리얼을 읽지않고도
+해결할 수 있을것입니다.
 
-=== Sorry, We've Moved ===
+=== 죄송합니다. 주소를 옮겼습니다 ===
 
-After cloning a repository, running *git push* or *git pull* will automatically
-push to or pull from the original URL. How does Git do this? The secret lies in
-config options created with the clone. Let's take a peek:
+저장소를 클로닝한 후 *git push*나 *git pull*을 사용하면 원래의 URL에서 해당
+명령어를 실행합니다. Git은 어떤 원리로 이렇게 하는 것일까요? 그 비밀은
+클론을 만들때 생선된 config 옵션에서 찾을 수 있습니다. 한번 볼까요?:
 
  $ git config --list
 
-The +remote.origin.url+ option controls the source URL; ``origin'' is a nickname
-given to the source repository. As with the ``master'' branch convention, we may
-change or delete this nickname but there is usually no reason for doing so.
++remote.origin.url+ 옵션은 URL 소스를 통제합니다; "origin"은 원래 저장소에
+붙여진 별명이라고 보면됩니다. 나뭇가지에는 "master"라고 이름이 붙듯이 말이죠. 그말은
+이 이름을 바꾸거나 지울 수 있는데 할 필요는 없다는 것입니다.
 
-If the original repository moves, we can update the URL via:
+제일 처음 사용하던 저장소가 옮겨지면, URL을 수정해 주어야 합니다: 
 
  $ git config remote.origin.url git://new.url/proj.git
 
-The +branch.master.merge+ option specifies the default remote branch in
-a *git pull*. During the initial clone, it is set to the current branch of the
-source repository, so even if the HEAD of the source repository subsequently
-moves to a different branch, a later pull will faithfully follow the
-original branch.
++brach.master.merge+ 옵션은 *git pull*로 당겨올 수 있는 나뭇가지를
+설정하여 줍니다. 처음으로 클론을 생성하였을때, 그 클론의 나뭇가지는
+그 클론을 만들어온 저장소의 현재 사용중인 저장소와 같게 설정이 되어있습니다. 그렇기 때문에 현재 작업 헤드가
+다른 나뭇가지로 옮겨갔었다고 하더라도, 추후의 당겨오기는 본래의 나뭇가지를 따를 수 있게 해줄 것 입니다.
 
-This option only applies to the repository we first cloned from, which is
-recorded in the option +branch.master.remote+. If we pull in from other
-repositories we must explicitly state which branch we want:
+본 옵션은 처음에 +branch.master.remote+옵션에 기록되어 있는 클론에만 적용됩니다.
+다른 저장소에서 당겨오기를 실행한다면, 구체적으로 어떤 나뭇가지에서 당겨오길 원하는지
+설정해주어야 합니다:
 
  $ git pull git://example.com/other.git master
 
-The above explains why some of our earlier push and pull examples had no
-arguments.
+이 것은 왜 전에 보여드렸던 밀기와 당겨오기 예제에 다른 argument가 붙지 않았었는지
+설명하여 줍니다.
 
-=== Remote Branches ===
+=== 원격 나뭇가지 ===
 
-When you clone a repository, you also clone all its branches. You may not have
-noticed this because Git hides them away: you must ask for them specifically.
-This prevents branches in the remote repository from interfering with
-your branches, and also makes Git easier for beginners.
+어떠한 저장소를 클론할 때에는 그 클론의 모든 나뭇가지를 클론하게 됩니다. Git은 이 사실을 은폐하기에
+당신은 클론을 하면서 몰랐을지도 모릅니다: 그러니 당신은 직접 Git에게 물어보아야 합니다. 이 설정은 원격
+저장소에 있는 나뭇가지들은 당신의 나뭇가지들을 꼬이게하는 일을 없게 해줍니다. 그래서 Git 역시
+초보자들이 사용할 수 있는 것이고요.
 
-List the remote branches with:
+다음 명령어를 이용하여 원격 나뭇가지들을 나열합니다:
 
  $ git branch -r
 
-You should see something like:
+당신은 다음과 비슷한 결과물들을 보게될 것입니다:
 
  origin/HEAD
  origin/master
  origin/experimental
 
-These represent branches and the HEAD of the remote repository, and can be used
-in regular Git commands. For example, suppose you have made many commits, and
-wish to compare against the last fetched version. You could search through the
-logs for the appropriate SHA1 hash, but it's much easier to type:
-
+이 결과는 각 행마다 원격저장소의 나뭇가지와 현 작업위치를 돌려주는 결과이며, 다른 Git 명령어들과
+함께 사용될 수 있습니다. 예를 들면, 당신은 지금 많은 commit을 하였다고 먼저 가정합니다. 그러고는
+가장 최근에 가져온 버젼과 비교를 하고싶다고 생각해봅니다. SHA1 해쉬를 찾아서 확인할 수도 있지만
+다음 명령어로 더 간단히 비교할 수 있습니다:
+ 
  $ git diff origin/HEAD
 
-Or you can see what the ``experimental'' branch has been up to:
+아니면 "experimental" 나뭇가지가 지금 어떠한 상태인지 알아낼 수도 있습니다.
 
  $ git log origin/experimental
 
-=== Multiple Remotes ===
+=== 다수의 원격저장소 ===
 
-Suppose two other developers are working on our project, and we want to
-keep tabs on both. We can follow more than one repository at a time with:
+당신 외의 두명의 개발자가 프로젝트를 공동으로 진행하고 있다고 가정합니다. 그리고 그 둘의
+작업상황을 주시하고 싶습니다. 당신은 다음 명령어를 사용함으로써 하나 이상의 저장소를
+추적할 수 있습니다:
 
  $ git remote add other git://example.com/some_repo.git
  $ git pull other some_branch
 
-Now we have merged in a branch from the second repository, and we have
-easy access to all branches of all repositories:
+이제 두번째 저장소의 나뭇가지로 병합을 시도하였으며 모든 저장소의 모든 나뭇가지에
+대한 접근권한이 생겼습니다.
 
  $ git diff origin/experimental^ other/some_branch~5
 
-But what if we just want to compare their changes without affecting our own
-work? In other words, we want to examine their branches without having
-their changes invade our working directory. Then rather than pull, run:
+그러나 내 작업과 관련없이 버전의 변화를 비교해내는 방법은 무엇일까요? 풀어말하자면 
+그들의 나뭇가지를 보는 동시에 내 작업이 영향받지않게 하고싶다는 것입니다. 그렇다면
+당겨오기 보다는:
 
- $ git fetch        # Fetch from origin, the default.
- $ git fetch other  # Fetch from the second programmer.
+ $ git fetch        # 원래의 저장소로부터 물어옵니다. 디폴트 명령어.
+ $ git fetch other  # 다른 개발자의 저장소를 물어옵니다.
 
-This just fetches histories. Although the working directory remains untouched,
-we can refer to any branch of any repository in a Git command because we now
-possess a local copy.
+버전기록들만을 가져오는 명령어들입니다. 현재 작업중인 디렉토리는 영향을 받지않을 것이지만, 로컬 사본을
+가지고 있기에 우리는 이제 어느 저장소의 어떤 나뭇가지라도 Git 명령어를 사용하여 활용할 수 있습니다.
 
-Recall that behind the scenes, a pull is simply a *fetch* then *merge*.
-Usually we *pull* because we want to merge the latest commit after a fetch;
-this situation is a notable exception.
+Pull은 간단히 풀어서 설명하면 *fetch(물어오기)* 후 *merge(병합하기)*를 합친 하나의
+고급명령어라고 말할 수 있습니다. 우리는 마지막 으로 한 commit을 현재 작업에 병합하길 원하기 때문에
+주로 *pull(당겨오기)*를 사용하게 될 것입니다; 위에 설명한 상황은 특수상황이지요.
 
-See *git help remote* for how to remove remote repositories, ignore certain
-branches, and more.
+*git help remote*에는 원격 저장소를 삭제하는 방법, 특정 나뭇가지를 무시하는 방법 외에
+많은 것을 볼 수 있습니다.
 
-=== My Preferences ===
+=== 나만의 취향 ===
 
-For my projects, I like contributors to prepare repositories from which I can
-pull. Some Git hosting services let you host your own fork of a project with
-the click of a button.
+나는 작업을 할때 다른 개발자들이 내가 당겨오기를 실행할 수 있게 항시 준비해두는 것을 선호합니다.
+어떠한 Git 호스팅 서비스는 클릭 한 번만으로도 쉽게 이를 행할 수 있게 도와주는 것도 있습니다. 
 
-After I fetch a tree, I run Git commands to navigate and examine the changes,
-which ideally are well-organized and well-described. I merge my own changes,
-and perhaps make further edits. Once satisfied, I push to the main repository.
+어떤 파일꾸러미를 물어온 후에는 Git 명령어들을 사용하여 프로젝트가 잘 정리되어 있길 빌며
+변화 기록을 조회합니다. 그러고는 나의 작업을 병합합니다. 그 후 내 작업이 맘에 들 경우
+메인 저장소에 밀어넣기 합니다.
 
-Though I infrequently receive contributions, I believe this approach scales
-well. See
-http://torvalds-family.blogspot.com/2009/06/happiness-is-warm-scm.html[this
-blog post by Linus Torvalds].
+다른 사람들로부터 많은 도움을 받는 스타일은 아니지만, 이러한 내 작업방식을
+추천드리고 싶습니다. 다음 링크를 한 번보세요.
+http://torvalds-family.blogspot.com/2009/06/happiness-is-warm-scm.html[Linus Torvalds의 
+블로그 포스팅].
 
-Staying in the Git world is slightly more convenient than patch files, as it
-saves me from converting them to Git commits. Furthermore, Git handles details
-such as recording the author's name and email address, as well as the time and
-date, and asks the author to describe their own change.
+Git의 세상에 거주하는 것은 패치 파일들을 만들어 배포하는 것보다 더 효율적입니다. Git은 단순한 버전관리 외에도
+작업을 행한 사람의 이름, 이메일주소, 작업날짜를 같이 기록하여줍니다.

@@ -1,85 +1,81 @@
-== Git Grandmastery ==
+== Git 마스터링 ==
 
-By now, you should be able to navigate the *git help* pages and understand
-almost everything. However, pinpointing the exact command required to solve a
-given problem can be tedious. Perhaps I can save you some time: below are some
-recipes I have needed in the past.
+지금까지 배운것만으로도 당신은 *git help* 페이지를 자유롭게 돌아다니며 거의 모든 것을
+이해할 수 있을 것입니다. 그러나 어떠한 문제를 풀기위해 어느 한 가지의 알맞는 명령어를 찾는 것은
+아직 어려울 수 있습니다. 그런 문제에 대해 제가 도와줄 수 있을 것 같습니다: 아래는 제가 Git을
+사용하며 유용하게 썼던 몇가지 팁들입니다.
 
-=== Source Releases ===
+=== 소스 공개 ===
 
-For my projects, Git tracks exactly the files I'd like to archive and release
-to users. To create a tarball of the source code, I run:
+제 프로젝트에서 Git은 제가 저장 및 공개하고 싶은 파일들을 정확히 추적하여 줍니다.
 
  $ git archive --format=tar --prefix=proj-1.2.3/ HEAD
 
-=== Commit What Changed ===
+=== 바뀐 것은 꼭 commit ===
 
-Telling Git when you've added, deleted and renamed files is troublesome for
-certain projects. Instead, you can type:
+Git에게 무엇을 추가, 삭제 및 파일이름을 바꾸었는지 일일히 알려주는 것은 귀찮은 짓일지도 모릅니다. 
+대신에 당신은 다음 명령어를 쓸 수있습니다:
 
  $ git add .
  $ git add -u
 
-Git will look at the files in the current directory and work out the details by
-itself. Instead of the second add command, run `git commit -a` if you also
-intend to commit at this time. See *git help ignore* for how to specify files
-that should be ignored.
+Git은 현재 작업중인 디렉토리에 있는 파일들을 자동으로 살피며 자세한 사항들을 기록합니다. 위의 두번째 
+명령어 (git add -u) 대신에 'git commit -a'를 사용하여 그 명령어와 commit을 동시에 
+해낼 수 있습니다. *git help ignore*를 참고하여 어떠한 지정된 파일을 무시하는 방법을 
+알아보십시오.
 
-You can perform the above in a single pass with:
+위의 모든 것을 한 줄의 명령어로 실행할 수 있습니다.
 
  $ git ls-files -d -m -o -z | xargs -0 git update-index --add --remove
 
-The *-z* and *-0* options prevent ill side-effects from filenames containing
-strange characters. As this command adds ignored files, you may want to use the
-`-x` or `-X` option.
+*-z*와 *-0* 옵션은 파일이름이 이상한 문자를 포함하고 있을 때 생길 수 있는 여러가지 문제점들을
+처리하여 줍니다. 이 옵션들은 무시된 파일들을 포함하여줌으로써 '-x'아니면 '-X'을 같이 써주어야 할
+것입니다.
 
-=== My Commit Is Too Big! ===
+=== 내 commit이 너무 클 경우? ===
 
-Have you neglected to commit for too long? Been coding furiously and forgotten
-about source control until now? Made a series of unrelated changes, because
-that's your style?
+Commit을 한지 시간이 좀 많이 지난 상황입니까? 코딩을 너무 열심히 한 나머지 버전컨트롤하는 것을
+깜빡했나요? 프로젝트에 여러가지 연관성없는 수정을 한 상태입니까?
 
-No worries. Run:
+걱정하지말고:
 
  $ git add -p
 
-For each edit you made, Git will show you the hunk of code that was changed,
-and ask if it should be part of the next commit. Answer with "y" or "n". You
-have other options, such as postponing the decision; type "?" to learn more.
+당신이 만든 모든 수정작업에 대하여 Git은 어떠한 것들이 바뀌였는지 코드로 보여주며 당신에게 
+다음에 실행할 commit에 부분적인 코드가 포함될 사항인지 물어볼 것입니다. "y"와 "n"를 이용하여 
+대답할 수 있습니다. 물론 이 대답을 당장하지 않아도 됩니다; "?"로 좀 더 알아보십시요.
 
-Once you're satisfied, type
+모든 수정작업이 마음에 든다면:
 
  $ git commit
 
-to commit precisely the changes you selected (the 'staged' changes). Make sure
-you omit the *-a* option, otherwise Git will commit all the edits.
+위의 간단한 명령어를 사용하여 부분적인 commit을 실행합니다. 이 상황에선 반드시 *-a*옵션을 생략하시길 바랍니다.
+그렇지 않으면 Git은 모든 수정작업을 commit할 것입니다.
 
-What if you've edited many files in many places? Reviewing each change one by
-one becomes frustratingly mind-numbing. In this case, use *git add -i*, whose
-interface is less straightforward, but more flexible. With a few keystrokes,
-you can stage or unstage several files at a time, or review and select changes
-in particular files only. Alternatively, run *git commit \--interactive* which
-automatically commits after you're done.
+만약에 여러군데 다른 디렉토리에 많은 수정작업을 해놓았다면 어떻게 할까요? 수정된 사항을 하나씩
+검토하는 작업은 정말 귀찮은 짓입니다. 이럴땐 *git add -i*를 사용합니다. 몇 번의 타이핑만으로도
+특정 파일의 수정작업을 검토할 수 있게됩니다. 또는 *git commit \--interactive*를 사용하여 작업 중
+자동으로 commit하는 방법도 있을 수 있습니다.
 
-=== The Index: Git's Staging Area ===
+=== 인덱스: Git의 스테이징 구역 ===
 
-So far we have avoided Git's famous 'index', but we must now confront it to
-explain the above. The index is a temporary staging area. Git seldom shuttles
-data directly between your project and its history. Rather, Git first writes
-data to the index, and then copies the data in the index to its final
-destination.
+여태까지 Git의 유명한 기능인 'index'를 피해왔지만 이제 한 번 살펴본 시간이 온 것 같습니다.
+인덱스는 임시적인 스테이징 구역 (번역주:책갈피처럼)으로 보면 됩니다. Git은 당신의 프로젝트와 프로젝트의
+기록 사이에 데이터를 직접 옮기는 경우는 드뭅니다. 대신, Git은 인덱스에 파일을 쓰며 그리고 그 파일들을
+마지막 목표지점에 카피하여 줍니다.
 
-For example, *commit -a* is really a two-step process. The first step places a
-snapshot of the current state of every tracked file into the index. The second
-step permanently records the snapshot now in the index. Committing without the
-*-a* option only performs the second step, and only makes sense after running
-commands that somehow change the index, such as *git add*.
+예를 들어 *commit -a*는 원래 투-스텝 과정을 거치는 하나의 명령어입니다. 첫번째로는 현 작업상황의
+스냅샷을 찍어 모든 파일들을 인덱스하는 과정을 거칩니다. 두번째 과정에서는 방금 찍은 스냅샷을 영구적으로
+보관하게 됩니다. *-a* 옵션을 쓰지않고 commit을 하는 것은 이 두번째 과정만 실행하는 일입니다. 그렇기에
+*git add* 같은 명령어를 쓴 후에 commit을 하는 것이 당연한 이야기가 되겠지요.
 
-Usually we can ignore the index and pretend we are reading straight from and writing straight to the history. On this occasion, we want finer control, so we manipulate the index. We place a snapshot of some, but not all, of our changes into the index, and then permanently record this carefully rigged snapshot.
+대체적으로 인덱스에 관한 컨셉트는 무시하고 파일기록에서 직접적으로 쓰기와 읽기가 실행된다는 개념으로 이해하면 편합니다. 이런 경우에는 우린 인덱스를 제어하는 것 처럼
+좀 더 세부한 제어를 하기 원할것입니다. 부분적인 스냅샷을 찍은 후 영구적으로 이 '부분스냅샷'을 보존하는 것이죠.
 
-=== Don't Lose Your HEAD ===
+=== 대가리(HEAD)를 잃어버리지 않기 ===
 
-The HEAD tag is like a cursor that normally points at the latest commit, advancing with each new commit. Some Git commands let you move it. For example:
+HEAD 태그는 문서작업시 보이는 커서처럼 마지막 commit 포인트를 가르키는 포인터 역할을 합니다. Commit을 실행할 때마다 물론 HEAD도 같이 앞으로 움직이겠지요. 어떤 Git 명령어들은 수동으로 HEAD를
+움직일 수 있게 해줍니다. 예를 들면:
 
  $ git reset HEAD~3
 
