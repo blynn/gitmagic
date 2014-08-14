@@ -188,43 +188,41 @@ Git은 요즘 유저들이 데이터를 쉽게 지우지 못하도록 하고 있
 
   $ git branch -M source target  # -m 대신 -M
 
-Unlike checkout and reset, these two commands defer data destruction. The
-changes are still stored in the .git subdirectory, and can be retrieved by
-recovering the appropriate hash from `.git/logs` (see "HEAD-hunting" above).
-By default, they will be kept for at least two weeks.
+체크아웃과 리셋과는 다르게 위의 두 명령어는 데이터를 직접 삭제하진 않습니다. 모든 변경기록은
+.git 하위 디렉토리에 남게되고 필요한 hash는 '.git/logs'에서
+찾을 수 있습니다 (위의 "HEAD-헌팅" 섹션 참고). 기본설정상, 이 기록들은
+2주 동안은 삭제되지 않습니다.
 
-*Clean*: Some git commands refuse to proceed because they're worried about
-clobbering untracked files. If you're certain that all untracked files and
-directories are expendable, then delete them mercilessly with:
+*Clean*: 몇 git 명령어들은 추적되지 않은 파일들을 망쳐놓을까봐 실행이 안되는 경우가 종종 있습니다.
+만약에 그 파일들이 삭제되도 된다는 확신이 선다면, 가차없이 다음 명령어를 사용하여
+삭제하십시오:
 
   $ git clean -f -d
 
-Next time, that pesky command will work!
+이 후에는 위 모든 명령어들은 다시 잘 실행되기 시작할 것입니다!
 
-=== Preventing Bad Commits ===
+=== 원치않는 commit들을 방지하기 ===
 
-Stupid mistakes pollute my repositories. Most frightening are missing files due
-to a forgotten *git add*. Lesser transgressions are trailing whitespace and
-unresolved merge conflicts: though harmless, I wish these never appeared on the
-public record.
+바보같은 실수들은 내 저장소를 망쳐놓곤 합니다. 그 중에서도 제일 무서운 것은 *git add*를 쓰지 않아서
+작업해놓은 파일들을 잃어버리는 것이지요. 그나마 코드 뒤에 빈 공간을 마구 넣어놓는다던지
+병합에서 일어날 수 있는 문제들을 해결해 놓지않는 것은 애교로 보입니다: 별로 문제가 되는 것들은 아니지만
+남들이 볼 수 있는 공공저장소에서는 보여주기 싫습니다.
 
-If only I had bought idiot insurance by using a _hook_ to alert me about these problems:
+_hook_ 을 사용하는 것과 같이 제가 바보같은 짓을 할 때마다 경고를 해주는 기능이 있다면 얼마나 좋을까요:
 
  $ cd .git/hooks
  $ cp pre-commit.sample pre-commit  # Older Git versions: chmod +x pre-commit
 
-Now Git aborts a commit if useless whitespace or unresolved merge conflicts are
-detected.
+이제는 아까 설명했던 애교스러운 실수들이 발견될 때 Git은 commit을 도중에 그만 둘것입니다.
 
-For this guide, I eventually added the following to the beginning of the
-*pre-commit* hook to guard against absent-mindedness:
+이 가이드에서는 *pre-commit* 앞에 밑에 써놓은 코드를 넣음으로써 혹시 있을지도 모르는
+바보같은 짓을 방지하였습니다.
 
  if git ls-files -o | grep '\.txt$'; then
    echo FAIL! Untracked .txt files.
    exit 1
  fi
 
-Several git operations support hooks; see *git help hooks*. We activated the
-sample *post-update* hook earlier when discussing Git over HTTP. This runs
-whenever the head moves. The sample post-update script updates files Git needs
-for communication over Git-agnostic transports such as HTTP.
+많은 git 작업들은 hook과 상호작용합니다; *git help hooks*를 참조하십시오. 우리는 Git over HTTP를 설명할때
+*post-update* hook을 활성화시켰습니다. HEAD가 옮겨질때마다 같이 실행되지요. Git over HTTP 예제에서는
+post-update 스크립트가 통신에 필요한 Git을 업데이트 했었습니다.
