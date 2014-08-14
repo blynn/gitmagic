@@ -136,57 +136,57 @@ Commit의 2주의 생명을 연장하여 줄 수 있습니다. 예를 들어:
 진정한 UNIX와 같이 Git의 디자인은 다른 프로그램들의 GUI, 웹 인터페이스와 같은 하위파트들과 호환이 됩니다. 어느 Git 명령어들은 유명인사의 어깨위에 서있는 것처럼
 Git 그 자체가 스크립팅 언어로 사용될 수도 있습니다. 조금만 시간을 투자하면 Git은 당신의 선호에 더 알맞게 바꿀수 있습니다.
 
-One easy trick is to use built-in Git aliases to shorten your most frequently
-used commands:
+한 가지 트릭을 소개하자면 자주 사용할것 같은 명령어들을 짧게 만들어줄 수 있는 방법이 있습니다:
 
   $ git config --global alias.co checkout
-  $ git config --global --get-regexp alias  # display current aliases
+  $ git config --global --get-regexp alias  # 현재 설정한 명령어들의 '가명'을 표기해줍니다.
   alias.co checkout
-  $ git co foo                              # same as 'git checkout foo'
+  $ git co foo                              # 'git checkout foo'와 같은 것입니다.
 
-Another is to print the current branch in the prompt, or window title.
-Invoking
+또 다른 트릭은 현재 작업중인 나뭇가지의 이름을 작업표시창에 표시하여주는 명령어도 있습니다.
 
   $ git symbolic-ref HEAD
 
-shows the current branch name. In practice, you most likely want to remove
-the "refs/heads/" and ignore errors:
+위 명령어는 현재 작업중인 나뭇가지 이름을 표기하여 줍니다. 실용적으로는 "refs/heads/"를 사용하지 않으며
+잠재적으로 일어날 수 있는 에러들을 무시하여 줍니다:
 
   $ git symbolic-ref HEAD 2> /dev/null | cut -b 12-
 
-The +contrib+ subdirectory is a treasure trove of tools built on Git.
-In time, some of them may be promoted to official commands. On Debian and
-Ubuntu, this directory lives at +/usr/share/doc/git-core/contrib+.
++contrib+ 하위 디렉토리는 유용한 Git 툴들이 저장되어있는 장소이기도 합니다.
+시간이 지나면 이곳에 있는 툴들은 공식적으로 인정받아 고유명령어가 생기기도 하겠지요. Debian과 Ubuntu에서는
+이 디렉토리는 +/usr/share/doc/git-core/contrib+에 위치하고 있습니다.
 
-One popular resident is +workdir/git-new-workdir+. Via clever symlinking, this script creates a new working directory whose history is shared with the original repository:
+앞으로 +workdir/git-new-workdir+디렉토리에 방문할 일도 많을 것입니다. 시스템링크 기술을 통해서 이 스크립트는 원래의 저장소와 작업기록을 같이하는 
+새로운 작업 디렉토리를 생성하여 줍니다:
 
   $ git-new-workdir an/existing/repo new/directory
 
-The new directory and the files within can be thought of as a clone, except since the history is shared, the two trees automatically stay in sync. There's no need to merge, push, or pull.
+새롭게 생성된 디렉토리는 클론으로 봐도 무방하며 일반클론들과의 한가지 차이점은 어느 한 곳에서 작업을 하던 두 개의 디렉토리는 앞으로 계속 싱크를 진행하며 같은 기록을 가지게 된다는 것입니다.
+즉, 병합, 밀어넣기, 당겨오기를 해줄 필요가 없어지는 것이지요.
 
-=== Daring Stunts ===
+=== 용감한 스턴트 ===
 
-These days, Git makes it difficult for the user to accidentally destroy data.
-But if you know what you are doing, you can override safeguards for common
-commands.
+Git은 요즘 유저들이 데이터를 쉽게 지우지 못하도록 하고 있습니다.
+그러나 몇가지의 상용적인 명령어를 통해서 이런 Git만의 방화벽 쯤은 쉽게 뚫어버릴 수 있지요.
 
-*Checkout*: Uncommitted changes cause checkout to fail. To destroy your changes, and checkout a given commit anyway, use the force flag:
+*Checkout*: Commit하지 않은 작업들은 checkout을 할 수없습니다. 방금작업한 모든 것들을 없던 일로하고 그래도 굳이 commit을 진행하고 싶다면:
 
   $ git checkout -f HEAD^
 
-On the other hand, if you specify particular paths for checkout, then there are no safety checks. The supplied paths are quietly overwritten. Take care if you use checkout in this manner.
+반면에 checkout을 할 위치를 수동으로 설정하여 준다면 Git의 방화벽은 처음부터 작동하지 않을 것입니다. 설정해준 위치는 조용히 덮어씌우게 됩니다.
+그러니, 이런 방식으로 checkout을 할 때에는 주의 하십시오.
 
-*Reset*: Reset also fails in the presence of uncommitted changes. To force it through, run:
+*Reset*: 리셋은 commit되지 않은 작업이 있으면 실행되지 않을 것입니다. 그래도 강제로 하고싶다면:
 
   $ git reset --hard 1b6d
 
-*Branch*: Deleting branches fails if this causes changes to be lost. To force a deletion, type:
+*Branch*: 방금한 작업을 잃어버릴 것같으면 Git은 나뭇가지가 지워지지 않게합니다. 그래도 하고싶다면:
 
-  $ git branch -D dead_branch  # instead of -d
+  $ git branch -D dead_branch  # -d 대신 -D
 
-Similarly, attempting to overwrite a branch via a move fails if data loss would ensue. To force a branch move, type:
+비슷한 방식으로, commit을 안한 작업이 있어서 move명령어를 통해서 덮어씌우기가 안될경우에는:
 
-  $ git branch -M source target  # instead of -m
+  $ git branch -M source target  # -m 대신 -M
 
 Unlike checkout and reset, these two commands defer data destruction. The
 changes are still stored in the .git subdirectory, and can be retrieved by
