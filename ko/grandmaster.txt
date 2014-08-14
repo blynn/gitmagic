@@ -79,60 +79,62 @@ HEAD 태그는 문서작업시 보이는 커서처럼 마지막 commit 포인트
 
  $ git reset HEAD~3
 
-will move the HEAD three commits back. Thus all Git commands now act as if you hadn't made those last three commits, while your files remain in the present. See the help page for some applications.
+위 명령어를 사용한다면 HEAD를 commit을 3번 하기 전으로 옮깁니다. 이 후 모든 Git 명령어는 가지고 있던 파일은 현재상태로 그대로 두되 
+그 3번의 commit을 하지 않은 것으로 이해하죠. 
 
-But how can you go back to the future? The past commits know nothing of the future.
+그러나 어떻게 해야 다시 미래로 돌아갈 수 있을까요? 예전에 했던 commit들은 미래에 대해서 아무것도 모를텐데 말이지요.
 
-If you have the SHA1 of the original HEAD then:
+원래의 HEAD의 SHA1을 가지고 있다면:
 
  $ git reset 1b6d
 
-But suppose you never took it down? Don't worry: for commands like these, Git saves the original HEAD as a tag called ORIG_HEAD, and you can return safe and sound with:
+그러나 이 것을 어디에도 써두지 않았었더라도 걱정하지 마십시오: Git은 이런 경우를 대비해서 원래의 HEAD를 ORIG_HEAD로 어딘가에는 저장하여 둡니다. 그러고는 다음명령어를 사용하여
+미래로 안전하게 돌아올 수 있지요:
 
  $ git reset ORIG_HEAD
 
-=== HEAD-hunting ===
+=== HEAD-헌팅 ===
 
-Perhaps ORIG_HEAD isn't enough. Perhaps you've just realized you made a monumental mistake and you need to go back to an ancient commit in a long-forgotten branch.
+ORIG_HEAD로 돌아가는 것만으로는 충분하지 않을지도 모릅니다. 당신은 방금 엄청나게 큰 실수를 발견하였고 아주 오래전에 했던 commit으로 돌아가야 할지 모릅니다.
 
-By default, Git keeps a commit for at least two weeks, even if you ordered
-Git to destroy the branch containing it. The trouble is finding the appropriate
-hash. You could look at all the hash values in `.git/objects` and use trial
-and error to find the one you want. But there's a much easier way.
+기본적으로 Git은 나뭇가지를 수동으로 삭제하였더라도 2주의 시간동안 commit을 무조건 저장하여 둡니다.
+문제는 돌아가고 싶은 commit의 hash를 찾는 일입니다. '.git/objects'의 모든 hash 값을
+조회하여 얻어걸릴 때까지 해보는 방법이 있긴합니다만, 여기 좀 더 쉬운 방법이 있습니다.
 
-Git records every hash of a commit it computes in `.git/logs`. The subdirectory `refs` contains the history of all activity on all branches, while the file `HEAD` shows every hash value it has ever taken. The latter can be used to find hashes of commits on branches that have been accidentally lopped off.
+Git은 모든 commit의 hash를 '.git/logs'에 저장해 둡니다. 하위 디렉토리 'refs'은 모든 나뭇가지의 활동기록을 저장하여두고 동시에 'HEAD'파일은 모든 hash 값을 저장하고 있습니다.
+후자는 실수로 마구 건너 뛴 commit들의 hash도 찾을 수 있게 해줍니다.
 
-The reflog command provides a friendly interface to these log files. Try
+reflog 명령어는 당신이 사용하기 쉬운 유저인터페이스로 log파일들을 표현하여 줍니다. 다음 명령어를 사용하여 보십시오.
 
   $ git reflog
 
-Instead of cutting and pasting hashes from the reflog, try:
+hash를 reflog으로부터 자르고 붙여넣기 보다는:
 
- $ git checkout "@{10 minutes ago}"
+ $ git checkout "@{10 minutes ago}" 
 
-Or checkout the 5th-last visited commit via:
+아니면 5번 째 전에 방문했던 commit으로 돌아갈수도 있습니다:
 
  $ git checkout "@{5}"
 
-See the ``Specifying Revisions'' section of *git help rev-parse* for more.
+좀 더 많은 정보는 *git help rev-parse*의 "재편집 구체화하기" 섹션을 참고하십시오.
 
-You may wish to configure a longer grace period for doomed commits. For
-example:
+Commit의 2주의 생명을 연장하여 줄 수 있습니다. 예를 들어:
 
   $ git config gc.pruneexpire "30 days"
 
-means a deleted commit will only be permanently lost once 30 days have passed
-and *git gc* is run.
+위 명령어는 30일이 지난 후에 지워진 commit들 역시 영구적으로 삭제된다는 의미입니다. 그러고는
+*git gc*가 실행되지요.
 
-You may also wish to disable automatic invocations of *git gc*:
+*git gc*가 자동실행되는 것을 꺼줄 수도 있습니다:
 
   $ git config gc.auto 0
 
-in which case commits will only be deleted when you run *git gc* manually.
+이 경우에는 *git gc*를 수동적으로 실행시켜 commit들을 삭제할 수 있지요.
 
-=== Building On Git ===
+=== Git을 좀 더 발전시키는 방법 ===
 
-In true UNIX fashion, Git's design allows it to be easily used as a low-level component of other programs, such as GUI and web interfaces, alternative command-line interfaces, patch managements tools, importing and conversion tools and so on. In fact, some Git commands are themselves scripts standing on the shoulders of giants. With a little tinkering, you can customize Git to suit your preferences.
+진정한 UNIX와 같이 Git의 디자인은 다른 프로그램들의 GUI, 웹 인터페이스와 같은 하위파트들과 호환이 됩니다. 어느 Git 명령어들은 유명인사의 어깨위에 서있는 것처럼
+Git 그 자체가 스크립팅 언어로 사용될 수도 있습니다. 조금만 시간을 투자하면 Git은 당신의 선호에 더 알맞게 바꿀수 있습니다.
 
 One easy trick is to use built-in Git aliases to shorten your most frequently
 used commands:
