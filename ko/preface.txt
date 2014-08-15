@@ -16,7 +16,7 @@ Arthur C. Clarke는 충분히 발전한 기술은 마술과 같다고 말하였�
  - link:/~blynn/gitmagic/intl/fr/[French]: by Alexandre Garel, Paul Gaborit, and Nicolas Deram. Also hosted at http://tutoriels.itaapy.com/[itaapy].
  - link:/~blynn/gitmagic/intl/de/[German]: by Benjamin Bellee and Armin Stebich; also http://gitmagic.lordofbikes.de/[hosted on Armin's website].
  - link:/~blynn/gitmagic/intl/it/[Italian]: by Mattia Rigotti.
- - link:/~blynn/gitmagic/intl/ko/ [Korean]: by Jung-Ho (John) Han; also https://sites.google.com/site/drinkhanjohn/useful-links/[hosted on John's website].
+ - link:/~blynn/gitmagic/intl/ko/[Korean]: by Jung-Ho (John) Han; also https://sites.google.com/site/drinkhanjohn/useful-links/[hosted on John's website].
  - link:/~blynn/gitmagic/intl/pl/[Polish]: by Damian Michna.
  - link:/~blynn/gitmagic/intl/pt_br/[Brazilian Portuguese]: by José Inácio Serafini and Leonardo Siqueira Rodrigues.
  - link:/~blynn/gitmagic/intl/ru/[Russian]: by Tikhon Tarnavsky, Mikhail Dymskov, and others.
