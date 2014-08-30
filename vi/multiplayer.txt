@@ -49,7 +49,7 @@ và mọi người có thể lấy dự án của bạn với lệnh:
 
 Bạn muốn đồng bộ hóa kho chứa nhưng lại không có máy chủ và cũng không có mạng?
 Bạn cần trong những trường hợp khẩn cấp? Chúng ta đã biết lệnh <<makinghistory, *git
-fast-export* và *git fast-import* có thể chuyển đổi một kho chứa thành một tệp tin đơn
+fast-export* và *git fast-import* có thể chuyển đổi một kho chứa thành một tập tin đơn
 và ngược lại>>. Chúng ta có thể chuyển qua chuyển lại như vậy để truyền kho Git
 đi thông qua bất kỳ phương tiện nào, nhưng có một công cụ hiệu quả hơn đó chính là *git bundle*.
 
@@ -110,13 +110,13 @@ Tệp tin lưu kết quả có thể chuyển cho lệnh *git-send-email*, hay c
 
  $ git format-patch 1b6d..HEAD^^
 
-Ở phía người nhận cuối, ghi lại thư điện tử thành tệp tin, sau đó chạy lệnh:
+Ở phía người nhận cuối, ghi lại thư điện tử thành tập tin, sau đó chạy lệnh:
 
  $ git am < email.txt
 
 Lệnh này sẽ áp dụng cho miếng vá nhận được, đồng thời tạo ra một lần commit, bao gồm các thông tin như là tác giả.
 
-Với một chương trình đọc thư điện tử, bạn có thể sử dụng con chuột để chuyển định dạng thư về dạng văn bản thuần  trước khi ghi miếng vá thành một tệp tin.
+Với một chương trình đọc thư điện tử, bạn có thể sử dụng con chuột để chuyển định dạng thư về dạng văn bản thuần  trước khi ghi miếng vá thành một tập tin.
 
 Có một số khác biệt nhỏ giữa các trình đọc đọc thư điện tử, nhưng nếu bạn sử dụng một trong
 số chúng, bạn hầu như chắc chắn là người mà có thể cấu hình chúng một cách dễ dàng
@@ -172,7 +172,7 @@ Bạn nhận được kết quả trông giống như thế này:
 
 Những nhánh tương ứng và HEAD của kho chứa remote, và bạn có thể sử dụng
 trong các lệnh Git thông thường. Ví dụ như là, giả sử bạn làm nhiều lần commit, và
-muốn so sánh chúng với bản đã fetch cuối cùng. Bạn cũng có thể tìm kiếm trong tệp tin
+muốn so sánh chúng với bản đã fetch cuối cùng. Bạn cũng có thể tìm kiếm trong tập tin
 log để có được giá trị băm SHA1 thích hợp, nhưng dễ dàng hơn việc gõ:
 
  $ git diff origin/HEAD
@@ -228,3 +228,4 @@ Git thuận lợi trong việc tạo các miếng vá, cũng như là nó
 tiết kiệm công sức cho chúng ta trong việc chuyển đổi chúng thành những lần commit dành cho Git. Hơn thế nữa, Git lưu giữ các thông tin rất chi tiết
 như là ghi lại tên và địa chỉ thư điện tử của tác giả, cũng như là ngày tháng và
 thời gian, và nó cũng đòi hỏi tác giả phải mô tả về những thay đổi mà họ đã tạo ra.
+

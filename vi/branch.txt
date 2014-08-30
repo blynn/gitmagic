@@ -8,11 +8,11 @@ là phải xóa bỏ hẳn đặc tính kỹ thuật đó. Người phát triể
 
 Việc gán đoạn suy nghĩ có thể làm giảm hiệu suất làm việc, và việc hoán chuyển nội dung càng cồng kềnh, vướng víu càng gây hậu quả nặng nề. Đối với các hệ thống quản lý mã nguồn tập trung chúng ta phải tải về một bản sao các tập tin mới từ máy chủ trung tâm. Các hệ thống phân tán hoạt động hiệu quả hơn, như là chúng ta có thể nhân bản một cách cục bộ.
 
-Nhưng việc nhân bản bắt buộc phải sao chép toàn bộ thư mục làm việc cũng như là toàn bộ các mục trong lịch sử cho đến thời điểm đã được chỉ ra. Dù là Git giảm bớt sự lãng phí cho việc này bằng cách chia sẻ và tạo ra các liên kết tệp tin cứng, chính bản thân các tệp tin dự án cũng phải được tạo ra trong các đề mục của chúng trong thư mục làm việc.
+Nhưng việc nhân bản bắt buộc phải sao chép toàn bộ thư mục làm việc cũng như là toàn bộ các mục trong lịch sử cho đến thời điểm đã được chỉ ra. Dù là Git giảm bớt sự lãng phí cho việc này bằng cách chia sẻ và tạo ra các liên kết tập tin cứng, chính bản thân các tập tin dự án cũng phải được tạo ra trong các đề mục của chúng trong thư mục làm việc.
 
 *Giải pháp*: Git có một công cụ tốt hơn để sử lý tình huống này, nó nhanh và tiết kiệm không gian lưu trữ hơn lệnh nhân bản đó chính là: *git branch*.
 
-Với vài câu thần chú, các tệp tin trong thư mục của bạn dễ dàng biến đổi từ phiên bản này sang phiên bản khác. Sự chuyển đổi này có thể làm nhiều hơn việc di chuyển trong trong lịch sử một các đơn thuần. Các tệp tin của bạn có thể chuyển hình thái từ bản phát hành cuối thành phiên bản thử nghiệm, thành phiên bản phát triển hiện nay, thành phiên bản của người bạn của bạn, và cứ như thế.
+Với vài câu thần chú, các tập tin trong thư mục của bạn dễ dàng biến đổi từ phiên bản này sang phiên bản khác. Sự chuyển đổi này có thể làm nhiều hơn việc di chuyển trong trong lịch sử một các đơn thuần. Các tập tin của bạn có thể chuyển hình thái từ bản phát hành cuối thành phiên bản thử nghiệm, thành phiên bản phát triển hiện nay, thành phiên bản của người bạn của bạn, và cứ như thế.
 
 === Nút Điều Khiển ===
 
@@ -25,21 +25,21 @@ Mỗi khi chơi điện tử, bạn bấm vào nút (``nút điều khiển''), 
  $ git add .
  $ git commit -m "Lần commit đầu tiên"
 
-Chúng ta đã tạo ra kho chứa Git mà nó theo dõi một tệp tin văn bản có chứa một thông điệp đã biết trước. Giờ hãy gõ:
+Chúng ta đã tạo ra kho chứa Git mà nó theo dõi một tập tin văn bản có chứa một thông điệp đã biết trước. Giờ hãy gõ:
 
  $ git checkout -b boss  # dường như chẳng có gì thay đổi sau lệnh này
  $ echo "Xếp thông minh hơn tôi" > myfile.txt
  $ git commit -a -m "Lần commit khác"
 
-Điều này cũng giống như việc chúng ta ghi đè lên tệp tin của mình sau đó commit nó. Nhưng không, đó chỉ là ảo tưởng. Gõ:
+Điều này cũng giống như việc chúng ta ghi đè lên tập tin của mình sau đó commit nó. Nhưng không, đó chỉ là ảo tưởng. Gõ:
 
- $ git checkout master  # quay trở lại phiên bản nguyên gốc của tệp tin
+ $ git checkout master  # quay trở lại phiên bản nguyên gốc của tập tin
 
 Ối trời ơi! Tệp tin văn bản lại trở về như cũ mất rồi. Và nếu ông chủ có ý định ngó qua thư mục của bạn thì hãy gõ:
 
  $ git checkout boss  # chuyển trở lại phiên bản vừa mắt ông chủ
 
-Bạn có thể hoán chuyển giữa hai phiên bản của tệp tin tùy thích, và commit từng cái trong số chúng một cách độc lập.
+Bạn có thể hoán chuyển giữa hai phiên bản của tập tin tùy thích, và commit từng cái trong số chúng một cách độc lập.
 
 === Bản Nháp ===
 
@@ -64,7 +64,7 @@ và commit trước khi quay trở lại nhánh master. Khi nào đó bạn mu�
 
  $ git checkout dirty
 
-Chúng ta đã đụng chạm đến lệnh như trên ở những chương trước rồi, khi thảo luận về việc tải về một trạng thái cũ. Cuối cùng chúng ta có thể thuật lại toàn bộ câu chuyện: các tệp tin đã thay đổi theo trạng thái đã được yêu cầu, nhưng chúng ta phải rời bỏ nhánh master. Tất cả những lần commit được tạo ra từ đây sẽ dẫn bạn đi trên một nhánh khác, nhánh này có thể được đặt tên sau.
+Chúng ta đã đụng chạm đến lệnh như trên ở những chương trước rồi, khi thảo luận về việc tải về một trạng thái cũ. Cuối cùng chúng ta có thể thuật lại toàn bộ câu chuyện: các tập tin đã thay đổi theo trạng thái đã được yêu cầu, nhưng chúng ta phải rời bỏ nhánh master. Tất cả những lần commit được tạo ra từ đây sẽ dẫn bạn đi trên một nhánh khác, nhánh này có thể được đặt tên sau.
 
 Mặt khác, sau khi 'check out' một trạng thái cũ, Git tự động đặt bạn vào một trạng thái mới, một nhánh chưa có tên, và nhánh này có thể đặt tên và ghi lại với lệnh *git checkout -b*.
 
@@ -243,3 +243,4 @@ Một nhóm khác lại thích cả hai cách trên.
 Việc tạo nhánh thì cũng giống như tạo các tab cho thư mục làm việc của bạn, còn việc nhân bản thì lại giống như việc mở một cửa sổ duyệt mới. Những việc này nhanh chóng và nội bộ, thế thì sao lại không
 thử nghiệm để tìm thấy cách nào thích hợp nhất cho mình? Git giúp bạn làm việc chính xác
 như bạn muốn.
+

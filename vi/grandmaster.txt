@@ -7,30 +7,30 @@ cách giải quyết các vấn đề thực tế đặt ra mà tôi đã từng
 
 === Phát hành Mã Nguồn ===
 
-Với dự án của tôi, Git giữ theo dõi chính xác các tệp tin tôi muốn lưu trữ và phát hành tới
+Với dự án của tôi, Git giữ theo dõi chính xác các tập tin tôi muốn lưu trữ và phát hành tới
 người dùng. Để tạo gói tarball cho mã nguồn, tôi chạy:
 
  $ git archive --format=tar --prefix=proj-1.2.3/ HEAD
 
 === Chỉ Commit Những Gì Thay Đổi ===
 
-Việc phải thông báo với Git khi bạn thêm, xóa hay đổi tên các tệp tin là việc rầy rà với
+Việc phải thông báo với Git khi bạn thêm, xóa hay đổi tên các tập tin là việc rầy rà với
 các dự án nào đó. Thay vào đó, bạn có thể gõ:
 
  $ git add .
  $ git add -u
 
-Git sẽ xem tất cả các tệp tin trong thư mục hiện tại và làm công việc mà nó phải
+Git sẽ xem tất cả các tập tin trong thư mục hiện tại và làm công việc mà nó phải
 làm. Thay vì chạy lệnh add thứ hai, hãy chạy  `git commit -a` nếu bạn cũng có
 ý định commit vào lúc này. Xem *git help ignore* để biết làm cách nào để chỉ ra
-các tệp tin bỏ qua.
+các tập tin bỏ qua.
 
 Bạn có thể thi hành những điều trên chỉ cần một dòng lệnh:
 
  $ git ls-files -d -m -o -z | xargs -0 git update-index --add --remove
 
-Tùy chọn *-z* và *-0* dùng để ngăn ngừa sai hỏng không mong muốn từ những tệp tin có chứa
-các ký tự đặc biệt. Bởi vì lệnh này bổ xung những tệp tin đã bị bỏ qua, bạn có thể muốn sử dụng
+Tùy chọn *-z* và *-0* dùng để ngăn ngừa sai hỏng không mong muốn từ những tập tin có chứa
+các ký tự đặc biệt. Bởi vì lệnh này bổ xung những tập tin đã bị bỏ qua, bạn có thể muốn sử dụng
 tùy chọn `-x` hay `-X`.
 
 === Lần commit này Nhiều Quá! ===
@@ -57,8 +57,8 @@ bạn đã không dùng tùy chọn *-a*, nếu không thì Git sẽ commit tấ
 Nhưng bạn lại có những tài liệu đã được chỉnh sửa đặt tại nhiều chỗ khác nhau? Việc duyệt từng cái một
 sẽ làm bạn nản lòng. Trong trường hợp này, sử dụng lệnh *git add -i*, với giao diện
 không ít rắc rối hơn, nhưng uyển chuyển hơn. Chỉ cần gõ vài cái,
-bạn có thể đưa vào hay gỡ bỏ nhiều tệp tin vào một trạng thái cùng một lúc, hay xem xét và chọn các thay đổi
-chỉ trong các tệp tin riêng biệt. Có một sự lựa chọn khác, chạy lệnh *git commit \--interactive* mà nó
+bạn có thể đưa vào hay gỡ bỏ nhiều tập tin vào một trạng thái cùng một lúc, hay xem xét và chọn các thay đổi
+chỉ trong các tập tin riêng biệt. Có một sự lựa chọn khác, chạy lệnh *git commit \--interactive* mà nó
 sẽ tự động commit sau khi bạn làm xong.
 
 === Mục Lục: Vùng trạng thái của Git ===
@@ -70,7 +70,7 @@ dữ liệu vào mục lục, và sau đó sao chép dữ liệu trong chỉ m�
 cuối.
 
 Ví dụ, lệnh *commit -a* thực sự bao gồm hai quá trình. Bước thứ nhất là đặt
-toàn bộ dữ liệu hiện tại của mọi tệp tin cần theo dõi vào bảng mục lục. Bước thứ
+toàn bộ dữ liệu hiện tại của mọi tập tin cần theo dõi vào bảng mục lục. Bước thứ
 hai là ghi vào bảng mục lục. Việc commit không sử dụng tùy chọn
 *-a* chỉ thi hành bước thứ hai, và nó chỉ có ý nghĩa sau khi chạy lệnh
 mà lệnh này bằng cách này hay cách khác thay đổi bảng chỉ mục, như là lệnh *git add* chẳng hạn.
@@ -83,7 +83,7 @@ Thẻ HEAD giống như một con trỏ, nó trỏ đến lần commit cuối c�
 
  $ git reset HEAD~3
 
-sẽ chuyển HEAD lên vị trí lần commit cách đây ba lần. Thế thì tất cả các lệnh Git thi hành như khi bạn ở vị trí commit này, trong khi các tệp tin của bạn vẫn nằm ở hiện tại. Xem thêm phần trợ giúp cho một số ứng dụng.
+sẽ chuyển HEAD lên vị trí lần commit cách đây ba lần. Thế thì tất cả các lệnh Git thi hành như khi bạn ở vị trí commit này, trong khi các tập tin của bạn vẫn nằm ở hiện tại. Xem thêm phần trợ giúp cho một số ứng dụng.
 
 Nhưng ta lại muốn quay trở lại phần sau này? Lần commit cũ không biết gì về phần sau này cả.
 
@@ -104,9 +104,9 @@ cho Git phá hủy nhánh chứa nó. Sự khó khăn là ở chỗ làm thế n
 thích hợp. Bạn có thể tìm kiếm tất cả các giá trị băm trong `.git/objects` và sử dụng phương pháp thử sai tất cả các giá trị
 để có được thứ mình muốn. Nhưng còn có cách dễ dàng hơn.
 
-Git ghi lại mọi giá trị băm của mọi lần commit trong máy tính tại thư mục `.git/logs`. Thư mục con `refs` chứa lịch sử của tất cả các hoạt động trên tất cả cách nhánh, trong khi tệp tin `HEAD` giữ tất cả các giá trị băm mà nó từng có được. Phần sau có thể được sử dụng để tìm kiếm giá trị băm của các lần commits trên các nhánh cái mà đã bị cắt đi một cách tình cờ.
+Git ghi lại mọi giá trị băm của mọi lần commit trong máy tính tại thư mục `.git/logs`. Thư mục con `refs` chứa lịch sử của tất cả các hoạt động trên tất cả cách nhánh, trong khi tập tin `HEAD` giữ tất cả các giá trị băm mà nó từng có được. Phần sau có thể được sử dụng để tìm kiếm giá trị băm của các lần commits trên các nhánh cái mà đã bị cắt đi một cách tình cờ.
 
-Lệnh reflog cung cấp cho chúng ta một giao diện thân thiện dành cho các tệp tin log. Bạn có thể thử bằng lệnh:
+Lệnh reflog cung cấp cho chúng ta một giao diện thân thiện dành cho các tập tin log. Bạn có thể thử bằng lệnh:
 
   $ git reflog
 
@@ -164,7 +164,7 @@ Một thư mục phổ biến khác là +workdir/git-new-workdir+. Thông qua c�
 
   $ git-new-workdir an/existing/repo new/directory
 
-Thư mục mới và các tệp tin trong nó có thể được coi như một bản sao, ngoại trừ phần lịch sử được chia sẻ dùng chung, hai cây được tự động đồng bộ hóa. Ở đây không cần có sự trộn, push, hay pull.
+Thư mục mới và các tập tin trong nó có thể được coi như một bản sao, ngoại trừ phần lịch sử được chia sẻ dùng chung, hai cây được tự động đồng bộ hóa. Ở đây không cần có sự trộn, push, hay pull.
 
 === Cứ Phiêu Lưu ===
 
@@ -196,7 +196,7 @@ lấy giá trị băm `.git/logs` thích hợp (xem phần "Tìm - HEAD" ở ph�
 Theo mặc định, chúng sẽ giữ ít nhất là hai tuần lễ.
 
 *Clean*: Một số lệnh Git từ chối thi hành bởi vì chúng lo lắng về việc làm như thế
-làm mất dấu hoàn toàn các tệp tin. Nếu bạn chắc chắn về tất cả các tệp tin và thư mục không cần Git
+làm mất dấu hoàn toàn các tập tin. Nếu bạn chắc chắn về tất cả các tập tin và thư mục không cần Git
 theo dõi nữa và muốn phá hủy chúng đi, thế thì xóa chúng triệt để với lệnh:
 
   $ git clean -f -d
@@ -205,7 +205,7 @@ Sau này, lệnh rầy rà đó sẽ hoạt động!
 
 === Ngăn Ngừa Commit Sai ===
 
-Có một số lỗi ngớ ngẩn đã xảy ra với tôi. Điều tồi tệ nhất là để sót các tệp tin bởi vì
+Có một số lỗi ngớ ngẩn đã xảy ra với tôi. Điều tồi tệ nhất là để sót các tập tin bởi vì
 quên lệnh *git add*. Ít tệ hại hơn là các ký tự khoảng trắng và
 những xung đột không cần phải trộn: mặc dù cũng chẳng tệ hại lắm, tôi mong rằng những điều này sẽ không xảy ra
 với mọi người.
@@ -228,5 +228,6 @@ hook *pre-commit* để đề phòng khi ta lơ đãng:
 
 Nhiều hoạt động của Git hỗ trợ hook; hãy xem *git help hooks*. Chúng tôi đã kích hoạt
 một hook mẫu là *post-update* trước khi nói đến Git thông qua HTTP. Cái này chạy
-mỗi khi head di chuyển. Đoạn script ví dụ post-update cập nhật các tệp tin Git cần
+mỗi khi head di chuyển. Đoạn script ví dụ post-update cập nhật các tập tin Git cần
 cho việc truyền thông thông qua Git-agnostic chuyên chở bằng giao thức giống như là HTTP.
+

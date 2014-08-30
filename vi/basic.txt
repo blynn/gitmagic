@@ -2,7 +2,7 @@
 
 Thay vì lao vào cả một biển lệnh với Git, bạn hãy sử dụng các ví dụ cơ bản để bắt đầu.
 Mặc dù chúng rất đơn giản, nhưng tất cả chúng đều rất hữu dụng.
-Quả thực là vậy, trong tháng đầu tiên sử dụng Git tôi chưa bao giờ vượt qua những gì nói trong chương này.
+Quả thực là vậy, trong tháng đầu tiên sử dụng Git, tôi chưa bao giờ vượt quá những gì nói trong chương này.
 
 === Ghi lại Trạng thái ===
 
@@ -15,7 +15,7 @@ trong thư mục hiện hành chứa các mã nguồn hay văn bản mà bạn m
 
 Bây giờ nếu như các sửa đổi của bạn vừa làm không được như mong đợi, hãy phục hồi lại bản cũ:
 
- $ git reset --hard # Đặt lại trạng thái và dữ liệu như lần commit cuối
+ $ git reset --hard # Đặt lại trạng thái và dữ liệu như lần chuyển giao cuối
 
 Sau đó sửa nội dung cho đúng ý mình rồi ghi lại thành một trạng thái mới:
 
@@ -23,18 +23,18 @@ Sau đó sửa nội dung cho đúng ý mình rồi ghi lại thành một trạ
 
 === Thêm, Xóa, Đổi Tên ===
 
-Lệnh ở trên chỉ giữ dấu vết các tệp tin hiện diện tại thời điểm bạn chạy lệnh *git add*. Nếu bạn thêm các tệp tin hay thư mục, thì bạn sẽ phải thông báo với Git:
+Lệnh ở trên chỉ giữ dấu vết các tập tin hiện diện tại thời điểm bạn chạy lệnh *git add*. Nếu bạn thêm các tập tin hay thư mục, thì bạn sẽ phải thông báo với Git:
 
  $ git add readme.txt Documentation
 
-Tương tự như vậy, nếu bạn muốn Git bỏ đi các tệp tin nào đó:
+Tương tự như vậy, nếu bạn muốn Git bỏ đi các tập tin nào đó:
 
  $ git rm kludge.h obsolete.c
  $ git rm -r incriminating/evidence/ #gỡ bỏ một cách đệ qui
 
-Git xóa bỏ những tệp tin nếu như bạn chưa làm.
+Git xóa bỏ những tập tin nếu như bạn chưa làm.
 
-Đổi tên tệp tin thì cũng giống như là việc bạn gỡ bỏ tên cũ và đặt vào nó cái tên mới. Sử dụng lệnh *git mv* có cú pháp rất giống lệnh *mv* của hệ thống Linux. Ví dụ:
+Đổi tên tập tin thì cũng giống như là việc bạn gỡ bỏ tên cũ và đặt vào nó cái tên mới. Lệnh *git mv* có cú pháp rất giống lệnh *mv* của hệ thống Linux. Ví dụ:
 
  $ git mv bug.c feature.c
 
@@ -44,7 +44,7 @@ Git xóa bỏ những tệp tin nếu như bạn chưa làm.
 
  $ git log
 
-sẽ hiển thị cho bạn danh sách các lần commit gần đây cùng với giá trị băm SHA1:
+sẽ hiển thị cho bạn danh sách các lần chuyển giao gần đây cùng với giá trị băm SHA1:
 
 ----------------------------------
 commit 766f9881690d240ba334153047649b8b8f11c664
@@ -60,73 +60,73 @@ Date:   Thu Jan 1 00:00:00 1970 +0000
     Initial commit.
 ----------------------------------
 
-Chỉ vài ký tự của giá trị băm là đủ để chỉ ra một commit cụ thể;
+Chỉ vài ký tự của giá trị băm là đủ để chỉ ra một chuyển giao cụ thể;
 một cách khác là chép và dán giá trị băm. Gõ:
 
  $ git reset --hard 766f
 
-để phục hồi lại trạng thái đã được chỉ ra và xóa bỏ tất cả các lần commit mới hơn kể từ đó.
+để phục hồi lại trạng thái đã được chỉ ra và xóa bỏ tất cả các lần chuyển giao mới hơn kể từ đó.
 
 Một lúc nào đó bạn lại muốn nhảy tới một bản cũ hơn. Trong trường hợp này thì gõ:
 
  $ git checkout 82f5
 
-Nó giúp bạn quay lại đúng thời điểm đó, trong khi vẫn giữ lại những lần commit mới hơn. Tuy nhiên, giống như cỗ máy thời gian trong các bộ phim khoa học viễn tưởng, nếu bây giờ bạn sửa sau đó commit, bạn sẽ ở trong một thực tại khác, bởi vì hành động của bạn bây giờ đã khác với khi chúng ta lần đầu tiên ở tại đây.
+Nó giúp bạn quay lại đúng thời điểm đó, trong khi vẫn giữ lại những lần chuyển giao mới hơn. Tuy nhiên, giống như cỗ máy thời gian trong các bộ phim khoa học viễn tưởng, nếu bây giờ bạn sửa sau đó chuyển giao, bạn sẽ ở trong một thực tại khác, bởi vì hành động của bạn bây giờ đã khác với khi chúng ta lần đầu tiên ở tại đây.
 
 Có cách thực tế hơn là sử dụng 'branch', và <<branch, chúng ta có nhiều điều để nói về nó sau này>>. Bây giờ, chỉ cần nhớ là:
 
  $ git checkout master
 
 sẽ mang chúng ta trở về hiện tại. Ngoài ra, để tránh rủi ro khi sử dụng Git, thì luôn luôn
-commit hay reset các thay đổi của bạn trước khi chạy lệnh checkout.
+chuyển giao hay reset các thay đổi của bạn trước khi chạy lệnh checkout.
 
-Sự tương đồng với game trên máy tính:
+Sự tương đồng với *ván đấu* trên máy tính:
 
-- *`git reset --hard`*: lấy cái cũ đã được lưu lại và xóa tất cả các games mới hơn cái vừa lấy.
+- *`git reset --hard`*: lấy cái cũ đã được lưu lại và xóa tất cả các *ván đấu* mới hơn cái vừa lấy.
 
-- *`git checkout`*: lấy một cái cũ, nhưng chỉ chơi với nó, trạng thái của game sẽ tách riêng về phía mới hơn chỗ mà bạn đã ghi lại lần đầu tiên. Bất kỳ game nào bạn tạo từ bây giờ sẽ là bản cuối cùng trong nhánh riêng rẽ tương ứng với một thực tại khác mà bạn đã gia nhập vào. <<branch, chúng tôi sẽ nói sau>>.
+- *`git checkout`*: lấy một cái cũ, nhưng chỉ chơi với nó, trạng thái của *ván đấu* sẽ tách riêng về phía mới hơn chỗ mà bạn đã ghi lại lần đầu tiên. Bất kỳ *ván đấu* nào bạn tạo từ bây giờ sẽ là bản cuối cùng trong nhánh riêng rẽ tương ứng với một thực tại khác mà bạn đã gia nhập vào. <<branch, chúng tôi sẽ nói sau>>.
 
-Bạn có thể chọn chỉ phục hồi lại các tệp tin hay thư mục bạn muốn bằng cách thêm vào chúng vào phần sau của câu lệnh:
+Bạn có thể chọn chỉ phục hồi lại các tập tin hay thư mục bạn muốn bằng cách thêm vào chúng vào phần sau của câu lệnh:
 
  $ git checkout 82f5 some.file another.file
 
-Bạn phải cẩn thận khi sử dụng các lệnh, như là lệnh *checkout* có thể âm thầm ghi đè lên các tệp tin. Để
-ngăn ngừa rủi ro như thế, hãy commit trước khi chạy lệnh checkout, nhất là khi
+Bạn phải cẩn thận khi sử dụng các lệnh, như là lệnh *checkout* có thể âm thầm ghi đè lên các tập tin. Để
+ngăn ngừa rủi ro như thế, hãy chuyển giao trước khi chạy lệnh checkout, nhất là khi
 mới học sử dụng Git. Tóm lại, bất kỳ khi nào bạn không chắc chắn về một lệnh nào đó, dù có là lệnh của Git hay không, đầu tiên hãy chạy lệnh *git commit -a*.
 
 Bạn không thích việc cắt dán ư? Hãy sử dụng:
 
  $ git checkout :/"My first b"
 
-để nhảy tới lần commit mà phần chú thích của nó bắt đầu với chuỗi bạn đã cho.
+để nhảy tới lần chuyển giao mà phần chú thích của nó bắt đầu với chuỗi bạn đã cho.
 Bạn cũng có thể yêu cầu trạng thái thứ 5 kể từ cái cuối cùng:
 
  $ git checkout master~5
 
 === Sự quay lại ===
 
-Trong một phiên tòa, mỗi sự kiện được gắn với một bản ghi. Cũng giống thế, bạn có thể chọn lệnh commit để undo.
+Trong một phiên tòa, mỗi sự kiện được gắn với một bản ghi. Cũng giống thế, bạn có thể chọn lệnh chuyển giao để undo.
 
  $ git commit -a
  $ git revert 1b6d
 
-sẽ chỉ undo lần commit với giá trị băm đã chỉ ra. Sự quay trở lại được ghi nhận như là một lần
-commit mới, bạn có thể xác nhận lại điều này bằng lệnh *git log*.
+sẽ chỉ undo lần chuyển giao với giá trị băm đã chỉ ra. Sự quay trở lại được ghi nhận như là một lần
+chuyển giao mới, bạn có thể xác nhận lại điều này bằng lệnh *git log*.
 
 === Tạo Nhật Ký các thay đổi ===
 
-Một số dự án yêu cầu có một http://en.wikipedia.org/wiki/Changelog[changelog].
+Một số dự án yêu cầu phải có một http://en.wikipedia.org/wiki/Changelog[changelog].
 Bạn có thể tạo một cái bằng cách gõ:
 
- $ git log > ThayĐổi
+ $ git log > Changelog # ThayĐổi
 
-=== Tải về các Tệp tin ===
+=== Tải về các tập tin ===
 
 Lấy về một bản sao của một dự án quản lý bằng Git bằng cách gõ:
 
  $ git clone git://server/path/to/files
 
-Ví dụ, để lấy tất cả các tệp tin mà tôi đã dùng để tạo ra cho quyển sách này là:
+Ví dụ, để lấy tất cả các tập tin mà tôi đã dùng để tạo ra cho quyển sách này là:
 
  $ git clone git://git.or.cz/gitmagic.git
 
@@ -168,7 +168,7 @@ Những người sử dụng sẽ không bao giờ thấy được dữ liệu c
 
 === Tôi Đã Làm Được Gì? ===
 
-Tìm tất cả các thay đổi kề từ lần bạn commit lần cuối bằng lệnh:
+Tìm tất cả các thay đổi kề từ lần bạn chuyển giao lần cuối bằng lệnh:
 
  $ git diff
 
@@ -189,15 +189,15 @@ Thường thường, tôi duyệt lịch sử bằng http://sourceforge.net/proj
 
 === Bài Tập ===
 
-Coi A, B, C, D là 4 lần commit thành công, nơi mà B giống A ngoại trừ một số tệp tin bị xóa bỏ. Chúng ta muốn thêm các tệp tin đó trở lại D. Chúng ta thực hiện điều này bằng cách nào?
+Giả sử A, B, C, D là 4 lần chuyển giao thành công, với B giống A ngoại trừ một số tập tin bị xóa bỏ. Chúng ta muốn thêm các tập tin đó trở lại D. Chúng ta thực hiện điều này bằng cách nào?
 
 Ở đây chúng ta có ít nhất 3 giải pháp. Giả thiết chúng ta đang ở D:
 
-  1. Sự khác nhau giữa A và B là việc các tệp tin đã bị gỡ bỏ. Chúng ta có thể tạo miếng vá tương ứng với sự khác biệt này và apply nó:
+  1. Sự khác nhau giữa A và B là việc các tập tin đã bị gỡ bỏ. Chúng ta có thể tạo miếng vá tương ứng với sự khác biệt này và áp dụng miếng vá đó:
 
    $ git diff B A | git apply
 
-  2. Kể từ sau khi chúng ta ghi lại các tệp tin tại A trở đi, chúng ta có thể lấy lại:
+  2. Kể từ sau khi chúng ta ghi lại các tập tin tại A trở đi, chúng ta có thể lấy lại:
 
    $ git checkout A foo.c bar.h
 
@@ -206,3 +206,4 @@ Coi A, B, C, D là 4 lần commit thành công, nơi mà B giống A ngoại tr�
    $ git revert B
 
 Lựa chọn nào là tốt nhất? Cách nào bạn thích nhất. Thật dễ dàng để có được thứ mà bạn muốn với Git, và thường là có nhiều hơn một cách để thực hiện được một thứ bạn muốn.
+
