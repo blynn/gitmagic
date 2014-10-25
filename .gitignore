@@ -1,6 +1,11 @@
+*.log
+*.fo
+*.aux
+*.out
+*.pdf
+fop-zh*
 /book*
 /conf
-/fop*
-*.svn/*
+/fop/*
 .*
 *~

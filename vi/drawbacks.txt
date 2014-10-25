@@ -19,7 +19,7 @@ Sử dụng Git trên hệ điều hành Microsoft Windows có vẻ hơi cồng 
 
 - http://code.google.com/p/msysgit/[Git chạy trên MSys] là một thay thế với các hỗ trợ tối thiểu nhất, bởi vì chỉ cần một ít lệnh để thực hiện một số việc mà thôi.
 
-=== Các Tệp tin Không liên quan ===
+=== Các Tập tin Không liên quan ===
 
 Nếu dự án của bạn rất lớn và chứa rất nhiều tập tin không có liên quan mà luôn luôn bị thay đổi, Git có thể chịu thiệt thòi hơn các hệ thống khác bởi vì các tập tin không được giữ dấu viết từng cái riêng lẻ. Git giữ các dấu vết thay đổi cho toàn bộ dự án, điều này thường là có lợi.
 

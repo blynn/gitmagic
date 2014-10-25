@@ -29,13 +29,13 @@ Chúng ta đã tạo ra kho chứa Git mà nó theo dõi một tập tin văn b�
 
  $ git checkout -b boss  # dường như chẳng có gì thay đổi sau lệnh này
  $ echo "Xếp thông minh hơn tôi" > myfile.txt
- $ git commit -a -m "Lần commit khác"
+ $ git commit -a -m "Lần chuyển giao khác"
 
 Điều này cũng giống như việc chúng ta ghi đè lên tập tin của mình sau đó commit nó. Nhưng không, đó chỉ là ảo tưởng. Gõ:
 
  $ git checkout master  # quay trở lại phiên bản nguyên gốc của tập tin
 
-Ối trời ơi! Tệp tin văn bản lại trở về như cũ mất rồi. Và nếu ông chủ có ý định ngó qua thư mục của bạn thì hãy gõ:
+Ối trời ơi! Tập tin văn bản lại trở về như cũ mất rồi. Và nếu ông chủ có ý định ngó qua thư mục của bạn thì hãy gõ:
 
  $ git checkout boss  # chuyển trở lại phiên bản vừa mắt ông chủ
 
@@ -200,7 +200,7 @@ Các tùy chọn *-d* and *-m* cho phép bạn xóa hay di chuyển (đổi tên
 Xem thêm *git help branch*.
 
 Nhánh ``master'' thông thường rất hữu dụng. Những người khác sẽ nghĩ rằng
-kho chứa của bạn có nhánh với tên này, và nhánh đó chứa phiên bản chính thức
+kho chứa của bạn có nhánh mang tên này, và nhánh đó chứa phiên bản chính thức
 của dự án của bạn. Mặc dù bạn có thể đổi tên hay xóa bỏ nhánh ``master'',
 nhưng bạn không nên làm như thế mà hãy tôn trọng thỏa thuận ngầm này.
 
@@ -218,7 +218,7 @@ chẳng thua kém gì chiếc điều khiển từ xa của một chiếc TV:
 
  $ git stash
 
-Lệnh này ghi lại trạng thái hiện hành vào một vị trí tạm thời (một 'stash') và
+Lệnh này ghi lại trạng thái hiện hành vào một vị trí tạm thời (một *stash*) và
 phục hồi lại trạng thái trước đó. Thư mục bạn đang làm việc xuất hiện chính xác
 như trước khi bạn chỉnh sửa, và bạn có thể sửa lỗi, pull về các thay đổi ngược dòng, và
 cứ như thế. Khi bạn muốn qua trở lại trạng thái đã được tạm giấu đi đó, hãy gõ:

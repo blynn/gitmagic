@@ -1,17 +1,12 @@
 # The availaible translation languages.
 # When starting a new translation, add a language code here.
 #
-# Vietnamese PDF generation fails, since DocBook lacks Vietnamese support.
-# I hope to work around this, or use another tool to generate a PDF from
-# AsciiDoc.
-#
-# For now, I've uploaded a PDF to the website; it was supplied by
-# Trần Ngọc Quân who used OpenOffice to convert HTML to PDF.
+
 TRANSLATIONS = de es fr ko pt_br ru uk vi zh_cn zh_tw it pl
 LANGS = en $(TRANSLATIONS)
 SHELL := /bin/bash
 
-.PHONY: all clean sync public $(LANGS)
+.PHONY: all clean sync public distclean $(LANGS)
 
 all: $(LANGS)
 
@@ -69,12 +64,20 @@ $(foreach l,$(LANGS),book-$(l).html): book-%.html: book-%.xml
 # Can also do SP_ENCODING="UTF-8".
 $(foreach l,$(LANGS),book-$(l).pdf): book-%.pdf: book-%.xml
 	if [ $* = zh_cn -o $* = zh_tw ]; then \
-	if ! [ -f fop-$*.xsl ]; then wget -q http://bestrecords.net/fop/fop-$*.xsl; fi; \
-	if ! [ -f fop-$*.xconf ]; then wget -q http://bestrecords.net/fop/fop-$*.xconf; fi; \
-	xmlto -m fop-$*.xsl --with-fop -p "-c `pwd`/fop-$*.xconf" pdf book-$*.xml ;\
+		if ! [ -f fop-$*.xsl ]; then wget -q http://bestrecords.net/fop/fop-$*.xsl; fi; \
+		if ! [ -f fop-$*.xconf ]; then wget -q http://bestrecords.net/fop/fop-$*.xconf; fi; \
+		xmlto -m fop-$*.xsl --with-fop -p "-c `pwd`/fop-$*.xconf" pdf book-$*.xml ;\
+	elif [ $* = vi ] ; then \
+		xsltproc --encoding utf-8 fop-vi.xsl book-$*.xml > book-$*.fo; \
+		fop -c fop-vi.xconf -fo book-$*.fo -pdf book-$*.pdf; \
 	else \
-	SP_ENCODING="XML" docbook2pdf book-$*.xml; \
+		SP_ENCODING="XML" docbook2pdf book-$*.xml; \
 	fi
 
 clean:
-	-rm -rf $(foreach l,$(LANGS),book-$(l).pdf book-$(l).xml book-$(l).html book-$(l))
+	-rm -rf $(foreach l,$(LANGS),book-$(l).pdf book-$(l).xml book-$(l).html book-$(l)) \
+	*.fo *.log *.out *.aux conf
+
+distclean: clean
+	-rm -rfv fop fop-zh*
+
