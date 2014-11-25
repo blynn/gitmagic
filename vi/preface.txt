@@ -42,7 +42,6 @@ Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael B
 François Marier đã bảo trì gói Debian do Daniel
 Baumann khởi xướng.
 
-John Hinnegan đã mua tên miền http://www.gitmagic.com/[gitmagic.com].
 
 Tôi cũng gửi lời cảm ơn tới sự giúp đỡ và sự tán dương của các bạn. Tôi muốn 
 trích dẫn những lời đó ra đây, nhưng làm như thế có vẻ hơi lố bịch, tự cao tự đại.

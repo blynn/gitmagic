@@ -40,7 +40,6 @@ Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael B
 
 François Marier 는 Daniel Baumann이 개발한 Debian 패키지를 관리합니다.
 
-John Hinnegan 은 http://www.gitmagic.com/[gitmagic.com] 도메인을 구입하였습니다.
 
 고마워 해야할 사람들이 많지만은 여기에 다 쓸수는 없는 노릇입니다.
 

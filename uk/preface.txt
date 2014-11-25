@@ -36,7 +36,6 @@ Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael B
 
 François Marier супроводжує пакунок Debian, спочатку створений Daniel Baumann.
 
-John Hinnegan купив http://www.gitmagic.com/[gitmagic.com] домен.
 
 Мої подяки іншим за вашу підтримку і похвалу. Мені дуже хотілося процитувати вас тут, але це могло б підняти ваше марнославство до неймовірних висот.
 

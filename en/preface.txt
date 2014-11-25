@@ -42,7 +42,6 @@ Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael B
 François Marier maintains the Debian package originally created by Daniel
 Baumann.
 
-John Hinnegan bought the http://www.gitmagic.com/[gitmagic.com] domain.
 
 My gratitude goes to many others for your support and praise. I'm tempted to
 quote you here, but it might raise expectations to ridiculous heights.

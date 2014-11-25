@@ -71,7 +71,6 @@ loro correzioni e miglioramenti.
 François Marier mantiene il pacchetto Debian, creato originariamente da
 Daniel Baumarr.
 
-John Hinnegan ha acquistato il dominio http://www.gitmagic.com/[gitmagic.com].
 
 Sono anche grato a molti altri per i loro sostegno e incoraggiamenti.
 Sono tentato di menzionarvi qui, ma rischierei di alzare eccessivamente
