@@ -9,9 +9,9 @@ noch besser, anpacken und mithelfen.
 === SHA1 Schwäche ===
 
 Mit der Zeit entdecken Kryptographen immer mehr Schwächen an SHA1. Schon
-heute wäre es technisch machbar für finanzkräftige Unternehmen
+heute wäre für finanzkräftige Unternehmen es technisch machbar,
 Hash-Kollisionen zu finden. In ein paar Jahren hat vielleicht schon ein ganz
-normaler Heim-PC ausreichend Rechenleistung um ein Git 'Reopsitory'
+normaler Heim-PC ausreichend Rechenleistung, um ein Git 'Reopsitory'
 unbemerkt zu korrumpieren.
 
 Hoffentlich stellt Git auf eine bessere Hash Funktion um, bevor die
@@ -43,7 +43,7 @@ willst.
 
 === Wer macht was? ===
 
-Einige Versionsverwaltungssysteme zwingen Dich explizit eine Datei auf
+Einige Versionsverwaltungssysteme zwingen Dich explizit, eine Datei auf
 irgendeine Weise für die Bearbeitung zu kennzeichnen. Obwohl es extrem
 lästig ist, wenn es die Kommunikation mit einem zentralen Server erfordert,
 so hat es doch zwei Vorteile:
@@ -63,11 +63,11 @@ aufrufen, wenn sie eine Datei bearbeiten.
 
 Da Git die Änderungen über das gesamte Projekt aufzeichnet, erfordert die
 Rekonstruktion des Verlaufs einer einzelnen Datei mehr Aufwand als in
-Versionsverwaltungssystemen die einzelne Dateien überwachen.
+Versionsverwaltungssystemen, die einzelne Dateien überwachen.
 
 Die Nachteile sind üblicherweise gering und werden gern in Kauf genommen, da
 andere Operationen dafür unglaublich effizient sind. Zum Beispiel ist `git
-checkout` schneller als `cp -a` und projektweite Unterschiede sind besser zu
+checkout` schneller als `cp -a`, und projektweite Unterschiede sind besser zu
 komprimieren als eine Sammlung von Änderungen auf Dateibasis.
 
 === Der erster Klon ===
@@ -77,7 +77,7 @@ Versionsverwaltungssystemen, wenn ein längerer Verlauf existiert.
 
 Der initiale Aufwand lohnt sich aber auf längere Sicht, da die meisten
 zukünftigen Operationen dann schnell und offline erfolgen. Trotzdem gibt es
-Situationen, in denen es besser ist einen oberflächlichen Klon mit der
+Situationen, in denen es besser ist, einen oberflächlichen Klon mit der
 `--depth` Option zu erstellen. Das geht wesentlich schneller, aber der
 resultierende Klon hat nur eingeschränkte Funktionalität.
 
@@ -104,11 +104,11 @@ gesucht, nicht ein Versionsverwaltungssystem. Ein Versionsverwaltungssystem
 zum Beispiel ist eine ungeeignete Lösung um Fotos zu verwalten, die
 periodisch von einer Webcam gemacht werden.
 
-Wenn die Dateien sich tatsächlich konstant verändern und sie wirklich
-versioniert werden müssen, ist es eine Möglichkeit Git in zentralisierter
+Wenn die Dateien sich tatsächlich konstant verändern, und sie wirklich
+versioniert werden müssen, ist es eine Möglichkeit, Git in zentralisierter
 Form zu verwenden. Jeder kann oberflächliche Klone erstellen, die nur wenig
 oder gar nichts vom Verlauf des Projekts enthalten. Natürlich sind dann
-viele Git Funktionen nicht verfügbar und Änderungen müssen als 'Patches'
+viele Git Funktionen nicht verfügbar, und Änderungen müssen als 'Patches'
 übermittelt werden. Das funktioniert wahrscheinlich ganz gut, wenn auch
 unklar ist, warum jemand die Versionsgeschichte von wahnsinnig instabilen
 Dateien braucht.
@@ -121,7 +121,7 @@ unnötig auf.
 
 In diesem Fall sollte der Quellcode der Firmware in einem Git 'Repository'
 gehalten werden und die Binärdatei außerhalb des Projekts. Um das Leben zu
-vereinfachen, könnte jemand ein Skript erstellen, das Git benutzt um den
+vereinfachen, könnte jemand ein Skript erstellen, das Git benutzt, um den
 Quellcode zu klonen und 'rsync' oder einen oberflächlichen Klon für die
 Firmware.
 
@@ -143,7 +143,7 @@ alle relevant.
 === Leere Unterverzeichnisse ===
 
 Leere Unterverzeichnisse können nicht überwacht werden. Erstelle eine
-Dummy-Datei um dieses Problem zu umgehen.
+Dummy-Datei, um dieses Problem zu umgehen.
 
 Die aktuelle Implementierung von Git, weniger sein Design, ist
 verantwortlich für diesen Pferdefuß. Mit etwas Glück, wenn Git's Verbreitung
@@ -165,8 +165,8 @@ dem Erstellen eines 'Repository' wird der 'HEAD' auf eine Zeichenfolge von
 'Repositories'.
 
 Würde dann zum Beispiel *git log* ausgeführt, würde der Anwender darüber
-informiert, daß noch keine 'Commits' gemacht wurden, anstelle mit einem
-fatalen Fehler zu beenden. Das gilt stellvertretenden für andere
+informiert, dass noch keine 'Commits' gemacht wurden, anstelle mit einem
+fatalen Fehler zu beenden. Das gilt stellvertretend für andere
 Anweisungen.
 
 Jeder initiale 'Commit' ist dann stillschweigend ein Abkömmling dieses

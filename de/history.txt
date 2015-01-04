@@ -254,7 +254,7 @@ zu benutzen. Eine unzuverlässige Internetverbindung stört mit Git nicht
 sehr, aber sie macht die Entwicklung unerträglich, wenn sie so zuverlässig
 wie ein lokale Festplatte sein sollte. Zusätzlich habe ich mich dabei
 ertappt, bestimmte Anweisungen zu vermeiden, um die damit verbundenen
-Wartezeiten zu vermeiden und das hat mich letztendlich davon abgehalten,
+Wartezeiten zu vermeiden, und das hat mich letztendlich davon abgehalten,
 meinem gewohnten Arbeitsablauf zu folgen.
 
 Wenn ich eine langsame Anweisung auszuführen hatte, wurde durch die

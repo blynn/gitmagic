@@ -1,6 +1,6 @@
 == Anhang B: Diese Anleitung übersetzen ==
 
-Ich empfehle folgende Schritte um diese Anleitung zu übersetzen, damit meine
+Ich empfehle folgende Schritte, um diese Anleitung zu übersetzen, damit meine
 Skripte einfach eine HTML- und PDF-Version erstellen können. Außerdem können
 so alle Übersetzungen in einem 'Repository' existieren.
 
@@ -13,7 +13,7 @@ das neue Verzeichnis und übersetze diese.
 
 Um zum Beispiel die Anleitung auf
 http://de.wikipedia.org/wiki/Klingonische_Sprache[Klingonisch] zu
-übersetzen, mußt du folgendes machen:
+übersetzen, musst du folgendes machen:
 
  $ git clone git://repo.or.cz/gitmagic.git
  $ cd gitmagic
@@ -30,7 +30,7 @@ hinzu. Nun kannst Du Deine Arbeit jederzeit wie folgt überprüfen:
  $ make tlh
  $ firefox book-tlh/index.html
 
-'Committe' deine Änderungen oft und wenn du fertig bist, gib bitte
-Bescheid. GitHub hat eine Schnittstelle, die das erleichtert: Erzeuge deine
-eigene 'Fork' vom "gitmagic" Projekt, 'pushe' deine Änderungen, dann gib mir
-Bescheid, deine Änderungen zu 'mergen'.
+'Committe' Deine Änderungen oft, und wenn Du fertig bist, gib bitte
+Bescheid. GitHub hat eine Schnittstelle, die das erleichtert: Erzeuge Deinen
+eigene 'Fork' vom "gitmagic" Projekt, 'pushe' Deine Änderungen, dann gib mir
+Bescheid, Deine Änderungen zu 'mergen'.
