@@ -56,7 +56,7 @@ Willst Du 'Repositories' ohne Server synchronisieren oder gar ohne
 Netzwerkverbindung? Musst Du während eines Notfalls improvisieren? Wir haben
 gesehen, dass man mit <<makinghistory, *git fast-export* und *git
 fast-import* 'Repositories' in eine einzige Datei konvertieren kann und
-zurück>>. Wir können solche Dateien hin und her schicken um Git
+zurück>>. Wir können solche Dateien hin und her schicken, um Git
 'Repositories' über jedes beliebige Medium zu transportieren, aber ein
 effizienteres Werkzeug ist *git bundle*.
 
@@ -82,7 +82,7 @@ haben:
  $ git bundle create einedatei HEAD ^1b6d
 
 Macht man das regelmäßig, kann man leicht vergessen, welcher 'Commit'
-zuletzt gesendet wurde. Die Hilfeseiten schlagen vor 'Tags' zu benutzen, um
+zuletzt gesendet wurde. Die Hilfeseiten schlagen vor, 'Tags' zu benutzen, um
 dieses Problem zu lösen. Das heißt, nachdem Du ein 'Bundle' gesendet hast,
 gib ein:
 
@@ -153,7 +153,7 @@ Blick riskieren:
 Die +remote.origin.url+ Option kontrolliert die Quell-URL; ``origin'' ist
 der Spitzname, der dem Quell-'Repository' gegeben wurde. Wie mit der
 ``master'' 'Branch' Konvention können wir diesen Spitznamen ändern oder
-löschen, aber es gibt für gewöhnlich keinen Grund dies, zu tun.
+löschen, aber es gibt für gewöhnlich keinen Grund, dies zu tun.
 
 Wenn das original 'Repository' verschoben wird, können wir die URL
 aktualisieren mit:
@@ -161,10 +161,10 @@ aktualisieren mit:
  $ git config remote.origin.url git://neue.url/proj.git
 
 Die +branch.master.merge+ Option definiert den Standard-Remote-'Branch' bei
-einem *git pull*. Während dem ursprünglichen 'clonen' wird sie auf den
+einem *git pull*. Während des ursprünglichen 'Clonen' wird sie auf den
 aktuellen 'Branch' des Quell-'Repository' gesetzt, so dass selbst dann, wenn
 der 'HEAD' des Quell-'Repository' inzwischen auf einen anderen 'Branch'
-gewechselt hat, ein späterer 'pull' wird treu dem original 'Branch' folgen.
+gewechselt hat, ein späterer 'pull' treu dem original 'Branch' folgen wird.
 
 Diese Option gilt nur für das 'Repository', von dem als erstes 'gecloned'
 wurde, was in der Option +branch.master.remote+ hinterlegt ist. Bei einem
@@ -181,7 +181,7 @@ Beispielen keine Argumente hatten.
 Wenn Du ein 'Repository' 'clonst', 'clonst' Du auch alle seine
 'Branches'. Das hast Du vielleicht noch nicht bemerkt, denn Git versteckt
 diese: Du musst speziell danach fragen. Das verhindert, dass 'Branches' vom
-entfernten 'Repository' Deine lokalen 'Branches' stören und es macht Git
+entfernten 'Repository' Deine lokalen 'Branches' stören, und es macht Git
 einfacher für Anfänger.
 
 Zeige die entfernten 'Branches' an mit:

@@ -123,11 +123,11 @@ ORIG_HEAD und Du kannst gesund und munter zurückkehren mit:
 === KOPF-Jagd ===
 
 Möglicherweise reicht ORIG_HEAD nicht aus. Vielleicht hast Du gerade
-bemerkt, dass Du einen kapitalen Fehler gemacht hast und nun musst Du zu
+bemerkt, dass Du einen kapitalen Fehler gemacht hast, und nun musst Du zu
 einem uralten 'Commit' in einem länst vergessenen 'Branch' zurück.
 
 Standardmäßig behält Git einen 'Commit' für mindesten zwei Wochen, sogar
-wenn Du Git anweist den 'Branch' zu zerstören, in dem er enthalten ist. Das
+wenn Du Git anweist, den 'Branch' zu zerstören, in dem er enthalten ist. Das
 Problem ist, den entsprechenden SHA1-Wert zu finden. Du kannst Dir alle
 SHA1-Werte in `.git/objects` vornehmen und ausprobieren ob Du den gesuchten
 'Commit' findest. Aber es gibt einen viel einfacheren Weg.
@@ -181,7 +181,7 @@ sind nur winzige Skripte, wie Zwerge auf den Schultern von Riesen. Mit ein
 bisschen Handarbeit kannst Du Git anpassen, damit es Deinen Anforderungen
 entspricht.
 
-Ein einfacher Trick ist es, die in Git integrierte Aliasfunktion zu verwenden
+Ein einfacher Trick ist es, die in Git integrierte Aliasfunktion zu verwenden,
 um die am häufigsten benutzten Anweisungen zu verkürzen:
 
   $ git config --global alias.co checkout
@@ -211,7 +211,7 @@ Versionsgeschichte mit dem original 'Repository' teilt:
   $ git-new-workdir ein/existierendes/repo neues/verzeichnis
 
 Das neue Verzeichnis und die Dateien darin kann man sich als 'Clone'
-vorstellen, mit dem Unterschied, dass durch die gemeinschaftliche
+vorstellen mit dem Unterschied, dass durch die gemeinschaftliche
 Versionsgeschichte die beiden Versionen automatisch synchron bleiben. Eine
 Synchronisierung mittels 'merge', 'push' oder 'pull' ist nicht notwendig.
 
@@ -226,7 +226,7 @@ häufigsten Anweisungen umgehen.
   $ git checkout -f HEAD^
 
 Auf der anderen Seite, wenn Du einen speziellen Pfad für 'checkout' angibst,
-gibt es keinen Sicherheitsüberprüfungen mehr. Der angegebene Pfad wird
+gibt es keine Sicherheitsüberprüfungen mehr. Der angegebene Pfad wird
 stillschweigend überschrieben. Sei vorsichtig, wenn Du 'checkout' auf diese
 Weise benutzt.
 
