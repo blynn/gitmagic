@@ -234,7 +234,7 @@ intégrées. Pour passer outre, faites :
   $ git reset --hard 1b6d
 
 *Branch*&#160;: la suppression de branches échoue si cela implique la perte de
-certains commits. Par forcer la suppression, tapez :
+certains commits. Pour forcer la suppression, tapez :
 
   $ git branch -D branche_morte  # à la place de -d
 

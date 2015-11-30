@@ -111,12 +111,12 @@ produit un patch qui peut être collé dans un mail. Dans un dépôt Git, tapez�
 pour appliquer le patch.
 
 D'une manière plus formelle, lorsque le nom des auteurs et peut-être leur
-signature doit apparaître, générer tous les patches depuis un certain point en
+signature doit apparaître, générez tous les patches depuis un certain point en
 tapant :
 
  $ git format-patch 1b6d
 
-Les fichiers résultants peuvent être fournis à *git send-email* ou envoyez à la
+Les fichiers résultants peuvent être fournis à *git send-email* ou envoyés à la
 main. Vous pouvez aussi spécifier un intervalle entre deux commits :
 
  $ git format-patch 1b6d..HEAD^^
