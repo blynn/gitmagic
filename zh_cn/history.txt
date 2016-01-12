@@ -24,34 +24,50 @@ Git分布式本性使得历史可以轻易编辑。但你若篡改过去，需�
 
 === 更复杂情况 ===
 
-假设前面的问题还要糟糕十倍。在漫长的时间里我们提交了一堆。但你不太喜欢他们的
+假设上面的问题再糟糕十倍，比如在漫长的时间里我们提交了一堆，但你不太喜欢他们的
 组织方式，而且一些提交信息需要重写。那么键入：
 
  $ git rebase -i HEAD~10
 
-并且后10个提交会出现在你喜爱的$EDITOR。一个例子：
+则最后的10个提交会出现在你喜爱的$EDITOR（即通过设置EDITOR环境变量决定使用哪个
+文本编辑器）。一个例子：
 
     pick 5c6eb73 Added repo.or.cz link
     pick a311a64 Reordered analogies in "Work How You Want"
     pick 100834f Added push target to Makefile
 
-之后：
+不像git log，列表中的提交是旧的在前，新的在后。在上面的列表中，5c6eb73是最老的
+提交，100834是最新的提交。接下来可以在$EDITOR中：
 
 - 通过删除行来移去提交。
 - 通过为行重新排序行来重新排序提交。
 - 替换 `pick` 使用：
    * `edit` 标记一个提交需要修订。
    * `reword` 改变日志信息。
-   * `squash` 将一个提交与其和前一个合并。
-   * `fixup` 将一个提交与其和前一个合并，并丢弃日志信息。
+   * `squash` 将一个提交与其前一个合并。
+   * `fixup` 将一个提交与其前一个合并，并丢弃日志信息。
 
-保存退出。如果你把一个提交标记为可编辑，那么运行
+比如，将第二个提交的`pick`修改为`squash`：
+    pick 5c6eb73 Added repo.or.cz link
+    squash a311a64 Reordered analogies in "Work How You Want"
+    pick 100834f Added push target to Makefile
 
- $ git commit --amend
+保存退出，则Git会把a311a64合并进5c6eb73。想象一下“挤压”动作，squash的作用就是
+把一个提交“挤压”进前一个提交。
 
-否则，运行：
+“挤压”的同时，Git合并了两个提交的日志信息供编辑。比较一下*fixup*命令，其直接
+扔掉“挤压“后合并的日志信息。
+
+如果你把一个提交标记为*edit*，Git会带你回到这个提交点，你可以修改当时的提交信息
+，甚至可以增加新的提交。修改完毕后执行：
 
  $ git rebase --continue
+
+直到遇到下一个*edit*标记点，Git会回放所有遇到的提交。
+
+也可以放弃修改：
+
+ $ git rebase --abort
 
 这样尽早提交，经常提交：你之后还可以用rebase来规整。
 
@@ -68,6 +84,9 @@ Git分布式本性使得历史可以轻易编辑。但你若篡改过去，需�
 
 另外参见 *git help rebase* 以获取这个让人惊奇的命令更详细的例子。你可以拆分提
 交。你甚至可以重新组织一棵树的分支。
+
+要小心的是，rebase指令非常强悍，对于复杂的rebase，最好首先使用*git clone*备份
+一下。
 
 === 重写历史 ===
 
