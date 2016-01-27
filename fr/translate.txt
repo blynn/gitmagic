@@ -15,7 +15,7 @@ http://fr.wikipedia.org/wiki/Klingon%20(langue)[Klingon], vous devriez faire :
 
  $ git clone git://repo.or.cz/gitmagic.git
  $ cd gitmagic
- $ mkdir tlh  # "tlh" et le code IETF de la langue Klingon.
+ $ mkdir tlh  # "tlh" est le code IETF de la langue Klingon.
  $ cd tlh
  $ cp ../en/intro.txt .
  $ edit intro.txt  # Traduire le fichier.
