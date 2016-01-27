@@ -165,7 +165,7 @@ Git对初学者稍稍容易些。
 
 === 多远端 ===
 
-假设另两个开发在同一个项目上工作，我们希望保持两个标签。我们可以同事跟多个仓库：
+假设另两个开发在同一个项目上工作，我们希望保持两个标签。我们可以同时跟多个仓库：
 
  $ git remote add other git://example.com/some_repo.git
  $ git pull other some_branch
