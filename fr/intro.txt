@@ -32,7 +32,7 @@ versions, vous pouvez l'"Enregistrer Sous..." un nom de fichier différent ou le
 recopier ailleurs avant de l'enregistrer. Vous pouvez même compresser ces
 copies pour gagner de l'espace. C'est une forme primitive et laborieuse de
 gestion de versions. Les jeux vidéo se sont améliorés sur ce point depuis
-longtemps pusique la plupart proposent différents emplacements de sauvegarde
+longtemps puisque la plupart proposent différents emplacements de sauvegarde
 automatiquement horodatés.
 
 Rendons le problème légèrement plus coriace. Imaginez que vous ayez un ensemble
