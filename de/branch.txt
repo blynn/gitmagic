@@ -83,7 +83,7 @@ Was, wenn Du am Ende die temporären Änderungen sichern willst? Einfach:
 und 'commite', bevor Du auf den 'Master Branch' zurückschaltest. Wann immer
 Du zu Deiner Schmutzarbeit zurückkehren willst, tippe einfach:
 
- $ git checkout schnmutzig
+ $ git checkout schmutzig
 
 Wir sind mit dieser Anweisung schon in einem früheren Kapitel in Berührung
 gekommen, als wir das Laden alter Stände besprochen haben. Nun können wir
