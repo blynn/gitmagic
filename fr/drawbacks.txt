@@ -25,7 +25,7 @@ Git sur Microsoft Windows peut être jugé encombrant :
 - http://cygwin.com/[Cygwin] est un environnement de type Linux dans Windows
   proposant http://cygwin.com/packages/git/[un portage de Git].
 
-- http://code.google.com/p/msysgit/[Git on MSys] est un autre choix nécessitant
+- https://gitforwindows.org/[Git pour Windows] est un autre choix nécessitant
   beaucoup moins de place. Néanmoins quelques commandes doivent encore être
   améliorées.
 

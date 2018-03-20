@@ -26,7 +26,7 @@ Git per Microsoft Windows può essere piuttosto ingombrante:
   Windows che contiene http://cygwin.com/packages/git/[una versione di
   Git per Windows].
 
-- http://code.google.com/p/msysgit/[Git per MSys] è un alternativa che
+- https://gitforwindows.org/[Git per Windows] è un alternativa che
   richiede meno risorse, anche se alcuni comandi necessitano ancora di
   essere migliorati.
 

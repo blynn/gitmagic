@@ -24,7 +24,7 @@ Git unter Microsoft Windows kann frustrierend sein:
 - http://cygwin.com/[Cygwin], eine Linux ähnliche Umgebung für Windows,
 enthält http://cygwin.com/packages/git/[eine Windows Portierung von Git].
 
-- http://code.google.com/p/msysgit/[Git unter MSys] ist eine Alternative,
+- https://gitforwindows.org/[Git für Windows] ist eine Alternative,
 die sehr wenig Laufzeitunterstützung erfordert, jedoch bedürfen einige
 Kommandos noch einer Überarbeitung.
 

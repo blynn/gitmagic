@@ -17,7 +17,7 @@ Sử dụng Git trên hệ điều hành Microsoft Windows có vẻ hơi cồng 
 
 - http://cygwin.com/[Cygwin], mô phỏng Linux dành cho Windows, có chứa  http://cygwin.com/packages/git/[Git đã chuyển đổi để chạy trên Windows].
 
-- http://code.google.com/p/msysgit/[Git chạy trên MSys] là một thay thế với các hỗ trợ tối thiểu nhất, bởi vì chỉ cần một ít lệnh để thực hiện một số việc mà thôi.
+- https://gitforwindows.org/[Git cho Windows] là một thay thế với các hỗ trợ tối thiểu nhất, bởi vì chỉ cần một ít lệnh để thực hiện một số việc mà thôi.
 
 === Các Tập tin Không liên quan ===
 

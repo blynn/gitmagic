@@ -18,7 +18,7 @@ Git on Microsoft Windows can be cumbersome:
 
 - http://cygwin.com/[Cygwin], a Linux-like environment for Windows, contains http://cygwin.com/packages/git/[a Windows port of Git].
 
-- http://code.google.com/p/msysgit/[Git on MSys] is an alternative requiring minimal runtime support, though a few of the commands need some work.
+- https://gitforwindows.org/[Git for Windows] is an alternative requiring minimal runtime support, though a few of the commands need some work.
 
 === Unrelated Files ===
 
