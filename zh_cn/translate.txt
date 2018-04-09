@@ -10,8 +10,8 @@ http://www.w3.org/International/articles/language-tags/Overview.en.php[ W3C在
 国际化方面的文章 ]。例如，英语是“en”，日语是“ja”，正体中文是“zh-Hant”。
 然后在新建目录，翻译这些来自“en”目录的 +txt+ 文件。
 
-例如，将本指南译为 http://en.wikipedia.org/wiki/Klingon_language[ 克林贡语 ]，
-你也许键入：
+例如，要将本指南译为 http://en.wikipedia.org/wiki/Klingon_language[ 克林贡语 ]，
+你可以键入：
 
  $ git clone git://repo.or.cz/gitmagic.git
  $ cd gitmagic
@@ -28,9 +28,8 @@ http://www.w3.org/International/articles/language-tags/Overview.en.php[ W3C在
  $ make tlh
  $ firefox book-tlh/index.html
 
-经常提交你的变更，然后然我知道他们什么时候完成。GitHub.com提供一个便于fork
+经常提交你的更新，这样我就知道他们什么时候可以完成。GitHub.com提供一个便于fork
 “gitmatic”项目的界面，提交你的变更，然后告诉我去合并。
 
 但请按照最适合你的方式做：例如，中文译者就使用
-Google Docs。只要你的工作使更多人看到我的工作，我就高兴。
-
+Google Docs。只要你的工作能使更多人看到我的工作，我就高兴。
