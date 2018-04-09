@@ -14,7 +14,7 @@ Korzystanie z Gita pod Microsoft Windows może być frustrujące:
 
 - http://cygwin.com/[Cygwin], unixoidalne środowisko dla Windowsa posiada http://cygwin.com/packages/git/[port Gita].
 
-- http://code.google.com/p/msysgit/[Git dla MSys] jest jedną z alternatyw, niektóre polecenia wymagają jednak poprawek.
+- https://gitforwindows.org/[Git dla Windows] jest jedną z alternatyw, niektóre polecenia wymagają jednak poprawek.
 
 === Pliki niepowiązane ===
 
