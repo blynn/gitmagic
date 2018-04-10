@@ -29,7 +29,7 @@ gawk '
 # For every file except the index...
 for FILE in $BOOKDIR/*.html
 do
-  sed '/<title>/a <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">' -i $FILE
+  sed '/<title>/a <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">' -i $FILE
   if [ $FILE != "$BOOKDIR/index.html" ]
   then
     # Prepend "Git Magic - " to titles of all pages.

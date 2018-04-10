@@ -14,7 +14,7 @@ http://git.or.cz/[Git] — це швейцарський ніж керуванн
 
  - link:/~blynn/gitmagic/intl/vi/[В'єтнамська]: Trần Ngọc Quân; також http://vnwildman.users.sourceforge.net/gitmagic/[розміщено на його вебсайті].
  - link:/~blynn/gitmagic/intl/es/[Іспанська]: Rodrigo Toledo та Ariset Llerena Tapia.
-  - http://docs.google.com/View?id=dfwthj68_675gz3bw8kj[Китайська (спрощена)]: JunJie, Meng та JiangWei. Конвертовано у link:/~blynn/gitmagic/intl/zh_tw/[Традиційна китайська] via +cconv -f UTF8-CN -t UTF8-TW+.
+ - link:/\~blynn/gitmagic/intl/zh_cn/[Китайська (спрощена)]: JunJie, Meng та JiangWei. Конвертовано у link:/~blynn/gitmagic/intl/zh_tw/[Традиційна китайська] via +cconv -f UTF8-CN -t UTF8-TW+.
  - link:/~blynn/gitmagic/intl/de/[Німецька]: Benjamin Bellee і Armin Stebich. Armin також розмістив http://gitmagic.lordofbikes.de/[німецький переклад на своєму сайті].
   - http://www.slideshare.net/slide_user/magia-git[Португальська]: Leonardo Siqueira Rodrigues [http://www.slideshare.net/slide_user/magia-git-verso-odt[в форматі ODT]].
  - link:/~blynn/gitmagic/intl/ru/[Російська]: Тихон Тарнавский, Михаил Дымсков і інші.

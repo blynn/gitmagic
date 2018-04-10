@@ -10,7 +10,7 @@ SHELL := /bin/bash
 
 all: $(LANGS)
 
-$(LANGS): %: book-% book-%/default.css book-%.html book-%.pdf
+$(LANGS): %: book-% book-%/default.css book-%.html book-%.pdf book-%.epub
 
 # The book consists of these text files in the following order:
 
@@ -57,27 +57,29 @@ $(foreach l,$(LANGS),book-$(l)/default.css): book-%/default.css: book.css
 	rsync book.css book-$*/default.css
 
 $(foreach l,$(LANGS),book-$(l).html): book-%.html: book-%.xml
-	xmlto -m custom-nochunks.xsl html-nochunks $^
-	-tidy -utf8 -imq $@
+	pandoc -s -f docbook -t html5 -o $@ $^
 
-# Set SP_ENCODING to avoid "non SGML character" errors.
-# Can also do SP_ENCODING="UTF-8".
 $(foreach l,$(LANGS),book-$(l).pdf): book-%.pdf: book-%.xml
-	if [ $* = zh_cn -o $* = zh_tw ]; then \
-		if ! [ -f fop-$*.xsl ]; then wget -q http://bestrecords.net/fop/fop-$*.xsl; fi; \
-		if ! [ -f fop-$*.xconf ]; then wget -q http://bestrecords.net/fop/fop-$*.xconf; fi; \
-		xmlto -m fop-$*.xsl --with-fop -p "-c `pwd`/fop-$*.xconf" pdf book-$*.xml ;\
-	elif [ $* = vi ] ; then \
-		xsltproc --encoding utf-8 fop-vi.xsl book-$*.xml > book-$*.fo; \
-		fop -c fop-vi.xconf -fo book-$*.fo -pdf book-$*.pdf; \
-	else \
-		SP_ENCODING="XML" docbook2pdf book-$*.xml; \
-	fi
+	pandoc -s -f docbook -o $@ --latex-engine xelatex $^
+
+book-ru.pdf: book-ru.xml
+	pandoc -s -f docbook -o $@ --latex-engine xelatex -V mainfont='DejaVuSansMono' $^
+
+book-uk.pdf: book-uk.xml
+	pandoc -s -f docbook -o $@ --latex-engine xelatex -V mainfont='DejaVuSansMono' $^
+
+book-ko.pdf: book-ko.xml
+	pandoc -s -f docbook -o $@ --latex-engine xelatex -V CJKmainfont='WenQuanYi Micro Hei Mono' $^
+
+book-zh_cn.pdf: book-zh_cn.xml
+	pandoc -s -f docbook -o $@ --latex-engine xelatex -V CJKmainfont='WenQuanYi Micro Hei Mono' $^
+
+book-zh_tw.pdf: book-zh_tw.xml
+	pandoc -s -f docbook -o $@ --latex-engine xelatex -V CJKmainfont='WenQuanYi Micro Hei Mono' $^
+
+$(foreach l,$(LANGS),book-$(l).epub): book-%.epub: book-%.xml
+	pandoc -s -f docbook -o $@ $^
 
 clean:
 	-rm -rf $(foreach l,$(LANGS),book-$(l).pdf book-$(l).xml book-$(l).html book-$(l)) \
 	*.fo *.log *.out *.aux conf
-
-distclean: clean
-	-rm -rfv fop fop-zh*
-

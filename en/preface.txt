@@ -28,6 +28,7 @@ Rather than go into details, we provide rough instructions for particular effect
 
  - link:book.html[Single webpage]: barebones HTML, with no CSS.
  - link:book.pdf[PDF file]: printer-friendly.
+ - link:book.epub[EPUB file]: E-reader-friendly.
  - http://packages.debian.org/gitmagic[Debian package], http://packages.ubuntu.com/gitmagic[Ubuntu package]: get a fast and local copy of this site. Handy http://csdcf.stanford.edu/status/[when this server is offline].
  - http://www.amazon.com/Git-Magic-Ben-Lynn/dp/1451523343/[Physical book [Amazon.com]]: 64 pages, 15.24cm x 22.86cm, black and white. Handy when there is no electricity.
 
@@ -58,8 +59,6 @@ repository, and can be obtained by typing:
 or from one of the mirrors:
 
  $ git clone git://github.com/blynn/gitmagic.git
- $ git clone git://gitorious.org/gitmagic/mainline.git
- $ git clone https://code.google.com/p/gitmagic/
  $ git clone git://git.assembla.com/gitmagic.git
  $ git clone git@bitbucket.org:blynn/gitmagic.git
 

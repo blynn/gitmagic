@@ -20,7 +20,7 @@ http://git.or.cz/[Git] это швейцарский нож управления
 
 .Переводы
 
- - http://docs.google.com/View?id=dfwthj68_675gz3bw8kj[	Китайский (упрощенный)]: JunJie, Meng и JiangWei.
+ - link:/~blynn/gitmagic/intl/zh_cn/[Китайский (упрощенный)]: JunJie, Meng и JiangWei.
  - link:/~blynn/gitmagic/intl/es/[Испанский]: Rodrigo Toledo.
  - link:/~blynn/gitmagic/intl/de/[Немецкий]: Benjamin Bellee и Armin Stebich. Armin также разместил http://gitmagic.lordofbikes.de/[немецкий перевод  на его сайте].
  - link:/~blynn/gitmagic/intl/ru/[Русский]: Тихон Тарнавский, Михаил Дымсков и другие.
