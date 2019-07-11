@@ -297,7 +297,7 @@ tout, des clones sont tout aussi rapides et vous pouvez basculer de l'un à
 l'autre par un simple *cd* au lieu de commandes Git ésotériques.
 
 Considérez les navigateurs Web. Pourquoi proposer plusieurs onglets ainsi que
-plusieurs fenêtres ? Parce proposer les deux permet de s'adapter à une large
+plusieurs fenêtres ? Parce que proposer les deux permet de s'adapter à une large
 gamme d'utilisations. Certains préfèrent n'avoir qu'une seule fenêtre avec plein
 d'onglets. D'autres font tout le contraire : plein de fenêtres avec un seul
 onglet. D'autres encore mélangent un peu des deux.
