@@ -60,22 +60,22 @@ $(foreach l,$(LANGS),book-$(l).html): book-%.html: book-%.xml
 	pandoc -s -f docbook -t html5 -o $@ $^
 
 $(foreach l,$(LANGS),book-$(l).pdf): book-%.pdf: book-%.xml
-	pandoc -s -f docbook -o $@ --latex-engine xelatex $^
+	pandoc -s -f docbook -o $@  --pdf-engine=xelatex $^
 
 book-ru.pdf: book-ru.xml
-	pandoc -s -f docbook -o $@ --latex-engine xelatex -V mainfont='DejaVuSansMono' $^
+	pandoc -s -f docbook -o $@ --pdf-engine xelatex -V mainfont='DejaVuSansMono' $^
 
 book-uk.pdf: book-uk.xml
-	pandoc -s -f docbook -o $@ --latex-engine xelatex -V mainfont='DejaVuSansMono' $^
+	pandoc -s -f docbook -o $@ --pdf-engine xelatex -V mainfont='DejaVuSansMono' $^
 
 book-ko.pdf: book-ko.xml
-	pandoc -s -f docbook -o $@ --latex-engine xelatex -V CJKmainfont='WenQuanYi Micro Hei Mono' $^
+	pandoc -s -f docbook -o $@ --pdf-engine xelatex -V CJKmainfont='WenQuanYi Micro Hei Mono' $^
 
 book-zh_cn.pdf: book-zh_cn.xml
-	pandoc -s -f docbook -o $@ --latex-engine xelatex -V CJKmainfont='WenQuanYi Micro Hei Mono' $^
+	pandoc -s -f docbook -o $@ --pdf-engine xelatex -V CJKmainfont='WenQuanYi Micro Hei Mono' $^
 
 book-zh_tw.pdf: book-zh_tw.xml
-	pandoc -s -f docbook -o $@ --latex-engine xelatex -V CJKmainfont='WenQuanYi Micro Hei Mono' $^
+	pandoc -s -f docbook -o $@ --pdf-engine xelatex -V CJKmainfont='WenQuanYi Micro Hei Mono' $^
 
 $(foreach l,$(LANGS),book-$(l).epub): book-%.epub: book-%.xml
 	pandoc -s -f docbook -o $@ $^
