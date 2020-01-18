@@ -13,7 +13,7 @@ Rather than go into details, we provide rough instructions for particular effect
 .Translations
 
  - link:/\~blynn/gitmagic/intl/zh_cn/[Simplified Chinese]: by JunJie, Meng and JiangWei. Converted to link:/~blynn/gitmagic/intl/zh_tw/[Traditional Chinese] via +cconv -f UTF8-CN -t UTF8-TW+.
- - link:/~blynn/gitmagic/intl/fr/[French]: by Alexandre Garel, Paul Gaborit, and Nicolas Deram. Also hosted at http://tutoriels.itaapy.com/[itaapy].
+ - link:/~blynn/gitmagic/intl/fr/[French]: by Alexandre Garel, Paul Gaborit, and Nicolas Deram.
  - link:/~blynn/gitmagic/intl/de/[German]: by Benjamin Bellee and Armin Stebich; also http://gitmagic.lordofbikes.de/[hosted on Armin's website].
  - link:/~blynn/gitmagic/intl/it/[Italian]: by Mattia Rigotti.
  - link:/~blynn/gitmagic/intl/ko/[Korean]: by Jung-Ho (John) Han; also https://sites.google.com/site/drinkhanjohn/useful-links/[hosted on John's website].

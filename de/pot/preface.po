@@ -85,11 +85,10 @@ msgstr ""
 #: ../en/preface.txt:22
 msgid ""
 "link:/~blynn/gitmagic/intl/fr/[French]: by Alexandre Garel, Paul Gaborit, "
-"and Nicolas Deram. Also hosted at http://tutoriels.itaapy.com/[itaapy]."
+"and Nicolas Deram."
 msgstr ""
 "link:/~blynn/gitmagic/intl/fr/[Französich]: von Alexandre Garel, Paul "
-"Gaborit, und Nicolas Deram. Auch gehostet unter http://tutoriels.itaapy.com/"
-"[itaapy]."
+"Gaborit, und Nicolas Deram."
 
 #. type: Bullet: ' - '
 #: ../en/preface.txt:22

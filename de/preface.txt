@@ -24,8 +24,7 @@ Bedarf zuschneiden kannst.
    Meng und JiangWei. Zu link:/~blynn/gitmagic/intl/zh_tw/[Traditionellem
    Chinesisch] konvertiert via +cconv -f UTF8-CN -t UTF8-TW+.
  - link:/~blynn/gitmagic/intl/fr/[Französich]: von Alexandre Garel, Paul
-   Gaborit, und Nicolas Deram. Auch gehostet unter
-   http://tutoriels.itaapy.com/[itaapy].
+   Gaborit, und Nicolas Deram.
  - link:/~blynn/gitmagic/intl/de/[Deutsch]: von Benjamin Bellee und Armin
    Stebich; Auch gehostet unter http://gitmagic.lordofbikes.de/[Armin's
    Website].
