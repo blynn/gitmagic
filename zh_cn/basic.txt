@@ -95,7 +95,7 @@ Date:   Thu Jan 1 00:00:00 1970 +0000
 
  $ git checkout 82f5 some.file another.file
 
-小心，这种形式的 *checkout* 会不声不响地覆盖当前文件。为阻止意外发生，在运行任何
+小心，这种形式的 *checkout* 会不声不响地覆盖当前文件。为防止意外发生，在运行任何
 checkout命令之前做提交，尤其在初学Git的时候。通常，任何时候你觉得对运行某个命
 令不放心，无论Git命令还是不是Git命令，就先运行一下 *git commit -a* 。
 
