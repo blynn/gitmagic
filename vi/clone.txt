@@ -1,40 +1,40 @@
 == Nhân Bản ==
 
-Trong các hệ thống quản lý mã nguồn trước đây, checkout là tác vụ cơ bản để lấy các tệp tin về. Bạn lấy về toàn bộ các tập tin được lưu giữ trong từng phiên bản riêng biệt.
+Trong các hệ thống quản lý mã nguồn trước đây, checkout là tác vụ cơ bản để lấy các tập tin về. Bạn lấy về toàn bộ các tập tin được lưu giữ trong từng phiên bản riêng biệt.
 
-Với Git và các hệ thống quản lý mã nguồn phân tán, clone là tác vụ cơ bản. Để lấy các tệp tin, bạn lấy về toàn bộ kho chứa. Nói cách khác, bạn thực tế là một bản sao của máy chủ trung tâm. Bất kỳ cái gì bạn thể làm được với kho chứa chính thì cũng làm được ở đây.
+Với Git và các hệ thống quản lý mã nguồn phân tán, clone là tác vụ cơ bản. Để lấy các tập tin, bạn lấy về toàn bộ kho chứa. Nói cách khác, bạn thực tế là một bản sao của máy chủ trung tâm. Bất kỳ cái gì bạn thể làm được với kho chứa chính thì cũng làm được ở đây.
 
 === Đồng bộ hóa Các Máy tính ===
 
-Tôi có thể tạo gói tarball hay sử dụng lệnh *rsync* để sao lưu dự phòng và đồng bộ hóa dữ liệu. Nhưng thỉnh thoảng, tôi biên tập trên máy tính xách tay của mình, nhưng lúc khác lại trên máy tính để bàn, và chúng có thể không có sự trao đổi được với nhau.
+Tôi có thể tạo gói *tarball* hay sử dụng lệnh *rsync* để sao lưu dự phòng và đồng bộ hóa dữ liệu. Nhưng thỉnh thoảng, tôi biên tập trên máy tính xách tay của mình, nhưng lúc khác lại trên máy tính để bàn, và chúng có thể không có sự trao đổi được với nhau.
 
-Khởi tạo kho chứa Git và commit các tệp tin trên một máy tính. Sau đó trên máy tính kia chạy lệnh:
+Khởi tạo kho chứa Git và commit các tập tin trên một máy tính. Sau đó trên máy tính kia chạy lệnh:
 
  $ git clone other.computer:/path/to/files
 
-để tạo một bản sao thứ hai cho các tệp tin và kho chứa. Từ giờ trở đi,
+để tạo một bản sao thứ hai cho các tập tin và kho chứa. Từ giờ trở đi,
 
  $ git commit -a
  $ git pull other.computer:/path/to/files HEAD
 
-sẽ lấy về một trạng thái của các tệp tin trên máy tính khác về máy bạn đang làm việc. Nếu bạn vừa tạo ra một sự chỉnh sửa xung đột trong cùng một tệp tin, Git sẽ cho bạn biết và bạn có thể commit lại sau khi đã sửa chữa chúng.
+sẽ lấy về một trạng thái của các tập tin trên máy tính khác về máy bạn đang làm việc. Nếu bạn vừa tạo ra một sự chỉnh sửa xung đột trong cùng một tập tin, Git sẽ cho bạn biết và bạn có thể chuyển giao sau khi đã sửa chữa chúng.
 
 === Quản lý theo cách Cũ ===
 
-Khởi tạo kho Git cho các tệp tin của bạn:
+Khởi tạo kho Git cho các tập tin của bạn:
 
  $ git init
  $ git add .
  $ git commit -m "Lần commit khởi tạo"
 
-Trên máy chủ trung tâm, khởi tạo 'kho bare' ở một thư mục nào đó:
+Trên máy chủ trung tâm, khởi tạo kho 'thuần' ở một thư mục nào đó:
 
  $ mkdir proj.git
  $ cd proj.git
  $ git --bare init
  $ touch proj.git/git-daemon-export-ok
 
-Khởi động dịch vụ Git daemon nếu cần:
+Khởi động dịch vụ Git nếu cần:
 
  $ git daemon --detach  # nó có thể đã hoạt động rồi
 
@@ -57,7 +57,7 @@ Sau khi thay đổi, các nhà phát triển phần mềm sẽ lưu lại các t
 
  $ git pull
 
-Mọi xung đột phải được xử lý trước, sau đó mới commit:
+Mọi xung đột phải được xử lý trước, sau đó mới chuyển giao:
 
  $ git commit -a
 
@@ -87,11 +87,11 @@ việc truyền thông bây giờ đều thông qua SSH.
 
 === Kho thuần ===
 
-Kho thuần (bare) được đặt tên như vậy vì nó không chứa thư mục làm việc; nó chỉ chứa các tệp tin thường là ẩn trong thư mục phụ `.git`. Hay nói cách khác, nó chứa lịch sử mã nguồn của một dự án, và không bao giờ giữ các tập tin bất kỳ phiên bản nào.
+Kho thuần (bare) được đặt tên như vậy vì nó không chứa thư mục làm việc; nó 'thuần túy' chứa các tập tin thường là ẩn trong thư mục con `.git`. Hay nói cách khác, nó chứa lịch sử mã nguồn của một dự án, và không bao giờ giữ các tập tin bất kỳ phiên bản nào.
 
 Kho thuần có vai trò hoạt động giống như máy chủ trung tâm trong các hệ thống
 quản lý mã nguồn tập trung: thư mục chủ dự án của bạn. Các nhà phát triển phần mềm nhân bản
-dữ liệu dự án của bạn ở đây, và push các thay đổi chính thức lên đó. Thông thường nó
+dữ liệu dự án của bạn ở đây, và 'push' các thay đổi chính thức lên đó. Thông thường nó
 đặt tại máy chủ mà máy này đôi khi còn làm một số việc khác nữa. Sự biên soạn mã nguồn
 xảy ra trên bản sao, vì vậy thư mục chủ của kho chứa có thể hoạt động mà không cần
 thư mục làm việc.
@@ -100,17 +100,17 @@ Nhiều lệnh Git gặp lỗi trên kho thuần trừ phi biến môi trường
 
 === Push ngược với pull ===
 
-Tại sao chúng tôi lại giới thiệu lệnh push, thay vì trông cậy vào lệnh pull
+Tại sao chúng tôi lại giới thiệu lệnh 'push', thay vì trông cậy vào lệnh 'pull'
 quen thuộc? Trước hết, việc pull gặp lỗi trên kho thuần: thay vào đó bạn phải dùng lệnh 'fetch',
 lệnh này chúng ta sẽ nói sau. Nhưng dù là chúng ta giữ kho chứa thông thường trên
-máy chủ trung tâm, việc pull lên nó hơi cồng kềnh. Chúng ta phải
-đăng nhập vào máy chủ trước, và cung cấp cho lệnh pull địa chỉ mạng
-của máy chúng ta đang pull từ đó. Chương trình tường lửa có thể gây trở ngại, và điều gì xảy ra khi chúng ta không
-có khả năng truy cập shell máy chủ trong chỗ đầu tiên đó?
+máy chủ trung tâm, việc 'pull' lên nó hơi cồng kềnh. Chúng ta phải
+đăng nhập vào máy chủ trước, và cung cấp cho lệnh 'pull' địa chỉ mạng
+của máy chúng ta đang 'pull' từ đó. Chương trình tường lửa có thể gây trở ngại, và điều gì xảy ra khi chúng ta không
+có khả năng truy cập 'hệ vỏ' máy chủ trong chỗ đầu tiên đó?
 
 Tuy nhiên, ngoài trường hợp này ra, chúng ta còn nản lòng với việc push lên kho chứa, bởi vì tình trạng hỗn loạn có thể xảy khi thư mục đích có chứa thư mục làm việc.
 
-Tóm lại, khi bạn học Git, chỉ push khi đích là kho thuần; nếu không thì dùng pull.
+Tóm lại, khi bạn học Git, chỉ 'push' khi đích là kho thuần; nếu không thì dùng 'pull'.
 
 === Rẽ nhánh một dự án ===
 
@@ -155,7 +155,7 @@ Bạn đang làm việc cho một dự án có sử dụng hệ thống quản l
  $ git add .
  $ git commit -m "Lần commit khởi tạo"
 
-sau đó clone nó:
+sau đó nhân bản nó:
 
  $ git clone . /some/new/directory
 
@@ -169,7 +169,7 @@ Sau đó chuyển tới thư mục mới và chạy:
  $ git commit -a -m "Mô tả về các thay đổi của mình"
  $ git pull
 
-Thủ tục đem lại các thay đổi của bạn tới những người khác nữa trên hệ thống quản lý mã nguồn khác. Thư mục mới có chứa các tệp tin mà bạn thay đổi. Chạy các lệnh mà hệ thống quản lý mã nguồn khác cần để tải chúng lên kho chứa trung tâm.
+Thủ tục đem lại các thay đổi của bạn tới những người khác nữa trên hệ thống quản lý mã nguồn khác. Thư mục mới có chứa các tập tin mà bạn thay đổi. Chạy các lệnh mà hệ thống quản lý mã nguồn khác cần để tải chúng lên kho chứa trung tâm.
 
 Subversion, có lẽ là hệ thống quản lý mã nguồn tập trung tốt nhất, được sử dụng bởi vô số các dự án. Lệnh *git svn* sẽ tự động hóa những việc đã nói ở trên dành cho Subversion, bạn cũng có thể làm như thế để http://google-opensource.blogspot.com/2008/05/export-git-project-to-google-code.html[xuất dự án Git thành Subversion].
 
@@ -207,12 +207,13 @@ Bazaar có lợi thế vì phát triển sau, có tuổi tương đối trẻ; n
 
 Plugin `bzr-git` giúp người dùng Bazaar làm việc với kho Git trong chừng mực nào đó. Chương trình chuyển đổi Bazaar thành Git, và có thể làm hơn thế nữa, trong khi `bzr-fast-export` thích hợp nhất cho việc chuyển đổi một lần duy nhất.
 
-=== Tại sao Tôi sử dụng Git ===
+=== Tại sao Tôi dùng Git? ===
 
-Trước tiên, tôi chọn Git bởi tôi nghe nói nó làm được việc phi thường là có thể quản lý mã nguồn cho một thứ khó quản lý như hạt nhân của hệ điều hành Linux. Tôi chưa bao giờ nghĩ đến việc chuyển sang dùng một phần mềm quản lý mã nguồn khác. Git làm được những việc thật đáng ngưỡng mộ, và tôi chưa từng bao giờ gặp các vấn đề với sai sót của nó. Do tôi hoạt động chủ yếu trên Linux, phát hành trên các nền tảng khác không phải là điều mà tôi quan tâm.
+Trước tiên, tôi chọn Git bởi tôi nghe nói nó làm được việc phi thường là có thể quản lý mã nguồn cho một thứ khó quản lý như hạt nhân của hệ điều hành *Linux*. Tôi chưa bao giờ nghĩ đến việc chuyển sang dùng một phần mềm quản lý mã nguồn khác. Git làm được những việc thật đáng ngưỡng mộ, và tôi chưa từng bao giờ gặp các vấn đề với sai sót của nó. Do tôi hoạt động chủ yếu trên Linux, phát hành trên các nền tảng khác không phải là điều mà tôi quan tâm.
 
-Ngoài ra, tôi thích lập trình bằng ngôn ngữ C và bash scripts để thực thi như là Python script: ở đây có rất ít sự phụ thuộc, và tôi đam mê với những hệ thống thi hành nhanh chóng.
+Ngoài ra, tôi thích lập trình bằng ngôn ngữ C và bash scripts để thực thi như là ngôn ngữ kịch bản Python: ở đây có rất ít sự phụ thuộc, và tôi đam mê với những hệ thống thi hành nhanh chóng.
 
 Tôi đã nghĩ về việc làm thế nào để Git có thể phát triển, xa hơn nữa là tự mình viết một công cụ tương tự như Git, nhưng đây không phải là bài tập có tính thực tế. Khi tôi hoàn thành dự án của mình, dù sao đi nữa tôi vẫn sẽ dùng Git, với lợi thế là có thể chuyển đổi từ hệ thống cũ sang một cách nhanh chóng.
 
 Theo lẽ tự nhiên, những thứ cần thiết cho bạn và những thứ bạn mong muốn có lẽ khác nhau, và bạn có thể tốt hơn nếu mình làm việc với hệ thống khác. Dù sao đi nữa, bạn sẽ không bao giờ phải hối tiếc vì đã chọn Git.
+

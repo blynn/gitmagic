@@ -1,187 +1,124 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
-<!-- git web interface version 1.7.0.9.GIT, (C) 2005-2006, Kay Sievers <kay.sievers@vrfy.org>, Christian Gierke -->
-<!-- git core binaries version 1.7.0.9.GIT -->
-<head>
-<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-<meta name="generator" content="gitweb/1.7.0.9.GIT git/1.7.0.9.GIT"/>
-<meta name="robots" content="index, nofollow"/>
-<title>Public Git Hosting - gitmagic.git/blob - book.css</title>
-<script type="text/javascript">/* <![CDATA[ */
-function fixBlameLinks() {
-	var allLinks = document.getElementsByTagName("a");
-	for (var i = 0; i < allLinks.length; i++) {
-		var link = allLinks.item(i);
-		if (link.className == 'blamelink')
-			link.href = link.href.replace("/blame/", "/blame_incremental/");
-	}
+body {
+    font-size: 95%;
+    font-family: 'Open Sans', sans-serif;
 }
-/* ]]> */</script>
-<base href="http://repo.or.cz/w" />
-<link rel="stylesheet" type="text/css" href="http://repo.or.cz/gitweb.css"/>
-<link rel="alternate" title="gitmagic.git - history of book.css - RSS feed" href="http://repo.or.cz/w/gitmagic.git/rss?f=book.css" type="application/rss+xml" />
-<link rel="alternate" title="gitmagic.git - history of book.css - RSS feed (no merges)" href="http://repo.or.cz/w/gitmagic.git/rss?f=book.css;opt=--no-merges" type="application/rss+xml" />
-<link rel="alternate" title="gitmagic.git - history of book.css - Atom feed" href="http://repo.or.cz/w/gitmagic.git/atom?f=book.css;opt=--no-merges" type="application/atom+xml" />
-<link rel="alternate" title="gitmagic.git - history of book.css - Atom feed (no merges)" href="http://repo.or.cz/w/gitmagic.git/atom?f=book.css;opt=--no-merges" type="application/atom+xml" />
-<link rel="shortcut icon" href="http://repo.or.cz/git-favicon.png" type="image/png" />
-<script src="http://repo.or.cz/gitweb.js" type="text/javascript"></script>
-</head>
-<body>
-<div class="page_header">
-<a title="git homepage" href="http://git-scm.com/"><img src="http://repo.or.cz/git-logo.png" width="72" height="27" alt="git" class="logo"/></a><a href="http://repo.or.cz/w">repo.or.cz</a> / <a href="http://repo.or.cz/w/gitmagic.git">gitmagic.git</a> / blob
-</div>
-<form method="get" action="http://repo.or.cz/w/gitmagic.git" enctype="application/x-www-form-urlencoded">
-<div class="search">
-<input name="a" type="hidden" value="search" />
-<input name="h" type="hidden" value="HEAD" />
-<select name="st" >
-<option selected="selected" value="commit">commit</option>
-<option value="grep">grep</option>
-<option value="author">author</option>
-<option value="committer">committer</option>
-<option value="pickaxe">pickaxe</option>
-</select><sup><a href="http://repo.or.cz/w/gitmagic.git/search_help">?</a></sup> search:
-<input type="text" name="s"  />
-<span title="Extended regular expression"><label><input type="checkbox" name="sr" value="1" />re</label></span></div>
-</form>
-<div class="page_nav">
-<a href="http://repo.or.cz/w/gitmagic.git">summary</a> | <a href="http://repo.or.cz/w/gitmagic.git/shortlog">log</a> | <a href="http://repo.or.cz/git-browser/by-commit.html?r=gitmagic.git">graphiclog</a> | <a href="http://repo.or.cz/w/gitmagic.git/commit/HEAD">commit</a> | <a href="http://repo.or.cz/w/gitmagic.git/commitdiff/HEAD">commitdiff</a> | <a href="http://repo.or.cz/w/gitmagic.git/tree/HEAD">tree</a> | <a href="http://repo.or.cz/w/gitmagic.git/refs">refs</a> | <a href="http://repo.or.cz/editproj.cgi?name=gitmagic.git">edit</a> | <a href="http://repo.or.cz/regproj.cgi?fork=gitmagic.git">fork</a><br/>
-<a href="http://repo.or.cz/w/gitmagic.git/blame/HEAD:/book.css">blame</a> | <a href="http://repo.or.cz/w/gitmagic.git/history/HEAD:/book.css">history</a> | <a href="http://repo.or.cz/w/gitmagic.git/blob_plain/HEAD:/book.css">raw</a> | <a href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css">HEAD</a><br/>
-</div>
-<div class="header">
-<a class="title" href="http://repo.or.cz/w/gitmagic.git/commit/HEAD">Merge branch 'master' of https://github.com/matrig/gitmagic</a>
-</div>
-<div class="page_path"><a title="tree root" href="http://repo.or.cz/w/gitmagic.git/tree/HEAD">[gitmagic.git]</a> / <a title="book.css" href="http://repo.or.cz/w/gitmagic.git/blob_plain/HEAD:/book.css">book.css</a><br/></div>
-<div class="page_body">
-<div class="pre"><a id="l1" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l1" class="linenr">   1</a> body&nbsp;{</div>
-<div class="pre"><a id="l2" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l2" class="linenr">   2</a> &nbsp;&nbsp;&nbsp;&nbsp;font-size:&nbsp;90%;</div>
-<div class="pre"><a id="l3" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l3" class="linenr">   3</a> &nbsp;&nbsp;&nbsp;&nbsp;font-family:&nbsp;verdana,&nbsp;arial,&nbsp;sans-serif;</div>
-<div class="pre"><a id="l4" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l4" class="linenr">   4</a> }</div>
-<div class="pre"><a id="l5" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l5" class="linenr">   5</a> </div>
-<div class="pre"><a id="l6" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l6" class="linenr">   6</a> tt,&nbsp;code,&nbsp;pre,&nbsp;.type&nbsp;{</div>
-<div class="pre"><a id="l7" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l7" class="linenr">   7</a> &nbsp;&nbsp;&nbsp;&nbsp;font-family:&nbsp;andale&nbsp;mono,&nbsp;courier&nbsp;new,&nbsp;courier,&nbsp;monospace;</div>
-<div class="pre"><a id="l8" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l8" class="linenr">   8</a> &nbsp;&nbsp;&nbsp;&nbsp;font-size:&nbsp;90%;</div>
-<div class="pre"><a id="l9" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l9" class="linenr">   9</a> }</div>
-<div class="pre"><a id="l10" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l10" class="linenr">  10</a> </div>
-<div class="pre"><a id="l11" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l11" class="linenr">  11</a> pre&nbsp;{</div>
-<div class="pre"><a id="l12" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l12" class="linenr">  12</a> &nbsp;&nbsp;&nbsp;&nbsp;color:&nbsp;#0000aa;</div>
-<div class="pre"><a id="l13" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l13" class="linenr">  13</a> }</div>
-<div class="pre"><a id="l14" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l14" class="linenr">  14</a> </div>
-<div class="pre"><a id="l15" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l15" class="linenr">  15</a> ul&nbsp;li&nbsp;p&nbsp;{</div>
-<div class="pre"><a id="l16" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l16" class="linenr">  16</a> &nbsp;&nbsp;&nbsp;&nbsp;margin:&nbsp;0;</div>
-<div class="pre"><a id="l17" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l17" class="linenr">  17</a> &nbsp;&nbsp;&nbsp;&nbsp;padding:&nbsp;0;</div>
-<div class="pre"><a id="l18" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l18" class="linenr">  18</a> }</div>
-<div class="pre"><a id="l19" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l19" class="linenr">  19</a> </div>
-<div class="pre"><a id="l20" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l20" class="linenr">  20</a> /*&nbsp;Based&nbsp;on&nbsp;http://phrogz.net/CSS/columns3.html&nbsp;*/</div>
-<div class="pre"><a id="l21" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l21" class="linenr">  21</a> div.toc&nbsp;{</div>
-<div class="pre"><a id="l22" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l22" class="linenr">  22</a> &nbsp;&nbsp;&nbsp;&nbsp;float:&nbsp;left;</div>
-<div class="pre"><a id="l23" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l23" class="linenr">  23</a> &nbsp;&nbsp;&nbsp;&nbsp;margin:&nbsp;0;</div>
-<div class="pre"><a id="l24" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l24" class="linenr">  24</a> &nbsp;&nbsp;&nbsp;&nbsp;padding:&nbsp;0;</div>
-<div class="pre"><a id="l25" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l25" class="linenr">  25</a> &nbsp;&nbsp;&nbsp;&nbsp;padding-top:&nbsp;0.5em;</div>
-<div class="pre"><a id="l26" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l26" class="linenr">  26</a> &nbsp;&nbsp;&nbsp;&nbsp;border:&nbsp;0;</div>
-<div class="pre"><a id="l27" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l27" class="linenr">  27</a> &nbsp;&nbsp;&nbsp;&nbsp;width:&nbsp;16em;</div>
-<div class="pre"><a id="l28" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l28" class="linenr">  28</a> </div>
-<div class="pre"><a id="l29" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l29" class="linenr">  29</a> &nbsp;&nbsp;&nbsp;&nbsp;background-color:&nbsp;#f9f9f9;</div>
-<div class="pre"><a id="l30" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l30" class="linenr">  30</a> &nbsp;&nbsp;&nbsp;&nbsp;margin-right:1em;</div>
-<div class="pre"><a id="l31" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l31" class="linenr">  31</a> }</div>
-<div class="pre"><a id="l32" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l32" class="linenr">  32</a> </div>
-<div class="pre"><a id="l33" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l33" class="linenr">  33</a> div.content&nbsp;{</div>
-<div class="pre"><a id="l34" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l34" class="linenr">  34</a> &nbsp;&nbsp;&nbsp;&nbsp;margin:&nbsp;0;</div>
-<div class="pre"><a id="l35" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l35" class="linenr">  35</a> &nbsp;&nbsp;&nbsp;&nbsp;padding:&nbsp;0;</div>
-<div class="pre"><a id="l36" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l36" class="linenr">  36</a> </div>
-<div class="pre"><a id="l37" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l37" class="linenr">  37</a> &nbsp;&nbsp;&nbsp;&nbsp;/*&nbsp;won't&nbsp;match&nbsp;if&nbsp;font&nbsp;is&nbsp;smaller&nbsp;in&nbsp;toc&nbsp;*/</div>
-<div class="pre"><a id="l38" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l38" class="linenr">  38</a> &nbsp;&nbsp;&nbsp;&nbsp;border-left:&nbsp;16em&nbsp;solid&nbsp;#f9f9f9;</div>
-<div class="pre"><a id="l39" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l39" class="linenr">  39</a> &nbsp;&nbsp;&nbsp;&nbsp;padding-left:&nbsp;1em;</div>
-<div class="pre"><a id="l40" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l40" class="linenr">  40</a> }</div>
-<div class="pre"><a id="l41" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l41" class="linenr">  41</a> </div>
-<div class="pre"><a id="l42" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l42" class="linenr">  42</a> div.content:after&nbsp;{</div>
-<div class="pre"><a id="l43" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l43" class="linenr">  43</a> &nbsp;&nbsp;&nbsp;&nbsp;content:'&nbsp;';</div>
-<div class="pre"><a id="l44" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l44" class="linenr">  44</a> &nbsp;&nbsp;&nbsp;&nbsp;clear:both;</div>
-<div class="pre"><a id="l45" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l45" class="linenr">  45</a> &nbsp;&nbsp;&nbsp;&nbsp;display:block;</div>
-<div class="pre"><a id="l46" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l46" class="linenr">  46</a> &nbsp;&nbsp;&nbsp;&nbsp;height:0;</div>
-<div class="pre"><a id="l47" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l47" class="linenr">  47</a> &nbsp;&nbsp;&nbsp;&nbsp;overflow:hidden</div>
-<div class="pre"><a id="l48" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l48" class="linenr">  48</a> }</div>
-<div class="pre"><a id="l49" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l49" class="linenr">  49</a> </div>
-<div class="pre"><a id="l50" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l50" class="linenr">  50</a> div.footer&nbsp;{</div>
-<div class="pre"><a id="l51" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l51" class="linenr">  51</a> &nbsp;&nbsp;&nbsp;&nbsp;clear:left;</div>
-<div class="pre"><a id="l52" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l52" class="linenr">  52</a> &nbsp;&nbsp;&nbsp;&nbsp;padding:&nbsp;0.5em;</div>
-<div class="pre"><a id="l53" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l53" class="linenr">  53</a> &nbsp;&nbsp;&nbsp;&nbsp;/*&nbsp;background-color:&nbsp;#f9f9f9;</div>
-<div class="pre"><a id="l54" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l54" class="linenr">  54</a> &nbsp;&nbsp;&nbsp;&nbsp;border:&nbsp;1px&nbsp;solid&nbsp;#aaaaaa;&nbsp;*/</div>
-<div class="pre"><a id="l55" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l55" class="linenr">  55</a> &nbsp;&nbsp;&nbsp;&nbsp;font-size:&nbsp;80%;</div>
-<div class="pre"><a id="l56" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l56" class="linenr">  56</a> &nbsp;&nbsp;&nbsp;&nbsp;margin:&nbsp;0;</div>
-<div class="pre"><a id="l57" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l57" class="linenr">  57</a> }</div>
-<div class="pre"><a id="l58" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l58" class="linenr">  58</a> </div>
-<div class="pre"><a id="l59" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l59" class="linenr">  59</a> div.toc&nbsp;ul&nbsp;{</div>
-<div class="pre"><a id="l60" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l60" class="linenr">  60</a> &nbsp;&nbsp;&nbsp;&nbsp;list-style:&nbsp;none;</div>
-<div class="pre"><a id="l61" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l61" class="linenr">  61</a> &nbsp;&nbsp;&nbsp;&nbsp;padding:&nbsp;0;</div>
-<div class="pre"><a id="l62" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l62" class="linenr">  62</a> &nbsp;&nbsp;&nbsp;&nbsp;margin:&nbsp;0;</div>
-<div class="pre"><a id="l63" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l63" class="linenr">  63</a> }</div>
-<div class="pre"><a id="l64" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l64" class="linenr">  64</a> </div>
-<div class="pre"><a id="l65" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l65" class="linenr">  65</a> div.toc&nbsp;li&nbsp;ul&nbsp;a,&nbsp;li&nbsp;ul&nbsp;span.currentlink</div>
-<div class="pre"><a id="l66" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l66" class="linenr">  66</a> {</div>
-<div class="pre"><a id="l67" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l67" class="linenr">  67</a> &nbsp;&nbsp;&nbsp;&nbsp;font-weight:&nbsp;normal;</div>
-<div class="pre"><a id="l68" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l68" class="linenr">  68</a> &nbsp;&nbsp;&nbsp;&nbsp;font-size:&nbsp;90%;</div>
-<div class="pre"><a id="l69" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l69" class="linenr">  69</a> &nbsp;&nbsp;&nbsp;&nbsp;padding-left:&nbsp;2em;</div>
-<div class="pre"><a id="l70" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l70" class="linenr">  70</a> }</div>
-<div class="pre"><a id="l71" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l71" class="linenr">  71</a> </div>
-<div class="pre"><a id="l72" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l72" class="linenr">  72</a> div.toc&nbsp;a,&nbsp;span.currentlink{</div>
-<div class="pre"><a id="l73" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l73" class="linenr">  73</a> &nbsp;&nbsp;&nbsp;&nbsp;display:block;</div>
-<div class="pre"><a id="l74" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l74" class="linenr">  74</a> &nbsp;&nbsp;&nbsp;&nbsp;text-decoration:&nbsp;none;</div>
-<div class="pre"><a id="l75" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l75" class="linenr">  75</a> &nbsp;&nbsp;&nbsp;&nbsp;padding-left:&nbsp;0.5em;</div>
-<div class="pre"><a id="l76" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l76" class="linenr">  76</a> &nbsp;&nbsp;&nbsp;&nbsp;color:&nbsp;#0000aa;</div>
-<div class="pre"><a id="l77" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l77" class="linenr">  77</a> }</div>
-<div class="pre"><a id="l78" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l78" class="linenr">  78</a> </div>
-<div class="pre"><a id="l79" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l79" class="linenr">  79</a> span.currentlink&nbsp;{</div>
-<div class="pre"><a id="l80" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l80" class="linenr">  80</a> &nbsp;&nbsp;&nbsp;&nbsp;text-decoration:&nbsp;none;</div>
-<div class="pre"><a id="l81" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l81" class="linenr">  81</a> &nbsp;&nbsp;&nbsp;&nbsp;background-color:&nbsp;#aaaaf9;</div>
-<div class="pre"><a id="l82" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l82" class="linenr">  82</a> }</div>
-<div class="pre"><a id="l83" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l83" class="linenr">  83</a> </div>
-<div class="pre"><a id="l84" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l84" class="linenr">  84</a> div.toc&nbsp;a:visited&nbsp;{</div>
-<div class="pre"><a id="l85" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l85" class="linenr">  85</a> &nbsp;&nbsp;&nbsp;&nbsp;color:&nbsp;#0000aa;</div>
-<div class="pre"><a id="l86" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l86" class="linenr">  86</a> }</div>
-<div class="pre"><a id="l87" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l87" class="linenr">  87</a> </div>
-<div class="pre"><a id="l88" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l88" class="linenr">  88</a> div.toc&nbsp;a:hover&nbsp;{</div>
-<div class="pre"><a id="l89" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l89" class="linenr">  89</a> &nbsp;&nbsp;&nbsp;&nbsp;background-color:&nbsp;#f9f9aa;</div>
-<div class="pre"><a id="l90" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l90" class="linenr">  90</a> }</div>
-<div class="pre"><a id="l91" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l91" class="linenr">  91</a> </div>
-<div class="pre"><a id="l92" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l92" class="linenr">  92</a> .programlisting,&nbsp;.screen&nbsp;{</div>
-<div class="pre"><a id="l93" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l93" class="linenr">  93</a> &nbsp;&nbsp;&nbsp;&nbsp;margin:&nbsp;0;</div>
-<div class="pre"><a id="l94" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l94" class="linenr">  94</a> &nbsp;&nbsp;&nbsp;&nbsp;border:&nbsp;1px&nbsp;solid&nbsp;#aaaaaa;</div>
-<div class="pre"><a id="l95" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l95" class="linenr">  95</a> &nbsp;&nbsp;&nbsp;&nbsp;background-color:&nbsp;#f9f9f9;</div>
-<div class="pre"><a id="l96" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l96" class="linenr">  96</a> &nbsp;&nbsp;&nbsp;&nbsp;padding:&nbsp;0.17em;</div>
-<div class="pre"><a id="l97" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l97" class="linenr">  97</a> &nbsp;&nbsp;&nbsp;&nbsp;margin:&nbsp;1em;</div>
-<div class="pre"><a id="l98" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l98" class="linenr">  98</a> &nbsp;&nbsp;&nbsp;&nbsp;margin-right:&nbsp;3em;</div>
-<div class="pre"><a id="l99" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l99" class="linenr">  99</a> }</div>
-<div class="pre"><a id="l100" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l100" class="linenr"> 100</a> </div>
-<div class="pre"><a id="l101" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l101" class="linenr"> 101</a> .parameter&nbsp;{</div>
-<div class="pre"><a id="l102" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l102" class="linenr"> 102</a> &nbsp;&nbsp;&nbsp;&nbsp;font-style:&nbsp;italic;</div>
-<div class="pre"><a id="l103" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l103" class="linenr"> 103</a> }</div>
-<div class="pre"><a id="l104" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l104" class="linenr"> 104</a> </div>
-<div class="pre"><a id="l105" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l105" class="linenr"> 105</a> h1,&nbsp;h2&nbsp;{</div>
-<div class="pre"><a id="l106" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l106" class="linenr"> 106</a> &nbsp;&nbsp;&nbsp;&nbsp;padding-top:&nbsp;0.5em;</div>
-<div class="pre"><a id="l107" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l107" class="linenr"> 107</a> &nbsp;&nbsp;&nbsp;&nbsp;padding-bottom:&nbsp;0.17em;</div>
-<div class="pre"><a id="l108" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l108" class="linenr"> 108</a> &nbsp;&nbsp;&nbsp;&nbsp;margin:&nbsp;0;</div>
-<div class="pre"><a id="l109" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l109" class="linenr"> 109</a> &nbsp;&nbsp;&nbsp;&nbsp;font-weight:&nbsp;normal;</div>
-<div class="pre"><a id="l110" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l110" class="linenr"> 110</a> &nbsp;&nbsp;&nbsp;&nbsp;color:&nbsp;black;</div>
-<div class="pre"><a id="l111" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l111" class="linenr"> 111</a> &nbsp;&nbsp;&nbsp;&nbsp;border-bottom:&nbsp;1px&nbsp;solid&nbsp;#aaaaaa;</div>
-<div class="pre"><a id="l112" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l112" class="linenr"> 112</a> }</div>
-<div class="pre"><a id="l113" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l113" class="linenr"> 113</a> </div>
-<div class="pre"><a id="l114" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l114" class="linenr"> 114</a> h1&nbsp;{</div>
-<div class="pre"><a id="l115" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l115" class="linenr"> 115</a> &nbsp;&nbsp;&nbsp;&nbsp;font-size:&nbsp;188%;</div>
-<div class="pre"><a id="l116" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l116" class="linenr"> 116</a> }</div>
-<div class="pre"><a id="l117" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l117" class="linenr"> 117</a> </div>
-<div class="pre"><a id="l118" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l118" class="linenr"> 118</a> div.chapter&nbsp;h2&nbsp;{</div>
-<div class="pre"><a id="l119" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l119" class="linenr"> 119</a> &nbsp;&nbsp;&nbsp;&nbsp;font-size:&nbsp;188%;</div>
-<div class="pre"><a id="l120" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l120" class="linenr"> 120</a> }</div>
-<div class="pre"><a id="l121" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l121" class="linenr"> 121</a> </div>
-<div class="pre"><a id="l122" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l122" class="linenr"> 122</a> div.section&nbsp;h2&nbsp;{</div>
-<div class="pre"><a id="l123" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l123" class="linenr"> 123</a> &nbsp;&nbsp;&nbsp;&nbsp;font-size:&nbsp;150%;</div>
-<div class="pre"><a id="l124" href="http://repo.or.cz/w/gitmagic.git/blob/HEAD:/book.css#l124" class="linenr"> 124</a> }</div>
-</div><div class="page_footer">
-<div class="page_footer_text">A guide to using Git</div>
-<a class="rss_logo" title="history of book.css RSS feed" href="http://repo.or.cz/w/gitmagic.git/rss?f=book.css">RSS</a>
-<a class="rss_logo" title="history of book.css Atom feed" href="http://repo.or.cz/w/gitmagic.git/atom?f=book.css">Atom</a>
-</div>
-</body>
-</html>
+
+tt, code, pre, .type {
+    font-family: andale mono, courier new, courier, monospace;
+    font-size: 90%;
+}
+
+pre {
+    color: #0000aa;
+}
+
+ul li p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Based on http://phrogz.net/CSS/columns3.html */
+div.toc {
+    float: left;
+    margin: 0;
+    padding: 0;
+    padding-top: 0.5em;
+    border: 0;
+    width: 16em;
+
+    background-color: #f9f9f9;
+    margin-right:1em;
+}
+
+div.content {
+    margin: 0;
+    padding: 0;
+
+    /* won't match if font is smaller in toc */
+    border-left: 16em solid #f9f9f9;
+    padding-left: 1em;
+}
+
+div.content:after {
+    content:' ';
+    clear:both;
+    display:block;
+    height:0;
+    overflow:hidden
+}
+
+div.footer {
+    clear:left;
+    padding: 0.5em;
+    /* background-color: #f9f9f9;
+    border: 1px solid #aaaaaa; */
+    font-size: 80%;
+    margin: 0;
+}
+
+div.toc ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+div.toc li ul a, li ul span.currentlink
+{
+    font-weight: normal;
+    font-size: 90%;
+    padding-left: 2em;
+}
+
+div.toc a, span.currentlink{
+    display:block;
+    text-decoration: none;
+    padding-left: 0.5em;
+    color: #0000aa;
+}
+
+span.currentlink {
+    text-decoration: none;
+    background-color: #aaaaf9;
+}
+
+div.toc a:visited {
+    color: #0000aa;
+}
+
+div.toc a:hover {
+    background-color: #f9f9aa;
+}
+
+.programlisting, .screen {
+    margin: 0;
+    border: 1px solid #aaaaaa;
+    background-color: #f9f9f9;
+    padding: 0.17em;
+    margin: 1em;
+    margin-right: 3em;
+}
+
+.parameter {
+    font-style: italic;
+}
+
+h1, h2 {
+    padding-top: 0.5em;
+    padding-bottom: 0.17em;
+    margin: 0;
+    font-weight: normal;
+    color: black;
+    border-bottom: 1px solid #aaaaaa;
+}
+
+h1 {
+    font-size: 188%;
+}
+
+div.chapter h2 {
+    font-size: 188%;
+}
+
+div.section h2 {
+    font-size: 150%;
+}

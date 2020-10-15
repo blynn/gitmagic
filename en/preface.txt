@@ -16,6 +16,7 @@ Rather than go into details, we provide rough instructions for particular effect
  - link:/~blynn/gitmagic/intl/fr/[French]: by Alexandre Garel, Paul Gaborit, and Nicolas Deram. Also hosted at http://tutoriels.itaapy.com/[itaapy].
  - link:/~blynn/gitmagic/intl/de/[German]: by Benjamin Bellee and Armin Stebich; also http://gitmagic.lordofbikes.de/[hosted on Armin's website].
  - link:/~blynn/gitmagic/intl/it/[Italian]: by Mattia Rigotti.
+ - link:/~blynn/gitmagic/intl/ko/[Korean]: by Jung-Ho (John) Han; also https://sites.google.com/site/drinkhanjohn/useful-links/[hosted on John's website].
  - link:/~blynn/gitmagic/intl/pl/[Polish]: by Damian Michna.
  - link:/~blynn/gitmagic/intl/pt_br/[Brazilian Portuguese]: by José Inácio Serafini and Leonardo Siqueira Rodrigues.
  - link:/~blynn/gitmagic/intl/ru/[Russian]: by Tikhon Tarnavsky, Mikhail Dymskov, and others.
@@ -27,6 +28,7 @@ Rather than go into details, we provide rough instructions for particular effect
 
  - link:book.html[Single webpage]: barebones HTML, with no CSS.
  - link:book.pdf[PDF file]: printer-friendly.
+ - link:book.epub[EPUB file]: E-reader-friendly.
  - http://packages.debian.org/gitmagic[Debian package], http://packages.ubuntu.com/gitmagic[Ubuntu package]: get a fast and local copy of this site. Handy http://csdcf.stanford.edu/status/[when this server is offline].
  - http://www.amazon.com/Git-Magic-Ben-Lynn/dp/1451523343/[Physical book [Amazon.com]]: 64 pages, 15.24cm x 22.86cm, black and white. Handy when there is no electricity.
 
@@ -41,7 +43,6 @@ Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael B
 François Marier maintains the Debian package originally created by Daniel
 Baumann.
 
-John Hinnegan bought the http://www.gitmagic.com/[gitmagic.com] domain.
 
 My gratitude goes to many others for your support and praise. I'm tempted to
 quote you here, but it might raise expectations to ridiculous heights.
@@ -58,8 +59,6 @@ repository, and can be obtained by typing:
 or from one of the mirrors:
 
  $ git clone git://github.com/blynn/gitmagic.git
- $ git clone git://gitorious.org/gitmagic/mainline.git
- $ git clone https://code.google.com/p/gitmagic/
  $ git clone git://git.assembla.com/gitmagic.git
  $ git clone git@bitbucket.org:blynn/gitmagic.git
 

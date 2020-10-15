@@ -18,7 +18,7 @@ Bạn vừa mới commit, nhưng lại ước rằng mình đã gõ những dòn
 
  $ git commit --amend
 
-để thay đổi chú thích cuối cùng. Bạn giật mình vì quên thêm các tệp tin vào? Chạy lệnh *git add* để
+để thay đổi chú thích cuối cùng. Bạn giật mình vì quên thêm các tập tin vào? Chạy lệnh *git add* để
 thêm nó vào, và sau đó lại chạy lệnh ở trên.
 
 Bạn muốn thêm vài chỉnh sửa vào lần cuối mình đã commit ư? Thế thì cứ sửa chúng đi và sau đó chạy lệnh:
@@ -97,11 +97,11 @@ một bản sao lưu dự phòng bằng lệnh *git clone*.
 
 Thỉnh thoảng, bạn muốn việc quản lý mã nguồn giống việc người ta sơn vẽ chân dung một
 con người, tẩy xóa chúng từ lịch sử như theo ý của Stalinesque. Ví dụ,
-giả sử chúng ta có ý định phát hành dự án, nhưng lại liên đới đến một tệp tin mà nó phải được giữ bí mật
-vì lý do nào đó. Chẳng hạn như tôi đã quên khi ghi lại số thẻ tín dụng vào trong một tệp tin
-văn bản và ngẫu nhiên nó được thêm vào trong dự án. Việc xóa tệp tin này là
+giả sử chúng ta có ý định phát hành dự án, nhưng lại liên đới đến một tập tin mà nó phải được giữ bí mật
+vì lý do nào đó. Chẳng hạn như tôi đã quên khi ghi lại số thẻ tín dụng vào trong một tập tin
+văn bản và ngẫu nhiên nó được thêm vào trong dự án. Việc xóa tập tin này là
 chưa đủ, bởi vì ta có thể đọc nó từ lần commit cũ. Chúng ta phải gỡ bỏ
-tệp tin này từ tất cả các lần đã commit:
+tập tin này từ tất cả các lần đã commit:
 
  $ git filter-branch --tree-filter 'rm top/secret/file' HEAD
 
@@ -123,7 +123,7 @@ riêng để mà tạo ra một lịch sử cho Git từ ban đầu. Thông thư
 lệnh này là một nhóm lệnh tổ hợp với nhau và chỉ chạy một lần, di chuyển một dự án chỉ bằng
 một lệnh đơn.
 
-Dưới đây là một ví dụ, dán danh sách theo sau đâu vào một tệp tin tạm thời nào đó, chẳng hạn như là `/tmp/history`:
+Dưới đây là một ví dụ, dán danh sách theo sau đâu vào một tập tin tạm thời nào đó, chẳng hạn như là `/tmp/history`:
 ----------------------------------
 commit refs/heads/master
 committer Alice <alice@example.com> Thu, 01 Jan 1970 00:00:00 +0000
@@ -160,7 +160,7 @@ EOT
 
 ----------------------------------
 
-Thế thì tạo một kho Git từ thư mục chứa các tệp tin tạm thời này bằng cách gõ:
+Thế thì tạo một kho Git từ thư mục chứa các tập tin tạm thời này bằng cách gõ:
 
  $ mkdir project; cd project; git init
  $ git fast-import --date-format=rfc2822 < /tmp/history
@@ -216,7 +216,7 @@ Giống như các hệ thống quản lý mã nguồn khác, Git cũng có lện
 
  $ git blame bug.c
 
-lệnh này chú thích tất cả các dòng có trong tệp tin được chỉ ra cho thấy ai là người cuối cùng sửa nó, và là khi nào. Không giống các hệ thống quản lý mã nguồn khác, hành động này hoạt động không cần có mạng, việc đọc chỉ đơn thuần từ ổ đĩa của máy tính cá nhân.
+lệnh này chú thích tất cả các dòng có trong tập tin được chỉ ra cho thấy ai là người cuối cùng sửa nó, và là khi nào. Không giống các hệ thống quản lý mã nguồn khác, hành động này hoạt động không cần có mạng, việc đọc chỉ đơn thuần từ ổ đĩa của máy tính cá nhân.
 
 === Kinh Nghiệm Riêng ===
 
@@ -224,7 +224,7 @@ Trong một hệ thống quản lý mã nguồn tập trung, thay đổi lịch 
 khó khăn, và chỉ làm được thế nếu đó là người quản trị. Việc nhân bản, tạo nhánh và
 trộn không thể thiếu việc truyền thông qua mạng. Cũng như thế với các tác vụ cơ bản khác
 như là duyệt lịch sử, hay là commit một thay đổi. Trong một số hệ thống khác, người dùng
-yêu cầu có kết nối mạng chỉ để xem các thay đổi của họ hay mở một tệp tin
+yêu cầu có kết nối mạng chỉ để xem các thay đổi của họ hay mở một tập tin
 để biên tập.
 
 Hệ thống tập trung không cho phép làm việc mà không có mạng, và đòi hỏi cơ sở hạ tầng mạng máy tính
@@ -258,3 +258,4 @@ nhiều cá nhân riêng lẻ có thể chiếm dụng nhiều lưu lượng m�
 khác nhau để cố gắng giảm thiểu sự chậm trễ có thể xảy ra trong tương lai. Hậu quả cuối cùng là
 sự quá tải quá mức, chính việc vô tình ủng hộ việc tiêu dùng cá nhân như thế đã tiêu tốn nhiều lưu lượng mạng hơn
 và sau đó nó làm cho việc tắc nghẽn càng lúc càng trở nên tồi tệ hơn.
+

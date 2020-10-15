@@ -80,10 +80,10 @@ Was, wenn Du am Ende die temporären Änderungen sichern willst? Einfach:
 
  $ git checkout -b schmutzig
 
-und 'commite' bevor du auf den 'Master Branch' zurückschaltest. Wann immer
-du zu deiner Schmutzarbeit zurückkehren willst, tippe einfach:
+und 'commite', bevor Du auf den 'Master Branch' zurückschaltest. Wann immer
+Du zu Deiner Schmutzarbeit zurückkehren willst, tippe einfach:
 
- $ git checkout schnmutzig
+ $ git checkout schmutzig
 
 Wir sind mit dieser Anweisung schon in einem früheren Kapitel in Berührung
 gekommen, als wir das Laden alter Stände besprochen haben. Nun können wir
@@ -92,7 +92,7 @@ Stand, aber wir müssen den 'Master Branch' verlassen. Jeder 'Commit' ab
 jetzt führt Deine Dateien auf einen anderen Weg, dem wir später noch einen
 Namen geben können.
 
-Mit anderen Worten, nach dem Abrufen eines alten Stands versetzt dich Git
+Mit anderen Worten, nach dem Abrufen eines alten Stands versetzt Dich Git
 automatisch in einen neuen, unbenannten 'Branch', der mit *git checkout -b*
 benannt und gesichert werden kann.
 
@@ -174,15 +174,15 @@ geprüft wurde, bevor Du mit dem zweiten Teil anfangen kannst.
 
 Dank des schmerzlosen 'Branchen' und 'Mergen' können wir die Regeln beugen
 und am Teil II arbeiten, bevor Teil I offiziell freigegeben
-wurde. Angenommen du hast Teil I 'commitet' und zur Prüfung
-eingereicht. Sagen wir du bist im `master` 'Branch'. Dann 'branche' zu Teil
+wurde. Angenommen Du hast Teil I 'commitet' und zur Prüfung
+eingereicht. Sagen wir, Du bist im `master` 'Branch'. Dann 'branche' zu Teil
 II:
 
  $ git checkout -b teil2
 
-Du arbeitest also an Teil II und 'commitest' deine Änderungen
+Du arbeitest also an Teil II und 'commitest' Deine Änderungen
 regelmäßig. Irren ist menschlich und so kann es vorkommen, dass Du zurück zu
-Teil I willst, um einen Fehler zu beheben. Wenn du Glück hast oder sehr gut
+Teil I willst, um einen Fehler zu beheben. Wenn Du Glück hast oder sehr gut
 bist, kannst Du die nächsten Zeilen überspringen.
 
  $ git checkout master  # Gehe zurück zu Teil I.
@@ -227,7 +227,7 @@ hast. Beginne ein paar 'Branches':
   $ git checkout -b mischmasch  # Erzeuge und wechsle in den Branch zum Arbeiten.
 
 Fahre fort, alles zu bearbeiten: Behebe Fehler, füge Funktionen hinzu,
-erstelle temporären Code und so weiter und 'commite' deine Änderungen
+erstelle temporären Code und so weiter und 'commite' Deine Änderungen
 oft. Dann:
 
   $ git checkout bereinigt
@@ -266,8 +266,8 @@ Stand zurück kannst, um eine vorrangige Fehlerbehebung zu machen oder
 irgendetwas anderes.
 
 Es ist vergleichbar mit dem kurzzeitigen Umschalten des Fernsehkanals, um zu
-sehen was auf dem anderen Kanal los ist. Doch anstelle ein paar Knöpfe zu
-drücken, machst du 'create', 'check out', 'merge' und 'delete' von
+sehen, was auf dem anderen Kanal los ist. Doch anstelle ein paar Knöpfe zu
+drücken, machst du 'create', 'checkout', 'merge' und 'delete' von
 temporären 'Branches'. Glücklicherweise hat Git eine Abkürzung dafür, die
 genauso komfortabel ist wie eine Fernbedienung:
 
@@ -286,10 +286,10 @@ Du kannst mehrere 'stashes' haben und diese unterschiedlich handhaben. Siehe
 *git help stash*. Wie Du Dir vielleicht schon gedacht hast, verwendet Git
 'Branches' im Hintergrund, um diesen Zaubertrick durchzuführen.
 
-=== Arbeite wie Du willst ===
+=== Arbeite, wie Du willst ===
 
-Du magst Dich fragen, ob 'Branches' diesen Aufwand Wert sind. Immerhin sind
-'Clone' fast genauso schnell und Du kannst mit *cd* anstelle von
+Du magst Dich fragen, ob 'Branches' diesen Aufwand wert sind. Immerhin sind
+'Clone' fast genauso schnell, und Du kannst mit *cd* anstelle von
 esoterischen Git Befehlen zwischen ihnen wechseln.
 
 Betrachten wir Webbrowser. Warum mehrere Tabs unterstützen und mehrere
@@ -298,7 +298,7 @@ Anwender möchten nur ein Browserfenster geöffnet haben und benutzen Tabs für
 unterschiedliche Webseiten. Andere bestehen auf dem anderen Extrem: mehrere
 Fenster, ganz ohne Tabs. Wieder andere bevorzugen irgendetwas dazwischen.
 
-'Branchen' ist wie Tabs für dein Arbeitsverzeichnis und 'Clonen' ist wie das
+'Branchen' ist wie Tabs für dein Arbeitsverzeichnis, und 'Clonen' ist wie das
 Öffnen eines neuen Browserfenster. Diese Operationen sind schnell und lokal,
 also warum nicht damit experimentieren, um die beste Kombination für sich
 selbst zu finden? Git lässt Dich genauso arbeiten, wie Du es willst.

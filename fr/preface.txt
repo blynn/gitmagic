@@ -23,12 +23,11 @@ recettes pour répondre à vos besoins.
 
 .Traductions
 
- - http://docs.google.com/View?id=dfwthj68_675gz3bw8kj[Chinois
+ - link:/~blynn/gitmagic/intl/zh_cn/[Chinois
    (Simplifié)]&#160;: par JunJie, Meng et JiangWei.
 
  - link:/~blynn/gitmagic/intl/fr/[Française]&#160;: par Alexandre Garel, Paul
-   Gaborit et Nicolas Deram. Hébergé aussi chez
-   http://tutoriels.itaapy.com/[itaapy].
+   Gaborit et Nicolas Deram.
 
  - link:/~blynn/gitmagic/intl/de/[Allemande]&#160;: par Benjamin Bellee et Armin
    Stebich. Hébergé aussi sur http://gitmagic.lordofbikes.de/[le site web

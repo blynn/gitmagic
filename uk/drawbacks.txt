@@ -14,7 +14,7 @@ Git на Microsoft Windows може бути громіздким:
 
 - http://cygwin.com/[Cygwin], Linux-подібне середовище для Windows, яке містить http://cygwin.com/packages/git/[порт Git на Windows].
 
-- http://code.google.com/p/msysgit/[Git на MSys], варіант, що вимагає мінімальної рантайм підтримки, хоча деякі команди потребують доопрацювання.
+- https://gitforwindows.org/[Git для Windows], варіант, що вимагає мінімальної рантайм підтримки, хоча деякі команди потребують доопрацювання.
 
 === Незв'язані файли ===
 

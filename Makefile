@@ -1,21 +1,16 @@
 # The availaible translation languages.
 # When starting a new translation, add a language code here.
 #
-# Vietnamese PDF generation fails, since DocBook lacks Vietnamese support.
-# I hope to work around this, or use another tool to generate a PDF from
-# AsciiDoc.
-#
-# For now, I've uploaded a PDF to the website; it was supplied by
-# Trần Ngọc Quân who used OpenOffice to convert HTML to PDF.
-TRANSLATIONS = de es fr pt_br ru uk vi zh_cn zh_tw it pl
+
+TRANSLATIONS = de es fr ko pt_br ru uk vi zh_cn zh_tw it pl
 LANGS = en $(TRANSLATIONS)
 SHELL := /bin/bash
 
-.PHONY: all clean sync public $(LANGS)
+.PHONY: all clean sync public distclean $(LANGS)
 
 all: $(LANGS)
 
-$(LANGS): %: book-% book-%/default.css book-%.html book-%.pdf
+$(LANGS): %: book-% book-%/default.css book-%.html book-%.pdf book-%.epub
 
 # The book consists of these text files in the following order:
 
@@ -62,19 +57,29 @@ $(foreach l,$(LANGS),book-$(l)/default.css): book-%/default.css: book.css
 	rsync book.css book-$*/default.css
 
 $(foreach l,$(LANGS),book-$(l).html): book-%.html: book-%.xml
-	xmlto -m custom-nochunks.xsl html-nochunks $^
-	-tidy -utf8 -imq $@
+	pandoc -s -f docbook -t html5 -o $@ $^
 
-# Set SP_ENCODING to avoid "non SGML character" errors.
-# Can also do SP_ENCODING="UTF-8".
 $(foreach l,$(LANGS),book-$(l).pdf): book-%.pdf: book-%.xml
-	if [ $* = zh_cn -o $* = zh_tw ]; then \
-	if ! [ -f fop-$*.xsl ]; then wget -q http://bestrecords.net/fop/fop-$*.xsl; fi; \
-	if ! [ -f fop-$*.xconf ]; then wget -q http://bestrecords.net/fop/fop-$*.xconf; fi; \
-	xmlto -m fop-$*.xsl --with-fop -p "-c `pwd`/fop-$*.xconf" pdf book-$*.xml ;\
-	else \
-	SP_ENCODING="XML" docbook2pdf book-$*.xml; \
-	fi
+	pandoc -s -f docbook -o $@  --pdf-engine=xelatex $^
+
+book-ru.pdf: book-ru.xml
+	pandoc -s -f docbook -o $@ --pdf-engine xelatex -V mainfont='DejaVuSansMono' $^
+
+book-uk.pdf: book-uk.xml
+	pandoc -s -f docbook -o $@ --pdf-engine xelatex -V mainfont='DejaVuSansMono' $^
+
+book-ko.pdf: book-ko.xml
+	pandoc -s -f docbook -o $@ --pdf-engine xelatex -V CJKmainfont='WenQuanYi Micro Hei Mono' $^
+
+book-zh_cn.pdf: book-zh_cn.xml
+	pandoc -s -f docbook -o $@ --pdf-engine xelatex -V CJKmainfont='WenQuanYi Micro Hei Mono' $^
+
+book-zh_tw.pdf: book-zh_tw.xml
+	pandoc -s -f docbook -o $@ --pdf-engine xelatex -V CJKmainfont='WenQuanYi Micro Hei Mono' $^
+
+$(foreach l,$(LANGS),book-$(l).epub): book-%.epub: book-%.xml
+	pandoc -s -f docbook -o $@ $^
 
 clean:
-	-rm -rf $(foreach l,$(LANGS),book-$(l).pdf book-$(l).xml book-$(l).html book-$(l))
+	-rm -rf $(foreach l,$(LANGS),book-$(l).pdf book-$(l).xml book-$(l).html book-$(l)) \
+	*.fo *.log *.out *.aux conf

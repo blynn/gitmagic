@@ -12,7 +12,7 @@ auch mit deinem 'Clone' tun.
 
 === Computer synchronisieren ===
 
-Es ist akzeptabel, für Datensicherungen und einfaches Synchronisieren, mit
+Es ist akzeptabel, für Datensicherungen und einfaches Synchronisieren mit
 'tarball' Archiven oder *rsync* zu arbeiten. Aber manchmal arbeite ich an
 meinem Laptop, dann an meinem Desktop-PC, und die beiden haben sich
 inzwischen nicht austauschen können.
@@ -30,12 +30,12 @@ jetzt an wird
 
 den Zustand der Dateien des anderen Computer auf den übertragen, an dem Du
 gerade arbeitest. Solltest Du kürzlich konkurrierende Änderungen an der
-selben Datei vorgenommen haben, lässt Git Dich das wissen und musst erneut
+selben Datei vorgenommen haben, lässt Git Dich das wissen, und Du musst erneut
 'commiten', nachdem Du die Konflikte aufgelöst hast.
 
 === Klassische Quellcodeverwaltung ===
 
-Erstelle ein Git 'Repository' für deine Dateien:
+Erstelle ein Git 'Repository' für Deine Dateien:
 
  $ git init
  $ git add .
@@ -61,7 +61,7 @@ Website aus.
 
  $ git push zentraler.server/pfad/zu/proj.git HEAD
 
-Um die Quellcodes abzurufen gibt ein Entwickler folgendes ein:
+Um die Quellcodes abzurufen, gibt ein Entwickler folgendes ein:
 
  $ git clone zentraler.server/pfad/zu/proj.git
 
@@ -83,7 +83,7 @@ Um die lokalen Änderungen in das zentrale 'Repository' zu übertragen:
  $ git push
 
 Wenn inzwischen neue Änderungen von anderen Entwicklern beim Hauptserver
-eingegangen sind, schlägt dein 'push' fehl. Aktualisiere das lokale
+eingegangen sind, schlägt Dein 'push' fehl. Aktualisiere das lokale
 'Repository' erneut mit 'pull', löse eventuell aufgetretene
 'Merge'-Konflikte und versuche es nochmal.
 
@@ -122,7 +122,7 @@ der nicht viel tut außer Daten zu verbreiten. Die Entwicklung findet in den
 'Clonen' statt, so kann das Heim-'Repository' ohne Arbeitsverzeichnis
 auskommen.
 
-Viele Git Befehle funktionieren nicht in 'bare Repositories'. Es sei denn
+Viele Git Befehle funktionieren nicht in 'bare Repositories'. Es sei denn,
 die `GIT_DIR` Umgebungsvariable wird auf das Arbeitsverzeichnis gesetzt,
 oder die `--bare` Option wird übergeben.
 
@@ -143,7 +143,7 @@ Wie auch immer, abgesehen von diesem Fall, raten wir vom 'Pushen' in ein
 Verwirrungen entstehen.
 
 Kurzum, während du lernst mit Git umzugehen, 'pushe' nur, wenn das Ziel ein
-'bare Repository' ist; andernfalls benutze 'pull'.
+'bare Repository' ist, andernfalls benutze 'pull'.
 
 === 'Fork' eines Projekts ===
 
@@ -152,7 +152,7 @@ besser? Dann mache folgendes auf deinem Server:
 
  $ git clone git://haupt.server/pfad/zu/dateien
 
-Dann erzähle jedem von Deiner 'Fork' des Projekts auf Deinem Server.
+Dann erzähle jedem von Deinem 'Fork' des Projekts auf Deinem Server.
 
 Zu jedem späteren Zeitpunkt kannst du die Änderungen des Originalprojekts
 'mergen' mit: 
@@ -180,8 +180,8 @@ Zeitungskopie zu manipulieren.
 
 === Multitasking mit Lichtgeschwindigkeit ===
 
-Nehmen wir an du willst parallel an mehreren Funktionen arbeiten. Dann
-'commite' dein Projekt und gib ein:
+Nehmen wir an Du willst parallel an mehreren Funktionen arbeiten. Dann
+'commite' Dein Projekt und gib ein:
 
  $ git clone . /irgendein/neuer/ordner
 

@@ -10,14 +10,14 @@ Versionsverwaltung].
 Ich spiele Computerspiele schon fast mein ganzes Leben. Im Gegensatz dazu
 habe ich erst als Erwachsener damit begonnen, Versionsverwaltungssysteme zu
 benutzen. Ich vermute, dass ich damit nicht alleine bin, und der Vergleich
-hilft vielleicht, dabei die Konzepte einfacher zu erklären und zu verstehen.
+hilft vielleicht dabei, die Konzepte einfacher zu erklären und zu verstehen.
 
 Stelle Dir das Bearbeiten deines Codes oder Deiner Dokumente wie ein
 Computerspiel vor. Wenn Du gut vorangekommen bist, willst Du das Erreichte
 sichern. Um das zu tun, klickst Du auf auf Speichern in Deinem vertrauten
 Editor.
 
-Aber, das überschreibt die vorherige Version. Das ist wie bei den Spielen
+Aber das überschreibt die vorherige Version. Das ist wie bei den Spielen
 der alten Schule, die nur Speicherplatz für eine Sicherung hatten:
 sicherlich konntest Du speichern, aber Du konntest nie zu einem älteren
 Stand zurück. Das war eine Schande, denn vielleicht war Deine vorherige
@@ -134,7 +134,7 @@ Dateiende. Beide laden ihre Änderungen hoch. Die meisten Systeme wählen
 automatisch eine vernünftige Vorgehensweise: akzeptiere beide Änderungen und
 füge sie zusammen, damit fließen beide Änderungen in das Dokument mit ein.
 
-Nun stell dir vor beide, Alice und Bob, machen Änderungen in der selben
+Nun stell Dir vor beide, Alice und Bob, machen Änderungen in der selben
 Zeile. Dann ist es unmöglich, ohne menschlichen Eingriff fortzufahren. Die
 zweite Person, welche die Datei hoch lädt, wird über einen _'Merge'
 Konflikt_ informiert und muss entscheiden, welche Änderung übernommen wird

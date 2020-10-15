@@ -11,9 +11,9 @@ main.
 
 Avec le temps, les spécialistes de cryptographie découvrent de plus en plus de
 faiblesses de SHA1. À ce jour, la découverte de collisions d'empreintes semble
-à la portée d'organisations bien dotée. Et d'ici quelques années, peut-être que
-même un simple PC aura assez de puissance de calcul pour corrompre de manière
-indétectable un dépôt Git.
+à la portée d'organisations bien dotées. Et d'ici quelques années, peut-être
+que même un simple PC aura assez de puissance de calcul pour corrompre de
+manière indétectable un dépôt Git.
 
 Heureusement Git aura migré vers une fonction de calcul d'empreintes de
 meilleure qualité avant que de futures recherches détruisent SHA1.
@@ -25,7 +25,7 @@ Git sur Microsoft Windows peut être jugé encombrant :
 - http://cygwin.com/[Cygwin] est un environnement de type Linux dans Windows
   proposant http://cygwin.com/packages/git/[un portage de Git].
 
-- http://code.google.com/p/msysgit/[Git on MSys] est un autre choix nécessitant
+- https://gitforwindows.org/[Git pour Windows] est un autre choix nécessitant
   beaucoup moins de place. Néanmoins quelques commandes doivent encore être
   améliorées.
 
@@ -85,11 +85,11 @@ clone ainsi créé offre des fonctionnalités réduites.
 Git a été conçu pour être rapide au regard de la taille des changements. Les
 humains font de petits changement de version en version. Une correction de bug
 en une ligne ici, une nouvelle fonctionnalité là, un commentaire amendé
-ailleurs... Mais si vous fichiers changent radicalement à chaque révision
+ailleurs... Mais si vos fichiers changent radicalement à chaque révision
 alors, à chaque commit, votre historique grossit d'un poids équivalent à celui
 de votre projet.
 
-Il n'y a rien que puisse faire un système de gestion de versions pour éviter
+Il n'y a rien qu'un système de gestion de versions puisse faire pour éviter
 cela, mais les utilisateurs de Git en souffrent plus puisque chaque clone
 contient habituellement l'historique complet.
 

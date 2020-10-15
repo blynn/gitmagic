@@ -14,8 +14,11 @@ Thay vì đi sâu vào chi tiết, chúng tôi đưa ra phác thảo cách làm 
 
  - link:/\~blynn/gitmagic/intl/zh_cn/[Tiếng Trung Giản thể]: dịch bởi JunJie, Meng và JiangWei. Đã chuyển đổi sang: link:/~blynn/gitmagic/intl/zh_tw/[Tiếng Trung Phồn thể] thông qua lệnh  +cconv -f UTF8-CN -t UTF8-TW+.
  - link:/~blynn/gitmagic/intl/fr/[Tiếng Pháp]: dịch bởi Alexandre Garel; và đồng thời được xuất bản tại http://tutoriels.itaapy.com/[itaapy].
- - link:/~blynn/gitmagic/intl/de/[Tiếng Đức]: dịch bởi Benjamin Bellee và Armin Stebich. Armin ; và đồng thời xuất bản http://gitmagic.lordofbikes.de/[bản dịch tiếng Đức trên website của chính mình].
- - http://www.slideshare.net/slide_user/magia-git[Tiếng Bồ Đào Nha]: dịch bởi Leonardo Siqueira Rodrigues [http://www.slideshare.net/slide_user/magia-git-verso-odt[định dạng ODT]].
+ - link:/~blynn/gitmagic/intl/de/[Tiếng Đức]: dịch bởi Benjamin Bellee và Armin Stebich; và đồng thời xuất bản http://gitmagic.lordofbikes.de/[trên website của Armin].
+ - link:/~blynn/gitmagic/intl/it/[Tiếng Ý]: dịch bởi Mattia Rigotti.
+ - link:/~blynn/gitmagic/intl/ko/[Tiếng Hàn Quốc]: dịch bởi Jung-Ho (John) Han; đồng thời https://sites.google.com/site/drinkhanjohn/useful-links/[xuất bản trên trang web của John].
+ - link:/~blynn/gitmagic/intl/pl/[Tiếng Ba Lan]: dịch bởi Damian Michna.
+ - link:/~blynn/gitmagic/intl/pt_br/[Tiếng Bồ Đào Nha Bra-xin]: dịch bởi José Inácio Serafini và Leonardo Siqueira Rodrigues.
  - link:/~blynn/gitmagic/intl/ru/[Tiếng Nga]: dịch bởi Tikhon Tarnavsky, Mikhail Dymskov và một số người khác.
  - link:/~blynn/gitmagic/intl/es/[Tiếng Tây Ban Nha]: dịch bởi Rodrigo Toledo và Ariset Llerena Tapia.
  - link:/~blynn/gitmagic/intl/uk/[Ukrainian]: dịch bởi Volodymyr Bodenchuk.
@@ -39,7 +42,6 @@ Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael B
 François Marier đã bảo trì gói Debian do Daniel
 Baumann khởi xướng.
 
-John Hinnegan đã mua tên miền http://www.gitmagic.com/[gitmagic.com].
 
 Tôi cũng gửi lời cảm ơn tới sự giúp đỡ và sự tán dương của các bạn. Tôi muốn 
 trích dẫn những lời đó ra đây, nhưng làm như thế có vẻ hơi lố bịch, tự cao tự đại.
@@ -63,3 +65,4 @@ hay từ các máy chủ khác:
 
 GitHub, Assembla, và Bitbucket có hỗ trợ các kho có tính riêng tư, hai địa sau
 là miễn phí.
+

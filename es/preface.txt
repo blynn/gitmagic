@@ -12,7 +12,7 @@ En lugar de ser detallados, proveemos instrucciones generales para efectos parti
 
 .Otras ediciones
 
- - http://docs.google.com/View?id=dfwthj68_675gz3bw8kj[Traducción al chino]: por JunJie, Meng y JiangWei.
+ - link:/~blynn/gitmagic/intl/zh_cn/[Traducción al chino]: por JunJie, Meng y JiangWei.
  - link:book.html[Una única página]: HTML simple, sin CSS.
  - link:book.pdf[Archivo PDF]: Listo para imprimir.
  - http://packages.debian.org/search?searchon=names&keywords=gitmagic[Paquete gitmagic para Debian]: Consigue una copia rápida y local de este sitio. http://packages.ubuntu.com/jaunty/gitmagic[Paquete para Ubuntu (Jaunty Jackalope)] también disponible. Útil http://csdcf.stanford.edu/status/[cuando este servidor está offline para mantenimiento].

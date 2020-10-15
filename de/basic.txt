@@ -1,9 +1,9 @@
 == Erste Schritte ==
 
 Bevor wir uns in ein Meer von Git-Befehlen stürzen, schauen wir uns ein paar
-einfache Beispiele an. Trotz ihrer Einfachheit, sind alle davon wichtig und
-nützlich. Um ehrlich zu sein, meine ersten Monate mit Git brauchte ich nicht
-mehr als in diesem Kapitel beschrieben steht.
+einfache Beispiele an. Trotz ihrer Einfachheit sind alle davon wichtig und
+nützlich. Um ehrlich zu sein, in meinen ersten Monaten mit Git brauchte ich nicht
+mehr, als in diesem Kapitel beschrieben steht.
 
 === Stand sichern ===
 
@@ -67,7 +67,7 @@ Date:   Thu Jan 1 00:00:00 1970 +0000
     Initial commit.
 ----------------------------------
 
-Die ersten paar Zeichen eines Hashwert reichen aus um einen 'Commit' zu
+Die ersten paar Zeichen eines Hashwert reichen aus, um einen 'Commit' zu
 identifizieren; alternativ benutze kopieren und einfügen für den kompletten
 Hashwert. Gib ein:
 
@@ -83,11 +83,11 @@ diesem Fall, gib folgendes ein:
 
 Damit springst Du in der Zeit zurück, behältst aber neuere Änderungen. Aber,
 wie bei Zeitreisen in einem Science-Fiction-Film, wenn Du jetzt etwas
-änderst und 'commitest', gelangst Du in ein alternative Realität, denn Deine
+änderst und 'commitest', gelangst Du in eine alternative Realität, denn Deine
 Änderungen sind anders als beim früheren 'Commit'.
 
-Diese alternative Realität heißt 'Branch' und <<branch,wir kommen später
-darauf zurück>>. Für jetzt, merke Dir
+Diese alternative Realität heißt 'Branch', und <<branch,wir kommen später
+darauf zurück>>. Für jetzt merke Dir,
 
  $ git checkout master
 
@@ -113,7 +113,7 @@ indem Du sie an den Befehl anhängst:
 
 Sei vorsichtig, diese Art des '*Checkout*' kann Dateien überschreiben, ohne
 dass Du etwas merkst. Um Unfälle zu vermeiden, solltest Du immer 'commiten'
-bevor du ein 'Checkout' machst, besonders am Anfang, wenn Du Git noch
+bevor Du ein 'Checkout' machst, besonders am Anfang, wenn Du Git noch
 erlernst. Allgemein gilt: Wenn Du unsicher bist, egal, ob ein Git Befehl oder
 irgendeine andere Operation, führe zuerst *git commit -a* aus.
 
@@ -169,8 +169,8 @@ Version aktualisieren mit:
 === Einfaches Veröffentlichen ===
 
 Angenommen Du hast ein Skript geschrieben und möchtest es anderen zugänglich
-machen. Du könntest sie einfach bitten, es von deinem Computer
-herunterzuladen, aber falls sie das tun, während du experimentierst oder das
+machen. Du könntest sie einfach bitten, es von Deinem Computer
+herunterzuladen, aber falls sie das tun, während Du experimentierst oder das
 Skript verbesserst, könnten sie in Schwierigkeiten geraten. Genau deswegen
 gibt es Releasezyklen. Entwickler arbeiten regelmäßig an einem Projekt,
 veröffentlichen den Code aber nur, wenn sie ihn für vorzeigbar halten.

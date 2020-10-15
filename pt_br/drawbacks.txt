@@ -14,7 +14,7 @@ O Git no Microsoft Windows pode ser trabalhoso:
 
 - http://cygwin.com/[Cygwin], é um ambiente que deixa o Windows parecido com o Linux, tem http://cygwin.com/packages/git/[uma versão do Git para  Windows].
 
-- http://code.google.com/p/msysgit/[Git no MSys] é uma alternativa que requer suporte minimo para execução, embora alguns poucos comandos precisem ser mais trabalhados.
+- https://gitforwindows.org/[Git para Windows] é uma alternativa que requer suporte minimo para execução, embora alguns poucos comandos precisem ser mais trabalhados.
 
 === Arquivos Independentes ===
 

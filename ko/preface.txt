@@ -16,7 +16,11 @@ Arthur C. Clarke는 충분히 발전한 기술은 마술과 같다고 말하였�
  - link:/~blynn/gitmagic/intl/fr/[French]: by Alexandre Garel, Paul Gaborit, and Nicolas Deram. Also hosted at http://tutoriels.itaapy.com/[itaapy].
  - link:/~blynn/gitmagic/intl/de/[German]: by Benjamin Bellee and Armin Stebich; also http://gitmagic.lordofbikes.de/[hosted on Armin's website].
  - link:/~blynn/gitmagic/intl/it/[Italian]: by Mattia Rigotti.
+<<<<<<< HEAD
  - link:/~blynn/gitmagic/intl/ko/ [Korean]: by John J. Han; also https://sites.google.com/site/drinkhanjohn/useful-links/[hosted on John's website].
+=======
+ - link:/~blynn/gitmagic/intl/ko/[Korean]: by Jung-Ho (John) Han; also https://sites.google.com/site/drinkhanjohn/useful-links/[hosted on John's website].
+>>>>>>> ce45ee87f14cf688493d027a8d76d94c78ed01ec
  - link:/~blynn/gitmagic/intl/pl/[Polish]: by Damian Michna.
  - link:/~blynn/gitmagic/intl/pt_br/[Brazilian Portuguese]: by José Inácio Serafini and Leonardo Siqueira Rodrigues.
  - link:/~blynn/gitmagic/intl/ru/[Russian]: by Tikhon Tarnavsky, Mikhail Dymskov, and others.
@@ -40,7 +44,6 @@ Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael B
 
 François Marier 는 Daniel Baumann이 개발한 Debian 패키지를 관리합니다.
 
-John Hinnegan 은 http://www.gitmagic.com/[gitmagic.com] 도메인을 구입하였습니다.
 
 고마워 해야할 사람들이 많지만은 여기에 다 쓸수는 없는 노릇입니다.
 

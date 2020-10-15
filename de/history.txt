@@ -21,8 +21,8 @@ eingegeben? Dann gib ein:
 
  $ git commit --amend
 
-um die letzte Beschreibung zu ändern. Du merkst, dass Du vergessen hast eine
-Datei hinzuzufügen? Führe *git add* aus, um sie hinzuzufügen und dann die
+um die letzte Beschreibung zu ändern. Du merkst, dass Du vergessen hast, eine
+Datei hinzuzufügen? Führe *git add* aus, um sie hinzuzufügen, und dann die
 vorhergehende Anweisung.
 
 Du willst noch ein paar Änderungen zu deinem letzten 'Commit' hinzufügen?
@@ -39,11 +39,11 @@ umformuliert werden. Dann gib ein:
 
  $ git rebase -i HEAD~10
 
-und die letzten zehn 'Commits' erscheinen in deinem bevorzugten
+und die letzten zehn 'Commits' erscheinen in Deinem bevorzugten
 $EDITOR. Auszug aus einem Beispiel:
 
     pick 5c6eb73 Link repo.or.cz hinzugefügt
-    pick a311a64 Analogien in "Arbeite wie du willst" umorganisiert
+    pick a311a64 Analogien in "Arbeite wie Du willst" umorganisiert
     pick 100834f Push-Ziel zum Makefile hinzugefügt
 
 Dann:
@@ -51,12 +51,12 @@ Dann:
 - Entferne 'Commits' durch das Löschen von Zeilen.
 - Organisiere 'Commits' durch verschieben von Zeilen.
 - Ersetze `pick` mit:
-   * `edit` um einen 'Commit' für 'amends' zu markieren.
-   * `reword` um die Log-Beschreibung zu ändern.
-   * `squash` um einen 'Commit' mit dem vorhergehenden zu vereinen ('merge').
-   * `fixup` um einen 'Commit' mit dem vorhergehenden zu vereinen ('merge') und die Log-Beschreibung zu verwerfen.
+   * `edit`, um einen 'Commit' für 'amends' zu markieren.
+   * `reword`, um die Log-Beschreibung zu ändern.
+   * `squash`, um einen 'Commit' mit dem vorhergehenden zu vereinen ('merge').
+   * `fixup`, um einen 'Commit' mit dem vorhergehenden zu vereinen ('merge') und die Log-Beschreibung zu verwerfen.
 
-Speichere und Beende. Wenn du einen 'Commit' mit 'edit' markiert hast, gib
+Speichere und Beende. Wenn Du einen 'Commit' mit 'edit' markiert hast, gib
 ein:
 
  $ git commit --amend
@@ -65,7 +65,7 @@ Ansonsten:
 
  $ git rebase --continue
 
-Also 'commite' früh und oft: du kannst später mit 'rebase' aufräumen.
+Also 'commite' früh und oft: Du kannst später mit 'rebase' aufräumen.
 
 === Lokale Änderungen zum Schluss ===
 
@@ -80,7 +80,7 @@ willst alle Deine Änderungen lieber in einem fortlaufenden Abschnitt und
 hinter den offiziellen Änderungen sehen.
 
 Das ist eine Aufgabe für *git rebase*, wie oben beschrieben. In vielen
-Fällen kannst du den *--onto* Schalter benutzen, um Interaktion zu vermeiden.
+Fällen kannst Du den *--onto* Schalter benutzen, um Interaktion zu vermeiden.
 
 Siehe auch *git help rebase* für ausführliche Beispiele dieser erstaunlichen
 Anweisung. Du kannst auch 'Commits' aufteilen. Du kannst sogar 'Branches' in
@@ -104,11 +104,11 @@ schnellere Methode vorstellt wird. Allgemein, *filter-branch* lässt Dich
 große Bereiche der Chronik mit einer einzigen Anweisung verändern.
 
 Danach beschreibt der Ordner +.git/refs/original+ den Zustand der Lage vor
-der Operation. Prüfe, ob die 'filter-branch' Anweisung getan hat, was du
+der Operation. Prüfe, ob die 'filter-branch' Anweisung getan hat, was Du
 wolltest, dann lösche dieses Verzeichnis, bevor Du weitere 'filter-branch'
 Operationen durchführst.
 
-Zuletzt, ersetze alle 'Clones' Deines Projekts mit deiner überarbeiteten
+Zuletzt, ersetze alle 'Clones' Deines Projekts mit Deiner überarbeiteten
 Version, falls Du später mit ihnen interagieren möchtest.
 
 === Geschichte machen ===
@@ -162,7 +162,7 @@ Die aktuellste Version des Projekts kannst Du abrufen ('checkout') mit:
  $ git checkout master .
 
 Die Anweisung *git fast-export* konvertiert jedes 'Repository' in das *git
-fast-import* Format, dessen Ausgabe Du studieren kannst, um Exporteure zu
+fast-import* Format, dessen Ausgabe Du studieren kannst, um Exporte zu
 schreiben und außerdem, um 'Repositories' im menschenlesbaren Text zu übertragen.
 
 Tatsächlich können diese Anweisungen Klartext-'Repositories' über reine
@@ -170,8 +170,8 @@ Textkanäle übertragen.
 
 === Wo ging alles schief? ===
 
-Du hast gerade eine Funktion in deiner Anwendung entdeckt, die nicht mehr
-funktioniert und du weißt sicher, dass sie vor ein paar Monaten noch
+Du hast gerade eine Funktion in Deiner Anwendung entdeckt, die nicht mehr
+funktioniert und Du weißt sicher, dass sie vor ein paar Monaten noch
 ging. Argh! Wo kommt dieser Fehler her? Hättest Du nur die Funktion während
 der Entwicklung getestet.
 
@@ -254,7 +254,7 @@ zu benutzen. Eine unzuverlässige Internetverbindung stört mit Git nicht
 sehr, aber sie macht die Entwicklung unerträglich, wenn sie so zuverlässig
 wie ein lokale Festplatte sein sollte. Zusätzlich habe ich mich dabei
 ertappt, bestimmte Anweisungen zu vermeiden, um die damit verbundenen
-Wartezeiten zu vermeiden und das hat mich letztendlich davon abgehalten,
+Wartezeiten zu vermeiden, und das hat mich letztendlich davon abgehalten,
 meinem gewohnten Arbeitsablauf zu folgen.
 
 Wenn ich eine langsame Anweisung auszuführen hatte, wurde durch die
