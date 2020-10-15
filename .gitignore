@@ -4,3 +4,4 @@
 *.svn/*
 .*
 *~
+.Rproj.user
