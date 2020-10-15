@@ -4,9 +4,9 @@ Ben Lynn
 
 == 서문 ==
 
-http://git-scm.com/[Git] 은 버전 관리계의 스위스아미나이프 정도로 보면 됩니다. 아주 유연하고 믿을 수 있지만 그만큼 배우기는 어려울 수도있는 본 버전 관리 시스템을 마스터 해봅시다!
+http://git-scm.com/[Git] 은 버전 관리계의 스위스아미나이프 정도로 보면 됩니다. 아주 유연하고 믿을 수 있지만 그만큼 배우기는 어려울 수도있는 이 Version Control System을 마스터 해봅시다!
 
-Arthur C. Clarke는 충분히 발전한 기술은 마술과 같다고 말하였습니다. Git도 마찬가지입니다. 초보자들은 Git이 어떻게 돌아가는지 알 필요가 없으며 Git이라는 간단한 장치가 어떻게 친구들과 적들을 놀라게하는지만 알면됩니다.
+Arthur C. Clarke는 충분히 발전한 기술은 마술과 같다고 말하였습니다. Git도 마찬가지입니다. 초보자들은 Git이 어떻게 돌아가는지 알 필요가 없으며 Git이라는 간단한 장치가 어떻게 친구들과 적들을 놀라게 하는지만 알면됩니다^^.
 
 세부사항들을 설명하는 대신에, 우리는 몇몇 기능들의 대략적인 설명을 하려합니다. 여기에 설명된 기능들을 자주 사용하다 보면 각각의 명령어들이 어떻게 작동하는지 알게 될 것입니다. 그리고 그 명령어들을 적용하여 새로운 일들을 해낼 수 있겠지요.
 
@@ -16,7 +16,7 @@ Arthur C. Clarke는 충분히 발전한 기술은 마술과 같다고 말하였�
  - link:/~blynn/gitmagic/intl/fr/[French]: by Alexandre Garel, Paul Gaborit, and Nicolas Deram. Also hosted at http://tutoriels.itaapy.com/[itaapy].
  - link:/~blynn/gitmagic/intl/de/[German]: by Benjamin Bellee and Armin Stebich; also http://gitmagic.lordofbikes.de/[hosted on Armin's website].
  - link:/~blynn/gitmagic/intl/it/[Italian]: by Mattia Rigotti.
- - link:/~blynn/gitmagic/intl/ko/ [Korean]: by Jung-Ho (John) Han; also https://sites.google.com/site/drinkhanjohn/useful-links/[hosted on John's website].
+ - link:/~blynn/gitmagic/intl/ko/ [Korean]: by John J. Han; also https://sites.google.com/site/drinkhanjohn/useful-links/[hosted on John's website].
  - link:/~blynn/gitmagic/intl/pl/[Polish]: by Damian Michna.
  - link:/~blynn/gitmagic/intl/pt_br/[Brazilian Portuguese]: by José Inácio Serafini and Leonardo Siqueira Rodrigues.
  - link:/~blynn/gitmagic/intl/ru/[Russian]: by Tikhon Tarnavsky, Mikhail Dymskov, and others.
