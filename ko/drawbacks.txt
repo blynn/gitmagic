@@ -66,30 +66,28 @@ VCS는 이것에 대해 아무것도 할 수 없습니다. 일반 Git 유저들�
 
 몇몇 중앙관리식 VCS들은 새로운 commit이 받아들여질때마다 임의의 양의정수를 보존합니다. Git은 양의정수보다 나은 hash를 써서 commit을 관리합니다.
 
-But some people like having this integer around. Luckily, it's easy to write scripts so that with every update, the central Git repository increments an integer, perhaps in a tag, and associates it with the hash of the latest commit.
+그러나 어느 사람들은 아직도 양의정수로 commit관리를 하길 추구합니다. 다행히도 Git에 추가프로그래밍을하여 Git repository에서 양의정수를 1씩 더하는 방식으로 commit을 관리할수도 있습니다.
 
-Every clone could maintain such a counter, but this would probably be useless, since only the central repository and its counter matters to everyone.
+어느 클론 파일이나 양의정수를 사용하여 commit을 관리할 수 있습니다. 그러나 이건 아무짝에도 쓸모가 없죠. 중앙 repository만 이 숫자를 쓸꺼니까요.
 
-=== Empty Subdirectories ===
+=== 빈 (empty) 섭디렉토리 ===
 
-Empty subdirectories cannot be tracked. Create dummy files to work around this problem.
+빈 섭디렉토리는 트랙킹되지 않습니다. 그러나 더미 파일을 만들어서 트랙킹하게 편법을 쓸 수 있죠.
 
-The current implementation of Git, rather than its design, is to blame for this drawback. With luck, once Git gains more traction, more users will clamour for this feature and it will be implemented.
+현 버전의 Git으로써 이 문제점은 Git의 약점입니다. Git이 다시 수면위로 올라가고 더 많은 사람들이 사용하게 될수록 이런 약점도 메꿔나가 지겠죠.
 
-=== Initial Commit ===
+=== 태초의 commit ===
 
-A stereotypical computer scientist counts from 0, rather than 1. Unfortunately, with respect to commits, git does not adhere to this convention. Many commands are unfriendly before the initial commit. Additionally, some corner cases must be handled specially, such as rebasing a branch with a different initial commit.
+보통의 컴퓨터공학자들은 숫자를 셀 때 0부터 세지 1부터 세지 않습니다. 하지만 안타깝게도 commit의 횟수를 셀때 git은 컴퓨터공학자들처럼 숫자를 세지 않습니다. Git의 그 많은 명령어들은 commit이 태초적으로 한번 이루어지기 전까지는 실행되지 않을겁니다. Branch들을 rebasing 할때나 이럴 경우에는 예외일 수도 있습니다.
 
-Git would benefit from defining the zero commit: as soon as a repository is constructed, HEAD would be set to the string consisting of 20 zero bytes. This special commit represents an empty tree, with no parent, at some time predating all Git repositories.
+애초에 Git은 태초의 commit으로부터 많은 혜택을 받습니다: repostiory가 생성되자마자 HEAD는 20 zero bytes의 스트링으로 자동설정됩니다. 이 특별한 commit은 빈 나무로 표현합니다. 빈 나무는 부모님 commit도 없습니다. 한마디로 근본이 없는 친구를 태초의 commit으로 부릅니다.
 
-Then running git log, for example, would inform the user that no commits have been made yet, instead of exiting with a fatal error. Similarly for other tools.
+그리고 태초의 commit후, git log를 로드했을때 Git이 오류를 내지 않고 단순히 commit이 하나도 안 되었다고 알려줄 것입니다. 
 
-Every initial commit is implicitly a descendant of this zero commit.
+태초의 commit은 한마디로 zero commit의 양자같은 컨셉트입니다.
 
-However there are some problem cases unfortunately. If several branches with different initial commits are merged together, then rebasing the result requires substantial manual intervention.
+그러나 이런 구성은 가끔 문제를 야기합니다. 여러개의 branch가 모두 태초의 commit을 하고 이제 branch를 병합시켜야 할때, rebasing은 아마 유저 본인이 수동으로 버전청소를 하라고 할수도 있습니다.
 
-=== Interface Quirks ===
+=== 별난 인터페이스 ===
 
-For commits A and B, the meaning of the expressions "A..B" and "A...B" depends
-on whether the command expects two endpoints or a range. See *git help diff*
-and *git help rev-parse*.
+A와 B commit이 있을때, "A..B" 와 "A...B" 표현의 차이는 명령어가 두개의 종점이나 범위가 입력되기를 기다리고 있느냐 마느냐입니다. *git help diff* 와 *git help rev-parse*를 참조하십시오.
