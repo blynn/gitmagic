@@ -1,32 +1,30 @@
-== Appendix A: Git Shortcomings ==
+== 부록 A: Git의 약점들 ==
 
-There are some Git issues I've swept under the carpet. Some can be handled easily with scripts and hooks, some require reorganizing or redefining the project, and for the few remaining annoyances, one will just have to wait. Or better yet, pitch in and help!
+Git을 소개하면서 저는 Git의 약점들을 몇 개 숨기긴 했습니다. 몇가지 약점들은 script나 hook을 통해 해결할수 있고, 몇가지는 프로젝트를 수정하면서 해결할수 있고, 그 외의 약점들은 현 시점에선 그냥 앉아서 기다리고 있을 수 밖에 없습니다. 그러기 싫으시다면 직접 도와줘보십쇼!
 
-=== SHA1 Weaknesses ===
+=== SHA1 약점 ===
 
-As time passes, cryptographers discover more and more SHA1 weaknesses. Already,
-finding hash collisions is feasible for well-funded organizations. Within
-years, perhaps even a typical PC will have enough computing power to silently
-corrupt a Git repository.
+시간이 지나면 해커들은 SHA1의 약점들을 더 많이 발견하게 될겁니다. 이미 hash에서의 충돌을 찾아내는 건
+가능한 일이지요. 몇 년 안에는 Git repository를 위해할 수 있는 연산능력을 가진
+일반컴퓨터도 있을 수 있습니다.
 
-Hopefully Git will migrate to a better hash function before further research
-destroys SHA1.
+Git이 그런 일이 일어나기전에 hash관련 기능들을 발전할 수 있었으면 좋겠어요.
 
 === Microsoft Windows ===
 
-Git on Microsoft Windows can be cumbersome:
+Git을 Microsoft Windows에서 사용하는 건 성가실 수 있습니다:
 
-- http://cygwin.com/[Cygwin], a Linux-like environment for Windows, contains http://cygwin.com/packages/git/[a Windows port of Git].
+- http://cygwin.com/[Cygwin], 리눅스와 비슷한 윈도우체제에선 http://cygwin.com/packages/git/[a Windows port of Git] 가 있습니다.
 
-- https://gitforwindows.org/[Git for Windows] is an alternative requiring minimal runtime support, though a few of the commands need some work.
+- https://gitforwindows.org/[Git for Windows] 는 아직 몇몇 허점이 있지만 Windows에서 Git을 효율적으로 쓸수 있게 해줍니다.
 
-=== Unrelated Files ===
+=== Git과 연관없는 파일들 ===
 
-If your project is very large and contains many unrelated files that are constantly being changed, Git may be disadvantaged more than other systems because single files are not tracked. Git tracks changes to the whole project, which is usually beneficial.
+만약에 당신의 프로젝트가 굉장히 크고, 쓸때없는 파일들이 많이 들어있는 상태이고, 상시로 바뀌는 상태라면, Git은 하나의 파일을 트랙킹하지 않기에 다른 VCS보다 유용하지 않을 수 있습니다. Git은 프로젝트 단위로 트랙킹을 하기 때문입니다. 이건 Git의 장점입니다.
 
-A solution is to break up your project into pieces, each consisting of related files. Use *git submodule* if you still want to keep everything in a single repository.
+그래도 만약 하나의 파일만을 트랙킹하기 원하다면 프로젝트를 여러개의 파트로 분리해두는 겁니다. 여러개의 파트로 분리해도 *git submodule* 명령어를 이용하면 하나의 repository를 유지할 수 있을겁니다.
 
-=== Who's Editing What? ===
+=== 누가 어떤 작업을 하는거지? ===
 
 Some version control systems force you to explicitly mark a file in some way before editing. While this is especially annoying when this involves talking to a central server, it does have two benefits:
 
