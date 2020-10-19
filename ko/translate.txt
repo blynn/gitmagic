@@ -1,15 +1,13 @@
-== Appendix B: Translating This Guide ==
+== 부록 B: 이 가이드를 번역하기 ==
 
-I recommend the following steps for translating this guide, so my scripts can
-quickly produce HTML and PDF versions, and all translations can live in the
-same repository.
+다음 절차들을 따라하셔야 제 프로그램이 자동으로 빠르게 HTML과 PDF 버전의 번역본을 만들수 있습니다.
 
-Clone the source, then create a directory corresponding to the target
-language's IETF tag: see
+우선 원본이 되는 소스를 클론하시고 폴더를 만드시는데, 폴더명을 IETF에 기재되어 있는 태그를 쓰시기 바랍니다:
+다음 링크에 들어가셔서 확인하세요,
 http://www.w3.org/International/articles/language-tags/Overview.en.php[the W3C
-article on internationalization]. For example, English is "en" and Japanese is
-"ja". In the new directory, and translate the +txt+ files from the "en"
-subdirectory.
+article on internationalization]. 예를 들자면, 영어의 태그는 "en"이고, 일본어는 "ja"이며, 국어는 "ko"입니다.
+그리고 새로운 디렉토리에서 "en"에 들어있는 원본 txt를 번역하시면 됩니다. (번역주: 영어를 못하시고 국어를 하실수 있다면 본 가이드를 쓰시면 되겠지만 그럴 확률이 거의 없겠죠)
+
 
 For instance, to translate the guide into http://en.wikipedia.org/wiki/Klingon_language[Klingon], you might type:
 
