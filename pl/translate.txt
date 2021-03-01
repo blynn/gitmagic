@@ -1,8 +1,8 @@
 == Załącznik B: Przetłumaczyć to HOWTO ==
 
-Aby przetłumaczyć moje HOWTO polecam wykonanie następujących poniżej kroków, wtedy moje skrypty będą w prosty sposób mogły wygenerować wersje HTML i PDF.  Poza tym wszystkie tłumaszenia mogą być prowadzone w jednym repozytorium.
+Aby przetłumaczyć moje HOWTO polecam wykonanie następujących poniżej kroków, wtedy moje skrypty będą w prosty sposób mogły wygenerować wersje HTML i PDF.  Poza tym wszystkie tłumaczenia mogą być prowadzone w jednym repozytorium.
 
-Sklonuj texty źródłowe, następnie utwórz katalog o nazwie skrótu IETF przetłumaszonego języka: sprawdź http://www.w3.org/International/articles/language-tags/Overview.en.php[Artykół W3C o internacjonalizacji]. Na przykład, angielski to "en", a japoński to "ja". Skopiuj wszystkie pliki +txt+ z katalogu "en" do nowoutworzonego katalogu.
+Sklonuj teksty źródłowe, następnie utwórz katalog o nazwie skrótu IETF przetłumaczonego języka: sprawdź http://www.w3.org/International/articles/language-tags/Overview.en.php[Artykuł W3C o internacjonalizacji]. Na przykład, angielski to "en", a japoński to "ja". Skopiuj wszystkie pliki +txt+ z katalogu "en" do nowo utworzonego katalogu.
 
 Aby przykładowo przetłumaczyć to HOWTO na http://de.wikipedia.org/wiki/Klingonische_Sprache[Klingonisch], musisz wykonać następujące polecenia:
 
@@ -18,4 +18,4 @@ Edytuj Makefile i dodaj skrót języka do zmiennej `TRANSLATIONS`. Teraz możesz
 
  $ make tlh $ firefox book-tlh/index.html
 
-Używaj często 'commit' a gdy już skończysz, to daj znać. GitHub posiada interfejs, który to ułatwi: utwórz twój własny 'Fork' projektu "gitmagic", 'push' twoje zmiany i daj mi znać, by je 'mergen'.
+Używaj często 'commit' a gdy już skończysz, to daj znać. GitHub posiada interfejs, który to ułatwi: utwórz twój własny 'Fork' projektu "gitmagic", 'push' twoje zmiany i daj mi znać, by można było wykonać operację 'merge'.

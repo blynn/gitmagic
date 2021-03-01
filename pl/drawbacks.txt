@@ -84,7 +84,7 @@ Jeśli na przykład użytkownik wykonałby polecenie *git log*, zostałby poinfo
 
 Każdy inicjujący 'commit' byłby pochodną tego zerowego 'commit'.
 
-Niestety występuje jeszcze kilka innych problemów. Jeśli chcemy scalić kilka 'branches' o różniących sie inicjalnych 'commits' i przeprowadzić 'rebase', musimy ingerować ręcznie.
+Niestety występuje jeszcze kilka innych problemów. Jeśli chcemy scalić kilka 'branches' o różniących się inicjalnych 'commits' i przeprowadzić 'rebase', musimy ingerować ręcznie.
 
 === Charakterystyka zastosowania ===
 

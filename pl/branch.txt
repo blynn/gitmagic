@@ -2,9 +2,9 @@
 
 Szybkie, natychmiastowe działanie poleceń 'branch' i 'merge', to jedne z najbardziej zabójczych właściwości Gita.
 
-*Problem*: Zewnętrzne faktory narzucają konieczność zmiany kontekstu. Poważne błędy w opublikowanej wersji ujawniły się bez ostrzeżenia. Skrócono termin opublikowania pewnej właściwości. Autor, którego pomocy potrzebujesz w jednej z kluczowych sekcji postanawia opóścić projekt. We wszystkich tych przypadkach musisz natychmiastowo zaprzestać bieżących prac i skoncentrować się nad zupełnie innymi zadaniami.
+*Problem*: Zewnętrzne faktory narzucają konieczność zmiany kontekstu. Poważne błędy w opublikowanej wersji ujawniły się bez ostrzeżenia. Skrócono termin opublikowania pewnej właściwości. Autor, którego pomocy potrzebujesz w jednej z kluczowych sekcji postanawia opuścić projekt. We wszystkich tych przypadkach musisz natychmiastowo zaprzestać bieżących prac i skoncentrować się nad zupełnie innymi zadaniami.
 
-Przerwanie toku myślenia nie jest dobre dla produktywności, a czym większa różnica w kontekście, tym większe straty. Używając centralnych systemów kontroli wersji musielibyśmy najpierw zładować świeżą kopię roboczą z serwera. W systemach rozproszonych wygląda to dużo lepiej, ponieważ możemy żądaną wersje sklonować lokalnie
+Przerwanie toku myślenia nie jest dobre dla produktywności, a czym większa różnica w kontekście, tym większe straty. Używając centralnych systemów kontroli wersji musielibyśmy najpierw załadować świeżą kopię roboczą z serwera. W systemach rozproszonych wygląda to dużo lepiej, ponieważ możemy żądaną wersje sklonować lokalnie
 
 Jednak klonowanie również niesie za sobą kopiowanie całego katalogu roboczego jak i całej historii projektu aż do żądanego punktu. Nawet jeśli Git redukuje wielkość przez podział danych i użycie twardych dowiązań, wszystkie pliki projektu muszą zostać odtworzone w nowym katalogu roboczym.
 
@@ -175,7 +175,7 @@ Można to porównać do chwilowego przełączenia kanału telewizyjnego, by spra
 
  $ git stash
 
-Polecenie to zabezpiecza aktualny stan w tymczasowym miejscu ('stash' = ukryj) i przywraca poprzedni stan. Twój katalog roboczy wygląda dokładnie tak, jak wyglądał zanim zacząłaś edycję. Teraz możesz poprawiać błędy, zładować zmiany z centralnego repozytorium ('pull') i tak dalej. Jeśli chcesz powrócić z powrotem do ukrytego ('stashed') stanu, wpisz:
+Polecenie to zabezpiecza aktualny stan w tymczasowym miejscu ('stash' = ukryj) i przywraca poprzedni stan. Twój katalog roboczy wygląda dokładnie tak, jak wyglądał zanim zacząłaś edycję. Teraz możesz poprawiać błędy, załadować zmiany z centralnego repozytorium ('pull') i tak dalej. Jeśli chcesz powrócić z powrotem do ukrytego ('stashed') stanu, wpisz:
 
  $ git stash apply # Prawdopodobnie będziesz musiał rozwiązać konflikty.
 

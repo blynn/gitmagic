@@ -1,6 +1,6 @@
 == Klonowanie ==
 
-W starszych systemach kontroli wersji polecenie 'checkout' stanowi standardową operacje pozyskiwania danych. Otrzymasz nią zbiór plików konkretnej wersji.
+W starszych systemach kontroli wersji polecenie 'checkout' stanowi standardową operację pozyskiwania danych. Otrzymasz nią zbiór plików konkretnej wersji.
 
 W Git i innych rozproszonych systemach standardowo służy temu operacja 'clone'. By pozyskać dane, tworzysz najpierw klon całego repozytorium. Lub inaczej mówiąc, otrzymujesz lustrzane odbicie serwera. Wszystko, co można zrobić w centralnym repozytorium, możesz również robić z klonem.
 
@@ -12,7 +12,7 @@ Utwórz repozytorium Gita w wykonaj 'commit' twoich danych na jednym z komputer�
 
  $ git clone drugi.komputer:/ścieżka/do/danych
 
-by otrzymać drugą kopie danych i jednocześnie utworzyć repozytorium Gita na drugim komputerze. Od teraz poleceniem:
+by otrzymać drugą kopię danych i jednocześnie utworzyć repozytorium Gita na drugim komputerze. Od teraz poleceniem:
 
  $ git commit -a
  $ git pull drugi.komputer:/ścieżka/do/danych HEAD
@@ -34,7 +34,7 @@ Na centralnym serwerze utwórz gołe ('bare') repozytorium w jakimkolwiek katalo
  $ git --bare init
  $ touch proj.git/git-daemon-export-ok
 
-W razie konieczności, wystartuj daemon Gita:
+W razie konieczności wystartuj daemon Gita:
 
  $ git daemon --detach # ponieważ, gdyby uruchomiony był wcześniej
 
@@ -70,7 +70,7 @@ Programiści potrzebują dostępu poprzez SSH dla wykonania poleceń 'pull' i 'p
 
  $ git clone git://główny.serwer/ścieżka/do/projektu.git
 
-Protokół GIT przypomina HTTP: nie posiada autentyfikacji, a więc każdy może skopiować dane. Przy ustawieniach standardowych wykonanie 'push' za pomocą protokołu GIT jest zdezaktywowane.
+Protokół GIT przypomina HTTP: nie posiada uwierzytelniania, a więc każdy może skopiować dane. Przy ustawieniach standardowych wykonanie 'push' za pomocą protokołu GIT jest zdezaktywowane.
 
 === Utajnienie źródła ===
 
@@ -90,7 +90,7 @@ Dlaczego wprowadziliśmy polecenie 'push', a nie pozostaliśmy przy znanym nam j
 
 W każdym bądź razie, nawet jeśli nawet mogło by to zadziałać, odradzam z korzystania z funkcji 'push' w ten sposób. Poprzez samo posiadanie katalogu roboczego na serwerze mogłoby powstać wiele nieścisłości.
 
-Krótko mówiąc, podczas gdy uczysz się korzystania z Git, korzystaj z polecenia 'push' tylko, gdy celem jest repozytorium 'bare', w wszystkich innych wypadkach z 'pull'.
+Krótko mówiąc, podczas gdy uczysz się korzystania z Git, korzystaj z polecenia 'push' tylko, gdy celem jest repozytorium 'bare', we wszystkich innych wypadkach z 'pull'.
 
 === Rozwidlenie projektu ===
 
