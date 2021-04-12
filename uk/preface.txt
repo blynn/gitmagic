@@ -19,7 +19,7 @@ http://git.or.cz/[Git] — це швейцарський ніж керуванн
   - http://www.slideshare.net/slide_user/magia-git[Португальська]: Leonardo Siqueira Rodrigues [http://www.slideshare.net/slide_user/magia-git-verso-odt[в форматі ODT]].
  - link:/~blynn/gitmagic/intl/ru/[Російська]: Тихон Тарнавский, Михаил Дымсков і інші.
  - link:/~blynn/gitmagic/intl/uk/[Українська]: Володимир Боденчук.
- - link:/~blynn/gitmagic/intl/fr/[Французька]: Alexandre Garel, Paul Gaborit, та Nicolas Deram. Також розміщений на http://tutoriels.itaapy.com/[itaapy].
+ - link:/~blynn/gitmagic/intl/fr/[Французька]: Alexandre Garel, Paul Gaborit, та Nicolas Deram.
 
 .Інші варіанти
 

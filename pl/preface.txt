@@ -13,7 +13,7 @@ Zamiast wchodzić w szczegóły, oferujemy proste instrukcje dla osiągnięcia z
 .Tłumaczenia
 
  - link:/\~blynn/gitmagic/intl/zh_cn/[Chiński uproszczony]: od JunJie, Meng i JiangWei. Konwertacja do link:/~blynn/gitmagic/intl/zh_tw/[Tradycjonalnego chińskiego] za pomocą +cconv -f UTF8-CN -t UTF8-TW+.
- - link:/~blynn/gitmagic/intl/fr/[Francuski]: od Alexandre Garel, Paul Gaborit, i Nicolas Deram. Również hostowany na http://tutoriels.itaapy.com/[itaapy].
+ - link:/~blynn/gitmagic/intl/fr/[Francuski]: od Alexandre Garel, Paul Gaborit, i Nicolas Deram.
  - link:/~blynn/gitmagic/intl/de/[Niemiecki]: od Benjamin Bellee i Armin Stebich; również hostowany na http://gitmagic.lordofbikes.de/[stronie Armina].
  - http://www.slideshare.net/slide_user/magia-git[Portugalski]: od Leonardo Siqueira Rodrigues [http://www.slideshare.net/slide_user/magia-git-verso-odt[wersja ODT]].
  - link:/~blynn/gitmagic/intl/ru/[Rosyjski]: od Tikhon Tarnavsky, Mikhail Dymskov, i innych.

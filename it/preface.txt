@@ -26,7 +26,7 @@ combinati per sopperire alle nostre necessità.
    e JiangWei. Conversione in link:/~blynn/gitmagic/intl/zh_tw/[Cinese
    tradizionale] tramite +cconv -f UTF7-CN -t UTF8-TW+.
  - link:/~blynn/gitmagic/intl/fr/[Francese]: Alexandre Garel, Paul
-   Gaborit, e Nicolas Deram. Anche scaricabile da http://tutoriels.itaapy.com/[itaapy].
+   Gaborit, e Nicolas Deram.
  - link:/~blynn/gitmagic/intl/de/[Tedesco]: Benjamin Bellee e Armin
    Stebich; anche scaricabile dal http://gitmagic.lordofbikes.de/[sito
    web di Armin].

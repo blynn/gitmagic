@@ -13,7 +13,7 @@ Thay vì đi sâu vào chi tiết, chúng tôi đưa ra phác thảo cách làm 
 .Bản dịch
 
  - link:/\~blynn/gitmagic/intl/zh_cn/[Tiếng Trung Giản thể]: dịch bởi JunJie, Meng và JiangWei. Đã chuyển đổi sang: link:/~blynn/gitmagic/intl/zh_tw/[Tiếng Trung Phồn thể] thông qua lệnh  +cconv -f UTF8-CN -t UTF8-TW+.
- - link:/~blynn/gitmagic/intl/fr/[Tiếng Pháp]: dịch bởi Alexandre Garel; và đồng thời được xuất bản tại http://tutoriels.itaapy.com/[itaapy].
+ - link:/~blynn/gitmagic/intl/fr/[Tiếng Pháp]: dịch bởi Alexandre Garel.
  - link:/~blynn/gitmagic/intl/de/[Tiếng Đức]: dịch bởi Benjamin Bellee và Armin Stebich; và đồng thời xuất bản http://gitmagic.lordofbikes.de/[trên website của Armin].
  - link:/~blynn/gitmagic/intl/it/[Tiếng Ý]: dịch bởi Mattia Rigotti.
  - link:/~blynn/gitmagic/intl/ko/[Tiếng Hàn Quốc]: dịch bởi Jung-Ho (John) Han; đồng thời https://sites.google.com/site/drinkhanjohn/useful-links/[xuất bản trên trang web của John].
