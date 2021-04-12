@@ -69,7 +69,7 @@ book-uk.pdf: book-uk.xml
 	pandoc -s -f docbook -o $@ --pdf-engine xelatex -V mainfont='DejaVuSansMono' $^
 
 book-ko.pdf: book-ko.xml
-	pandoc -s -f docbook -o $@ --pdf-engine xelatex -V CJKmainfont='WenQuanYi Micro Hei Mono' $^
+	pandoc -s -f docbook -o $@ --pdf-engine xelatex -V CJKmainfont='NanumGothic' $^
 
 book-zh_cn.pdf: book-zh_cn.xml
 	pandoc -s -f docbook -o $@ --pdf-engine xelatex -V CJKmainfont='WenQuanYi Micro Hei Mono' $^

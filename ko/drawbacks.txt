@@ -1,97 +1,93 @@
-== Appendix A: Git Shortcomings ==
+== 부록 A: Git의 약점들 ==
 
-There are some Git issues I've swept under the carpet. Some can be handled easily with scripts and hooks, some require reorganizing or redefining the project, and for the few remaining annoyances, one will just have to wait. Or better yet, pitch in and help!
+Git을 소개하면서 저는 Git의 약점들을 몇 개 숨기긴 했습니다. 몇가지 약점들은 script나 hook을 통해 해결할수 있고, 몇가지는 프로젝트를 수정하면서 해결할수 있고, 그 외의 약점들은 현 시점에선 그냥 앉아서 기다리고 있을 수 밖에 없습니다. 그러기 싫으시다면 직접 도와줘보십쇼!
 
-=== SHA1 Weaknesses ===
+=== SHA1 약점 ===
 
-As time passes, cryptographers discover more and more SHA1 weaknesses. Already,
-finding hash collisions is feasible for well-funded organizations. Within
-years, perhaps even a typical PC will have enough computing power to silently
-corrupt a Git repository.
+시간이 지나면 해커들은 SHA1의 약점들을 더 많이 발견하게 될겁니다. 이미 hash에서의 충돌을 찾아내는 건
+가능한 일이지요. 몇 년 안에는 Git repository를 위해할 수 있는 연산능력을 가진
+일반컴퓨터도 있을 수 있습니다.
 
-Hopefully Git will migrate to a better hash function before further research
-destroys SHA1.
+Git이 그런 일이 일어나기전에 hash관련 기능들을 발전할 수 있었으면 좋겠어요.
 
 === Microsoft Windows ===
 
-Git on Microsoft Windows can be cumbersome:
+Git을 Microsoft Windows에서 사용하는 건 성가실 수 있습니다:
 
-- http://cygwin.com/[Cygwin], a Linux-like environment for Windows, contains http://cygwin.com/packages/git/[a Windows port of Git].
+- http://cygwin.com/[Cygwin], 리눅스와 비슷한 윈도우체제에선 http://cygwin.com/packages/git/[a Windows port of Git] 가 있습니다.
 
-- https://gitforwindows.org/[Git for Windows] is an alternative requiring minimal runtime support, though a few of the commands need some work.
+- https://gitforwindows.org/[Git for Windows] 는 아직 몇몇 허점이 있지만 Windows에서 Git을 효율적으로 쓸수 있게 해줍니다.
 
-=== Unrelated Files ===
+=== Git과 연관없는 파일들 ===
 
-If your project is very large and contains many unrelated files that are constantly being changed, Git may be disadvantaged more than other systems because single files are not tracked. Git tracks changes to the whole project, which is usually beneficial.
+만약에 당신의 프로젝트가 굉장히 크고, 쓸때없는 파일들이 많이 들어있는 상태이고, 상시로 바뀌는 상태라면, Git은 하나의 파일을 트랙킹하지 않기에 다른 VCS보다 유용하지 않을 수 있습니다. Git은 프로젝트 단위로 트랙킹을 하기 때문입니다. 이건 Git의 장점입니다.
 
-A solution is to break up your project into pieces, each consisting of related files. Use *git submodule* if you still want to keep everything in a single repository.
+그래도 만약 하나의 파일만을 트랙킹하기 원하다면 프로젝트를 여러개의 파트로 분리해두는 겁니다. 여러개의 파트로 분리해도 *git submodule* 명령어를 이용하면 하나의 repository를 유지할 수 있을겁니다.
 
-=== Who's Editing What? ===
+=== 누가 어떤 작업을 하는거지? ===
 
-Some version control systems force you to explicitly mark a file in some way before editing. While this is especially annoying when this involves talking to a central server, it does have two benefits:
+몇몇의 VCS는 유저들로 하여금 작업하기전에 파일들을 강제로 마킹 시킵니다. 이러한 강제성은 중앙서버와 연결하는데 귀찮은 절차이지만 두개의 장점이 있습니다:
 
-  1. Diffs are quick because only the marked files need be examined.
+  1. 버전의 차이 (Diff)를 체크하는데 매우 빠릅니다. 마킹 된 파일만 검사하면 되니까요.
 
-  2. One can discover who else is working on the file by asking the central server who has marked it for editing.
+  2. 유저는 어떤 사람이 어떤 작업을 하는지 중앙서버를 조회하면 간단히 알아낼 수 있습니다.
 
-With appropriate scripting, you can achieve the same with Git. This requires cooperation from the programmer, who should execute particular scripts when editing a file.
+Git으로도 이렇게 하는게 가능합니다. 그러나 그렇게 하기위해선 코딩이 좀 필요하니 프로그래머의 도움이 좀 필요할 수 있겠군요.
 
-=== File History ===
+=== 파일 히스토리 ===
 
-Since Git records project-wide changes, reconstructing the history of a single file requires more work than in version control systems that track individual files.
+Git은 프로젝트 전체를 트랙킹하기 때문에 어떤 한 파일의 히스토리를 재건설하는데 다른 (하나의 파일만 트랙킹하는) VCS들보다 느릴 수 있습니다.
 
-The penalty is typically slight, and well worth having as other operations are incredibly efficient. For example, `git checkout` is faster than `cp -a`, and project-wide deltas compress better than collections of file-based deltas.
+그렇게 심하게 느려진다는 것은 아니고 오히려 Git의 장점들이 이 하나의 단점을 상쇄하고도 남습니다. 예를 들어 'git checkout'은 'cp -a'보다 빠르고 프로젝트 전체의 변화를 압축화하는 것이 파일 하나하나씩 압축하는 것보다 효율적입니다.
 
-=== Initial Clone ===
+=== 태초의 클론 ===
 
-Creating a clone is more expensive than checking out code in other version control systems when there is a lengthy history.
+만약에 어떠한 프로젝트의 히스토리가 길 경우, 클론을 만드는 것은 다른 VCS들의 'checking out'보다 컴퓨터의 용량을 더 차지할 수 있습니다.
 
-The initial cost is worth paying in the long run, as most future operations will then be fast and offline. However, in some situations, it may be preferable to create a shallow clone with the `--depth` option. This is much faster, but the resulting clone has reduced functionality.
+그러나 길게보면 클론이 checking out보다 나을 것입니다. 클로닝 이후 다른 명령어들은 매우 빠르고 오프라인으로도 진행이 가능하니까요. 그러나 어떠한 경우에는 좀 더 히스토리가 얕은 클론을 '--depth' 명령어를 통해 만드는 것이 더 나은 선택일 수 있습니다. 이렇게 만들어진 클론은 작업실행 속도가 빠르겠지만 몇몇 기능들이 제외되어 있을 수 있습니다.
 
-=== Volatile Projects ===
+=== 불완전한 프로젝트들 ===
 
-Git was written to be fast with respect to the size of the changes. Humans make small edits from version to version. A one-liner bugfix here, a new feature there, emended comments, and so forth. But if your files are radically different in successive revisions, then on each commit, your history necessarily grows by the size of your whole project.
+Git은 파일에 작업을 더 많이할 수록 그 작업량에 대비해 빠르게 Version Control을 할 수 있도록 하기위해 쓰여진 프로그램입니다. 인간은 하나의 버전에서 다음 버전으로 작업을 할때 소량의 작업만 진행할 수 있죠. 예를들어, 한줄짜리 코드에 있는 버그를 고친다던가, 새로운 기능을 넣는다던가, 코멘트를 코드에 단다거나 말이죠. 그런데 만약 commit과 commit 사이에 작업량이 방대하게 클 경우 그 파일의 히스토리는 비례해서 커질 수 밖에 없겠죠.
 
-There is nothing any version control system can do about this, but standard Git users will suffer more since normally histories are cloned.
+VCS는 이것에 대해 아무것도 할 수 없습니다. 일반 Git 유저들은 그 부풀어진 파일들을 곧대로 받아들일 수 밖에 없겠죠.
 
-The reasons why the changes are so great should be examined. Perhaps file formats should be changed. Minor edits should only cause minor changes to at most a few files.
+그러나 왜 방대한 작업량이 필요했는지에 대해 알아볼 필요는 있습니다. 파일 포맷이 바뀌어서 그랬을수도 있죠. 소량의 작업은 소량의 변화를 주기마련입니다.
 
-Or perhaps a database or backup/archival solution is what is actually being sought, not a version control system. For example, version control may be ill-suited for managing photos periodically taken from a webcam.
+아니면 데이터베이스나 백업자료실를 구축해놓는 것이 이런 방대한 프로젝트들을 진행하는 데에 있어 VCS보다 적합할수도 있습니다. 예를 들어 VCS는 어떤 웹캠에서 주기적으로 찍은 이미지를 관리하는 데에는 적합하지 않습니다.
 
-If the files really must be constantly morphing and they really must be versioned, a possibility is to use Git in a centralized fashion. One can create shallow clones, which checks out little or no history of the project. Of course, many Git tools will be unavailable, and fixes must be submitted as patches. This is probably fine as it's unclear why anyone would want the history of wildly unstable files.
+만약에 파일들이 매번 변화하고 있고 각각의 변화에 무조건 버젼번호를 매겨야겠다 한다면 Git을 중앙서버처럼 쓰는 방법밖에 없습니다. 개발자들은 상대적으로 가벼운 클론을 만들면 되죠. 이렇게 일을 진해하면 물론 단점도 있을겁니다. 픽스들을 패치로 배포해야하고 Git tool들이 들어먹지 않을 수도 있어요. 근데 이렇게라도 일을 진행해야하는게 맞는 방법일 수 있습니다. 아무도 히스토리가 매우 긴 프로젝트들을 곧대로 받긴 싫어하거든요.
 
-Another example is a project depending on firmware, which takes the form of a huge binary file. The history of the firmware is uninteresting to users, and updates compress poorly, so firmware revisions would unnecessarily blow up the size of the repository.
+다른 예시로는 큰 바이너리 파일들을 수행하는 펌웨어들에 기반한 프로젝트를 진행할 경우입니다. 펌웨어의 히스토리는 유저들에게 별로 흥미로운 소재는 아니고, 업데이트들은 압축률이 매우 좋지 않습니다. 그래서 펌웨어들을 재구성할떄는 repository의 크기가 매우 커지는 경우가 있죠.
 
-In this case, the source code should be stored in a Git repository, and the binary file should be kept separately. To make life easier, one could distribute a script that uses Git to clone the code, and rsync or a Git shallow clone for the firmware.
+이럴때에는 모든 소스코드들이 Git repository에 저장되어 있는 편이 좋고, 바이너리 파일들은 따로 보관되어야 할 것 입니다. 이 일을 좀 더 쉽게 진행하기 위해서 Git 유저가 어떤 파일에 대해 클론을 만들수있고 *rsync*를 할 수 있으며, 가벼운 클론을 만들수있는 코드를 배포하는 것이 좋을 수 있습니다.
 
-=== Global Counter ===
+=== 글로벌 카운터 ===
 
-Some centralized version control systems maintain a positive integer that increases when a new commit is accepted. Git refers to changes by their hash, which is better in many circumstances.
+몇몇 중앙관리식 VCS들은 새로운 commit이 받아들여질때마다 임의의 양의정수를 보존합니다. Git은 양의정수보다 나은 hash를 써서 commit을 관리합니다.
 
-But some people like having this integer around. Luckily, it's easy to write scripts so that with every update, the central Git repository increments an integer, perhaps in a tag, and associates it with the hash of the latest commit.
+그러나 어느 사람들은 아직도 양의정수로 commit관리를 하길 추구합니다. 다행히도 Git에 추가프로그래밍을하여 Git repository에서 양의정수를 1씩 더하는 방식으로 commit을 관리할수도 있습니다.
 
-Every clone could maintain such a counter, but this would probably be useless, since only the central repository and its counter matters to everyone.
+어느 클론 파일이나 양의정수를 사용하여 commit을 관리할 수 있습니다. 그러나 이건 아무짝에도 쓸모가 없죠. 중앙 repository만 이 숫자를 쓸꺼니까요.
 
-=== Empty Subdirectories ===
+=== 빈 (empty) 섭디렉토리 ===
 
-Empty subdirectories cannot be tracked. Create dummy files to work around this problem.
+빈 섭디렉토리는 트랙킹되지 않습니다. 그러나 더미 파일을 만들어서 트랙킹하게 편법을 쓸 수 있죠.
 
-The current implementation of Git, rather than its design, is to blame for this drawback. With luck, once Git gains more traction, more users will clamour for this feature and it will be implemented.
+현 버전의 Git으로써 이 문제점은 Git의 약점입니다. Git이 다시 수면위로 올라가고 더 많은 사람들이 사용하게 될수록 이런 약점도 메꿔나가 지겠죠.
 
-=== Initial Commit ===
+=== 태초의 commit ===
 
-A stereotypical computer scientist counts from 0, rather than 1. Unfortunately, with respect to commits, git does not adhere to this convention. Many commands are unfriendly before the initial commit. Additionally, some corner cases must be handled specially, such as rebasing a branch with a different initial commit.
+보통의 컴퓨터공학자들은 숫자를 셀 때 0부터 세지 1부터 세지 않습니다. 하지만 안타깝게도 commit의 횟수를 셀때 git은 컴퓨터공학자들처럼 숫자를 세지 않습니다. Git의 그 많은 명령어들은 commit이 태초적으로 한번 이루어지기 전까지는 실행되지 않을겁니다. Branch들을 rebasing 할때나 이럴 경우에는 예외일 수도 있습니다.
 
-Git would benefit from defining the zero commit: as soon as a repository is constructed, HEAD would be set to the string consisting of 20 zero bytes. This special commit represents an empty tree, with no parent, at some time predating all Git repositories.
+애초에 Git은 태초의 commit으로부터 많은 혜택을 받습니다: repostiory가 생성되자마자 HEAD는 20 zero bytes의 스트링으로 자동설정됩니다. 이 특별한 commit은 빈 나무로 표현합니다. 빈 나무는 부모님 commit도 없습니다. 한마디로 근본이 없는 친구를 태초의 commit으로 부릅니다.
 
-Then running git log, for example, would inform the user that no commits have been made yet, instead of exiting with a fatal error. Similarly for other tools.
+그리고 태초의 commit후, git log를 로드했을때 Git이 오류를 내지 않고 단순히 commit이 하나도 안 되었다고 알려줄 것입니다. 
 
-Every initial commit is implicitly a descendant of this zero commit.
+태초의 commit은 한마디로 zero commit의 양자같은 컨셉트입니다.
 
-However there are some problem cases unfortunately. If several branches with different initial commits are merged together, then rebasing the result requires substantial manual intervention.
+그러나 이런 구성은 가끔 문제를 야기합니다. 여러개의 branch가 모두 태초의 commit을 하고 이제 branch를 병합시켜야 할때, rebasing은 아마 유저 본인이 수동으로 버전청소를 하라고 할수도 있습니다.
 
-=== Interface Quirks ===
+=== 별난 인터페이스 ===
 
-For commits A and B, the meaning of the expressions "A..B" and "A...B" depends
-on whether the command expects two endpoints or a range. See *git help diff*
-and *git help rev-parse*.
+A와 B commit이 있을때, "A..B" 와 "A...B" 표현의 차이는 명령어가 두개의 종점이나 범위가 입력되기를 기다리고 있느냐 마느냐입니다. *git help diff* 와 *git help rev-parse*를 참조하십시오.
