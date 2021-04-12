@@ -1,6 +1,6 @@
 == Multiplayer Git ==
 
-Na początku zastosowałem Git w prywatnym projekcie, gdzie byłem jedynym programistą. Z poleceń, w związku z rozproszoną naturą Gita, potrzebowałem jedynie komende *pull* i *clone*, dzięki czemu mogłem trzymać ten sam projekt w kilku miejscach.
+Na początku zastosowałem Git w prywatnym projekcie, gdzie byłem jedynym programistą. Z poleceń, w związku z rozproszoną naturą Gita, potrzebowałem jedynie komendę *pull* i *clone*, dzięki czemu mogłem trzymać ten sam projekt w kilku miejscach.
 
 Później chciałem opublikować mój kod za pomocą Gita i dołączyć zmiany kolegów. Musiałem nauczyć się zarządzać projektami, nad którymi zaangażowani byli programiści z całego świata. Na szczęście jest to silną stroną Gita i chyba jego racją bytu.
 
@@ -11,7 +11,7 @@ Każdy 'commit' otrzymuje nazwę i adres e-mail autora, które zostaną pokazane
  $ git config --global user.name "Jan Kowalski"
  $ git config --global user.email jan.kowalski@example.com
 
-Jeśli opóścisz przełącznik '--global' zmiany zostaną zastosowane wyłącznie do aktualnego repozytorium.
+Jeśli opuścisz przełącznik '--global' zmiany zostaną zastosowane wyłącznie do aktualnego repozytorium.
 
 === Git przez SSH, HTTP ===
 
@@ -64,7 +64,7 @@ a nowy 'bundle' tworzymy następnie poprzez:
 
 === Patches: globalny środek płatniczy ===
 
-'Patches' to jawne zobrazowanie twoich zmian, które mogą być jednocześnie rozumiane przez komputer i człowieka. Dodaje im to uniwersalnej mocy przyciągania. Możesz wysłać patch prowadzącym projekt, niezależnie od tego, jakiego używają systemu kontroli wersji. Doputy twoi współpracownicy potrafią czytać swoje maile, mogą widzieć również twoje zmiany. Również i z twojej strony wszystko, czego ci potrzeba to funkcjonujące konto e-mailowe: nie istnieje konieczność zakładania repozytorium online.
+'Patches' to jawne zobrazowanie twoich zmian, które mogą być jednocześnie rozumiane przez komputer i człowieka. Dodaje im to uniwersalnej mocy przyciągania. Możesz wysłać patch prowadzącym projekt, niezależnie od tego, jakiego używają systemu kontroli wersji. Dopóty twoi współpracownicy potrafią czytać swoje maile, mogą widzieć również twoje zmiany. Również i z twojej strony wszystko, czego ci potrzeba to funkcjonujące konto e-mailowe: nie istnieje konieczność zakładania repozytorium online.
 
 Przypomnij sobie pierwszy rozdział:
 
@@ -92,7 +92,7 @@ Patch zostanie wprowadzony i utworzy commit, włącznie z informacjami jak na pr
 
 Jeśli stosujesz webmail musisz ewentualnie poszukać opcji pokazania treści w formie niesformatowanego textu, zanim zapamiętasz patch do pliku.
 
-Występują minimalne różnice między aplikacjami e-mailowymi bazującymi na mbox, ale jeśli korzystasz z takiej, należysz do grupy ludzi, która za pewne umie się z nimi obchodzić bez czytania instrukcji!
+Występują minimalne różnice między aplikacjami e-mailowymi bazującymi na mbox, ale jeśli korzystasz z takiej, należysz do grupy ludzi, która zapewne umie się z nimi obchodzić bez czytania instrukcji!
 
 === Przepraszamy, przeprowadziliśmy się ===
 
@@ -160,7 +160,7 @@ Sprawdź *git help remote* by zobaczyć, jak usuwa się repozytoria, ignoruje pe
 
 W moich projektach preferuję, gdy pomagający mi programiści przygotują własne repozytoria z których mogę wykonać 'pull'. Większość hosterów Gita pozwala na utworzenie jednym kliknięciem twojego własnego forka innego projektu.
 
-Gdy przywołałem moją gałęź korzystam z poleceń Gita dla nawigacji i kontroli zmian, które najlepiej, gdy są dobrze zorganizowane i udokumentowane. Wykonuję 'merge' moich własnych zmian i przeprowadzam ewentualnie dalsze zmiany. Gdy już jestem zadowolony, 'push' do zentralnego repozytorium.
+Gdy przywołałem moją gałęź korzystam z poleceń Gita dla nawigacji i kontroli zmian, które najlepiej, gdy są dobrze zorganizowane i udokumentowane. Wykonuję 'merge' moich własnych zmian i przeprowadzam ewentualnie dalsze zmiany. Gdy już jestem zadowolony, 'push' do centralnego repozytorium.
 
 Mimo, iż dość rzadko otrzymuję posty, jestem zdania, że ta metoda się opłaca. Zobacz http://torvalds-family.blogspot.com/2009/06/happiness-is-warm-scm.html[Post na Blogu Linusa Torvalds (po angielsku)].
 

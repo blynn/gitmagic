@@ -78,7 +78,7 @@ Korzystając ponownie z analogii do gier komputerowych:
 
 - *`git reset --hard`*: załaduj jakiś starszy stan gry i skasuj wszystkie nowsze niż właśnie ładowany.
 
-- *`git checkout`*:  Załaduj stary stan, grając dalej, twój stan będzie się różnił od nowszych zapamiętanych. Każdy stan, który zapamiętasz od teraz, powstanie jako osobna gałęź ('branch'), reprezentującym alternatywną rzeczywistość. <<branch,Wrócimy do tego później>>
+- *`git checkout`*:  Załaduj stary stan, grając dalej, twój stan będzie się różnił od nowszych zapamiętanych. Każdy stan, który zapamiętasz od teraz, powstanie jako osobna gałąź ('branch'), reprezentującym alternatywną rzeczywistość. <<branch,Wrócimy do tego później>>
 
 Jeśli chcesz, możesz przywrócić jedynie wybrane pliki lub katalogi poprzez dodanie ich nazw do polecenia:
 
@@ -115,7 +115,7 @@ Kopię projektu zarządzanego za pomocą Gita uzyskasz poleceniem:
 
  $ git clone git://ścieżka/do/projektu
 
-By na przykład zładować wszystkie dane, których użyłem do stworzenia tej strony skorzystaj z:
+By na przykład załadować wszystkie dane, których użyłem do stworzenia tej strony skorzystaj z:
 
  $ git clone git://git.or.cz/gitmagic.git
 
@@ -129,7 +129,7 @@ Jeśli posiadasz już kopię projektu wykonaną za pomocą *git clone*, możesz 
 
 === Szybka publikacja ===
 
-Przypuśćmy, że napisałaś skrypt i chcesz go udostępnić innym. Mogłabyś poprosić ich, by zładowali go bezpośrednio z twojego komputera. Jeśli jednak zrobią to podczas gdy ty jeszcze wprowadzasz poprawki lub eksperymentujesz ze zmianami, mogłabyś przysporzyć im nieprzyjemności. Z tego powodu istnieje coś takiego jak cykl wydawniczy. Programiści regularnie pracują nad projektem, upubliczniają kod jednak dopiero, jeśli uznają, że nadaje się już do pokazania.
+Przypuśćmy, że napisałaś skrypt i chcesz go udostępnić innym. Mogłabyś poprosić ich, by załadowali go bezpośrednio z twojego komputera. Jeśli jednak zrobią to podczas gdy ty jeszcze wprowadzasz poprawki lub eksperymentujesz ze zmianami, mogłabyś przysporzyć im nieprzyjemności. Z tego powodu istnieje coś takiego jak cykl wydawniczy. Programiści regularnie pracują nad projektem, upubliczniają kod jednak dopiero, jeśli uznają, że nadaje się już do pokazania.
 
 Aby wykonać to za pomocą GIT, wejdź do katalogu w którym znajduje się twój skrypt:
 
@@ -141,7 +141,7 @@ Następnie poproś twych użytkowników o wykonanie:
 
  $ git clone twój.komputer:/ścieżka/do/skryptu
 
-by zładować twój skrypt. Zakładamy tu posiadanie przez nich klucza SSH do twojego komputera. Jeśli go nie mają, uruchom *git daemon* i podaj im następujący link:
+by załadować twój skrypt. Zakładamy tu posiadanie przez nich klucza SSH do twojego komputera. Jeśli go nie mają, uruchom *git daemon* i podaj im następujący link:
 
  $ git clone git://twój.komputer/ścieżka/do/skryptu
 
@@ -173,13 +173,13 @@ Za każdym razem uzyskane informacje są równocześnie patchem, który poprzez 
 
  $ git whatchanged --since="2 weeks ago"
 
-Jeśli chcę sprawdzić listę zmian jakiegoś repozytorium, często korzystam z http://sourceforge.net/projects/qgit[qgit], ze względu na jego fotogeniczny interfejs, albo z http://jonas.nitro.dk/tig/[tig], tekstowy interfejs, działający zadowalająco gdy mamy do czynienia z wolnym łączem internetowym. Alternatywnie, zainstaluj serwer HTTP, uruchom *git instaweb* i odpal dowolną przeglądarkę internetową.
+Jeśli chcę sprawdzić listę zmian jakiegoś repozytorium, często korzystam z http://sourceforge.net/projects/qgit[qgit], ze względu na jego fotogeniczny interfejs, albo z http://jonas.nitro.dk/tig/[tig], tekstowy interfejs, działający zadowalająco, gdy mamy do czynienia z wolnym łączem internetowym. Alternatywnie, zainstaluj serwer HTTP, uruchom *git instaweb* i odpal dowolną przeglądarkę internetową.
 
 === Ćwiczenie ===
 
 Niech A, B, C i D będą 4 następującymi po sobie 'commits', gdzie B różni się od A, jedynie tym, iż usunięto kilka plików. Chcemy teraz te usunięte pliki zrekonstruować do D. Jak to można zrobić?
 
-Istnieją przynajmniej 3 rozwiązania. Załóżmy że znajdujemy się obecnie w D:
+Istnieją przynajmniej 3 rozwiązania. Załóżmy, że znajdujemy się obecnie w D:
 
 1. Różnica pomiędzy A i B, to skasowane pliki. Możemy utworzyć patch, który pokaże te różnice i następnie zastosować go:
 

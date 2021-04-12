@@ -31,7 +31,7 @@ Zamiast wchodzić w szczegóły, oferujemy proste instrukcje dla osiągnięcia z
 
 === Podziękowania! ===
 
-Jestem mile zaskoczony, że tak dużo ludzi pracowało nad przetłumaczeniem tych stron. Bardzo cenię, iż dzięki staraniom wyżej wspommnianych osób otrzymałem możliwość dotarcia do większego grona czytelników.
+Jestem mile zaskoczony, że tak dużo ludzi pracowało nad przetłumaczeniem tych stron. Bardzo cenię, iż dzięki staraniom wyżej wspomnianych osób otrzymałem możliwość dotarcia do większego grona czytelników.
 
 Dustin Sallings, Alberto Bertogli, James Cameron, Douglas Livingstone, Michael Budde, Richard Albury, Tarmigan, Derek Mahar, Frode Aannevik, Keith Rarick, Andy Somerville, Ralf Recker, Øyvind A. Holm, Miklos Vajna, Sébastien Hinderer, Thomas Miedema, Joe Malin, i Tyler Breisacher przyczynilli się do poprawek i korektur.
 
@@ -55,4 +55,4 @@ albo z serwerów lustrzanych:
  $ git clone git://git.assembla.com/gitmagic.git
  $ git clone git@bitbucket.org:blynn/gitmagic.git
 
-GitHub, Assembla, i Bitbucket pozwalają na prowadzienie prywatnych repozytorii, te dwa ostatnie za darmo.
+GitHub, Assembla, i Bitbucket pozwalają na prowadzenie prywatnych repozytoriów, te dwa ostatnie za darmo.

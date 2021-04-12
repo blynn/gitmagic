@@ -75,7 +75,7 @@ Teraz jednak historia w twoim lokalnym klonie jest chaotycznym pomieszaniem twoi
 
 To zadanie dla *git rebase*, jak opisano powyżej. W wielu przypadkach możesz skorzystać z przełącznika *--onto* by zapobiec interakcji.
 
-Przeczytaj też *git help rebase* dla zapoznania sie z obszernymi przykładami tej zadziwiającej funkcji. Możesz również podzielić 'commits'. Możesz nawet przeorganizować 'branches' w repozytorium.
+Przeczytaj też *git help rebase* dla zapoznania się z obszernymi przykładami tej zadziwiającej funkcji. Możesz również podzielić 'commits'. Możesz nawet przeorganizować 'branches' w repozytorium.
 
 Bądź ostrożny korzystając z 'rebase', to bardzo mocne polecenie. Zanim dokonasz skomplikowanych 'rebase', zrób backup za pomocą *git clone*
 

@@ -39,7 +39,7 @@ Jeśli jesteś już zadowolony z wyniku, wpisz:
 
 by dokonać wybranych zmian. Uważaj tylko, by nie skorzystać z opcji *-a*, ponieważ wtedy git dokona 'commit' zawierający wszystkie zmiany.
 
-A co, jeśli pracowałaś nad wieloma danymi w wielu różnych miejscach? Sprawdzenie każdej danej z osobna jest zarówno rustrujące jak i męczące. W takim wypadku skorzystaj z *git add -i*, obsługa tego polecenia może nie jest zbyt łatwa, za to jednak bardzo elastyczna. Kilkoma naciśnięciami klawiszy możesz wiele zmienionych plików dodać ('stage') albo usunąć z 'commit' ('unstage'), jak również sprawdzić, czy dodać zmiany dla poszczególnych plików. Alternaywnie możesz skorzystać z *git commit \--interactive*, polecenie to wykona automatycznie 'commit' gdy skończysz.
+A co, jeśli pracowałaś nad wieloma danymi w wielu różnych miejscach? Sprawdzenie każdej danej z osobna jest zarówno frustrujące, jak i męczące. W takim wypadku skorzystaj z *git add -i*, obsługa tego polecenia może nie jest zbyt łatwa, za to jednak bardzo elastyczna. Kilkoma naciśnięciami klawiszy możesz wiele zmienionych plików dodać ('stage') albo usunąć z 'commit' ('unstage'), jak również sprawdzić, czy dodać zmiany dla poszczególnych plików. Alternaywnie możesz skorzystać z *git commit \--interactive*, polecenie to wykona automatycznie 'commit' gdy skończysz.
 
 === Index: rusztowanie Gita ===
 
@@ -55,7 +55,7 @@ Identyfikator 'HEAD' zachowuje się jak kursor, który zwykle wskazuje na najmł
 
  $ git reset HEAD~3
 
-przesunie identyfikator 'HEAD' o 3 'commits' spowrotem. Spowoduje to, że wszystkie następne komendy Gita będą reagować, jakby tych trzech ostatnich 'commits' wogóle nie było, podczas gdy twoje dane zostaną w przyszłości. Na stronach pomocy Gita znajdziesz więcej takich zastosowań.
+przesunie identyfikator 'HEAD' o 3 'commits' z powrotem. Spowoduje to, że wszystkie następne komendy Gita będą reagować, jakby tych trzech ostatnich 'commits' wogóle nie było, podczas gdy twoje dane zostaną w przyszłości. Na stronach pomocy Gita znajdziesz więcej takich zastosowań.
 
 Ale jak teraz wrócić znów do przyszłości? Poprzednie 'commits' nic nie wiedzą o jej istnieniu.
 
@@ -126,7 +126,7 @@ Ulubionym przedstawicielem jest +workdir/git-new-workdir+. Poprzez sprytne przel
 
  $ git-new-workdir istniejacy/repo nowy/katalog
 
-Ten nowy katalog i znajdujące się w nim pliki można sobie wyobrazić jako klon, z tą różnicą, że ze względu na wspólną niepodzieloną historie obje wersje pozostaną zsynchronizowane. Synchronizacja za pomocą 'merge', 'push', czy 'pull' nie będzie konieczna.
+Ten nowy katalog i znajdujące się w nim pliki można sobie wyobrazić jako klon, z tą różnicą, że ze względu na wspólną niepodzieloną historie obie wersje pozostaną zsynchronizowane. Synchronizacja za pomocą 'merge', 'push', czy 'pull' nie będzie konieczna.
 
 === Śmiałe wyczyny ===
 
