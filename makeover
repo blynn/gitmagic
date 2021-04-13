@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Extract table of contents from index.html and delete preface link.
 BOOKDIR=book-$1
@@ -9,22 +9,14 @@ case $1 in
         ;;
 esac
 
-gawk '
-/<div class="toc">/ {
-  print $0
-  getline
-  print $0
-  print "<li><b>'"$TITLE"'</b></li>"
-  getline
-  while (!match($0, "</div>")) {
-    gsub("pr01.html", "index.html")
-    print $0
-    getline
-  }
-  print $0
-  exit
-}
-' < $BOOKDIR/index.html > toc.tmp
+# Older AsciiDoc versions put newlines in their output.
+# To get them to work with the following, first minify the HTML output.
+cat $BOOKDIR/index.html \
+  | grep -o '<div class="toc">.*' \
+  | sed 's!</div>.*!</div>!' \
+  | sed 's!<pr01.html\>!index.html!g' \
+  | sed 's!<li>!<li><b>'"$TITLE"'</b></li>&!' \
+  > toc.tmp
 
 # For every file except the index...
 for FILE in $BOOKDIR/*.html
@@ -35,11 +27,13 @@ do
     # Prepend "Git Magic - " to titles of all pages.
     sed '/<title>/ s/<title>/&'"$TITLE"' - /' -i $FILE
     sed 's/pr01\.html/index.html/g' -i $FILE
+    # Insert newline after `body` tag.
+    sed 's/<body[^>]*>/&\n/' -i $FILE
     # Paste ToC into beginning and add div section with class content for CSS.
-    sed '/<body/{n; r toc.tmp
+    sed '/<body/{r toc.tmp
 a <div class="content">
 }' -i $FILE
-    sed '/^<\/body/i </div>' -i $FILE
+    sed 's!</body>!</div>&!' -i $FILE
   fi
 done
 

@@ -1,12 +1,10 @@
 # The availaible translation languages.
 # When starting a new translation, add a language code here.
-#
 
 TRANSLATIONS = de es fr ko pt_br ru uk vi zh_cn zh_tw it pl
 LANGS = en $(TRANSLATIONS)
-SHELL := /bin/bash
 
-.PHONY: all clean sync public distclean $(LANGS)
+.PHONY: all clean $(LANGS)
 
 all: $(LANGS)
 
