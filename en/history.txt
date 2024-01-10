@@ -51,6 +51,10 @@ Here, 5c6eb73 is the oldest commit, and 100834f is the newest. Then:
    * `squash` to merge a commit with the previous one.
    * `fixup` to merge a commit with the previous one and discard the log message.
 
+The difference between the `edit` and `reword` commands is that `reword` only
+allows you to change the commit message, while `edit` allows you to change the
+contents of the commit as well as the commit message.
+
 For example, we might replace the second `pick` with `squash`:
 
     pick 5c6eb73 Added repo.or.cz link
