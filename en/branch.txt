@@ -16,7 +16,7 @@ With this magic word, the files in your directory suddenly shapeshift from one v
 
 === The Boss Key ===
 
-Ever played one of those games where at the push of a button (``the boss key''), the screen would instantly display a spreadsheet or something? So if the boss walked in the office while you were playing the game you could quickly hide it away?
+Ever played one of those games where at the push of a button (``the boss key''), the screen would instantly display a spreadsheet or something? So if the boss walked into the office while you were playing the game you could quickly hide it away?
 
 In some directory:
 

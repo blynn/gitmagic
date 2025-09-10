@@ -38,7 +38,7 @@ Start the Git daemon if necessary:
 
  $ git daemon --detach  # it may already be running
 
-For Git hosting services, follow the instructions to setup the initially
+For Git hosting services, follow the instructions to set up the initially
 empty Git repository. Typically one fills in a form on a webpage.
 
 'Push' your project to the central server with:

@@ -4,7 +4,7 @@ A consequence of Git's distributed nature is that history can be edited
 easily. But if you tamper with the past, take care: only rewrite that part of
 history which you alone possess. Just as nations forever argue over who
 committed what atrocity, if someone else has a clone whose version of history
-differs to yours, you will have trouble reconciling when your trees interact.
+differs from yours, you will have trouble reconciling when your trees interact.
 
 Some developers strongly feel history should be immutable, warts and all.
 Others feel trees should be made presentable before they are unleashed in

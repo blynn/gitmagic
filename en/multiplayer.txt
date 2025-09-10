@@ -41,7 +41,7 @@ Now you can publish your latest edits via SSH from any clone:
 
  $ git push web.server:/path/to/proj.git master
 
-and anybody can get your project with:
+and anyone can get your project with:
 
  $ git clone http://web.server/proj.git
 

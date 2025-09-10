@@ -8,7 +8,7 @@ Clone the source, then create a directory corresponding to the target
 language's IETF tag: see
 http://www.w3.org/International/articles/language-tags/Overview.en.php[the W3C
 article on internationalization]. For example, English is "en" and Japanese is
-"ja". In the new directory, and translate the +txt+ files from the "en"
+"ja". In the new directory, translate the +txt+ files from the "en"
 subdirectory.
 
 For instance, to translate the guide into http://en.wikipedia.org/wiki/Klingon_language[Klingon], you might type:

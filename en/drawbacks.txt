@@ -80,7 +80,7 @@ The current implementation of Git, rather than its design, is to blame for this 
 
 === Initial Commit ===
 
-A stereotypical computer scientist counts from 0, rather than 1. Unfortunately, with respect to commits, git does not adhere to this convention. Many commands are unfriendly before the initial commit. Additionally, some corner cases must be handled specially, such as rebasing a branch with a different initial commit.
+A stereotypical computer scientist counts from 0, rather than 1. Unfortunately, with respect to commits, Git does not adhere to this convention. Many commands are unfriendly before the initial commit. Additionally, some corner cases must be handled specially, such as rebasing a branch with a different initial commit.
 
 Git would benefit from defining the zero commit: as soon as a repository is constructed, HEAD would be set to the string consisting of 20 zero bytes. This special commit represents an empty tree, with no parent, at some time predating all Git repositories.
 
