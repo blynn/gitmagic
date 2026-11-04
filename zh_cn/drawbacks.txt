@@ -19,7 +19,7 @@ Git在微软Windows上可能有些繁琐：
 - http://cygwin.com/[Cygwin] , 这是一个Windows下的类Linux的环境，其包含一
   个 http://cygwin.com/packages/git/[一个Git在Windows下的移植].
 
-- http://code.google.com/p/msysgit/[基于MSys的Git] 是另一个，要求最小运行
+- https://gitforwindows.org/[Git for Windows] 是另一个，要求最小运行
   时支持，不过一些命令不能马上工作。
 
 === 不相关的文件 ===

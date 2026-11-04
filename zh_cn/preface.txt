@@ -4,7 +4,7 @@ Ben Lynn
 
 == 前言 ==
 
-http://git.or.cz/[Git] 堪称版本控制瑞士军刀。这个可靠、多才多艺、用途多样的校
+http://git-scm.com/[Git] 堪称版本控制瑞士军刀。这个可靠、多才多艺、用途多样的校
 订工具异常灵活，以致不易掌握，更别说精通了。
 
 正如Arthur C. Clarke所说，足够先进的技术与魔法无二。这是学习Git的好办法：新手
@@ -18,26 +18,31 @@ http://git.or.cz/[Git] 堪称版本控制瑞士军刀。这个可靠、多才多
  - link:/\~blynn/gitmagic/intl/zh_cn/[简体中文]: 俊杰，萌和江薇。
    link:/~blynn/gitmagic/intl/zh_tw/[正体中文] 由 + cconv -f UTF8-CN -t
    UTF8-TW + 转换。
- - link:/~blynn/gitmagic/intl/fr/[法文]: Alexandre Garel。也在
-   http://tutoriels.itaapy.com/[itaapy]。
+ - link:/~blynn/gitmagic/intl/fr/[法文]: Alexandre Garel, Paul Gaborit 和
+   Nicolas Deram。
  - link:/~blynn/gitmagic/intl/de/[德文]: Benjamin Bellee和Armin Stebich；也在
    http://gitmagic.lordofbikes.de/[Armin的网站]。
- - http://www.slideshare.net/slide_user/magia-git[葡萄牙文]: Leonardo
-   Siqueira Rodrigues
-   [http://www.slideshare.net/slide_user/magia-git-verso-odt[ODT版]]。
+ - link:/~blynn/gitmagic/intl/it/[意大利文]: Mattia Rigotti。
+ - link:/~blynn/gitmagic/intl/ko/[韩文]: Jung-Ho (John) Han；也在
+   https://sites.google.com/site/drinkhanjohn/useful-links/[John的网站]。
+ - link:/~blynn/gitmagic/intl/pl/[波兰文]: Damian Michna。
+ - link:/~blynn/gitmagic/intl/pt_br/[巴西葡萄牙文]: José Inácio Serafini 和
+   Leonardo Siqueira Rodrigues。
  - link:/~blynn/gitmagic/intl/ru/[俄文]: Tikhon Tarnavsky, Mikhail Dymskov,
    和其他人。
  - link:/~blynn/gitmagic/intl/es/[西班牙]: Rodrigo Toledo和Ariset Llerena
    Tapia。
+ - link:/~blynn/gitmagic/intl/uk/[乌克兰文]: Volodymyr Bodenchuk。
  - link:/~blynn/gitmagic/intl/vi/[越南文]: Trần Ngọc Quân; 也在
-   http://vnwildman.users.sourceforge.net/gitmagic.html[他的网站].
+   http://vnwildman.users.sourceforge.net/gitmagic/[他的网站]。
 
 .其它版本
 
  - link:book.html[单一文件]: 纯HTML，无CSS。
  - link:book.pdf[PDF文件]: 打印效果好.
+ - link:book.epub[EPUB文件]: 适合电子阅读器.
  - http://packages.debian.org/gitmagic[Debian包]，
-   http:://packages.ubuntu.com/gitmagic[Ubuntu包]: 本站快速本地拷贝。如果
+   http://packages.ubuntu.com/gitmagic[Ubuntu包]: 本站快速本地拷贝。如果
    http://csdcf.stanford.edu/status/[下线了]会方便些。
  - http://www.amazon.com/Git-Magic-Ben-Lynn/dp/1451523343/[纸质书
    [Amazon.com]]: 64 页, 15.24cm x 22.86cm, 黑白。 没有电子设备的时候会方便些。
