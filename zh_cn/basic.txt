@@ -119,7 +119,7 @@ checkout命令之前做提交，尤其在初学Git的时候。通常，任何时
 
 === 变更日志生成 ===
 
-一些项目要求生成变更日志http://en.wikipedia.org/wiki/Changelog[changelog]. 若
+一些项目要求生成http://en.wikipedia.org/wiki/Changelog[变更日志]。若
 要生成一个变更日志，可以键入：
 
  $ git log > ChangeLog
