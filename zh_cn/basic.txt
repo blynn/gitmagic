@@ -198,10 +198,10 @@ checkout命令之前做提交，尤其在初学Git的时候。通常，任何时
 
  $ git whatchanged --since="2 weeks ago"
 
-我也经常用http://sourceforge.net/projects/qgit[qgit] 浏览历史, 因为他的图形界
-面很养眼，或者 http://jonas.nitro.dk/tig/[tig] ，一个文本界面的东西，很慢的网
-络状况下也可以工作的很好。也可以安装web 服务器，运行 *git instaweb* ，就可以用
-任意浏览器浏览了。
+我也经常用 http://sourceforge.net/projects/qgit[qgit] 浏览历史, 因为他
+的图形界面很养眼，或者 http://jonas.nitro.dk/tig/[tig] ，一个文本界面
+的东西，很慢的网络状况下也可以工作的很好。也可以安装web 服务器，运行
+*git instaweb* ，就可以用任意浏览器浏览了。
 
 === 练习 ===
 
