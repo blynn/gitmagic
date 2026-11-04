@@ -46,6 +46,7 @@
 對一些Git伺服服務，按照其提示來初始化空Git倉庫。一般是在伺服器網頁上填寫一個表單。
 
 把你的專案“推送”到中心伺服器：
+
  $ git push central.server/path/to/proj.git HEAD
 
 若要克隆原始碼，可以鍵入：
